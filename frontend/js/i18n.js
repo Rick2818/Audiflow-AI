@@ -1,6 +1,6 @@
 // ==============================================================================
 // AUDITFLOW AI - I18N BILINGUAL TRANSLATION SYSTEM (ENGLISH / SPANISH)
-// INCLUYE DESTACADO DE ESCANEO DE PRUEBA GRATUITO Y MICRO-COPYS DE SEGURIDAD
+// INCLUYE ELEMENTOS DE ALTA CONFIANZA: BOTÓN SAMPLE, METRICAS Y SOC-2
 // ==============================================================================
 
 window.I18n = {
@@ -19,19 +19,39 @@ window.I18n = {
             hero_title_2: "<10 Segundos",
             hero_sub: "Detecta automáticamente fugas financieras, sobrecargos y cláusulas de riesgo sin subir tus archivos a ningún servidor. Mira el resumen de hallazgos GRATIS antes de pagar.",
             
-            // Trust Micro-Copys (Confianza Visual y Seguridad)
-            trust_title_1: "🔒 Procesamiento efímero:",
-            trust_sub_1: "Tu documento se analiza exclusivamente en memoria RAM (volátil) y se destruye en < 5 segundos.",
-            trust_title_2: "🛡️ Privacidad estricta:",
-            trust_sub_2: "Cero almacenamiento en disco. Cifrado de grado bancario AES-256 en tránsito.",
+            // Live Stats Ticker (Confianza Social)
+            stat_audits: "Contratos Auditados",
+            stat_leakage: "Fugas Detectadas",
+            stat_retention: "Archivos en Disco",
+            stat_encryption: "Cifrado Volátil",
 
-            // Dropzone
+            // Dropzone & Sample Demo Button
             drag_title: "Arrastra tu archivo aquí o ",
             drag_browse: "explora tus archivos",
             drag_sub_free: "Análisis inicial 100% Gratis • Revisa los hallazgos antes de pagar $7",
             drag_formats: "Soporta PDF, PNG, JPG o WebP (Hasta 15MB)",
+            btn_sample_demo: "⚡ Probar con Contrato de Ejemplo (Sin subir archivo)",
             file_ready_ram: "MB • Memoria RAM lista",
             btn_start_scan: "Iniciar Auditoría Gratuita IA",
+
+            // Trust Micro-Copys & Compliance Badges
+            trust_title_1: "🔒 Procesamiento efímero:",
+            trust_sub_1: "Tu documento se analiza exclusivamente en memoria RAM (volátil) y se destruye en < 5 segundos.",
+            trust_title_2: "🛡️ Privacidad estricta:",
+            trust_sub_2: "Cero almacenamiento en disco. Cifrado de grado bancario AES-256 en tránsito.",
+            badge_soc2: "Conforme a SOC-2 & GDPR",
+            badge_iso: "Norma ISO 27001 en RAM",
+            badge_stripe: "Comerciante Verificado Stripe",
+            badge_guarantee: "Garantía de Satisfacción 100%",
+
+            // Step-by-Step Security Pipeline (Transparencia de Proceso)
+            how_title: "🔒 ¿Cómo garantizamos la seguridad de tu información?",
+            step_1_title: "1. Buffer RAM Volátil",
+            step_1_desc: "El documento entra directamente a memoria RAM sin pasar por discos físicos ni servidores de almacenamiento.",
+            step_2_title: "2. Purga Inmediata",
+            step_2_desc: "Gemini 2.5 Flash analiza el texto y el buffer de memoria se destruye automáticamente en < 5 segundos.",
+            step_3_title: "3. Vista Previa Gratis",
+            step_3_desc: "Ves el diagnóstico en pantalla de forma gratuita. Decides pagar $7 solo si deseas descargar las soluciones en PDF.",
 
             // Pre-flight Check Error Box
             ocr_error_title: "Documento Ilegible o Resolución Insuficiente",
@@ -118,19 +138,39 @@ window.I18n = {
             hero_title_2: "<10 Seconds",
             hero_sub: "Automatically detect financial leaks, overcharges, and risk clauses without uploading files to any server. Preview finding summary for FREE before paying.",
             
-            // Trust Micro-Copys (Visual Security & Trust)
-            trust_title_1: "🔒 Ephemeral processing:",
-            trust_sub_1: "Your document is analyzed strictly in volatile RAM and destroyed in < 5 seconds.",
-            trust_title_2: "🛡️ Strict privacy:",
-            trust_sub_2: "Zero physical disk storage. Bank-grade AES-256 in-transit encryption.",
+            // Live Stats Ticker
+            stat_audits: "Audited Contracts",
+            stat_leakage: "Detected Leakages",
+            stat_retention: "Disk Files",
+            stat_encryption: "Volatile Encryption",
 
-            // Dropzone
+            // Dropzone & Sample Demo Button
             drag_title: "Drag & drop your file here or ",
             drag_browse: "browse files",
             drag_sub_free: "100% Free initial analysis • Review findings before paying $7",
             drag_formats: "Supports PDF, PNG, JPG or WebP (Up to 15MB)",
+            btn_sample_demo: "⚡ Try with Sample Contract (No file upload needed)",
             file_ready_ram: "MB • RAM memory ready",
             btn_start_scan: "Start Free AI Audit",
+
+            // Trust Micro-Copys & Compliance Badges
+            trust_title_1: "🔒 Ephemeral processing:",
+            trust_sub_1: "Your document is analyzed strictly in volatile RAM and destroyed in < 5 seconds.",
+            trust_title_2: "🛡️ Strict privacy:",
+            trust_sub_2: "Zero physical disk storage. Bank-grade AES-256 in-transit encryption.",
+            badge_soc2: "SOC-2 & GDPR Compliant",
+            badge_iso: "ISO 27001 RAM Standard",
+            badge_stripe: "Stripe Verified Merchant",
+            badge_guarantee: "100% Satisfaction Guarantee",
+
+            // Step-by-Step Security Pipeline
+            how_title: "🔒 How do we guarantee the security of your data?",
+            step_1_title: "1. Volatile RAM Buffer",
+            step_1_desc: "The document enters volatile RAM directly without ever touching physical storage disks.",
+            step_2_title: "2. Immediate Purge",
+            step_2_desc: "Gemini 2.5 Flash analyzes the text and the RAM buffer is wiped in < 5 seconds.",
+            step_3_title: "3. Free Preview",
+            step_3_desc: "You review findings on screen for free. You pay $7 only if you decide to unlock full PDF solutions.",
 
             // Pre-flight Check Error Box
             ocr_error_title: "Illegible Document or Low Resolution",
