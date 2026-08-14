@@ -1,6 +1,6 @@
 // ==============================================================================
 // AUDITFLOW AI - I18N BILINGUAL TRANSLATION SYSTEM (ENGLISH / SPANISH)
-// INCLUYE ELEMENTOS DE ALTA CONFIANZA: BOTÓN SAMPLE, METRICAS Y SOC-2
+// INCLUYE ELEMENTOS SEO, FAQ SCHEMA Y ESTRATEGIA DE MARKETING DIGITAL B2B
 // ==============================================================================
 
 window.I18n = {
@@ -44,7 +44,7 @@ window.I18n = {
             badge_stripe: "Comerciante Verificado Stripe",
             badge_guarantee: "Garantía de Satisfacción 100%",
 
-            // Step-by-Step Security Pipeline (Transparencia de Proceso)
+            // Step-by-Step Security Pipeline
             how_title: "🔒 ¿Cómo garantizamos la seguridad de tu información?",
             step_1_title: "1. Buffer RAM Volátil",
             step_1_desc: "El documento entra directamente a memoria RAM sin pasar por discos físicos ni servidores de almacenamiento.",
@@ -52,6 +52,17 @@ window.I18n = {
             step_2_desc: "Gemini 2.5 Flash analiza el texto y el buffer de memoria se destruye automáticamente en < 5 segundos.",
             step_3_title: "3. Vista Previa Gratis",
             step_3_desc: "Ves el diagnóstico en pantalla de forma gratuita. Decides pagar $7 solo si deseas descargar las soluciones en PDF.",
+
+            // FAQ SEO Section (Preguntas Frecuentes de Alta Búsqueda)
+            faq_title: "❓ Preguntas Frecuentes (SEO & Seguridad B2B)",
+            faq_q1: "¿Cómo auditar un contrato o factura con Inteligencia Artificial?",
+            faq_a1: "Solo debes arrastrar tu documento PDF o imagen. El motor Gemini 2.5 Flash escanea el texto en <10 segundos, detecta sobrecargos, penalizaciones ocultas y te muestra un resumen de hallazgos gratis en pantalla.",
+            faq_q2: "¿Mis contratos o documentos se guardan en algún servidor?",
+            faq_a2: "No. AuditFlow AI opera con una arquitectura de memoria RAM volátil estricta (0 Disk Retention). El archivo se analiza en memoria y se destruye en menos de 5 segundos.",
+            faq_q3: "¿Qué incluye la auditoría por $7.00 USD / Satoshis?",
+            faq_a3: "La vista previa es 100% gratuita. Al abonar $7.00 USD (vía Stripe o Bitcoin Lightning), desbloqueas las soluciones tácticas de renegociación, la objeción legal de cargos y el informe PDF firmado.",
+            faq_q4: "¿Tienen plan corporativo para auditorías ilimitadas?",
+            faq_a4: "Sí. Para empresas con alto volumen de facturación o contratos mensuales, ofrecemos la suscripción Corporativa por $49/mes con auditorías ilimitadas y soporte legal prioritario.",
 
             // Pre-flight Check Error Box
             ocr_error_title: "Documento Ilegible o Resolución Insuficiente",
@@ -171,6 +182,17 @@ window.I18n = {
             step_2_desc: "Gemini 2.5 Flash analyzes the text and the RAM buffer is wiped in < 5 seconds.",
             step_3_title: "3. Free Preview",
             step_3_desc: "You review findings on screen for free. You pay $7 only if you decide to unlock full PDF solutions.",
+
+            // FAQ SEO Section
+            faq_title: "❓ Frequently Asked Questions (B2B SEO & Security)",
+            faq_q1: "How to audit a contract or invoice with Artificial Intelligence?",
+            faq_a1: "Simply drag your PDF document or image. Gemini 2.5 Flash engine scans text in <10s, detects overcharges, hidden penalties, and shows a free finding preview on screen.",
+            faq_q2: "Are my contracts or documents stored on any server?",
+            faq_a2: "No. AuditFlow AI operates on a strict volatile RAM architecture (0 Disk Retention). Files are analyzed in RAM and purged in < 5 seconds.",
+            faq_q3: "What does the $7.00 USD / Satoshis audit include?",
+            faq_a3: "The preview is 100% free. Paying $7.00 USD (via Stripe or Bitcoin Lightning) unlocks tactical renegotiation text, legal fee objection clauses, and a signed PDF report.",
+            faq_q4: "Do you offer an enterprise plan for unlimited audits?",
+            faq_a4: "Yes. For companies with high invoice volumes or monthly contracts, we offer the Enterprise subscription at $49/mo with unlimited audits and priority legal support.",
 
             // Pre-flight Check Error Box
             ocr_error_title: "Illegible Document or Low Resolution",
