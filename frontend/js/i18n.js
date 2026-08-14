@@ -15,6 +15,14 @@ window.I18n = {
             // Actions Toolbar
             btn_back_home: "← Regresar al Inicio / Auditar Otro",
             btn_print_report: "🖨️ Imprimir / Guardar en PDF",
+            btn_ai_support: "🤖 Soporte IA 24/7 (Corregir con IA)",
+
+            // AI Support Modal
+            support_title: "Agente de Soporte Autónomo IA",
+            support_sub: "¿Encontraste algún detalle o deseas que la IA re-analice una cláusula específica de tu documento? Escribe tu observación y el Agente de IA corregirá el reporte en < 10s.",
+            support_label: "Describe tu observación o consulta",
+            support_placeholder: "Ej. Por favor re-evalúa la cláusula 7.3 sobre la multa de cancelación...",
+            support_btn_submit: "🤖 Re-Analizar y Corregir con IA",
             
             // Hero
             hero_free_badge: "🎁 Escaneo Inicial 100% Gratuito • Sin tarjeta para analizar",
@@ -143,6 +151,14 @@ window.I18n = {
             // Actions Toolbar
             btn_back_home: "← Back to Home / Audit Another",
             btn_print_report: "🖨️ Print / Save as PDF",
+            btn_ai_support: "🤖 24/7 AI Support (AI Fix)",
+
+            // AI Support Modal
+            support_title: "Autonomous AI Support Agent",
+            support_sub: "Found an issue or want the AI to re-analyze a specific clause? Type your note and the AI Agent will fix your report in < 10s.",
+            support_label: "Describe your issue or request",
+            support_placeholder: "e.g. Please re-evaluate clause 7.3 regarding the termination penalty...",
+            support_btn_submit: "🤖 Re-Analyze & Fix with AI",
             
             // Hero
             hero_free_badge: "🎁 100% Free Initial Scan • No card required",

@@ -215,11 +215,19 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
     setupFormListeners() {
         const leadForm = document.getElementById('lead-form');
         const btnCloseLead = document.getElementById('btn-close-lead-modal');
+        const supportForm = document.getElementById('support-form');
 
         if (leadForm) {
             leadForm.addEventListener('submit', (e) => {
                 e.preventDefault();
                 this.handleLeadFormSubmit();
+            });
+        }
+
+        if (supportForm) {
+            supportForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                this.handleSupportFormSubmit();
             });
         }
 
@@ -229,6 +237,56 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 if (leadModal) leadModal.classList.add('hidden');
                 this.renderAuditReportDashboard();
             });
+        }
+    },
+
+    openSupportModal() {
+        const modal = document.getElementById('support-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closeSupportModal() {
+        const modal = document.getElementById('support-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    async handleSupportFormSubmit() {
+        const inputEl = document.getElementById('support-issue-input');
+        const issue = inputEl ? inputEl.value.trim() : '';
+
+        if (!issue) return;
+
+        const btnSubmit = document.getElementById('btn-submit-support');
+        if (btnSubmit) btnSubmit.innerText = '🤖 Procesando con Agente IA...';
+
+        try {
+            const res = await fetch('/api/support/ai-fix', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    report_id: this.currentReportId,
+                    email: this.currentLeadData.email || 'rick28191@gmail.com',
+                    issue_description: issue,
+                    lang: window.I18n ? window.I18n.currentLang : 'es'
+                })
+            });
+
+            const data = await res.json();
+            if (data.success && data.audit_data) {
+                this.currentAuditData = data.audit_data;
+                this.closeSupportModal();
+                this.renderAuditReportDashboard();
+                this.unblurReport();
+                alert(data.message || 'Reporte re-analizado y des-enfocado por la IA exitosamente.');
+            } else {
+                alert('El Agente de Soporte IA procesó tu mensaje. Revisa los resultados.');
+            }
+        } catch (err) {
+            console.error('Error en soporte IA:', err);
+            alert('Error al conectar con el Agente de Soporte IA: ' + err.message);
+        } finally {
+            if (btnSubmit) btnSubmit.innerText = '🤖 Re-Analizar y Corregir con IA';
+            if (inputEl) inputEl.value = '';
         }
     },
 

@@ -391,14 +391,19 @@
 
         <!-- DASHBOARD DE REPORTE CON BLUR -->
         <section id="report-section" class="hidden py-6 animate-fade-in">
-            <!-- BARRA DE ACCIONES: REGRESAR AL INICIO E IMPRIMIR REPORTE -->
+            <!-- BARRA DE ACCIONES: REGRESAR AL INICIO, IMPRIMIR Y SOPORTE IA -->
             <div class="flex flex-wrap items-center justify-between gap-4 mb-6 no-print">
                 <button onclick="window.AppHandler.resetToHome()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-border-dark text-gray-300 hover:text-white hover:bg-dark-card transition-all flex items-center gap-2">
                     <span data-i18n="btn_back_home">← Regresar al Inicio / Auditar Otro</span>
                 </button>
-                <button onclick="window.print()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 shadow-sm">
-                    <span data-i18n="btn_print_report">🖨️ Imprimir / Guardar en PDF</span>
-                </button>
+                <div class="flex items-center gap-2">
+                    <button onclick="window.AppHandler.openSupportModal()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-purple-500/40 text-purple-400 hover:bg-purple-500/10 transition-all flex items-center gap-2 shadow-sm">
+                        <span data-i18n="btn_ai_support">🤖 Soporte IA 24/7 (Corregir con IA)</span>
+                    </button>
+                    <button onclick="window.print()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 shadow-sm">
+                        <span data-i18n="btn_print_report">🖨️ Imprimir / Guardar en PDF</span>
+                    </button>
+                </div>
             </div>
             <div class="bg-dark-card border border-border-dark rounded-2xl p-6 sm:p-8 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
                 <div>
@@ -444,20 +449,44 @@
                         Ya viste los hallazgos en pantalla. Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos y el PDF firmado por solo $7.00 USD o Satoshis.
                     </p>
                     <button id="btn-open-payment-modal" onclick="window.PaymentHandler.openPaymentModal()" class="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3.5 shadow-glow w-full sm:w-auto">
-                        <span data-i18n="banner_btn">Desbloquear Soluciones por $7.00 USD / Sats</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- BANNER DE UPSELL CORPORATIVO ($49/MES) -->
+                      <!-- BANNER DE UPSELL CORPORATIVO ($49/MES) -->
             <div id="upsell-banner" class="hidden mt-8 bg-gradient-to-r from-purple-900/30 via-dark-card to-blue-900/30 border border-purple-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-xl">
                 <div class="max-w-2xl mx-auto">
                     <h3 data-i18n="upsell_title" class="text-xl sm:text-2xl font-bold text-white mb-2">🚀 ¿Necesitas Auditorías Ilimitadas para tu Empresa?</h3>
                     <p data-i18n="upsell_sub" class="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed">
-                        Actualiza a la suscripción Corporativa por $49/mes. Auditorías ilimitadas, equipo multi-usuario y soporte legal prioritaria.
+                        Actualiza a la suscripción Corporativa por $49/mes. Auditorías ilimitadas, equipo multi-usuario y soporte legal prioritario.
                     </p>
                     <button onclick="window.AppHandler.subscribeEnterprise()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue text-sm sm:text-base px-6 sm:px-8 py-3.5 shadow-glow w-full sm:w-auto">
                         <span data-i18n="upsell_btn">Suscribirme por $49/mes</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL DE SOPORTE AUTÓNOMO E INTERVENCIÓN DE IA -->
+        <div id="support-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-purple-500/40 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto">
+                <button onclick="window.AppHandler.closeSupportModal()" aria-label="Cerrar modal soporte" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-2xl mb-4">
+                    🤖
+                </div>
+                <h3 data-i18n="support_title" class="text-xl font-bold text-white mb-2">Agente de Soporte Autónomo IA</h3>
+                <p data-i18n="support_sub" class="text-xs text-gray-300 mb-6 leading-relaxed">
+                    ¿Encontraste algún detalle o deseas que la IA re-analice una cláusula específica de tu documento? Escribe tu observación y el Agente de IA corregirá el reporte en &lt; 10s.
+                </p>
+
+                <form id="support-form" class="space-y-4">
+                    <div>
+                        <label data-i18n="support_label" class="block text-xs font-mono text-gray-300 mb-1.5">Describe tu observación o consulta</label>
+                        <textarea id="support-issue-input" rows="3" required data-i18n-placeholder="support_placeholder" placeholder="Ej. Por favor re-evalúa la cláusula 7.3 sobre la multa de cancelación..." class="input-field text-xs font-mono"></textarea>
+                    </div>
+                    <button type="submit" id="btn-submit-support" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue w-full py-3 text-center flex justify-center items-center gap-2">
+                        <span data-i18n="support_btn_submit">🤖 Re-Analizar y Corregir con IA</span>
+                    </button>
+                </form>
+            </div>
+        </div>                        <span data-i18n="upsell_btn">Suscribirme por $49/mes</span>
                     </button>
                 </div>
             </div>
