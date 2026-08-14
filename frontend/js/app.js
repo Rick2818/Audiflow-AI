@@ -1,6 +1,6 @@
 // ==============================================================================
 // AUDITFLOW AI - MAIN CLIENT APPLICATION (app.js)
-// CON FILTRO PRE-VUELO OCR, CONFIANZA VISUAL, MUESTRA DE EJEMPLO Y UPSELL CORPORATIVO
+// CON FILTRO PRE-VUELO OCR, DESBLOQUEO DE REPORTES Y DESENFOQUE TRAS PAGO
 // ==============================================================================
 
 window.AppHandler = {
@@ -224,6 +224,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
 
         this.currentLeadData = { name, email };
+        const currentLang = window.I18n ? window.I18n.currentLang : 'es';
 
         try {
             const res = await fetch('/api/lead', {
@@ -232,6 +233,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 body: JSON.stringify({
                     name,
                     email,
+                    lang: currentLang,
                     document_name: this.selectedFile ? this.selectedFile.name : 'contrato.pdf',
                     audit_data: this.currentAuditData
                 })
@@ -262,7 +264,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const data = this.currentAuditData || {
             document_type: 'Contrato de Servicios Comercial',
             company_estimate: 'Empresa Detectada',
-            total_contract_value: 50000,
+            total_contract_value: 85000,
             total_financial_leakage: 3450,
             risk_level: 'HIGH',
             lead_score: 88,
@@ -270,29 +272,29 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 {
                     id: 1,
                     title: 'Penalización Excesiva por Cancelación Anticipada',
-                    clause_reference: 'Cláusula 4.1',
+                    clause_reference: 'Cláusula 7.3 / Línea 42',
                     severity: 'CRITICAL',
                     financial_impact: 1800,
-                    teaser_preview: 'Se exige el cobro del 100% del saldo pendiente más un recargo del 30%.',
-                    actionable_solution: 'Reemplazar por aviso previo de 30 días sin cargo o penalización máxima del 10%.'
+                    teaser_preview: 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.',
+                    actionable_solution: 'Notificar objeción basada en el Art. 1244 del Código Comercial y sustituir con la cláusula de terminación estándar a 30 días sin penalización.'
                 },
                 {
                     id: 2,
                     title: 'Duplicación de Ajuste por Inflación',
-                    clause_reference: 'Cláusula 6.3',
+                    clause_reference: 'Cláusula 12.1',
                     severity: 'HIGH',
-                    financial_impact: 1150,
-                    teaser_preview: 'Ajuste semestral según IPC acumulado con recargo fijo duplicado.',
-                    actionable_solution: 'Eliminar el margen fijo y topar el ajuste anual al IPC oficial.'
+                    financial_impact: 950,
+                    teaser_preview: 'Ajuste inflacionario duplicado combinando IPC local y tasa fija en USD.',
+                    actionable_solution: 'Eliminar la cláusula de ajuste en USD y fijar el ajuste strictly al IPC anual acumulado.'
                 },
                 {
                     id: 3,
-                    title: 'Renovación Automática Obligatoria',
-                    clause_reference: 'Cláusula 9.2',
+                    title: 'Cobro de Honorarios de Mantenimiento No Prestados',
+                    clause_reference: 'Anexo B - Facturación',
                     severity: 'MEDIUM',
-                    financial_impact: 500,
-                    teaser_preview: 'Renovación automática por 24 meses sin aviso de 120 días.',
-                    actionable_solution: 'Establecer ventana de aviso de 30 días y renovación mes a mes.'
+                    financial_impact: 450,
+                    teaser_preview: 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.',
+                    actionable_solution: 'Solicitar la eliminación de la partida presupuestaria B-4 e imputar nota de crédito a la facturación del trimestre.'
                 }
             ]
         };
@@ -305,7 +307,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const reportIdEl = document.getElementById('rep-id-display');
 
         if (docNameEl) docNameEl.innerText = (this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf');
-        if (docTypeEl) docTypeEl.innerText = data.document_type || 'Contrato Commercial';
+        if (docTypeEl) docTypeEl.innerText = data.document_type || 'Contrato Comercial';
         if (reportIdEl) reportIdEl.innerText = this.currentReportId || 'rep_123456';
 
         const leakageVal = (typeof data.total_financial_leakage === 'number' && !isNaN(data.total_financial_leakage)) 
@@ -411,7 +413,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
     },
 
-    checkUrlForPaymentSuccess() {
+    async checkUrlForPaymentSuccess() {
         const urlParams = new URLSearchParams(window.location.search);
         const reportId = urlParams.get('reportId');
         const status = urlParams.get('status');
@@ -424,6 +426,19 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
             if (uploadSec) uploadSec.classList.add('hidden');
             if (repSec) repSec.classList.remove('hidden');
 
+            try {
+                const res = await fetch(`/api/report/${reportId}`);
+                if (res.ok) {
+                    const report = await res.json();
+                    if (report && (report.summary_json || report.audit_data)) {
+                        this.currentAuditData = report.summary_json || report.audit_data;
+                    }
+                }
+            } catch (err) {
+                console.warn('Usando datos de reporte en memoria volátil:', err);
+            }
+
+            this.renderAuditReportDashboard();
             this.unblurReport();
         }
     },
