@@ -1,6 +1,6 @@
 // ==============================================================================
 // AUDITFLOW AI - BACKEND SERVER (Node.js + Express)
-// CON FILTRO PRE-VUELO OCR, RESEND EMAIL DISPATCHER (GMAIL) Y MEMORIA VOLÁTIL
+// CON FILTRO PRE-VUELO OCR, GMAIL SMTP DISPATCHER (NODEMAILER) Y MEMORIA VOLÁTIL
 // ==============================================================================
 
 import express from 'express';
@@ -9,6 +9,7 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 import pdfParse from 'pdf-parse';
 import fetch from 'node-fetch';
+import nodemailer from 'nodemailer';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 import path from 'path';
@@ -48,22 +49,21 @@ const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 const memoryReportsDB = new Map();
 
 // ==============================================================================
-// HELPER: ENVÍO REAL DE CORREOS BILINGÜES A GMAIL VÍA RESEND API
+// HELPER: ENVÍO DIRECTO DE CORREOS BILINGÜES A TRAVÉS DE GMAIL SMTP (NODEMAILER)
 // ==============================================================================
-async function sendResendAuditEmail({ recipientEmail, recipientName, auditData, documentName, lang = 'es' }) {
-  const resendApiKey = process.env.RESEND_API_KEY;
-  // Resend requiere 'onboarding@resend.dev' para envíos de desarrollo/prueba a cualquier Gmail
-  const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, documentName, lang = 'es' }) {
+  const gmailUser = process.env.GMAIL_USER;
+  const gmailPass = process.env.GMAIL_APP_PASSWORD; // Contraseña de aplicación de 16 caracteres de Google
   const appUrl = process.env.APP_URL || 'http://localhost:3000';
 
-  if (!resendApiKey || resendApiKey === 're_123456789...' || resendApiKey.startsWith('tu_')) {
+  if (!gmailUser || !gmailPass || gmailUser.includes('tu_correo') || gmailPass.includes('tu_clave')) {
     console.log(`\n=======================================================`);
-    console.log(`📧 [AGENTE DE CORREO RESEND - MODO SIMULACIÓN]`);
-    console.log(`📩 Destinatario: ${recipientName} <${recipientEmail}> (Gmail / Corporativo)`);
+    console.log(`📧 [AGENTE DE CORREO GMAIL SMTP - MODO SIMULACIÓN]`);
+    console.log(`📩 Destinatario: ${recipientName} <${recipientEmail}>`);
     console.log(`📄 Documento: ${documentName || 'Contrato.pdf'} | Idioma: ${lang.toUpperCase()}`);
-    console.log(`⚠️ Para recibir correos reales en tu Gmail, configura en .env:`);
-    console.log(`   RESEND_API_KEY=re_tu_clave_real_resend`);
-    console.log(`   FROM_EMAIL=onboarding@resend.dev`);
+    console.log(`⚠️ Para enviar correos reales usando tu cuenta de Gmail, configura en .env:`);
+    console.log(`   GMAIL_USER=tu_correo@gmail.com`);
+    console.log(`   GMAIL_APP_PASSWORD=tu_contraseña_de_aplicacion_16_caracteres`);
     console.log(`=======================================================\n`);
     return { success: false, mode: 'simulated' };
   }
@@ -173,30 +173,26 @@ async function sendResendAuditEmail({ recipientEmail, recipientName, auditData, 
   </html>`;
 
   try {
-    const res = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${resendApiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        from: fromEmail,
-        to: [recipientEmail],
-        subject: subject,
-        html: htmlBody
-      })
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: gmailUser,
+        pass: gmailPass
+      }
     });
 
-    const data = await res.json();
-    if (res.ok) {
-      console.log(`✅ [RESEND OK] Correo enviado a ${recipientEmail} | Resend ID: ${data.id}`);
-      return { success: true, resendId: data.id };
-    } else {
-      console.error(`❌ [RESEND ERROR] HTTP ${res.status}:`, data);
-      return { success: false, error: data };
-    }
+    const info = await transporter.sendMail({
+      from: `"AuditFlow AI" <${gmailUser}>`,
+      to: recipientEmail,
+      subject: subject,
+      html: htmlBody
+    });
+
+    console.log(`✅ [GMAIL SMTP OK] Correo enviado a ${recipientEmail} | MessageID: ${info.messageId}`);
+    return { success: true, messageId: info.messageId };
+
   } catch (err) {
-    console.error(`❌ [RESEND EXCEPTION]`, err.message);
+    console.error(`❌ [GMAIL SMTP ERROR]`, err.message);
     return { success: false, error: err.message };
   }
 }
@@ -381,7 +377,7 @@ app.post('/api/audit', upload.single('document'), async (req, res) => {
 });
 
 // ==============================================================================
-// ENDPOINT 2: POST /api/lead (CAPTURA DE LEADS Y DISPARO DE CORREO RESEND A GMAIL)
+// ENDPOINT 2: POST /api/lead (CAPTURA DE LEADS Y DISPARO DE CORREO GMAIL SMTP)
 // ==============================================================================
 app.post('/api/lead', async (req, res) => {
   try {
@@ -430,8 +426,8 @@ app.post('/api/lead', async (req, res) => {
 
     const isEnterpriseCandidate = leadScore >= 75;
 
-    // Disparar envío real a Gmail vía Resend API
-    sendResendAuditEmail({
+    // Disparar envío real usando tu propia cuenta de Gmail a través de Nodemailer
+    sendGmailAuditEmail({
       recipientEmail: email,
       recipientName: name,
       auditData: audit_data || {},
@@ -443,7 +439,7 @@ app.post('/api/lead', async (req, res) => {
       success: true,
       report_id: reportId,
       lead_classification: isEnterpriseCandidate ? 'ENTERPRISE_HIGH_VALUE' : 'STANDARD',
-      message: 'Lead registrado e invitación enviada exitosamente.'
+      message: 'Lead registrado e invitación Gmail enviada exitosamente.'
     });
 
   } catch (err) {
@@ -679,6 +675,6 @@ app.listen(PORT, () => {
   console.log(`🚀 AUDITFLOW AI corriendo en http://localhost:${PORT}`);
   console.log(`🔒 Procesamiento en memoria volátil ACTIVO + Filtro Pre-Vuelo OCR`);
   console.log(`⚡ Pagos Híbridos Tripwire ($7 USD / Sats) + Upsell $49/mes`);
-  console.log(`📧 Agente de Correo Resend (Gmail): ${process.env.RESEND_API_KEY ? 'CONFIGURADO' : 'MODO SIMULACIÓN (Configurar en .env)'}`);
+  console.log(`📧 Agente de Correo Gmail SMTP: ${process.env.GMAIL_USER ? 'CONFIGURADO' : 'MODO SIMULACIÓN (Configurar en .env)'}`);
   console.log(`=======================================================`);
 });
