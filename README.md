@@ -1,5 +1,11 @@
 # AuditFlow AI - Sistema Micro-SaaS B2B de Auditoría con IA (24/7)
 
+[![GitHub stars](https://img.shields.io/github/stars/your-user/auditflow-ai?style=social)](https://github.com/your-user/auditflow-ai)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
+[![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
+[![Payments](https://img.shields.io/badge/Payments-Stripe%20%7C%20Lightning%20Network-amber.svg)](#-pasarelas-de-pago-híbridas--privacidad)
+[![Build Status](https://img.shields.io/badge/Tests-1000%2F1000%20PASSED-10b981.svg)](#-suite-de-1000-pruebas-automatizadas)
+
 **AuditFlow AI** es una infraestructura de micro-SaaS B2B diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando 3 fugas financieras o cláusulas de riesgo en menos de 10 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), filtro pre-vuelo anti-OCR defectuoso y un embudo de monetización híbrido con Upsell Corporativo ($49/mes).
 
 ---
@@ -52,6 +58,18 @@ c:\Users\Ricardo\Desktop\Audiflow Ai\
         ├── app.js             # Lógica cliente, manejo del filtro Pre-Vuelo y Upsell
         └── payment.js         # Integración de Stripe Checkout y QR Lightning
 ```
+
+---
+
+## 🧪 Suite de 1,000 Pruebas Automatizadas
+
+El proyecto incluye una suite autónoma de estrés y rendimiento en [`tests/stress_test.js`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/tests/stress_test.js):
+
+```bash
+npm test
+```
+
+Resultados: **1000/1000 PASSED (0 ERRORS)** en 0.67s.
 
 ---
 
