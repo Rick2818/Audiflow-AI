@@ -21,6 +21,17 @@ window.PaymentHandler = {
         }
     },
 
+    openPaymentModal() {
+        const modal = document.getElementById('payment-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closePaymentModal() {
+        const modal = document.getElementById('payment-modal');
+        if (modal) modal.classList.add('hidden');
+        this.clearPollingAndTimers();
+    },
+
     setupEventListeners() {
         const tabStripe = document.getElementById('tab-stripe');
         const tabLightning = document.getElementById('tab-lightning');
@@ -28,8 +39,18 @@ window.PaymentHandler = {
         const contentLightning = document.getElementById('payment-content-lightning');
         const btnPayStripe = document.getElementById('btn-pay-stripe');
         const btnCopyLn = document.getElementById('btn-copy-ln');
+        const btnOpenModal = document.getElementById('btn-open-payment-modal');
+        const btnCloseModal = document.getElementById('btn-close-payment-modal');
 
-        // Toggle entre Pestañas Stripe vs Lightning
+        if (btnOpenModal) {
+            btnOpenModal.addEventListener('click', () => this.openPaymentModal());
+        }
+
+        if (btnCloseModal) {
+            btnCloseModal.addEventListener('click', () => this.closePaymentModal());
+        }
+
+        // Toggle entre Pestañas Stripe ($ USD) vs Lightning (Satoshis)
         if (tabStripe && tabLightning && contentStripe && contentLightning) {
             tabStripe.addEventListener('click', () => {
                 tabStripe.classList.add('bg-dark-card', 'border', 'border-accent-blue', 'text-white');
@@ -99,87 +120,89 @@ window.PaymentHandler = {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    report_id: this.currentReportId,
-                    email: this.currentLeadEmail,
-                    document_name: this.currentDocName
+                    report_id: this.currentReportId || 'rep_123456',
+                    email: this.currentLeadEmail || 'cliente@empresa.com',
+                    document_name: this.currentDocName || 'contrato.pdf'
                 })
             });
 
             const data = await res.json();
-            if (data && data.checkoutUrl) {
+            if (data.checkoutUrl) {
                 window.location.href = data.checkoutUrl;
+            } else {
+                alert('Redirigiendo a Stripe Checkout...');
             }
-        } catch (error) {
-            console.error('Error al iniciar Stripe Checkout:', error);
-            alert('No se pudo conectar con Stripe. Revisa la configuración del servidor.');
+        } catch (err) {
+            console.error('Error en checkout Stripe:', err);
+            alert('Error iniciando pasarela Stripe: ' + err.message);
         }
     },
 
     /**
-     * Genera la Factura Lightning Network BOLT11 con QR y Timer de 10 Minutos
+     * Genera Factura Lightning Network BOLT11 en Satoshis
      */
     async generateLightningInvoice() {
-        this.clearPollingAndTimers();
-
-        const qrContainer = document.getElementById('qrcode-container');
-        if (qrContainer) {
-            qrContainer.innerHTML = '<div class="text-xs font-mono py-4 text-gray-600">Generando Factura Lightning...</div>';
-        }
-
         try {
             const res = await fetch('/api/payment/lightning', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    report_id: this.currentReportId,
-                    document_name: this.currentDocName
+                    report_id: this.currentReportId || 'rep_123456',
+                    document_name: this.currentDocName || 'contrato.pdf'
                 })
             });
 
             const data = await res.json();
-            if (!data || !data.lightningInvoice) {
-                if (qrContainer) qrContainer.innerHTML = '<div class="text-xs text-red-500 py-4">Error al generar factura</div>';
-                return;
+            if (!res.ok || !data.lightningInvoice) {
+                throw new Error(data.error || 'Error creando factura Lightning');
             }
 
-            const satsAmount = typeof data.amountSats === 'number' && !isNaN(data.amountSats) ? data.amountSats : 10769;
+            const inputInvoice = document.getElementById('ln-invoice-input');
+            const satsAmountEl = document.getElementById('ln-sats-amount');
 
-            const inputEl = document.getElementById('ln-invoice-input');
-            const satsEl = document.getElementById('ln-sats-amount');
-            const addrEl = document.getElementById('ln-address-display');
-
-            if (inputEl) inputEl.value = data.lightningInvoice;
-            if (satsEl) satsEl.innerText = `${satsAmount.toLocaleString()} Sats`;
-            if (addrEl) addrEl.innerText = data.lightningAddress || 'audits@stacker.news';
-
-            // Renderizar Código QR
-            if (qrContainer) {
-                qrContainer.innerHTML = '';
-                if (typeof QRCode !== 'undefined') {
-                    new QRCode(qrContainer, {
-                        text: data.lightningInvoice,
-                        width: 140,
-                        height: 140,
-                        colorDark: '#09090b',
-                        colorLight: '#ffffff',
-                        correctLevel: QRCode.CorrectLevel.M
-                    });
-                } else {
-                    qrContainer.innerHTML = '<div class="text-xs text-gray-500 font-mono py-2">Factura generada. Copia el texto abajo.</div>';
-                }
+            if (inputInvoice) inputInvoice.value = data.lightningInvoice;
+            if (satsAmountEl && data.amountSats) {
+                satsAmountEl.innerText = `${data.amountSats.toLocaleString()} Sats`;
             }
 
-            // Iniciar Contador Cuenta Regresiva de 10 minutos
-            this.startCountdownTimer(10 * 60);
+            // Generar Código QR interactivo
+            this.renderQrCode(data.lightningInvoice);
 
-            // Iniciar Polling de verificación de pago cada 3 segundos
+            // Iniciar temporizador de 10 minutos
+            this.startCountdownTimer(600);
+
+            // Polling de verificación de pago cada 3 segundos
             this.startPaymentPolling();
 
-        } catch (error) {
-            console.error('Error generando factura Lightning:', error);
+        } catch (err) {
+            console.error('Error en pasarela Lightning:', err);
+            const qrContainer = document.getElementById('qrcode-container');
             if (qrContainer) {
-                qrContainer.innerHTML = '<div class="text-xs text-red-500 py-4">Error al generar QR Lightning</div>';
+                qrContainer.innerHTML = '<div class="text-xs text-red-500 py-4 font-mono">Error al conectar con nodo Lightning</div>';
             }
+        }
+    },
+
+    renderQrCode(text) {
+        const qrContainer = document.getElementById('qrcode-container');
+        if (!qrContainer) return;
+        qrContainer.innerHTML = '';
+
+        if (typeof QRCode !== 'undefined') {
+            try {
+                new QRCode(qrContainer, {
+                    text: text,
+                    width: 140,
+                    height: 140,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: QRCode.CorrectLevel.M
+                });
+            } catch (err) {
+                qrContainer.innerHTML = `<div class="text-xs text-gray-800 break-all p-2 font-mono">${text.substring(0, 30)}...</div>`;
+            }
+        } else {
+            qrContainer.innerHTML = `<div class="text-xs text-gray-800 break-all p-2 font-mono">${text.substring(0, 30)}...</div>`;
         }
     },
 
@@ -217,11 +240,10 @@ window.PaymentHandler = {
                     if (report && report.status === 'paid') {
                         this.clearPollingAndTimers();
                         
-                        // Cerrar modal y desbloquear reporte en pantalla
                         const modal = document.getElementById('payment-modal');
                         if (modal) modal.classList.add('hidden');
-                        if (window.AppHandler && window.AppHandler.unlockReportUI) {
-                            window.AppHandler.unlockReportUI();
+                        if (window.AppHandler && window.AppHandler.unblurReport) {
+                            window.AppHandler.unblurReport();
                         }
                     }
                 }
@@ -229,3 +251,9 @@ window.PaymentHandler = {
         }, 3000);
     }
 };
+
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.PaymentHandler) {
+        window.PaymentHandler.init();
+    }
+});
