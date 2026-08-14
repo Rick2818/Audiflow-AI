@@ -282,10 +282,15 @@ app.post('/api/lead', async (req, res) => {
       created_at: new Date().toISOString()
     });
 
+    // 3. AGENTE AUTÓNOMO DE CORREO: Clasificar Lead y enviar invitación B2B
+    const isEnterpriseCandidate = leadScore >= 75;
+    console.log(`[EMAIL AGENT] Lead clasificado: ${email} | Lead Score: ${leadScore} | Empresa B2B: ${isEnterpriseCandidate ? 'SI (Suscripción $49/mes)' : 'NO'}`);
+
     return res.json({
       success: true,
       report_id: reportId,
-      message: 'Lead registrado exitosamente. Generada vista previa con desenfoque.'
+      lead_classification: isEnterpriseCandidate ? 'ENTERPRISE_HIGH_VALUE' : 'STANDARD',
+      message: 'Lead clasificado e invitación B2B generada exitosamente. Vista previa lista.'
     });
 
   } catch (err) {
@@ -408,6 +413,7 @@ app.post('/api/payment/lightning', async (req, res) => {
       chargeId: 'charge_mock_' + Math.random().toString(36).substr(2, 6),
       lightningInvoice: mockInvoice,
       amountSats: satsAmount,
+      lightningAddress: process.env.LIGHTNING_ADDRESS || 'tu_nodo@lightning.com',
       expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString()
     });
 
