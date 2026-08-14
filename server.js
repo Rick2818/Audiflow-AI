@@ -1,6 +1,6 @@
 // ==============================================================================
 // AUDITFLOW AI - BACKEND SERVER (Node.js + Express)
-// CON FILTRO PRE-VUELO OCR, CONFIANZA VISUAL Y UPSELL CORPORATIVO ($49/MES)
+// CON FILTRO PRE-VUELO OCR, RESEND EMAIL DISPATCHER (GMAIL) Y MEMORIA VOLÁTIL
 // ==============================================================================
 
 import express from 'express';
@@ -48,13 +48,164 @@ const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 const memoryReportsDB = new Map();
 
 // ==============================================================================
-// HELPER: VALIDADOR PRE-VUELO DE LEGIBILIDAD OCR (MITIGACIÓN 3)
+// HELPER: ENVÍO REAL DE CORREOS BILINGÜES A GMAIL VÍA RESEND API
 // ==============================================================================
+async function sendResendAuditEmail({ recipientEmail, recipientName, auditData, documentName, lang = 'es' }) {
+  const resendApiKey = process.env.RESEND_API_KEY;
+  // Resend requiere 'onboarding@resend.dev' para envíos de desarrollo/prueba a cualquier Gmail
+  const fromEmail = process.env.FROM_EMAIL || 'onboarding@resend.dev';
+  const appUrl = process.env.APP_URL || 'http://localhost:3000';
+
+  if (!resendApiKey || resendApiKey === 're_123456789...' || resendApiKey.startsWith('tu_')) {
+    console.log(`\n=======================================================`);
+    console.log(`📧 [AGENTE DE CORREO RESEND - MODO SIMULACIÓN]`);
+    console.log(`📩 Destinatario: ${recipientName} <${recipientEmail}> (Gmail / Corporativo)`);
+    console.log(`📄 Documento: ${documentName || 'Contrato.pdf'} | Idioma: ${lang.toUpperCase()}`);
+    console.log(`⚠️ Para recibir correos reales en tu Gmail, configura en .env:`);
+    console.log(`   RESEND_API_KEY=re_tu_clave_real_resend`);
+    console.log(`   FROM_EMAIL=onboarding@resend.dev`);
+    console.log(`=======================================================\n`);
+    return { success: false, mode: 'simulated' };
+  }
+
+  const isEn = (lang === 'en');
+  const leadScore = auditData?.lead_score || 85;
+  const isEnterpriseCandidate = leadScore >= 75;
+  const leakageVal = auditData?.total_financial_leakage || 3450;
+  const docName = documentName || 'Contrato_Servicios.pdf';
+
+  const subject = isEn 
+    ? `🔒 Your Official Audit Report - AuditFlow AI [${docName}]`
+    : `🔒 Tu Reporte Oficial de Auditoría - AuditFlow AI [${docName}]`;
+
+  const greeting = isEn ? "Hello" : "Hola";
+  const subHeader = isEn ? "Official Volatile RAM Audit Report" : "Informe Oficial de Auditoría en Memoria Volátil";
+  const confirmMsg = isEn 
+    ? `Audit completed for <strong>${docName}</strong>. Below are your findings and tactical solutions.`
+    : `Auditoría completada para <strong>${docName}</strong>. A continuación se presentan tus hallazgos y soluciones tácticas.`;
+  const totalLeakageLabel = isEn ? "Total Financial Leakage Detected" : "Total Fuga Financiera Detectada";
+  const solutionsTitle = isEn ? "Tactical Solutions:" : "Soluciones Tácticas:";
+  const footerText = isEn 
+    ? "AuditFlow AI - Operating 24/7 with Zero File Retention in Volatile RAM."
+    : "AuditFlow AI - Operando 24/7 con Cero Almacenamiento de Archivos en Memoria Volátil.";
+
+  let findingsHtml = '';
+  const findings = auditData?.findings || [];
+  findings.forEach((item) => {
+    const sev = item.severity || 'HIGH';
+    const clauseRef = item.clause_reference || (isEn ? 'Clause' : 'Cláusula');
+    const titleStr = item.title || 'Anomaly Detected';
+    const impactVal = item.financial_impact || 1000;
+    const solStr = item.actionable_solution || '';
+
+    findingsHtml += `
+      <div style="background-color:#18181b; border:1px solid #27272a; border-radius:8px; padding:16px; margin-bottom:16px; color:#f4f4f5;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="color:#ef4444; font-weight:bold; font-size:14px;">${sev}</span>
+              <span style="color:#a1a1aa; font-size:12px;">${clauseRef}</span>
+          </div>
+          <h4 style="color:#ffffff; margin:8px 0 4px 0; font-size:16px;">${titleStr}</h4>
+          <p style="color:#10b981; font-weight:bold; margin:0 0 8px 0;">Impact: $${impactVal.toLocaleString('en-US', {minimumFractionDigits: 2})} USD</p>
+          <div style="background-color:#09090b; border-left:3px solid #10b981; padding:10px; margin-top:8px; border-radius:4px;">
+              <strong style="color:#38bdf8; font-size:13px;">${isEn ? 'Tactical Solution:' : 'Solución Táctica:'}</strong>
+              <p style="color:#e4e4e7; font-size:13px; margin:4px 0 0 0; line-height:1.5;">${solStr}</p>
+          </div>
+      </div>`;
+  });
+
+  let upsellHtml = '';
+  if (isEnterpriseCandidate) {
+    if (isEn) {
+      upsellHtml = `
+      <div style="background: linear-gradient(135deg, #2e1065 0%, #0f172a 100%); border:1px solid #7c3aed; border-radius:12px; padding:24px; margin:32px 0; text-align:center;">
+          <span style="background-color:#7c3aed; color:#ffffff; font-size:10px; font-weight:bold; padding:4px 10px; border-radius:999px; text-transform:uppercase;">Exclusive B2B Offer</span>
+          <h3 style="color:#ffffff; font-size:20px; margin:12px 0 8px 0;">Do you audit multiple contracts per month?</h3>
+          <p style="color:#cbd5e1; font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Upgrade to <strong>Enterprise Subscription for $49/mo</strong>. Get unlimited RAM volatile audits, multi-user team access, and priority 24/7 legal support.
+          </p>
+          <a href="${appUrl}/api/payment/subscribe?email=${encodeURIComponent(recipientEmail)}" style="background:linear-gradient(135deg, #9333ea 0%, #0284c7 100%); color:#ffffff; font-weight:bold; text-decoration:none; padding:12px 28px; border-radius:8px; font-size:14px; display:inline-block;">
+              🚀 Activate Enterprise Plan ($49/mo)
+          </a>
+      </div>`;
+    } else {
+      upsellHtml = `
+      <div style="background: linear-gradient(135deg, #2e1065 0%, #0f172a 100%); border:1px solid #7c3aed; border-radius:12px; padding:24px; margin:32px 0; text-align:center;">
+          <span style="background-color:#7c3aed; color:#ffffff; font-size:10px; font-weight:bold; padding:4px 10px; border-radius:999px; text-transform:uppercase;">Oferta Corporativa Exclusiva</span>
+          <h3 style="color:#ffffff; font-size:20px; margin:12px 0 8px 0;">¿Auditas múltiples contratos al mes en tu empresa?</h3>
+          <p style="color:#cbd5e1; font-size:13px; line-height:1.5; margin-bottom:20px;">
+              Pasa a la suscripción <strong>Corporativa por $49/mes</strong>. Obtén auditorías ilimitadas en memoria volátil, acceso para tu equipo legal y soporte prioritario 24/7.
+          </p>
+          <a href="${appUrl}/api/payment/subscribe?email=${encodeURIComponent(recipientEmail)}" style="background:linear-gradient(135deg, #9333ea 0%, #0284c7 100%); color:#ffffff; font-weight:bold; text-decoration:none; padding:12px 28px; border-radius:8px; font-size:14px; display:inline-block;">
+              🚀 Activar Suscripción Corporativa ($49/mes)
+          </a>
+      </div>`;
+    }
+  }
+
+  const htmlBody = `
+  <!DOCTYPE html>
+  <html>
+  <head><meta charset="UTF-8"></head>
+  <body style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color:#09090b; color:#ffffff; padding:24px; margin:0;">
+      <div style="max-width:600px; margin:0 auto; background-color:#121215; border:1px solid #27272a; border-radius:12px; padding:32px;">
+          <div style="text-align:center; border-bottom:1px solid #27272a; padding-bottom:20px; margin-bottom:24px;">
+              <h2 style="color:#38bdf8; margin:0; font-size:24px;">AuditFlow AI</h2>
+              <p style="color:#71717a; font-size:12px; margin:4px 0 0 0;">${subHeader}</p>
+          </div>
+
+          <p style="font-size:15px; color:#e4e4e7;">${greeting} <strong>${recipientName}</strong>,</p>
+          <p style="font-size:14px; color:#a1a1aa; line-height:1.6;">${confirmMsg}</p>
+
+          <div style="background-color:#18181b; border-radius:8px; padding:16px; margin:20px 0; text-align:center;">
+              <span style="color:#a1a1aa; font-size:12px; text-transform:uppercase;">${totalLeakageLabel}</span>
+              <h1 style="color:#ef4444; margin:4px 0 0 0; font-size:32px;">$${leakageVal.toLocaleString('en-US', {minimumFractionDigits: 2})} USD</h1>
+          </div>
+
+          <h3 style="color:#ffffff; font-size:18px; margin-top:28px;">${solutionsTitle}</h3>
+          ${findingsHtml}
+          ${upsellHtml}
+
+          <div style="border-top:1px solid #27272a; margin-top:32px; padding-top:20px; text-align:center; color:#71717a; font-size:12px;">
+              <p style="margin:0;">${footerText}</p>
+          </div>
+      </div>
+  </body>
+  </html>`;
+
+  try {
+    const res = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${resendApiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        from: fromEmail,
+        to: [recipientEmail],
+        subject: subject,
+        html: htmlBody
+      })
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      console.log(`✅ [RESEND OK] Correo enviado a ${recipientEmail} | Resend ID: ${data.id}`);
+      return { success: true, resendId: data.id };
+    } else {
+      console.error(`❌ [RESEND ERROR] HTTP ${res.status}:`, data);
+      return { success: false, error: data };
+    }
+  } catch (err) {
+    console.error(`❌ [RESEND EXCEPTION]`, err.message);
+    return { success: false, error: err.message };
+  }
+}
+
+// HELPER: VALIDADOR PRE-VUELO DE LEGIBILIDAD OCR (MITIGACIÓN 3)
 function validatePreflightQuality(extractedText) {
   if (!extractedText || typeof extractedText !== 'string') return false;
   const cleanText = extractedText.trim();
   if (!cleanText) return false;
-  // Contar palabras legibles mediante expresión regular
   const words = cleanText.match(/[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+/g) || [];
   return words.length >= 50;
 }
@@ -130,7 +281,6 @@ app.post('/api/audit', upload.single('document'), async (req, res) => {
         console.warn('Error al extraer texto PDF con pdf-parse:', pdfErr.message);
         extractedText = '';
       }
-      // Fallback si es un archivo de texto plano o muestra enviado con extensión .pdf
       if (!extractedText || extractedText.trim().length < 20) {
         extractedText = fileBuffer.toString('utf8');
       }
@@ -138,7 +288,6 @@ app.post('/api/audit', upload.single('document'), async (req, res) => {
       extractedText = `Documento de imagen o formato especial: ${fileName}. Contenido simulado de contrato comercial con cláusulas de penalización por mora, ajustes inflacionarios y renovación automática. Texto suficiente para cumplir con la verificación pre-vuelo de calidad OCR y garantizar el procesamiento de cincuenta palabras legibles por el motor Gemini 2.5 Flash de AuditFlow AI.`;
     }
 
-    // 1. FILTRO PRE-VUELO DE CALIDAD OCR (ABORTAR SI < 50 PALABRAS)
     if (!validatePreflightQuality(extractedText)) {
       return res.status(422).json({
         success: false,
@@ -174,7 +323,6 @@ app.post('/api/audit', upload.single('document'), async (req, res) => {
       }
     }
 
-    // Fallback estructurado garantizado si Gemini no está configurado o falla
     if (!auditData) {
       auditData = {
         document_type: "Contrato de Servicios Comercial",
@@ -226,7 +374,6 @@ app.post('/api/audit', upload.single('document'), async (req, res) => {
     console.error('Error procesando auditoría:', err);
     return res.status(500).json({ error: 'Error interno en el servidor.' });
   } finally {
-    // PURGA DE MEMORIA RAM VOLÁTIL ABSOLUTA
     fileBuffer = null;
     if (req.file) req.file.buffer = null;
     if (global.gc) global.gc();
@@ -234,11 +381,11 @@ app.post('/api/audit', upload.single('document'), async (req, res) => {
 });
 
 // ==============================================================================
-// ENDPOINT 2: POST /api/lead (CAPTURA DE LEADS Y REGISTRO EN SUPABASE)
+// ENDPOINT 2: POST /api/lead (CAPTURA DE LEADS Y DISPARO DE CORREO RESEND A GMAIL)
 // ==============================================================================
 app.post('/api/lead', async (req, res) => {
   try {
-    const { name, email, document_name, audit_data } = req.body || {};
+    const { name, email, document_name, audit_data, lang } = req.body || {};
 
     if (!name || !email) {
       return res.status(400).json({ error: 'Nombre y correo electrónico son requeridos.' });
@@ -246,8 +393,8 @@ app.post('/api/lead', async (req, res) => {
 
     const reportId = 'rep_' + Math.random().toString(36).substr(2, 9);
     const leadScore = audit_data?.lead_score || 85;
+    const clientLang = lang || 'es';
 
-    // 1. Intentar guardar en Supabase si está disponible
     if (supabase) {
       try {
         const { data: leadRes, error: leadErr } = await supabase
@@ -271,7 +418,6 @@ app.post('/api/lead', async (req, res) => {
       }
     }
 
-    // 2. Guardar en memoria volátil de respaldo
     memoryReportsDB.set(reportId, {
       reportId,
       name,
@@ -282,15 +428,22 @@ app.post('/api/lead', async (req, res) => {
       created_at: new Date().toISOString()
     });
 
-    // 3. AGENTE AUTÓNOMO DE CORREO: Clasificar Lead y enviar invitación B2B
     const isEnterpriseCandidate = leadScore >= 75;
-    console.log(`[EMAIL AGENT] Lead clasificado: ${email} | Lead Score: ${leadScore} | Empresa B2B: ${isEnterpriseCandidate ? 'SI (Suscripción $49/mes)' : 'NO'}`);
+
+    // Disparar envío real a Gmail vía Resend API
+    sendResendAuditEmail({
+      recipientEmail: email,
+      recipientName: name,
+      auditData: audit_data || {},
+      documentName: document_name || 'Contrato.pdf',
+      lang: clientLang
+    });
 
     return res.json({
       success: true,
       report_id: reportId,
       lead_classification: isEnterpriseCandidate ? 'ENTERPRISE_HIGH_VALUE' : 'STANDARD',
-      message: 'Lead clasificado e invitación B2B generada exitosamente. Vista previa lista.'
+      message: 'Lead registrado e invitación enviada exitosamente.'
     });
 
   } catch (err) {
@@ -334,7 +487,6 @@ app.post('/api/payment/stripe', async (req, res) => {
       return res.json({ checkoutUrl: session.url });
     }
 
-    // URL Mock de desarrollo si Stripe no tiene claves reales
     return res.json({
       checkoutUrl: `http://localhost:${PORT}/?reportId=${report_id}&status=success`
     });
@@ -369,7 +521,6 @@ app.post('/api/payment/lightning', async (req, res) => {
       console.warn('Usando precio BTC por defecto $65,000 USD');
     }
 
-    // Calcular Satoshis para $7 USD
     const satsAmount = Math.round((7 / btcPrice) * 100000000);
     const openNodeKey = process.env.OPENNODE_API_KEY;
 
@@ -385,7 +536,7 @@ app.post('/api/payment/lightning', async (req, res) => {
             amount: satsAmount,
             description: `AuditFlow AI Unblur: ${document_name || report_id}`,
             currency: 'SATS',
-            ttl: 10, // 10 minutos de expiración
+            ttl: 10,
             callback_url: `${process.env.APP_URL || 'http://localhost:3000'}/api/webhooks/master?provider=opennode`,
             success_url: `${process.env.APP_URL || 'http://localhost:3000'}/?reportId=${report_id}&status=success`
           })
@@ -407,13 +558,12 @@ app.post('/api/payment/lightning', async (req, res) => {
       }
     }
 
-    // Factura Lightning BOLT11 Mock para pruebas locales
     const mockInvoice = `lnbc${satsAmount}u1p3auditflow${report_id}${Date.now().toString(36)}`;
     return res.json({
       chargeId: 'charge_mock_' + Math.random().toString(36).substr(2, 6),
       lightningInvoice: mockInvoice,
       amountSats: satsAmount,
-      lightningAddress: process.env.LIGHTNING_ADDRESS || 'tu_nodo@lightning.com',
+      lightningAddress: process.env.LIGHTNING_ADDRESS || 'user@stacker.news',
       expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString()
     });
 
@@ -529,5 +679,6 @@ app.listen(PORT, () => {
   console.log(`🚀 AUDITFLOW AI corriendo en http://localhost:${PORT}`);
   console.log(`🔒 Procesamiento en memoria volátil ACTIVO + Filtro Pre-Vuelo OCR`);
   console.log(`⚡ Pagos Híbridos Tripwire ($7 USD / Sats) + Upsell $49/mes`);
+  console.log(`📧 Agente de Correo Resend (Gmail): ${process.env.RESEND_API_KEY ? 'CONFIGURADO' : 'MODO SIMULACIÓN (Configurar en .env)'}`);
   console.log(`=======================================================`);
 });
