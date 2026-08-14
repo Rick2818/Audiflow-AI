@@ -10,6 +10,8 @@ import multer from 'multer';
 import pdfParse from 'pdf-parse';
 import fetch from 'node-fetch';
 import nodemailer from 'nodemailer';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 import path from 'path';
@@ -22,6 +24,25 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// ==============================================================================
+// FIREWALL & SEGURIDAD CORPORATIVA (HELMET + RATE LIMITING DDoS PROTECTION)
+// ==============================================================================
+app.use(helmet({
+  contentSecurityPolicy: false, // Permitir CDNs externos (Tailwind, Fonts, QR)
+  crossOriginEmbedderPolicy: false
+}));
+
+// Firewall de Protección DDoS y Brute-Force Rate Limiting (Candado de Seguridad)
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 300, // Límite de 300 peticiones por IP cada 15 min
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: 'Demasiadas peticiones detectadas por el Firewall de Seguridad. Intenta de nuevo en unas minutos.' }
+});
+
+app.use('/api/', apiLimiter);
 
 // Configuración de Multer: Almacenamiento Estrictamente en Memoria RAM Volátil (0 Disco)
 const storage = multer.memoryStorage();
