@@ -1,5 +1,7 @@
 # AuditFlow AI - Sistema Micro-SaaS B2B de Auditoría con IA (24/7)
 
+![AuditFlow AI 30-Second Product Demo Showcase](frontend/assets/demo_hyperframes.jpg)
+
 [![GitHub stars](https://img.shields.io/github/stars/your-user/auditflow-ai?style=social)](https://github.com/your-user/auditflow-ai)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
@@ -7,6 +9,16 @@
 [![Build Status](https://img.shields.io/badge/Tests-1000%2F1000%20PASSED-10b981.svg)](#-suite-de-1000-pruebas-automatizadas)
 
 **AuditFlow AI** es una infraestructura de micro-SaaS B2B diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando 3 fugas financieras o cláusulas de riesgo en menos de 10 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), filtro pre-vuelo anti-OCR defectuoso y un embudo de monetización híbrido con Upsell Corporativo ($49/mes).
+
+---
+
+## 📹 Demostración del Producto (30-Second Demo Showcase)
+
+La imagen arriba resume los 4 hiperfotogramas (*hyperframes*) clave de la experiencia de usuario:
+1. **Drag & Drop en Memoria RAM**: Carga instantánea de PDFs/Imágenes sin persistencia en disco.
+2. **Dashboard de Auditoría en Tiempo Real**: Métricas visuales de riesgo y detección de fugas financieras.
+3. **Reporte con Soluciones Desenfocadas (Blur)**: Protección de textos tácticos hasta la confirmación de pago.
+4. **Checkout Híbrido $7 USD / Lightning QR**: Paga con tarjeta bancaria o Satoshis en la red Lightning.
 
 ---
 
@@ -50,6 +62,8 @@ c:\Users\Ricardo\Desktop\Audiflow Ai\
 │   └── webhooks/
 │       └── MasterWebhook.bx   # Listener unificado Stripe & Lightning
 └── frontend/
+    ├── assets/
+    │   └── demo_hyperframes.jpg # Hiperfotogramas de demostración del producto
     ├── index.html             # UI bilingüe con micro-copys de seguridad y alerta Pre-Vuelo OCR
     ├── css/
     │   └── styles.css         # Estilos, alertas y desenfoque .blurred-content
