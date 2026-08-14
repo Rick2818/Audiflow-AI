@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: auditflow-ai
+    env: node
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: NODE_ENV
+        value: production
