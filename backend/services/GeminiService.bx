@@ -1,0 +1,122 @@
+// ==============================================================================
+// AUDITFLOW AI - GEMINI 2.5 FLASH SERVICE (GeminiService.bx)
+// CON FILTRO PRE-VUELO DE LEGIBILIDAD OCR Y PROCESAMIENTO VOLÁTIL
+// ==============================================================================
+
+class {
+
+    private string function getApiKey() {
+        return getSystemSetting("GEMINI_API_KEY", "");
+    }
+
+    /**
+     * Validador Pre-Vuelo de legibilidad OCR (Filtro Anti-Garbage In)
+     */
+    public boolean function validatePreflightQuality( required string extractedText ) {
+        var cleanText = trim(arguments.extractedText);
+        if ( len(cleanText) == 0 ) return false;
+
+        var words = reMatch("[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+", cleanText);
+        if ( !isArray(words) OR arrayLen(words) < 50 ) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Procesa un documento (PDF/Imagen) directamente desde un Buffer de Memoria RAM
+     */
+    public struct function analyzeDocumentInMemory( required any fileBuffer, required string mimeType, required string fileName, string extractedText="" ) {
+        var apiKey = getApiKey();
+        if ( len(trim(apiKey)) == 0 ) {
+            throw(type="MissingApiKey", message="GEMINI_API_KEY no está configurada en las variables de entorno.");
+        }
+
+        // 1. VALIDACIÓN PRE-VUELO DE LEGIBILIDAD OCR
+        if ( len(trim(arguments.extractedText)) > 0 AND !validatePreflightQuality(arguments.extractedText) ) {
+            throw(type="PreflightCheckFailed", message="El documento es ilegible o tiene menos de 50 palabras legibles. Por favor sube una copia más clara.");
+        }
+
+        // 2. Convertir buffer de memoria a Base64 en RAM sin escribir a disco
+        var base64Content = binaryEncode( arguments.fileBuffer, "base64" );
+
+        // 3. Prompt Maestro JSON
+        var promptText = "
+Analiza minuciosamente el documento adjunto y responde EXCLUSIVAMENTE con un objeto JSON estricto sin sintaxis markdown:
+
+{
+  \"document_type\": \"Categoría del documento\",
+  \"company_estimate\": \"Empresa emisora\",
+  \"total_contract_value\": 50000.00,
+  \"total_financial_leakage\": 3450.00,
+  \"risk_level\": \"HIGH\",
+  \"lead_score\": 85,
+  \"findings\": [
+    {
+      \"id\": 1,
+      \"title\": \"Título del fallo #1\",
+      \"clause_reference\": \"Cláusula 4.2\",
+      \"severity\": \"CRITICAL\",
+      \"financial_impact\": 2000.00,
+      \"teaser_preview\": \"Resumen de intriga.\",
+      \"actionable_solution\": \"Solución táctica paso a paso.\"
+    }
+  ]
+}
+";
+
+        var requestPayload = {
+            "contents": [
+                {
+                    "parts": [
+                        { "text": promptText },
+                        {
+                            "inline_data": {
+                                "mime_type": arguments.mimeType,
+                                "data": base64Content
+                            }
+                        }
+                    ]
+                }
+            ],
+            "generationConfig": {
+                "temperature": 0.1,
+                "response_mime_type": "application/json"
+            }
+        };
+
+        var apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" & apiKey;
+
+        var httpService = new http();
+        httpService.setMethod("POST");
+        httpService.setUrl(apiUrl);
+        httpService.addParam(type="header", name="Content-Type", value="application/json");
+        httpService.setBody( serializeJSON(requestPayload) );
+
+        var result = httpService.send().getPrefix();
+
+        // PURGA INMEDIATA DE MEMORIA RAM CON INSTANCIACIÓN CORRECTA DE BYTE ARRAY
+        base64Content = "";
+        try {
+            arguments.fileBuffer = createObject("java", "java.io.ByteArrayOutputStream").init().toByteArray();
+        } catch (any e) {}
+
+        if ( result.statusCode contains "200" AND isJson(result.fileContent) ) {
+            var rawResponse = deserializeJSON( result.fileContent );
+            if ( structKeyExists(rawResponse, "candidates") AND isArray(rawResponse.candidates) AND arrayLen(rawResponse.candidates) > 0 ) {
+                var firstCandidate = rawResponse.candidates[1];
+                if ( structKeyExists(firstCandidate, "content") AND structKeyExists(firstCandidate.content, "parts") AND isArray(firstCandidate.content.parts) AND arrayLen(firstCandidate.content.parts) > 0 ) {
+                    var jsonStringText = firstCandidate.content.parts[1].text;
+                    jsonStringText = replaceNoCase(jsonStringText, "```json", "", "all");
+                    jsonStringText = replaceNoCase(jsonStringText, "```", "", "all");
+                    jsonStringText = trim(jsonStringText);
+                    if ( isJson(jsonStringText) ) {
+                        return deserializeJSON( jsonStringText );
+                    }
+                }
+            }
+        }
+
+        throw(type="GeminiApiException", message="Error en API Gemini 2.5 Flash: " & result.fileContent);
+    }
+}

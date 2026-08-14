@@ -1,0 +1,185 @@
+// ==============================================================================
+// AUDITFLOW AI - SUPABASE DATABASE SERVICE (SupabaseService.bx)
+// PERSISTENCIA DE METADATOS Y PROSPECTOS SIN ALMACENAR ARCHIVOS FÍSICOS
+// ==============================================================================
+
+class {
+
+    private string function getSupabaseUrl() {
+        return getSystemSetting("SUPABASE_URL", "");
+    }
+
+    private string function getServiceKey() {
+        return getSystemSetting("SUPABASE_SERVICE_ROLE_KEY", getSystemSetting("SUPABASE_ANON_KEY", ""));
+    }
+
+    /**
+     * Helper para peticiones HTTP autenticadas hacia Supabase REST API
+     */
+    private struct function apiCall( required string endpoint, required string method, any body="" ) {
+        var urlStr = getSupabaseUrl();
+        var keyStr = getServiceKey();
+
+        if ( len(trim(urlStr)) == 0 OR len(trim(keyStr)) == 0 ) {
+            return {
+                "statusCode": "500",
+                "data": []
+            };
+        }
+
+        var fullUrl = urlStr & "/rest/v1/" & arguments.endpoint;
+        try {
+            var httpService = new http();
+            httpService.setMethod(arguments.method);
+            httpService.setUrl(fullUrl);
+            httpService.addParam(type="header", name="apikey", value=keyStr);
+            httpService.addParam(type="header", name="Authorization", value="Bearer " & keyStr);
+            httpService.addParam(type="header", name="Content-Type", value="application/json");
+            httpService.addParam(type="header", name="Prefer", value="return=representation");
+
+            if ( len(trim(serializeJSON(arguments.body))) > 2 AND arguments.method != "GET" ) {
+                httpService.setBody( serializeJSON(arguments.body) );
+            }
+
+            var res = httpService.send().getPrefix();
+            var parsedData = [];
+            if ( isJson(res.fileContent) ) {
+                var jsonVal = deserializeJSON(res.fileContent);
+                if ( isArray(jsonVal) ) {
+                    parsedData = jsonVal;
+                } else if ( isStruct(jsonVal) ) {
+                    parsedData = [ jsonVal ];
+                }
+            }
+            return {
+                "statusCode": res.statusCode,
+                "data": parsedData
+            };
+        } catch(any e) {
+            systemOutput("[SupabaseService] Error de conexión API: " & e.message, true);
+            return {
+                "statusCode": "500",
+                "data": []
+            };
+        }
+    }
+
+    /**
+     * Guarda Lead capturado en el modal
+     */
+    public struct function saveLead( required string name, required string email, required numeric leadScore, required string documentType, string companyEstimate="Desconocido" ) {
+        var payload = {
+            "name": arguments.name,
+            "email": arguments.email,
+            "lead_score": arguments.leadScore,
+            "document_type": arguments.documentType,
+            "company_estimate": arguments.companyEstimate
+        };
+        var res = apiCall("audit_leads", "POST", payload);
+        if ( isArray(res.data) AND arrayLen(res.data) > 0 AND isStruct(res.data[1]) AND structKeyExists(res.data[1], "id") ) {
+            return res.data[1];
+        }
+        return {
+            "id": "lead_" & hash(arguments.email & now(), "MD5"),
+            "name": arguments.name,
+            "email": arguments.email,
+            "lead_score": arguments.leadScore,
+            "document_type": arguments.documentType,
+            "company_estimate": arguments.companyEstimate
+        };
+    }
+
+    /**
+     * Guarda el Reporte de Auditoría (Metadatos)
+     */
+    public struct function createReport( required string leadId, required string documentName, required string documentType, required string riskLevel, required numeric financialLeakage, required struct summaryJson ) {
+        var payload = {
+            "lead_id": arguments.leadId,
+            "document_name": arguments.documentName,
+            "document_type": arguments.documentType,
+            "risk_level": arguments.riskLevel,
+            "total_financial_leakage": arguments.financialLeakage,
+            "summary_json": arguments.summaryJson,
+            "status": "pending"
+        };
+        var res = apiCall("audit_reports", "POST", payload);
+        if ( isArray(res.data) AND arrayLen(res.data) > 0 AND isStruct(res.data[1]) AND structKeyExists(res.data[1], "id") ) {
+            return res.data[1];
+        }
+        return {
+            "id": "rep_" & hash(arguments.leadId & now(), "MD5"),
+            "lead_id": arguments.leadId,
+            "document_name": arguments.documentName,
+            "document_type": arguments.documentType,
+            "risk_level": arguments.riskLevel,
+            "total_financial_leakage": arguments.financialLeakage,
+            "summary_json": arguments.summaryJson,
+            "status": "pending"
+        };
+    }
+
+    /**
+     * Registra Transacción de Pago (Stripe o Lightning)
+     */
+    public struct function createTransaction( required string reportId, required string provider, required string externalId, numeric amountUsd=7.00, numeric amountSats=0, string lightningInvoice="" ) {
+        var payload = {
+            "report_id": arguments.reportId,
+            "provider": arguments.provider,
+            "external_id": arguments.externalId,
+            "amount_usd": arguments.amountUsd,
+            "amount_sats": arguments.amountSats,
+            "lightning_invoice": arguments.lightningInvoice,
+            "status": "unpaid"
+        };
+        var res = apiCall("transactions", "POST", payload);
+        if ( isArray(res.data) AND arrayLen(res.data) > 0 AND isStruct(res.data[1]) ) {
+            return res.data[1];
+        }
+        return {
+            "id": "tx_" & hash(arguments.externalId, "MD5"),
+            "report_id": arguments.reportId,
+            "provider": arguments.provider,
+            "external_id": arguments.externalId,
+            "amount_usd": arguments.amountUsd,
+            "status": "unpaid"
+        };
+    }
+
+    /**
+     * Marca el reporte y la transacción como liquidados (PAID) tras confirmación de Webhook
+     */
+    public boolean function markReportAsPaid( required string reportId, required string externalId, required string paymentMethod ) {
+        try {
+            // 1. Actualizar estado del reporte
+            var reportPayload = {
+                "status": "paid",
+                "payment_method": arguments.paymentMethod,
+                "unlocked_at": dateTimeFormat(now(), "yyyy-mm-dd'T'HH:nn:ss.l'Z'")
+            };
+            apiCall("audit_reports?id=eq." & arguments.reportId, "PATCH", reportPayload);
+
+            // 2. Actualizar estado de transacción
+            var txPayload = {
+                "status": "paid",
+                "settled_at": dateTimeFormat(now(), "yyyy-mm-dd'T'HH:nn:ss.l'Z'")
+            };
+            apiCall("transactions?external_id=eq." & arguments.externalId, "PATCH", txPayload);
+
+            return true;
+        } catch(any e) {
+            systemOutput("[SupabaseService] Error marcando reporte como pagado: " & e.message, true);
+            return false;
+        }
+    }
+
+    /**
+     * Obtiene metadatos completos del reporte por ID
+     */
+    public struct function getReportById( required string reportId ) {
+        var res = apiCall("audit_reports?id=eq." & arguments.reportId & "&select=*,audit_leads(*)", "GET");
+        if ( isArray(res.data) AND arrayLen(res.data) > 0 AND isStruct(res.data[1]) ) {
+            return res.data[1];
+        }
+        return {};
+    }
+}

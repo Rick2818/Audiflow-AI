@@ -1,0 +1,142 @@
+// ==============================================================================
+// AUDITFLOW AI - CENTRAL ROUTER (router.bx)
+// RUTEO DE ENDPOINTS REST PARA PROCESAMIENTO EN MEMORIA, BASE DE DATOS Y PAGOS
+// ==============================================================================
+
+class {
+
+    public any function handleRequest( required string path, required string method, required any body, required struct queryParams ) {
+        var geminiService = new backend.services.GeminiService();
+        var supabaseService = new backend.services.SupabaseService();
+        var stripeService = new backend.services.StripeService();
+        var lightningService = new backend.services.LightningService();
+        var webhookHandler = new backend.webhooks.MasterWebhook();
+
+        // 1. ENDPOINT: POST /api/audit (Analizar archivo en Memoria RAM)
+        if ( arguments.path == "/api/audit" AND arguments.method == "POST" ) {
+            var fileBuffer = structKeyExists(arguments.body, "fileBuffer") ? arguments.body.fileBuffer : binaryDecode("", "base64");
+            var mimeType = structKeyExists(arguments.body, "mimeType") ? arguments.body.mimeType : "application/pdf";
+            var fileName = structKeyExists(arguments.body, "fileName") ? arguments.body.fileName : "documento.pdf";
+            var extractedText = structKeyExists(arguments.body, "extractedText") ? arguments.body.extractedText : "";
+
+            var auditResult = geminiService.analyzeDocumentInMemory(
+                fileBuffer = fileBuffer,
+                mimeType = mimeType,
+                fileName = fileName,
+                extractedText = extractedText
+            );
+
+            return auditResult;
+        }
+
+        // 2. ENDPOINT: POST /api/lead (Guardar Lead y crear Reporte en Supabase)
+        if ( arguments.path == "/api/lead" AND arguments.method == "POST" ) {
+            var payload = arguments.body;
+            var name = structKeyExists(payload, "name") ? payload.name : "Cliente";
+            var email = structKeyExists(payload, "email") ? payload.email : "lead@auditflow.ai";
+            var leadScore = structKeyExists(payload, "lead_score") ? val(payload.lead_score) : 80;
+            var docType = structKeyExists(payload, "document_type") ? payload.document_type : "Contrato";
+            var companyEst = structKeyExists(payload, "company_estimate") ? payload.company_estimate : "Desconocido";
+            var docName = structKeyExists(payload, "document_name") ? payload.document_name : "Documento.pdf";
+            var riskLvl = structKeyExists(payload, "risk_level") ? payload.risk_level : "HIGH";
+            var leakage = structKeyExists(payload, "total_financial_leakage") ? val(payload.total_financial_leakage) : 0;
+            var summary = structKeyExists(payload, "summary_json") ? payload.summary_json : {};
+            
+            // Guardar prospecto
+            var lead = supabaseService.saveLead(
+                name = name,
+                email = email,
+                leadScore = leadScore,
+                documentType = docType,
+                companyEstimate = companyEst
+            );
+
+            var leadId = (isStruct(lead) AND structKeyExists(lead, "id")) ? lead.id : "lead_" & hash(email & now(), "MD5");
+
+            // Crear registro de reporte
+            var report = supabaseService.createReport(
+                leadId = leadId,
+                documentName = docName,
+                documentType = docType,
+                riskLevel = riskLvl,
+                financialLeakage = leakage,
+                summaryJson = summary
+            );
+
+            var reportId = (isStruct(report) AND structKeyExists(report, "id")) ? report.id : "rep_" & hash(leadId & now(), "MD5");
+
+            return {
+                "lead_id": leadId,
+                "report_id": reportId,
+                "status": "created"
+            };
+        }
+
+        // 3. ENDPOINT: POST /api/payment/stripe (Generar Checkout $7 USD)
+        if ( arguments.path == "/api/payment/stripe" AND arguments.method == "POST" ) {
+            var payload = arguments.body;
+            var rId = structKeyExists(payload, "report_id") ? payload.report_id : "";
+            var email = structKeyExists(payload, "email") ? payload.email : "";
+            var docName = structKeyExists(payload, "document_name") ? payload.document_name : "Documento.pdf";
+
+            var session = stripeService.createCheckoutSession(
+                reportId = rId,
+                leadEmail = email,
+                documentName = docName
+            );
+
+            // Guardar transacción pendiente en Supabase
+            supabaseService.createTransaction(
+                reportId = rId,
+                provider = "stripe",
+                externalId = session.sessionId,
+                amountUsd = 7.00
+            );
+
+            return session;
+        }
+
+        // 4. ENDPOINT: POST /api/payment/lightning (Generar Factura BOLT11 Satoshis)
+        if ( arguments.path == "/api/payment/lightning" AND arguments.method == "POST" ) {
+            var payload = arguments.body;
+            var rId = structKeyExists(payload, "report_id") ? payload.report_id : "";
+            var docName = structKeyExists(payload, "document_name") ? payload.document_name : "Documento.pdf";
+
+            var invoiceData = lightningService.createLightningInvoice(
+                reportId = rId,
+                documentName = docName,
+                usdAmount = 7.00
+            );
+
+            // Guardar transacción pendiente en Supabase
+            supabaseService.createTransaction(
+                reportId = rId,
+                provider = "lightning",
+                externalId = invoiceData.chargeId,
+                amountUsd = 7.00,
+                amountSats = invoiceData.amountSats,
+                lightningInvoice = invoiceData.lightningInvoice
+            );
+
+            return invoiceData;
+        }
+
+        // 5. ENDPOINT: GET /api/report (Obtener estado y metadatos del reporte)
+        if ( (left(arguments.path, 12) == "/api/report/" OR findNoCase("/api/report/", arguments.path) == 1) AND arguments.method == "GET" ) {
+            var reportId = replace(arguments.path, "/api/report/", "");
+            return supabaseService.getReportById(reportId);
+        }
+
+        // 6. ENDPOINT: POST /api/webhooks/master (Webhook Listener)
+        if ( (left(arguments.path, 20) == "/api/webhooks/master" OR findNoCase("/api/webhooks/master", arguments.path) == 1) AND arguments.method == "POST" ) {
+            var provider = structKeyExists(arguments.queryParams, "provider") ? arguments.queryParams.provider : "stripe";
+            return webhookHandler.processWebhook(
+                provider = provider,
+                payload = arguments.body,
+                headers = isDefined("getPageContext") ? getPageContext().getRequest().getHeaderNames() : {}
+            );
+        }
+
+        return { "error": "Endpoint no encontrado o método no soportado", "path": arguments.path };
+    }
+}

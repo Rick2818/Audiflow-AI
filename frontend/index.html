@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuditFlow AI - Auditoría Instantánea de Contratos y Facturas</title>
+    <meta name="description" content="Auditoría B2B en memoria volátil impulsada por IA Gemini 2.5 Flash. Detecta fugas financieras y cláusulas de riesgo en <10 segundos. Cero almacenamiento.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#09090b',
+                        'bg-dark-surface': '#121215',
+                        'bg-dark-card': '#18181b',
+                        'border-dark': '#27272a',
+                        'accent-blue': '#38bdf8',
+                        'accent-emerald': '#10b981',
+                        'text-light': '#f4f4f5',
+                        'text-muted': '#a1a1aa',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px rgba(56, 189, 248, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <!-- QR Code Generator Library para Lightning Network -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="bg-dark text-light antialiased font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- BARRA NAVEGACIÓN SUPERIOR -->
+    <header class="border-b border-border-dark bg-dark-surface sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent-blue to-accent-emerald flex items-center justify-center font-bold text-white shadow-glow">
+                    A
+                </div>
+                <span class="font-bold text-xl tracking-tight text-white">AuditFlow <span class="text-accent-blue">AI</span></span>
+            </div>
+            
+            <div class="flex items-center gap-3 sm:gap-4 text-sm">
+                <!-- SWITCHER BILINGÜE (ES / EN) -->
+                <div class="inline-flex items-center bg-dark-card border border-border-dark rounded-lg p-1 text-xs font-mono">
+                    <button id="btn-lang-es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
+                    <button id="btn-lang-en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
+                </div>
+
+                <span class="badge-privacy hidden sm:inline-flex items-center gap-2">
+                    <span class="pulse-dot"></span>
+                    <span data-i18n="nav_privacy_badge">Memoria Volátil Activa (0 Disco)</span>
+                </span>
+                <span data-i18n="nav_speed_badge" class="text-gray-300 font-mono text-xs hidden md:inline px-2.5 py-1 rounded bg-dark-card border border-border-dark">Auditoría &lt;10s</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- HÉROE PRINCIPAL / UPLOAD SECTION -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full">
+        <section id="upload-section" class="text-center py-4 sm:py-8">
+            <div class="max-w-3xl mx-auto">
+                <div data-i18n="hero_engine_badge" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-dark-card border border-gray-700/70 text-xs font-mono text-accent-blue mb-6 shadow-sm">
+                    ⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido
+                </div>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                    <span data-i18n="hero_title_1">Audita tus Contratos y Facturas en </span><span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-emerald">&lt;10 Segundos</span>
+                </h1>
+                <p data-i18n="hero_sub" class="text-gray-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Detecta automáticamente fugas financieras, sobrecargos y cláusulas de riesgo sin subir tus archivos a ningún servidor. Procesamiento 100% en RAM volátil.
+                </p>
+
+                <!-- ÁREA DRAG & DROP -->
+                <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-6 focus:outline-none focus:ring-2 focus:ring-accent-blue">
+                    <input type="file" id="file-input" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.webp">
+                    
+                    <div class="flex flex-col items-center justify-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-border-dark/80 flex items-center justify-center text-accent-blue group-hover:scale-110 group-hover:bg-accent-blue/10 transition-all duration-300">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-base sm:text-lg font-semibold text-white mb-1.5"><span data-i18n="drag_title">Arrastra tu archivo aquí o </span><span data-i18n="drag_browse" class="text-accent-blue underline hover:text-accent-blue/80">explora tus archivos</span></p>
+                            <p data-i18n="drag_formats" class="text-xs text-gray-400 font-mono">Soporta PDF, PNG, JPG o WebP (Hasta 15MB)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BANNERS ESTÁTICOS DE CONFIANZA VISUAL Y SEGURIDAD CORPORATIVA -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-left">
+                    <div class="p-4 rounded-xl bg-dark-surface border border-emerald-500/30 flex items-start gap-3.5 shadow-sm">
+                        <span class="text-xl shrink-0">🔒</span>
+                        <div>
+                            <h4 data-i18n="trust_title_1" class="text-xs font-bold text-white uppercase tracking-wider mb-1">Procesamiento efímero:</h4>
+                            <p data-i18n="trust_sub_1" class="text-xs text-gray-300 leading-relaxed">Tu documento se analiza exclusivamente en memoria RAM (volátil) y se destruye en &lt; 5 segundos.</p>
+                        </div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-dark-surface border border-accent-blue/30 flex items-start gap-3.5 shadow-sm">
+                        <span class="text-xl shrink-0">🛡️</span>
+                        <div>
+                            <h4 data-i18n="trust_title_2" class="text-xs font-bold text-white uppercase tracking-wider mb-1">Privacidad estricta:</h4>
+                            <p data-i18n="trust_sub_2" class="text-xs text-gray-300 leading-relaxed">Cero almacenamiento en disco. Cifrado de grado bancario AES-256 en tránsito.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INDICADOR DE SELECCIÓN DE ARCHIVO -->
+                <div id="file-selected-box" class="hidden mt-4 p-4 sm:p-5 rounded-xl bg-dark-card border border-accent-blue/40 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg animate-fade-in">
+                    <div class="flex items-center gap-3 text-left w-full sm:w-auto">
+                        <div class="w-11 h-11 rounded-xl bg-accent-blue/15 text-accent-blue flex items-center justify-center font-bold font-mono shrink-0">
+                            📄
+                        </div>
+                        <div class="min-w-0 flex-1">
+                            <p id="file-name-display" class="font-semibold text-white text-sm truncate">contrato_proveedor.pdf</p>
+                            <p id="file-size-display" class="text-xs text-gray-400 font-mono">2.4 MB • Memoria RAM lista</p>
+                        </div>
+                    </div>
+                    <button id="btn-start-scan" class="btn-primary w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 text-sm">
+                        <span data-i18n="btn_start_scan">Iniciar Auditoría IA</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </button>
+                </div>
+
+                <!-- CAJA DE ALERTA DE PRE-FLIGHT CHECK -->
+                <div id="ocr-error-box" class="hidden mt-6 p-6 rounded-2xl bg-red-950/40 border border-red-500/40 text-left animate-fade-in">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-2xl shrink-0">
+                            ⚠️
+                        </div>
+                        <div>
+                            <h3 data-i18n="ocr_error_title" class="text-base sm:text-lg font-bold text-red-400 mb-1">Documento Ilegible o Resolución Insuficiente</h3>
+                            <p data-i18n="ocr_error_msg" class="text-xs sm:text-sm text-gray-300 leading-relaxed mb-4">
+                                El filtro de calidad detectó menos de 50 palabras legibles o caracteres corruptos. Por favor, sube una versión más clara para garantizar una auditoría precisa.
+                            </p>
+                            <button onclick="window.AppHandler.resetUploadView()" class="btn-secondary text-xs font-semibold px-4 py-2 flex items-center gap-2">
+                                <span data-i18n="ocr_error_retry">Subir Otro Archivo</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CARACTERÍSTICAS CLAVE -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
+                    <div class="p-6 rounded-xl bg-dark-card border border-border-dark hover:border-gray-700 transition-colors">
+                        <div data-i18n="feat_1_tag" class="text-accent-blue mb-2 font-bold font-mono text-xs uppercase tracking-wider">01. Privacidad Total</div>
+                        <h3 data-i18n="feat_1_title" class="text-white font-semibold text-base mb-1.5">Cero Guardado en Disco</h3>
+                        <p data-i18n="feat_1_desc" class="text-gray-300 text-xs leading-relaxed">El documento se convierte a memoria RAM volátil, se audita por Gemini y se destruye inmediatamente.</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-dark-card border border-border-dark hover:border-gray-700 transition-colors">
+                        <div data-i18n="feat_2_tag" class="text-accent-emerald mb-2 font-bold font-mono text-xs uppercase tracking-wider">02. Detección Táctica</div>
+                        <h3 data-i18n="feat_2_title" class="text-white font-semibold text-base mb-1.5">3 Fallas Críticas</h3>
+                        <p data-i18n="feat_2_desc" class="text-gray-300 text-xs leading-relaxed">Detecta penalizaciones ocultas, indexaciones dobles y sobrecargos en minutos de lectura.</p>
+                    </div>
+                    <div class="p-6 rounded-xl bg-dark-card border border-border-dark hover:border-gray-700 transition-colors">
+                        <div data-i18n="feat_3_tag" class="text-purple-400 mb-2 font-bold font-mono text-xs uppercase tracking-wider">03. Pagos Híbridos</div>
+                        <h3 data-i18n="feat_3_title" class="text-white font-semibold text-base mb-1.5">$7 USD o Satoshis</h3>
+                        <p data-i18n="feat_3_desc" class="text-gray-300 text-xs leading-relaxed">Paga fácilmente con Tarjeta bancaria ($7) o red Lightning de Bitcoin en segundos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN DE CARGA / SCANNER ANIMADO -->
+        <section id="scanner-section" class="hidden py-16 text-center max-w-xl mx-auto animate-fade-in">
+            <div class="relative w-28 h-28 mx-auto mb-8">
+                <div class="absolute inset-0 rounded-full border-4 border-accent-blue/20 animate-ping"></div>
+                <div class="absolute inset-0 rounded-full border-4 border-t-accent-blue border-r-transparent border-b-accent-emerald border-l-transparent animate-spin"></div>
+                <div class="w-full h-full rounded-full bg-dark-card flex items-center justify-center font-mono font-bold text-xl text-accent-blue shadow-glow">
+                    <span id="scan-timer">0.0s</span>
+                </div>
+            </div>
+
+            <h2 id="scan-status-text" data-i18n="scan_init" class="text-xl sm:text-2xl font-bold text-white mb-2">Iniciando escáner en memoria volátil...</h2>
+            <p id="scan-subtext" data-i18n="scan_sub" class="text-gray-300 text-sm mb-6">Analizando cláusulas financieras con Gemini 2.5 Flash</p>
+
+            <div class="w-full bg-dark-card h-2.5 rounded-full overflow-hidden border border-border-dark mb-6">
+                <div id="scan-progress-bar" class="h-full bg-gradient-to-r from-accent-blue to-accent-emerald transition-all duration-300 w-0"></div>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono text-gray-400">
+                <span id="step-1" data-i18n="step_ram" class="p-2 rounded bg-dark-card border border-border-dark text-accent-blue font-bold">RAM Buffer</span>
+                <span id="step-2" data-i18n="step_gemini" class="p-2 rounded bg-dark-card border border-border-dark">Gemini AI</span>
+                <span id="step-3" data-i18n="step_scoring" class="p-2 rounded bg-dark-card border border-border-dark">Lead Scoring</span>
+                <span id="step-4" data-i18n="step_ready" class="p-2 rounded bg-dark-card border border-border-dark">Reporte Listo</span>
+            </div>
+        </section>
+
+        <!-- MODAL LEADS (NOMBRE Y EMAIL) -->
+        <div id="lead-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-border-dark rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto max-h-[90vh] overflow-y-auto">
+                <button id="btn-close-lead-modal" aria-label="Cerrar modal" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="w-12 h-12 rounded-xl bg-accent-blue/10 text-accent-blue flex items-center justify-center font-bold text-xl mb-4">
+                    📋
+                </div>
+                <h3 data-i18n="lead_modal_title" class="text-xl sm:text-2xl font-bold text-white mb-2">Auditoría Completada</h3>
+                <p data-i18n="lead_modal_sub" class="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed">
+                    Se han detectado fugas financieras en tu documento. Ingresa tus datos para generar tu ID de informe oficial y recibir el resumen.
+                </p>
+
+                <form id="lead-form" class="space-y-4">
+                    <div>
+                        <label data-i18n="lead_label_name" class="block text-xs font-medium text-gray-300 mb-1.5">Nombre Completo</label>
+                        <input type="text" id="lead-name" required data-i18n-placeholder="lead_placeholder_name" placeholder="Ej. Carlos Mendoza" class="input-field">
+                    </div>
+                    <div>
+                        <label data-i18n="lead_label_email" class="block text-xs font-medium text-gray-300 mb-1.5">Correo Electrónico Corporativo</label>
+                        <input type="email" id="lead-email" required data-i18n-placeholder="lead_placeholder_email" placeholder="carlos@empresa.com" class="input-field">
+                    </div>
+                    <button type="submit" id="btn-submit-lead" class="btn-primary w-full py-3.5 mt-2 text-center flex justify-center items-center gap-2">
+                        <span data-i18n="lead_btn_submit">Ver Reporte de Auditoría</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- DASHBOARD DE REPORTE CON BLUR -->
+        <section id="report-section" class="hidden py-6 animate-fade-in">
+            <div class="bg-dark-card border border-border-dark rounded-2xl p-6 sm:p-8 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
+                <div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <span id="rep-doc-type" data-i18n="rep_doc_default" class="px-3 py-1 rounded-full bg-border-dark text-accent-blue text-xs font-mono font-medium">Contrato Comercial</span>
+                        <span id="rep-risk-badge" data-i18n="rep_risk_high" class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">RIESGO ALTO</span>
+                    </div>
+                    <h2 id="rep-doc-name" class="text-xl sm:text-2xl font-bold text-white">Auditoría: Contrato_Servicios.pdf</h2>
+                    <p class="text-gray-400 text-xs mt-1 font-mono">ID: <span id="rep-id-display" class="text-white">rep_123456</span> • 0 Disk Storage</p>
+                </div>
+
+                <div class="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 md:border-l border-border-dark pt-4 md:pt-0 md:pl-8">
+                    <div class="text-left md:text-right">
+                        <span data-i18n="rep_leakage_label" class="text-[11px] text-gray-400 block uppercase font-mono tracking-wider mb-0.5">Fuga Financiera Total</span>
+                        <span id="rep-total-leakage" class="text-2xl sm:text-3xl font-extrabold text-red-400">$3,450.00 USD</span>
+                    </div>
+                    <div class="text-right">
+                        <span data-i18n="rep_lead_score_label" class="text-[11px] text-gray-400 block uppercase font-mono tracking-wider mb-0.5">Lead Score</span>
+                        <div id="rep-lead-score-badge" class="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-accent-emerald/15 text-accent-emerald font-extrabold text-base sm:text-lg font-mono border border-accent-emerald/30 shadow-glow-emerald">
+                            88
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TARJETAS DE HALLAZGOS (3 FALLAS) -->
+            <div class="mb-8">
+                <h3 data-i18n="rep_findings_title" class="text-lg sm:text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span>3 Fallas Financieras &amp; Cláusulas de Riesgo Detectadas</span>
+                </h3>
+
+                <div id="findings-container" class="space-y-6">
+                    <!-- Inserción dinámica de hallazgos mediante JS -->
+                </div>
+            </div>
+
+            <!-- BANNER DE DESBLOQUEO / PASARELA DE PAGO -->
+            <div id="unlock-banner" class="bg-gradient-to-r from-accent-blue/10 via-dark-card to-accent-emerald/10 border border-accent-blue/30 rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden shadow-2xl">
+                <div class="max-w-xl mx-auto">
+                    <span class="w-12 h-12 rounded-full bg-accent-blue/20 text-accent-blue inline-flex items-center justify-center font-bold text-xl mb-4 shadow-glow">🔓</span>
+                    <h3 data-i18n="banner_title" class="text-xl sm:text-2xl font-bold text-white mb-2">Desbloquea las 3 Soluciones Tácticas + Reporte PDF</h3>
+                    <p data-i18n="banner_sub" class="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed">
+                        Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos y el PDF firmado de auditoría listo para tu equipo legal.
+                    </p>
+                    <button id="btn-open-payment-modal" class="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3.5 shadow-glow w-full sm:w-auto">
+                        <span data-i18n="banner_btn">Desbloquear Informe Completo ($7.00 USD / Sats)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- BANNER DE UPSELL CORPORATIVO ($49/MES) -->
+            <div id="upsell-banner" class="hidden mt-8 bg-gradient-to-r from-purple-900/30 via-dark-card to-blue-900/30 border border-purple-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-xl">
+                <div class="max-w-2xl mx-auto">
+                    <h3 data-i18n="upsell_title" class="text-xl sm:text-2xl font-bold text-white mb-2">🚀 ¿Necesitas Auditorías Ilimitadas para tu Empresa?</h3>
+                    <p data-i18n="upsell_sub" class="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed">
+                        Actualiza a la suscripción Corporativa por $49/mes. Auditorías ilimitadas, equipo multi-usuario y soporte legal prioritaria.
+                    </p>
+                    <button onclick="window.AppHandler.subscribeEnterprise()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue text-sm sm:text-base px-6 sm:px-8 py-3.5 shadow-glow w-full sm:w-auto">
+                        <span data-i18n="upsell_btn">Suscribirme por $49/mes</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- MODAL DE PAGO HÍBRIDO (STRIPE / LIGHTNING) -->
+        <div id="payment-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-border-dark rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto max-h-[90vh] overflow-y-auto">
+                <button id="btn-close-payment-modal" aria-label="Cerrar modal de pago" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <h3 data-i18n="pay_title" class="text-xl font-bold text-white mb-1">Selecciona Método de Pago</h3>
+                <p data-i18n="pay_sub" class="text-xs text-gray-400 mb-6 font-mono">Tarifa plana de $7.00 USD • Liquidación inmediata</p>
+
+                <div class="grid grid-cols-2 gap-2 p-1.5 bg-dark-surface rounded-xl mb-6 border border-border-dark">
+                    <button id="tab-stripe" data-i18n="pay_tab_stripe" class="py-2 px-3 rounded-lg text-xs font-semibold text-white bg-dark-card border border-accent-blue transition-all">
+                        💳 Stripe ($7.00 USD)
+                    </button>
+                    <button id="tab-lightning" data-i18n="pay_tab_ln" class="py-2 px-3 rounded-lg text-xs font-semibold text-gray-400 hover:text-white transition-all">
+                        ⚡ Lightning (Satoshis)
+                    </button>
+                </div>
+
+                <div id="payment-content-stripe" class="space-y-4">
+                    <div class="p-4 rounded-xl bg-dark-surface border border-border-dark text-left">
+                        <div class="flex justify-between items-center mb-2">
+                            <span data-i18n="pay_total_label" class="text-xs font-medium text-gray-400">Total a Pagar</span>
+                            <span class="text-xl font-extrabold text-white">$7.00 USD</span>
+                        </div>
+                        <p data-i18n="pay_stripe_desc" class="text-xs text-gray-300 leading-relaxed">Liquidación segura a través de tarjeta de crédito/débito. Recibes el reporte desenfocado al instante + copia PDF en tu correo.</p>
+                    </div>
+                    <button id="btn-pay-stripe" class="btn-primary w-full py-3.5 text-center flex justify-center items-center gap-2">
+                        <span data-i18n="pay_btn_stripe">Pagar con Tarjeta ($7 USD)</span>
+                    </button>
+                </div>
+
+                <div id="payment-content-lightning" class="hidden space-y-4 text-center">
+                    <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
+                        <div class="flex justify-between items-center mb-3 text-xs font-mono">
+                            <span data-i18n="pay_ln_expiry" class="text-gray-400">Expiración Factura</span>
+                            <span id="ln-timer" class="text-amber-400 font-bold">09:59</span>
+                        </div>
+
+                        <!-- CLS PREVENTER: Min height fixed container for QR -->
+                        <div id="qrcode-container" class="bg-white p-3 rounded-xl inline-flex items-center justify-center my-2 min-w-[164px] min-h-[164px]"></div>
+
+                        <div class="mt-3">
+                            <span data-i18n="pay_ln_sats_label" class="text-xs text-gray-400 block font-mono">Monto en Satoshis:</span>
+                            <span id="ln-sats-amount" class="text-lg font-extrabold text-accent-emerald font-mono">10,769 Sats</span>
+                        </div>
+                    </div>
+
+                    <div class="text-left">
+                        <label data-i18n="pay_ln_input_label" class="block text-xs font-mono text-gray-400 mb-1">Factura Lightning BOLT11</label>
+                        <div class="flex gap-2">
+                            <input type="text" id="ln-invoice-input" readonly value="cargando..." class="input-field font-mono text-xs text-gray-400 select-all">
+                            <button id="btn-copy-ln" data-i18n="pay_btn_copy" class="btn-secondary text-xs px-3 font-mono shrink-0">Copiar</button>
+                        </div>
+                    </div>
+
+                    <div class="text-xs text-gray-400 font-mono">
+                        <span data-i18n="pay_ln_node_label">Directo a nodo Lightning:</span> <span id="ln-address-display" class="text-accent-blue">audits@stacker.news</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-border-dark py-8 text-center text-xs text-gray-400 font-mono bg-dark-surface mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div data-i18n="footer_rights">
+                © 2026 AuditFlow AI. Infraestructura Micro-SaaS B2B Operando 24/7.
+            </div>
+            <div class="flex items-center gap-4 text-gray-400">
+                <span data-i18n="footer_privacy_link">Garantía Memoria Volátil</span>
+                <span>•</span>
+                <span>Stripe &amp; Lightning</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- LÓGICA BILINGÜE Y FRONTEND JS -->
+    <script src="js/i18n.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

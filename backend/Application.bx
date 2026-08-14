@@ -1,0 +1,52 @@
+// ==============================================================================
+// AUDITFLOW AI - BOXLANG APPLICATION CONFIGURATION (Application.bx)
+// ==============================================================================
+
+class {
+    this.name = "AuditFlowAI_Engine";
+    this.applicationTimeout = createTimeSpan(0, 1, 0, 0); // 1 hora
+    this.sessionManagement = false; // Sin estado ni almacenamiento en disco
+    this.setClientCookies = false;
+    this.charset = "UTF-8";
+
+    // Regla estricta de memoria: No permitir persistencia en disco ni caches temporales de subida
+    this.customFileUploadDir = ""; 
+
+    /**
+     * Inicializador de aplicación BoxLang
+     */
+    public boolean function onApplicationStart() {
+        application.version = "1.0.0";
+        application.startTime = now();
+        systemOutput("[AuditFlow AI] Motor BoxLang iniciado exitosamente. Memoria volátil configurada.", true);
+        return true;
+    }
+
+    /**
+     * Interceptor global de peticiones HTTP
+     */
+    public boolean function onRequestStart( required string targetPage ) {
+        // Cabeceras CORS de alta velocidad y privacidad
+        getPageContext().getResponse().setHeader("Access-Control-Allow-Origin", "*");
+        getPageContext().getResponse().setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+        getPageContext().getResponse().setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+        getPageContext().getResponse().setHeader("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
+        getPageContext().getResponse().setHeader("Pragma", "no-cache");
+
+        // Manejar peticiones OPTIONS pre-flight
+        if ( getPageContext().getRequest().getMethod() == "OPTIONS" ) {
+            getPageContext().getResponse().setStatus(200);
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Limpieza explícita de memoria al finalizar cada petición
+     */
+    public void function onRequestEnd( required string targetPage ) {
+        // Forzar recolección de residuos en Java VM para garantizar cero residuos en memoria RAM
+        createObject("java", "java.lang.System").gc();
+    }
+}

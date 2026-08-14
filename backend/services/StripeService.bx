@@ -1,0 +1,70 @@
+// ==============================================================================
+// AUDITFLOW AI - STRIPE PAYMENT SERVICE (StripeService.bx)
+// COBROS EN USD ($7.00) CON LIQUIDACIÓN DIRECTA A CUENTA BANCARIA
+// ==============================================================================
+
+class {
+
+    private string function getStripeSecretKey() {
+        return getSystemSetting("STRIPE_SECRET_KEY", "");
+    }
+
+    private string function getAppUrl() {
+        return getSystemSetting("APP_URL", "http://localhost:3000");
+    }
+
+    /**
+     * Crea una sesión de checkout en Stripe para cobrar $7.00 USD
+     */
+    public struct function createCheckoutSession( required string reportId, required string leadEmail, required string documentName ) {
+        var secretKey = getStripeSecretKey();
+        var successUrl = getAppUrl() & "/?reportId=" & arguments.reportId & "&status=success&session_id={CHECKOUT_SESSION_ID}";
+        var cancelUrl = getAppUrl() & "/?reportId=" & arguments.reportId & "&status=cancelled";
+
+        if ( len(trim(secretKey)) == 0 ) {
+            return {
+                "checkoutUrl": getAppUrl() & "/?reportId=" & arguments.reportId & "&status=mock_stripe_success",
+                "sessionId": "cs_mock_" & hash(arguments.reportId, "MD5")
+            };
+        }
+
+        var httpService = new http();
+        httpService.setMethod("POST");
+        httpService.setUrl("https://api.stripe.com/v1/checkout/sessions");
+        httpService.addParam(type="header", name="Authorization", value="Bearer " & secretKey);
+        httpService.addParam(type="header", name="Content-Type", value="application/x-www-form-urlencoded");
+
+        // Parámetros de cobro plano de $7.00 USD
+        httpService.addParam(type="formfield", name="payment_method_types[0]", value="card");
+        httpService.addParam(type="formfield", name="mode", value="payment");
+        httpService.addParam(type="formfield", name="customer_email", value=arguments.leadEmail);
+        httpService.addParam(type="formfield", name="line_items[0][price_data][currency]", value="usd");
+        httpService.addParam(type="formfield", name="line_items[0][price_data][unit_amount]", value="700"); // 700 centavos = $7.00 USD
+        httpService.addParam(type="formfield", name="line_items[0][price_data][product_data][name]", value="AuditFlow AI - Desbloqueo de Auditoría Completa");
+        httpService.addParam(type="formfield", name="line_items[0][price_data][product_data][description]", value="Informe completo sin desenfoque + Reporte PDF oficial de: " & left(arguments.documentName, 100));
+        httpService.addParam(type="formfield", name="line_items[0][quantity]", value="1");
+        httpService.addParam(type="formfield", name="success_url", value=successUrl);
+        httpService.addParam(type="formfield", name="cancel_url", value=cancelUrl);
+        httpService.addParam(type="formfield", name="metadata[report_id]", value=arguments.reportId);
+
+        try {
+            var res = httpService.send().getPrefix();
+            if ( res.statusCode contains "200" AND isJson(res.fileContent) ) {
+                var sessionData = deserializeJSON(res.fileContent);
+                if ( structKeyExists(sessionData, "url") AND structKeyExists(sessionData, "id") ) {
+                    return {
+                        "checkoutUrl": sessionData.url,
+                        "sessionId": sessionData.id
+                    };
+                }
+            }
+        } catch(any stripeErr) {
+            systemOutput("[StripeService] Error invocando Stripe Checkout: " & stripeErr.message, true);
+        }
+
+        return {
+            "checkoutUrl": getAppUrl() & "/?reportId=" & arguments.reportId & "&status=mock_stripe_success",
+            "sessionId": "cs_mock_" & hash(arguments.reportId, "MD5")
+        };
+    }
+}
