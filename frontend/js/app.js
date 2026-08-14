@@ -111,6 +111,32 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (errBox) errBox.classList.add('hidden');
     },
 
+    resetToHome() {
+        this.selectedFile = null;
+        this.currentAuditData = null;
+        this.currentReportId = null;
+
+        const uploadSec = document.getElementById('upload-section');
+        const scanSec = document.getElementById('scanner-section');
+        const repSec = document.getElementById('report-section');
+        const fileInput = document.getElementById('file-input');
+        const boxDisplay = document.getElementById('file-selected-box');
+        const errBox = document.getElementById('ocr-error-box');
+
+        if (fileInput) fileInput.value = '';
+        if (boxDisplay) boxDisplay.classList.add('hidden');
+        if (errBox) errBox.classList.add('hidden');
+        if (scanSec) scanSec.classList.add('hidden');
+        if (repSec) repSec.classList.add('hidden');
+        if (uploadSec) uploadSec.classList.remove('hidden');
+
+        if (window.history && window.history.pushState) {
+            window.history.pushState({}, document.title, window.location.pathname);
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
     async startAuditScanProcess() {
         if (!this.selectedFile) return;
 
