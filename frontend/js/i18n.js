@@ -1,6 +1,6 @@
 // ==============================================================================
 // AUDITFLOW AI - I18N BILINGUAL TRANSLATION SYSTEM (ENGLISH / SPANISH)
-// INCLUYE MICRO-COPYS DE SEGURIDAD Y MENSAJES DE PRE-FLIGHT CHECK
+// INCLUYE DESTACADO DE ESCANEO DE PRUEBA GRATUITO Y MICRO-COPYS DE SEGURIDAD
 // ==============================================================================
 
 window.I18n = {
@@ -13,10 +13,11 @@ window.I18n = {
             nav_speed_badge: "Auditoría <10s",
             
             // Hero
+            hero_free_badge: "🎁 Escaneo Inicial 100% Gratuito • Sin tarjeta para analizar",
             hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido",
             hero_title_1: "Audita tus Contratos y Facturas en ",
             hero_title_2: "<10 Segundos",
-            hero_sub: "Detecta automáticamente fugas financieras, sobrecargos y cláusulas de riesgo sin subir tus archivos a ningún servidor. Procesamiento 100% en RAM volátil.",
+            hero_sub: "Detecta automáticamente fugas financieras, sobrecargos y cláusulas de riesgo sin subir tus archivos a ningún servidor. Mira el resumen de hallazgos GRATIS antes de pagar.",
             
             // Trust Micro-Copys (Confianza Visual y Seguridad)
             trust_title_1: "🔒 Procesamiento efímero:",
@@ -27,9 +28,10 @@ window.I18n = {
             // Dropzone
             drag_title: "Arrastra tu archivo aquí o ",
             drag_browse: "explora tus archivos",
+            drag_sub_free: "Análisis inicial 100% Gratis • Revisa los hallazgos antes de pagar $7",
             drag_formats: "Soporta PDF, PNG, JPG o WebP (Hasta 15MB)",
             file_ready_ram: "MB • Memoria RAM lista",
-            btn_start_scan: "Iniciar Auditoría IA",
+            btn_start_scan: "Iniciar Auditoría Gratuita IA",
 
             // Pre-flight Check Error Box
             ocr_error_title: "Documento Ilegible o Resolución Insuficiente",
@@ -45,7 +47,7 @@ window.I18n = {
             feat_2_desc: "Detecta penalizaciones ocultas, indexaciones dobles y sobrecargos en minutos de lectura.",
             feat_3_tag: "03. Pagos Híbridos",
             feat_3_title: "$7 USD o Satoshis",
-            feat_3_desc: "Paga fácilmente con Tarjeta bancaria ($7) o red Lightning de Bitcoin en segundos.",
+            feat_3_desc: "Mira los hallazgos gratis. Paga $7 sólo para desbloquear el texto de renegociación + PDF.",
 
             // Scanner
             scan_init: "Iniciando escáner en memoria volátil...",
@@ -56,13 +58,13 @@ window.I18n = {
             step_ready: "Reporte Listo",
 
             // Lead Modal
-            lead_modal_title: "Auditoría Completada",
-            lead_modal_sub: "Se han detectado fugas financieras en tu documento. Ingresa tus datos para generar tu ID de informe oficial y recibir el resumen.",
+            lead_modal_title: "Auditoría Completada (Resumen Gratuito)",
+            lead_modal_sub: "Se han detectado fugas financieras en tu documento. Ingresa tu nombre y correo para ver la vista previa de hallazgos.",
             lead_label_name: "Nombre Completo",
             lead_placeholder_name: "Ej. Carlos Mendoza",
             lead_label_email: "Correo Electrónico Corporativo",
             lead_placeholder_email: "carlos@empresa.com",
-            lead_btn_submit: "Ver Reporte de Auditoría",
+            lead_btn_submit: "Ver Vista Previa Gratuita",
 
             // Report Dashboard
             rep_doc_default: "Contrato Comercial",
@@ -71,14 +73,14 @@ window.I18n = {
             rep_lead_score_label: "Lead Score",
             rep_findings_title: "3 Fallas Financieras & Cláusulas de Riesgo Detectadas",
             rep_impact_label: "Impacto Financiero Estimado:",
-            rep_teaser_label: "🔍 Resumen de la Anomalía:",
+            rep_teaser_label: "🔍 Resumen de la Anomalía (Gratis):",
             rep_solution_label: "💡 Solución Táctica & Texto Sustitutivo de Renegociación:",
-            rep_unlock_btn: "🔒 Desbloquear Solución Táctica",
+            rep_unlock_btn: "🔒 Desbloquear Solución Táctica ($7 USD)",
             
             // Unlock Banner
             banner_title: "Desbloquea las 3 Soluciones Tácticas + Reporte PDF",
-            banner_sub: "Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos y el PDF firmado de auditoría listo para tu equipo legal.",
-            banner_btn: "Desbloquear Informe Completo ($7.00 USD / Sats)",
+            banner_sub: "Ya viste los hallazgos en pantalla. Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos y el PDF firmado por solo $7.00 USD o Satoshis.",
+            banner_btn: "Desbloquear Soluciones por $7.00 USD / Sats",
 
             // Payment Modal
             pay_title: "Selecciona Método de Pago",
@@ -110,10 +112,11 @@ window.I18n = {
             nav_speed_badge: "Audit <10s",
             
             // Hero
+            hero_free_badge: "🎁 100% Free Initial Scan • No credit card required to analyze",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultra-fast processing",
             hero_title_1: "Audit Contracts & Invoices in ",
             hero_title_2: "<10 Seconds",
-            hero_sub: "Automatically detect financial leaks, overcharges, and risk clauses without uploading files to any server. 100% volatile RAM processing.",
+            hero_sub: "Automatically detect financial leaks, overcharges, and risk clauses without uploading files to any server. Preview finding summary for FREE before paying.",
             
             // Trust Micro-Copys (Visual Security & Trust)
             trust_title_1: "🔒 Ephemeral processing:",
@@ -124,9 +127,10 @@ window.I18n = {
             // Dropzone
             drag_title: "Drag & drop your file here or ",
             drag_browse: "browse files",
+            drag_sub_free: "100% Free initial analysis • Review findings before paying $7",
             drag_formats: "Supports PDF, PNG, JPG or WebP (Up to 15MB)",
             file_ready_ram: "MB • RAM memory ready",
-            btn_start_scan: "Start AI Audit",
+            btn_start_scan: "Start Free AI Audit",
 
             // Pre-flight Check Error Box
             ocr_error_title: "Illegible Document or Low Resolution",
@@ -142,7 +146,7 @@ window.I18n = {
             feat_2_desc: "Detect hidden penalties, double indexations, and overcharges in minutes of reading.",
             feat_3_tag: "03. Hybrid Payments",
             feat_3_title: "$7 USD or Sats",
-            feat_3_desc: "Pay easily via Credit Card ($7) or Bitcoin Lightning Network in seconds.",
+            feat_3_desc: "Preview findings for free. Pay $7 only to unlock full negotiation text + PDF.",
 
             // Scanner
             scan_init: "Starting volatile memory scanner...",
@@ -153,13 +157,13 @@ window.I18n = {
             step_ready: "Report Ready",
 
             // Lead Modal
-            lead_modal_title: "Audit Completed",
-            lead_modal_sub: "Financial leaks detected in your document. Enter your details to generate your official report ID and receive the summary.",
+            lead_modal_title: "Audit Completed (Free Preview)",
+            lead_modal_sub: "Financial leaks detected in your document. Enter your name and email to view the findings preview.",
             lead_label_name: "Full Name",
             lead_placeholder_name: "e.g. John Doe",
             lead_label_email: "Corporate Email",
             lead_placeholder_email: "john@company.com",
-            lead_btn_submit: "View Audit Report",
+            lead_btn_submit: "View Free Audit Preview",
 
             // Report Dashboard
             rep_doc_default: "Commercial Contract",
@@ -168,14 +172,14 @@ window.I18n = {
             rep_lead_score_label: "Lead Score",
             rep_findings_title: "3 Financial Flaws & Risk Clauses Detected",
             rep_impact_label: "Estimated Financial Impact:",
-            rep_teaser_label: "🔍 Anomaly Summary:",
+            rep_teaser_label: "🔍 Anomaly Summary (Free Preview):",
             rep_solution_label: "💡 Tactical Solution & Negotiation Text:",
-            rep_unlock_btn: "🔒 Unlock Tactical Solution",
+            rep_unlock_btn: "🔒 Unlock Tactical Solution ($7 USD)",
             
             // Unlock Banner
             banner_title: "Unlock 3 Tactical Solutions + PDF Report",
-            banner_sub: "Get exact text for contract negotiation, fee objections, and official signed PDF report ready for your legal team.",
-            banner_btn: "Unlock Full Report ($7.00 USD / Sats)",
+            banner_sub: "You've seen the findings on screen. Get the exact negotiation text, fee objections, and signed PDF report for just $7.00 USD or Satoshis.",
+            banner_btn: "Unlock Solutions for $7.00 USD / Sats",
 
             // Payment Modal
             pay_title: "Select Payment Method",
