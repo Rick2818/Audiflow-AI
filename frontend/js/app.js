@@ -151,13 +151,29 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         this.runScannerAnimation();
 
         try {
-            const formData = new FormData();
-            formData.append('document', this.selectedFile);
+            let res;
+            if (this.selectedFile) {
+                const base64 = await new Promise((resolve) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.readAsDataURL(this.selectedFile);
+                });
 
-            const res = await fetch('/api/audit', {
-                method: 'POST',
-                body: formData
-            });
+                res = await fetch('/api/audit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        document_base64: base64,
+                        document_name: this.selectedFile.name
+                    })
+                });
+            } else {
+                res = await fetch('/api/audit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ sample_text: 'sample' })
+                });
+            }
 
             const data = await res.json();
 
