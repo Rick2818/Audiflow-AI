@@ -231,7 +231,7 @@
             },
 
             async handleLogin(e) {
-                e.preventDefault();
+                if (e) e.preventDefault();
                 const passInput = document.getElementById('admin-password-input');
                 const password = passInput ? passInput.value.trim() : '';
                 const errEl = document.getElementById('login-error');
@@ -239,7 +239,10 @@
                 try {
                     const res = await fetch('/api/admin/login', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'X-Admin-Password': password
+                        },
                         body: JSON.stringify({ password })
                     });
                     const data = await res.json();
@@ -247,6 +250,7 @@
                     if (data.success && data.token) {
                         this.authToken = data.token;
                         localStorage.setItem('auditflow_admin_token', data.token);
+                        localStorage.setItem('auditflow_admin_pass', password);
                         document.getElementById('admin-login-modal').classList.add('hidden');
                         this.loadStats();
                     } else {
@@ -260,10 +264,11 @@
 
             async loadStats() {
                 try {
+                    const savedPass = localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
                     const res = await fetch('/api/admin/stats', {
                         headers: {
                             'Authorization': `Bearer ${this.authToken}`,
-                            'X-Admin-Password': 'AuditFlow2026!'
+                            'X-Admin-Password': savedPass
                         }
                     });
 
