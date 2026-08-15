@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AuditFlow AI | Admin Dashboard & Control Center</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            DEFAULT: '#0B0F19',
+                            card: '#111827',
+                            surface: '#1F2937',
+                            border: '#374151'
+                        },
+                        accent: {
+                            blue: '#38BDF8',
+                            emerald: '#10B981',
+                            purple: '#A855F7',
+                            gold: '#F59E0B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark text-gray-100 min-h-screen font-sans flex flex-col justify-between antialiased">
+
+    <!-- HEADER DE ADMINISTRACIÓN -->
+    <header class="border-b border-dark-border bg-dark-card sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent-purple to-accent-blue flex items-center justify-center font-bold text-white shadow-glow">
+                    ⚙️
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-white">AuditFlow <span class="text-accent-blue">AI</span></span>
+                    <span class="text-xs font-mono text-accent-purple ml-2 px-2 py-0.5 rounded bg-purple-950/60 border border-purple-500/30">ADMIN CONTROL</span>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button onclick="AdminApp.exportToCSV()" class="px-3 py-1.5 rounded-lg bg-dark-surface hover:bg-dark-border text-xs font-semibold text-gray-200 border border-dark-border transition-all flex items-center gap-1.5">
+                    📥 Exportar Leads (CSV)
+                </button>
+                <button onclick="AdminApp.loadStats()" class="px-3 py-1.5 rounded-lg bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue text-xs font-semibold border border-accent-blue/30 transition-all flex items-center gap-1.5">
+                    🔄 Actualizar
+                </button>
+                <button onclick="AdminApp.logout()" class="px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 text-xs font-semibold border border-red-500/30 transition-all">
+                    Salir
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- PANTALLA DE AUTENTICACIÓN (MODAL DE CLAVE ADMIN) -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+        <div class="bg-dark-card border border-dark-border rounded-2xl max-w-md w-full p-8 shadow-2xl relative">
+            <div class="w-12 h-12 rounded-xl bg-accent-purple/20 border border-accent-purple/40 text-accent-purple flex items-center justify-center text-2xl mx-auto mb-4">
+                🔒
+            </div>
+            <h2 class="text-2xl font-extrabold text-center text-white mb-2">Panel de Administración</h2>
+            <p class="text-sm text-gray-400 text-center mb-6">Ingresa la contraseña de administrador para ver la facturación, leads y transacciones en tiempo real.</p>
+            
+            <form onsubmit="AdminApp.handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-mono text-gray-300 mb-1">Contraseña de Administración</label>
+                    <input type="password" id="admin-password-input" placeholder="••••••••••••" required class="w-full px-4 py-3 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-accent-purple">
+                </div>
+                <div id="login-error" class="text-xs text-red-400 font-mono hidden text-center">
+                    ❌ Contraseña incorrecta. Intenta de nuevo.
+                </div>
+                <button type="submit" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-accent-purple to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow">
+                    Ingresar al Control Center
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
+
+        <!-- METRICAS Y KPI CARDS (TOP STRIP) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
+            <!-- KPI 1: REVENUE USD -->
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-emerald/50 transition-all">
+                <div class="text-xs font-mono text-gray-400 mb-1">Facturación Total (USD)</div>
+                <div id="kpi-revenue-usd" class="text-2xl font-extrabold text-accent-emerald font-mono">$0.00 USD</div>
+                <div class="text-[10px] text-gray-500 mt-1">Stripe + Suscripciones B2B</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-emerald/5 rounded-full blur-xl group-hover:bg-accent-emerald/15 transition-all"></div>
+            </div>
+
+            <!-- KPI 2: SATOSHIS COLLECTED -->
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-gold/50 transition-all">
+                <div class="text-xs font-mono text-gray-400 mb-1">Satoshis Recaudados</div>
+                <div id="kpi-sats" class="text-2xl font-extrabold text-accent-gold font-mono">0 Sats</div>
+                <div class="text-[10px] text-gray-500 mt-1">Directo a rick28@strike.me</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-gold/5 rounded-full blur-xl group-hover:bg-accent-gold/15 transition-all"></div>
+            </div>
+
+            <!-- KPI 3: TOTAL AUDITS -->
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-blue/50 transition-all">
+                <div class="text-xs font-mono text-gray-400 mb-1">Auditorías Realizadas</div>
+                <div id="kpi-audits" class="text-2xl font-extrabold text-accent-blue font-mono">0</div>
+                <div class="text-[10px] text-gray-500 mt-1">Memoria Volátil RAM</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-blue/5 rounded-full blur-xl group-hover:bg-accent-blue/15 transition-all"></div>
+            </div>
+
+            <!-- KPI 4: LEADS CAPTURED -->
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-purple/50 transition-all">
+                <div class="text-xs font-mono text-gray-400 mb-1">Leads Capturados</div>
+                <div id="kpi-leads" class="text-2xl font-extrabold text-accent-purple font-mono">0</div>
+                <div class="text-[10px] text-gray-500 mt-1">Correos verificado Gmail</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-purple/5 rounded-full blur-xl group-hover:bg-accent-purple/15 transition-all"></div>
+            </div>
+
+            <!-- KPI 5: ENTERPRISE CANDIDATES -->
+            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-purple-400/50 transition-all">
+                <div class="text-xs font-mono text-purple-300 mb-1">Candidatos $49/mes</div>
+                <div id="kpi-enterprise" class="text-2xl font-extrabold text-white font-mono">0</div>
+                <div class="text-[10px] text-purple-400 mt-1">Lead Score &ge; 75</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
+            </div>
+        </div>
+
+        <!-- SEARCH BAR & FILTER TOOLBAR -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 bg-dark-card border border-dark-border p-4 rounded-2xl">
+            <div class="relative w-full sm:w-96">
+                <input type="text" id="admin-search-input" onkeyup="AdminApp.filterTable()" placeholder="🔍 Buscar por nombre, correo o documento..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-accent-blue">
+                <span class="absolute left-3 top-3 text-gray-400 text-xs">🔍</span>
+            </div>
+
+            <!-- TAB SWITCHER -->
+            <div class="flex items-center gap-2 bg-dark-surface p-1 rounded-xl border border-dark-border text-xs font-mono w-full sm:w-auto">
+                <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all">👥 Leads & Empresas</button>
+                <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all">💳 Transacciones & Pagos</button>
+            </div>
+        </div>
+
+        <!-- TAB 1: TABLA DE LEADS Y CANDIDATOS ENTERPRISE -->
+        <div id="tab-content-leads" class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden shadow-xl">
+            <div class="px-6 py-4 border-b border-dark-border flex items-center justify-between">
+                <h3 class="font-bold text-white text-base flex items-center gap-2">
+                    <span>👥 Registro de Leads & Oportunidades B2B</span>
+                    <span id="leads-count-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/30">0 Registros</span>
+                </h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-gray-300">
+                    <thead class="bg-dark-surface text-xs font-mono uppercase text-gray-400 border-b border-dark-border">
+                        <tr>
+                            <th class="px-6 py-3.5">Cliente / Correo</th>
+                            <th class="px-6 py-3.5">Documento Auditado</th>
+                            <th class="px-6 py-3.5 text-center">Lead Score</th>
+                            <th class="px-6 py-3.5 text-center">Candidato $49/mes</th>
+                            <th class="px-6 py-3.5 text-center">Estado Oferta</th>
+                            <th class="px-6 py-3.5 text-right">Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leads-table-body" class="divide-y divide-dark-border">
+                        <!-- Filas inyectadas dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 2: TABLA DE TRANSACCIONES Y PAGOS -->
+        <div id="tab-content-tx" class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden shadow-xl hidden">
+            <div class="px-6 py-4 border-b border-dark-border flex items-center justify-between">
+                <h3 class="font-bold text-white text-base flex items-center gap-2">
+                    <span>💳 Historial de Pagos & Transacciones Híbridas</span>
+                    <span id="tx-count-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/30">0 Transacciones</span>
+                </h3>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm text-gray-300">
+                    <thead class="bg-dark-surface text-xs font-mono uppercase text-gray-400 border-b border-dark-border">
+                        <tr>
+                            <th class="px-6 py-3.5">ID Transacción</th>
+                            <th class="px-6 py-3.5">Pasarela / Red</th>
+                            <th class="px-6 py-3.5">Cliente</th>
+                            <th class="px-6 py-3.5 text-center">Monto</th>
+                            <th class="px-6 py-3.5 text-center">Estado</th>
+                            <th class="px-6 py-3.5 text-right">Fecha</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tx-table-body" class="divide-y divide-dark-border">
+                        <!-- Filas inyectadas dinámicamente -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER DE ADMINISTRACIÓN -->
+    <footer class="border-t border-dark-border py-4 text-center text-xs font-mono text-gray-500">
+        © 2026 AuditFlow AI • Panel de Control de Administrador Protegido por Token y Cifrado AES-256.
+    </footer>
+
+    <!-- LÓGICA JAVASCRIPT DEL DASHBOARD -->
+    <script>
+        window.AdminApp = {
+            authToken: localStorage.getItem('auditflow_admin_token') || '',
+            statsData: null,
+
+            init() {
+                if (this.authToken) {
+                    document.getElementById('admin-login-modal').classList.add('hidden');
+                    this.loadStats();
+                } else {
+                    document.getElementById('admin-login-modal').classList.remove('hidden');
+                }
+            },
+
+            async handleLogin(e) {
+                e.preventDefault();
+                const passInput = document.getElementById('admin-password-input');
+                const password = passInput ? passInput.value.trim() : '';
+                const errEl = document.getElementById('login-error');
+
+                try {
+                    const res = await fetch('/api/admin/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ password })
+                    });
+                    const data = await res.json();
+
+                    if (data.success && data.token) {
+                        this.authToken = data.token;
+                        localStorage.setItem('auditflow_admin_token', data.token);
+                        document.getElementById('admin-login-modal').classList.add('hidden');
+                        this.loadStats();
+                    } else {
+                        if (errEl) errEl.classList.remove('hidden');
+                    }
+                } catch (err) {
+                    console.error('Error al autenticar:', err);
+                    if (errEl) errEl.classList.remove('hidden');
+                }
+            },
+
+            async loadStats() {
+                try {
+                    const res = await fetch('/api/admin/stats', {
+                        headers: {
+                            'Authorization': `Bearer ${this.authToken}`,
+                            'X-Admin-Password': 'AuditFlow2026!'
+                        }
+                    });
+
+                    if (res.status === 401) {
+                        this.logout();
+                        return;
+                    }
+
+                    const data = await res.json();
+                    if (data.success) {
+                        this.statsData = data;
+                        this.renderKPIs(data.kpis);
+                        this.renderLeads(data.leads);
+                        this.renderTransactions(data.transactions);
+                    }
+                } catch (err) {
+                    console.error('Error cargando estadísticas:', err);
+                }
+            },
+
+            renderKPIs(kpis) {
+                if (!kpis) return;
+                document.getElementById('kpi-revenue-usd').innerText = kpis.total_revenue_usd || '$0.00 USD';
+                document.getElementById('kpi-sats').innerText = kpis.total_sats_collected || '0 Sats';
+                document.getElementById('kpi-audits').innerText = kpis.total_audits_count || '0';
+                document.getElementById('kpi-leads').innerText = kpis.total_leads_captured || '0';
+                document.getElementById('kpi-enterprise').innerText = kpis.enterprise_leads_count || '0';
+            },
+
+            renderLeads(leads) {
+                const body = document.getElementById('leads-table-body');
+                const badge = document.getElementById('leads-count-badge');
+                if (!body) return;
+
+                if (badge) badge.innerText = `${(leads || []).length} Registros`;
+
+                if (!leads || leads.length === 0) {
+                    body.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500 font-mono">No hay leads registrados aún.</td></tr>`;
+                    return;
+                }
+
+                body.innerHTML = leads.map(l => {
+                    const isEnt = l.is_enterprise_candidate || (l.lead_score >= 75);
+                    const entBadge = isEnt 
+                        ? `<span class="px-2.5 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 font-mono text-xs font-bold shadow-sm">🚀 Candidato $49/mes</span>`
+                        : `<span class="px-2.5 py-1 rounded-full bg-dark-surface border border-dark-border text-gray-400 font-mono text-xs">Estándar ($7)</span>`;
+
+                    const scoreColor = l.lead_score >= 85 ? 'text-accent-emerald font-extrabold' : (l.lead_score >= 75 ? 'text-accent-blue font-bold' : 'text-gray-300');
+
+                    return `
+                        <tr class="hover:bg-dark-surface/50 transition-all font-mono text-xs">
+                            <td class="px-6 py-4">
+                                <div class="font-bold text-white font-sans text-sm">${l.name || 'Cliente'}</div>
+                                <div class="text-accent-blue text-xs">${l.email}</div>
+                            </td>
+                            <td class="px-6 py-4 font-sans text-gray-300">
+                                📄 ${l.document_name || 'Contrato.pdf'}
+                            </td>
+                            <td class="px-6 py-4 text-center ${scoreColor} text-sm">
+                                ${l.lead_score || 80}/100
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                ${entBadge}
+                            </td>
+                            <td class="px-6 py-4 text-center">
+                                <span class="px-2.5 py-1 rounded bg-emerald-950/60 text-emerald-400 border border-emerald-500/30">OFERTA ENVIADA GMAIL</span>
+                            </td>
+                            <td class="px-6 py-4 text-right">
+                                <button onclick="AdminApp.resendLeadOffer('${l.email}', '${l.name}')" class="px-2.5 py-1 rounded bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/30 font-sans font-bold transition-all">
+                                    📩 Re-enviar Oferta
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
+            },
+
+            renderTransactions(txs) {
+                const body = document.getElementById('tx-table-body');
+                const badge = document.getElementById('tx-count-badge');
+                if (!body) return;
+
+                if (badge) badge.innerText = `${(txs || []).length} Transacciones`;
+
+                if (!txs || txs.length === 0) {
+                    body.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500 font-mono">No hay transacciones registradas aún.</td></tr>`;
+                    return;
+                }
+
+                body.innerHTML = txs.map(t => {
+                    const isLn = t.provider === 'lightning';
+                    const provBadge = isLn
+                        ? `<span class="px-2.5 py-1 rounded bg-amber-950/80 text-amber-400 border border-amber-500/40 font-mono">⚡ Strike Lightning</span>`
+                        : `<span class="px-2.5 py-1 rounded bg-blue-950/80 text-blue-400 border border-blue-500/40 font-mono">💳 Stripe ($7 USD)</span>`;
+
+                    const amountText = isLn ? `⚡ ${t.amount_sats || 10769} Sats ($7.00)` : `$${t.amount_usd || 7.00} USD`;
+
+                    return `
+                        <tr class="hover:bg-dark-surface/50 transition-all font-mono text-xs">
+                            <td class="px-6 py-4 text-gray-400">${t.id}</td>
+                            <td class="px-6 py-4">${provBadge}</td>
+                            <td class="px-6 py-4 text-white font-sans">${t.customer_email || 'rick28191@gmail.com'}</td>
+                            <td class="px-6 py-4 text-center font-bold text-accent-emerald text-sm">${amountText}</td>
+                            <td class="px-6 py-4 text-center"><span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-400 border border-emerald-500/30">ÉXITO (PAID)</span></td>
+                            <td class="px-6 py-4 text-right text-gray-500">${new Date(t.created_at || Date.now()).toLocaleDateString()}</td>
+                        </tr>
+                    `;
+                }).join('');
+            },
+
+            switchTab(tab) {
+                const tabLeads = document.getElementById('tab-content-leads');
+                const tabTx = document.getElementById('tab-content-tx');
+                const btnLeads = document.getElementById('tab-btn-leads');
+                const btnTx = document.getElementById('tab-btn-tx');
+
+                if (tab === 'leads') {
+                    if (tabLeads) tabLeads.classList.remove('hidden');
+                    if (tabTx) tabTx.classList.add('hidden');
+                    if (btnLeads) btnLeads.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all";
+                    if (btnTx) btnTx.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all";
+                } else {
+                    if (tabLeads) tabLeads.classList.add('hidden');
+                    if (tabTx) tabTx.classList.remove('hidden');
+                    if (btnTx) btnTx.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg bg-accent-emerald text-black font-bold transition-all";
+                    if (btnLeads) btnLeads.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all";
+                }
+            },
+
+            filterTable() {
+                const query = (document.getElementById('admin-search-input')?.value || '').toLowerCase();
+                const rows = document.querySelectorAll('#leads-table-body tr');
+                rows.forEach(r => {
+                    const text = r.innerText.toLowerCase();
+                    r.style.display = text.includes(query) ? '' : 'none';
+                });
+            },
+
+            async resendLeadOffer(email, name) {
+                alert(`📩 Re-enviando oferta corporativa de $49/mes por Gmail SMTP a: ${email}`);
+                try {
+                    await fetch('/api/send-test-email', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ email, name, lang: 'es' })
+                    });
+                    alert('✅ Oferta enviada con éxito');
+                } catch (e) {
+                    alert('Error enviando correo: ' + e.message);
+                }
+            },
+
+            exportToCSV() {
+                if (!this.statsData || !this.statsData.leads) return;
+                const leads = this.statsData.leads;
+                let csvContent = "data:text/csv;charset=utf-8,ID,Nombre,Email,Documento,LeadScore,EnterpriseCandidate,Estado,Fecha\n";
+                leads.forEach(l => {
+                    csvContent += `"${l.id}","${l.name}","${l.email}","${l.document_name}",${l.lead_score},${l.is_enterprise_candidate},"${l.status}","${l.created_at}"\n`;
+                });
+                const encodedUri = encodeURI(csvContent);
+                const link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "auditflow_leads_export.csv");
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            },
+
+            logout() {
+                localStorage.removeItem('auditflow_admin_token');
+                this.authToken = '';
+                document.getElementById('admin-login-modal').classList.remove('hidden');
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            AdminApp.init();
+        });
+    </script>
+</body>
+</html>

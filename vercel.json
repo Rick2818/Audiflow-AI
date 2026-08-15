@@ -16,6 +16,10 @@
   ],
   "routes": [
     {
+      "src": "/admin",
+      "dest": "frontend/admin.html"
+    },
+    {
       "src": "/api/audit",
       "dest": "api/audit.js"
     },
