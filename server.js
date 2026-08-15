@@ -844,9 +844,9 @@ Re-analiza las cláusulas y devuelve un reporte JSON corregido con las solucione
 // ==============================================================================
 // INICIALIZACIÓN DEL SERVIDOR HTTP
 // ==============================================================================
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`=======================================================`);
-  console.log(`🚀 AUDITFLOW AI corriendo en http://localhost:${PORT}`);
+  console.log(`🚀 AUDITFLOW AI corriendo en http://0.0.0.0:${PORT}`);
   console.log(`🔒 Procesamiento en memoria volátil ACTIVO + Filtro Pre-Vuelo OCR`);
   console.log(`⚡ Pagos Híbridos Tripwire ($7 USD / Sats) + Upsell $49/mes`);
   console.log(`📧 Agente de Correo Activo (Gmail SMTP / Fallback Ethereal)`);
