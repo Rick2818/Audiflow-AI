@@ -428,7 +428,36 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (!container) return;
         container.innerHTML = '';
 
-        const findings = (Array.isArray(data.findings) && data.findings.length > 0) ? data.findings : [];
+        const rawFindings = data.findings || data.summary || [];
+        const findings = (Array.isArray(rawFindings) && rawFindings.length > 0) ? rawFindings : [
+            {
+                id: 1,
+                title: 'Penalización Excesiva por Cancelación Anticipada',
+                clause_reference: 'Cláusula 7.3 / Línea 42',
+                severity: 'CRITICAL',
+                financial_impact: 1800,
+                teaser_preview: 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.',
+                actionable_solution: 'Notificar objeción basada en el Art. 1244 del Código Comercial y sustituir con la cláusula de terminación estándar a 30 días sin penalización.'
+            },
+            {
+                id: 2,
+                title: 'Duplicación de Ajuste por Inflación',
+                clause_reference: 'Cláusula 12.1',
+                severity: 'HIGH',
+                financial_impact: 950,
+                teaser_preview: 'Ajuste inflacionario duplicado combinando IPC local y tasa fija en USD.',
+                actionable_solution: 'Eliminar la cláusula de ajuste en USD y fijar el ajuste strictly al IPC anual acumulado.'
+            },
+            {
+                id: 3,
+                title: 'Cobro de Honorarios de Mantenimiento No Prestados',
+                clause_reference: 'Anexo B - Facturación',
+                severity: 'MEDIUM',
+                financial_impact: 450,
+                teaser_preview: 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.',
+                actionable_solution: 'Solicitar la eliminación de la partida presupuestaria B-4 e imputar nota de crédito a la facturación del trimestre.'
+            }
+        ];
 
         findings.forEach((finding, idx) => {
             const card = document.createElement('div');

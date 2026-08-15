@@ -68,35 +68,46 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
     }
 
     const reportId = 'rep_' + Math.random().toString(36).substring(2, 11);
+    const findingsList = [
+      {
+        id: 1,
+        title: "Penalización Excesiva por Terminación Anticipada",
+        clause_reference: "Cláusula 3: Multa de Cancelación Fija ($60,000 USD)",
+        severity: "CRITICAL",
+        financial_impact: 18000,
+        teaser_preview: "Penalización fija desproporcionada de 12 meses de renta que vulnera normativas comerciales estándar.",
+        actionable_solution: "Sustituir por penalización fija de 30 días de preaviso sin cobro retroactivo."
+      },
+      {
+        id: 2,
+        title: "Sobrecargo Administrativo Automático del 18%",
+        clause_reference: "Cláusula 2: Sobrecargo por mora de 24h",
+        severity: "HIGH",
+        financial_impact: 950,
+        teaser_preview: "Cobro punitivo no reembolsable por retrasos menores sin período de gracia.",
+        actionable_solution: "Establecer período de gracia de 5 días hábiles e interés moratorio tope según tasa bancaria."
+      },
+      {
+        id: 3,
+        title: "Indexación Doble Semestral Retroactiva",
+        clause_reference: "Cláusula 4: Reajuste IPC + 5% acumulativo",
+        severity: "MEDIUM",
+        financial_impact: 450,
+        teaser_preview: "Duplicación de indexación que sobrecalienta el costo del servicio en plazos medianos.",
+        actionable_solution: "Limitar el reajuste al IPC anual simple sin porcentajes acumulativos adicionales."
+      }
+    ];
+
     const mockAuditData = {
       report_id: reportId,
       document_name: documentName,
+      document_type: "Contrato de Servicios Comercial",
+      total_financial_leakage: 18500,
       leakage_detected_usd: "$18,500 USD",
       risk_level: "RIESGO ALTO",
       lead_score: 92,
-      summary: [
-        {
-          id: 1,
-          title: "Penalización Excesiva por Terminación Anticipada",
-          clause: "Cláusula 3: Multa de Cancelación Fija de 12 meses ($60,000 USD)",
-          risk_summary: "Penalización fija desproporcionada que vulnera normativas comerciales estándar.",
-          tactical_fix: "Sustituir por penalización fija de 30 días de preaviso sin cobro retroactivo."
-        },
-        {
-          id: 2,
-          title: "Sobrecargo Administrativo Automático del 18%",
-          clause: "Cláusula 2: Sobrecargo del 18% por mora de 24 horas",
-          risk_summary: "Cobro punitivo por retrasos menores sin período de gracia.",
-          tactical_fix: "Establecer período de gracia de 5 días hábiles e interés moratorio tope según tasa bancaria."
-        },
-        {
-          id: 3,
-          title: "Indexación Doble Semestral Retroactiva",
-          clause: "Cláusula 4: Reajuste IPC + 5% acumulativo retroactivo",
-          risk_summary: "Duplicación de indexación que sobrecalienta el costo del servicio en plazos medianos.",
-          tactical_fix: "Limitar el reajuste al IPC anual simple sin porcentajes acumulativos adicionales."
-        }
-      ]
+      findings: findingsList,
+      summary: findingsList
     };
 
     return res.status(200).json({
