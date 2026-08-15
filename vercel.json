@@ -1,4 +1,5 @@
 {
+  "name": "auditflow-ai",
   "version": 2,
   "builds": [
     {
