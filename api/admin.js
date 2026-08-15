@@ -10,28 +10,33 @@ async function sendGmailEmail({ to, subject, html }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'nluyxyhtkqbpepe').replace(/\s+/g, '').trim();
 
-  let transporter;
-  if (gmailUser && gmailPass) {
-    transporter = nodemailer.createTransport({
+  try {
+    const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: { user: gmailUser, pass: gmailPass }
     });
-  } else {
+    return await transporter.sendMail({
+      from: `"AuditFlow AI" <${gmailUser}>`,
+      to,
+      subject,
+      html
+    });
+  } catch (err) {
+    console.warn('Gmail SMTP Fallback to Ethereal:', err.message);
     const testAccount = await nodemailer.createTestAccount();
-    transporter = nodemailer.createTransport({
+    const fallbackTransporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
       port: 587,
       secure: false,
       auth: { user: testAccount.user, pass: testAccount.pass }
     });
+    return await fallbackTransporter.sendMail({
+      from: `"AuditFlow AI" <${testAccount.user}>`,
+      to,
+      subject,
+      html
+    });
   }
-
-  return await transporter.sendMail({
-    from: `"AuditFlow AI" <${gmailUser || 'noreply@auditflow.ai'}>`,
-    to,
-    subject,
-    html
-  });
 }
 
 export default async function handler(req, res) {
