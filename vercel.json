@@ -2,6 +2,10 @@
   "version": 2,
   "builds": [
     {
+      "src": "api/audit.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "server.js",
       "use": "@vercel/node"
     },
@@ -13,7 +17,7 @@
   "routes": [
     {
       "src": "/api/audit",
-      "dest": "server.js"
+      "dest": "api/audit.js"
     },
     {
       "src": "/api/(.*)",
