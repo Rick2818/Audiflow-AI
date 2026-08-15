@@ -30,6 +30,7 @@ window.I18n = {
             hero_title_1: "Audita tus Contratos y Facturas en ",
             hero_title_2: "<10 Segundos",
             hero_sub: "Detecta automáticamente fugas financieras, sobrecargos y cláusulas de riesgo sin subir tus archivos a ningún servidor. Mira el resumen de hallazgos GRATIS antes de pagar.",
+            hero_privacy_guarantee: "<strong>Privacidad Total Garantizada:</strong> Tu documento se destruye automáticamente de la memoria RAM efímera tras la auditoría (0 Almacenamiento en Disco).",
             
             // Live Stats Ticker (Confianza Social)
             stat_audits: "Contratos Auditados",
@@ -161,11 +162,12 @@ window.I18n = {
             support_btn_submit: "🤖 Re-Analyze & Fix with AI",
             
             // Hero
-            hero_free_badge: "🎁 100% Free Initial Scan • No card required",
+            hero_free_badge: "🎁 100% Free Initial Scan • No card required to analyze",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultra-fast processing",
             hero_title_1: "Audit Contracts & Invoices in ",
             hero_title_2: "<10 Seconds",
-            hero_sub: "Automatically detect financial leakage, overcharges, and risk clauses without uploading files to disk. See free findings summary before paying.",
+            hero_sub: "Automatically detect financial leakage, overcharges, and risk clauses without uploading files to any server. View findings summary FREE before paying.",
+            hero_privacy_guarantee: "<strong>Total Privacy Guaranteed:</strong> Your document is automatically purged from volatile RAM memory immediately after auditing (0 Disk Storage).",
             
             // Live Stats Ticker
             stat_audits: "Audited Contracts",
