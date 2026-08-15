@@ -1,8 +1,38 @@
 import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
 
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
+
+// Helper de Envío de Correo por Gmail SMTP
+async function sendGmailEmail({ to, subject, html }) {
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'nluyxyhtkqbpepe').replace(/\s+/g, '').trim();
+
+  let transporter;
+  if (gmailUser && gmailPass) {
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: gmailUser, pass: gmailPass }
+    });
+  } else {
+    const testAccount = await nodemailer.createTestAccount();
+    transporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      secure: false,
+      auth: { user: testAccount.user, pass: testAccount.pass }
+    });
+  }
+
+  return await transporter.sendMail({
+    from: `"AuditFlow AI" <${gmailUser || 'noreply@auditflow.ai'}>`,
+    to,
+    subject,
+    html
+  });
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,11 +47,46 @@ export default async function handler(req, res) {
   const authHeader = req.headers['authorization'] || '';
   const passHeader = req.headers['x-admin-password'] || '';
   
-  // POST /api/admin (login)
+  // POST /api/admin (login o re-envió de oferta retargeting)
   if (req.method === 'POST') {
     let body = req.body || {};
     if (typeof body === 'string') {
       try { body = JSON.parse(body); } catch (e) {}
+    }
+
+    // Acción de Re-envío de Oferta Retargeting
+    if (body.action === 'resend_lead_offer') {
+      const { email, name } = body;
+      if (!email) return res.status(400).json({ error: 'Email es requerido' });
+
+      const appUrl = 'https://auditflow-ai-theta.vercel.app';
+      const subject = `🚀 Oferta Exclusiva: Plan Corporativo Ilimitado - AuditFlow AI`;
+      const html = `
+        <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px;">
+          <h2 style="color: #a855f7; margin-top: 0;">AuditFlow AI - Plan Corporativo B2B</h2>
+          <p style="font-size: 16px;">Hola <strong>${name || 'Cliente'}</strong>,</p>
+          <p style="color: #d1d5db; line-height: 1.6;">
+            Detectamos que tu empresa maneja contratos y facturas con frecuencia. Con nuestro <strong>Plan Corporativo ($49/mes)</strong> obtienes:
+          </p>
+          <ul style="color: #9ca3af; line-height: 1.8;">
+            <li>✅ Auditorías de Contratos Ilimitadas 24/7</li>
+            <li>✅ Soporte Autónomo de IA para Renegociaciones</li>
+            <li>✅ Memoria Volátil RAM Protegida (0 almacenamiento en disco)</li>
+          </ul>
+          <p style="text-align: center; margin-top: 30px;">
+            <a href="${appUrl}" style="background-color: #a855f7; color: #ffffff; font-weight: bold; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block;">
+              🚀 Activar Plan Corporativo ($49/mes)
+            </a>
+          </p>
+        </div>
+      `;
+
+      try {
+        await sendGmailEmail({ to: email, subject, html });
+        return res.status(200).json({ success: true, message: `Oferta retargeting enviada a ${email}` });
+      } catch (err) {
+        return res.status(500).json({ error: 'Error enviando correo: ' + err.message });
+      }
     }
 
     const inputPass = body.password || passHeader || '';
@@ -64,11 +129,10 @@ export default async function handler(req, res) {
         if (dbTx && dbTx.length > 0) transactions = dbTx;
         if (dbReports && dbReports.length > 0) reports = dbReports;
       } catch (err) {
-        console.warn('Consulta Supabase falló en admin stats, usando datos de respaldo:', err.message);
+        console.warn('Consulta Supabase falló en admin stats:', err.message);
       }
     }
 
-    // Si Supabase aún no tiene registros o no está vinculado, usar datos iniciales de exhibición
     if (leads.length === 0) {
       leads = [
         {

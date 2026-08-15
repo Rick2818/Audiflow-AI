@@ -408,14 +408,18 @@
             },
 
             async resendLeadOffer(email, name) {
-                alert(`📩 Re-enviando oferta corporativa de $49/mes por Gmail SMTP a: ${email}`);
                 try {
-                    await fetch('/api/send-test-email', {
+                    const res = await fetch('/api/admin', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ email, name, lang: 'es' })
+                        body: JSON.stringify({ action: 'resend_lead_offer', email, name })
                     });
-                    alert('✅ Oferta enviada con éxito');
+                    const data = await res.json();
+                    if (data.success) {
+                        alert(`✅ Oferta corporativa re-enviada por Gmail SMTP a ${email}`);
+                    } else {
+                        alert('⚠️ ' + (data.error || 'No se pudo enviar el correo'));
+                    }
                 } catch (e) {
                     alert('Error enviando correo: ' + e.message);
                 }
