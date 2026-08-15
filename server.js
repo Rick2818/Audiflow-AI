@@ -25,6 +25,13 @@ const __dirname = path.dirname(__filename);
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Configuración Vercel Serverless para procesamiento de archivos en memoria RAM
+export const config = {
+  api: {
+    bodyParser: false
+  }
+};
+
 // ==============================================================================
 // FIREWALL & SEGURIDAD CORPORATIVA (HELMET + RATE LIMITING DDoS PROTECTION)
 // ==============================================================================
