@@ -7,9 +7,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
 [![Payments](https://img.shields.io/badge/Payments-Stripe%20%7C%20Strike%20Lightning-amber.svg)](#-pasarelas-de-pago-híbridas--privacidad)
-[![Build Status](https://img.shields.io/badge/Tests-1000%2F1000%20PASSED-10b981.svg)](#-suite-de-1000-pruebas-automatizadas)
+[![Tests Status](https://img.shields.io/badge/Tests-1000%2F1000%20PASSED-10b981.svg)](#-suite-de-1000-pruebas-automatizadas)
 
-**AuditFlow AI** es una infraestructura de micro-SaaS B2B diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando 3 fugas financieras o cláusulas de riesgo en menos de 10 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), filtro pre-vuelo anti-OCR defectuoso, embudo de monetización híbrido con Upsell Corporativo ($49/mes) y pagos directos en Lightning Network a Strike (**`rick28@strike.me`**).
+**AuditFlow AI** es una infraestructura de micro-SaaS B2B diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando 3 fugas financieras o cláusulas de riesgo en menos de 10 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), filtro pre-vuelo anti-OCR defectuoso, embudo de monetización híbrido con Plan Corporativo Mensual ($49/mes) y Anual ($399/año - Ahorro $189 USD), comprobantes digitales de pago B2B 100% bilingües (ES / EN) y pagos directos en Lightning Network a Strike (**`rick28@strike.me`**).
 
 ---
 
@@ -25,18 +25,20 @@
 
 1. **Memoria Volátil RAM Efímera (0 Almacenamiento en Disco)**:
    - Los documentos se procesan en búferes de RAM Serverless y se destruyen inmediatamente (`PURGED_FROM_RAM`) tras la auditoría.
-2. **Panel de Control de Administración B2B (`/admin`)**:
+2. **Plan Corporativo B2B Mensual ($49/mes) & Anual ($399/año - Ahorra $189 USD)**:
+   - Acceso ilimitado 24/7 a auditorías sin cuotas por evento, con selector interactivo de tarifas y pasarela Stripe + Strike Lightning Sats (**75,384 Sats/mes** o **613,846 Sats/año**).
+3. **Generador de Recibos Digitales B2B (#REC-2026-X9) 100% Bilingües (ES / EN)**:
+   - Despacho inmediato por Gmail SMTP de comprobantes oficiales con desglose de empresa, tarifa, método de pago y confirmación de estado liquidado.
+4. **Módulo de Reporte de Fallos de Configuración & Auto-Diagnóstico por IA**:
+   - Botón directo `🛠️ Reportar Fallo de Configuración` en el pie de página que registra la incidencia en Supabase, envía una alerta por correo a `rick28191@gmail.com` y responde en tiempo real en pantalla con *"¡Gracias por su ayuda!..."*.
+5. **Formulario Interactivo de Tarjetas de Crédito con Atributos W3C**:
+   - Campos de entrada para número de tarjeta, expiración y CVC con `autocomplete="cc-csc"` e `inputmode="numeric"` para prevenir popups molestos del gestor de contraseñas.
+6. **Navegación Fluida con Botones de Regreso al Dashboard**:
+   - Botón `🏠 Regresar al Inicio / Auditar Nuevo Documento` tras confirmar una compra y `← Regresar al Panel Principal` en el modal corporativo.
+7. **Panel de Control de Administración B2B (`/admin`)**:
    - Monitoreo en tiempo real de facturación (USD y Satoshis), leads capturados, candidatos corporativos (`lead_score >= 75`) y exportación a CSV con 1 clic.
-3. **Persistencia Automática en Supabase PostgreSQL**:
-   - Guardado indestructible en la nube para prospectos, transacciones e informes mediante `@supabase/supabase-js`.
-4. **Visor de Ejemplo de Reporte PDF Oficial Modelo**:
-   - Modal interactivo que muestra la previsualización del informe firmado con sello de auditoría, desgloses financieros y cláusulas tácticas de renegociación.
-5. **Widget Flotante de Prueba Social en Vivo (Social Proof Toast)**:
+8. **Widget Flotante de Prueba Social en Vivo (Social Proof Toast)**:
    - Notificaciones dinámicas no invasivas que rotan en tiempo real demostrando auditorías completadas en El Salvador, Miami, Madrid y México.
-6. **Motor de Enlaces de Auditoría Compartibles (`?reportId=...`)**:
-   - Botón `🔗 Copiar Enlace para Compartir con Mi Jefe/Socio` que permite a los usuarios enviar el informe a los tomadores de decisiones para autorizar el pago.
-7. **Calculadora de ROI (2,450% ROI) y Botón Directo de WhatsApp**:
-   - Demuestra el ahorro de ~$1,250 USD en honorarios legales y permite soporte directo B2B.
 
 ---
 
@@ -50,19 +52,21 @@ c:\Users\Ricardo\Desktop\Audiflow Ai\
 ├── vercel.json                # Configuración de rutas estáticas y Serverless Functions en Vercel
 ├── README.md                  # Manual ejecutivo de configuración y despliegue
 ├── db/
-│   └── schema.sql             # DDL PostgreSQL de Supabase (Leads, Reports, Transactions, Subscriptions)
+│   └── schema.sql             # DDL PostgreSQL de Supabase (Leads, Reports, Transactions, Subscriptions, Issues)
 ├── api/                       # Vercel Serverless Functions
 │   ├── audit.js               # Procesador de auditoría Base64 en memoria RAM efímera
 │   ├── admin.js               # API del Dashboard de Control (/admin) y re-envío de ofertas
-│   └── lead.js                # Captura de prospectos y disparo de Gmail SMTP
+│   ├── lead.js                # Captura de prospectos y disparo de Gmail SMTP
+│   ├── subscribe.js           # Checkout corporativo ($49/mes / $399/año) y recibo B2B bilingüe
+│   └── report-issue.js        # Módulo de reporte de fallos de configuración y auto-diagnóstico IA
 └── frontend/
     ├── admin.html             # Panel de Control B2B con login y exportación CSV
-    ├── index.html             # UI bilingüe con visor PDF modelo y prueba social
+    ├── index.html             # UI bilingüe con modal corporativo, reporte de fallos y visor PDF
     ├── css/
     │   └── styles.css         # Estilos, alertas y desenfoque táctico .blurred-content
     └── js/
         ├── i18n.js            # Sistema bilingüe dinámico (ES / EN)
-        ├── app.js             # Lógica cliente, widget de prueba social y enlaces compartibles
+        ├── app.js             # Lógica cliente, widget de prueba social y reportes de fallo
         └── payment.js         # Integración de Stripe Checkout y QR Strike Lightning
 ```
 
@@ -70,7 +74,7 @@ c:\Users\Ricardo\Desktop\Audiflow Ai\
 
 ## 🛡️ Pasarelas de Pago Híbridas & Privacidad
 
-*   **Stripe**: Tarifas planas de **$7.00 USD** (Tripwire) y **$49.00 USD/mes** (Plan Corporativo).
+*   **Stripe**: Tarifas planas de **$7.00 USD** (Unlock Report), **$49.00 USD/mes** (Plan Corporativo Mensual) y **$399.00 USD/año** (Plan Corporativo Anual).
 *   **Strike Lightning Network**: Invoices BOLT11 en Satoshis liquidadas directamente a la dirección **`rick28@strike.me`** sin comisiones bancarias internacionales.
 
 ---
