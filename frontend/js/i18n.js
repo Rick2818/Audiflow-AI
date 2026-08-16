@@ -130,6 +130,7 @@ window.I18n = {
             pay_ln_input_label: "Factura Lightning BOLT11",
             pay_btn_copy: "Copiar",
             pay_ln_node_label: "Directo a nodo Lightning:",
+            btn_preview_sample_pdf: "Ver Ejemplo de Reporte PDF Oficial Modelo",
 
             // Features & Footer
             feat_1_tag: "01. Privacidad Total",

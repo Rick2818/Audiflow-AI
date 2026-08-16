@@ -572,6 +572,60 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
     },
 
+    openSamplePdfModal() {
+        const modal = document.getElementById('sample-pdf-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closeSamplePdfModal() {
+        const modal = document.getElementById('sample-pdf-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    initSocialProofWidget() {
+        const toast = document.getElementById('social-proof-toast');
+        const titleEl = document.getElementById('social-proof-title');
+        const descEl = document.getElementById('social-proof-desc');
+        const timeEl = document.getElementById('social-proof-time');
+
+        if (!toast || !titleEl || !descEl || !timeEl) return;
+
+        const proofs = [
+            { loc: "San Salvador, SV", type: "Contrato de Arrendamiento Comercial", leakage: "$18,500 USD", time: "Hace 3 minutos" },
+            { loc: "Miami, FL", type: "SLA de Infraestructura Cloud", leakage: "$12,400 USD", time: "Hace 8 minutos" },
+            { loc: "Madrid, ES", type: "Acuerdo de Proveedores IT", leakage: "$6,800 USD", time: "Hace 14 minutos" },
+            { loc: "Santa Tecla, SV", type: "Contrato de Obra Civil", leakage: "$24,100 USD", time: "Hace 19 minutos" },
+            { loc: "Ciudad de México, MX", type: "Factura Corporativa Q3", leakage: "$9,200 USD", time: "Hace 25 minutos" }
+        ];
+
+        let index = 0;
+
+        const showNext = () => {
+            const item = proofs[index];
+            const isEn = window.I18n && window.I18n.currentLang === 'en';
+
+            titleEl.innerText = isEn ? "New Audit Executed ⚡" : "Nueva Auditoría Realizada ⚡";
+            descEl.innerText = isEn 
+                ? `A user in ${item.loc} audited a ${item.type} and detected ${item.leakage} in leakage.`
+                : `Un usuario en ${item.loc} auditó un ${item.type} e identificó ${item.leakage} en fugas.`;
+            timeEl.innerText = isEn ? `${item.time} • Volatile RAM` : `${item.time} • Memoria Volátil RAM`;
+
+            toast.classList.remove('opacity-0', 'translate-y-24', 'pointer-events-none');
+            toast.classList.add('opacity-100', 'translate-y-0');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-24', 'pointer-events-none');
+            }, 6000);
+
+            index = (index + 1) % proofs.length;
+        };
+
+        // Mostrar primer toast tras 4 segundos y rotar cada 20 segundos
+        setTimeout(showNext, 4000);
+        setInterval(showNext, 20000);
+    },
+
     unblurReport() {
         document.querySelectorAll('.blurred-content').forEach(el => {
             el.classList.remove('blurred-content', 'select-none');
@@ -589,4 +643,5 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
 
 document.addEventListener('DOMContentLoaded', () => {
     window.AppHandler.init();
+    window.AppHandler.initSocialProofWidget();
 });

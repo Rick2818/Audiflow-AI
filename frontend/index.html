@@ -564,6 +564,99 @@
                         <span data-i18n="pay_ln_node_label">Directo a nodo Lightning:</span> <span id="ln-address-display" class="text-accent-blue">audits@stacker.news</span>
                     </div>
                 </div>
+
+                <!-- BOTÓN PARA PREVISUALIZAR EJEMPLO DE REPORTE PDF MODELO -->
+                <div class="mt-4 pt-4 border-t border-border-dark text-center">
+                    <button onclick="window.AppHandler.openSamplePdfModal()" class="text-xs font-mono text-accent-blue hover:text-white underline transition-all flex items-center justify-center gap-1.5 mx-auto">
+                        📄 <span data-i18n="btn_preview_sample_pdf">Ver Ejemplo de Reporte PDF Oficial Modelo</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL MODELO DE MUESTRA DE REPORTE PDF EJECUTIVO -->
+        <div id="sample-pdf-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-slate-900 border border-slate-700 rounded-2xl max-w-3xl w-full p-6 sm:p-10 relative shadow-2xl my-auto text-slate-100 max-h-[92vh] overflow-y-auto">
+                <button onclick="window.AppHandler.closeSamplePdfModal()" aria-label="Cerrar vista de PDF de muestra" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-2 bg-slate-800 rounded-full focus:outline-none">✕</button>
+
+                <!-- ENCABEZADO FORMATO PDF CORPOATIVO -->
+                <div class="border-b-2 border-slate-700 pb-6 mb-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-500 to-emerald-400 flex items-center justify-center font-extrabold text-white text-2xl shadow-lg">
+                            A
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold text-white tracking-tight">AUDITFLOW <span class="text-sky-400">AI</span></h2>
+                            <p class="text-xs font-mono text-slate-400">MEMORIA VOLÁTIL RAM (0 DISCO) • SELLO DE AUDITORÍA OFICIAL</p>
+                        </div>
+                    </div>
+                    <div class="text-right font-mono text-xs text-slate-400">
+                        <span class="px-3 py-1 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-500/40 font-bold block mb-1">DOCUMENTO OFICIAL MODELO</span>
+                        <span>ID: REP-PROD-2026-X8</span>
+                    </div>
+                </div>
+
+                <!-- RESUMEN EJECUTIVO Y METRICAS DEL PDF DE MUESTRA -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">Documento Auditado</span>
+                        <span class="font-bold text-white text-sm">Contrato_Servicios_Comercial.pdf</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-800/80 border border-slate-700">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">Nivel de Riesgo</span>
+                        <span class="font-extrabold text-red-400 text-sm">CRÍTICO (LEAD SCORE: 92/100)</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-slate-800/80 border border-emerald-500/40 bg-emerald-950/20">
+                        <span class="text-xs text-emerald-400 font-mono block mb-1">Fuga Financiera Detectada</span>
+                        <span class="font-extrabold text-emerald-400 text-lg font-mono">$18,500.00 USD</span>
+                    </div>
+                </div>
+
+                <!-- TABLA DE HALLAZGOS Y TEXTO DE RENEGOCIACIÓN -->
+                <div class="space-y-4 mb-8">
+                    <h4 class="font-bold text-white text-sm font-mono uppercase tracking-wider text-sky-400">Desglose de Soluciones Tácticas de Renegociación:</h4>
+
+                    <div class="p-4 rounded-xl bg-slate-800 border border-slate-700 text-left text-xs space-y-2">
+                        <div class="flex justify-between items-center font-bold text-white text-sm border-b border-slate-700 pb-2">
+                            <span>1. Penalización Excesiva por Cancelación Anticipada</span>
+                            <span class="text-red-400 font-mono">$18,000.00 USD</span>
+                        </div>
+                        <p class="text-slate-300 font-mono"><strong>Cláusula Original:</strong> Cláusula 7.3 - Multa de cancelación fija de 12 meses de renta sin causa justificada.</p>
+                        <p class="text-emerald-300 font-mono"><strong>Solución Táctica Desbloqueada:</strong> Notificar objeción legal basada en el Art. 1244 del Código Comercial y sustituir con la cláusula de preaviso estándar a 30 días sin multa punitiva.</p>
+                    </div>
+
+                    <div class="p-4 rounded-xl bg-slate-800 border border-slate-700 text-left text-xs space-y-2">
+                        <div class="flex justify-between items-center font-bold text-white text-sm border-b border-slate-700 pb-2">
+                            <span>2. Indexación Doble Semestral Retroactiva</span>
+                            <span class="text-amber-400 font-mono">$950.00 USD</span>
+                        </div>
+                        <p class="text-slate-300 font-mono"><strong>Cláusula Original:</strong> Cláusula 12.1 - Ajuste inflacionario duplicado combinando IPC local y tasa fija en USD.</p>
+                        <p class="text-emerald-300 font-mono"><strong>Solución Táctica Desbloqueada:</strong> Eliminar la cláusula de ajuste duplicada en USD y fijar el ajuste estrictamente al IPC anual simple sin porcentajes acumulativos.</p>
+                    </div>
+                </div>
+
+                <!-- SELLO DE AUDITORÍA Y FIRMA DIGITAL -->
+                <div class="pt-4 border-t border-slate-700 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-emerald-400 animate-pulse"></span>
+                        <span>Firma Digital &amp; Sello de Validación por IA Gemini 2.5 Flash</span>
+                    </div>
+                    <button onclick="window.PaymentHandler.openPaymentModal(); window.AppHandler.closeSamplePdfModal();" class="btn-primary text-xs py-3 px-6 font-bold shadow-glow">
+                        🔓 Desbloquear Mi Reporte Oficial ($7 USD)
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- WIDGET FLOTANTE DE PRUEBA SOCIAL EN VIVO (SOCIAL PROOF TOAST) -->
+        <div id="social-proof-toast" class="fixed bottom-5 left-5 z-40 max-w-sm bg-dark-card border border-accent-blue/40 p-3.5 rounded-2xl shadow-2xl transition-all duration-500 transform translate-y-24 opacity-0 pointer-events-none flex items-center gap-3 backdrop-blur-md">
+            <div class="w-10 h-10 rounded-xl bg-accent-blue/20 text-accent-blue flex items-center justify-center font-bold text-lg shrink-0">
+                ⚡
+            </div>
+            <div class="text-left text-xs font-sans">
+                <div id="social-proof-title" class="font-bold text-white mb-0.5">Nueva Auditoría Realizada</div>
+                <div id="social-proof-desc" class="text-gray-300 font-mono text-[11px] leading-tight">Un usuario en El Salvador auditó un Contrato Comercial e identificó $18,500 USD en fugas.</div>
+                <div id="social-proof-time" class="text-[10px] text-accent-emerald font-mono mt-1">Hace 2 minutos • Memoria Volátil RAM</div>
             </div>
         </div>
 
