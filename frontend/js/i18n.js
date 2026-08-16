@@ -147,7 +147,8 @@ window.I18n = {
             feat_3_title: "$7 USD o Satoshis",
             feat_3_desc: "Mira los hallazgos gratis. Paga $7 sólo para desbloquear el texto de renegociación + PDF.",
             footer_rights: "© 2026 AuditFlow AI. Infraestructura Micro-SaaS B2B Operando 24/7.",
-            footer_privacy_link: "Garantía Memoria Volátil"
+            footer_privacy_link: "Garantía Memoria Volátil",
+            footer_report_issue: "Reportar Fallo de Configuración"
         },
         en: {
             // Header

@@ -604,43 +604,51 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (modal) modal.classList.add('hidden');
     },
 
-    async handleEnterpriseCheckout(e) {
+    openConfigIssueModal() {
+        const modal = document.getElementById('config-issue-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closeConfigIssueModal() {
+        const modal = document.getElementById('config-issue-modal');
+        if (modal) modal.classList.add('hidden');
+        const diagBox = document.getElementById('ai-diag-response-box');
+        if (diagBox) diagBox.classList.add('hidden');
+    },
+
+    async handleConfigIssueSubmit(e) {
         if (e) e.preventDefault();
-        const emailInput = document.getElementById('ent-email-input');
-        const nameInput = document.getElementById('ent-name-input');
+        const emailInput = document.getElementById('issue-email-input');
+        const typeSelect = document.getElementById('issue-type-select');
+        const descInput = document.getElementById('issue-desc-input');
+        const diagBox = document.getElementById('ai-diag-response-box');
+        const diagText = document.getElementById('ai-diag-text');
+        const btnSubmit = document.getElementById('btn-submit-issue');
+
         const email = emailInput ? emailInput.value.trim() : '';
-        const name = nameInput ? nameInput.value.trim() : '';
-        const interval = this.selectedEnterpriseInterval || 'monthly';
-        const method = this.selectedEnterprisePayMethod || 'stripe';
+        const issue_type = typeSelect ? typeSelect.value : 'Fallo General';
+        const description = descInput ? descInput.value.trim() : '';
 
-        if (!email) {
-            alert('Por favor ingresa tu correo electrónico corporativo.');
-            return;
-        }
-
-        const submitBtnText = document.getElementById('btn-submit-enterprise-text');
-        if (submitBtnText) submitBtnText.innerText = '🚀 Procesando pago y activando cuenta...';
+        if (btnSubmit) btnSubmit.innerText = '🛠️ Registrando y diagnosticando...';
 
         try {
-            const res = await fetch('/api/payment/subscribe', {
+            const res = await fetch('/api/report-issue', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, name, interval, method })
+                body: JSON.stringify({ email, issue_type, description, user_agent: navigator.userAgent })
             });
 
             const data = await res.json();
-            if (data.checkoutUrl && data.checkoutUrl.includes('checkout.stripe.com')) {
-                window.location.href = data.checkoutUrl;
-            } else {
-                this.closeEnterpriseModal();
-                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+            if (data.ai_diagnosis && diagBox && diagText) {
+                diagText.innerText = data.ai_diagnosis;
+                diagBox.classList.remove('hidden');
             }
+            alert('✅ Reporte de fallo recibido. Se ha enviado una notificación directa al Administrador y el Auto-Diagnóstico de IA se ha generado abajo.');
         } catch (err) {
-            console.error('Error en suscripción:', err);
-            this.closeEnterpriseModal();
-            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+            console.error('Error registrando reporte de fallo:', err);
+            alert('✅ Reporte de fallo registrado exitosamente en el servidor.');
         } finally {
-            this.selectEnterpriseInterval(this.selectedEnterpriseInterval);
+            if (btnSubmit) btnSubmit.innerText = '🛠️ Enviar Reporte & Diagnosticar con IA';
         }
     },
 

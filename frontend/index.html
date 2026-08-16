@@ -797,15 +797,63 @@
             </svg>
         </a>
 
+        <!-- MODAL DE REPORTE DE FALLO DE CONFIGURACIÓN & AUTO-DIAGNÓSTICO IA -->
+        <div id="config-issue-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-red-500/40 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto">
+                <button onclick="window.AppHandler.closeConfigIssueModal()" aria-label="Cerrar modal reporte fallo" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="w-12 h-12 rounded-xl bg-red-500/20 text-red-400 flex items-center justify-center font-bold text-2xl mb-4 mx-auto">
+                    🛠️
+                </div>
+                <h3 class="text-xl font-bold text-white text-center mb-1">Reportar Fallo de Configuración</h3>
+                <p class="text-xs text-gray-400 text-center mb-6 font-mono">Auto-Diagnóstico Autónomo Asistido por IA</p>
+
+                <form onsubmit="window.AppHandler.handleConfigIssueSubmit(event)" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Tu Correo Electrónico</label>
+                        <input type="email" id="issue-email-input" placeholder="ejemplo@correo.com" required class="input-field text-xs font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Tipo de Incidencia o Fallo</label>
+                        <select id="issue-type-select" required class="input-field text-xs font-mono text-white bg-dark-surface">
+                            <option value="Falla de Carga de Archivo / OCR">Falla de Carga de Archivo / OCR Ilegible</option>
+                            <option value="Inconsistencia en Pasarela de Pago">Inconsistencia en Pasarela de Pago (Stripe/Lightning)</option>
+                            <option value="Error de Renderizado de Reporte">Error de Renderizado de Reporte o Soluciones</option>
+                            <option value="Fallo de Configuración General">Fallo de Configuración General</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Descripción del Fallo (Opcional)</label>
+                        <textarea id="issue-desc-input" rows="3" placeholder="Describe brevemente qué sucedió..." class="input-field text-xs font-mono"></textarea>
+                    </div>
+
+                    <div id="ai-diag-response-box" class="hidden p-3 rounded-xl bg-dark-surface border border-accent-blue/40 text-xs font-mono text-gray-300 leading-relaxed">
+                        <span class="text-accent-blue font-bold block mb-1">🤖 Diagnóstico IA en Tiempo Real:</span>
+                        <p id="ai-diag-text" class="text-gray-300"></p>
+                    </div>
+
+                    <button type="submit" id="btn-submit-issue" class="btn-primary bg-gradient-to-r from-red-600 to-amber-600 w-full py-3 text-center font-bold text-xs shadow-glow flex justify-center items-center gap-2">
+                        <span>🛠️ Enviar Reporte &amp; Diagnosticar con IA</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
     </main>
 
-    <!-- FOOTER -->
+    <!-- FOOTER CON ENLACE DE REPORTE DE FALLOS -->
     <footer class="border-t border-border-dark py-8 text-center text-xs text-gray-400 font-mono bg-dark-surface mt-auto">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
             <div data-i18n="footer_rights">
                 © 2026 AuditFlow AI. Infraestructura Micro-SaaS B2B Operando 24/7.
             </div>
             <div class="flex items-center gap-4 text-gray-400">
+                <button onclick="window.AppHandler.openConfigIssueModal()" class="hover:text-red-400 transition-all underline flex items-center gap-1">
+                    🛠️ <span data-i18n="footer_report_issue">Reportar Fallo de Configuración</span>
+                </button>
+                <span>•</span>
                 <span data-i18n="footer_privacy_link">Garantía Memoria Volátil</span>
                 <span>•</span>
                 <span>Stripe &amp; Lightning</span>
