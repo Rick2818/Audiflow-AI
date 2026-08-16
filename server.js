@@ -265,9 +265,138 @@ async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, d
     console.log(`🔗 Ver correo real entregado: ${previewUrl}`);
     console.log(`=======================================================\n`);
 
-    return { success: true, provider: 'ethereal', previewUrl: previewUrl, messageId: info.messageId };
   } catch (fallbackErr) {
     console.error(`❌ [EMAIL AGENT ERROR]`, fallbackErr.message);
+    return { success: false, error: fallbackErr.message };
+  }
+}
+
+// ==============================================================================
+// HELPER: NOTIFICACIÓN AUTOMÁTICA AL PROPIETARIO (CORREO PERSONAL) POR CADA COMPRA
+// ==============================================================================
+async function sendOwnerPurchaseNotification({
+  customerEmail,
+  customerName = 'Cliente Valioso',
+  planName = 'Reporte Desenfocado PDF ($7.00 USD)',
+  amount = '$7.00 USD',
+  provider = 'Stripe / Strike Lightning',
+  documentName = 'Contrato.pdf',
+  reportId = 'N/A',
+  leakage = '$3,450.00 USD'
+}) {
+  const ownerEmail = (process.env.PERSONAL_NOTIFICATION_EMAIL || process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+
+  const subject = `💰 ¡NUEVA VENTA CONFIRMADA! [${amount}] - ${customerName}`;
+  const nowStr = new Date().toLocaleString('es-ES', { timeZone: 'America/El_Salvador' });
+
+  const htmlBody = `
+  <!DOCTYPE html>
+  <html>
+  <head><meta charset="UTF-8"></head>
+  <body style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color:#09090b; color:#ffffff; padding:24px; margin:0;">
+      <div style="max-width:600px; margin:0 auto; background-color:#121215; border:1px solid #10b981; border-radius:12px; padding:32px;">
+          <div style="text-align:center; border-bottom:1px solid #27272a; padding-bottom:20px; margin-bottom:24px;">
+              <span style="background-color:#10b981; color:#000000; font-weight:bold; padding:4px 12px; border-radius:999px; font-size:12px;">NOTIFICACIÓN DE VENTA EN VIVO</span>
+              <h2 style="color:#ffffff; margin:12px 0 0 0; font-size:24px;">🎉 ¡Nueva Compra Recibida!</h2>
+              <p style="color:#10b981; font-size:28px; font-weight:bold; margin:8px 0 0 0;">${amount}</p>
+          </div>
+
+          <div style="background-color:#18181b; border:1px solid #27272a; border-radius:8px; padding:20px; margin-bottom:20px;">
+              <h3 style="color:#38bdf8; margin-top:0; font-size:16px; border-bottom:1px solid #27272a; padding-bottom:8px;">📋 Detalle de la Transacción:</h3>
+              <table style="width:100%; color:#e4e4e7; font-size:14px; border-collapse:collapse;">
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Cliente:</td>
+                      <td style="text-align:right; font-weight:bold; color:#ffffff;">${customerName}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Correo del Cliente:</td>
+                      <td style="text-align:right; font-weight:bold; color:#38bdf8;"><a href="mailto:${customerEmail}" style="color:#38bdf8;">${customerEmail}</a></td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Servicio Comprado:</td>
+                      <td style="text-align:right; font-weight:bold; color:#a855f7;">${planName}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Pasarela de Pago:</td>
+                      <td style="text-align:right; font-weight:bold; color:#f59e0b;">${provider}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Documento Auditado:</td>
+                      <td style="text-align:right; font-weight:bold; color:#ffffff;">${documentName}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Fuga Detectada:</td>
+                      <td style="text-align:right; font-weight:bold; color:#ef4444;">${leakage}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">ID de Reporte:</td>
+                      <td style="text-align:right; font-family:monospace; color:#a1a1aa;">${reportId}</td>
+                  </tr>
+                  <tr>
+                      <td style="padding:6px 0; color:#a1a1aa;">Fecha y Hora:</td>
+                      <td style="text-align:right; color:#a1a1aa;">${nowStr}</td>
+                  </tr>
+              </table>
+          </div>
+
+          <div style="text-align:center; border-top:1px solid #27272a; pt:20px; font-size:12px; color:#71717a;">
+              <p style="margin:0;">AuditFlow AI • Agente Autónomo de Ventas en Memoria Volátil</p>
+          </div>
+      </div>
+  </body>
+  </html>`;
+
+  if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: gmailUser, pass: gmailPass }
+      });
+
+      const info = await transporter.sendMail({
+        from: `"AuditFlow AI Sales" <${gmailUser}>`,
+        to: ownerEmail,
+        subject: subject,
+        html: htmlBody
+      });
+
+      console.log(`✅ [NOTIFICACIÓN AL PROPIETARIO] Venta enviada a ${ownerEmail} | Transacción: ${amount}`);
+      return { success: true, ownerEmail, messageId: info.messageId };
+    } catch (err) {
+      console.error(`⚠️ Error enviando notificación de venta al propietario (${ownerEmail}):`, err.message);
+    }
+  }
+
+  // Fallback Ethereal Mail para pruebas locales
+  try {
+    const testAccount = await nodemailer.createTestAccount();
+    const testTransporter = nodemailer.createTransport({
+      host: 'smtp.ethereal.email',
+      port: 587,
+      secure: false,
+      auth: { user: testAccount.user, pass: testAccount.pass }
+    });
+
+    const info = await testTransporter.sendMail({
+      from: `"AuditFlow AI Sales" <${testAccount.user}>`,
+      to: ownerEmail,
+      subject: subject,
+      html: htmlBody
+    });
+
+    const previewUrl = nodemailer.getTestMessageUrl(info);
+    console.log(`\n=======================================================`);
+    console.log(`📧 [ALERTA DE VENTA AL PROPIETARIO AUTO-GENERADA]`);
+    console.log(`📩 Notificado a: ${ownerEmail}`);
+    console.log(`💰 Venta: ${planName} - ${amount}`);
+    console.log(`🔗 Ver correo real entregado: ${previewUrl}`);
+    console.log(`=======================================================\n`);
+
+    return { success: true, provider: 'ethereal', previewUrl: previewUrl, ownerEmail, messageId: info.messageId };
+  } catch (fallbackErr) {
+    console.error(`❌ [OWNER NOTIFICATION ERROR]`, fallbackErr.message);
     return { success: false, error: fallbackErr.message };
   }
 }
@@ -695,14 +824,65 @@ app.post('/api/payment/subscribe', async (req, res) => {
         cancel_url: `${req.headers.origin || 'http://localhost:3000'}/?subscription=cancel`,
       });
 
+      // Notificar al propietario por correo personal
+      await sendOwnerPurchaseNotification({
+        customerEmail: email || 'cliente@empresa.com',
+        customerName: 'Cliente Corporativo B2B',
+        planName: 'Plan Corporativo B2B ($49/mes o $399/año)',
+        amount: '$49.00 USD / mes',
+        provider: 'Stripe Subscription / Strike Lightning',
+        documentName: 'Suscripción Multiusuario',
+        reportId: 'SUB-' + Math.random().toString(36).substr(2, 6).toUpperCase(),
+        leakage: 'Ilimitado 24/7'
+      });
+
       return res.json({ checkoutUrl: session.url });
     }
+
+    // Fallback de modo interactivo si Stripe secret key no está presente
+    await sendOwnerPurchaseNotification({
+      customerEmail: email || 'cliente@empresa.com',
+      customerName: 'Cliente Corporativo B2B',
+      planName: 'Plan Corporativo B2B ($49/mes)',
+      amount: '$49.00 USD',
+      provider: 'Modo Directo / Strike Lightning',
+      documentName: 'Acceso Corporativo 24/7',
+      reportId: 'SUB-DIRECT-' + Date.now().toString(36).toUpperCase(),
+      leakage: 'Ilimitado 24/7'
+    });
 
     return res.json({ checkoutUrl: `http://localhost:${PORT}/?subscription=active` });
 
   } catch (err) {
     console.error('Error creando suscripción:', err);
     return res.status(500).json({ error: 'Error en suscripción corporativa' });
+  }
+});
+
+// ==============================================================================
+// ENDPOINT DE PRUEBA: POST /api/test-owner-notification (PRUEBA DE NOTIFICACIÓN DE VENTA)
+// ==============================================================================
+app.post('/api/test-owner-notification', async (req, res) => {
+  try {
+    const { email, customer_name, plan_name, amount } = req.body || {};
+    const result = await sendOwnerPurchaseNotification({
+      customerEmail: email || 'cliente.prueba@empresa.com',
+      customerName: customer_name || 'Carlos Mendoza (Abogado Corporativo)',
+      planName: plan_name || 'Desbloqueo de Reporte Táctico + PDF ($7.00 USD)',
+      amount: amount || '$7.00 USD',
+      provider: 'Stripe Credit Card',
+      documentName: 'Contrato_Arrendamiento_Comercial.pdf',
+      reportId: 'rep_test_' + Math.random().toString(36).substr(2, 6),
+      leakage: '$18,500.00 USD'
+    });
+
+    return res.json({
+      success: true,
+      message: `Notificación de compra enviada con éxito al correo personal del propietario (${result.ownerEmail || 'rick28191@gmail.com'})`,
+      details: result
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
   }
 });
 
@@ -737,13 +917,25 @@ app.post('/api/webhooks/master', async (req, res) => {
           .eq('id', reportId);
       }
 
-      // DISPARAR REENVÍO DE CORREO CON REPORTE FINAL DESBLOQUEADO
+      // DISPARAR REENVÍO DE CORREO CON REPORTE FINAL DESBLOQUEADO AL CLIENTE
       await sendGmailAuditEmail({
         recipientEmail,
         recipientName,
         auditData,
         documentName: docName,
         lang: 'es'
+      });
+
+      // DISPARAR NOTIFICACIÓN EN TIEMPO REAL AL CORREO PERSONAL DEL PROPIETARIO
+      await sendOwnerPurchaseNotification({
+        customerEmail: recipientEmail,
+        customerName: recipientName,
+        planName: 'Desbloqueo de Reporte Táctico PDF ($7.00 USD)',
+        amount: '$7.00 USD / Sats',
+        provider: provider.toUpperCase(),
+        documentName: docName,
+        reportId: reportId,
+        leakage: `$${(auditData?.total_financial_leakage || 3450).toLocaleString('en-US', {minimumFractionDigits: 2})} USD`
       });
     }
 

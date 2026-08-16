@@ -190,8 +190,43 @@ export default async function handler(req, res) {
     const stripeInterval = planInterval === 'annual' ? 'year' : 'month';
     const appUrl = 'https://auditflow-ai-theta.vercel.app';
 
-    // Disparar Correo de Bienvenida Corporativa + Recibo B2B en el idioma seleccionado (ES / EN)
+    // Disparar Correo de Bienvenida Corporativa + Recibo B2B al cliente
     await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName, interval: planInterval, lang: lang || 'es' });
+
+    // Disparar Notificación de Venta en Tiempo Real al correo personal del propietario
+    try {
+      const ownerEmail = (process.env.PERSONAL_NOTIFICATION_EMAIL || process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+      const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+      const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+
+      if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: gmailUser, pass: gmailPass }
+        });
+
+        await transporter.sendMail({
+          from: `"AuditFlow AI Sales" <${gmailUser}>`,
+          to: ownerEmail,
+          subject: `💰 ¡NUEVA SUSCRIPCIÓN B2B! [$${priceUsd.toFixed(2)} USD] - ${customerName}`,
+          html: `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 10px; max-width: 600px; margin: 0 auto; border: 1px solid #10b981;">
+              <h2 style="color: #10b981; margin-top: 0;">🎉 ¡Nueva Suscripción Corporativa B2B Recibida!</h2>
+              <p style="font-size: 24px; font-weight: bold; color: #a855f7; margin: 10px 0;">$${priceUsd.toFixed(2)} USD ${planInterval === 'annual' ? '/ año' : '/ mes'}</p>
+              <table style="width: 100%; color: #d1d5db; font-size: 14px; border-collapse: collapse; margin-top: 15px;">
+                <tr><td style="padding: 6px 0; color: #9ca3af;">Cliente / Empresa:</td><td style="text-align: right; font-weight: bold; color: #ffffff;">${customerName}</td></tr>
+                <tr><td style="padding: 6px 0; color: #9ca3af;">Correo del Cliente:</td><td style="text-align: right; font-weight: bold; color: #38bdf8;">${customerEmail}</td></tr>
+                <tr><td style="padding: 6px 0; color: #9ca3af;">Plan Contratado:</td><td style="text-align: right; font-weight: bold; color: #a855f7;">${planInterval === 'annual' ? 'Enterprise Annual ($399/año)' : 'Enterprise Monthly ($49/mes)'}</td></tr>
+                <tr><td style="padding: 6px 0; color: #9ca3af;">Pasarela / Nodo:</td><td style="text-align: right; font-weight: bold; color: #f59e0b;">Stripe &amp; Strike Lightning (rick28@strike.me)</td></tr>
+                <tr><td style="padding: 6px 0; color: #9ca3af;">Fecha y Hora:</td><td style="text-align: right; color: #9ca3af;">${new Date().toLocaleString('es-ES')}</td></tr>
+              </table>
+            </div>`
+        });
+        console.log(`✅ [NOTIFICACIÓN AL PROPIETARIO] Suscripción notificada a ${ownerEmail}`);
+      }
+    } catch (ownerErr) {
+      console.warn('Warning enviando correo al propietario en subscribe.js:', ownerErr.message);
+    }
 
     // Si Stripe está configurado con clave real, genera Stripe Checkout Session
     if (stripe) {
