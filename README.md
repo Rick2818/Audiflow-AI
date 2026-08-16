@@ -1,42 +1,42 @@
 # AuditFlow AI - Sistema Micro-SaaS B2B de Auditoría con IA (24/7)
 
-![AuditFlow AI 30-Second Product Demo Showcase](frontend/assets/demo_hyperframes.jpg)
+![AuditFlow AI Showcase](frontend/assets/demo_hyperframes.jpg)
 
-[![GitHub stars](https://img.shields.io/github/stars/your-user/auditflow-ai?style=social)](https://github.com/your-user/auditflow-ai)
+[![Production](https://img.shields.io/badge/Vercel%20Production-LIVE-10b981.svg)](https://auditflow-ai-theta.vercel.app)
+[![Admin Control Center](https://img.shields.io/badge/Admin%20Dashboard-%2Fadmin-a855f7.svg)](https://auditflow-ai-theta.vercel.app/admin)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
-[![Payments](https://img.shields.io/badge/Payments-Stripe%20%7C%20Lightning%20Network-amber.svg)](#-pasarelas-de-pago-híbridas--privacidad)
+[![Payments](https://img.shields.io/badge/Payments-Stripe%20%7C%20Strike%20Lightning-amber.svg)](#-pasarelas-de-pago-híbridas--privacidad)
 [![Build Status](https://img.shields.io/badge/Tests-1000%2F1000%20PASSED-10b981.svg)](#-suite-de-1000-pruebas-automatizadas)
 
-**AuditFlow AI** es una infraestructura de micro-SaaS B2B diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando 3 fugas financieras o cláusulas de riesgo en menos de 10 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), filtro pre-vuelo anti-OCR defectuoso y un embudo de monetización híbrido con Upsell Corporativo ($49/mes).
+**AuditFlow AI** es una infraestructura de micro-SaaS B2B diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando 3 fugas financieras o cláusulas de riesgo en menos de 10 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), filtro pre-vuelo anti-OCR defectuoso, embudo de monetización híbrido con Upsell Corporativo ($49/mes) y pagos directos en Lightning Network a Strike (**`rick28@strike.me`**).
 
 ---
 
-## 📹 Demostración del Producto (30-Second Demo Showcase)
+## 🌐 Enlaces Oficiales en Vivo
 
-La imagen arriba resume los 4 hiperfotogramas (*hyperframes*) clave de la experiencia de usuario:
-1. **Drag & Drop en Memoria RAM**: Carga instantánea de PDFs/Imágenes sin persistencia en disco.
-2. **Dashboard de Auditoría en Tiempo Real**: Métricas visuales de riesgo y detección de fugas financieras.
-3. **Reporte con Soluciones Desenfocadas (Blur)**: Protección de textos tácticos hasta la confirmación de pago.
-4. **Checkout Híbrido $7 USD / Lightning QR**: Paga con tarjeta bancaria o Satoshis en la red Lightning.
+*   👉 **Aplicación Principal**: [https://auditflow-ai-theta.vercel.app](https://auditflow-ai-theta.vercel.app)
+*   👉 **Panel Privado de Administración**: [https://auditflow-ai-theta.vercel.app/admin](https://auditflow-ai-theta.vercel.app/admin) *(Contraseña: `AuditFlow2026!`)*
+*   👉 **Repositorio GitHub**: [https://github.com/Rick2818/Audiflow-AI](https://github.com/Rick2818/Audiflow-AI)
 
 ---
 
-## 🛡️ Estrategias de Mitigación e Ingeniería Implementadas
+## 🚀 Características Clave Implementadas
 
-### 1. Tripwire + Embudo de Upsell Corporativo ($49/mes)
-- El cobro inicial de **$7 USD / Satoshis** actúa como un producto de alta conversión (*Tripwire*) para filtrar compradores de curiosos.
-- Cuando el Lead Score determina un perfil empresarial de alto valor (`lead_score >= 75`), el sistema activa automáticamente un banner One-Click y un correo de seguimiento ofreciendo la **Suscripción Corporativa Ilimitada por $49/mes** vía Stripe o Lightning recurrente.
-
-### 2. Confianza Visual y Reducción de Fricción Psicológica
-- Se integraron banners estáticos de alta visibilidad directamente debajo del área de *Drag & Drop*:
-  - 🔒 **Procesamiento Efímero**: Análisis exclusivo en memoria RAM volátil y destrucción en < 5 segundos.
-  - 🛡️ **Privacidad Estricta**: Cero almacenamiento físico en disco. Cifrado de grado bancario AES-256 en tránsito.
-
-### 3. Filtro Pre-Vuelo Anti-Garbage (Legibilidad OCR)
-- Se incorporó un módulo de validación antes de realizar llamadas a la API de Gemini 2.5 Flash o solicitar pagos.
-- **Regla Estricta**: `IF word_count < 50 OR garbled_text_ratio > 20% THEN ABORT`.
-- Si el documento es borroso o ilegible, la interfaz muestra la alerta: *"Documento Ilegible o Resolución Insuficiente"* y solicita una copia más clara **sin emitir cobros ni pedir datos de pago**, previniendo disputas financieras o reembolsos.
+1. **Memoria Volátil RAM Efímera (0 Almacenamiento en Disco)**:
+   - Los documentos se procesan en búferes de RAM Serverless y se destruyen inmediatamente (`PURGED_FROM_RAM`) tras la auditoría.
+2. **Panel de Control de Administración B2B (`/admin`)**:
+   - Monitoreo en tiempo real de facturación (USD y Satoshis), leads capturados, candidatos corporativos (`lead_score >= 75`) y exportación a CSV con 1 clic.
+3. **Persistencia Automática en Supabase PostgreSQL**:
+   - Guardado indestructible en la nube para prospectos, transacciones e informes mediante `@supabase/supabase-js`.
+4. **Visor de Ejemplo de Reporte PDF Oficial Modelo**:
+   - Modal interactivo que muestra la previsualización del informe firmado con sello de auditoría, desgloses financieros y cláusulas tácticas de renegociación.
+5. **Widget Flotante de Prueba Social en Vivo (Social Proof Toast)**:
+   - Notificaciones dinámicas no invasivas que rotan en tiempo real demostrando auditorías completadas en El Salvador, Miami, Madrid y México.
+6. **Motor de Enlaces de Auditoría Compartibles (`?reportId=...`)**:
+   - Botón `🔗 Copiar Enlace para Compartir con Mi Jefe/Socio` que permite a los usuarios enviar el informe a los tomadores de decisiones para autorizar el pago.
+7. **Calculadora de ROI (2,450% ROI) y Botón Directo de WhatsApp**:
+   - Demuestra el ahorro de ~$1,250 USD en honorarios legales y permite soporte directo B2B.
 
 ---
 
@@ -44,55 +44,54 @@ La imagen arriba resume los 4 hiperfotogramas (*hyperframes*) clave de la experi
 
 ```
 c:\Users\Ricardo\Desktop\Audiflow Ai\
-├── .env.example               # Plantilla de claves (Gemini, Supabase, Stripe, Lightning, Email)
-├── package.json               # Dependencias del servidor Node/BoxLang y scripts
-├── server.js                  # Servidor con Filtro Pre-Vuelo OCR, Memoria Volátil y API de Suscripciones
+├── .env.example               # Plantilla de claves (Gemini, Supabase, Stripe, Strike, Email)
+├── package.json               # Dependencias del servidor Node/Serverless
+├── server.js                  # Servidor Express con Helmet WAF, Rate Limiter y endpoints API
+├── vercel.json                # Configuración de rutas estáticas y Serverless Functions en Vercel
 ├── README.md                  # Manual ejecutivo de configuración y despliegue
 ├── db/
-│   └── schema.sql             # DDL Supabase (Incluye tablas `subscriptions` y `customer_tokens`)
-├── backend/
-│   ├── Application.bx         # Motor BoxLang y purga de RAM
-│   ├── router.bx              # Enrutador REST principal
-│   ├── services/
-│   │   ├── GeminiService.bx   # Filtro Pre-Vuelo OCR + Prompt Gemini 2.5 Flash
-│   │   ├── SupabaseService.bx # Servicio de metadatos e historial
-│   │   ├── StripeService.bx   # Checkout $7 USD Tripwire y Suscripciones $49/mes
-│   │   ├── LightningService.bx# Facturas BOLT11 Satoshis (10 min ttl)
-│   │   └── EmailAgent.bx      # Email automatizado con propuesta de Upsell $49/mes
-│   └── webhooks/
-│       └── MasterWebhook.bx   # Listener unificado Stripe & Lightning
+│   └── schema.sql             # DDL PostgreSQL de Supabase (Leads, Reports, Transactions, Subscriptions)
+├── api/                       # Vercel Serverless Functions
+│   ├── audit.js               # Procesador de auditoría Base64 en memoria RAM efímera
+│   ├── admin.js               # API del Dashboard de Control (/admin) y re-envío de ofertas
+│   └── lead.js                # Captura de prospectos y disparo de Gmail SMTP
 └── frontend/
-    ├── assets/
-    │   └── demo_hyperframes.jpg # Hiperfotogramas de demostración del producto
-    ├── index.html             # UI bilingüe con micro-copys de seguridad y alerta Pre-Vuelo OCR
+    ├── admin.html             # Panel de Control B2B con login y exportación CSV
+    ├── index.html             # UI bilingüe con visor PDF modelo y prueba social
     ├── css/
-    │   └── styles.css         # Estilos, alertas y desenfoque .blurred-content
+    │   └── styles.css         # Estilos, alertas y desenfoque táctico .blurred-content
     └── js/
         ├── i18n.js            # Sistema bilingüe dinámico (ES / EN)
-        ├── app.js             # Lógica cliente, manejo del filtro Pre-Vuelo y Upsell
-        └── payment.js         # Integración de Stripe Checkout y QR Lightning
+        ├── app.js             # Lógica cliente, widget de prueba social y enlaces compartibles
+        └── payment.js         # Integración de Stripe Checkout y QR Strike Lightning
 ```
+
+---
+
+## 🛡️ Pasarelas de Pago Híbridas & Privacidad
+
+*   **Stripe**: Tarifas planas de **$7.00 USD** (Tripwire) y **$49.00 USD/mes** (Plan Corporativo).
+*   **Strike Lightning Network**: Invoices BOLT11 en Satoshis liquidadas directamente a la dirección **`rick28@strike.me`** sin comisiones bancarias internacionales.
 
 ---
 
 ## 🧪 Suite de 1,000 Pruebas Automatizadas
 
-El proyecto incluye una suite autónoma de estrés y rendimiento en [`tests/stress_test.js`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/tests/stress_test.js):
-
 ```bash
 npm test
 ```
 
-Resultados: **1000/1000 PASSED (0 ERRORS)** en 0.67s.
+Resultados: **1000/1000 PASSED (0 ERRORS)**.
 
 ---
 
-## ⚡ Guía de Instalación y Ejecución
+## ⚡ Guía de Instalación y Ejecución Local
 
 ```bash
-cd "c:\Users\Ricardo\Desktop\Audiflow Ai"
+git clone https://github.com/Rick2818/Audiflow-AI.git
+cd Audiflow-AI
 npm install
 npm run dev
 ```
 
-Accede en tu navegador a **`http://localhost:3000`**.
+Accede en tu navegador a **`http://localhost:3000`** o al panel admin en **`http://localhost:3000/admin`**.
