@@ -10,18 +10,20 @@ const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 // Helper para envío de correo de Bienvenida Corporativa por Gmail SMTP
-async function sendSubscriptionWelcomeEmail({ to, name }) {
+async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly' }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
+  const isAnnual = interval === 'annual';
+  const planText = isAnnual ? 'Plan Corporativo Anual ($399.00 USD/año)' : 'Plan Corporativo Mensual ($49.00 USD/mes)';
   const appUrl = 'https://auditflow-ai-theta.vercel.app';
-  const subject = `🎉 ¡Bienvenido al Plan Corporativo de AuditFlow AI! ($49/mes)`;
+  const subject = `🎉 ¡Bienvenido al ${planText} de AuditFlow AI!`;
   const html = `
     <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px;">
       <h2 style="color: #a855f7; margin-top: 0;">AuditFlow AI - Confirmación de Suscripción Corporativa</h2>
       <p style="font-size: 16px;">Hola <strong>${name || 'Cliente'}</strong>,</p>
       <p style="color: #d1d5db; line-height: 1.6;">
-        Tu suscripción al <strong>Plan Corporativo B2B ($49.00 USD/mes)</strong> ha sido activada con éxito.
+        Tu suscripción al <strong>${planText}</strong> ha sido activada con éxito.
       </p>
       
       <div style="background-color: #111827; border: 1px solid #a855f7; padding: 20px; border-radius: 8px; margin: 20px 0;">
@@ -77,15 +79,19 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) {}
     }
 
-    const { email, name } = body;
+    const { email, name, interval } = body;
     const customerEmail = email || 'cliente@empresa.com';
     const customerName = name || 'Cliente Corporativo';
+    const planInterval = interval === 'annual' ? 'annual' : 'monthly';
+    const priceUsd = planInterval === 'annual' ? 399.00 : 49.00;
+    const unitAmount = planInterval === 'annual' ? 39900 : 4900;
+    const stripeInterval = planInterval === 'annual' ? 'year' : 'month';
     const appUrl = 'https://auditflow-ai-theta.vercel.app';
 
-    // Disparar Correo de Bienvenida Corporativa $49/mes
-    await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName });
+    // Disparar Correo de Bienvenida Corporativa
+    await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName, interval: planInterval });
 
-    // Si Stripe está configurado con clave real, genera Stripe Checkout Session para $49/mes
+    // Si Stripe está configurado con clave real, genera Stripe Checkout Session
     if (stripe) {
       try {
         const session = await stripe.checkout.sessions.create({
@@ -97,11 +103,11 @@ export default async function handler(req, res) {
               price_data: {
                 currency: 'usd',
                 product_data: {
-                  name: 'AuditFlow AI - Plan Corporativo B2B (Auditorías Ilimitadas)',
+                  name: `AuditFlow AI - Plan Corporativo B2B (${planInterval === 'annual' ? '$399/año' : '$49/mes'})`,
                   description: 'Acceso ilimitado 24/7 a auditorías de contratos con memoria volátil RAM'
                 },
-                unit_amount: 4900,
-                recurring: { interval: 'month' }
+                unit_amount: unitAmount,
+                recurring: { interval: stripeInterval }
               },
               quantity: 1
             }
@@ -125,8 +131,8 @@ export default async function handler(req, res) {
       try {
         await supabase.from('subscriptions').insert([
           {
-            plan_name: 'Enterprise Monthly',
-            price_usd: 49.00,
+            plan_name: planInterval === 'annual' ? 'Enterprise Annual' : 'Enterprise Monthly',
+            price_usd: priceUsd,
             status: 'active',
             customer_email: customerEmail
           }
@@ -138,7 +144,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: `Suscripción Corporativa activada. Correo de bienvenida enviado a ${customerEmail}.`,
+      message: `Suscripción Corporativa (${planInterval === 'annual' ? '$399/año' : '$49/mes'}) activada. Correo de bienvenida enviado a ${customerEmail}.`,
       checkoutUrl: `${appUrl}/?status=success_subscription&email=${encodeURIComponent(customerEmail)}`
     });
 

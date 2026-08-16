@@ -590,7 +590,7 @@
             </div>
         </div>
 
-        <!-- MODAL DE SUSCRIPCIÓN CORPORATIVA B2B ($49/MES) -->
+        <!-- MODAL DE SUSCRIPCIÓN CORPORATIVA B2B ($49/MES O $399/AÑO) -->
         <div id="enterprise-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
             <div class="bg-dark-card border border-purple-500/50 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto">
                 <button onclick="window.AppHandler.closeEnterpriseModal()" aria-label="Cerrar modal corporativo" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
@@ -600,6 +600,19 @@
                 </div>
                 <h3 class="text-2xl font-bold text-white text-center mb-1">Plan Corporativo B2B</h3>
                 <p class="text-xs text-purple-300 text-center mb-6 font-mono">Auditorías Ilimitadas 24/7 • Soporte Prioritario por IA</p>
+
+                <!-- CONMUTADOR DE FRECUENCIA DE PAGO: MENSUAL VS ANUAL -->
+                <div class="grid grid-cols-2 gap-2 p-1.5 bg-dark-surface rounded-xl mb-6 border border-purple-500/30">
+                    <button type="button" id="tab-ent-monthly" onclick="window.AppHandler.selectEnterpriseInterval('monthly')" class="py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-purple-500 transition-all flex flex-col items-center justify-center">
+                        <span>💳 Mensual</span>
+                        <span class="text-[10px] text-purple-300">$49 USD / mes</span>
+                    </button>
+                    <button type="button" id="tab-ent-annual" onclick="window.AppHandler.selectEnterpriseInterval('annual')" class="py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex flex-col items-center justify-center relative">
+                        <span class="absolute -top-2 bg-emerald-500 text-black font-extrabold text-[9px] px-2 py-0.5 rounded-full shadow">AHORRA $189 USD</span>
+                        <span>⭐ Anual (2 Meses Gratis)</span>
+                        <span class="text-[10px] text-emerald-400">$399 USD / año</span>
+                    </button>
+                </div>
 
                 <form onsubmit="window.AppHandler.handleEnterpriseCheckout(event)" class="space-y-4 text-left">
                     <div>
@@ -611,16 +624,16 @@
                         <input type="text" id="ent-name-input" placeholder="Empresa o Despacho Legal" required class="input-field text-xs font-mono">
                     </div>
 
-                    <div class="p-4 rounded-xl bg-dark-surface border border-purple-500/30 font-mono text-xs text-gray-300 space-y-2">
+                    <div id="ent-summary-box" class="p-4 rounded-xl bg-dark-surface border border-purple-500/30 font-mono text-xs text-gray-300 space-y-2">
                         <div class="flex justify-between items-center text-white font-bold text-sm">
-                            <span>Suscripción Mensual</span>
-                            <span class="text-purple-400">$49.00 USD / mes</span>
+                            <span id="ent-plan-label">Plan Mensual</span>
+                            <span id="ent-price-label" class="text-purple-400">$49.00 USD / mes</span>
                         </div>
-                        <p class="text-[11px] text-gray-400">Incluye acceso ilimitado para todo tu equipo, purga automática de RAM y reportes PDF sin marcas de agua.</p>
+                        <p id="ent-plan-desc" class="text-[11px] text-gray-400">Incluye acceso ilimitado para todo tu equipo, purga automática de RAM y reportes PDF sin marcas de agua.</p>
                     </div>
 
                     <button type="submit" id="btn-submit-enterprise" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue w-full py-3.5 text-center font-bold text-sm shadow-glow flex justify-center items-center gap-2">
-                        <span>🚀 Activar Suscripción por $49/mes</span>
+                        <span id="btn-submit-enterprise-text">🚀 Activar Suscripción por $49/mes</span>
                     </button>
                 </form>
             </div>

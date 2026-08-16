@@ -521,6 +521,42 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
     },
 
+    selectedEnterpriseInterval: 'monthly',
+
+    selectEnterpriseInterval(interval) {
+        this.selectedEnterpriseInterval = interval;
+        const btnMonthly = document.getElementById('tab-ent-monthly');
+        const btnAnnual = document.getElementById('tab-ent-annual');
+        const planLabel = document.getElementById('ent-plan-label');
+        const priceLabel = document.getElementById('ent-price-label');
+        const planDesc = document.getElementById('ent-plan-desc');
+        const submitBtnText = document.getElementById('btn-submit-enterprise-text');
+
+        if (interval === 'annual') {
+            if (btnMonthly) {
+                btnMonthly.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex flex-col items-center justify-center';
+            }
+            if (btnAnnual) {
+                btnAnnual.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-emerald-500 transition-all flex flex-col items-center justify-center relative';
+            }
+            if (planLabel) planLabel.innerText = 'Plan Corporativo Anual';
+            if (priceLabel) priceLabel.innerText = '$399.00 USD / año';
+            if (planDesc) planDesc.innerText = '2 meses GRATIS incluidos. Un solo pago anual por adelantado con auditorías ilimitadas para todo tu equipo.';
+            if (submitBtnText) submitBtnText.innerText = '⭐ Activar Suscripción Anual por $399/año';
+        } else {
+            if (btnMonthly) {
+                btnMonthly.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-purple-500 transition-all flex flex-col items-center justify-center';
+            }
+            if (btnAnnual) {
+                btnAnnual.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex flex-col items-center justify-center relative';
+            }
+            if (planLabel) planLabel.innerText = 'Plan Corporativo Mensual';
+            if (priceLabel) priceLabel.innerText = '$49.00 USD / mes';
+            if (planDesc) planDesc.innerText = 'Incluye acceso ilimitado para todo tu equipo, purga automática de RAM y reportes PDF sin marcas de agua.';
+            if (submitBtnText) submitBtnText.innerText = '🚀 Activar Suscripción por $49/mes';
+        }
+    },
+
     subscribeEnterprise() {
         const modal = document.getElementById('enterprise-modal');
         if (modal) modal.classList.remove('hidden');
@@ -537,20 +573,21 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const nameInput = document.getElementById('ent-name-input');
         const email = emailInput ? emailInput.value.trim() : '';
         const name = nameInput ? nameInput.value.trim() : '';
+        const interval = this.selectedEnterpriseInterval || 'monthly';
 
         if (!email) {
             alert('Por favor ingresa tu correo electrónico corporativo.');
             return;
         }
 
-        const btnSubmit = document.getElementById('btn-submit-enterprise');
-        if (btnSubmit) btnSubmit.innerText = '🚀 Conectando pasarela $49/mes...';
+        const submitBtnText = document.getElementById('btn-submit-enterprise-text');
+        if (submitBtnText) submitBtnText.innerText = '🚀 Conectando pasarela de pago...';
 
         try {
             const res = await fetch('/api/payment/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, name })
+                body: JSON.stringify({ email, name, interval })
             });
 
             const data = await res.json();
@@ -558,14 +595,14 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 window.location.href = data.checkoutUrl;
             } else {
                 this.closeEnterpriseModal();
-                alert('✅ Suscripción Corporativa procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.');
+                alert(`✅ Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.`);
             }
         } catch (err) {
             console.error('Error en suscripción:', err);
             this.closeEnterpriseModal();
-            alert('✅ Solicitud Corporativa procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.');
+            alert(`✅ Solicitud Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.`);
         } finally {
-            if (btnSubmit) btnSubmit.innerText = '🚀 Activar Suscripción por $49/mes';
+            this.selectEnterpriseInterval(this.selectedEnterpriseInterval);
         }
     },
 
