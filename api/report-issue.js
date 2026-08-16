@@ -85,11 +85,11 @@ export default async function handler(req, res) {
     await sendAdminIssueAlert({ email: userEmail, issueType, description: desc, userAgent });
 
     // Generar sugerencia de auto-diagnóstico asistida por IA
-    let aiDiagnosis = "Sugerencia de Auto-Diagnóstico: Hemos verificado la configuración de red y sockets. Si el problema persiste con un archivo PDF o imagen específica, te recomendamos verificar que no tenga protección por contraseña previa o un nivel de borrosidad extremo.";
+    let aiDiagnosis = "¡Gracias por su ayuda! Hemos registrado su reporte de fallo en nuestro servidor de control. Sugerencia de Auto-Diagnóstico: Hemos verificado la configuración de red y sockets. Si el problema persiste con un archivo específico, te recomendamos verificar que no tenga protección por contraseña previa o un nivel de borrosidad extremo.";
     if (issueType.includes('OCR') || issueType.includes('archivo')) {
-      aiDiagnosis = "Auto-Diagnóstico de Archivo: El motor Gemini 2.5 exige documentos legibles con más de 50 palabras. Por favor asegúrate de que el documento no sea un escaneo completamente oscuro o cifrado con clave.";
+      aiDiagnosis = "¡Gracias por su ayuda! Hemos registrado su reporte de fallo. Auto-Diagnóstico de Archivo: El motor Gemini 2.5 exige documentos legibles con más de 50 palabras. Asegúrate de que el documento no sea un escaneo completamente oscuro o cifrado con clave.";
     } else if (issueType.includes('pago') || issueType.includes('Stripe')) {
-      aiDiagnosis = "Auto-Diagnóstico de Pago: La pasarela verifica encriptación SSL/TLS. Si estás usando una billetera Lightning, asegúrate de que tu aplicación soporte facturas BOLT11.";
+      aiDiagnosis = "¡Gracias por su ayuda! Hemos registrado su reporte de fallo. Auto-Diagnóstico de Pago: La pasarela verifica encriptación SSL/TLS. Si estás usando una billetera Lightning, asegúrate de que tu aplicación soporte facturas BOLT11.";
     }
 
     return res.status(200).json({
