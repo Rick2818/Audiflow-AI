@@ -10,7 +10,9 @@ window.I18n = {
         es: {
             // Header
             nav_privacy_badge: "Memoria Volátil Activa (0 Disco)",
+            nav_firewall_badge: "🔒 Firewall & WAF Activo (AES-256)",
             nav_speed_badge: "Auditoría <10s",
+            nav_corp_plan: "Plan Corporativo B2B",
             
             // Actions Toolbar
             btn_back_home: "← Regresar al Inicio / Auditar Otro",

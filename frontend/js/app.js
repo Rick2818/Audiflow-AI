@@ -588,6 +588,14 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
     },
 
+    subscribeEnterprise() {
+        const modal = document.getElementById('enterprise-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            this.selectEnterpriseInterval(this.selectedEnterpriseInterval || 'monthly');
+        }
+    },
+
     closeEnterpriseModal() {
         const modal = document.getElementById('enterprise-modal');
         if (modal) modal.classList.add('hidden');

@@ -126,10 +126,13 @@
                     <span class="pulse-dot"></span>
                     <span data-i18n="nav_privacy_badge">Memoria Volátil Activa (0 Disco)</span>
                 </span>
-                <span class="text-xs font-mono px-2.5 py-1 rounded bg-emerald-950/60 border border-emerald-500/40 text-emerald-400 font-bold hidden lg:inline-flex items-center gap-1.5 shadow-sm">
+                <span data-i18n="nav_firewall_badge" class="text-accent-emerald font-mono text-xs hidden sm:inline px-2.5 py-1 rounded bg-emerald-950/40 border border-emerald-500/30 font-bold">
                     🔒 Firewall & WAF Activo (AES-256)
                 </span>
-                <span data-i18n="nav_speed_badge" class="text-gray-300 font-mono text-xs hidden md:inline px-2.5 py-1 rounded bg-dark-card border border-border-dark">Auditoría &lt;10s</span>
+                <!-- BOTÓN HEADER PARA ABRIR PLAN CORPORATIVO ($49/MES O $399/AÑO) EN CUALQUIER MOMENTO -->
+                <button onclick="window.AppHandler.subscribeEnterprise()" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-xs shadow-glow hover:opacity-90 transition-all flex items-center gap-1.5">
+                    🚀 <span data-i18n="nav_corp_plan">Plan Corporativo B2B</span>
+                </button>
             </div>
         </div>
     </header>
