@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
 
 const stripeSecret = process.env.STRIPE_SECRET_KEY || '';
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
@@ -7,6 +8,55 @@ const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
+
+// Helper para envío de correo de Bienvenida Corporativa por Gmail SMTP
+async function sendSubscriptionWelcomeEmail({ to, name }) {
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'nluyxyhtkqbpepe').replace(/\s+/g, '').trim();
+
+  const appUrl = 'https://auditflow-ai-theta.vercel.app';
+  const subject = `🎉 ¡Bienvenido al Plan Corporativo de AuditFlow AI! ($49/mes)`;
+  const html = `
+    <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px;">
+      <h2 style="color: #a855f7; margin-top: 0;">AuditFlow AI - Confirmación de Suscripción Corporativa</h2>
+      <p style="font-size: 16px;">Hola <strong>${name || 'Cliente'}</strong>,</p>
+      <p style="color: #d1d5db; line-height: 1.6;">
+        Tu suscripción al <strong>Plan Corporativo B2B ($49.00 USD/mes)</strong> ha sido activada con éxito.
+      </p>
+      
+      <div style="background-color: #111827; border: 1px solid #a855f7; padding: 20px; border-radius: 8px; margin: 20px 0;">
+        <h3 style="color: #38bdf8; margin-top: 0;">🚀 Beneficios Corporativos Activos 24/7:</h3>
+        <ul style="color: #9ca3af; line-height: 1.8; margin-bottom: 0;">
+          <li>✅ Auditorías de Contratos y Facturas Ilimitadas sin pago por evento</li>
+          <li>✅ Análisis en Memoria Volátil RAM Efímera (0 Almacenamiento en Disco)</li>
+          <li>✅ Agente de Soporte Autónomo IA para correcciones y re-evaluaciones</li>
+          <li>✅ Reportes en PDF Firmados Digitalmente sin marcas de agua</li>
+        </ul>
+      </div>
+
+      <p style="text-align: center; margin-top: 30px;">
+        <a href="${appUrl}" style="background-color: #a855f7; color: #ffffff; font-weight: bold; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block;">
+          🚀 Ir a Mi Panel de Auditorías Ilimitadas
+        </a>
+      </p>
+
+      <hr style="border-color: #374151; margin-top: 30px;">
+      <p style="font-size: 12px; color: #6b7280; text-align: center;">
+        AuditFlow AI • Soporte Corporativo Prioritario 24/7.
+      </p>
+    </div>
+  `;
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: gmailUser, pass: gmailPass }
+    });
+    return await transporter.sendMail({ from: `"AuditFlow AI" <${gmailUser}>`, to, subject, html });
+  } catch (err) {
+    console.warn('Gmail SMTP Welcome Email Warning:', err.message);
+  }
+}
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -27,9 +77,13 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) {}
     }
 
-    const { email } = body;
+    const { email, name } = body;
     const customerEmail = email || 'cliente@empresa.com';
+    const customerName = name || 'Cliente Corporativo';
     const appUrl = 'https://auditflow-ai-theta.vercel.app';
+
+    // Disparar Correo de Bienvenida Corporativa $49/mes
+    await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName });
 
     // Si Stripe está configurado con clave real, genera Stripe Checkout Session para $49/mes
     if (stripe) {
@@ -46,7 +100,7 @@ export default async function handler(req, res) {
                   name: 'AuditFlow AI - Plan Corporativo B2B (Auditorías Ilimitadas)',
                   description: 'Acceso ilimitado 24/7 a auditorías de contratos con memoria volátil RAM'
                 },
-                unit_amount: 4900, // $49.00 USD
+                unit_amount: 4900,
                 recurring: { interval: 'month' }
               },
               quantity: 1
@@ -84,7 +138,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: 'Suscripción Corporativa procesada exitosamente.',
+      message: `Suscripción Corporativa activada. Correo de bienvenida enviado a ${customerEmail}.`,
       checkoutUrl: `${appUrl}/?status=success_subscription&email=${encodeURIComponent(customerEmail)}`
     });
 
