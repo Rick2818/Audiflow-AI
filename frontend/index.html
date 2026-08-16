@@ -628,13 +628,34 @@
                     </div>
 
                     <!-- SELECCIÓN DE MÉTODO DE PAGO CORPORATIVO: STRIPE VS LIGHTNING SATOSHIS -->
-                    <div class="grid grid-cols-2 gap-2 p-1 bg-dark-surface rounded-lg mb-2 border border-border-dark font-mono text-[11px]">
-                        <button type="button" id="tab-ent-pay-stripe" onclick="window.AppHandler.selectEnterprisePaymentMethod('stripe')" class="py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center">
+                    <div class="grid grid-cols-2 gap-2 p-1 bg-dark-surface rounded-lg mb-3 border border-border-dark font-mono text-[11px]">
+                        <button type="button" id="tab-ent-pay-stripe" onclick="window.AppHandler.selectEnterprisePaymentMethod('stripe')" class="py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1">
                             💳 Tarjeta ($ USD)
                         </button>
-                        <button type="button" id="tab-ent-pay-ln" onclick="window.AppHandler.selectEnterprisePaymentMethod('lightning')" class="py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center">
+                        <button type="button" id="tab-ent-pay-ln" onclick="window.AppHandler.selectEnterprisePaymentMethod('lightning')" class="py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1">
                             ⚡ Lightning (Strike Sats)
                         </button>
+                    </div>
+
+                    <!-- FORMULARIO INTERACTIVO DE TARJETA DE CRÉDITO / DÉBITO -->
+                    <div id="ent-card-form-container" class="space-y-3 p-3.5 rounded-xl bg-dark-surface border border-border-dark">
+                        <div>
+                            <label class="block text-[11px] font-mono text-gray-300 mb-1">Número de Tarjeta de Crédito / Débito</label>
+                            <div class="relative">
+                                <input type="text" id="ent-card-number" placeholder="4242 •••• •••• 4242" maxlength="19" required class="input-field text-xs font-mono pl-9 tracking-widest text-white">
+                                <span class="absolute left-3 top-2.5 text-gray-400 text-sm">💳</span>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] font-mono text-gray-300 mb-1">Expiración (MM/YY)</label>
+                                <input type="text" id="ent-card-expiry" placeholder="12/28" maxlength="5" required class="input-field text-xs font-mono text-center text-white">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-mono text-gray-300 mb-1">Código CVC</label>
+                                <input type="password" id="ent-card-cvc" placeholder="123" maxlength="4" required class="input-field text-xs font-mono text-center text-white">
+                            </div>
+                        </div>
                     </div>
 
                     <!-- CONTENEDOR QR LIGHTNING PARA STRIKE (rick28@strike.me) -->

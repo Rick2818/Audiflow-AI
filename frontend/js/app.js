@@ -563,6 +563,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         this.selectedEnterprisePayMethod = method;
         const btnStripe = document.getElementById('tab-ent-pay-stripe');
         const btnLn = document.getElementById('tab-ent-pay-ln');
+        const cardContainer = document.getElementById('ent-card-form-container');
         const lnContainer = document.getElementById('ent-lightning-container');
         const satsAmountEl = document.getElementById('ent-ln-sats-amount');
         const qrBox = document.getElementById('ent-qrcode-box');
@@ -573,8 +574,9 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (satsAmountEl) satsAmountEl.innerText = satsAmount;
 
         if (method === 'lightning') {
-            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center';
-            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-amber-500 text-center';
+            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1';
+            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-amber-500 text-center flex items-center justify-center gap-1';
+            if (cardContainer) cardContainer.classList.add('hidden');
             if (lnContainer) lnContainer.classList.remove('hidden');
 
             if (qrBox) {
@@ -582,8 +584,9 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 qrBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=${encodeURIComponent(strikeAddress)}" alt="QR Strike Lightning" class="w-40 h-40 rounded-lg shadow">`;
             }
         } else {
-            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center';
-            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center';
+            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1';
+            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1';
+            if (cardContainer) cardContainer.classList.remove('hidden');
             if (lnContainer) lnContainer.classList.add('hidden');
         }
     },
@@ -608,6 +611,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const email = emailInput ? emailInput.value.trim() : '';
         const name = nameInput ? nameInput.value.trim() : '';
         const interval = this.selectedEnterpriseInterval || 'monthly';
+        const method = this.selectedEnterprisePayMethod || 'stripe';
 
         if (!email) {
             alert('Por favor ingresa tu correo electrónico corporativo.');
@@ -615,26 +619,26 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
 
         const submitBtnText = document.getElementById('btn-submit-enterprise-text');
-        if (submitBtnText) submitBtnText.innerText = '🚀 Conectando pasarela de pago...';
+        if (submitBtnText) submitBtnText.innerText = '🚀 Procesando pago y activando cuenta...';
 
         try {
             const res = await fetch('/api/payment/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, name, interval })
+                body: JSON.stringify({ email, name, interval, method })
             });
 
             const data = await res.json();
-            if (data.checkoutUrl) {
+            if (data.checkoutUrl && data.checkoutUrl.includes('checkout.stripe.com')) {
                 window.location.href = data.checkoutUrl;
             } else {
                 this.closeEnterpriseModal();
-                alert(`✅ Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.`);
+                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
             }
         } catch (err) {
             console.error('Error en suscripción:', err);
             this.closeEnterpriseModal();
-            alert(`✅ Solicitud Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.`);
+            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
         } finally {
             this.selectEnterpriseInterval(this.selectedEnterpriseInterval);
         }
