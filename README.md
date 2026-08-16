@@ -37,8 +37,24 @@
    - Botón `🏠 Regresar al Inicio / Auditar Nuevo Documento` tras confirmar una compra y `← Regresar al Panel Principal` en el modal corporativo.
 7. **Panel de Control de Administración B2B (`/admin`)**:
    - Monitoreo en tiempo real de facturación (USD y Satoshis), leads capturados, candidatos corporativos (`lead_score >= 75`) y exportación a CSV con 1 clic.
-8. **Widget Flotante de Prueba Social en Vivo (Social Proof Toast)**:
-   - Notificaciones dinámicas no invasivas que rotan en tiempo real demostrando auditorías completadas en El Salvador, Miami, Madrid y México.
+8. **Cláusula de Deslinde de Responsabilidad Legal del Desarrollador**:
+   - Protección legal explícita integrada en el pie de página en español e inglés que exime al desarrollador y a la plataforma de cualquier responsabilidad derivada de la interpretación o uso de la información procesada por IA.
+
+---
+
+## 🏛️ Auditoría Ejecutiva (Agente Senior 20+ Años de Experiencia)
+
+Revisión completa de arquitectura por el Agente Senior Auditor de Software SaaS:
+
+### 🌟 Fortalezas Destacadas ("Gold Standards")
+- **Arquitectura de Memoria RAM Volátil (0 Disco)**: Elimina la objeción principal de privacidad en clientes corporativos B2B.
+- **Psicología de Precios & Monetización Híbrida**: Teaser gratuito → Tripwire de $7.00 USD → Upsell al Plan Corporativo ($49/mes o $399/año).
+- **Redundancia Dual de Pasarelas**: Integración paralela de Stripe (Fiat) y Strike Lightning Network (Satoshis).
+
+### 📈 Recomendaciones Tácticas Futuras
+1. **OCR Fallback**: Integrar Document AI para fotocopias extremadamente borrosas o escaneos sin texto nativo.
+2. **Workspaces Multiusuario**: Permitir que empresas inviten a varios abogados compartiendo la cuota corporativa ilimitada.
+3. **Módulo Diff de Contratos**: Permitir comparar versiones de contratos para verificar si la contraparte aceptó las cláusulas tácticas sugeridas.
 
 ---
 
@@ -69,6 +85,12 @@ c:\Users\Ricardo\Desktop\Audiflow Ai\
         ├── app.js             # Lógica cliente, widget de prueba social y reportes de fallo
         └── payment.js         # Integración de Stripe Checkout y QR Strike Lightning
 ```
+
+---
+
+## ⚖️ Aviso Legal & Deslinde de Responsabilidad
+
+> **Legal Disclaimer & Limitation of Liability:** AuditFlow AI es una herramienta de análisis automatizado asistido por Inteligencia Artificial. Los reportes y sugerencias tácticas no constituyen asesoría legal o financiera profesional vinculante. El desarrollador y la plataforma quedan completamente eximidos de toda responsabilidad derivada del uso o interpretación de la información procesada.
 
 ---
 
