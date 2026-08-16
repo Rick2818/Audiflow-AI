@@ -582,6 +582,21 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (modal) modal.classList.add('hidden');
     },
 
+    copyShareableReportLink() {
+        const reportId = this.currentReportId || 'rep_x89';
+        const url = `${window.location.origin}/?reportId=${reportId}`;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+                alert('✅ Enlace de Auditoría copiado al portapapeles. Puedes enviarlo por WhatsApp o correo a tu jefe/socio para autorizar el pago.');
+            }).catch(() => {
+                alert(`🔗 Enlace de auditoría: ${url}`);
+            });
+        } else {
+            alert(`🔗 Enlace de auditoría: ${url}`);
+        }
+    },
+
     initSocialProofWidget() {
         const toast = document.getElementById('social-proof-toast');
         const titleEl = document.getElementById('social-proof-title');

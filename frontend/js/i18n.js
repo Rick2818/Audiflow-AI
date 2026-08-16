@@ -131,6 +131,8 @@ window.I18n = {
             pay_btn_copy: "Copiar",
             pay_ln_node_label: "Directo a nodo Lightning:",
             btn_preview_sample_pdf: "Ver Ejemplo de Reporte PDF Oficial Modelo",
+            btn_copy_shareable_link: "Copiar Enlace de Auditoría para Compartir con Mi Jefe/Socio",
+            roi_calculator_chip: "<strong>Calculadora de ROI:</strong> 10 auditorías/mes ahorran ~$1,250 USD en honorarios legales. ¡Tu ROI es del <strong>2,450%</strong> por $49/mes!",
 
             // Features & Footer
             feat_1_tag: "01. Privacidad Total",
