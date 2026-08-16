@@ -51,24 +51,30 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent, l
   `;
 
   // Enviar copia a AMBOS (Administrador y Usuario)
-  const recipients = [gmailUser];
-  if (email && email.includes('@') && email.trim() !== gmailUser) {
-    recipients.push(email.trim());
+  const recipientList = [gmailUser];
+  if (email && email.includes('@') && email.trim().toLowerCase() !== gmailUser.toLowerCase()) {
+    recipientList.push(email.trim());
   }
+  const toHeader = [...new Set(recipientList)].join(', ');
 
   try {
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: { user: gmailUser, pass: gmailPass }
     });
-    return await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `"AuditFlow AI System" <${gmailUser}>`,
-      to: recipients.join(', '),
+      to: toHeader,
       subject,
       html
     });
+    console.log('✅ ISSUE ALERT EMAIL SENT SUCCESSFULLY:', info.messageId, 'TO:', toHeader);
+    return info;
   } catch (err) {
-    console.warn('Gmail SMTP Issue Alert Warning:', err.message);
+    console.error('❌ CRITICAL ERROR SENDING ISSUE ALERT EMAIL:', err);
+    throw err;
   }
 }
 
@@ -116,7 +122,13 @@ export default async function handler(req, res) {
     }
 
     // Despachar alerta de correo al Administrador y al Usuario simultáneamente
-    await sendAdminIssueAlert({ email: userEmail, issueType, description: desc, userAgent, lang });
+    let emailStatus = 'SENT';
+    try {
+      await sendAdminIssueAlert({ email: userEmail, issueType, description: desc, userAgent, lang });
+    } catch (emailErr) {
+      console.error('Error dispatching issue alert email:', emailErr.message);
+      emailStatus = 'FAILED: ' + emailErr.message;
+    }
 
     // Generar sugerencia de auto-diagnóstico asistida por IA en ES o EN
     let aiDiagnosis = isEn
@@ -136,7 +148,8 @@ export default async function handler(req, res) {
     return res.status(200).json({
       success: true,
       message: isEn ? 'Issue report received and registered.' : 'Reporte de fallo recibido y registrado en el servidor de control.',
-      ai_diagnosis: aiDiagnosis
+      ai_diagnosis: aiDiagnosis,
+      email_status: emailStatus
     });
 
   } catch (err) {

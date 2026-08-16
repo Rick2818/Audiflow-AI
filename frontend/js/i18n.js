@@ -98,44 +98,27 @@ window.I18n = {
             lead_btn_submit: "Ver Vista Previa Gratuita",
 
             // OCR Pre-flight Error Box
-            ocr_error_title: "Documento Ilegible o Resolución Insuficiente",
-            ocr_error_msg: "El filtro de calidad detectó menos de 50 palabras legibles o caracteres corruptos. Por favor, sube una versión más clara para garantizar una auditoría precisa.",
-            ocr_error_retry: "Subir Otro Archivo",
+            ocr_error_title: "⚠️ Documento No Apto para Auditoría",
+            ocr_error_sub: "El documento seleccionado no contiene texto legible o es una imagen extremadamente borrosa. Gemini 2.5 exige un mínimo de 50 palabras legibles para calcular fugas financieras.",
+            ocr_error_btn: "Intentar con Otro Archivo Legible",
 
-            // Report Dashboard
+            // Report Header & Metrics
             rep_doc_default: "Contrato Comercial",
             rep_risk_high: "RIESGO ALTO",
             rep_leakage_label: "Fuga Financiera Total",
             rep_lead_score_label: "Lead Score",
             rep_findings_title: "3 Fallas Financieras & Cláusulas de Riesgo Detectadas",
-            rep_teaser_label: "🔍 Resumen de la Anomalía (Gratis):",
-            rep_solution_label: "💡 Solución Táctica & Texto Sustitutivo de Renegociación:",
-            rep_unlock_btn: "🔒 Desbloquear Solución Táctica ($7 USD)",
+
+            // Unlock Banner & Payment Modal
             banner_title: "Desbloquea las 3 Soluciones Tácticas + Reporte PDF",
             banner_sub: "Ya viste los hallazgos en pantalla. Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos y el PDF firmado por solo $7.00 USD o Satoshis.",
-            banner_btn: "Desbloquear Soluciones por $7.00 USD / Sats",
-            
-            // Upsell Corporate Banner ($49/mo)
-            upsell_title: "🚀 ¿Necesitas Auditorías Ilimitadas para tu Empresa?",
-            upsell_sub: "Actualiza a la suscripción Corporativa por $49/mes. Auditorías ilimitadas, equipo multi-usuario y soporte legal prioritario.",
-            upsell_btn: "Suscribirme por $49/mes",
-
-            // Payment Modal (Hybrid Stripe & Lightning)
-            pay_title: "Selecciona Método de Pago",
-            pay_sub: "Tarifa plana de $7.00 USD • Liquidación inmediata",
-            pay_tab_stripe: "💳 Stripe ($7.00 USD)",
-            pay_tab_ln: "⚡ Lightning (Satoshis)",
-            pay_total_label: "Total a Pagar",
-            pay_stripe_desc: "Liquidación segura a través de tarjeta de crédito/débito. Recibes el reporte desenfocado al instante + copia PDF en tu correo.",
-            pay_btn_stripe: "Pagar con Tarjeta ($7 USD)",
-            pay_ln_expiry: "Expiración Factura",
-            pay_ln_sats_label: "Monto en Satoshis:",
-            pay_ln_input_label: "Factura Lightning BOLT11",
-            pay_btn_copy: "Copiar",
-            pay_ln_node_label: "Directo a nodo Lightning:",
-            btn_preview_sample_pdf: "Ver Ejemplo de Reporte PDF Oficial Modelo",
-            btn_copy_shareable_link: "Copiar Enlace de Auditoría para Compartir con Mi Jefe/Socio",
-            roi_calculator_chip: "<strong>Calculadora de ROI:</strong> 10 auditorías/mes ahorran ~$1,250 USD en honorarios legales. ¡Tu ROI es del <strong>2,450%</strong> por $49/mes!",
+            btn_unlock_report: "🔓 Desbloquear Reporte Completo + PDF ($7 USD)",
+            modal_pay_title: "Desbloquear Auditoría Completa",
+            modal_pay_sub: "Pago único de $7.00 USD para descargar las soluciones tácticas y el reporte oficial firmado.",
+            tab_stripe: "💳 Stripe ($7.00 USD)",
+            tab_lightning: "⚡ Lightning (Satoshis)",
+            btn_pay_stripe: "Pagar con Tarjeta ($7 USD)",
+            btn_copy_ln: "Copiar Factura BOLT11",
 
             // Features & Footer
             feat_1_tag: "01. Privacidad Total",
@@ -218,27 +201,27 @@ window.I18n = {
             badge_guarantee: "100% Satisfaction Guarantee",
 
             // Step-by-Step Security Pipeline
-            how_title: "🔒 How do we guarantee your document privacy?",
+            how_title: "🔒 How do we guarantee the security of your information?",
             step_1_title: "1. Volatile RAM Buffer",
-            step_1_desc: "Document enters RAM buffer directly without ever passing through physical disk storage.",
+            step_1_desc: "The document enters volatile RAM directly without passing through physical disks or cloud storage.",
             step_2_title: "2. Immediate Purge",
-            step_2_desc: "Gemini 2.5 Flash analyzes text and RAM buffer is automatically destroyed in < 5 seconds.",
+            step_2_desc: "Gemini 2.5 Flash analyzes text and the memory buffer is destroyed in < 5 seconds.",
             step_3_title: "3. Free Preview",
-            step_3_desc: "View findings summary on-screen for free. Pay $7 only if you wish to download tactical solutions PDF.",
+            step_3_desc: "You view the diagnosis on screen for free. Pay $7 only if you wish to download PDF solutions.",
 
             // FAQ SEO Section
-            faq_title: "❓ Frequently Asked Questions (SEO & B2B Security)",
+            faq_title: "❓ Frequently Asked Questions (B2B Security & SEO)",
             faq_q1: "How to audit a contract or invoice with Artificial Intelligence?",
-            faq_a1: "Simply drag and drop your PDF or image. Gemini 2.5 Flash engine scans the text in <10 seconds, detects overcharges and risk clauses, showing a free preview on-screen.",
-            faq_q2: "Are my contracts or files saved on any server?",
-            faq_a2: "No. AuditFlow AI operates on strict zero-disk retention architecture. Files are processed in RAM and purged in under 5 seconds.",
-            faq_q3: "What does the $7.00 USD / Satoshis audit unlock?",
-            faq_a3: "The preview is 100% free. Paying $7.00 USD unlocks full tactical negotiation text, legal fee objection wording, and signed PDF report.",
-            faq_q4: "Do you have an enterprise unlimited plan?",
-            faq_a4: "Yes. For businesses with high contract volume, we offer Enterprise Subscription for $49/mo with unlimited audits and priority legal support.",
+            faq_a1: "Just drag & drop your PDF or image. Gemini 2.5 Flash scans text in <10s, detects overcharges and hidden penalties, showing a free summary on screen.",
+            faq_q2: "Are my contracts or documents saved on any server?",
+            faq_a2: "No. AuditFlow AI operates with strict volatile RAM architecture (0 Disk Retention). Files are analyzed in memory and destroyed in under 5 seconds.",
+            faq_q3: "What is included in the $7.00 USD / Satoshis audit?",
+            faq_a3: "The preview is 100% free. By paying $7.00 USD (via Stripe or Bitcoin Lightning), you unlock tactical renegotiation clauses and the signed PDF report.",
+            faq_q4: "Do you have an enterprise plan for unlimited audits?",
+            faq_a4: "Yes. For companies with high billing volume or monthly contracts, we offer Enterprise Subscriptions for $49/mo or $399/yr with unlimited audits.",
 
             // Scanner Section
-            scan_init: "Starting volatile memory scanner...",
+            scan_init: "Initializing scanner in volatile memory...",
             scan_sub: "Analyzing financial clauses with Gemini 2.5 Flash",
             step_ram: "RAM Buffer",
             step_gemini: "Gemini AI",
@@ -247,7 +230,7 @@ window.I18n = {
 
             // Lead Capture Modal
             lead_modal_title: "Audit Completed (Free Summary)",
-            lead_modal_sub: "Financial leakage has been detected in your document. Enter your name and email to view findings preview.",
+            lead_modal_sub: "Financial leakage has been detected in your document. Enter your name and email to view the findings preview.",
             lead_label_name: "Full Name",
             lead_placeholder_name: "e.g. John Doe",
             lead_label_email: "Corporate Email Address",
@@ -255,54 +238,54 @@ window.I18n = {
             lead_btn_submit: "View Free Preview",
 
             // OCR Pre-flight Error Box
-            ocr_error_title: "Illegible Document or Insufficient Resolution",
-            ocr_error_msg: "Pre-flight quality check detected under 50 legible words or corrupted OCR. Please upload a clearer version for accurate audit.",
-            ocr_error_retry: "Upload Another File",
+            ocr_error_title: "⚠️ Document Unsuitable for Auditing",
+            ocr_error_sub: "The selected document lacks readable text or is an extremely blurry image. Gemini 2.5 requires at least 50 readable words to calculate financial leakage.",
+            ocr_error_btn: "Try Another Readable File",
 
-            // Report Dashboard
-            rep_doc_default: "Commercial Contract",
+            // Report Header & Metrics
+            rep_doc_default: "Commercial Agreement",
             rep_risk_high: "HIGH RISK",
             rep_leakage_label: "Total Financial Leakage",
             rep_lead_score_label: "Lead Score",
-            rep_findings_title: "3 Financial Anomalies & Risk Clauses Detected",
-            rep_teaser_label: "🔍 Anomaly Summary (Free):",
-            rep_solution_label: "💡 Tactical Solution & Negotiation Wording:",
-            rep_unlock_btn: "🔒 Unlock Tactical Solution ($7 USD)",
-            banner_title: "Unlock All 3 Tactical Solutions + PDF Report",
-            banner_sub: "You've seen the findings. Get exact renegotiation text, fee objection wording, and signed PDF for just $7.00 USD or Satoshis.",
-            banner_btn: "Unlock Solutions for $7.00 USD / Sats",
+            rep_findings_title: "3 Financial Flaws & Risk Clauses Detected",
 
-            // Upsell Corporate Banner
-            upsell_title: "🚀 Need Unlimited Audits for Your Business?",
-            upsell_sub: "Upgrade to Enterprise Subscription for $49/mo. Unlimited audits, multi-user team access, and priority support.",
-            upsell_btn: "Subscribe for $49/mo",
+            // Unlock Banner & Payment Modal
+            banner_title: "Unlock 3 Tactical Solutions + PDF Report",
+            banner_sub: "You already saw findings on screen. Get exact text to renegotiate contracts, contest invalid charges, and download signed PDF for $7.00 USD or Satoshis.",
+            btn_unlock_report: "🔓 Unlock Full Report + PDF ($7 USD)",
+            modal_pay_title: "Unlock Full Audit",
+            modal_pay_sub: "One-time $7.00 USD payment to download tactical solutions and signed official report.",
+            tab_stripe: "💳 Stripe ($7.00 USD)",
+            tab_lightning: "⚡ Lightning (Satoshis)",
+            btn_pay_stripe: "Pay with Card ($7 USD)",
+            btn_copy_ln: "Copy BOLT11 Invoice",
 
-            // Payment Modal
-            pay_title: "Select Payment Method",
-            pay_sub: "$7.00 USD Flat Rate • Immediate Unblur",
-            pay_tab_stripe: "💳 Stripe ($7.00 USD)",
-            pay_tab_ln: "⚡ Lightning (Satoshis)",
-            pay_total_label: "Total Amount",
-            pay_stripe_desc: "Secure credit/debit card checkout. Immediate report unblur + PDF copy sent to your email.",
-            pay_btn_stripe: "Pay with Card ($7 USD)",
-            pay_ln_expiry: "Invoice Expiry",
-            pay_ln_sats_label: "Amount in Satoshis:",
-            pay_ln_input_label: "BOLT11 Lightning Invoice",
-            pay_btn_copy: "Copy",
-            pay_ln_node_label: "Direct to Lightning node:",
-
-            // Features & Footer
+            // Features & Footer & Issue Modal (EN)
             feat_1_tag: "01. Total Privacy",
             feat_1_title: "Zero Disk Storage",
-            feat_1_desc: "Document converted to volatile RAM, audited by Gemini, and destroyed immediately.",
+            feat_1_desc: "Documents convert to volatile RAM, audited by Gemini, and destroyed immediately.",
             feat_2_tag: "02. Tactical Detection",
-            feat_2_title: "3 Critical Anomalies",
+            feat_2_title: "3 Critical Flaws",
             feat_2_desc: "Detect hidden penalties, double indexation, and overcharges in minutes.",
             feat_3_tag: "03. Hybrid Payments",
             feat_3_title: "$7 USD or Satoshis",
             feat_3_desc: "See findings free. Pay $7 only to unlock renegotiation text + PDF.",
-            footer_rights: "© 2026 AuditFlow AI. B2B Micro-SaaS Infrastructure Operating 24/7.",
-            footer_privacy_link: "Volatile Memory Guarantee"
+            footer_rights: "© 2026 AuditFlow AI. 24/7 B2B Micro-SaaS Infrastructure.",
+            footer_privacy_link: "Volatile Memory Guarantee",
+            footer_report_issue: "Report Configuration Issue",
+
+            // Configuration Issue Modal (EN)
+            issue_modal_title: "Report Configuration Issue",
+            issue_modal_sub: "Autonomous AI Self-Diagnosis",
+            issue_email_label: "Your Email Address",
+            issue_type_label: "Issue / Incident Type",
+            issue_opt_1: "File Upload Failure / Unreadable OCR",
+            issue_opt_2: "Payment Gateway Issue (Stripe/Lightning)",
+            issue_opt_3: "Report or Solution Rendering Error",
+            issue_opt_4: "General Configuration Issue",
+            issue_desc_label: "Issue Description (Optional)",
+            issue_ai_heading: "🤖 Real-Time AI Diagnosis:",
+            issue_btn_submit: "🛠️ Submit Report & Diagnose with AI"
         }
     },
 
