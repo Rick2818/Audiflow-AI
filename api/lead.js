@@ -8,7 +8,7 @@ const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supaba
 // Helper para envío de correos por Gmail SMTP / Ethereal Fallback
 async function sendGmailEmail({ to, subject, html }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'nluyxyhtkqbpepe').replace(/\s+/g, '').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   try {
     const transporter = nodemailer.createTransport({

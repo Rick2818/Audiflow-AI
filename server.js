@@ -80,8 +80,8 @@ const memoryReportsDB = new Map();
 // HELPER: ENVÍO DIRECTO DE CORREOS BILINGÜES A TRAVÉS DE GMAIL SMTP / ETHEREAL
 // ==============================================================================
 async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, documentName, lang = 'es' }) {
-  const gmailUser = (process.env.GMAIL_USER || '').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim(); // Eliminar espacios
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim(); // Eliminar espacios
   const appUrl = process.env.APP_URL || 'http://localhost:3000';
 
   const isEn = (lang === 'en');

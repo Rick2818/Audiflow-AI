@@ -12,7 +12,7 @@ const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supaba
 // Helper para envío de correo de Bienvenida Corporativa por Gmail SMTP
 async function sendSubscriptionWelcomeEmail({ to, name }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'nluyxyhtkqbpepe').replace(/\s+/g, '').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   const appUrl = 'https://auditflow-ai-theta.vercel.app';
   const subject = `🎉 ¡Bienvenido al Plan Corporativo de AuditFlow AI! ($49/mes)`;
