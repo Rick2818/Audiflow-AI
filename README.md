@@ -15,8 +15,8 @@
 
 ## 🌐 Enlaces Oficiales en Vivo
 
-*   👉 **Aplicación Principal**: [https://auditflow-ai-theta.vercel.app](https://auditflow-ai-theta.vercel.app)
-*   👉 **Panel Privado de Administración**: [https://auditflow-ai-theta.vercel.app/admin](https://auditflow-ai-theta.vercel.app/admin) *(Contraseña: `AuditFlow2026!`)*
+*   👉 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+*   👉 **Panel Privado de Administración**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Contraseña: `AuditFlow2026!`)*
 *   👉 **Repositorio GitHub**: [https://github.com/Rick2818/Audiflow-AI](https://github.com/Rick2818/Audiflow-AI)
 
 ---

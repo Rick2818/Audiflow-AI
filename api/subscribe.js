@@ -23,7 +23,7 @@ async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly', la
     
   const amountText = isAnnual ? '$399.00 USD' : '$49.00 USD';
   const recId = 'REC-' + Math.random().toString(36).substring(2, 9).toUpperCase();
-  const appUrl = 'https://auditflow-ai-theta.vercel.app';
+  const appUrl = 'https://audiflowai.com';
   
   const subject = isEn
     ? `🎉 Payment Receipt & Welcome - ${planText} [AuditFlow AI]`
