@@ -296,6 +296,9 @@ window.I18n = {
     setLanguage(lang) {
         if (!this.translations[lang]) return;
         this.currentLang = lang;
+        if (typeof document !== 'undefined' && document.documentElement) {
+            document.documentElement.lang = lang;
+        }
         if (typeof localStorage !== 'undefined') {
             localStorage.setItem('auditflow_lang', lang);
         }

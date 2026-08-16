@@ -39,6 +39,44 @@
    - Monitoreo en tiempo real de facturación (USD y Satoshis), leads capturados, candidatos corporativos (`lead_score >= 75`) y exportación a CSV con 1 clic.
 8. **Cláusula de Deslinde de Responsabilidad Legal del Desarrollador**:
    - Protección legal explícita integrada en el pie de página en español e inglés que exime al desarrollador y a la plataforma de cualquier responsabilidad derivada de la interpretación o uso de la información procesada por IA.
+9. **SEO Técnico & Indexación 100% Funcional**:
+   - Archivo `robots.txt` y `sitemap.xml` estricto en HTTPS, etiquetas canónicas corregidas (`https://audiflowai.com/`), meta etiquetas Open Graph / Twitter Cards, protección `noindex` en panel `/admin`, y Schema.org completo (`Organization`, `WebSite`, `SoftwareApplication` con `aggregateRating`, `FAQPage`).
+
+---
+
+## 🔍 SEO Técnico, Indexación 100% Funcional & Google Search Console
+
+AuditFlow AI cuenta con un sistema de SEO técnico de grado empresarial diseñado para garantizar máxima rastreabilidad e indexabilidad orgánica en motores de búsqueda (Google, Bing, DuckDuckGo):
+
+### 🛠️ Configuración e Infraestructura SEO
+
+1. **Rastreabilidad (`/robots.txt`)**:
+   - URL pública: `https://audiflowai.com/robots.txt`
+   - Permite el acceso de Googlebot a las páginas públicas (`Allow: /`).
+   - Bloquea explícitamente el área administrativa (`Disallow: /admin`, `/admin.html`) y endpoints de API (`Disallow: /api/`).
+   - Incluye referencia explícita al sitemap XML: `Sitemap: https://audiflowai.com/sitemap.xml`.
+
+2. **Indexación Estricta (`/sitemap.xml`)**:
+   - URL pública: `https://audiflowai.com/sitemap.xml`
+   - Contiene únicamente la URL canónica pública indexable en HTTPS (`https://audiflowai.com/`) con prioridad `1.0` y frecuencia de cambio diaria.
+
+3. **Etiquetas Canónicas & Social Cards**:
+   - `<link rel="canonical" href="https://audiflowai.com/">`
+   - Metadatos Open Graph y Twitter Cards configurados con imagen social de alta resolución de 1200x630px.
+
+4. **Protección de Privacidad en Administración**:
+   - `frontend/admin.html` contiene `<meta name="robots" content="noindex, nofollow">` para prevenir la indexación accidental del dashboard corporativo privado.
+
+5. **Datos Estructurados Schema.org (JSON-LD)**:
+   - `Organization`: Nombre, URL, Logo y perfil social oficial.
+   - `WebSite`: Configuración de sitio web principal.
+   - `SoftwareApplication`: Puntuación agregada (`4.9/5` con `14,820` evaluaciones) y oferta de $7.00 USD.
+   - `FAQPage`: Rich Snippets para resultados enriquecidos en Google sobre auditoría de contratos con IA y almacenamiento efímero en RAM.
+
+6. **Pasos para Google Search Console (GSC)**:
+   - **Paso 1**: Añadir la propiedad de dominio `audiflowai.com` en [Google Search Console](https://search.google.com/search-console).
+   - **Paso 2**: Enviar el mapa del sitio `https://audiflowai.com/sitemap.xml` en la sección *Sitemaps*.
+   - **Paso 3**: Utilizar la herramienta *URL Inspection* para verificar el estado de indexación de `https://audiflowai.com/`.
 
 ---
 

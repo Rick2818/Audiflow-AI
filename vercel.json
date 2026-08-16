@@ -32,6 +32,18 @@
   ],
   "routes": [
     {
+      "src": "/robots.txt",
+      "dest": "frontend/robots.txt"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "frontend/sitemap.xml"
+    },
+    {
+      "src": "/google3767930768036b5b.html",
+      "dest": "frontend/google3767930768036b5b.html"
+    },
+    {
       "src": "/admin",
       "dest": "frontend/admin.html"
     },

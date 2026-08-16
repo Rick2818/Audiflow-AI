@@ -61,6 +61,30 @@ const upload = multer({
 app.use(cors());
 app.use(express.json());
 
+// Servir robots.txt y sitemap.xml con cabeceras de tipo de contenido estricto para buscadores
+app.get('/robots.txt', (req, res) => {
+  res.header('Content-Type', 'text/plain');
+  res.sendFile(path.join(__dirname, 'frontend', 'robots.txt'));
+});
+
+app.get('/sitemap.xml', (req, res) => {
+  res.header('Content-Type', 'application/xml');
+  res.sendFile(path.join(__dirname, 'frontend', 'sitemap.xml'));
+});
+
+app.get('/google3767930768036b5b.html', (req, res) => {
+  res.header('Content-Type', 'text/html');
+  res.sendFile(path.join(__dirname, 'frontend', 'google3767930768036b5b.html'));
+});
+
+// Middleware global de cabeceras de seguridad HTTP
+app.use((req, res, next) => {
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('X-Frame-Options', 'SAMEORIGIN');
+  res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
+  next();
+});
+
 // Servir archivos estáticos del Frontend
 app.use(express.static(path.join(__dirname, 'frontend')));
 
