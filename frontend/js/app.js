@@ -531,6 +531,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const priceLabel = document.getElementById('ent-price-label');
         const planDesc = document.getElementById('ent-plan-desc');
         const submitBtnText = document.getElementById('btn-submit-enterprise-text');
+        const multiBadge = document.getElementById('ent-multi-lawyer-badge');
 
         if (interval === 'annual') {
             if (btnMonthly) {
@@ -543,6 +544,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
             if (priceLabel) priceLabel.innerText = '$399.00 USD / año';
             if (planDesc) planDesc.innerText = '2 meses GRATIS incluidos. Un solo pago anual por adelantado con auditorías ilimitadas para todo tu equipo.';
             if (submitBtnText) submitBtnText.innerText = '⭐ Activar Suscripción Anual por $399/año';
+            if (multiBadge) multiBadge.classList.remove('hidden');
         } else {
             if (btnMonthly) {
                 btnMonthly.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-purple-500 transition-all flex flex-col items-center justify-center';
@@ -554,6 +556,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
             if (priceLabel) priceLabel.innerText = '$49.00 USD / mes';
             if (planDesc) planDesc.innerText = 'Incluye acceso ilimitado para todo tu equipo, purga automática de RAM y reportes PDF sin marcas de agua.';
             if (submitBtnText) submitBtnText.innerText = '🚀 Activar Suscripción por $49/mes';
+            if (multiBadge) multiBadge.classList.add('hidden');
         }
     },
 

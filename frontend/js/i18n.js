@@ -145,7 +145,9 @@ window.I18n = {
             issue_opt_4: "Fallo de Configuración General",
             issue_desc_label: "Descripción del Fallo (Opcional)",
             issue_ai_heading: "🤖 Diagnóstico IA en Tiempo Real:",
-            issue_btn_submit: "🛠️ Enviar Reporte & Diagnosticar con IA"
+            issue_btn_submit: "🛠️ Enviar Reporte & Diagnosticar con IA",
+            ent_multi_lawyer_text: "Cuota Anual Multiusuario: Puede ser compartida entre varios abogados de tu firma o despacho legal.",
+            legal_disclaimer: "<strong>Aviso Legal & Deslinde de Responsabilidad:</strong> AuditFlow AI es una herramienta de análisis automatizado asistido por Inteligencia Artificial. Los reportes y sugerencias tácticas no constituyen asesoría legal o financiera profesional vinculante. El desarrollador y la plataforma quedan completamente eximidos de toda responsabilidad derivada del uso o interpretación de la información procesada."
         },
         en: {
             // Header
@@ -285,7 +287,9 @@ window.I18n = {
             issue_opt_4: "General Configuration Issue",
             issue_desc_label: "Issue Description (Optional)",
             issue_ai_heading: "🤖 Real-Time AI Diagnosis:",
-            issue_btn_submit: "🛠️ Submit Report & Diagnose with AI"
+            issue_btn_submit: "🛠️ Submit Report & Diagnose with AI",
+            ent_multi_lawyer_text: "Multi-User Annual Quota: Can be shared among multiple attorneys in your firm or legal practice.",
+            legal_disclaimer: "<strong>Legal Disclaimer & Limitation of Liability:</strong> AuditFlow AI is an automated analysis tool powered by Artificial Intelligence. Reports and tactical suggestions do not constitute binding professional legal or financial advice. The app developer and platform are fully released from any liability arising from the use or interpretation of processed information."
         }
     },
 
