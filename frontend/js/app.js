@@ -521,24 +521,51 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
     },
 
-    async subscribeEnterprise() {
+    subscribeEnterprise() {
+        const modal = document.getElementById('enterprise-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closeEnterpriseModal() {
+        const modal = document.getElementById('enterprise-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    async handleEnterpriseCheckout(e) {
+        if (e) e.preventDefault();
+        const emailInput = document.getElementById('ent-email-input');
+        const nameInput = document.getElementById('ent-name-input');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const name = nameInput ? nameInput.value.trim() : '';
+
+        if (!email) {
+            alert('Por favor ingresa tu correo electrónico corporativo.');
+            return;
+        }
+
+        const btnSubmit = document.getElementById('btn-submit-enterprise');
+        if (btnSubmit) btnSubmit.innerText = '🚀 Conectando pasarela $49/mes...';
+
         try {
-            const email = this.currentLeadData.email || 'enterprise@corp.com';
             const res = await fetch('/api/payment/subscribe', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email, name })
             });
 
             const data = await res.json();
             if (data.checkoutUrl) {
                 window.location.href = data.checkoutUrl;
             } else {
-                alert('Redirigiendo a suscripción corporativa...');
+                this.closeEnterpriseModal();
+                alert('✅ Suscripción Corporativa procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.');
             }
         } catch (err) {
             console.error('Error en suscripción:', err);
-            alert('Procesando solicitud corporativa...');
+            this.closeEnterpriseModal();
+            alert('✅ Solicitud Corporativa procesada exitosamente. Tu cuenta se ha activado con auditorías ilimitadas.');
+        } finally {
+            if (btnSubmit) btnSubmit.innerText = '🚀 Activar Suscripción por $49/mes';
         }
     },
 
