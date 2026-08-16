@@ -745,6 +745,20 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         setInterval(showNext, 14000);
     },
 
+    resetToHome() {
+        const uploadSec = document.getElementById('upload-section');
+        const repSec = document.getElementById('report-section');
+        const fileInput = document.getElementById('file-input');
+        const isBanner = document.getElementById('unlocked-success-banner');
+
+        if (repSec) repSec.classList.add('hidden');
+        if (uploadSec) uploadSec.classList.remove('hidden');
+        if (fileInput) fileInput.value = '';
+        if (isBanner) isBanner.classList.add('hidden');
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
     unblurReport() {
         document.querySelectorAll('.blurred-content').forEach(el => {
             el.classList.remove('blurred-content', 'select-none');
@@ -757,6 +771,12 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
 
         const banner = document.getElementById('unlock-banner');
         if (banner) banner.classList.add('hidden');
+
+        const successBanner = document.getElementById('unlocked-success-banner');
+        if (successBanner) {
+            successBanner.classList.remove('hidden');
+            successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
     }
 };
 
