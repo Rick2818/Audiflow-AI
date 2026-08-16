@@ -9,19 +9,87 @@ const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
-// Helper para envío de correo de Bienvenida Corporativa y COMPROBANTE DE PAGO B2B por Gmail SMTP
-async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly' }) {
+// Helper para envío de correo bilingüe (ES / EN) de Bienvenida Corporativa y COMPROBANTE DE PAGO B2B por Gmail SMTP
+async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly', lang = 'es' }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
-  const isAnnual = interval === 'annual';
-  const planText = isAnnual ? 'Plan Corporativo Anual ($399.00 USD/año)' : 'Plan Corporativo Mensual ($49.00 USD/mes)';
+  const isEn = (lang === 'en');
+  const isAnnual = (interval === 'annual');
+
+  const planText = isEn
+    ? (isAnnual ? 'Enterprise Annual Plan ($399.00 USD/yr)' : 'Enterprise Monthly Plan ($49.00 USD/mo)')
+    : (isAnnual ? 'Plan Corporativo Anual ($399.00 USD/año)' : 'Plan Corporativo Mensual ($49.00 USD/mes)');
+    
   const amountText = isAnnual ? '$399.00 USD' : '$49.00 USD';
   const recId = 'REC-' + Math.random().toString(36).substring(2, 9).toUpperCase();
   const appUrl = 'https://auditflow-ai-theta.vercel.app';
-  const subject = `🎉 Recibo de Pago & Bienvenida - ${planText} [AuditFlow AI]`;
   
-  const html = `
+  const subject = isEn
+    ? `🎉 Payment Receipt & Welcome - ${planText} [AuditFlow AI]`
+    : `🎉 Recibo de Pago & Bienvenida - ${planText} [AuditFlow AI]`;
+  
+  const html = isEn ? `
+    <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #a855f7; margin-top: 0; font-size: 22px;">AuditFlow AI - Official B2B Receipt & Confirmation</h2>
+      <p style="font-size: 15px; color: #e5e7eb;">Dear <strong>${name || 'Valued Client'}</strong>,</p>
+      <p style="color: #d1d5db; line-height: 1.6; font-size: 14px;">
+        Your subscription to <strong>${planText}</strong> has been successfully activated. Below is your official digital payment receipt.
+      </p>
+      
+      <!-- COMPROBANTE OFICIAL DE PAGO B2B EN INGLÉS -->
+      <div style="background-color: #111827; border: 1px solid #10b981; padding: 20px; border-radius: 10px; margin: 25px 0;">
+        <div style="border-bottom: 1px solid #1f2937; pb: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="color: #10b981; margin: 0; font-size: 16px;">🧾 OFFICIAL B2B DIGITAL RECEIPT</h3>
+          <span style="font-size: 12px; color: #9ca3af; font-family: monospace;">${recId}</span>
+        </div>
+        <table style="width: 100%; color: #d1d5db; font-size: 13px; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Client / Company Name:</td>
+            <td style="text-align: right; font-weight: bold; color: #ffffff;">${name || 'Corporate Client'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Audit Plan:</td>
+            <td style="text-align: right; font-weight: bold; color: #a855f7;">${planText}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Total Amount Paid:</td>
+            <td style="text-align: right; font-weight: bold; color: #10b981; font-size: 16px;">${amountText}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Gateway / Destination Node:</td>
+            <td style="text-align: right; font-weight: bold; color: #38bdf8;">Stripe &amp; Lightning (rick28@strike.me)</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Payment Status:</td>
+            <td style="text-align: right; font-weight: bold; color: #10b981;">✅ SETTLED &amp; ACTIVE</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- BENEFICIOS ILIMITADOS EN INGLÉS -->
+      <div style="background-color: #111827; border: 1px solid #374151; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <h3 style="color: #38bdf8; margin-top: 0; font-size: 15px;">🚀 Active 24/7 Enterprise Benefits:</h3>
+        <ul style="color: #9ca3af; line-height: 1.8; margin-bottom: 0; font-size: 13px; padding-left: 20px;">
+          <li>✅ Unlimited Contract &amp; Invoice Audits without individual per-event fees</li>
+          <li>✅ Volatile RAM Processing Architecture (0 Disk Retention)</li>
+          <li>✅ Autonomous AI Support Agent for real-time corrections</li>
+          <li>✅ Digitally Signed Watermark-Free PDF Reports</li>
+        </ul>
+      </div>
+
+      <p style="text-align: center; margin-top: 30px;">
+        <a href="${appUrl}" style="background-color: #a855f7; color: #ffffff; font-weight: bold; padding: 14px 28px; text-decoration: none; border-radius: 8px; display: inline-block;">
+          🚀 Access My Unlimited Audit Dashboard
+        </a>
+      </p>
+
+      <hr style="border-color: #374151; margin-top: 30px;">
+      <p style="font-size: 12px; color: #6b7280; text-align: center;">
+        AuditFlow AI • 24/7 Priority Enterprise Infrastructure.
+      </p>
+    </div>
+  ` : `
     <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
       <h2 style="color: #a855f7; margin-top: 0; font-size: 22px;">AuditFlow AI - Confirmación & Recibo Oficial B2B</h2>
       <p style="font-size: 15px; color: #e5e7eb;">Estimado(a) <strong>${name || 'Cliente Corporativo'}</strong>,</p>
@@ -113,7 +181,7 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) {}
     }
 
-    const { email, name, interval } = body;
+    const { email, name, interval, lang } = body;
     const customerEmail = email || 'cliente@empresa.com';
     const customerName = name || 'Cliente Corporativo';
     const planInterval = interval === 'annual' ? 'annual' : 'monthly';
@@ -122,8 +190,8 @@ export default async function handler(req, res) {
     const stripeInterval = planInterval === 'annual' ? 'year' : 'month';
     const appUrl = 'https://auditflow-ai-theta.vercel.app';
 
-    // Disparar Correo de Bienvenida Corporativa + Recibo B2B
-    await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName, interval: planInterval });
+    // Disparar Correo de Bienvenida Corporativa + Recibo B2B en el idioma seleccionado (ES / EN)
+    await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName, interval: planInterval, lang: lang || 'es' });
 
     // Si Stripe está configurado con clave real, genera Stripe Checkout Session
     if (stripe) {

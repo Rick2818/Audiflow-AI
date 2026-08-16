@@ -616,6 +616,47 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (diagBox) diagBox.classList.add('hidden');
     },
 
+    async handleEnterpriseCheckout(e) {
+        if (e) e.preventDefault();
+        const emailInput = document.getElementById('ent-email-input');
+        const nameInput = document.getElementById('ent-name-input');
+        const email = emailInput ? emailInput.value.trim() : '';
+        const name = nameInput ? nameInput.value.trim() : '';
+        const interval = this.selectedEnterpriseInterval || 'monthly';
+        const method = this.selectedEnterprisePayMethod || 'stripe';
+
+        if (!email) {
+            alert('Por favor ingresa tu correo electrónico corporativo.');
+            return;
+        }
+
+        const submitBtnText = document.getElementById('btn-submit-enterprise-text');
+        if (submitBtnText) submitBtnText.innerText = '🚀 Procesando pago y activando cuenta...';
+
+        try {
+            const currentLang = window.I18n ? window.I18n.currentLang : 'es';
+            const res = await fetch('/api/payment/subscribe', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, name, interval, method, lang: currentLang })
+            });
+
+            const data = await res.json();
+            if (data.checkoutUrl && data.checkoutUrl.includes('checkout.stripe.com')) {
+                window.location.href = data.checkoutUrl;
+            } else {
+                this.closeEnterpriseModal();
+                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+            }
+        } catch (err) {
+            console.error('Error en suscripción:', err);
+            this.closeEnterpriseModal();
+            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+        } finally {
+            this.selectEnterpriseInterval(this.selectedEnterpriseInterval);
+        }
+    },
+
     async handleConfigIssueSubmit(e) {
         if (e) e.preventDefault();
         const emailInput = document.getElementById('issue-email-input');

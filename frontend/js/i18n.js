@@ -16,6 +16,7 @@ window.I18n = {
             
             // Actions Toolbar
             btn_back_home: "← Regresar al Inicio / Auditar Otro",
+            btn_back_enterprise: "Regresar al Panel Principal",
             btn_print_report: "🖨️ Imprimir / Guardar en PDF",
             btn_ai_support: "🤖 Soporte IA 24/7 (Corregir con IA)",
 
