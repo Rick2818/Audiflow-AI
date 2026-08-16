@@ -673,10 +673,11 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (btnSubmit) btnSubmit.innerText = '🛠️ Registrando y diagnosticando...';
 
         try {
+            const currentLang = window.I18n ? window.I18n.currentLang : 'es';
             const res = await fetch('/api/report-issue', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, issue_type, description, user_agent: navigator.userAgent })
+                body: JSON.stringify({ email, issue_type, description, user_agent: navigator.userAgent, lang: currentLang })
             });
 
             const data = await res.json();

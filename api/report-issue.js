@@ -5,7 +5,7 @@ const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
-async function sendAdminIssueAlert({ email, issueType, description, userAgent }) {
+async function sendAdminIssueAlert({ email, issueType, description, userAgent, lang }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
@@ -17,6 +17,7 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent })
       
       <div style="background-color: #111827; border: 1px solid #ef4444; padding: 18px; border-radius: 8px; margin: 20px 0; font-size: 13px;">
         <p style="margin: 4px 0;"><strong>Correo del Usuario:</strong> ${email || 'No proporcionado'}</p>
+        <p style="margin: 4px 0;"><strong>Idioma:</strong> ${lang === 'en' ? 'Inglés (EN)' : 'Español (ES)'}</p>
         <p style="margin: 4px 0;"><strong>Tipo de Incidencia:</strong> <span style="color: #f59e0b; font-weight: bold;">${issueType}</span></p>
         <p style="margin: 4px 0;"><strong>Descripción:</strong> ${description || 'Sin descripción adicional'}</p>
         <p style="margin: 4px 0; color: #9ca3af; font-family: monospace; font-size: 11px;"><strong>User Agent:</strong> ${userAgent || 'N/A'}</p>
@@ -58,11 +59,12 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) {}
     }
 
-    const { email, issue_type, description, user_agent } = body;
+    const { email, issue_type, description, user_agent, lang } = body;
     const userEmail = email || 'usuario@anonimo.com';
     const issueType = issue_type || 'Error de Configuración General';
     const desc = description || 'Reporte autónomo de fallo técnico.';
     const userAgent = user_agent || (req.headers['user-agent'] || 'Unknown');
+    const isEn = (lang === 'en');
 
     // Registrar incidencia en Supabase
     if (supabase) {
@@ -82,19 +84,26 @@ export default async function handler(req, res) {
     }
 
     // Despachar alerta de correo al Administrador
-    await sendAdminIssueAlert({ email: userEmail, issueType, description: desc, userAgent });
+    await sendAdminIssueAlert({ email: userEmail, issueType, description: desc, userAgent, lang });
 
-    // Generar sugerencia de auto-diagnóstico asistida por IA
-    let aiDiagnosis = "¡Gracias por su ayuda! Hemos registrado su reporte de fallo en nuestro servidor de control. Sugerencia de Auto-Diagnóstico: Hemos verificado la configuración de red y sockets. Si el problema persiste con un archivo específico, te recomendamos verificar que no tenga protección por contraseña previa o un nivel de borrosidad extremo.";
-    if (issueType.includes('OCR') || issueType.includes('archivo')) {
-      aiDiagnosis = "¡Gracias por su ayuda! Hemos registrado su reporte de fallo. Auto-Diagnóstico de Archivo: El motor Gemini 2.5 exige documentos legibles con más de 50 palabras. Asegúrate de que el documento no sea un escaneo completamente oscuro o cifrado con clave.";
-    } else if (issueType.includes('pago') || issueType.includes('Stripe')) {
-      aiDiagnosis = "¡Gracias por su ayuda! Hemos registrado su reporte de fallo. Auto-Diagnóstico de Pago: La pasarela verifica encriptación SSL/TLS. Si estás usando una billetera Lightning, asegúrate de que tu aplicación soporte facturas BOLT11.";
+    // Generar sugerencia de auto-diagnóstico asistida por IA en ES o EN
+    let aiDiagnosis = isEn
+      ? "Thank you for your help! We have registered your issue report in our control server. AI Auto-Diagnosis: We verified network configuration and sockets. If the issue persists with a specific file, please ensure it has no password protection or extreme blurriness."
+      : "¡Gracias por su ayuda! Hemos registrado su reporte de fallo en nuestro servidor de control. Sugerencia de Auto-Diagnóstico: Hemos verificado la configuración de red y sockets. Si el problema persiste con un archivo específico, te recomendamos verificar que no tenga protección por contraseña previa o un nivel de borrosidad extremo.";
+
+    if (issueType.includes('OCR') || issueType.includes('archivo') || issueType.includes('File')) {
+      aiDiagnosis = isEn
+        ? "Thank you for your help! We have registered your issue report. File Auto-Diagnosis: The Gemini 2.5 engine requires clear documents with over 50 words. Please ensure the document is not an entirely dark scan or password encrypted."
+        : "¡Gracias por su ayuda! Hemos registrado su reporte de fallo. Auto-Diagnóstico de Archivo: El motor Gemini 2.5 exige documentos legibles con más de 50 palabras. Asegúrate de que el documento no sea un escaneo completamente oscuro o cifrado con clave.";
+    } else if (issueType.includes('pago') || issueType.includes('Stripe') || issueType.includes('Payment')) {
+      aiDiagnosis = isEn
+        ? "Thank you for your help! We have registered your issue report. Payment Auto-Diagnosis: The gateway verifies SSL/TLS encryption. If using a Lightning wallet, please ensure your app supports standard BOLT11 invoices."
+        : "¡Gracias por su ayuda! Hemos registrado su reporte de fallo. Auto-Diagnóstico de Pago: La pasarela verifica encriptación SSL/TLS. Si estás usando una billetera Lightning, asegúrate de que tu aplicación soporte facturas BOLT11.";
     }
 
     return res.status(200).json({
       success: true,
-      message: 'Reporte de fallo recibido y registrado en el servidor de control.',
+      message: isEn ? 'Issue report received and registered.' : 'Reporte de fallo recibido y registrado en el servidor de control.',
       ai_diagnosis: aiDiagnosis
     });
 

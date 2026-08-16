@@ -149,17 +149,33 @@ window.I18n = {
             feat_3_desc: "Mira los hallazgos gratis. Paga $7 sólo para desbloquear el texto de renegociación + PDF.",
             footer_rights: "© 2026 AuditFlow AI. Infraestructura Micro-SaaS B2B Operando 24/7.",
             footer_privacy_link: "Garantía Memoria Volátil",
-            footer_report_issue: "Reportar Fallo de Configuración"
+            footer_report_issue: "Reportar Fallo de Configuración",
+            
+            // Configuration Issue Modal (ES)
+            issue_modal_title: "Reportar Fallo de Configuración",
+            issue_modal_sub: "Auto-Diagnóstico Autónomo Asistido por IA",
+            issue_email_label: "Tu Correo Electrónico",
+            issue_type_label: "Tipo de Incidencia o Fallo",
+            issue_opt_1: "Falla de Carga de Archivo / OCR Ilegible",
+            issue_opt_2: "Inconsistencia en Pasarela de Pago (Stripe/Lightning)",
+            issue_opt_3: "Error de Renderizado de Reporte o Soluciones",
+            issue_opt_4: "Fallo de Configuración General",
+            issue_desc_label: "Descripción del Fallo (Opcional)",
+            issue_ai_heading: "🤖 Diagnóstico IA en Tiempo Real:",
+            issue_btn_submit: "🛠️ Enviar Reporte & Diagnosticar con IA"
         },
         en: {
             // Header
-            nav_privacy_badge: "Volatile RAM Active (0 Disk)",
+            nav_privacy_badge: "Volatile RAM Memory Active (0 Disk)",
+            nav_firewall_badge: "🔒 Firewall & WAF Active (AES-256)",
             nav_speed_badge: "Audit <10s",
-
+            nav_corp_plan: "B2B Enterprise Plan",
+            
             // Actions Toolbar
             btn_back_home: "← Back to Home / Audit Another",
+            btn_back_enterprise: "Return to Main Dashboard",
             btn_print_report: "🖨️ Print / Save as PDF",
-            btn_ai_support: "🤖 24/7 AI Support (AI Fix)",
+            btn_ai_support: "🤖 24/7 AI Support (Self-Fix with AI)",
 
             // AI Support Modal
             support_title: "Autonomous AI Support Agent",
