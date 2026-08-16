@@ -9,15 +9,36 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent, l
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
-  const subject = `🚨 ALERTA TÉCNICA: Reporte de Fallo de Configuración [AuditFlow AI]`;
-  const html = `
+  const isEn = (lang === 'en');
+  const subject = isEn 
+    ? `🚨 TECHNICAL ALERT: Configuration Issue Report [AuditFlow AI]`
+    : `🚨 ALERTA TÉCNICA: Reporte de Fallo de Configuración [AuditFlow AI]`;
+
+  const html = isEn ? `
     <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
-      <h2 style="color: #ef4444; margin-top: 0; font-size: 20px;">🛠️ AuditFlow AI - Alerta de Fallo de Configuración</h2>
-      <p style="color: #d1d5db; font-size: 14px;">Un usuario ha reportado una inconsistencia técnica o de configuración en la plataforma.</p>
+      <h2 style="color: #ef4444; margin-top: 0; font-size: 20px;">🛠️ AuditFlow AI - Issue Report Confirmation</h2>
+      <p style="color: #d1d5db; font-size: 14px;">Thank you for your help! We have received your technical issue report and registered it in our system.</p>
+      
+      <div style="background-color: #111827; border: 1px solid #ef4444; padding: 18px; border-radius: 8px; margin: 20px 0; font-size: 13px;">
+        <p style="margin: 4px 0;"><strong>User Email:</strong> ${email || 'Not provided'}</p>
+        <p style="margin: 4px 0;"><strong>Language:</strong> English (EN)</p>
+        <p style="margin: 4px 0;"><strong>Issue Category:</strong> <span style="color: #f59e0b; font-weight: bold;">${issueType}</span></p>
+        <p style="margin: 4px 0;"><strong>Description:</strong> ${description || 'No additional description'}</p>
+        <p style="margin: 4px 0; color: #9ca3af; font-family: monospace; font-size: 11px;"><strong>User Agent:</strong> ${userAgent || 'N/A'}</p>
+      </div>
+
+      <p style="font-size: 12px; color: #6b7280; text-align: center; margin-top: 25px;">
+        AuditFlow AI Autonomous 24/7 Monitoring Infrastructure.
+      </p>
+    </div>
+  ` : `
+    <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #ef4444; margin-top: 0; font-size: 20px;">🛠️ AuditFlow AI - Alerta & Confirmación de Reporte</h2>
+      <p style="color: #d1d5db; font-size: 14px;">¡Gracias por su ayuda! Hemos recibido su reporte de fallo técnico y lo hemos registrado en nuestro servidor de control.</p>
       
       <div style="background-color: #111827; border: 1px solid #ef4444; padding: 18px; border-radius: 8px; margin: 20px 0; font-size: 13px;">
         <p style="margin: 4px 0;"><strong>Correo del Usuario:</strong> ${email || 'No proporcionado'}</p>
-        <p style="margin: 4px 0;"><strong>Idioma:</strong> ${lang === 'en' ? 'Inglés (EN)' : 'Español (ES)'}</p>
+        <p style="margin: 4px 0;"><strong>Idioma:</strong> Español (ES)</p>
         <p style="margin: 4px 0;"><strong>Tipo de Incidencia:</strong> <span style="color: #f59e0b; font-weight: bold;">${issueType}</span></p>
         <p style="margin: 4px 0;"><strong>Descripción:</strong> ${description || 'Sin descripción adicional'}</p>
         <p style="margin: 4px 0; color: #9ca3af; font-family: monospace; font-size: 11px;"><strong>User Agent:</strong> ${userAgent || 'N/A'}</p>
@@ -29,12 +50,23 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent, l
     </div>
   `;
 
+  // Enviar copia a AMBOS (Administrador y Usuario)
+  const recipients = [gmailUser];
+  if (email && email.includes('@') && email.trim() !== gmailUser) {
+    recipients.push(email.trim());
+  }
+
   try {
     const transporter = nodemailer.createTransport({
       service: 'gmail',
       auth: { user: gmailUser, pass: gmailPass }
     });
-    return await transporter.sendMail({ from: `"AuditFlow AI Alerts" <${gmailUser}>`, to: gmailUser, subject, html });
+    return await transporter.sendMail({
+      from: `"AuditFlow AI System" <${gmailUser}>`,
+      to: recipients.join(', '),
+      subject,
+      html
+    });
   } catch (err) {
     console.warn('Gmail SMTP Issue Alert Warning:', err.message);
   }
@@ -83,7 +115,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // Despachar alerta de correo al Administrador
+    // Despachar alerta de correo al Administrador y al Usuario simultáneamente
     await sendAdminIssueAlert({ email: userEmail, issueType, description: desc, userAgent, lang });
 
     // Generar sugerencia de auto-diagnóstico asistida por IA en ES o EN
