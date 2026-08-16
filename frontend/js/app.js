@@ -625,20 +625,22 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 : `Un usuario en ${item.loc} auditó un ${item.type} e identificó ${item.leakage} en fugas.`;
             timeEl.innerText = isEn ? `${item.time} • Volatile RAM` : `${item.time} • Memoria Volátil RAM`;
 
-            toast.classList.remove('opacity-0', 'translate-y-24', 'pointer-events-none');
-            toast.classList.add('opacity-100', 'translate-y-0');
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+            toast.style.pointerEvents = 'auto';
 
             setTimeout(() => {
-                toast.classList.remove('opacity-100', 'translate-y-0');
-                toast.classList.add('opacity-0', 'translate-y-24', 'pointer-events-none');
-            }, 6000);
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(6rem)';
+                toast.style.pointerEvents = 'none';
+            }, 7000);
 
             index = (index + 1) % proofs.length;
         };
 
-        // Mostrar primer toast tras 4 segundos y rotar cada 20 segundos
-        setTimeout(showNext, 4000);
-        setInterval(showNext, 20000);
+        // Mostrar primer toast a los 1.5s y rotar cada 14 segundos
+        setTimeout(showNext, 1500);
+        setInterval(showNext, 14000);
     },
 
     unblurReport() {
