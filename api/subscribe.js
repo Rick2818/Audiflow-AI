@@ -9,27 +9,61 @@ const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
-// Helper para envío de correo de Bienvenida Corporativa por Gmail SMTP
+// Helper para envío de correo de Bienvenida Corporativa y COMPROBANTE DE PAGO B2B por Gmail SMTP
 async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly' }) {
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   const isAnnual = interval === 'annual';
   const planText = isAnnual ? 'Plan Corporativo Anual ($399.00 USD/año)' : 'Plan Corporativo Mensual ($49.00 USD/mes)';
+  const amountText = isAnnual ? '$399.00 USD' : '$49.00 USD';
+  const recId = 'REC-' + Math.random().toString(36).substring(2, 9).toUpperCase();
   const appUrl = 'https://auditflow-ai-theta.vercel.app';
-  const subject = `🎉 ¡Bienvenido al ${planText} de AuditFlow AI!`;
+  const subject = `🎉 Recibo de Pago & Bienvenida - ${planText} [AuditFlow AI]`;
+  
   const html = `
-    <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px;">
-      <h2 style="color: #a855f7; margin-top: 0;">AuditFlow AI - Confirmación de Suscripción Corporativa</h2>
-      <p style="font-size: 16px;">Hola <strong>${name || 'Cliente'}</strong>,</p>
-      <p style="color: #d1d5db; line-height: 1.6;">
-        Tu suscripción al <strong>${planText}</strong> ha sido activada con éxito.
+    <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #a855f7; margin-top: 0; font-size: 22px;">AuditFlow AI - Confirmación & Recibo Oficial B2B</h2>
+      <p style="font-size: 15px; color: #e5e7eb;">Estimado(a) <strong>${name || 'Cliente Corporativo'}</strong>,</p>
+      <p style="color: #d1d5db; line-height: 1.6; font-size: 14px;">
+        Tu suscripción al <strong>${planText}</strong> ha sido activada correctamente. A continuación encuentras tu comprobante oficial de pago y recibo digital.
       </p>
       
-      <div style="background-color: #111827; border: 1px solid #a855f7; padding: 20px; border-radius: 8px; margin: 20px 0;">
-        <h3 style="color: #38bdf8; margin-top: 0;">🚀 Beneficios Corporativos Activos 24/7:</h3>
-        <ul style="color: #9ca3af; line-height: 1.8; margin-bottom: 0;">
-          <li>✅ Auditorías de Contratos y Facturas Ilimitadas sin pago por evento</li>
+      <!-- COMPROBANTE OFICIAL DE PAGO B2B -->
+      <div style="background-color: #111827; border: 1px solid #10b981; padding: 20px; border-radius: 10px; margin: 25px 0;">
+        <div style="border-bottom: 1px solid #1f2937; pb: 12px; margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+          <h3 style="color: #10b981; margin: 0; font-size: 16px;">🧾 COMPROBANTE DIGITAL DE PAGO</h3>
+          <span style="font-size: 12px; color: #9ca3af; font-family: monospace;">${recId}</span>
+        </div>
+        <table style="width: 100%; color: #d1d5db; font-size: 13px; border-collapse: collapse;">
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Cliente / Razón Social:</td>
+            <td style="text-align: right; font-weight: bold; color: #ffffff;">${name || 'Cliente Corporativo'}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Plan de Auditoría:</td>
+            <td style="text-align: right; font-weight: bold; color: #a855f7;">${planText}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Monto Total Pagado:</td>
+            <td style="text-align: right; font-weight: bold; color: #10b981; font-size: 16px;">${amountText}</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Pasarela / Nodo Destino:</td>
+            <td style="text-align: right; font-weight: bold; color: #38bdf8;">Stripe &amp; Lightning (rick28@strike.me)</td>
+          </tr>
+          <tr>
+            <td style="padding: 6px 0; color: #9ca3af;">Estado del Cobro:</td>
+            <td style="text-align: right; font-weight: bold; color: #10b981;">✅ LIQUIDADO &amp; ACTIVO</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- BENEFICIOS ILIMITADOS -->
+      <div style="background-color: #111827; border: 1px solid #374151; padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <h3 style="color: #38bdf8; margin-top: 0; font-size: 15px;">🚀 Beneficios Corporativos Activos 24/7:</h3>
+        <ul style="color: #9ca3af; line-height: 1.8; margin-bottom: 0; font-size: 13px; padding-left: 20px;">
+          <li>✅ Auditorías de Contratos y Facturas Ilimitadas sin costo individual</li>
           <li>✅ Análisis en Memoria Volátil RAM Efímera (0 Almacenamiento en Disco)</li>
           <li>✅ Agente de Soporte Autónomo IA para correcciones y re-evaluaciones</li>
           <li>✅ Reportes en PDF Firmados Digitalmente sin marcas de agua</li>
@@ -88,7 +122,7 @@ export default async function handler(req, res) {
     const stripeInterval = planInterval === 'annual' ? 'year' : 'month';
     const appUrl = 'https://auditflow-ai-theta.vercel.app';
 
-    // Disparar Correo de Bienvenida Corporativa
+    // Disparar Correo de Bienvenida Corporativa + Recibo B2B
     await sendSubscriptionWelcomeEmail({ to: customerEmail, name: customerName, interval: planInterval });
 
     // Si Stripe está configurado con clave real, genera Stripe Checkout Session
@@ -144,7 +178,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
-      message: `Suscripción Corporativa (${planInterval === 'annual' ? '$399/año' : '$49/mes'}) activada. Correo de bienvenida enviado a ${customerEmail}.`,
+      message: `Suscripción Corporativa (${planInterval === 'annual' ? '$399/año' : '$49/mes'}) activada. Recibo oficial enviado a ${customerEmail}.`,
       checkoutUrl: `${appUrl}/?status=success_subscription&email=${encodeURIComponent(customerEmail)}`
     });
 

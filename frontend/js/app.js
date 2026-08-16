@@ -557,9 +557,35 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         }
     },
 
-    subscribeEnterprise() {
-        const modal = document.getElementById('enterprise-modal');
-        if (modal) modal.classList.remove('hidden');
+    selectedEnterprisePayMethod: 'stripe',
+
+    selectEnterprisePaymentMethod(method) {
+        this.selectedEnterprisePayMethod = method;
+        const btnStripe = document.getElementById('tab-ent-pay-stripe');
+        const btnLn = document.getElementById('tab-ent-pay-ln');
+        const lnContainer = document.getElementById('ent-lightning-container');
+        const satsAmountEl = document.getElementById('ent-ln-sats-amount');
+        const qrBox = document.getElementById('ent-qrcode-box');
+
+        const isAnnual = (this.selectedEnterpriseInterval === 'annual');
+        const satsAmount = isAnnual ? '613,846 Sats' : '75,384 Sats';
+
+        if (satsAmountEl) satsAmountEl.innerText = satsAmount;
+
+        if (method === 'lightning') {
+            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center';
+            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-amber-500 text-center';
+            if (lnContainer) lnContainer.classList.remove('hidden');
+
+            if (qrBox) {
+                const strikeAddress = 'lightning:rick28@strike.me';
+                qrBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=${encodeURIComponent(strikeAddress)}" alt="QR Strike Lightning" class="w-40 h-40 rounded-lg shadow">`;
+            }
+        } else {
+            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center';
+            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center';
+            if (lnContainer) lnContainer.classList.add('hidden');
+        }
     },
 
     closeEnterpriseModal() {
