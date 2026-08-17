@@ -117,6 +117,25 @@ if (fs.existsSync(vercelPath)) {
   assert(vercelContent.includes('/sitemap.xml'), 'vercel.json define ruta estática para /sitemap.xml');
 }
 
+// 7. Verificación de SEO Programático e IndexNow Protocol
+console.log(`\n[TEST GROUP 7] Verificación de SEO Programático e IndexNow:`);
+const p1Path = path.join(rootDir, 'frontend', 'auditar-contrato-arrendamiento.html');
+const p2Path = path.join(rootDir, 'frontend', 'auditar-factura-proveedor.html');
+const p3Path = path.join(rootDir, 'frontend', 'auditar-contrato-servicios-it.html');
+const indexNowKeyPath = path.join(rootDir, 'frontend', 'auditflow2026indexnow.txt');
+
+assert(fs.existsSync(p1Path), 'La landing page auditar-contrato-arrendamiento.html existe');
+assert(fs.existsSync(p2Path), 'La landing page auditar-factura-proveedor.html existe');
+assert(fs.existsSync(p3Path), 'La landing page auditar-contrato-servicios-it.html existe');
+assert(fs.existsSync(indexNowKeyPath), 'La clave IndexNow auditflow2026indexnow.txt existe');
+
+if (fs.existsSync(sitemapPath)) {
+  const sm = fs.readFileSync(sitemapPath, 'utf8');
+  assert(sm.includes('auditar-contrato-arrendamiento'), 'sitemap.xml incluye la URL de arrendamiento');
+  assert(sm.includes('auditar-factura-proveedor'), 'sitemap.xml incluye la URL de facturas');
+  assert(sm.includes('auditar-contrato-servicios-it'), 'sitemap.xml incluye la URL de contratos IT');
+}
+
 // RESUMEN FINAL
 console.log(`\n=======================================================`);
 console.log(`📊 RESULTADO FINAL DE LA SUITE SEO & INDEXACIÓN:`);

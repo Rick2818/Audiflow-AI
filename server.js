@@ -77,6 +77,57 @@ app.get('/google3767930768036b5b.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'google3767930768036b5b.html'));
 });
 
+app.get('/auditflow2026indexnow.txt', (req, res) => {
+  res.header('Content-Type', 'text/plain');
+  res.sendFile(path.join(__dirname, 'frontend', 'auditflow2026indexnow.txt'));
+});
+
+// Rutas de SEO Programático de Alta Intención B2B
+app.get('/auditar-contrato-arrendamiento', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-arrendamiento.html'));
+});
+
+app.get('/auditar-factura-proveedor', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'auditar-factura-proveedor.html'));
+});
+
+app.get('/auditar-contrato-servicios-it', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-servicios-it.html'));
+});
+
+// Endpoint de notificación instantánea a Bing & IndexNow API
+app.post('/api/indexnow/submit', async (req, res) => {
+  try {
+    const host = 'audiflowai.com';
+    const key = 'auditflow2026indexnowkey';
+    const urlList = [
+      'https://audiflowai.com/',
+      'https://audiflowai.com/auditar-contrato-arrendamiento',
+      'https://audiflowai.com/auditar-factura-proveedor',
+      'https://audiflowai.com/auditar-contrato-servicios-it'
+    ];
+
+    const response = await fetch('https://api.indexnow.org/indexnow', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      body: JSON.stringify({
+        host,
+        key,
+        keyLocation: `https://${host}/auditflow2026indexnow.txt`,
+        urlList
+      })
+    });
+
+    return res.json({
+      success: response.ok,
+      status: response.status,
+      message: response.ok ? 'Notificación de indexación enviada a Bing y motores IndexNow' : 'Respuesta IndexNow API: ' + response.status
+    });
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+});
+
 // Middleware global de cabeceras de seguridad HTTP
 app.use((req, res, next) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');

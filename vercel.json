@@ -44,6 +44,22 @@
       "dest": "frontend/google3767930768036b5b.html"
     },
     {
+      "src": "/auditflow2026indexnow.txt",
+      "dest": "frontend/auditflow2026indexnow.txt"
+    },
+    {
+      "src": "/auditar-contrato-arrendamiento",
+      "dest": "frontend/auditar-contrato-arrendamiento.html"
+    },
+    {
+      "src": "/auditar-factura-proveedor",
+      "dest": "frontend/auditar-factura-proveedor.html"
+    },
+    {
+      "src": "/auditar-contrato-servicios-it",
+      "dest": "frontend/auditar-contrato-servicios-it.html"
+    },
+    {
       "src": "/admin",
       "dest": "frontend/admin.html"
     },
