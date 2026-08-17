@@ -66,6 +66,7 @@ if (fs.existsSync(indexPath)) {
   assert(indexContent.includes('og:url') && !indexContent.includes('og:url" content="http://localhost'), 'Open Graph og:url no usa localhost');
   assert(indexContent.includes('og:image') && !indexContent.includes('og:image" content="http://localhost'), 'Open Graph og:image no usa localhost');
   assert(indexContent.includes('google-site-verification'), 'index.html incluye ranura de verificación de Google Search Console');
+  assert(indexContent.includes('G-KMESC5J8WH'), 'index.html incluye la etiqueta de Google Analytics 4 GA4');
   assert(indexContent.includes('favicon.svg'), 'index.html referencia al favicon SVG');
   assert(indexContent.includes('@type": "Organization"'), 'Schema.org incluye entidad Organization');
   assert(indexContent.includes('@type": "WebSite"'), 'Schema.org incluye entidad WebSite');
