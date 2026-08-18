@@ -73,10 +73,23 @@ AuditFlow AI cuenta con un sistema de SEO técnico de grado empresarial diseñad
    - `SoftwareApplication`: Puntuación agregada (`4.9/5` con `14,820` evaluaciones) y oferta de $7.00 USD.
    - `FAQPage`: Rich Snippets para resultados enriquecidos en Google sobre auditoría de contratos con IA y almacenamiento efímero en RAM.
 
-6. **Pasos para Google Search Console (GSC)**:
-   - **Paso 1**: Añadir la propiedad de dominio `audiflowai.com` en [Google Search Console](https://search.google.com/search-console).
-   - **Paso 2**: Enviar el mapa del sitio `https://audiflowai.com/sitemap.xml` en la sección *Sitemaps*.
-   - **Paso 3**: Utilizar la herramienta *URL Inspection* para verificar el estado de indexación de `https://audiflowai.com/`.
+6. **Google Analytics 4 (GA4) & Medición en Vivo**:
+   - Etiqueta oficial `G-KMESC5J8WH` integrada en la cabecera HTML para medición de tráfico en tiempo real y conversiones B2B.
+
+7. **SEO Programático & Landing Pages de Nicho B2B**:
+   - `https://audiflowai.com/auditar-contrato-arrendamiento`: Landing especializada en alquiler comercial.
+   - `https://audiflowai.com/auditar-factura-proveedor`: Landing especializada en sobrecargos de facturas.
+   - `https://audiflowai.com/auditar-contrato-servicios-it`: Landing especializada en servicios IT, cloud y SaaS.
+
+8. **Protocolo IndexNow (Bing, ChatGPT & Copilot)**:
+   - Clave pública `/auditflow2026indexnow.txt` e integración en `server.js` (`POST /api/indexnow/submit`) para notificaciones instantáneas de indexación a motores de IA.
+
+9. **Notificaciones de Ventas en Tiempo Real al Propietario**:
+   - Envío automático de correo por Gmail SMTP a `rick28191@gmail.com` tras cada compra ($7 USD, $49/mes, $399/año o Satoshis) con desglose del cliente y transacción.
+
+10. **Pasos para Google Search Console (GSC)**:
+   - **Paso 1**: Propiedad verificada en vivo (`https://audiflowai.com/google3767930768036b5b.html`).
+   - **Paso 2**: Mapa del sitio enviado y procesado como **"Correcto"** (`https://audiflowai.com/sitemap.xml`).
 
 ---
 
