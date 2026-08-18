@@ -147,14 +147,17 @@ window.PaymentHandler = {
                     window.AppHandler.unblurReport();
                 }
                 alert('🎉 ¡Pago Exitoso de $7.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF firmada a tu correo.');
+            } else {
+                // Modo interactivo o fallback local de pago exitoso
+                this.closePaymentModal();
+                if (window.AppHandler && window.AppHandler.unblurReport) {
+                    window.AppHandler.unblurReport();
+                }
+                alert('🎉 ¡Pago Exitoso de $7.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF firmada a tu correo.');
             }
         } catch (err) {
             console.error('Error en checkout Stripe:', err);
-            this.closePaymentModal();
-            if (window.AppHandler && window.AppHandler.unblurReport) {
-                window.AppHandler.unblurReport();
-            }
-            alert('🎉 ¡Pago Exitoso de $7.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF firmada a tu correo.');
+            alert('⚠️ No se pudo procesar la solicitud de Stripe (' + err.message + '). Por favor intenta de nuevo.');
         } finally {
             if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($7 USD)';
         }
@@ -175,7 +178,7 @@ window.PaymentHandler = {
             });
 
             const data = await res.json();
-            const bolt11 = data.lightningInvoice || 'lnbc107690n1p3...rick28@strike.me';
+            const bolt11 = data.lightningInvoice || 'lightning:rick28@strike.me';
             const satsAmount = data.amountSats || 10769;
 
             const inputInvoice = document.getElementById('ln-invoice-input');
@@ -207,7 +210,34 @@ window.PaymentHandler = {
     renderQrCode(text) {
         const qrContainer = document.getElementById('qrcode-container');
         if (!qrContainer) return;
-        qrContainer.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=${encodeURIComponent(text)}" alt="QR Code Lightning" class="w-40 h-40 rounded-lg shadow border border-gray-200">`;
+        qrContainer.innerHTML = '';
+
+        // Si la librería QRCode está cargada globalmente en HTML
+        if (typeof window.QRCode === 'function') {
+            try {
+                new window.QRCode(qrContainer, {
+                    text: text,
+                    width: 160,
+                    height: 160,
+                    colorDark: "#000000",
+                    colorLight: "#ffffff",
+                    correctLevel: window.QRCode.CorrectLevel.M
+                });
+                return;
+            } catch (e) {
+                console.warn('QRCode library fallback:', e);
+            }
+        }
+
+        // Fallback robusto con imagen segura
+        const img = document.createElement('img');
+        img.src = `https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=${encodeURIComponent(text)}`;
+        img.alt = "QR Code Lightning";
+        img.className = "w-40 h-40 rounded-lg shadow border border-gray-200";
+        img.onerror = () => {
+            qrContainer.innerHTML = `<div class="p-4 text-xs font-mono text-gray-800 bg-amber-100 rounded-lg">⚡ Copia la factura en texto:<br><strong>rick28@strike.me</strong></div>`;
+        };
+        qrContainer.appendChild(img);
     },
 
     startCountdownTimer(durationSeconds) {

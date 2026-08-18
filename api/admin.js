@@ -334,8 +334,8 @@ export default async function handler(req, res) {
     const totalLeads = enrichedLeads.length;
     const enterpriseCandidates = enrichedLeads.filter(l => l.is_enterprise_candidate || l.is_enterprise || (l.lead_score >= 75)).length;
     const totalAudits = Math.max(reports.length, totalLeads + 3);
-    const totalRevenueUsd = transactions.reduce((acc, curr) => acc + (Number(curr.amount_usd) || 0), 63.00);
-    const totalSatsCollected = transactions.reduce((acc, curr) => acc + (Number(curr.amount_sats) || 0), 10769);
+    const totalRevenueUsd = transactions.reduce((acc, curr) => acc + (Number(curr.amount_usd) || 0), 0);
+    const totalSatsCollected = transactions.reduce((acc, curr) => acc + (Number(curr.amount_sats) || 0), 0);
 
     return res.status(200).json({
       success: true,

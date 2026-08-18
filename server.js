@@ -1463,8 +1463,8 @@ app.get('/api/admin/stats', async (req, res) => {
     const totalLeads = leads.length;
     const enterpriseCandidates = leads.filter(l => l.is_enterprise_candidate || (l.lead_score >= 75)).length;
     const totalAudits = Math.max(reports.length, totalLeads + 3);
-    const totalRevenueUsd = transactions.reduce((acc, curr) => acc + (Number(curr.amount_usd) || 0), 63.00);
-    const totalSatsCollected = transactions.reduce((acc, curr) => acc + (Number(curr.amount_sats) || 0), 10769);
+    const totalRevenueUsd = transactions.reduce((acc, curr) => acc + (Number(curr.amount_usd) || 0), 0);
+    const totalSatsCollected = transactions.reduce((acc, curr) => acc + (Number(curr.amount_sats) || 0), 0);
 
     return res.json({
       success: true,
