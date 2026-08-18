@@ -118,6 +118,14 @@ window.PaymentHandler = {
         const btnPayStripe = document.getElementById('btn-pay-stripe');
         if (btnPayStripe) btnPayStripe.innerText = '⏳ Procesando Pago $7 USD...';
 
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'begin_checkout', {
+                value: 7.0,
+                currency: 'USD',
+                items: [{ item_id: 'report_unlock_7', item_name: 'Desbloqueo PDF Reporte Táctico' }]
+            });
+        }
+
         try {
             const res = await fetch('/api/payment/stripe', {
                 method: 'POST',

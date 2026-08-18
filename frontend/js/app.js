@@ -140,6 +140,14 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
     async startAuditScanProcess() {
         if (!this.selectedFile) return;
 
+        // Disparar evento personalizado GA4 de inicio de auditoria
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'scan_started', {
+                file_name: this.selectedFile.name,
+                file_size: this.selectedFile.size
+            });
+        }
+
         const uploadSec = document.getElementById('upload-section');
         const scanSec = document.getElementById('scanner-section');
         const errBox = document.getElementById('ocr-error-box');
