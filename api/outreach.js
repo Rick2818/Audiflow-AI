@@ -46,7 +46,8 @@ export default async function handler(req, res) {
       const { name = 'Ejecutivo', company = 'Empresa B2B', role = 'Director', email, country = 'El Salvador', lang = 'es' } = p;
       if (!email || !email.includes('@')) continue;
 
-      const isEn = lang === 'en' || ['Estados Unidos', 'Inglaterra', 'Dinamarca', 'Noruega', 'Finlandia'].includes(country);
+      const englishCountries = ['estados unidos', 'eeuu', 'ee.uu.', 'united states', 'us', 'usa', 'inglaterra', 'uk', 'united kingdom', 'england', 'suiza', 'switzerland', 'ch', 'francia', 'france', 'fr', 'luxemburgo', 'luxembourg', 'lu', 'alemania', 'germany', 'de', 'dinamarca', 'denmark', 'dk', 'noruega', 'norway', 'no', 'finlandia', 'finland', 'fi'];
+      const isEn = lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c));
 
       let subject = `Auditoría preventiva de facturas/contratos para ${company}`;
       let bodyHtml = `
