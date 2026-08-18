@@ -210,6 +210,74 @@
             </div>
         </div>
 
+        <!-- TAB 3: MOTOR DE PROSPECCIÓN B2B AUTOMATIZADA MULTI-PAÍS -->
+        <div id="tab-content-outreach" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        🚀 Motor de Direct Marketing B2B Automatizado
+                    </h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">
+                        Segmentación Multi-País: El Salvador, Guatemala, Costa Rica, Panamá, México, EE.UU., Inglaterra, Suiza, Francia, Luxemburgo, Alemania, Dinamarca, Noruega y Finlandia.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
+                        ⚡ Gmail SMTP Outbound
+                    </span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- FORMULARIO DE ENVIADOR -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar País Objetivo:</label>
+                        <select id="outreach-country" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
+                            <option value="El Salvador">El Salvador (Español)</option>
+                            <option value="Guatemala">Guatemala (Español)</option>
+                            <option value="Costa Rica">Costa Rica (Español)</option>
+                            <option value="Panama">Panamá (Español)</option>
+                            <option value="Mexico">México (Español)</option>
+                            <option value="Estados Unidos">Estados Unidos (English)</option>
+                            <option value="Inglaterra">Inglaterra / UK (English)</option>
+                            <option value="Suiza">Suiza (English/German)</option>
+                            <option value="Francia">Francia (English/French)</option>
+                            <option value="Luxemburgo">Luxemburgo (English/French)</option>
+                            <option value="Alemania">Alemania (English/German)</option>
+                            <option value="Dinamarca">Dinamarca (English)</option>
+                            <option value="Noruega">Noruega (English)</option>
+                            <option value="Finlandia">Finlandia (English)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Lista de Correos de Prospectos B2B (1 por línea o formato CSV):</label>
+                        <textarea id="outreach-emails-input" rows="5" placeholder="carlos.mendoza@empresa.com, Carlos Mendoza, CFO, Arrendamiento Comercial&#10;ana.gomez@techcompany.com, Ana Gómez, Legal Director, SaaS IT" class="w-full bg-dark-surface border border-dark-border rounded-lg p-3 text-xs font-mono text-white focus:border-accent-blue focus:outline-none"></textarea>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3">
+                        <button onclick="window.AdminDashboard.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all">
+                            🚀 Disparar Campaña B2B Real
+                        </button>
+                        <button onclick="window.AdminDashboard.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all">
+                            🧪 Simulación de Prueba (Test Mode)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- GUÍAS & STATUS -->
+                <div class="bg-dark-surface border border-dark-border rounded-xl p-4 text-xs space-y-3 font-mono">
+                    <h4 class="font-bold text-accent-blue text-sm border-b border-dark-border pb-2">📋 Estado del Despachador</h4>
+                    <p class="text-gray-300">Remitente Configurado: <span class="text-emerald-400">rick28191@gmail.com</span></p>
+                    <p class="text-gray-300">Gancho Monetario: <span class="text-amber-400">$3,500 - $18,000 USD</span></p>
+                    <div id="outreach-status-log" class="p-3 bg-black/40 border border-dark-border rounded-lg text-[11px] text-gray-400 min-h-[100px] overflow-y-auto font-mono">
+                        Esperando orden de lanzamiento de campaña...
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- FOOTER DE ADMINISTRACIÓN -->
@@ -443,12 +511,63 @@
                 document.body.removeChild(link);
             },
 
+            async launchOutreachCampaign(testMode = false) {
+                const country = document.getElementById('outreach-country')?.value || 'El Salvador';
+                const inputArea = document.getElementById('outreach-emails-input')?.value || '';
+                const logBox = document.getElementById('outreach-status-log');
+
+                if (!inputArea.trim()) {
+                    alert('⚠️ Por favor ingresa al menos una dirección de correo o línea de prospecto B2B.');
+                    return;
+                }
+
+                const lines = inputArea.split('\n').filter(l => l.trim().length > 0);
+                const prospects = lines.map(line => {
+                    const parts = line.split(',').map(p => p.trim());
+                    return {
+                        email: parts[0],
+                        name: parts[1] || 'Ejecutivo',
+                        company: parts[2] || 'Empresa B2B',
+                        role: parts[3] || 'Director Financiero / Legal',
+                        country: country
+                    };
+                });
+
+                if (logBox) logBox.innerHTML = `🔄 Iniciando despacho de campaña (${prospects.length} prospectos, País: ${country}, ModoSimulado: ${testMode})...<br>`;
+
+                try {
+                    const res = await fetch('/api/outreach/send-campaign', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-admin-password': this.authToken || 'AuditFlow2026!'
+                        },
+                        body: JSON.stringify({ prospects, test_mode: testMode })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        if (logBox) {
+                            logBox.innerHTML += `<span class="text-emerald-400">✅ ¡Campaña procesada con éxito! (${data.total_processed} prospectos procesados).</span><br>`;
+                            data.details.forEach(d => {
+                                logBox.innerHTML += `• ${d.email} [${d.company}] ➔ ${d.status}<br>`;
+                            });
+                        }
+                    } else {
+                        if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${data.error}</span>`;
+                    }
+                } catch (err) {
+                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error enviando campaña: ${err.message}</span>`;
+                }
+            },
+
             logout() {
                 localStorage.removeItem('auditflow_admin_token');
                 this.authToken = '';
                 document.getElementById('admin-login-modal').classList.remove('hidden');
             }
         };
+
+        window.AdminDashboard = AdminApp;
 
         document.addEventListener('DOMContentLoaded', () => {
             AdminApp.init();

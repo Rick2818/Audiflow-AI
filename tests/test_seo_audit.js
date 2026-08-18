@@ -134,7 +134,24 @@ if (fs.existsSync(sitemapPath)) {
   const sm = fs.readFileSync(sitemapPath, 'utf8');
   assert(sm.includes('auditar-contrato-arrendamiento'), 'sitemap.xml incluye la URL de arrendamiento');
   assert(sm.includes('auditar-factura-proveedor'), 'sitemap.xml incluye la URL de facturas');
-  assert(sm.includes('auditar-contrato-servicios-it'), 'sitemap.xml incluye la URL de contratos IT');
+  assert(sm.includes('auditar-contrato-servicios-it'), 'sitemap.xml includes la URL de contratos IT');
+}
+
+// 8. Verificación de Motor de Prospección B2B Automatizada Multi-País
+console.log(`\n[TEST GROUP 8] Verificación de Motor de Prospección B2B Automatizada Multi-País:`);
+const outreachApiPath = path.join(rootDir, 'api', 'outreach.js');
+assert(fs.existsSync(outreachApiPath), 'El archivo api/outreach.js existe');
+
+if (fs.existsSync(serverPath)) {
+  const sc = fs.readFileSync(serverPath, 'utf8');
+  assert(sc.includes('/api/outreach/send-campaign'), 'server.js contiene endpoint para /api/outreach/send-campaign');
+}
+
+const adminPagePath = path.join(rootDir, 'frontend', 'admin.html');
+if (fs.existsSync(adminPagePath)) {
+  const ac = fs.readFileSync(adminPagePath, 'utf8');
+  assert(ac.includes('outreach-country'), 'admin.html incluye selector de país para campaña B2B');
+  assert(ac.includes('launchOutreachCampaign'), 'admin.html incluye lanzador de campañas B2B automatizadas');
 }
 
 // RESUMEN FINAL
