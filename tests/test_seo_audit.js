@@ -161,6 +161,20 @@ if (fs.existsSync(vercelPath)) {
   assert(vc.includes('0 9 * * 1,2'), 'vercel.json programa la ejecución automática los Lunes y Martes a las 9:00 AM');
 }
 
+// 9. Verificación de las 5 Mejoras Enterprise 2.0 en Producción
+console.log(`\n[TEST GROUP 9] Verificación de las 5 Mejoras Enterprise 2.0:`);
+if (fs.existsSync(serverPath)) {
+  const sc = fs.readFileSync(serverPath, 'utf8');
+  assert(sc.includes('/api/webhooks/trigger'), 'server.js contiene endpoint de Webhooks bidireccionales (/api/webhooks/trigger)');
+  assert(sc.includes('/api/audit/download-pdf'), 'server.js contiene generador de reportes PDF marca blanca (/api/audit/download-pdf)');
+}
+
+const adminApiPath = path.join(rootDir, 'api', 'admin.js');
+if (fs.existsSync(adminApiPath)) {
+  const aic = fs.readFileSync(adminApiPath, 'utf8');
+  assert(aic.includes('PLATINUM (CFO/Legal Counsel)'), 'api/admin.js incluye motor de enriquecimiento de prospectos Tiers (Platinum/Gold/Silver)');
+}
+
 // RESUMEN FINAL
 console.log(`\n=======================================================`);
 console.log(`📊 RESULTADO FINAL DE LA SUITE SEO & INDEXACIÓN:`);

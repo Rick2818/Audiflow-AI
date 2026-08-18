@@ -323,8 +323,16 @@ export default async function handler(req, res) {
       ];
     }
 
-    const totalLeads = leads.length;
-    const enterpriseCandidates = leads.filter(l => l.is_enterprise_candidate || l.is_enterprise || (l.lead_score >= 75)).length;
+    const enrichedLeads = leads.map(l => {
+      const score = Number(l.lead_score) || 75;
+      let tier = 'SILVER';
+      if (score >= 88) tier = 'PLATINUM (CFO/Legal Counsel)';
+      else if (score >= 75) tier = 'GOLD (Director B2B)';
+      return { ...l, tier };
+    });
+
+    const totalLeads = enrichedLeads.length;
+    const enterpriseCandidates = enrichedLeads.filter(l => l.is_enterprise_candidate || l.is_enterprise || (l.lead_score >= 75)).length;
     const totalAudits = Math.max(reports.length, totalLeads + 3);
     const totalRevenueUsd = transactions.reduce((acc, curr) => acc + (Number(curr.amount_usd) || 0), 63.00);
     const totalSatsCollected = transactions.reduce((acc, curr) => acc + (Number(curr.amount_sats) || 0), 10769);
@@ -339,7 +347,7 @@ export default async function handler(req, res) {
         enterprise_leads_count: enterpriseCandidates,
         conversion_rate: `${((enterpriseCandidates / Math.max(totalLeads, 1)) * 100).toFixed(1)}%`
       },
-      leads,
+      leads: enrichedLeads,
       reports,
       transactions,
       timestamp: new Date().toISOString()
