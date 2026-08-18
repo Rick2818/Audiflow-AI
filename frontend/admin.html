@@ -88,7 +88,7 @@
                     ❌ Contraseña incorrecta. Intenta de nuevo.
                 </div>
                 <button type="submit" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-accent-purple to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow">
-                    Ingresar al Control Center
+                    Acceder al Panel / Control Center
                 </button>
             </form>
         </div>
@@ -554,14 +554,14 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                 if (logBox) logBox.innerHTML = `🔄 Iniciando despacho de campaña (${prospects.length} prospectos, País: ${country}, ModoSimulado: ${testMode})...<br>`;
 
                 try {
-                    const res = await fetch('/api/outreach/send-campaign', {
+                    const res = await fetch('/api/admin', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'x-admin-password': savedPass,
                             'Authorization': `Bearer ${this.authToken || ''}`
                         },
-                        body: JSON.stringify({ prospects, test_mode: testMode, admin_password: savedPass })
+                        body: JSON.stringify({ action: 'send_outreach_campaign', prospects, test_mode: testMode, admin_password: savedPass })
                     });
                     
                     const text = await res.text();

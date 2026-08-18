@@ -10,14 +10,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    const adminPassword = req.headers['x-admin-password'] || req.body?.admin_password || req.query?.admin_password;
+    let body = req.body || {};
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
+
+    const adminPassword = req.headers['x-admin-password'] || body?.admin_password || req.query?.admin_password;
     const expectedPassword = process.env.ADMIN_PASSWORD || 'AuditFlow2026!';
 
     if (adminPassword !== expectedPassword) {
       return res.status(401).json({ success: false, error: 'No autorizado. Contraseña de administración incorrecta.' });
     }
 
-    const { prospects, test_mode = false } = req.body || {};
+    const { prospects, test_mode = false } = body;
 
     if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
       return res.status(400).json({ success: false, error: 'Se requiere una lista válida de prospectos en req.body.prospects' });
