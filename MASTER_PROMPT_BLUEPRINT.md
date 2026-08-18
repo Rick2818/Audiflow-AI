@@ -126,6 +126,26 @@ Para maximizar la tasa de conversión e ingresos en los próximos 3 MicroSaaS, i
    - Integrar un servicio de enriquecimiento de datos que valide el cargo exacto del prospecto (LinkedIn Sales Navigator) antes de despachar la secuencia de correo frío.
 
 ================================================================================
+FASE 8: CHECKLIST PREVENTIVO DE CALIDAD Y REGLAS ANTI-ERRORES 2.0 (5 REGLAS DE ORO)
+================================================================================
+Para garantizar que NINGUNO de los 5 errores de lógica se repita en desarrollos futuros, todo agente de IA o desarrollador DEBE aplicar preventivamente estas 5 reglas:
+
+1. REGLA 1 (INICIALIZACIÓN DE ACUMULADORES MATH):
+   - Todo método `.reduce()` para sumar métricas de facturación (USD) o créditos (Sats/Puntos) DEBE inicializarse obligatoriamente en `0` (`.reduce((acc, curr) => acc + val, 0)`). NUNCA pasar valores sintéticos pre-existentes como acumulador inicial para evitar la duplicación de ingresos en el dashboard.
+
+2. REGLA 2 (RENDERIZADO DE QR CODES MULTI-CAPA):
+   - Todo código QR de pasarelas de pago (Lightning/Crypto/Stripe) DEBE intentar primero la generación local mediante Canvas/SVG (`QRCode.js`). Si se usa una API de imagen externa como fallback, DEBE incluir manejador `onerror` con alternativa de texto copiable para evitar códigos rotos en navegadores con ad-blockers o VPNs.
+
+3. REGLA 3 (BLINDAJE EN BLOQUES CATCH DE PAGOS):
+   - Los bloques de captura de errores (`try/catch`) en pasarelas de pago (Stripe/PayPal) NUNCA deben llamar a funciones de desbloqueo del producto ni emitir alertas de "Pago Exitoso". En caso de fallo técnico o de red, DEBEN mostrar la alerta de error correspondiente sin otorgar acceso gratuito no autorizado.
+
+4. REGLA 4 (DETECCIÓN INDIVIDUAL DE IDIOMA EN ENVÍOS MASIVOS):
+   - En campañas masivas de Direct Marketing, la lógica de idioma DEBE evaluarse individualmente por cada prospecto procesado (`parts[4] || country`), forzando plantillas en Inglés para EE.UU. y países europeos (UK, Suiza, Francia, Luxemburgo, Alemania, Dinamarca, Noruega, Finlandia).
+
+5. REGLA 5 (TOLERANCIA A POLLING EN ARQUITECTURAS SERVERLESS EFÍMERAS):
+   - Las consultas periódicas de estado (polling `/api/report/:id`) deben tolerar desconexiones o respuestas 404 provenientes de Lambdas serverless efímeras, deteniendo los temporizadores limpia y automáticamente tras 5-10 minutos de inactividad.
+
+================================================================================
 EJECUCIÓN Y VALIDACIÓN
 ================================================================================
 - Ejecutar suite de pruebas automatizadas unitarias e integradas (certificando el 100% de pases).
