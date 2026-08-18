@@ -88,6 +88,14 @@
       "dest": "api/report-issue.js"
     },
     {
+      "src": "/api/outreach/send-campaign",
+      "dest": "api/outreach.js"
+    },
+    {
+      "src": "/api/outreach",
+      "dest": "api/outreach.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "server.js"
     },

@@ -532,6 +532,7 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                 const country = document.getElementById('outreach-country')?.value || 'El Salvador';
                 const inputArea = document.getElementById('outreach-emails-input')?.value || '';
                 const logBox = document.getElementById('outreach-status-log');
+                const savedPass = localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
 
                 if (!inputArea.trim()) {
                     alert('⚠️ Por favor ingresa al menos una dirección de correo o línea de prospecto B2B.');
@@ -557,20 +558,29 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'x-admin-password': this.authToken || 'AuditFlow2026!'
+                            'x-admin-password': savedPass,
+                            'Authorization': `Bearer ${this.authToken || ''}`
                         },
-                        body: JSON.stringify({ prospects, test_mode: testMode })
+                        body: JSON.stringify({ prospects, test_mode: testMode, admin_password: savedPass })
                     });
-                    const data = await res.json();
+                    
+                    const text = await res.text();
+                    let data;
+                    try {
+                        data = JSON.parse(text);
+                    } catch (pErr) {
+                        data = { success: false, error: `Error HTTP ${res.status}: ${text.substring(0, 150)}` };
+                    }
+
                     if (data.success) {
                         if (logBox) {
                             logBox.innerHTML += `<span class="text-emerald-400">✅ ¡Campaña procesada con éxito! (${data.total_processed} prospectos procesados).</span><br>`;
-                            data.details.forEach(d => {
+                            (data.details || []).forEach(d => {
                                 logBox.innerHTML += `• ${d.email} [${d.company}] ➔ ${d.status}<br>`;
                             });
                         }
                     } else {
-                        if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${data.error}</span>`;
+                        if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${data.error || 'Fallo de respuesta'}</span>`;
                     }
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error enviando campaña: ${err.message}</span>`;
