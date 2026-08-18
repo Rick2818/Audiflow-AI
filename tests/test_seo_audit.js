@@ -152,6 +152,13 @@ if (fs.existsSync(adminPagePath)) {
   const ac = fs.readFileSync(adminPagePath, 'utf8');
   assert(ac.includes('outreach-country'), 'admin.html incluye selector de país para campaña B2B');
   assert(ac.includes('launchOutreachCampaign'), 'admin.html incluye lanzador de campañas B2B automatizadas');
+  assert(ac.includes('carlos.mendoza@empresa-sv.com'), 'admin.html contiene la lista precargada de prospectos B2B multi-país');
+}
+
+if (fs.existsSync(vercelPath)) {
+  const vc = fs.readFileSync(vercelPath, 'utf8');
+  assert(vc.includes('"crons"'), 'vercel.json contiene configuración de crons automatizados');
+  assert(vc.includes('0 9 * * 1,2'), 'vercel.json programa la ejecución automática los Lunes y Martes a las 9:00 AM');
 }
 
 // RESUMEN FINAL
