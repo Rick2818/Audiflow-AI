@@ -222,9 +222,9 @@
                     </p>
                 </div>
                 <div class="flex items-center gap-2">
-                    <span class="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono font-bold">
-                        ⚡ Gmail SMTP Outbound
-                    </span>
+                    <button id="btn-test-smtp" onclick="AdminApp.testSmtpConnection()" class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold border border-emerald-500/30 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm">
+                        ⚡ Probar Conexión Gmail SMTP Outbound
+                    </button>
                 </div>
             </div>
 
@@ -595,6 +595,41 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                     alert('❌ Error enviando campaña: ' + err.message);
                 } finally {
                     if (targetBtn) targetBtn.innerText = originalText;
+                }
+            },
+
+            async testSmtpConnection() {
+                const btn = document.getElementById('btn-test-smtp');
+                const logBox = document.getElementById('outreach-status-log');
+                const savedPass = localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
+                const originalText = '⚡ Probar Conexión Gmail SMTP Outbound';
+
+                if (btn) btn.innerText = '⏳ Verificando servidor SMTP...';
+                if (logBox) logBox.innerHTML = `🔄 Probando autenticación con el servidor Gmail SMTP...<br>`;
+
+                try {
+                    const res = await fetch('/api/admin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-admin-password': savedPass,
+                            'Authorization': `Bearer ${this.authToken || ''}`
+                        },
+                        body: JSON.stringify({ action: 'test_smtp_connection', admin_password: savedPass })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        if (logBox) logBox.innerHTML += `<span class="text-emerald-400">✅ ${data.message}</span><br>`;
+                        alert(`✅ ${data.message}`);
+                    } else {
+                        if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error SMTP: ${data.error}</span><br>`;
+                        alert(`❌ Error al conectar con Gmail SMTP: ${data.error}`);
+                    }
+                } catch (err) {
+                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error de Red: ${err.message}</span><br>`;
+                    alert(`❌ Error de Red comprobando SMTP: ${err.message}`);
+                } finally {
+                    if (btn) btn.innerText = originalText;
                 }
             },
 

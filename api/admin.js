@@ -56,6 +56,27 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { action, email, name, prospects, test_mode = false } = req.body || {};
 
+    // Acción: Probar Conexión Gmail SMTP Outbound
+    if (action === 'test_smtp_connection') {
+      const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+      const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+
+      try {
+        const transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: gmailUser, pass: gmailPass }
+        });
+        await transporter.verify();
+        return res.status(200).json({
+          success: true,
+          message: `Conexión Gmail SMTP AUTENTICADA Y VERIFICADA con éxito (${gmailUser})`,
+          gmailUser
+        });
+      } catch (err) {
+        return res.status(500).json({ success: false, error: err.message });
+      }
+    }
+
     // Acción: Disparar Campaña de Prospección B2B Automatizada
     if (action === 'send_outreach_campaign' || req.url.includes('outreach')) {
       if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
