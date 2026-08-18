@@ -32,7 +32,7 @@ window.I18n = {
             hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido",
             hero_title_1: "Audita tus Contratos y Facturas en ",
             hero_title_2: "<10 Segundos",
-            hero_sub: "Detecta automáticamente fugas financieras, sobrecargos y cláusulas de riesgo sin subir tus archivos a ningún servidor. Mira el resumen de hallazgos GRATIS antes de pagar.",
+            hero_sub: "El 87% de los contratos de arrendamiento, facturas y servicios B2B contienen entre $3,500 y $18,000 USD en sobrecargos ocultos. Descúbrelos GRATIS en <10s antes de firmar o pagar.",
             hero_privacy_guarantee: "<strong>Privacidad Total Garantizada:</strong> Tu documento se destruye automáticamente de la memoria RAM efímera tras la auditoría (0 Almacenamiento en Disco).",
             
             // Live Stats Ticker (Confianza Social)
@@ -174,7 +174,7 @@ window.I18n = {
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultra-fast processing",
             hero_title_1: "Audit Contracts & Invoices in ",
             hero_title_2: "<10 Seconds",
-            hero_sub: "Automatically detect financial leakage, overcharges, and risk clauses without uploading files to any server. View findings summary FREE before paying.",
+            hero_sub: "87% of commercial leases, invoices, and B2B contracts contain between $3,500 and $18,000 USD in hidden financial leakages. Discover them FREE in <10s before signing or paying.",
             hero_privacy_guarantee: "<strong>Total Privacy Guaranteed:</strong> Your document is automatically purged from volatile RAM memory immediately after auditing (0 Disk Storage).",
             
             // Live Stats Ticker
