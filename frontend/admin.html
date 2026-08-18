@@ -274,10 +274,10 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                     </div>
 
                     <div class="flex flex-wrap items-center gap-3">
-                        <button onclick="window.AdminDashboard.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all">
+                        <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer">
                             🚀 Disparar Campaña B2B Real
                         </button>
-                        <button onclick="window.AdminDashboard.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all">
+                        <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
                             🧪 Simulación de Prueba (Test Mode)
                         </button>
                     </div>
@@ -529,6 +529,8 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
             },
 
             async launchOutreachCampaign(testMode = false) {
+                const btnReal = document.getElementById('btn-launch-outreach-real');
+                const btnTest = document.getElementById('btn-launch-outreach-test');
                 const country = document.getElementById('outreach-country')?.value || 'El Salvador';
                 const inputArea = document.getElementById('outreach-emails-input')?.value || '';
                 const logBox = document.getElementById('outreach-status-log');
@@ -550,6 +552,10 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                         country: country
                     };
                 });
+
+                const originalText = testMode ? '🧪 Simulación de Prueba (Test Mode)' : '🚀 Disparar Campaña B2B Real';
+                const targetBtn = testMode ? btnTest : btnReal;
+                if (targetBtn) targetBtn.innerText = '⏳ Despachando correos...';
 
                 if (logBox) logBox.innerHTML = `🔄 Iniciando despacho de campaña (${prospects.length} prospectos, País: ${country}, ModoSimulado: ${testMode})...<br>`;
 
@@ -579,11 +585,16 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Software, General Counsel, Fi
                                 logBox.innerHTML += `• ${d.email} [${d.company}] ➔ ${d.status}<br>`;
                             });
                         }
+                        alert(`✅ ¡Campaña procesada con éxito! (${data.total_processed} prospectos procesados).`);
                     } else {
                         if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${data.error || 'Fallo de respuesta'}</span>`;
+                        alert('⚠️ ' + (data.error || 'Error al procesar la campaña'));
                     }
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error enviando campaña: ${err.message}</span>`;
+                    alert('❌ Error enviando campaña: ' + err.message);
+                } finally {
+                    if (targetBtn) targetBtn.innerText = originalText;
                 }
             },
 
