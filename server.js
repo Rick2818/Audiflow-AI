@@ -19,6 +19,9 @@ import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+import crossAuditHandler from './api/cross-audit.js';
+import exportDocxHandler from './api/export-docx.js';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -127,6 +130,9 @@ app.post('/api/indexnow/submit', async (req, res) => {
     return res.status(500).json({ error: err.message });
   }
 });
+
+app.post('/api/cross-audit', crossAuditHandler);
+app.post('/api/export-docx', exportDocxHandler);
 
 // Middleware global de cabeceras de seguridad HTTP
 app.use((req, res, next) => {

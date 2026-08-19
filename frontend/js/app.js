@@ -838,6 +838,56 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
             successBanner.classList.remove('hidden');
             successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
+    },
+
+    downloadDocxRedlines() {
+        const title = (this.selectedFile ? this.selectedFile.name : 'Contrato') + '_Redlines';
+        const counterProposal = (this.currentAuditData && this.currentAuditData.counter_proposal_playbook) ? this.currentAuditData.counter_proposal_playbook : '';
+        const content = (this.currentAuditData && this.currentAuditData.summary) ? `<p>${this.currentAuditData.summary}</p>` : '';
+
+        fetch('/api/export-docx', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title, content, counter_proposal: counterProposal })
+        })
+        .then(res => res.blob())
+        .then(blob => {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = `${title}.doc`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        })
+        .catch(err => {
+            alert('Error descargando Word: ' + err.message);
+        });
+    },
+
+    downloadIcalEvents() {
+        const events = (this.currentAuditData && this.currentAuditData.calendar_events) ? this.currentAuditData.calendar_events : [
+            {
+                title: "Vencimiento Contrato / Preaviso No Renovación",
+                date: "2026-12-15",
+                description: "Notificar decisión de renovación con anticipación según contrato."
+            }
+        ];
+
+        let icsContent = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AuditFlow AI//Calendar Reminders//ES\n";
+        events.forEach((ev) => {
+            const dt = (ev.date || '2026-12-15').replace(/-/g, '');
+            icsContent += `BEGIN:VEVENT\nSUMMARY:${ev.title || 'Recordatorio Contrato AuditFlow'}\nDESCRIPTION:${ev.description || 'Recordatorio automático'}\nDTSTART:${dt}T090000Z\nDTEND:${dt}T100000Z\nEND:VEVENT\n`;
+        });
+        icsContent += "END:VCALENDAR";
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'auditflow_vencimientos.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        alert('📅 Archivo de calendario (.ics) generado. Ábrelo para agregar los vencimientos a Google Calendar o Outlook.');
     }
 };
 

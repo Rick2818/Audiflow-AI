@@ -146,6 +146,24 @@ Para garantizar que NINGUNO de los 5 errores de lógica se repita en desarrollos
    - Las consultas periódicas de estado (polling `/api/report/:id`) deben tolerar desconexiones o respuestas 404 provenientes de Lambdas serverless efímeras, deteniendo los temporizadores limpia y automáticamente tras 5-10 minutos de inactividad.
 
 ================================================================================
+FASE 9: NÚCLEO DE ADQUISICIÓN DE 4 CANALES Y 5 MÓDULOS ENTERPRISE
+================================================================================
+Todo nuevo MicroSaaS B2B DEBE incorporar de forma nativa los siguientes componentes de adquisición y valor:
+
+1. NÚCLEO DE ADQUISICIÓN DE 4 CANALES GRATIS (EN DASHBOARD `/admin`):
+   - Canal 1: Direct Email Outreach B2B multi-país con plantillas dinámicas por nicho y automatización Vercel Cron.
+   - Canal 2: SEO Programático e IndexNow Pinger (notificaciones <5s a Bing/Yandex) con datos estructurados `HowTo` y `BreadcrumbList`.
+   - Canal 3: Lanzamiento en Directorios B2B (Product Hunt, SaaSHub, AlternativeTo) para captura de backlinks gratis.
+   - Canal 4: Generador de Publicaciones Orgánicas (Social Copywriting) para LinkedIn y Reddit listo para copiar en 1 clic.
+
+2. LOS 5 MÓDULOS ENTERPRISE DE ALTA CONVERSIÓN:
+   - Módulo 1: Auditoría Cruzada 2-Way (Reconciliación Contrato vs Factura / Documento A vs Documento B).
+   - Módulo 2: Playbooks de Negociación y Redlining con generación de propuestas de objeción.
+   - Módulo 3: Matriz de Riesgo por Semáforo (Traffic Light Heatmap: Rojo Crítico, Amarillo Moderado, Verde Conforme).
+   - Módulo 4: Exportación a Microsoft Word (.docx) con formato de marcas de revisión (*Track Changes*).
+   - Módulo 5: Motor de Recordatorios de Vencimiento iCalendar (.ics) para sincronización con Google Calendar y Outlook.
+
+================================================================================
 EJECUCIÓN Y VALIDACIÓN
 ================================================================================
 - Ejecutar suite de pruebas automatizadas unitarias e integradas (certificando el 100% de pases).

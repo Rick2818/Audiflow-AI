@@ -68,12 +68,27 @@ Este documento es el activo de conocimiento supremo y la memoria técnica del ag
 4. **A/B Testing Dinámico (`?v=1` vs `?v=2`):** Alternar titulares y precios registrando la dimensión `ab_variant` en GA4.
 5. **Enriquecimiento por Tiers (Platinum/Gold/Silver):** Clasificar automáticamente a los prospectos B2B según la jerarquía ejecutiva.
 
-### FASE 8: CHECKLIST PREVENTIVO ANTI-ERRORES (5 REGLAS DE ORO)
-1. **REGLA 1 (Math Accumulators):** Todo `.reduce()` en KPIs debe inicializarse en `0` (`.reduce((acc, curr) => acc + val, 0)`), nunca con valores preexistentes.
-2. **REGLA 2 (QR Codes Robustos):** Intentar primero la generación local mediante Canvas/SVG (`QRCode.js`). Si se usa una API externa, incluir `onerror` con alternativa copiable.
-3. **REGLA 3 (Catch Blocks en Pagos):** Los bloques `catch` en pasarelas jamás deben desbloquear el producto o reportar pago exitoso. Deben notificar el error de red de forma segura.
-4. **REGLA 4 (Detección de Idioma por Fila):** La plantilla se evalúa individualmente por prospecto (`parts[4] || country`), forzando inglés para EE.UU. y Europa.
-5. **REGLA 5 (Tolerancia Polling Serverless):** Las consultas periódicas (`/api/report/:id`) deben tolerar desconexiones de Lambdas efímeras de Vercel y detenerse tras 5-10 minutos.
+### FASE 8: CHECKLIST PREVENTIVO DE CALIDAD Y REGLAS ANTI-ERRORES 2.0 (5 REGLAS DE ORO)
+1. **Regla 1 (Acumuladores Math)**: Todo `.reduce()` DEBE inicializarse en `0` (`.reduce((acc, curr) => acc + val, 0)`). NUNCA usar acumuladores implícitos.
+2. **Regla 2 (QR Codes Multi-Capa)**: Generar primero localmente mediante Canvas/SVG (`QRCode.js`) con fallback de texto.
+3. **Regla 3 (Blindaje Catch en Pagos)**: NUNCA llamar a funciones de desbloqueo en bloques `catch` de pagos.
+4. **Regla 4 (Detección Individual de Idioma)**: Evaluar la plantilla de correo en Inglés individualmente por prospecto para EE.UU. y Europa.
+5. **Regla 5 (Tolerancia a Polling Serverless)**: El polling en frontend debe detenerse automáticamente tras 5 minutos de inactividad.
+
+### FASE 9: NÚCLEO DE ADQUISICIÓN DE 4 CANALES Y 5 MÓDULOS ENTERPRISE
+1. **4 Canales Gratis integrados en `/admin`**: Cold Email Outreach Automatizado, SEO Programático e IndexNow (<5s), Lanzamiento en Directorios B2B (Product Hunt / SaaSHub / AlternativeTo) y Generador de Copywriting Social por Nicho.
+2. **5 Módulos Enterprise de Alta Conversión**:
+   * Auditoría Cruzada 2-Way (Contrato vs Factura).
+   * Playbook de Negociación & Auto-Redlining.
+   * Traffic Light Risk Heatmap (Semáforo Rojo/Amarillo/Verde).
+   * Exportación a Word (.docx) con Control de Cambios.
+   * Motor de Recordatorios de Vencimientos iCalendar (.ics).
+
+---
+
+## 🛠️ Comando Maestro de Creación
+
+Cuando el usuario solicite construir un nuevo MicroSaaS B2B, ejecuta autónomamente toda esta arquitectura dual, SEO programático, embudo de ventas de $7/$49, los 4 canales de adquisición gratis y los 5 módulos enterprise, realizando la verificación completa mediante pruebas automatizadas antes de concluir.
 
 ---
 

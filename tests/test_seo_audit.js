@@ -74,6 +74,8 @@ if (fs.existsSync(indexPath)) {
   assert(indexContent.includes('@type": "SoftwareApplication"'), 'Schema.org incluye entidad SoftwareApplication');
   assert(indexContent.includes('aggregateRating'), 'SoftwareApplication incluye aggregateRating');
   assert(indexContent.includes('@type": "FAQPage"'), 'Schema.org incluye entidad FAQPage');
+  assert(indexContent.includes('@type": "HowTo"'), 'Schema.org incluye entidad HowTo (Pasos de Auditoría)');
+  assert(indexContent.includes('@type": "BreadcrumbList"'), 'Schema.org incluye entidad BreadcrumbList (Navegación)');
   
   // Verificación de sintaxis limpia (no contiene tags duplicados corruptos)
   assert(!indexContent.includes('</div>                        <span data-i18n="upsell_btn">'), 'index.html no contiene fragmentos de HTML corruptos');

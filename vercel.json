@@ -26,6 +26,18 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/indexnow.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/cross-audit.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/export-docx.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "frontend/**",
       "use": "@vercel/static"
     }
@@ -82,6 +94,18 @@
     {
       "src": "/api/payment/subscribe",
       "dest": "api/subscribe.js"
+    },
+    {
+      "src": "/api/indexnow(.*)",
+      "dest": "api/indexnow.js"
+    },
+    {
+      "src": "/api/cross-audit",
+      "dest": "api/cross-audit.js"
+    },
+    {
+      "src": "/api/export-docx",
+      "dest": "api/export-docx.js"
     },
     {
       "src": "/api/report-issue",

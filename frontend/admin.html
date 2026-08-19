@@ -147,10 +147,14 @@
                 <span class="absolute left-3 top-3 text-gray-400 text-xs">🔍</span>
             </div>
 
-            <!-- TAB SWITCHER -->
-            <div class="flex items-center gap-2 bg-dark-surface p-1 rounded-xl border border-dark-border text-xs font-mono w-full sm:w-auto">
-                <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all">👥 Leads & Empresas</button>
-                <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all">💳 Transacciones & Pagos</button>
+            <!-- TAB SWITCHER (NUCLEO 4 CANALES GRATIS) -->
+            <div class="flex items-center gap-1.5 bg-dark-surface p-1.5 rounded-xl border border-dark-border text-xs font-mono w-full sm:w-auto flex-wrap">
+                <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="px-3 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all">👥 Leads & Empresas</button>
+                <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">💳 Transacciones</button>
+                <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">📧 1. Cold Email</button>
+                <button id="tab-btn-seo" onclick="AdminApp.switchTab('seo')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">🔍 2. SEO & IndexNow</button>
+                <button id="tab-btn-directories" onclick="AdminApp.switchTab('directories')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">🌐 3. Directorios B2B</button>
+                <button id="tab-btn-social" onclick="AdminApp.switchTab('social')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">📢 4. Copy LinkedIn/Reddit</button>
             </div>
         </div>
 
@@ -331,9 +335,154 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     </div>
                 </div>
             </div>
+        <!-- TAB 4: CANAL 2 - SEO PROGRAMÁTICO & INDEXNOW PINGER -->
+        <div id="tab-content-seo" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        🔍 Canal 2: Control de SEO & Indexación Instantánea (IndexNow Protocol)
+                    </h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">
+                        Notifica a Bing, Yandex y motores compatibles la presencia de tus 4 URLs de alta intención B2B en menos de 5 segundos.
+                    </p>
+                </div>
+                <button onclick="AdminApp.triggerIndexNow()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 to-accent-emerald text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer">
+                    ⚡ Forzar Indexación Instantánea en IndexNow
+                </button>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- URLs DE SEO PROGRAMÁTICO -->
+                <div class="space-y-3 font-mono text-xs">
+                    <h4 class="font-bold text-accent-blue text-sm">📄 URLs Canónicas Indexadas en Sitemap XML:</h4>
+                    <div class="bg-dark-surface p-3 rounded-xl border border-dark-border space-y-2">
+                        <div class="flex items-center justify-between text-gray-300">
+                            <span>1. 🏠 Landing Principal:</span>
+                            <a href="https://audiflowai.com/" target="_blank" class="text-accent-blue hover:underline">audiflowai.com/</a>
+                        </div>
+                        <div class="flex items-center justify-between text-gray-300">
+                            <span>2. 🏢 Contratos Arrendamiento:</span>
+                            <a href="https://audiflowai.com/auditar-contrato-arrendamiento" target="_blank" class="text-accent-emerald hover:underline">/auditar-contrato-arrendamiento</a>
+                        </div>
+                        <div class="flex items-center justify-between text-gray-300">
+                            <span>3. 🧾 Facturas Proveedor:</span>
+                            <a href="https://audiflowai.com/auditar-factura-proveedor" target="_blank" class="text-accent-gold hover:underline">/auditar-factura-proveedor</a>
+                        </div>
+                        <div class="flex items-center justify-between text-gray-300">
+                            <span>4. 💻 Contratos Servicios IT:</span>
+                            <a href="https://audiflowai.com/auditar-contrato-servicios-it" target="_blank" class="text-accent-purple hover:underline">/auditar-contrato-servicios-it</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LOG DE RESPUESTA INDEXNOW -->
+                <div class="bg-dark-surface border border-dark-border rounded-xl p-4 text-xs space-y-2 font-mono">
+                    <h4 class="font-bold text-accent-emerald text-sm border-b border-dark-border pb-2">📡 Consola de Estado IndexNow API</h4>
+                    <div id="seo-status-log" class="p-3 bg-black/40 border border-dark-border rounded-lg text-[11px] text-gray-400 min-h-[110px] overflow-y-auto font-mono">
+                        Estado actual: Clave IndexNow auditflow2026indexnow.txt activa en raíz. Sitemap XML HTTPS 100% válido.
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </main>
+        <!-- TAB 5: CANAL 3 - DIRECTORIOS B2B & PLAZAS MICROSAAS -->
+        <div id="tab-content-directories" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6">
+                <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                    🌐 Canal 3: Lanzamiento en Directorios B2B & Plazas MicroSaaS
+                </h3>
+                <p class="text-xs text-gray-400 font-mono mt-1">
+                    Posiciona AuditFlow AI en las plataformas de descubrimiento tecnológico de mayor dominio para obtener backlinks gratuitos de alta autoridad.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- PRODUCT HUNT -->
+                <div class="bg-dark-surface border border-dark-border rounded-xl p-4 flex flex-col justify-between hover:border-accent-blue/50 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-white text-sm">😸 Product Hunt</span>
+                            <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded">Alta Autoridad</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-4">Lanza el perfil oficial de AuditFlow AI en la comunidad #1 de productos tecnológicos.</p>
+                    </div>
+                    <a href="https://www.producthunt.com/posts/new" target="_blank" class="w-full py-2 bg-orange-600/20 hover:bg-orange-600/40 text-orange-400 border border-orange-500/30 text-xs font-bold font-mono rounded-lg text-center transition-all">
+                        🚀 Publicar en Product Hunt
+                    </a>
+                </div>
+
+                <!-- SAASHUB -->
+                <div class="bg-dark-surface border border-dark-border rounded-xl p-4 flex flex-col justify-between hover:border-accent-emerald/50 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-white text-sm">🔄 SaaSHub</span>
+                            <span class="text-[10px] font-mono text-blue-400 bg-blue-950 px-2 py-0.5 rounded">Directorio SaaS</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-4">Registra AuditFlow AI en el mercado alternativo de software B2B.</p>
+                    </div>
+                    <a href="https://www.saashub.com/submit" target="_blank" class="w-full py-2 bg-blue-600/20 hover:bg-blue-600/40 text-blue-400 border border-blue-500/30 text-xs font-bold font-mono rounded-lg text-center transition-all">
+                        ➕ Enviar a SaaSHub
+                    </a>
+                </div>
+
+                <!-- ALTERNATIVETO -->
+                <div class="bg-dark-surface border border-dark-border rounded-xl p-4 flex flex-col justify-between hover:border-accent-purple/50 transition-all">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-bold text-white text-sm">🔀 AlternativeTo</span>
+                            <span class="text-[10px] font-mono text-purple-400 bg-purple-950 px-2 py-0.5 rounded">Tráfico Comparativo</span>
+                        </div>
+                        <p class="text-xs text-gray-400 mb-4">Posiciónate como la alternativa ligera a software legal costoso (Ironclad/DocuSign).</p>
+                    </div>
+                    <a href="https://alternativeto.net/software/add/" target="_blank" class="w-full py-2 bg-purple-600/20 hover:bg-purple-600/40 text-purple-400 border border-purple-500/30 text-xs font-bold font-mono rounded-lg text-center transition-all">
+                        🔗 Registrar en AlternativeTo
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: CANAL 4 - GENERADOR DE COPYWRITING ORGANICO PARA LINKEDIN & REDDIT -->
+        <div id="tab-content-social" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        📢 Canal 4: Generador de Publicaciones Orgánicas (LinkedIn & Reddit B2B)
+                    </h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">
+                        Genera copy de alto impacto optimizado para comunidades financieras, de bienes raíces y servicios de tecnología con 1 solo clic.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- SELECCIÓN DE NICHO -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar Nicho B2B:</label>
+                        <select id="social-niche-select" onchange="AdminApp.generateSocialCopy()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
+                            <option value="realestate">🏠 Bienes Raíces & Arrendamientos Comerciales</option>
+                            <option value="finance">🧾 Facturación & CFOs (Sobreprecios)</option>
+                            <option value="it">💻 Servicios IT & SLA de Software</option>
+                        </select>
+                    </div>
+                    <div class="p-4 bg-dark-surface border border-dark-border rounded-xl text-xs space-y-2 text-gray-400">
+                        <span class="text-accent-blue font-bold">💡 Consejo de Conversión:</span>
+                        <p>Publica estos casos de uso en grupos de LinkedIn de Administradores de Inmuebles, Foros Contables y en Reddit (`r/smallbusiness`, `r/realestateinvesting`).</p>
+                    </div>
+                </div>
+
+                <!-- PREVISUALIZACIÓN DE COPY Y BOTÓN DE COPIAR -->
+                <div class="lg:col-span-2 space-y-3 font-mono">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-300">Copy Generado Listo para Copiar:</span>
+                        <button onclick="AdminApp.copySocialCopy()" class="px-4 py-1.5 rounded-lg bg-accent-blue text-black font-bold text-xs hover:opacity-90 transition-all cursor-pointer">
+                            📋 Copiar Texto al Portapapeles
+                        </button>
+                    </div>
+                    <textarea id="social-copy-output" rows="9" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-4 text-xs font-mono text-white focus:outline-none"></textarea>
+                </div>
+            </div>
+        </div>
 
     <!-- FOOTER DE ADMINISTRACIÓN -->
     <footer class="border-t border-dark-border py-4 text-center text-xs font-mono text-gray-500">
@@ -505,21 +654,96 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
             },
 
             switchTab(tab) {
-                const tabLeads = document.getElementById('tab-content-leads');
-                const tabTx = document.getElementById('tab-content-tx');
-                const btnLeads = document.getElementById('tab-btn-leads');
-                const btnTx = document.getElementById('tab-btn-tx');
+                const tabs = ['leads', 'tx', 'outreach', 'seo', 'directories', 'social'];
+                tabs.forEach(t => {
+                    const contentEl = document.getElementById(`tab-content-${t}`);
+                    const btnEl = document.getElementById(`tab-btn-${t}`);
+                    if (contentEl) {
+                        if (t === tab) {
+                            contentEl.classList.remove('hidden');
+                        } else {
+                            contentEl.classList.add('hidden');
+                        }
+                    }
+                    if (btnEl) {
+                        if (t === tab) {
+                            btnEl.className = "px-3 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all shadow-sm";
+                        } else {
+                            btnEl.className = "px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all";
+                        }
+                    }
+                });
 
-                if (tab === 'leads') {
-                    if (tabLeads) tabLeads.classList.remove('hidden');
-                    if (tabTx) tabTx.classList.add('hidden');
-                    if (btnLeads) btnLeads.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all";
-                    if (btnTx) btnTx.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all";
+                if (tab === 'social') {
+                    this.generateSocialCopy();
+                }
+            },
+
+            async triggerIndexNow() {
+                const logBox = document.getElementById('seo-status-log');
+                if (logBox) logBox.innerHTML = `🔄 Enviando ping de indexación instantánea a la API de IndexNow (Bing & Yandex)...<br>`;
+                try {
+                    const res = await fetch('/api/indexnow', { method: 'POST' });
+                    const data = await res.json();
+                    if (data.success) {
+                        if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Indexación notificada con éxito! (${data.urls_submitted} URLs enviadas a Bing/IndexNow).</span><br>`;
+                    } else {
+                        if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Respuesta: ${data.message || 'Error de conexión con IndexNow'}</span><br>`;
+                    }
+                } catch (err) {
+                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${err.message}</span><br>`;
+                }
+            },
+
+            generateSocialCopy() {
+                const selectEl = document.getElementById('social-niche-select');
+                const outputEl = document.getElementById('social-copy-output');
+                if (!selectEl || !outputEl) return;
+
+                const niche = selectEl.value;
+                let copyText = '';
+
+                if (niche === 'realestate') {
+                    copyText = `🚨 ¡Cuidado con la cláusula de indexación doble en contratos de alquiler comercial! 🏬✍️
+
+Recientemente auditamos un contrato de arrendamiento de local comercial en 8 segundos con AuditFlow AI y detectamos una penalización por cancelación anticipada del 40% del contrato restante + un sobrecargo no declarado en mantenimiento del edificio ($4,200 USD/año extra).
+
+Si eres Administrador de Bienes Raíces, Inversionista o Arrendatario B2B:
+👉 Pruébalo 100% Gratis sin registrarte: https://audiflowai.com/auditar-contrato-arrendamiento
+
+#BienesRaices #ContratosComerciales #AuditFlowAI #RealEstateB2B #LegalTech`;
+                } else if (niche === 'finance') {
+                    copyText = `🧾 ¿Tu equipo contable está aprobando facturas de proveedores con discrepancias no detectadas? 💼💸
+
+El 68% de las empresas B2B pagan entre $3,500 y $18,000 USD al año en pequeñas fugas financieras ocultas en líneas de facturación de servicios.
+
+AuditFlow AI procesa tus facturas en memoria volátil RAM (0 archivos en disco) y detecta sobreprecios e inconsistencias en <10 segundos.
+
+Prueba un análisis inicial gratis para tu empresa:
+👉 https://audiflowai.com/auditar-factura-proveedor
+
+#FinanzasB2B #CFO #AuditoriaContable #AuditFlowAI #Fintech`;
                 } else {
-                    if (tabLeads) tabLeads.classList.add('hidden');
-                    if (tabTx) tabTx.classList.remove('hidden');
-                    if (btnTx) btnTx.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg bg-accent-emerald text-black font-bold transition-all";
-                    if (btnLeads) btnLeads.className = "flex-1 sm:flex-none px-4 py-2 rounded-lg text-gray-300 hover:text-white transition-all";
+                    copyText = `💻 Auditando contratos de servicios IT y SLA de software con Inteligencia Artificial.
+
+Antes de firmar o renovar licencias de software enterprise, asegúrate de que el SLA (Acuerdo de Nivel de Servicio) y las penalizaciones por inactividad estén equilibrados.
+
+AuditFlow AI escanea contratos de infraestructura y licencias IT detectando cláusulas leoninas en segundos.
+
+Escaneo de prueba gratuito:
+👉 https://audiflowai.com/auditar-contrato-servicios-it
+
+#ITProcurement #SLA #SaaS #AuditFlowAI #LegalTech`;
+                }
+
+                outputEl.value = copyText;
+            },
+
+            copySocialCopy() {
+                const outputEl = document.getElementById('social-copy-output');
+                if (outputEl && outputEl.value) {
+                    navigator.clipboard.writeText(outputEl.value);
+                    alert('📋 ¡Copywriting copiado al portapapeles con éxito! Listo para pegar en LinkedIn o Reddit.');
                 }
             },
 

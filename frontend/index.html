@@ -94,6 +94,67 @@
     }
     </script>
 
+    <!-- Schema.org HowTo Structured Data (Rich Snippets en Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "Cómo Auditar un Contrato o Factura B2B con IA en 3 Pasos",
+      "description": "Proceso instantáneo para detectar sobrecargos y cláusulas de riesgo en contratos y facturas usando IA en memoria volátil RAM.",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "name": "Subir Documento PDF o Imagen",
+          "text": "Arrastra o selecciona tu contrato o factura en la plataforma segura."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Procesamiento Volátil con IA",
+          "text": "La IA Gemini 2.5 Flash analiza el documento en memoria RAM volátil en <10 segundos."
+        },
+        {
+          "@type": "HowToStep",
+          "name": "Descargar Reporte Ejecutivo",
+          "text": "Recibe un desglose claro de penalizaciones, sobrecostos y recomendaciones de renegociación."
+        }
+      ]
+    }
+    </script>
+
+    <!-- Schema.org BreadcrumbList Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Inicio",
+          "item": "https://audiflowai.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Auditar Contrato Arrendamiento",
+          "item": "https://audiflowai.com/auditar-contrato-arrendamiento"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Auditar Factura Proveedor",
+          "item": "https://audiflowai.com/auditar-factura-proveedor"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Auditar Contrato Servicios IT",
+          "item": "https://audiflowai.com/auditar-contrato-servicios-it"
+        }
+      ]
+    }
+    </script>
+
     <!-- Schema.org FAQPage Structured Data para Google Rich Snippets -->
     <script type="application/ld+json">
     {
@@ -472,7 +533,13 @@
                 <button onclick="window.AppHandler.resetToHome()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-border-dark text-gray-300 hover:text-white hover:bg-dark-card transition-all flex items-center gap-2">
                     <span data-i18n="btn_back_home">← Regresar al Inicio / Auditar Otro</span>
                 </button>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="window.AppHandler.downloadDocxRedlines()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5 shadow-sm">
+                        <span>📄 Descargar Word (.docx) Redlines</span>
+                    </button>
+                    <button onclick="window.AppHandler.downloadIcalEvents()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 transition-all flex items-center gap-1.5 shadow-sm">
+                        <span>📅 Recordatorios Calendario (.ics)</span>
+                    </button>
                     <button onclick="window.AppHandler.openSupportModal()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-purple-500/40 text-purple-400 hover:bg-purple-500/10 transition-all flex items-center gap-2 shadow-sm">
                         <span data-i18n="btn_ai_support">🤖 Soporte IA 24/7 (Corregir con IA)</span>
                     </button>
