@@ -890,6 +890,25 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         alert('📅 Archivo de calendario (.ics) generado. Ábrelo para agregar los vencimientos a Google Calendar o Outlook.');
     },
 
+    updateRoiCalculator() {
+        const slider = document.getElementById('roi-contracts-slider');
+        const valEl = document.getElementById('roi-contracts-value');
+        const lossEl = document.getElementById('roi-calculated-loss');
+        const netEl = document.getElementById('roi-net-savings');
+
+        if (!slider || !valEl || !lossEl || !netEl) return;
+
+        const count = parseInt(slider.value) || 8;
+        valEl.innerText = `${count} documentos/mes`;
+
+        const annualLoss = count * 1800;
+        const planCost = 588;
+        const netSavings = Math.max(annualLoss - planCost, 0);
+
+        lossEl.innerText = `$${annualLoss.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD/año`;
+        netEl.innerText = `$${netSavings.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD/año`;
+    },
+
     openChatCopilotModal() {
         const modal = document.getElementById('chat-copilot-modal');
         if (modal) modal.classList.remove('hidden');
