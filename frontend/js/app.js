@@ -888,6 +888,93 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         link.click();
         document.body.removeChild(link);
         alert('📅 Archivo de calendario (.ics) generado. Ábrelo para agregar los vencimientos a Google Calendar o Outlook.');
+    },
+
+    openChatCopilotModal() {
+        const modal = document.getElementById('chat-copilot-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closeChatCopilotModal() {
+        const modal = document.getElementById('chat-copilot-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    sendQuickChatQuestion(questionText) {
+        const inputEl = document.getElementById('chat-copilot-input');
+        if (inputEl) {
+            inputEl.value = questionText;
+            this.handleChatFormSubmit();
+        }
+    },
+
+    async handleChatFormSubmit(e) {
+        if (e) e.preventDefault();
+        const inputEl = document.getElementById('chat-copilot-input');
+        const messagesBox = document.getElementById('chat-copilot-messages');
+        const question = inputEl ? inputEl.value.trim() : '';
+
+        if (!question || !messagesBox) return;
+
+        // Inyectar pregunta del usuario en UI
+        messagesBox.innerHTML += `
+            <div class="bg-accent-blue/10 border border-accent-blue/30 p-3 rounded-xl text-white font-mono text-right ml-8">
+                👤 ${question}
+            </div>
+        `;
+        inputEl.value = '';
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        // Inyectar loader
+        const loadingId = 'loading-' + Date.now();
+        messagesBox.innerHTML += `
+            <div id="${loadingId}" class="bg-dark-surface border border-dark-border p-3 rounded-xl text-gray-400 font-mono italic mr-8">
+                🤖 Analizando documento con IA Gemini 2.5 Flash...
+            </div>
+        `;
+        messagesBox.scrollTop = messagesBox.scrollHeight;
+
+        try {
+            const docName = this.selectedFile ? this.selectedFile.name : 'Contrato.pdf';
+            const docText = (this.currentAuditData && this.currentAuditData.summary) ? this.currentAuditData.summary : '';
+
+            const res = await fetch('/api/chat-document', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    question,
+                    document_text: docText,
+                    document_name: docName
+                })
+            });
+
+            const data = await res.json();
+            const loaderEl = document.getElementById(loadingId);
+            if (loaderEl) loaderEl.remove();
+
+            if (data.success && data.answer) {
+                messagesBox.innerHTML += `
+                    <div class="bg-dark-surface border border-emerald-500/30 p-3 rounded-xl text-emerald-300 font-sans mr-8 shadow-sm">
+                        🤖 <strong>AuditFlow Copilot:</strong><br>${data.answer.replace(/\n/g, '<br>')}
+                    </div>
+                `;
+            } else {
+                messagesBox.innerHTML += `
+                    <div class="bg-red-950/40 border border-red-500/30 p-3 rounded-xl text-red-300 mr-8">
+                        ⚠️ No se pudo obtener respuesta del copiloto. Intenta nuevamente.
+                    </div>
+                `;
+            }
+        } catch (err) {
+            const loaderEl = document.getElementById(loadingId);
+            if (loaderEl) loaderEl.remove();
+            messagesBox.innerHTML += `
+                <div class="bg-red-950/40 border border-red-500/30 p-3 rounded-xl text-red-300 mr-8">
+                    ❌ Error: ${err.message}
+                </div>
+            `;
+        }
+        messagesBox.scrollTop = messagesBox.scrollHeight;
     }
 };
 

@@ -534,6 +534,9 @@
                     <span data-i18n="btn_back_home">← Regresar al Inicio / Auditar Otro</span>
                 </button>
                 <div class="flex items-center gap-2 flex-wrap">
+                    <button onclick="window.AppHandler.openChatCopilotModal()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-sky-500/40 text-sky-400 hover:bg-sky-500/10 transition-all flex items-center gap-1.5 shadow-sm">
+                        <span>💬 Chatear con la IA sobre este Contrato</span>
+                    </button>
                     <button onclick="window.AppHandler.downloadDocxRedlines()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5 shadow-sm">
                         <span>📄 Descargar Word (.docx) Redlines</span>
                     </button>
@@ -974,6 +977,51 @@
 
                     <button type="submit" id="btn-submit-issue" class="btn-primary bg-gradient-to-r from-red-600 to-amber-600 w-full py-3 text-center font-bold text-xs shadow-glow flex justify-center items-center gap-2">
                         <span data-i18n="issue_btn_submit">🛠️ Enviar Reporte &amp; Diagnosticar con IA</span>
+                    </button>
+                </form>
+            </div>
+        <!-- MODAL DE COPILOTO INTERACTIVO (CHAT WITH CONTRACT / DOCUMENT) -->
+        <div id="chat-copilot-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+            <div class="bg-dark-card border border-border-dark rounded-2xl max-w-lg w-full h-[80vh] flex flex-col shadow-2xl relative my-auto">
+                <!-- HEADER DEL CHAT -->
+                <div class="p-4 border-b border-border-dark flex items-center justify-between bg-dark-surface rounded-t-2xl">
+                    <div class="flex items-center gap-2">
+                        <div class="w-8 h-8 rounded-lg bg-accent-blue/20 text-accent-blue flex items-center justify-center font-bold text-sm">
+                            💬
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white text-sm">Copiloto IA — Consulta sobre Documento</h3>
+                            <span class="text-[10px] font-mono text-emerald-400">Gemini 2.5 Flash • Memoria RAM Volátil</span>
+                        </div>
+                    </div>
+                    <button onclick="window.AppHandler.closeChatCopilotModal()" class="text-gray-400 hover:text-white p-1 text-lg">✕</button>
+                </div>
+
+                <!-- LISTA DE MENSAJES -->
+                <div id="chat-copilot-messages" class="flex-1 p-4 overflow-y-auto space-y-3 font-sans text-xs">
+                    <div class="bg-dark-surface border border-border-dark p-3 rounded-xl text-gray-300">
+                        👋 Hola. Soy tu Copiloto Legal y Financiero. Puedes hacerme cualquier pregunta sobre este documento (cláusulas, penalizaciones, sugerencias de objeción o plazos).
+                    </div>
+                </div>
+
+                <!-- CHIPS DE PREGUNTAS RÁPIDAS -->
+                <div class="px-4 py-2 border-t border-border-dark/50 bg-dark-surface/50 flex gap-2 overflow-x-auto text-[11px] font-mono">
+                    <button onclick="window.AppHandler.sendQuickChatQuestion('¿Cuál es la multa por terminación anticipada?')" class="px-2.5 py-1 rounded-full bg-dark-card border border-border-dark hover:border-accent-blue text-gray-300 whitespace-nowrap">
+                        ❓ Multa cancelación
+                    </button>
+                    <button onclick="window.AppHandler.sendQuickChatQuestion('¿Hay sobrecargos en mantenimiento no declarados?')" class="px-2.5 py-1 rounded-full bg-dark-card border border-border-dark hover:border-accent-emerald text-gray-300 whitespace-nowrap">
+                        ❓ Sobrecargos ocultos
+                    </button>
+                    <button onclick="window.AppHandler.sendQuickChatQuestion('¿Cómo redactar la carta de objeción a esta factura?')" class="px-2.5 py-1 rounded-full bg-dark-card border border-border-dark hover:border-accent-purple text-gray-300 whitespace-nowrap">
+                        ❓ Carta de objeción
+                    </button>
+                </div>
+
+                <!-- INPUT DE PREGUNTA -->
+                <form onsubmit="window.AppHandler.handleChatFormSubmit(event)" class="p-3 border-t border-border-dark bg-dark-surface rounded-b-2xl flex items-center gap-2">
+                    <input type="text" id="chat-copilot-input" placeholder="Escribe tu pregunta sobre el contrato o factura..." required class="flex-1 px-3 py-2 rounded-xl bg-dark-card border border-border-dark text-white text-xs focus:outline-none focus:border-accent-blue font-mono">
+                    <button type="submit" id="btn-send-chat" class="px-4 py-2 rounded-xl bg-accent-blue text-black font-bold text-xs hover:opacity-90 transition-all">
+                        Enviar
                     </button>
                 </form>
             </div>
