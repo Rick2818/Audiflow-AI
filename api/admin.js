@@ -175,19 +175,25 @@ export default async function handler(req, res) {
         // HOOK IRRESISTIBLE EN ESPAÑOL
         let subject = `🎁 Análisis preventivo de contratos y facturas para ${company} (100% Gratis)`;
         let bodyHtml = `
-          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #10b981; margin-top: 0;">AuditFlow AI — Auditoría de Contratos B2B (${country})</h2>
+          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría de Contratos B2B (${country})</h2>
             <p>Hola <strong>${pName}</strong> (${role} en <strong>${company}</strong>):</p>
             <p style="line-height: 1.6; color: #e5e7eb;">
-              Lanzamos <strong>AuditFlow AI</strong>, una herramienta de inteligencia artificial que revisa contratos y facturas en <strong>8 segundos</strong> para encontrar cláusulas trampa, penalizaciones ocultas o cobros indebidos de entre <strong>$3,500 y $18,000 USD</strong> antes de autorizar pagos.
+              Mi nombre es <strong>Ricardo</strong> y recientemente lancé <strong>AuditFlow AI</strong>, una herramienta de inteligencia artificial que revisa contratos y facturas en <strong>8 segundos</strong> para encontrar cláusulas trampa, penalizaciones ocultas o cobros indebidos de entre <strong>$3,500 y $18,000 USD</strong> antes de autorizar pagos.
             </p>
             <p style="line-height: 1.6; color: #e5e7eb;">
-              Queremos regalarte a ti y a tu equipo un <strong>análisis 100% gratis</strong> de cualquier contrato o factura de proveedor que tengas activo para que compruebes en tiempo real qué detecta.
+              Queremos regalarte a ti y a tu equipo de <strong>${company}</strong> un <strong>análisis 100% gratis</strong> de cualquier contrato o factura de proveedor que tengas activo para que compruebes en tiempo real qué detecta.
             </p>
             <p style="text-align: center; margin: 25px 0;">
               <a href="https://audiflowai.com/?ref=outreach_gift_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Probar Auditoría Gratuita de ${company}</a>
             </p>
-            <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-bottom: 0;">
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a tu total disposición para cualquier consulta,</p>
+              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
+              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador, AuditFlow AI</p>
+              <p style="margin: 4px 0 0 0;"><a href="mailto:rick28191@gmail.com" style="color: #10b981; font-size: 13px; text-decoration: none;">✉️ rick28191@gmail.com</a></p>
+            </div>
+            <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
               AuditFlow AI • Procesamiento Efímero en Memoria Volátil RAM (0 Almacenamiento en Disco • Cifrado AES-256)
             </p>
           </div>`;
@@ -196,19 +202,25 @@ export default async function handler(req, res) {
         if (isEn) {
           subject = `🎁 Free preventive contract & invoice audit for ${company}`;
           bodyHtml = `
-            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #10b981; margin-top: 0;">AuditFlow AI — B2B Contract Audit (${country})</h2>
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B Contract Audit (${country})</h2>
               <p>Hello <strong>${pName}</strong> (${role} at <strong>${company}</strong>):</p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                We recently launched <strong>AuditFlow AI</strong>, an AI engine that audits vendor contracts and invoices in <strong>8 seconds</strong> to detect hidden trap clauses, unfair penalties, and billing leakages of <strong>$3,500 to $18,000 USD</strong> before payment approval.
+                My name is <strong>Ricardo</strong>, and I recently launched <strong>AuditFlow AI</strong>, an AI engine that audits vendor contracts and invoices in <strong>8 seconds</strong> to detect hidden trap clauses, unfair penalties, and billing leakages of <strong>$3,500 to $18,000 USD</strong> before payment approval.
               </p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                We want to gift your team a <strong>100% free audit</strong> on any active contract or vendor invoice so you can experience exactly what savings and risks it identifies.
+                I would love to gift your team at <strong>${company}</strong> a <strong>100% free audit</strong> on any active contract or vendor invoice so you can experience firsthand what savings and risks it identifies.
               </p>
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_gift_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Try Free Audit for ${company}</a>
               </p>
-              <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-bottom: 0;">
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Feel free to reach out directly if you have any questions,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Founder, AuditFlow AI</p>
+                <p style="margin: 4px 0 0 0;"><a href="mailto:rick28191@gmail.com" style="color: #10b981; font-size: 13px; text-decoration: none;">✉️ rick28191@gmail.com</a></p>
+              </div>
+              <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
                 AuditFlow AI • Volatile RAM Ephemeral Processing (Zero Disk Storage • AES-256 Encryption)
               </p>
             </div>`;
@@ -217,7 +229,8 @@ export default async function handler(req, res) {
         if (!test_mode && transporter) {
           try {
             const info = await transporter.sendMail({
-              from: `"AuditFlow AI" <${gmailUser}>`,
+              from: `"Ricardo — AuditFlow AI" <${gmailUser}>`,
+              replyTo: 'rick28191@gmail.com',
               to: pEmail,
               subject,
               html: bodyHtml
