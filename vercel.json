@@ -120,6 +120,18 @@
       "dest": "api/report-issue.js"
     },
     {
+      "src": "/api/webhooks/(.*)",
+      "dest": "api/webhook.js"
+    },
+    {
+      "src": "/api/webhook",
+      "dest": "api/webhook.js"
+    },
+    {
+      "src": "/api/audit/download-pdf",
+      "dest": "api/download-pdf.js"
+    },
+    {
       "src": "/api/outreach/send-campaign",
       "dest": "api/outreach.js"
     },
