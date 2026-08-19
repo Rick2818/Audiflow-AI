@@ -2,58 +2,6 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/audit.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/admin.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/lead.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/subscribe.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/report-issue.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/indexnow.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/cross-audit.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/export-docx.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/chat-document.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/download-pdf.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/outreach.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/payment.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/webhook.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "server.js",
       "use": "@vercel/node"
     },
@@ -102,78 +50,6 @@
     {
       "src": "/terms",
       "dest": "frontend/terms.html"
-    },
-    {
-      "src": "/api/admin/(.*)",
-      "dest": "api/admin.js"
-    },
-    {
-      "src": "/api/admin",
-      "dest": "api/admin.js"
-    },
-    {
-      "src": "/api/audit",
-      "dest": "api/audit.js"
-    },
-    {
-      "src": "/api/lead",
-      "dest": "api/lead.js"
-    },
-    {
-      "src": "/api/payment/subscribe",
-      "dest": "api/subscribe.js"
-    },
-    {
-      "src": "/api/indexnow(.*)",
-      "dest": "api/indexnow.js"
-    },
-    {
-      "src": "/api/cross-audit",
-      "dest": "api/cross-audit.js"
-    },
-    {
-      "src": "/api/export-docx",
-      "dest": "api/export-docx.js"
-    },
-    {
-      "src": "/api/chat-document",
-      "dest": "api/chat-document.js"
-    },
-    {
-      "src": "/api/report-issue",
-      "dest": "api/report-issue.js"
-    },
-    {
-      "src": "/api/webhooks/(.*)",
-      "dest": "api/webhook.js"
-    },
-    {
-      "src": "/api/webhook",
-      "dest": "api/webhook.js"
-    },
-    {
-      "src": "/api/audit/download-pdf",
-      "dest": "api/download-pdf.js"
-    },
-    {
-      "src": "/api/outreach/send-campaign",
-      "dest": "api/outreach.js"
-    },
-    {
-      "src": "/api/outreach",
-      "dest": "api/outreach.js"
-    },
-    {
-      "src": "/api/payment/stripe",
-      "dest": "api/payment.js"
-    },
-    {
-      "src": "/api/payment/lightning",
-      "dest": "api/payment.js"
-    },
-    {
-      "src": "/api/payment/subscribe",
-      "dest": "api/subscribe.js"
     },
     {
       "src": "/api/(.*)",

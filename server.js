@@ -24,6 +24,8 @@ import exportDocxHandler from './api/export-docx.js';
 import chatDocumentHandler from './api/chat-document.js';
 import adminHandler from './api/admin.js';
 import outreachHandler from './api/outreach.js';
+import reportIssueHandler from './api/report-issue.js';
+import subscribeHandler from './api/subscribe.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -155,6 +157,8 @@ app.post('/api/indexnow/submit', async (req, res) => {
 app.post('/api/cross-audit', crossAuditHandler);
 app.post('/api/export-docx', exportDocxHandler);
 app.post('/api/chat-document', chatDocumentHandler);
+app.all('/api/report-issue', reportIssueHandler);
+app.all('/api/payment/subscribe', subscribeHandler);
 app.all('/api/admin', adminHandler);
 app.all('/api/outreach', outreachHandler);
 app.all('/api/outreach/send-campaign', outreachHandler);
@@ -1548,13 +1552,17 @@ app.get('/api/admin/stats', async (req, res) => {
 });
 
 // ==============================================================================
-// INICIALIZACIÓN DEL SERVIDOR HTTP
+// INICIALIZACIÓN DEL SERVIDOR HTTP (LOCAL & VERCEL SERVERLESS EXPORT)
 // ==============================================================================
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`=======================================================`);
-  console.log(`🚀 AUDITFLOW AI corriendo en http://0.0.0.0:${PORT}`);
-  console.log(`🔒 Procesamiento en memoria volátil ACTIVO + Filtro Pre-Vuelo OCR`);
-  console.log(`⚡ Pagos Híbridos Tripwire ($7 USD / Sats) + Upsell $49/mes`);
-  console.log(`📧 Agente de Correo Activo (Gmail SMTP / Fallback Ethereal)`);
-  console.log(`=======================================================`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`=======================================================`);
+    console.log(`🚀 AUDITFLOW AI corriendo en http://0.0.0.0:${PORT}`);
+    console.log(`🔒 Procesamiento en memoria volátil ACTIVO + Filtro Pre-Vuelo OCR`);
+    console.log(`⚡ Pagos Híbridos Tripwire ($19 USD / Sats) + Upsell $69/mes o $590/año`);
+    console.log(`📧 Agente de Correo Activo (Resend API / Gmail SMTP)`);
+    console.log(`=======================================================`);
+  });
+}
+
+export default app;
