@@ -396,6 +396,201 @@ window.I18n = {
             issue_btn_submit: "🛠️ Submit Report & Diagnose with AI",
             ent_multi_lawyer_text: "Multi-User Annual Quota: Can be shared among multiple attorneys in your firm or legal practice.",
             legal_disclaimer: "<strong>Legal Disclaimer & Limitation of Liability:</strong> AuditFlow AI is an automated analysis tool powered by Artificial Intelligence. Reports and tactical suggestions do not constitute binding professional legal or financial advice. The app developer and platform are fully released from any liability arising from the use or interpretation of processed information."
+        },
+        de: {
+            // Header (DE)
+            nav_privacy_badge: "Flüchtiger RAM-Speicher aktiv (0 Festplatte)",
+            nav_firewall_badge: "🔒 Firewall & WAF aktiv (AES-256)",
+            nav_speed_badge: "Prüfung <10s",
+            nav_corp_plan: "B2B Unternehmens-Plan",
+            nav_pricing: "Preise",
+            
+            // Actions Toolbar (DE)
+            btn_back_home: "← Zurück zur Startseite / Weiteres Dokument prüfen",
+            btn_back_enterprise: "Zurück zur Hauptübersicht",
+            btn_print_report: "🖨️ Drucken / Als PDF speichern",
+            btn_ai_support: "🤖 24/7 KI-Support (Mit KI korrigieren)",
+
+            // AI Support Modal (DE)
+            support_title: "Autonomer KI-Support-Agent",
+            support_sub: "Haben Sie ein Detail gefunden oder möchten Sie, dass die KI eine bestimmte Klausel erneut prüft? Schreiben Sie Ihren Hinweis, und der KI-Agent korrigiert den Bericht in < 10s.",
+            support_label: "Beschreiben Sie Ihre Beobachtung oder Anfrage",
+            support_placeholder: "z.B. Bitte überprüfen Sie Klausel 7.3 bezüglich der Kündigungsstrafe...",
+            support_btn_submit: "🤖 Mit KI neu analysieren & korrigieren",
+            
+            // Hero (DE)
+            hero_free_badge: "🎁 100% Kostenlose Erstprüfung • Keine Kreditkarte erforderlich",
+            hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultraschnelle Verarbeitung",
+            hero_title_1: "Verträge & Rechnungen prüfen in ",
+            hero_title_2: "<10 Sekunden",
+            hero_sub: "87% der Gewerbemietverträge, Rechnungen und B2B-Verträge enthalten zwischen 3.500 $ und 18.000 $ an versteckten finanziellen Verlusten. Entdecken Sie diese KOSTENLOS in <10s vor der Unterschrift oder Zahlung.",
+            hero_privacy_guarantee: "<strong>Garantierter Datenschutz:</strong> Ihr Dokument wird unmittelbar nach der Prüfung automatisch aus dem flüchtigen RAM-Speicher gelöscht (0 Festplattenspeicherung).",
+            
+            // Live Stats Ticker (DE)
+            stat_audits: "Geprüfte Verträge",
+            stat_leakage: "Verluste Entdeckt",
+            stat_retention: "Dateien auf Festplatte",
+            stat_encryption: "RAM-Verschlüsselung",
+
+            // Financial ROI Calculator (DE)
+            roi_title: "🧮 B2B-Finanzverlust-Rechner",
+            roi_badge: "Diagnose-Tool",
+            roi_question: "Wie viele Verträge oder Rechnungen bearbeiten Sie pro Monat?",
+            roi_min_doc: "1 Dok/Monat",
+            roi_max_doc: "50 Dok/Monat",
+            roi_loss_label: "Geschätzter jährlicher Finanzverlust ohne KI:",
+            roi_savings_label: "Geschätzte Netto-Ersparnis mit AuditFlow AI:",
+
+            // Dropzone & Sample Demo Button (DE)
+            drag_title: "Ziehen Sie Ihre Datei hierher oder ",
+            drag_browse: "Dateien durchsuchen",
+            drag_sub_free: "100% Kostenlose Erstprüfung • Ergebnisse vor Zahlung von 19 $ ansehen",
+            drag_formats: "Unterstützt PDF, PNG, JPG oder WebP (Bis zu 15MB)",
+            btn_sample_demo: "⚡ Mustervertrag ausprobieren (Kein Datei-Upload erforderlich)",
+            file_ready_ram: "MB • RAM-Speicher bereit",
+            btn_start_scan: "Kostenlose KI-Prüfung starten",
+
+            // Trust Micro-Copys & Compliance Badges (DE)
+            trust_title_1: "🔒 Flüchtige Verarbeitung:",
+            trust_sub_1: "Ihr Dokument wird ausschließlich im flüchtigen RAM analysiert und in < 5 Sekunden vernichtet.",
+            trust_title_2: "🛡️ Strenge Privatsphäre:",
+            trust_sub_2: "Keine Festplattenspeicherung. Bankübliche AES-256-Verschlüsselung bei der Übertragung.",
+            badge_soc2: "SOC-2 & DSGVO-Konform",
+            badge_iso: "ISO 27001 RAM-Standard",
+            badge_stripe: "Verifizierter Stripe-Händler",
+            badge_guarantee: "100% Zufriedenheitsgarantie",
+
+            // Step-by-Step Security Pipeline (DE)
+            how_title: "🔒 Wie garantieren wir die Sicherheit Ihrer Daten?",
+            step_1_title: "1. Flüchtiger RAM-Puffer",
+            step_1_desc: "Das Dokument gelangt direkt in den RAM-Speicher, ohne physische Festplatten oder Cloud-Speicher zu berühren.",
+            step_2_title: "2. Sofortige Löschung",
+            step_2_desc: "Gemini 2.5 Flash analysiert den Text und der Speicherpuffer wird in < 5 Sekunden zerstört.",
+            step_3_title: "3. Kostenlose Vorschau",
+            step_3_desc: "Sie sehen die Diagnose kostenlos auf dem Bildschirm. Sie zahlen 19 $ nur, wenn Sie die Lösungen in Word + PDF herunterladen möchten.",
+
+            // FAQ SEO Section (DE)
+            faq_title: "❓ Häufig gestellte Fragen (B2B-Sicherheit & DSGVO)",
+            faq_q1: "Wie prüft man einen Vertrag oder eine Rechnung mit Künstlicher Intelligenz?",
+            faq_a1: "Ziehen Sie einfach Ihr PDF oder Bild hinein. Die Gemini 2.5 Flash Engine scannt den Text in <10s, erkennt unberechtigte Mehrkosten sowie versteckte Vertragsstrafen und zeigt eine kostenlose Übersicht auf dem Bildschirm.",
+            faq_q2: "Werden meine Verträge oder Dokumente auf einem Server gespeichert?",
+            faq_a2: "Nein. AuditFlow AI arbeitet mit einer strikten flüchtigen RAM-Architektur (0 Disk Retention). Die Datei wird im Speicher analysiert und in unter 5 Sekunden vollständig vernichtet.",
+            faq_q3: "Was beinhaltet der Ausführliche Prüfbericht für 19.00 USD / Satoshis?",
+            faq_a3: "Die Vorschau ist 100% kostenlos. Bei Zahlung von 19.00 USD (über Stripe oder Bitcoin Lightning) schalten Sie 3 taktische Nachverhandlungslösungen, bearbeitbare Word .docx-Redlines mit Änderungsnachverfolgung und das offiziell digital signierte PDF-Dokument frei.",
+            faq_q4: "Gibt es einen Unternehmensplan für unbegrenzte Prüfungen?",
+            faq_a4: "Ja. Für Kanzleien und Unternehmen bieten wir das monatliche Abonnement (69 $/Monat) oder das jährliche Abonnement (590 $/Jahr mit ~3,5 Monaten gratis) mit unbegrenzten Prüfungen, 2-Way Cross-Audit und bevorzugtem Support an.",
+
+            // Scanner Section (DE)
+            scan_init: "Scanner im flüchtigen Speicher wird initialisiert...",
+            scan_sub: "Finanzklauseln werden mit Gemini 2.5 Flash analysiert",
+            step_ram: "RAM-Puffer",
+            step_gemini: "Gemini KI",
+            step_scoring: "Lead Scoring",
+            step_ready: "Bericht Bereit",
+
+            // Lead Capture Modal (DE)
+            lead_modal_title: "Prüfung Abgeschlossen (Kostenlose Übersicht)",
+            lead_modal_sub: "In Ihrem Dokument wurden finanzielle Risiken festgestellt. Geben Sie Ihren Namen und Ihre E-Mail ein, um die Ergebnisvorschau zu sehen.",
+            lead_label_name: "Vollständiger Name",
+            lead_placeholder_name: "z.B. Maximilian Müller",
+            lead_label_email: "Geschäftliche E-Mail-Adresse",
+            lead_placeholder_email: "m.mueller@unternehmen.de",
+            lead_btn_submit: "Kostenlose Vorschau anzeigen",
+
+            // OCR Pre-flight Error Box (DE)
+            ocr_error_title: "⚠️ Dokument für Prüfung ungeeignet",
+            ocr_error_sub: "Das ausgewählte Dokument enthält keinen lesbaren Text oder ist extrem unscharf. Gemini 2.5 erfordert mindestens 50 lesbare Wörter, um finanzielle Verluste zu berechnen.",
+            ocr_error_btn: "Anderes lesbares Dokument versuchen",
+
+            // Report Header & Metrics (DE)
+            rep_doc_default: "Gewerblicher Vertrag",
+            rep_risk_high: "HOHES RISIKO",
+            rep_leakage_label: "Gesamter Finanzieller Verlust",
+            rep_lead_score_label: "Lead Score",
+            rep_findings_title: "3 Finanzielle Mängel & Risikoklauseln Erkannt",
+            rep_teaser_label: "🔍 Zusammenfassung der Anomalie (Kostenlose Vorschau):",
+            rep_solution_label: "💡 Taktische Lösung & Nachverhandlungsklausel:",
+            rep_unlock_btn: "🔒 Taktische Lösung Freischalten (19 USD)",
+
+            // Unlock Banner & Payment Modal (DE)
+            banner_title: "3 Taktische Lösungen + Word DOCX + PDF-Bericht Freischalten",
+            banner_sub: "Sie haben die Ergebnisse auf dem Bildschirm gesehen. Erhalten Sie den genauen Nachverhandlungstext, Word .docx-Dateien und das signierte PDF für 19.00 USD oder Satoshis.",
+            btn_unlock_report: "🔓 Ausführlichen Bericht + Word + PDF freischalten (19 USD)",
+            modal_pay_title: "Vollständige Prüfung Freischalten",
+            modal_pay_sub: "Einmalige Zahlung von 19.00 USD zum Download der taktischen Lösungen, bearbeitbaren Word-Dokumente und des signierten Prüfberichts.",
+            tab_stripe: "💳 Stripe (19.00 USD)",
+            tab_lightning: "⚡ Lightning (Satoshis)",
+            btn_pay_stripe: "Mit Karte Bezahlen (19 USD)",
+            btn_copy_ln: "BOLT11-Rechnung Kopieren",
+
+            // Features & Footer (DE)
+            feat_1_tag: "01. Vollständiger Datenschutz",
+            feat_1_title: "Keine Festplattenspeicherung",
+            feat_1_desc: "Dokumente werden in flüchtigen RAM umgewandelt, von Gemini geprüft und sofort vernichtet.",
+            feat_2_tag: "02. Taktische Erkennung",
+            feat_2_title: "3 Kritische Mängel",
+            feat_2_desc: "Erkennt versteckte Strafen, doppelte Wertsicherungen und unberechtigte Zuschläge in Minuten.",
+            feat_3_tag: "03. Hybride Zahlungen",
+            feat_3_title: "19 USD oder Satoshis",
+            feat_3_desc: "Ergebnisse kostenlos ansehen. 19 $ nur für Nachverhandlungstexte in Word .docx + PDF bezahlen.",
+
+            // Pricing Grid Section (DE)
+            pricing_badge_clear: "Transparente Preise",
+            pricing_section_title: "💰 Transparente B2B-Preise & Tarife",
+            pricing_section_sub: "Keine versteckten Gebühren, kein Kleingedrucktes. Kostenlos testen und je nach Dokumentenvolumen skalieren.",
+            
+            pricing_card1_tag: "KOSTENLOS",
+            pricing_card1_title: "Erst-Scan",
+            pricing_card1_price: "0 $",
+            pricing_card1_period: "Dauerhaft Kostenlos",
+            pricing_card1_desc: "Ideal, um den Zustand Ihres Vertrags oder Ihrer Rechnung vor Unterschrift oder Zahlung zu prüfen.",
+            pricing_card1_f1: "✓ Live-Vorschau von 3 finanziellen Anomalien",
+            pricing_card1_f2: "✓ Berechnung des geschätzten finanziellen Verlusts",
+            pricing_card1_f3: "✓ Flüchtige RAM-Verarbeitung (< 5s)",
+            pricing_card1_f4: "✓ 0 Festplattenspeicherung",
+            pricing_card1_btn: "⚡ Kostenlosen Scan Starten",
+
+            pricing_card2_top_badge: "BELIEBTESTE WAHL • EMPFOHLEN",
+            pricing_card2_tag: "BELIEBT • EINMALIG",
+            pricing_card2_title: "Ausführlicher Bericht",
+            pricing_card2_price: "19 $",
+            pricing_card2_period: "USD / pro Prüfung",
+            pricing_card2_desc: "Vollständige Tiefenprüfung mit bearbeitbaren Dokumenten für Ihr Rechts- und Finanzteam.",
+            pricing_card2_f1: "✓ Vollständige Freischaltung von 3 Taktischen Lösungen",
+            pricing_card2_f2: "✓ Bearbeitbare Word .docx-Redlines mit Änderungsnachverfolgung",
+            pricing_card2_f3: "✓ Offizieller, digital signierter PDF-Prüfbericht",
+            pricing_card2_f4: "✓ Einmalzahlung ohne automatische Verlängerung",
+            pricing_card2_btn: "🔓 1 Dokument Prüfen (19 USD)",
+
+            pricing_card3_tag: "UNTERNEHMEN • UNBEGRENZT",
+            pricing_card3_title: "Unternehmens-Plan",
+            pricing_card3_price: "69 $",
+            pricing_card3_period: "USD / Monat oder 590 $/Jahr",
+            pricing_card3_desc: "Für Kanzleien, Bauunternehmen und Firmen mit hohem monatlichem Vertragsaufkommen.",
+            pricing_card3_f1: "✓ Unbegrenzte 24/7 Multi-User-Prüfungen",
+            pricing_card3_f2: "✓ 2-Way Cross-Audit (Vertrag vs. Rechnung)",
+            pricing_card3_f3: "✓ Echtzeit-KI-Dokumenten-Copilot-Chat",
+            pricing_card3_f4: "✓ Bevorzugter 24/7-Support & geteilte Kanzlei-Lizenz",
+            pricing_card3_btn: "🚀 Unternehmens-Pläne Ansehen (69 $/Monat)",
+
+            footer_rights: "© 2026 AuditFlow AI. 24/7 B2B Micro-SaaS Infrastruktur.",
+            footer_privacy_link: "Garantie für flüchtigen Speicher",
+            footer_report_issue: "Konfigurationsfehler Melden",
+
+            // Configuration Issue Modal (DE)
+            issue_modal_title: "Konfigurationsfehler Melden",
+            issue_modal_sub: "Autonome KI-Selbstdiagnose",
+            issue_email_label: "Ihre E-Mail-Adresse",
+            issue_type_label: "Art der Störung",
+            issue_opt_1: "Datei-Upload-Fehler / Unleserliche OCR",
+            issue_opt_2: "Zahlungsgateway-Problem (Stripe/Lightning)",
+            issue_opt_3: "Darstellungsfehler im Bericht oder in den Lösungen",
+            issue_opt_4: "Allgemeiner Konfigurationsfehler",
+            issue_desc_label: "Beschreibung des Fehlers (Optional)",
+            issue_ai_heading: "🤖 Echtzeit-KI-Diagnose:",
+            issue_btn_submit: "🛠️ Bericht Senden & mit KI Diagnostizieren",
+            ent_multi_lawyer_text: "Multi-User-Jahreslizenz: Kann von mehreren Anwälten Ihrer Kanzlei gemeinsam genutzt werden.",
+            legal_disclaimer: "<strong>Rechtlicher Hinweis & Haftungsausschluss:</strong> AuditFlow AI ist ein automatisiertes Analysetool auf Basis Künstlicher Intelligenz. Berichte und taktische Vorschläge stellen keine rechtsverbindliche Rechts- oder Finanzberatung dar. Entwickler und Plattform sind vollständig von jeglicher Haftung freigestellt."
         }
     },
 
@@ -412,16 +607,14 @@ window.I18n = {
 
         const btnEs = document.getElementById('btn-lang-es');
         const btnEn = document.getElementById('btn-lang-en');
+        const btnDe = document.getElementById('btn-lang-de');
 
-        if (btnEs && btnEn) {
-            if (lang === 'es') {
-                btnEs.className = "px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none";
-                btnEn.className = "px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none";
-            } else {
-                btnEn.className = "px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none";
-                btnEs.className = "px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none";
-            }
-        }
+        const inactiveClass = "px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none";
+        const activeClass = "px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none";
+
+        if (btnEs) btnEs.className = (lang === 'es' ? activeClass : inactiveClass);
+        if (btnEn) btnEn.className = (lang === 'en' ? activeClass : inactiveClass);
+        if (btnDe) btnDe.className = (lang === 'de' ? activeClass : inactiveClass);
     },
 
     t(key) {

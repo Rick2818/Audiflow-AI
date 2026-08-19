@@ -103,38 +103,41 @@ export default async function handler(req, res) {
     const results = [];
 
     for (const p of prospects) {
-      const { name = 'Ejecutivo', company = 'Empresa B2B', role = 'Director', email, country = 'El Salvador', lang = 'es' } = p;
+      const { name = 'Ejecutivo', company = 'Empresa B2B', role = 'Director', email, country = 'El Salvador', lang } = p;
       if (!email || !email.includes('@')) continue;
 
-      const englishCountries = ['estados unidos', 'eeuu', 'ee.uu.', 'united states', 'us', 'usa', 'inglaterra', 'uk', 'united kingdom', 'england', 'suiza', 'switzerland', 'ch', 'francia', 'france', 'fr', 'luxemburgo', 'luxembourg', 'lu', 'alemania', 'germany', 'de', 'dinamarca', 'denmark', 'dk', 'noruega', 'norway', 'no', 'finlandia', 'finland', 'fi'];
-      const isEn = lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c));
+      const germanCountries = ['alemania', 'germany', 'deutschland', 'de', 'austria', 'österreich', 'at', 'suiza', 'switzerland', 'schweiz', 'ch', 'liechtenstein', 'li'];
+      const englishCountries = ['estados unidos', 'eeuu', 'ee.uu.', 'united states', 'us', 'usa', 'inglaterra', 'uk', 'united kingdom', 'england', 'dinamarca', 'denmark', 'dk', 'noruega', 'norway', 'no', 'suecia', 'sweden', 'se', 'finlandia', 'finland', 'fi', 'francia', 'france', 'fr', 'luxemburgo', 'luxembourg', 'lu', 'países bajos', 'netherlands', 'nl'];
 
-      // HOOK IRRESISTIBLE EN ESPAÑOL
-      let subject = `🎁 Análisis preventivo de contratos y facturas para ${company} (100% Gratis)`;
+      const isDe = lang === 'de' || germanCountries.some(c => (country || '').toLowerCase().includes(c)) || (email || '').endsWith('.de') || (email || '').endsWith('.at') || (email || '').endsWith('.ch');
+      const isEn = !isDe && (lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c)));
+
+      // 1. HOOK IRRESISTIBLE EN ALEMÁN (DACH REGION)
+      let subject = `🎁 Kostenlose präventive Vertrags- und Rechnungsprüfung für ${company}`;
       let bodyHtml = `
         <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría de Contratos B2B (${country})</h2>
-          <p>Hola <strong>${name}</strong> (${role} en <strong>${company}</strong>):</p>
+          <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B-Vertragsprüfung (${country})</h2>
+          <p>Guten Tag <strong>${name}</strong> (${role} bei <strong>${company}</strong>),</p>
           <p style="line-height: 1.6; color: #e5e7eb;">
-            Mi nombre es <strong>Ricardo</strong> y recientemente lancé <strong>AuditFlow AI</strong>, una herramienta de inteligencia artificial que revisa contratos y facturas en <strong>8 segundos</strong> para encontrar cláusulas trampa, penalizaciones ocultas o cobros indebidos de entre <strong>$3,500 y $18,000 USD</strong> antes de autorizar pagos.
+            mein Name ist <strong>Ricardo</strong>. Ich habe <strong>AuditFlow AI</strong> entwickelt – eine KI-Engine, die gewerbliche Verträge und Lieferantenrechnungen in <strong>unter 10 Sekunden</strong> prüft, um versteckte Risikoklauseln, unberechtigte Mehrkosten und finanzielle Verluste von <strong>3.500 $ bis 18.000 $</strong> vor der Freigabe aufzudecken.
           </p>
           <p style="line-height: 1.6; color: #e5e7eb;">
-            Queremos regalarte a ti y a tu equipo de <strong>${company}</strong> un <strong>análisis 100% gratis</strong> de cualquier contrato o factura de proveedor que tengas activo para que compruebes en tiempo real qué detecta.
+            Wir möchten Ihnen und Ihrem Team bei <strong>${company}</strong> eine <strong>100% kostenlose Erstprüfung</strong> für einen aktiven Vertrag oder eine Lieferantenrechnung schenken, damit Sie die Genauigkeit und DSGVO-Sicherheit direkt testen können.
           </p>
           <p style="text-align: center; margin: 25px 0;">
-            <a href="https://audiflowai.com/?ref=outreach_gift_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Probar Auditoría Gratuita de ${company}</a>
+            <a href="https://audiflowai.com/?ref=outreach_gift_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose Prüfung für ${company} starten</a>
           </p>
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a tu total disposición para cualquier consulta,</p>
+            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Für Rückfragen stehe ich Ihnen gerne persönlich zur Verfügung,</p>
             <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador, AuditFlow AI</p>
+            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Gründer, AuditFlow AI</p>
           </div>
           <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
-            AuditFlow AI • Procesamiento Efímero en Memoria Volátil RAM (0 Almacenamiento en Disco • Cifrado AES-256)
+            AuditFlow AI • Flüchtige Verarbeitung im RAM-Speicher (100% DSGVO-Konform • 0 Festplattenspeicherung • AES-256)
           </p>
         </div>`;
 
-      // HOOK IRRESISTIBLE EN INGLÉS
+      // 2. HOOK IRRESISTIBLE EN INGLÉS
       if (isEn) {
         subject = `🎁 Free preventive contract & invoice audit for ${company}`;
         bodyHtml = `
@@ -157,6 +160,31 @@ export default async function handler(req, res) {
             </div>
             <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
               AuditFlow AI • Volatile RAM Ephemeral Processing (Zero Disk Storage • AES-256 Encryption)
+            </p>
+          </div>`;
+      } else if (!isDe) {
+        // 3. HOOK IRRESISTIBLE EN ESPAÑOL (DEFAULT LATAM / ESPAÑA)
+        subject = `🎁 Análisis preventivo de contratos y facturas para ${company} (100% Gratis)`;
+        bodyHtml = `
+          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría de Contratos B2B (${country})</h2>
+            <p>Hola <strong>${name}</strong> (${role} en <strong>${company}</strong>):</p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              Mi nombre es <strong>Ricardo</strong> y recientemente lancé <strong>AuditFlow AI</strong>, una herramienta de inteligencia artificial que revisa contratos y facturas en <strong>8 segundos</strong> para encontrar cláusulas trampa, penalizaciones ocultas o cobros indebidos de entre <strong>$3,500 y $18,000 USD</strong> antes de autorizar pagos.
+            </p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              Queremos regalarte a ti y a tu equipo de <strong>${company}</strong> un <strong>análisis 100% gratis</strong> de cualquier contrato o factura de proveedor que tengas activo para que compruebes en tiempo real qué detecta.
+            </p>
+            <p style="text-align: center; margin: 25px 0;">
+              <a href="https://audiflowai.com/?ref=outreach_gift_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Probar Auditoría Gratuita de ${company}</a>
+            </p>
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a tu total disposición para cualquier consulta,</p>
+              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
+              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador, AuditFlow AI</p>
+            </div>
+            <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
+              AuditFlow AI • Procesamiento Efímero en Memoria Volátil RAM (0 Almacenamiento en Disco • Cifrado AES-256)
             </p>
           </div>`;
       }

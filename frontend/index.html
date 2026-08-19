@@ -233,10 +233,11 @@
             </div>
             
             <div class="flex items-center gap-3 sm:gap-4 text-sm">
-                <!-- SWITCHER BILINGÜE (ES / EN) -->
+                <!-- SWITCHER TRI-LINGÜE (ES / EN / DE) -->
                 <div class="inline-flex items-center bg-dark-card border border-border-dark rounded-lg p-1 text-xs font-mono">
-                    <button id="btn-lang-es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
-                    <button id="btn-lang-en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
+                    <button id="btn-lang-es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
+                    <button id="btn-lang-en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
+                    <button id="btn-lang-de" aria-label="Sprache auf Deutsch umstellen" onclick="window.I18n.setLanguage('de')" class="px-2 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">DE</button>
                 </div>
 
                 <span class="badge-privacy hidden sm:inline-flex items-center gap-2">
@@ -342,9 +343,7 @@
                             var lossEl = document.getElementById('roi-calculated-loss');
                             var netEl = document.getElementById('roi-net-savings');
 
-                            var isEn = false;
-                            try { isEn = (localStorage.getItem('auditflow_lang') === 'en'); } catch(e){}
-
+                            var lang = (window.I18n && window.I18n.currentLang) || 'es';
                             var tTitle = document.querySelector('[data-i18n="roi_title"]');
                             var tBadge = document.querySelector('[data-i18n="roi_badge"]');
                             var tQuestion = document.querySelector('[data-i18n="roi_question"]');
@@ -353,24 +352,29 @@
                             var tLossLabel = document.querySelector('[data-i18n="roi_loss_label"]');
                             var tSavingsLabel = document.querySelector('[data-i18n="roi_savings_label"]');
 
-                            if (tTitle) tTitle.innerHTML = isEn ? '🧮 B2B Financial Leakage Calculator' : '🧮 Calculadora Interactiva de Fugas Financieras B2B';
-                            if (tBadge) tBadge.innerHTML = isEn ? 'Diagnostic Tool' : 'Herramienta de Diagnóstico';
-                            if (tQuestion) tQuestion.innerHTML = isEn ? 'How many contracts or invoices do you process per month?' : '¿Cuántos contratos o facturas procesas al mes?';
-                            if (tMin) tMin.innerHTML = isEn ? '1 doc/mo' : '1 doc/mes';
-                            if (tMax) tMax.innerHTML = isEn ? '50 docs/mo' : '50 docs/mes';
-                            if (tLossLabel) tLossLabel.innerHTML = isEn ? 'Estimated Annual Financial Leakage without AI:' : 'Riesgo / Fuga Anual Estimada sin IA:';
-                            if (tSavingsLabel) tSavingsLabel.innerHTML = isEn ? 'Estimated Net Savings with AuditFlow AI:' : 'Ahorro Neto Estimado con AuditFlow AI:';
+                            if (window.I18n) {
+                                if (tTitle) tTitle.innerHTML = window.I18n.t('roi_title');
+                                if (tBadge) tBadge.innerHTML = window.I18n.t('roi_badge');
+                                if (tQuestion) tQuestion.innerHTML = window.I18n.t('roi_question');
+                                if (tMin) tMin.innerHTML = window.I18n.t('roi_min_doc');
+                                if (tMax) tMax.innerHTML = window.I18n.t('roi_max_doc');
+                                if (tLossLabel) tLossLabel.innerHTML = window.I18n.t('roi_loss_label');
+                                if (tSavingsLabel) tSavingsLabel.innerHTML = window.I18n.t('roi_savings_label');
+                            }
 
                             if (!slider || !valEl || !lossEl || !netEl) return;
                             var count = parseInt(slider.value, 10) || 8;
 
-                            valEl.textContent = count + (isEn ? ' docs/month' : ' documentos/mes');
+                            var docUnit = (lang === 'de') ? ' Dok./Monat' : ((lang === 'en') ? ' docs/month' : ' documentos/mes');
+                            var yearUnit = (lang === 'de') ? ' USD/Jahr' : ((lang === 'en') ? ' USD/year' : ' USD/año');
+
+                            valEl.textContent = count + docUnit;
                             var annualLoss = count * 1800;
                             var netSavings = Math.max(annualLoss - 588, 0);
                             var fLoss = '$' + annualLoss.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
                             var fSave = '$' + netSavings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-                            lossEl.textContent = fLoss + (isEn ? ' USD/year' : ' USD/año');
-                            netEl.textContent = fSave + (isEn ? ' USD/year' : ' USD/año');
+                            lossEl.textContent = fLoss + yearUnit;
+                            netEl.textContent = fSave + yearUnit;
                         } catch(e){}
                     }
                     window.updateRoiCalculator = updateRoiCalculator;
