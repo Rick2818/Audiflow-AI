@@ -106,17 +106,20 @@ FASE 7: SEO TÉCNICO, INDEXNOW Y SEO PROGRAMÁTICO
 - Pinger instantáneo a Bing y motores IndexNow en <5s (`/api/indexnow/submit`).
 
 ================================================================================
-FASE 8: MOTOR DE PROSPECCIÓN B2B CON HOOK IRRESISTIBLE & A/B TESTING
+FASE 8: MOTOR DE PROSPECCIÓN B2B TRI-LINGÜE (ES | EN | DE) & A/B TESTING
 ================================================================================
 - Gancho de Regalo: *"🎁 Análisis preventivo 100% Gratis de contratos/facturas para tu equipo directivo"*.
-- Lógica de idioma automática: Inglés para EE.UU./Europa, Español para LATAM/España.
+- Lógica de idioma tri-lingüe automática: 
+  * 🇩🇪 **Alemán (DE):** Para prospectos en Alemania, Suiza (CH), Austria (AT), Liechtenstein y nórdicos comerciales.
+  * 🇬🇧 **Inglés (EN):** Para prospectos en EE.UU., Reino Unido, Dinamarca, Noruega, Suecia, Países Bajos y multinacionales.
+  * 🇪🇸 **Español (ES):** Para prospectos en Latinoamérica y España.
 - Dataset integrado de 1,000 prospectos B2B taggeados (Lote 1 Base + Lote 2 A/B Hook).
 
 ================================================================================
 FASE 9: LOS 4 CANALES DE ADQUISICIÓN GRATIS Y 7 MÓDULOS ENTERPRISE
 ================================================================================
 1. 4 CANALES DE ADQUISICIÓN EN `/admin`:
-   - Canal 1: Cold Email Outreach automatizado con Vercel Crons.
+   - Canal 1: Cold Email Outreach automatizado con Resend SDK y Vercel Crons.
    - Canal 2: SEO Programático e IndexNow Pinger.
    - Canal 3: Lanzamiento en Directorios B2B (Product Hunt, SaaSHub).
    - Canal 4: Generador de Publicaciones Orgánicas para LinkedIn y Reddit en 1 clic.
@@ -129,29 +132,30 @@ FASE 10: CHECKLIST PREVENTIVO ANTI-ERRORES (5 REGLAS DE ORO)
 1. REGLA 1: Inicialización obligatoria de acumuladores Math en `0` (`.reduce(..., 0)`).
 2. REGLA 2: Renderizado de QR Codes con fallback de texto y manejador `onerror`.
 3. REGLA 3: Bloques `catch` en pasarelas de pago NUNCA otorgan acceso gratuito.
-4. REGLA 4: Detección individual de idioma por prospecto en envíos masivos.
+4. REGLA 4: Detección individual de idioma por prospecto en envíos masivos (ES/EN/DE).
 5. REGLA 5: Tolerancia a desconexiones de polling efímero serverless.
 
 ================================================================================
 FASE 11: TELEMETRÍA, HEATMAPS Y NOTIFICACIONES AL PROPIETARIO
 ================================================================================
 - Google Analytics 4 (GA4) y Microsoft Clarity (Heatmaps & Session Recordings).
-- Alerta por correo al fundador en cada venta o suscripción efectuada.
+- Alerta por correo al fundador en cada venta ($19 USD) o suscripción ($69/mes o $590/año) efectuada.
 
 ================================================================================
 FASE 12: SUITE DE 1,000 PRUEBAS AUTOMATIZADAS & CERTIFICACIÓN
 ================================================================================
 - Crear y ejecutar script `tests/stress_test.js` que pruebe endpoints, concurrencia y pasarelas de pago con resultado obligatorio: **1,000 / 1,000 PASSED (0 ERRORS)**.
+- Validación de lote de 50 auditorías en segundo plano (`tests/audit_batch_validation.js`) con 0 incongruencias.
 
 ================================================================================
 FASE 13: BASE DE DATOS SUPABASE & BOXLANG
 ================================================================================
-- Esquema PostgreSQL en `db/schema.sql` con tablas para leads, reportes, transacciones híbridas ($7 USD / Sats), suscripciones ($49/mes) y políticas RLS habilitadas.
+- Esquema PostgreSQL en `db/schema.sql` con tablas para leads, reportes, transacciones ($19.00 USD / Sats), suscripciones recurrentes ($69/mes y $590/año) y políticas RLS habilitadas.
 
 ================================================================================
 FASE 14: ENTREGA TOTAL, COMMITS GIT Y DESPLIEGUE EN PRODUCCIÓN
 ================================================================================
-- `README.md` exhaustivo con badges, documentación de arquitectura y guía de uso.
+- `README.md` exhaustivo con badges, documentación de arquitectura tri-lingüe y guía de uso.
 - Repositorio Git limpio, commiteado y empujado a `origin main`.
-- Servidor probado y respondiendo con código **200 OK** en todas las rutas.
+- Servidor probado y respondiendo con código **200 OK** en todas las rutas locales y en Vercel.
 ```

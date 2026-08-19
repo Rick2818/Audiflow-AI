@@ -31,30 +31,37 @@
    - Design System Obsidian & Zinc con cifras numéricas tabulares (`tabular-nums`) y animaciones a 60fps con curvas bezier suaves.
    - Certificación de contraste superior **WCAG AAA (>7:1 ratio)**.
 
-2. **Cumplimiento Legal Formal (SOC2 & GDPR)**:
+2. **Soporte Tri-Lingüe Nativo (ES | EN | DE)**:
+   - **Español (ES)**: Optimizado para el mercado corporativo de Latinoamérica y España.
+   - **Inglés (EN)**: Cobertura global para EE.UU., Reino Unido y multinacionales.
+   - **Alemán (DE)**: Adaptación jurídica y comercial para la **región DACH (Alemania, Suiza, Austria)** y sus socios comerciales nórdicos (Dinamarca, Noruega, Suecia), con terminología conforme a DSGVO/GDPR.
+
+3. **Motor de Correo B2B Resend & Remitente Corporativo**:
+   - **Resend SDK Nativo (`resend`)**: Capacidad de hasta 3,000 correos/mes con entregabilidad ultra-alta y autenticación DKIM/SPF/DMARC.
+   - **Remitente Oficial**: `Ricardo | AuditFlow AI <ricardo@audiflowai.com>`.
+   - Plantillas de prospección automatizadas con gancho irresistible de auditoría gratuita en los 3 idiomas.
+
+4. **Arquitectura de Precios B2B de Alto Valor ($19 / $69 / $590)**:
+   - **Escaneo Diagnóstico ($0 USD):** Vista previa gratuita de 3 anomalías y cálculo de fuga financiera.
+   - **Reporte Ejecutivo Completo ($19.00 USD / 29,230 Sats):** Auditoría exhaustiva + Redlines en Word `.docx` editable con control de cambios + PDF oficial firmado digitalmente.
+   - **Plan Corporativo Mensual ($69.00 USD/mes):** Auditorías ilimitadas multi-usuario, Cross-Audit 2-Way y Copiloto Chat 24/7.
+   - **Plan Corporativo Anual ($590.00 USD/año):** Tarifa preferencial con ahorro de $238 USD (~3.5 meses gratis) y soporte prioritario.
+
+5. **Cumplimiento Legal Formal (SOC2 & GDPR / DSGVO)**:
    - Procesamiento efímero en memoria RAM volátil (`multer.memoryStorage()`) con purga obligatoria (`PURGED_FROM_RAM`).
    - **Cero almacenamiento en disco duro (Zero Disk Retention)**.
    - **Cláusula estricta de NO-ENTRENAMIENTO de modelos de IA** con los contratos o datos confidenciales del cliente.
 
-3. **Motor de Transporte de Correo Dual (Dual-Transport)**:
-   - **Opción A (Dominio Corporativo / Resend / Zoho):** `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM` con firma SPF, DKIM y DMARC.
-   - **Opción B (Fallback Automático):** Gmail SMTP para desarrollo sin romper la ejecución.
-   - Envío por bloques seguros (anti-timeout) con barra de progreso en vivo y dataset de 1,000 prospectos B2B para pruebas A/B.
-
-4. **Arquitectura de Precios B2B de 3 Niveles**:
-   - **Reporte Express ($7.00 USD / Sats):** Detección rápida de riesgos y fugas financieras.
-   - **Reporte Ejecutivo Completo ($19.00 USD):** Auditoría exhaustiva + Redlines en Word `.docx` editable con control de cambios + PDF con marca blanca.
-   - **Plan Corporativo Ilimitado ($49.00 USD/mes o $399.00 USD/año):** Auditorías ilimitadas multi-usuario, Cross-Audit 2-Way y Copiloto Chat 24/7.
-
-5. **5 Módulos Enterprise & Copiloto IA**:
+6. **5 Módulos Enterprise & Copiloto IA**:
    - **Auditoría Cruzada 2-Way**: Reconciliación entre Contratos y Facturas (`/api/cross-audit`).
-   - **Playbook de Negociación & Redlines**: Sugerencias de contra-propuesta.
+   - **Playbook de Negociación & Redlines**: Sugerencias de contra-propuesta con marcas de revisión.
    - **Traffic Light Risk Heatmap**: Semáforo visual de riesgos (🔴 Crítico, 🟡 Moderado, 🟢 Conforme).
-   - **Exportación Word (.docx)**: Descarga editable con marcas de revisión (`/api/export-docx`).
+   - **Exportación Word (.docx)**: Descarga editable con control de cambios (`/api/export-docx`).
    - **Recordatorios iCalendar (.ics)**: Sincronización de vencimientos con Google Calendar y Outlook.
    - **Copiloto Chat con IA (`Chat-with-Contract`)**: Chat en tiempo real sobre el documento (`/api/chat-document`).
 
-6. **SEO Técnico, IndexNow & Google Search Console**:
+7. **SEO Técnico, IndexNow & Google Search Console**:
+   - Indexación oficial completada en Google Search Console.
    - Sitemap dinámico, robots.txt, Schema.org (`Organization`, `SoftwareApplication`, `FAQPage`, `HowTo`).
    - Landing pages de SEO Programático (`/auditar-contrato-arrendamiento`, `/auditar-factura-proveedor`, `/auditar-contrato-servicios-it`).
    - Pinger instantáneo a Bing y motores IndexNow en <5s (`/api/indexnow/submit`).
