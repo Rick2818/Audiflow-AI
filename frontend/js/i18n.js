@@ -346,7 +346,7 @@ window.I18n = {
             const key = el.getAttribute('data-i18n');
             const translation = this.t(key);
             if (translation) {
-                el.innerText = translation;
+                el.innerHTML = translation;
             }
         });
 

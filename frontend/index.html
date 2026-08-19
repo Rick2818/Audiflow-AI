@@ -337,10 +337,29 @@
                             var valEl = document.getElementById('roi-contracts-value');
                             var lossEl = document.getElementById('roi-calculated-loss');
                             var netEl = document.getElementById('roi-net-savings');
-                            if (!slider || !valEl || !lossEl || !netEl) return;
-                            var count = parseInt(slider.value, 10) || 8;
+
                             var isEn = false;
                             try { isEn = (localStorage.getItem('auditflow_lang') === 'en'); } catch(e){}
+
+                            var tTitle = document.querySelector('[data-i18n="roi_title"]');
+                            var tBadge = document.querySelector('[data-i18n="roi_badge"]');
+                            var tQuestion = document.querySelector('[data-i18n="roi_question"]');
+                            var tMin = document.querySelector('[data-i18n="roi_min_doc"]');
+                            var tMax = document.querySelector('[data-i18n="roi_max_doc"]');
+                            var tLossLabel = document.querySelector('[data-i18n="roi_loss_label"]');
+                            var tSavingsLabel = document.querySelector('[data-i18n="roi_savings_label"]');
+
+                            if (tTitle) tTitle.innerHTML = isEn ? '🧮 B2B Financial Leakage Calculator' : '🧮 Calculadora Interactiva de Fugas Financieras B2B';
+                            if (tBadge) tBadge.innerHTML = isEn ? 'Diagnostic Tool' : 'Herramienta de Diagnóstico';
+                            if (tQuestion) tQuestion.innerHTML = isEn ? 'How many contracts or invoices do you process per month?' : '¿Cuántos contratos o facturas procesas al mes?';
+                            if (tMin) tMin.innerHTML = isEn ? '1 doc/mo' : '1 doc/mes';
+                            if (tMax) tMax.innerHTML = isEn ? '50 docs/mo' : '50 docs/mes';
+                            if (tLossLabel) tLossLabel.innerHTML = isEn ? 'Estimated Annual Financial Leakage without AI:' : 'Riesgo / Fuga Anual Estimada sin IA:';
+                            if (tSavingsLabel) tSavingsLabel.innerHTML = isEn ? 'Estimated Net Savings with AuditFlow AI:' : 'Ahorro Neto Estimado con AuditFlow AI:';
+
+                            if (!slider || !valEl || !lossEl || !netEl) return;
+                            var count = parseInt(slider.value, 10) || 8;
+
                             valEl.textContent = count + (isEn ? ' docs/month' : ' documentos/mes');
                             var annualLoss = count * 1800;
                             var netSavings = Math.max(annualLoss - 588, 0);
