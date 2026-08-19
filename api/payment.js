@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import subscribeHandler from './subscribe.js';
 
 const stripeSecret = process.env.STRIPE_SECRET_KEY || '';
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
@@ -19,6 +20,10 @@ export default async function handler(req, res) {
     }
 
     const path = req.url || '';
+    if (path.includes('subscribe') || body.interval) {
+      return await subscribeHandler(req, res);
+    }
+
     const { report_id, email, document_name } = body;
 
     if (!report_id && !path.includes('subscribe')) {
