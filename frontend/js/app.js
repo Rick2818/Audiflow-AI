@@ -871,6 +871,35 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         });
     },
 
+    downloadPdfReport() {
+        const documentName = (this.selectedFile ? this.selectedFile.name : 'Informe_Auditoria_AuditFlow.pdf');
+        const auditData = this.currentAuditData || {};
+        const riskScore = auditData.risk_score || 85;
+        const summary = auditData.summary || 'Auditoría preventiva de fugas financieras y revisión de cláusulas de riesgo.';
+        const findings = auditData.redlines || auditData.findings || [];
+
+        fetch('/api/audit/download-pdf', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ documentName, riskScore, summary, findings })
+        })
+        .then(res => res.text())
+        .then(html => {
+            const printWin = window.open('', '_blank');
+            if (printWin) {
+                printWin.document.write(html);
+                printWin.document.close();
+                printWin.focus();
+                setTimeout(() => { printWin.print(); }, 500);
+            } else {
+                window.print();
+            }
+        })
+        .catch(() => {
+            window.print();
+        });
+    },
+
     downloadIcalEvents() {
         const events = (this.currentAuditData && this.currentAuditData.calendar_events) ? this.currentAuditData.calendar_events : [
             {
