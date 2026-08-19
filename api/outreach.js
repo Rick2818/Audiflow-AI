@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
+// Dataset de Prospectos B2B para Campañas de Prospección (Lote 1 y Lote 2)
 function generateOutreachProspects(batch = 2) {
   const firstNamesBatch1 = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
   const lastNamesBatch1 = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
@@ -66,6 +68,9 @@ export default async function handler(req, res) {
       prospects = generateOutreachProspects(batch);
     }
 
+    const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+    const resendClient = resendApiKey ? new Resend(resendApiKey) : null;
+
     const smtpHost = (process.env.SMTP_HOST || '').trim();
     const smtpPort = Number(process.env.SMTP_PORT) || 587;
     const smtpUser = (process.env.SMTP_USER || '').trim();
@@ -76,23 +81,25 @@ export default async function handler(req, res) {
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
     let transporter;
-    if (smtpHost && smtpUser && smtpPass) {
-      transporter = nodemailer.createTransport({
-        host: smtpHost,
-        port: smtpPort,
-        secure: smtpPort === 465,
-        auth: { user: smtpUser, pass: smtpPass }
-      });
-    } else if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
-      transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: { user: gmailUser, pass: gmailPass }
-      });
-    } else {
-      return res.status(500).json({ success: false, error: 'Credenciales de correo (SMTP Corporativo o Gmail) no configuradas en el servidor.' });
+    if (!resendClient) {
+      if (smtpHost && smtpUser && smtpPass) {
+        transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: smtpPort === 465,
+          auth: { user: smtpUser, pass: smtpPass }
+        });
+      } else if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+        transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: gmailUser, pass: gmailPass }
+        });
+      } else {
+        return res.status(500).json({ success: false, error: 'Credenciales de correo (Resend, SMTP Corporativo o Gmail) no configuradas en el servidor.' });
+      }
     }
 
-    const senderFrom = (smtpHost && smtpUser) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
+    const senderFrom = (resendClient || (smtpHost && smtpUser)) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
     const results = [];
 
     for (const p of prospects) {
@@ -156,13 +163,27 @@ export default async function handler(req, res) {
 
       if (!test_mode) {
         try {
-          const info = await transporter.sendMail({
-            from: senderFrom,
-            to: email,
-            subject,
-            html: bodyHtml
-          });
-          results.push({ email, name, company, country, status: 'sent', messageId: info.messageId });
+          if (resendClient) {
+            const { data, error } = await resendClient.emails.send({
+              from: senderFrom,
+              to: [email],
+              subject,
+              html: bodyHtml
+            });
+            if (error) {
+              results.push({ email, name, company, country, status: 'error', error: error.message });
+            } else {
+              results.push({ email, name, company, country, status: 'sent_resend', messageId: data?.id });
+            }
+          } else {
+            const info = await transporter.sendMail({
+              from: senderFrom,
+              to: email,
+              subject,
+              html: bodyHtml
+            });
+            results.push({ email, name, company, country, status: 'sent', messageId: info.messageId });
+          }
         } catch (err) {
           results.push({ email, name, company, country, status: 'error', error: err.message });
         }

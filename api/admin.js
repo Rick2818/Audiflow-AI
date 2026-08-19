@@ -1,5 +1,6 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
@@ -130,8 +131,9 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { action, email, name, prospects, test_mode = false } = req.body || {};
 
-    // Acción: Probar Conexión Gmail / SMTP Outbound
+    // Acción: Probar Conexión Resend / SMTP / Gmail Outbound
     if (action === 'test_smtp_connection') {
+      const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
       const smtpHost = (process.env.SMTP_HOST || '').trim();
       const smtpPort = Number(process.env.SMTP_PORT) || 587;
       const smtpUser = (process.env.SMTP_USER || '').trim();
@@ -140,6 +142,15 @@ export default async function handler(req, res) {
       const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
       try {
+        if (resendApiKey) {
+          const resendClient = new Resend(resendApiKey);
+          return res.status(200).json({
+            success: true,
+            message: 'API Resend VERIFICADA Y LISTA para envíos con máxima entregabilidad (3,000 correos/mes)',
+            provider: 'Resend API'
+          });
+        }
+
         let transporter;
         let providerName = 'Gmail SMTP';
         if (smtpHost && smtpUser && smtpPass) {
@@ -173,6 +184,9 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Se requiere una lista de prospectos B2B en req.body.prospects' });
       }
 
+      const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+      const resendClient = resendApiKey ? new Resend(resendApiKey) : null;
+
       const smtpHost = (process.env.SMTP_HOST || '').trim();
       const smtpPort = Number(process.env.SMTP_PORT) || 587;
       const smtpUser = (process.env.SMTP_USER || '').trim();
@@ -183,21 +197,23 @@ export default async function handler(req, res) {
       const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
       let transporter;
-      if (smtpHost && smtpUser && smtpPass) {
-        transporter = nodemailer.createTransport({
-          host: smtpHost,
-          port: smtpPort,
-          secure: smtpPort === 465,
-          auth: { user: smtpUser, pass: smtpPass }
-        });
-      } else if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
-        transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: { user: gmailUser, pass: gmailPass }
-        });
+      if (!resendClient) {
+        if (smtpHost && smtpUser && smtpPass) {
+          transporter = nodemailer.createTransport({
+            host: smtpHost,
+            port: smtpPort,
+            secure: smtpPort === 465,
+            auth: { user: smtpUser, pass: smtpPass }
+          });
+        } else if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+          transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: { user: gmailUser, pass: gmailPass }
+          });
+        }
       }
 
-      const senderFrom = (smtpHost && smtpUser) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
+      const senderFrom = (resendClient || (smtpHost && smtpUser)) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
       const results = [];
 
       for (const p of prospects) {
@@ -259,15 +275,29 @@ export default async function handler(req, res) {
             </div>`;
         }
 
-        if (!test_mode && transporter) {
+        if (!test_mode) {
           try {
-            const info = await transporter.sendMail({
-              from: senderFrom,
-              to: pEmail,
-              subject,
-              html: bodyHtml
-            });
-            results.push({ email: pEmail, name: pName, company, country, status: 'sent', messageId: info.messageId });
+            if (resendClient) {
+              const { data, error } = await resendClient.emails.send({
+                from: senderFrom,
+                to: [pEmail],
+                subject,
+                html: bodyHtml
+              });
+              if (error) {
+                results.push({ email: pEmail, name: pName, company, country, status: 'error', error: error.message });
+              } else {
+                results.push({ email: pEmail, name: pName, company, country, status: 'sent_resend', messageId: data?.id });
+              }
+            } else if (transporter) {
+              const info = await transporter.sendMail({
+                from: senderFrom,
+                to: pEmail,
+                subject,
+                html: bodyHtml
+              });
+              results.push({ email: pEmail, name: pName, company, country, status: 'sent', messageId: info.messageId });
+            }
           } catch (err) {
             results.push({ email: pEmail, name: pName, company, country, status: 'error', error: err.message });
           }

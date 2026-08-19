@@ -35,7 +35,7 @@
     "nodemailer": "^9.0.5",
     "pdf-parse": "^1.1.1",
     "pdfkit": "^0.19.1",
-    "resend": "^3.2.0",
+    "resend": "^3.5.0",
     "stripe": "^14.24.0"
   }
 }
