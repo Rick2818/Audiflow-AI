@@ -305,27 +305,27 @@
                 <!-- CALCULADORA INTERACTIVA DE FUGAS FINANCIERAS (HERRAMIENTA PLG) -->
                 <div class="mb-8 p-5 rounded-2xl bg-dark-card border border-border-dark text-left font-mono shadow-xl">
                     <div class="flex items-center justify-between mb-3 border-b border-border-dark pb-2">
-                        <span class="font-bold text-white text-xs sm:text-sm flex items-center gap-2">
+                        <span data-i18n="roi_title" class="font-bold text-white text-xs sm:text-sm flex items-center gap-2">
                             🧮 Calculadora Interactiva de Fugas Financieras B2B
                         </span>
-                        <span class="text-[10px] text-accent-emerald bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/30 font-bold">Herramienta de Diagnóstico</span>
+                        <span data-i18n="roi_badge" class="text-[10px] text-accent-emerald bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/30 font-bold">Herramienta de Diagnóstico</span>
                     </div>
                     
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                         <div>
-                            <label class="block text-xs text-gray-300 mb-1">¿Cuántos contratos o facturas procesas al mes?</label>
+                            <label data-i18n="roi_question" class="block text-xs text-gray-300 mb-1">¿Cuántos contratos o facturas procesas al mes?</label>
                             <input type="range" id="roi-contracts-slider" min="1" max="50" value="8" oninput="window.updateRoiCalculator && window.updateRoiCalculator()" onchange="window.updateRoiCalculator && window.updateRoiCalculator()" class="w-full accent-accent-blue cursor-pointer">
                             <div class="flex justify-between text-[11px] text-gray-400 mt-1">
-                                <span>1 doc/mes</span>
+                                <span data-i18n="roi_min_doc">1 doc/mes</span>
                                 <span id="roi-contracts-value" class="font-bold text-accent-blue">8 documentos/mes</span>
-                                <span>50 docs/mes</span>
+                                <span data-i18n="roi_max_doc">50 docs/mes</span>
                             </div>
                         </div>
 
                         <div class="bg-dark-surface p-3.5 rounded-xl border border-border-dark space-y-1">
-                            <div class="text-[11px] text-gray-400">Riesgo / Fuga Anual Estimada sin IA:</div>
+                            <div data-i18n="roi_loss_label" class="text-[11px] text-gray-400">Riesgo / Fuga Anual Estimada sin IA:</div>
                             <div id="roi-calculated-loss" class="text-xl font-extrabold text-red-400 font-mono">$14,400.00 USD/año</div>
-                            <div class="text-[10px] text-emerald-400">Ahorro Neto Estimado con AuditFlow AI: <strong id="roi-net-savings">$13,812.00 USD/año</strong></div>
+                            <div class="text-[10px] text-emerald-400"><span data-i18n="roi_savings_label">Ahorro Neto Estimado con AuditFlow AI:</span> <strong id="roi-net-savings">$13,812.00 USD/año</strong></div>
                         </div>
                     </div>
                 </div>

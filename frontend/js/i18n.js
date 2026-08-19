@@ -41,6 +41,15 @@ window.I18n = {
             stat_retention: "Archivos en Disco",
             stat_encryption: "Cifrado Volátil",
 
+            // Financial ROI Calculator
+            roi_title: "🧮 Calculadora Interactiva de Fugas Financieras B2B",
+            roi_badge: "Herramienta de Diagnóstico",
+            roi_question: "¿Cuántos contratos o facturas procesas al mes?",
+            roi_min_doc: "1 doc/mes",
+            roi_max_doc: "50 docs/mes",
+            roi_loss_label: "Riesgo / Fuga Anual Estimada sin IA:",
+            roi_savings_label: "Ahorro Neto Estimado con AuditFlow AI:",
+
             // Dropzone & Sample Demo Button
             drag_title: "Arrastra tu archivo aquí o ",
             drag_browse: "explora tus archivos",
@@ -182,6 +191,15 @@ window.I18n = {
             stat_leakage: "Leakage Detected",
             stat_retention: "Files on Disk",
             stat_encryption: "RAM Encryption",
+
+            // Financial ROI Calculator
+            roi_title: "🧮 B2B Financial Leakage Calculator",
+            roi_badge: "Diagnostic Tool",
+            roi_question: "How many contracts or invoices do you process per month?",
+            roi_min_doc: "1 doc/mo",
+            roi_max_doc: "50 docs/mo",
+            roi_loss_label: "Estimated Annual Financial Leakage without AI:",
+            roi_savings_label: "Estimated Net Savings with AuditFlow AI:",
 
             // Dropzone & Sample Demo Button
             drag_title: "Drag & drop your file here or ",
@@ -339,6 +357,10 @@ window.I18n = {
                 el.placeholder = translation;
             }
         });
+
+        if (typeof window.updateRoiCalculator === 'function') {
+            window.updateRoiCalculator();
+        }
     }
 };
 
