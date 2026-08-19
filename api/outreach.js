@@ -106,7 +106,6 @@ export default async function handler(req, res) {
             <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a tu total disposición para cualquier consulta,</p>
             <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
             <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador, AuditFlow AI</p>
-            <p style="margin: 4px 0 0 0;"><a href="mailto:rick28191@gmail.com" style="color: #10b981; font-size: 13px; text-decoration: none;">✉️ rick28191@gmail.com</a></p>
           </div>
           <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
             AuditFlow AI • Procesamiento Efímero en Memoria Volátil RAM (0 Almacenamiento en Disco • Cifrado AES-256)
@@ -133,7 +132,6 @@ export default async function handler(req, res) {
               <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Feel free to reach out directly if you have any questions,</p>
               <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
               <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Founder, AuditFlow AI</p>
-              <p style="margin: 4px 0 0 0;"><a href="mailto:rick28191@gmail.com" style="color: #10b981; font-size: 13px; text-decoration: none;">✉️ rick28191@gmail.com</a></p>
             </div>
             <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
               AuditFlow AI • Volatile RAM Ephemeral Processing (Zero Disk Storage • AES-256 Encryption)
@@ -144,8 +142,7 @@ export default async function handler(req, res) {
       if (!test_mode) {
         try {
           const info = await transporter.sendMail({
-            from: `"Ricardo — AuditFlow AI" <${gmailUser}>`,
-            replyTo: 'rick28191@gmail.com',
+            from: `"Ricardo | AuditFlow AI" <${gmailUser}>`,
             to: email,
             subject,
             html: bodyHtml
