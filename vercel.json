@@ -140,6 +140,18 @@
       "dest": "api/outreach.js"
     },
     {
+      "src": "/api/payment/stripe",
+      "dest": "api/payment.js"
+    },
+    {
+      "src": "/api/payment/lightning",
+      "dest": "api/payment.js"
+    },
+    {
+      "src": "/api/payment/subscribe",
+      "dest": "api/subscribe.js"
+    },
+    {
       "src": "/api/(.*)",
       "dest": "server.js"
     },
