@@ -75,7 +75,7 @@ export default async function handler(req, res) {
     const smtpPort = Number(process.env.SMTP_PORT) || 587;
     const smtpUser = (process.env.SMTP_USER || '').trim();
     const smtpPass = (process.env.SMTP_PASS || '').trim();
-    const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <rick28191@gmail.com>').trim();
+    const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
 
     const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();

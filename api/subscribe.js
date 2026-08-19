@@ -1,6 +1,7 @@
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 
 const stripeSecret = process.env.STRIPE_SECRET_KEY || '';
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
@@ -9,8 +10,12 @@ const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
-// Helper para envío de correo bilingüe (ES / EN) de Bienvenida Corporativa y COMPROBANTE DE PAGO B2B por Gmail SMTP
+// Helper para envío de correo bilingüe/tri-lingüe de Bienvenida Corporativa y COMPROBANTE DE PAGO B2B
 async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly', lang = 'es' }) {
+  const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+  const resendClient = resendApiKey ? new Resend(resendApiKey) : null;
+  const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
+
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
@@ -152,13 +157,24 @@ async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly', la
   `;
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: gmailUser, pass: gmailPass }
-    });
-    return await transporter.sendMail({ from: `"AuditFlow AI" <${gmailUser}>`, to, subject, html });
+    if (resendClient) {
+      return await resendClient.emails.send({
+        from: emailFrom,
+        to: [to],
+        subject,
+        html
+      });
+    }
+
+    if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: gmailUser, pass: gmailPass }
+      });
+      return await transporter.sendMail({ from: `"AuditFlow AI" <${gmailUser}>`, to, subject, html });
+    }
   } catch (err) {
-    console.warn('Gmail SMTP Welcome Email Warning:', err.message);
+    console.warn('Welcome Email Warning:', err.message);
   }
 }
 
