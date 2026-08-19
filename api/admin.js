@@ -60,7 +60,13 @@ function generate500Leads() {
   ];
 
   const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
-  const statuses = ['OFFER_SENT', 'UNLOCKED_PAYMENT', 'LEAD_CAPTURED', 'ENTERPRISE_SUBSCRIBED'];
+  const rolesData = [
+    { role: 'CFO & VP of Finance', tag: '👑 PLATINUM_CFO' },
+    { role: 'Director de Compras & Procurement', tag: '🛒 PROCUREMENT_LEAD' },
+    { role: 'General Counsel & Director Legal', tag: '⚖️ LEGAL_DIRECTOR' },
+    { role: 'Financial Controller & Auditor', tag: '📊 FINANCIAL_CONTROLLER' },
+    { role: 'Property Manager & Real Estate Lead', tag: '🏢 PROPERTY_MANAGER' }
+  ];
 
   const leads = [];
   const now = Date.now();
@@ -72,20 +78,13 @@ function generate500Leads() {
     const docObj = docs[i % docs.length];
     const country = countries[i % countries.length];
     const status = statuses[i % statuses.length];
+    const roleObj = rolesData[i % rolesData.length];
 
     const leadScore = 60 + ((i * 13) % 39);
     const isEnterprise = leadScore >= 75;
 
-    const tags = [docObj.tag];
+    const tags = [docObj.tag, roleObj.tag];
     if (leadScore >= 88) {
-      tags.push('👑 PLATINUM_CFO');
-    } else if (leadScore >= 75) {
-      tags.push('⭐ GOLD_DIRECTOR');
-    } else {
-      tags.push('SILVER_MANAGER');
-    }
-
-    if (i % 2 === 0) {
       tags.push('🚨 HIGH_LEAKAGE');
     } else {
       tags.push('🟡 MED_LEAKAGE');
@@ -99,6 +98,7 @@ function generate500Leads() {
       name: `${fn} ${ln}`,
       email: email,
       company: dom.split('.')[0].toUpperCase(),
+      role: roleObj.role,
       country: country,
       document_name: docObj.name,
       document_type: docObj.type,
