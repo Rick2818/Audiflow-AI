@@ -328,13 +328,16 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
                     <div class="flex flex-wrap items-center gap-3">
                         <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer">
-                            🚀 Disparar Campaña B2B Real
+                            🚀 Disparar Campaña B2B Real (Hook Irresistible)
                         </button>
                         <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
                             🧪 Simulación de Prueba (Test Mode)
                         </button>
-                        <button onclick="AdminApp.load500Prospects()" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
-                            ⚡ Cargar 500 Prospectos B2B
+                        <button onclick="AdminApp.loadProspectsBatch(1)" class="px-3.5 py-2.5 rounded-xl bg-dark-surface border border-blue-500/40 text-blue-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
+                            📦 Cargar Lote 1 (500 Leads Base)
+                        </button>
+                        <button onclick="AdminApp.loadProspectsBatch(2)" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                            🔥 Cargar Lote 2 (500 Nuevos Leads - Hook A/B)
                         </button>
                     </div>
                 </div>
@@ -342,8 +345,9 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 <!-- GUÍAS & STATUS -->
                 <div class="bg-dark-surface border border-dark-border rounded-xl p-4 text-xs space-y-3 font-mono">
                     <h4 class="font-bold text-accent-blue text-sm border-b border-dark-border pb-2">📋 Estado del Despachador</h4>
-                    <p class="text-gray-300">Remitente Configurado: <span class="text-emerald-400">rick28191@gmail.com</span></p>
-                    <p class="text-gray-300">Gancho Monetario: <span class="text-amber-400">$3,500 - $18,000 USD</span></p>
+                    <p class="text-gray-300">Remitente: <span class="text-emerald-400">rick28191@gmail.com</span></p>
+                    <p class="text-gray-300">Hook Activo: <span class="text-emerald-400">🎁 Auditoría 100% Gratis de Regalo</span></p>
+                    <p class="text-gray-300">Detección: <span class="text-amber-400">$3,500 - $18,000 USD en <8s</span></p>
                     <div id="outreach-status-log" class="p-3 bg-black/40 border border-dark-border rounded-lg text-[11px] text-gray-400 min-h-[100px] overflow-y-auto font-mono">
                         Esperando orden de lanzamiento de campaña...
                     </div>
@@ -725,15 +729,23 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 }
             },
 
-            load500Prospects() {
+            loadProspectsBatch(batch = 2) {
                 const area = document.getElementById('outreach-emails-input');
                 const logBox = document.getElementById('outreach-status-log');
                 if (!area) return;
 
-                const firstNames = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
-                const lastNames = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
-                const domains = ['mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx', 'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar', 'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'];
-                const roles = ['CFO & VP of Finance', 'Director de Compras & Procurement', 'General Counsel & Director Legal', 'Financial Controller & Auditor', 'Property Manager & Real Estate Lead'];
+                const firstNamesBatch1 = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
+                const lastNamesBatch1 = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+                const domainsBatch1 = ['mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx', 'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar', 'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'];
+
+                const firstNamesBatch2 = ['Andrés', 'Valeria', 'Rodrigo', 'Daniela', 'Gonzalo', 'Natalia', 'Esteban', 'Camila', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio', 'Paula', 'Arthur', 'Grace', 'Lucas', 'Chloe', 'Liam', 'Zoe', 'Noah', 'Lily', 'Mason', 'Hannah', 'Ethan', 'Ella', 'James', 'Aria'];
+                const lastNamesBatch2 = ['Alvarado', 'Bermúdez', 'Cisneros', 'Delgado', 'Escobar', 'Fuentes', 'Guzmán', 'Herrera', 'Ibáñez', 'Jiménez', 'Lara', 'Montero', 'Noriega', 'Orellana', 'Paredes', 'Quezada', 'Ramírez', 'Salazar', 'Trejo', 'Urrutia', 'Velasco', 'Walker', 'White', 'Harris', 'Clark', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen'];
+                const domainsBatch2 = ['alvaradoholdings.sv', 'bermudezcapital.mx', 'cisneroslogistics.co', 'delgadogroup.cl', 'escobarenterprise.pe', 'fuentesindustries.gt', 'guzmanpartners.cr', 'herreratrade.pa', 'ibanezventures.es', 'monteroglobal.ch', 'apexcorp.co.uk', 'bavariasoftware.de', 'nordicscale.se', 'parisinnovate.fr', 'beneluxcloud.nl', 'helsinkifintech.fi', 'pacificlawcorp.us', 'summitadvisors.us', 'manhattanassets.us', 'londontechgroup.co.uk'];
+
+                const firstNames = batch === 2 ? firstNamesBatch2 : firstNamesBatch1;
+                const lastNames = batch === 2 ? lastNamesBatch2 : lastNamesBatch1;
+                const domains = batch === 2 ? domainsBatch2 : domainsBatch1;
+                const roles = ['CFO & VP of Finance', 'Director Legal B2B', 'Gerente de Compras & Procurement', 'General Counsel', 'Director de Operaciones & Finanzas'];
                 const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
 
                 const lines = [];
@@ -749,8 +761,13 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 }
 
                 area.value = lines.join('\n');
-                if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡500 Prospectos B2B cargados exitosamente en el despachador!</span><br>`;
-                alert('⚡ 500 Prospectos B2B calificados de 14 países pre-cargados exitosamente.');
+                const batchLabel = batch === 2 ? 'Lote 2 (500 Nuevos Prospectos - Hook A/B Irresistible)' : 'Lote 1 (500 Prospectos Base)';
+                if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡${batchLabel} cargados exitosamente en el despachador!</span><br>`;
+                alert(`⚡ ¡${batchLabel} pre-cargados exitosamente!`);
+            },
+
+            load500Prospects() {
+                this.loadProspectsBatch(2);
             },
 
             generateSocialCopy() {

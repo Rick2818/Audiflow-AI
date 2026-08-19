@@ -1,10 +1,18 @@
 import nodemailer from 'nodemailer';
 
-function generate500OutreachProspects() {
-  const firstNames = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
-  const lastNames = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
-  const domains = ['mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx', 'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar', 'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'];
-  const roles = ['CFO & VP Finance', 'Director Legal B2B', 'Gerente de Compras', 'General Counsel', 'VP Operations & Legal'];
+function generateOutreachProspects(batch = 2) {
+  const firstNamesBatch1 = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
+  const lastNamesBatch1 = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+  const domainsBatch1 = ['mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx', 'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar', 'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'];
+
+  const firstNamesBatch2 = ['Andrés', 'Valeria', 'Rodrigo', 'Daniela', 'Gonzalo', 'Natalia', 'Esteban', 'Camila', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio', 'Paula', 'Arthur', 'Grace', 'Lucas', 'Chloe', 'Liam', 'Zoe', 'Noah', 'Lily', 'Mason', 'Hannah', 'Ethan', 'Ella', 'James', 'Aria'];
+  const lastNamesBatch2 = ['Alvarado', 'Bermúdez', 'Cisneros', 'Delgado', 'Escobar', 'Fuentes', 'Guzmán', 'Herrera', 'Ibáñez', 'Jiménez', 'Lara', 'Montero', 'Noriega', 'Orellana', 'Paredes', 'Quezada', 'Ramírez', 'Salazar', 'Trejo', 'Urrutia', 'Velasco', 'Walker', 'White', 'Harris', 'Clark', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen'];
+  const domainsBatch2 = ['alvaradoholdings.sv', 'bermudezcapital.mx', 'cisneroslogistics.co', 'delgadogroup.cl', 'escobarenterprise.pe', 'fuentesindustries.gt', 'guzmanpartners.cr', 'herreratrade.pa', 'ibanezventures.es', 'monteroglobal.ch', 'apexcorp.co.uk', 'bavariasoftware.de', 'nordicscale.se', 'parisinnovate.fr', 'beneluxcloud.nl', 'helsinkifintech.fi', 'pacificlawcorp.us', 'summitadvisors.us', 'manhattanassets.us', 'londontechgroup.co.uk'];
+
+  const firstNames = batch === 2 ? firstNamesBatch2 : firstNamesBatch1;
+  const lastNames = batch === 2 ? lastNamesBatch2 : lastNamesBatch1;
+  const domains = batch === 2 ? domainsBatch2 : domainsBatch1;
+  const roles = ['CFO & VP of Finance', 'Director Legal B2B', 'Gerente de Compras & Procurement', 'General Counsel', 'Director de Operaciones & Finanzas'];
   const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
 
   const prospects = [];
@@ -16,7 +24,15 @@ function generate500OutreachProspects() {
     const country = countries[i % countries.length];
     const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
     const company = dom.split('.')[0].toUpperCase();
-    prospects.push({ email, name: `${fn} ${ln}`, company, role, country });
+    prospects.push({
+      email,
+      name: `${fn} ${ln}`,
+      company,
+      role,
+      country,
+      batch: `batch_${batch}`,
+      campaign: `outreach_batch${batch}_irresistible_hook`
+    });
   }
   return prospects;
 }
@@ -44,10 +60,10 @@ export default async function handler(req, res) {
       return res.status(401).json({ success: false, error: 'No autorizado. Contraseña de administración incorrecta.' });
     }
 
-    let { prospects, test_mode = false } = body;
+    let { prospects, test_mode = false, batch = 2 } = body;
 
     if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
-      prospects = generate500OutreachProspects();
+      prospects = generateOutreachProspects(batch);
     }
 
     const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
@@ -71,38 +87,52 @@ export default async function handler(req, res) {
       const englishCountries = ['estados unidos', 'eeuu', 'ee.uu.', 'united states', 'us', 'usa', 'inglaterra', 'uk', 'united kingdom', 'england', 'suiza', 'switzerland', 'ch', 'francia', 'france', 'fr', 'luxemburgo', 'luxembourg', 'lu', 'alemania', 'germany', 'de', 'dinamarca', 'denmark', 'dk', 'noruega', 'norway', 'no', 'finlandia', 'finland', 'fi'];
       const isEn = lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c));
 
-      let subject = `Auditoría preventiva de facturas/contratos para ${company}`;
+      // HOOK IRRESISTIBLE EN ESPAÑOL
+      let subject = `🎁 Análisis preventivo de contratos y facturas para ${company} (100% Gratis)`;
       let bodyHtml = `
         <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #10b981; margin-top: 0;">AuditFlow AI — Auditoría de Contratos B2B (${country})</h2>
           <p>Hola <strong>${name}</strong> (${role} en <strong>${company}</strong>):</p>
-          <p>Desarrollamos AuditFlow AI para auditar contratos y facturas de proveedores en 8 segundos, detectando sobrecargos y penalizaciones ocultas de entre <strong>$3,500 y $18,000 USD</strong> antes de autorizar pagos.</p>
-          <p>Te hemos habilitado un análisis de prueba 100% gratuito para tu equipo en:</p>
-          <p style="text-align: center; margin: 20px 0;">
-            <a href="https://audiflowai.com/?ref=outreach_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Probar Auditoría Gratuita de ${company}</a>
+          <p style="line-height: 1.6; color: #e5e7eb;">
+            Lanzamos <strong>AuditFlow AI</strong>, una herramienta de inteligencia artificial que revisa contratos y facturas en <strong>8 segundos</strong> para encontrar cláusulas trampa, penalizaciones ocultas o cobros indebidos de entre <strong>$3,500 y $18,000 USD</strong> antes de autorizar pagos.
           </p>
-          <p style="color: #9ca3af; font-size: 12px; text-align: center;">AuditFlow AI • Memoria Volátil RAM (0 Almacenamiento en Disco)</p>
+          <p style="line-height: 1.6; color: #e5e7eb;">
+            Queremos regalarte a ti y a tu equipo un <strong>análisis 100% gratis</strong> de cualquier contrato o factura de proveedor que tengas activo para que compruebes en tiempo real qué detecta.
+          </p>
+          <p style="text-align: center; margin: 25px 0;">
+            <a href="https://audiflowai.com/?ref=outreach_gift_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Probar Auditoría Gratuita de ${company}</a>
+          </p>
+          <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-bottom: 0;">
+            AuditFlow AI • Procesamiento Efímero en Memoria Volátil RAM (0 Almacenamiento en Disco • Cifrado AES-256)
+          </p>
         </div>`;
 
+      // HOOK IRRESISTIBLE EN INGLÉS
       if (isEn) {
-        subject = `Preventive Invoice/Contract Audit for ${company}`;
+        subject = `🎁 Free preventive contract & invoice audit for ${company}`;
         bodyHtml = `
           <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
             <h2 style="color: #10b981; margin-top: 0;">AuditFlow AI — B2B Contract Audit (${country})</h2>
             <p>Hello <strong>${name}</strong> (${role} at <strong>${company}</strong>):</p>
-            <p>We developed AuditFlow AI to audit contracts and vendor invoices in 8 seconds, detecting hidden financial leakages of <strong>$3,500 to $18,000 USD</strong> before payment authorization.</p>
-            <p>We have enabled a 100% free test analysis for your team at:</p>
-            <p style="text-align: center; margin: 20px 0;">
-              <a href="https://audiflowai.com/?ref=outreach_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">Try Free Audit for ${company}</a>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              We recently launched <strong>AuditFlow AI</strong>, an AI engine that audits vendor contracts and invoices in <strong>8 seconds</strong> to detect hidden trap clauses, unfair penalties, and billing leakages of <strong>$3,500 to $18,000 USD</strong> before payment approval.
             </p>
-            <p style="color: #9ca3af; font-size: 12px; text-align: center;">AuditFlow AI • Volatile RAM Processing (Zero Disk Storage)</p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              We want to gift your team a <strong>100% free audit</strong> on any active contract or vendor invoice so you can experience exactly what savings and risks it identifies.
+            </p>
+            <p style="text-align: center; margin: 25px 0;">
+              <a href="https://audiflowai.com/?ref=outreach_gift_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Try Free Audit for ${company}</a>
+            </p>
+            <p style="color: #9ca3af; font-size: 12px; text-align: center; margin-bottom: 0;">
+              AuditFlow AI • Volatile RAM Ephemeral Processing (Zero Disk Storage • AES-256 Encryption)
+            </p>
           </div>`;
       }
 
       if (!test_mode) {
         try {
           const info = await transporter.sendMail({
-            from: `"AuditFlow AI Sales" <${gmailUser}>`,
+            from: `"AuditFlow AI" <${gmailUser}>`,
             to: email,
             subject,
             html: bodyHtml
@@ -118,6 +148,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({
       success: true,
+      batch: batch || 2,
       total_processed: results.length,
       test_mode,
       details: results
