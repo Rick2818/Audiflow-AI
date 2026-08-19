@@ -60,6 +60,13 @@ window.AppHandler = {
                 }
             });
         }
+
+        const roiSlider = document.getElementById('roi-contracts-slider');
+        if (roiSlider) {
+            roiSlider.addEventListener('input', () => this.updateRoiCalculator());
+            roiSlider.addEventListener('change', () => this.updateRoiCalculator());
+        }
+        this.updateRoiCalculator();
     },
 
     loadSampleContract() {
@@ -899,14 +906,22 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (!slider || !valEl || !lossEl || !netEl) return;
 
         const count = parseInt(slider.value) || 8;
-        valEl.innerText = `${count} documentos/mes`;
+        const isEn = (localStorage.getItem('auditflow_lang') === 'en');
+
+        if (isEn) {
+            valEl.innerText = `${count} docs/month`;
+        } else {
+            valEl.innerText = `${count} documentos/mes`;
+        }
 
         const annualLoss = count * 1800;
         const planCost = 588;
         const netSavings = Math.max(annualLoss - planCost, 0);
 
-        lossEl.innerText = `$${annualLoss.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD/año`;
-        netEl.innerText = `$${netSavings.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD/año`;
+        const formatUsd = (num) => '$' + num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+
+        lossEl.innerText = isEn ? `${formatUsd(annualLoss)} USD/year` : `${formatUsd(annualLoss)} USD/año`;
+        netEl.innerText = isEn ? `${formatUsd(netSavings)} USD/year` : `${formatUsd(netSavings)} USD/año`;
     },
 
     openChatCopilotModal() {

@@ -60,6 +60,7 @@ if (fs.existsSync(indexPath)) {
   assert(content.includes('@type": "BreadcrumbList"'), 'index.html incluye Schema.org BreadcrumbList');
   assert(content.includes('downloadDocxRedlines()'), 'index.html incluye botón para descargar Word .docx');
   assert(content.includes('downloadIcalEvents()'), 'index.html incluye botón para descargar eventos .ics');
+  assert(content.includes('roi-contracts-slider'), 'index.html incluye el slider de la calculadora financiera');
 }
 
 // 4. Verificación de js/app.js (Módulo 5: Exportación iCal y Word)
@@ -69,6 +70,7 @@ if (fs.existsSync(appJsPath)) {
   const content = fs.readFileSync(appJsPath, 'utf8');
   assert(content.includes('downloadDocxRedlines()'), 'app.js implementa downloadDocxRedlines');
   assert(content.includes('downloadIcalEvents()'), 'app.js implementa downloadIcalEvents');
+  assert(content.includes('updateRoiCalculator()'), 'app.js implementa updateRoiCalculator para la calculadora financiera');
   assert(content.includes('BEGIN:VCALENDAR'), 'app.js construye formato estándar iCalendar (.ics)');
 }
 
