@@ -39,6 +39,37 @@ async function sendGmailEmail({ to, subject, html }) {
   }
 }
 
+function generateLeadTags({ document_type = '', lead_score = 85, leakage_usd = 3450 }) {
+  const tags = [];
+  const dt = document_type.toLowerCase();
+  
+  if (dt.includes('arrendamiento') || dt.includes('rent') || dt.includes('alquiler')) {
+    tags.push('🏢 ARRENDAMIENTO');
+  } else if (dt.includes('factura') || dt.includes('invoice')) {
+    tags.push('🧾 FACTURACION');
+  } else if (dt.includes('it') || dt.includes('software') || dt.includes('cloud')) {
+    tags.push('💻 SERVICIOS_IT');
+  } else {
+    tags.push('📜 CONTRATO_COMERCIAL');
+  }
+
+  if (lead_score >= 88) {
+    tags.push('👑 PLATINUM_CFO');
+  } else if (lead_score >= 75) {
+    tags.push('⭐ GOLD_DIRECTOR');
+  } else {
+    tags.push('SILVER_MANAGER');
+  }
+
+  if (leakage_usd >= 3000) {
+    tags.push('🚨 HIGH_LEAKAGE');
+  } else {
+    tags.push('🟡 MED_LEAKAGE');
+  }
+
+  return tags;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -69,6 +100,8 @@ export default async function handler(req, res) {
     const isEnterpriseCandidate = leadScore >= 75;
     const docName = document_name || 'Contrato_Servicios.pdf';
     const docType = audit_data?.document_type || 'Contrato Comercial';
+    const leakageUsd = audit_data?.total_leakage || 3450;
+    const tags = generateLeadTags({ document_type: docType, lead_score: leadScore, leakage_usd: leakageUsd });
 
     console.log(`📩 [VERCEL LEAD CAPTURED] ${name} <${email}> - Score: ${leadScore}`);
 
@@ -139,6 +172,7 @@ export default async function handler(req, res) {
       report_id: reportId,
       lead_score: leadScore,
       is_enterprise_candidate: isEnterpriseCandidate,
+      tags: tags,
       email_status: emailStatus,
       message: 'Lead capturado exitosamente y correo de retargeting enviado.'
     });

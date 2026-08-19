@@ -244,6 +244,7 @@ export default async function handler(req, res) {
           document_name: 'Contrato_Arrendamiento_Comercial.pdf',
           lead_score: 92,
           is_enterprise_candidate: true,
+          tags: ['🏢 ARRENDAMIENTO', '👑 PLATINUM_CFO', '🚨 HIGH_LEAKAGE'],
           status: 'OFFER_SENT',
           created_at: new Date(Date.now() - 3600000 * 2).toISOString()
         },
@@ -254,6 +255,7 @@ export default async function handler(req, res) {
           document_name: 'Factura_Servicios_IT_Q3.pdf',
           lead_score: 88,
           is_enterprise_candidate: true,
+          tags: ['🧾 FACTURACION', '👑 PLATINUM_CFO', '🚨 HIGH_LEAKAGE'],
           status: 'UNLOCKED_PAYMENT',
           created_at: new Date(Date.now() - 3600000 * 5).toISOString()
         },
@@ -264,6 +266,7 @@ export default async function handler(req, res) {
           document_name: 'Acuerdo_Proveedores_2026.pdf',
           lead_score: 84,
           is_enterprise_candidate: true,
+          tags: ['📜 CONTRATO_COMERCIAL', '⭐ GOLD_DIRECTOR', '🟡 MED_LEAKAGE'],
           status: 'OFFER_SENT',
           created_at: new Date(Date.now() - 3600000 * 12).toISOString()
         },
@@ -274,6 +277,7 @@ export default async function handler(req, res) {
           document_name: 'SLA_Infraestructura_Cloud.pdf',
           lead_score: 79,
           is_enterprise_candidate: true,
+          tags: ['💻 SERVICIOS_IT', '⭐ GOLD_DIRECTOR', '🚨 HIGH_LEAKAGE'],
           status: 'UNLOCKED_PAYMENT',
           created_at: new Date(Date.now() - 3600000 * 24).toISOString()
         },
@@ -284,6 +288,7 @@ export default async function handler(req, res) {
           document_name: 'Contrato_Obra_Civil.pdf',
           lead_score: 65,
           is_enterprise_candidate: false,
+          tags: ['📜 CONTRATO_COMERCIAL', 'SILVER_MANAGER', '🟡 MED_LEAKAGE'],
           status: 'LEAD_CAPTURED',
           created_at: new Date(Date.now() - 3600000 * 48).toISOString()
         }
