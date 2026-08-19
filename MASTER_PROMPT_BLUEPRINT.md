@@ -156,12 +156,22 @@ Todo nuevo MicroSaaS B2B DEBE incorporar de forma nativa los siguientes componen
    - Canal 3: Lanzamiento en Directorios B2B (Product Hunt, SaaSHub, AlternativeTo) para captura de backlinks gratis.
    - Canal 4: Generador de Publicaciones Orgánicas (Social Copywriting) para LinkedIn y Reddit listo para copiar en 1 clic.
 
-2. LOS 5 MÓDULOS ENTERPRISE DE ALTA CONVERSIÓN:
+2. LOS 7 MÓDULOS ENTERPRISE DE ALTA CONVERSIÓN & PLG:
    - Módulo 1: Auditoría Cruzada 2-Way (Reconciliación Contrato vs Factura / Documento A vs Documento B).
    - Módulo 2: Playbooks de Negociación y Redlining con generación de propuestas de objeción.
    - Módulo 3: Matriz de Riesgo por Semáforo (Traffic Light Heatmap: Rojo Crítico, Amarillo Moderado, Verde Conforme).
    - Módulo 4: Exportación a Microsoft Word (.docx) con formato de marcas de revisión (*Track Changes*).
    - Módulo 5: Motor de Recordatorios de Vencimiento iCalendar (.ics) para sincronización con Google Calendar y Outlook.
+   - Módulo 6: Copiloto de Chat con IA sobre Documentos (`Chat-with-Contract` en tiempo real con Gemini 2.5 Flash).
+   - Módulo 7: Calculadora Interactiva de Fugas Financieras & Ahorro Estimado (PLG Slider Widget de Conversión).
+
+================================================================================
+FASE 10: INTEGRACIONES CLOUD & WEBHOOKS DE FIRMA ELECTRÓNICA
+================================================================================
+1. IMPORTACIÓN DESDE NUBE:
+   - Permitir la subida directa de archivos mediante URL pública de Google Drive, Dropbox o OneDrive.
+2. WEBHOOKS DE FIRMA ELECTRÓNICA:
+   - Disparar auditorías preventivas automáticas ante eventos de firma en DocuSign o PandaDoc.
 
 ================================================================================
 EJECUCIÓN Y VALIDACIÓN

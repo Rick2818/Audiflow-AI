@@ -64,12 +64,14 @@
   2. **SEO Programático & IndexNow**: Generación de páginas de nicho B2B ([`/auditar-contrato-arrendamiento`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/frontend/auditar-contrato-arrendamiento.html), etc.) y notificación instantánea (<5s) a Bing & Yandex mediante la API de IndexNow.
   3. **Directorios B2B & Plazas MicroSaaS**: Enlaces directos para lanzamiento en Product Hunt, SaaSHub y AlternativeTo.
   4. **Generador de Publicaciones Orgánicas**: Herramienta interactiva para copiar publicaciones formateadas por nicho en LinkedIn y Reddit.
-- **5 Módulos Enterprise Avanzados**:
+- **7 Módulos Enterprise & PLG Avanzados**:
   1. **Auditoría Cruzada 2-Way (Contrato vs Factura)**: Reconciliación bidireccional entre tarifas acordadas y montos cobrados ([`api/cross-audit.js`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/api/cross-audit.js)).
   2. **Playbook de Negociación y Redlines**: Generación automática de propuestas de objeción y contra-propuestas ejecutivas.
   3. **Matriz de Riesgo por Semáforo (Traffic Light Heatmap)**: Clasificación de riesgos en 🔴 Crítico, 🟡 Moderado y 🟢 Conforme.
   4. **Exportación a Microsoft Word (.docx) con Control de Cambios**: Descarga de informes editables en Word con marcas de revisión ([`api/export-docx.js`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/api/export-docx.js)).
   5. **Motor de Recordatorios de Vencimiento (`.ics` / Calendar)**: Generador dinámico de archivos iCalendar para agendar preavisos y vencimientos en Google Calendar o Outlook.
+  6. **Copiloto de Chat con IA sobre Documentos (`Chat-with-Contract`)**: Asistente conversacional en tiempo real ([`api/chat-document.js`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/api/chat-document.js)).
+  7. **Calculadora Interactiva de Fugas Financieras & ROI**: Widget de conversión PLG en tiempo real con slider de volumen mensual.
 
 ---
 

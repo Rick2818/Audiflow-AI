@@ -75,14 +75,20 @@ Este documento es el activo de conocimiento supremo y la memoria técnica del ag
 4. **Regla 4 (Detección Individual de Idioma)**: Evaluar la plantilla de correo en Inglés individualmente por prospecto para EE.UU. y Europa.
 5. **Regla 5 (Tolerancia a Polling Serverless)**: El polling en frontend debe detenerse automáticamente tras 5 minutos de inactividad.
 
-### FASE 9: NÚCLEO DE ADQUISICIÓN DE 4 CANALES Y 5 MÓDULOS ENTERPRISE
+### FASE 9: NÚCLEO DE ADQUISICIÓN DE 4 CANALES Y 7 MÓDULOS ENTERPRISE & PLG
 1. **4 Canales Gratis integrados en `/admin`**: Cold Email Outreach Automatizado, SEO Programático e IndexNow (<5s), Lanzamiento en Directorios B2B (Product Hunt / SaaSHub / AlternativeTo) y Generador de Copywriting Social por Nicho.
-2. **5 Módulos Enterprise de Alta Conversión**:
+2. **7 Módulos Enterprise & PLG de Alta Conversión**:
    * Auditoría Cruzada 2-Way (Contrato vs Factura).
    * Playbook de Negociación & Auto-Redlining.
    * Traffic Light Risk Heatmap (Semáforo Rojo/Amarillo/Verde).
    * Exportación a Word (.docx) con Control de Cambios.
    * Motor de Recordatorios de Vencimientos iCalendar (.ics).
+   * Copiloto de Chat con IA sobre Documentos (`Chat-with-Contract`).
+   * Calculadora Interactiva de Fugas Financieras & Ahorro Estimado (PLG Slider Widget).
+
+### FASE 10: INTEGRACIONES CLOUD & WEBHOOKS DE FIRMA
+1. Subida directa por URL pública de Google Drive, Dropbox y OneDrive.
+2. Webhooks para disparar auditorías automáticas desde DocuSign o PandaDoc.
 
 ---
 
