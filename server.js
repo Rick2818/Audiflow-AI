@@ -22,6 +22,8 @@ dotenv.config();
 import crossAuditHandler from './api/cross-audit.js';
 import exportDocxHandler from './api/export-docx.js';
 import chatDocumentHandler from './api/chat-document.js';
+import adminHandler from './api/admin.js';
+import outreachHandler from './api/outreach.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -144,6 +146,9 @@ app.post('/api/indexnow/submit', async (req, res) => {
 app.post('/api/cross-audit', crossAuditHandler);
 app.post('/api/export-docx', exportDocxHandler);
 app.post('/api/chat-document', chatDocumentHandler);
+app.all('/api/admin', adminHandler);
+app.all('/api/outreach', outreachHandler);
+app.all('/api/outreach/send-campaign', outreachHandler);
 
 // Middleware global de cabeceras de seguridad HTTP
 app.use((req, res, next) => {

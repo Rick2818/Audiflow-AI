@@ -904,56 +904,74 @@ Escaneo de prueba gratuito:
                 }
 
                 const lines = inputArea.split('\n').filter(l => l.trim().length > 0);
-                const prospects = lines.map(line => {
+                const allProspects = lines.map(line => {
                     const parts = line.split(',').map(p => p.trim());
                     return {
                         email: parts[0],
                         name: parts[1] || 'Ejecutivo',
                         company: parts[2] || 'Empresa B2B',
                         role: parts[3] || 'Director Financiero / Legal',
-                        country: country
+                        country: parts[4] || country
                     };
                 });
 
-                const originalText = testMode ? '🧪 Simulación de Prueba (Test Mode)' : '🚀 Disparar Campaña B2B Real';
+                const originalText = testMode ? '🧪 Simulación de Prueba (Test Mode)' : '🚀 Disparar Campaña B2B Real (Hook Irresistible)';
                 const targetBtn = testMode ? btnTest : btnReal;
                 if (targetBtn) targetBtn.innerText = '⏳ Despachando correos...';
 
-                if (logBox) logBox.innerHTML = `🔄 Iniciando despacho de campaña (${prospects.length} prospectos, País: ${country}, ModoSimulado: ${testMode})...<br>`;
+                if (logBox) logBox.innerHTML = `🔄 Iniciando campaña (${allProspects.length} prospectos, Modo: ${testMode ? 'Simulado 100%' : 'Envío Real'})...<br>`;
+
+                const chunkSize = testMode ? 250 : 20;
+                let totalSuccess = 0;
+                let allDetails = [];
 
                 try {
-                    const res = await fetch('/api/admin', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-admin-password': savedPass,
-                            'Authorization': `Bearer ${this.authToken || ''}`
-                        },
-                        body: JSON.stringify({ action: 'send_outreach_campaign', prospects, test_mode: testMode, admin_password: savedPass })
-                    });
-                    
-                    const text = await res.text();
-                    let data;
-                    try {
-                        data = JSON.parse(text);
-                    } catch (pErr) {
-                        data = { success: false, error: `Error HTTP ${res.status}: ${text.substring(0, 150)}` };
+                    for (let i = 0; i < allProspects.length; i += chunkSize) {
+                        const chunk = allProspects.slice(i, i + chunkSize);
+                        const progressPercent = Math.round(((i + chunk.length) / allProspects.length) * 100);
+                        if (targetBtn) targetBtn.innerText = `⏳ Enviando (${i + chunk.length}/${allProspects.length} - ${progressPercent}%)...`;
+
+                        const res = await fetch('/api/admin', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'x-admin-password': savedPass,
+                                'Authorization': `Bearer ${this.authToken || ''}`
+                            },
+                            body: JSON.stringify({
+                                action: 'send_outreach_campaign',
+                                prospects: chunk,
+                                test_mode: testMode,
+                                admin_password: savedPass
+                            })
+                        });
+
+                        const text = await res.text();
+                        let data;
+                        try {
+                            data = JSON.parse(text);
+                        } catch (pErr) {
+                            data = { success: false, error: `Error HTTP ${res.status}: ${text.substring(0, 120)}` };
+                        }
+
+                        if (data.success) {
+                            totalSuccess += (data.total_processed || chunk.length);
+                            if (data.details) allDetails.push(...data.details);
+                            if (logBox) {
+                                logBox.innerHTML += `<span class="text-emerald-400">⚡ Lote procesado: ${i + chunk.length}/${allProspects.length} (${progressPercent}%)</span><br>`;
+                            }
+                        } else {
+                            if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Aviso en lote (${i + 1}-${i + chunk.length}): ${data.error}</span><br>`;
+                        }
                     }
 
-                    if (data.success) {
-                        if (logBox) {
-                            logBox.innerHTML += `<span class="text-emerald-400">✅ ¡Campaña procesada con éxito! (${data.total_processed} prospectos procesados).</span><br>`;
-                            (data.details || []).forEach(d => {
-                                logBox.innerHTML += `• ${d.email} [${d.company}] ➔ ${d.status}<br>`;
-                            });
-                        }
-                        alert(`✅ ¡Campaña procesada con éxito! (${data.total_processed} prospectos procesados).`);
-                    } else {
-                        if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${data.error || 'Fallo de respuesta'}</span>`;
-                        alert('⚠️ ' + (data.error || 'Error al procesar la campaña'));
+                    if (logBox) {
+                        logBox.innerHTML += `<span class="text-emerald-400 font-bold">🎉 ¡Campaña finalizada! ${totalSuccess} prospectos procesados con éxito.</span><br>`;
+                        logBox.scrollTop = logBox.scrollHeight;
                     }
+                    alert(`✅ ¡Campaña procesada exitosamente! ${totalSuccess} prospectos procesados.`);
                 } catch (err) {
-                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error enviando campaña: ${err.message}</span>`;
+                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${err.message}</span><br>`;
                     alert('❌ Error enviando campaña: ' + err.message);
                 } finally {
                     if (targetBtn) targetBtn.innerText = originalText;
