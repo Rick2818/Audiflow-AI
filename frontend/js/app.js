@@ -898,30 +898,9 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
     },
 
     updateRoiCalculator() {
-        const slider = document.getElementById('roi-contracts-slider');
-        const valEl = document.getElementById('roi-contracts-value');
-        const lossEl = document.getElementById('roi-calculated-loss');
-        const netEl = document.getElementById('roi-net-savings');
-
-        if (!slider || !valEl || !lossEl || !netEl) return;
-
-        const count = parseInt(slider.value) || 8;
-        const isEn = (localStorage.getItem('auditflow_lang') === 'en');
-
-        if (isEn) {
-            valEl.innerText = `${count} docs/month`;
-        } else {
-            valEl.innerText = `${count} documentos/mes`;
+        if (typeof window.updateRoiCalculator === 'function') {
+            window.updateRoiCalculator();
         }
-
-        const annualLoss = count * 1800;
-        const planCost = 588;
-        const netSavings = Math.max(annualLoss - planCost, 0);
-
-        const formatUsd = (num) => '$' + num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
-
-        lossEl.innerText = isEn ? `${formatUsd(annualLoss)} USD/year` : `${formatUsd(annualLoss)} USD/año`;
-        netEl.innerText = isEn ? `${formatUsd(netSavings)} USD/year` : `${formatUsd(netSavings)} USD/año`;
     },
 
     openChatCopilotModal() {

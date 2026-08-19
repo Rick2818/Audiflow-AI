@@ -314,7 +314,7 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                         <div>
                             <label class="block text-xs text-gray-300 mb-1">¿Cuántos contratos o facturas procesas al mes?</label>
-                            <input type="range" id="roi-contracts-slider" min="1" max="50" value="8" oninput="window.AppHandler.updateRoiCalculator()" onchange="window.AppHandler.updateRoiCalculator()" class="w-full accent-accent-blue cursor-pointer">
+                            <input type="range" id="roi-contracts-slider" min="1" max="50" value="8" oninput="window.updateRoiCalculator && window.updateRoiCalculator()" onchange="window.updateRoiCalculator && window.updateRoiCalculator()" class="w-full accent-accent-blue cursor-pointer">
                             <div class="flex justify-between text-[11px] text-gray-400 mt-1">
                                 <span>1 doc/mes</span>
                                 <span id="roi-contracts-value" class="font-bold text-accent-blue">8 documentos/mes</span>
@@ -329,6 +329,30 @@
                         </div>
                     </div>
                 </div>
+
+                <script>
+                    function updateRoiCalculator() {
+                        try {
+                            var slider = document.getElementById('roi-contracts-slider');
+                            var valEl = document.getElementById('roi-contracts-value');
+                            var lossEl = document.getElementById('roi-calculated-loss');
+                            var netEl = document.getElementById('roi-net-savings');
+                            if (!slider || !valEl || !lossEl || !netEl) return;
+                            var count = parseInt(slider.value, 10) || 8;
+                            var isEn = false;
+                            try { isEn = (localStorage.getItem('auditflow_lang') === 'en'); } catch(e){}
+                            valEl.textContent = count + (isEn ? ' docs/month' : ' documentos/mes');
+                            var annualLoss = count * 1800;
+                            var netSavings = Math.max(annualLoss - 588, 0);
+                            var fLoss = '$' + annualLoss.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                            var fSave = '$' + netSavings.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,');
+                            lossEl.textContent = fLoss + (isEn ? ' USD/year' : ' USD/año');
+                            netEl.textContent = fSave + (isEn ? ' USD/year' : ' USD/año');
+                        } catch(e){}
+                    }
+                    window.updateRoiCalculator = updateRoiCalculator;
+                    document.addEventListener('DOMContentLoaded', updateRoiCalculator);
+                </script>
 
                 <!-- ÁREA DRAG & DROP -->
                 <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-4 focus:outline-none focus:ring-2 focus:ring-accent-blue">
