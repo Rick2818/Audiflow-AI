@@ -39,6 +39,80 @@ async function sendGmailEmail({ to, subject, html }) {
   }
 }
 
+function generate500Leads() {
+  const firstNames = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
+  const lastNames = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+  
+  const domains = [
+    'mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx',
+    'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar',
+    'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de',
+    'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'
+  ];
+
+  const docs = [
+    { name: 'Contrato_Arrendamiento_Comercial_2026.pdf', type: 'Arrendamiento', tag: '🏢 ARRENDAMIENTO' },
+    { name: 'Factura_Servicios_IT_Cloud_Q3.pdf', type: 'Facturación', tag: '🧾 FACTURACION' },
+    { name: 'SLA_Infraestructura_Servidores.pdf', type: 'Servicios IT', tag: '💻 SERVICIOS_IT' },
+    { name: 'Acuerdo_Proveedores_Logistica_2026.pdf', type: 'Contrato Comercial', tag: '📜 CONTRATO_COMERCIAL' },
+    { name: 'Contrato_Obra_Civil_Industrial.pdf', type: 'Contrato Comercial', tag: '📜 CONTRATO_COMERCIAL' },
+    { name: 'Factura_Mantenimiento_Maquinaria.pdf', type: 'Facturación', tag: '🧾 FACTURACION' }
+  ];
+
+  const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
+  const statuses = ['OFFER_SENT', 'UNLOCKED_PAYMENT', 'LEAD_CAPTURED', 'ENTERPRISE_SUBSCRIBED'];
+
+  const leads = [];
+  const now = Date.now();
+
+  for (let i = 1; i <= 500; i++) {
+    const fn = firstNames[i % firstNames.length];
+    const ln = lastNames[(i * 3) % lastNames.length];
+    const dom = domains[(i * 7) % domains.length];
+    const docObj = docs[i % docs.length];
+    const country = countries[i % countries.length];
+    const status = statuses[i % statuses.length];
+
+    const leadScore = 60 + ((i * 13) % 39);
+    const isEnterprise = leadScore >= 75;
+
+    const tags = [docObj.tag];
+    if (leadScore >= 88) {
+      tags.push('👑 PLATINUM_CFO');
+    } else if (leadScore >= 75) {
+      tags.push('⭐ GOLD_DIRECTOR');
+    } else {
+      tags.push('SILVER_MANAGER');
+    }
+
+    if (i % 2 === 0) {
+      tags.push('🚨 HIGH_LEAKAGE');
+    } else {
+      tags.push('🟡 MED_LEAKAGE');
+    }
+
+    const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+    const hoursAgo = i * 1.5;
+
+    leads.push({
+      id: `lead_${String(i).padStart(3, '0')}`,
+      name: `${fn} ${ln}`,
+      email: email,
+      company: dom.split('.')[0].toUpperCase(),
+      country: country,
+      document_name: docObj.name,
+      document_type: docObj.type,
+      lead_score: leadScore,
+      is_enterprise_candidate: isEnterprise,
+      tags: tags,
+      status: status,
+      created_at: new Date(now - 3600000 * hoursAgo).toISOString()
+    });
+  }
+
+  return leads;
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
@@ -236,63 +310,7 @@ export default async function handler(req, res) {
     }
 
     if (leads.length === 0) {
-      leads = [
-        {
-          id: 'lead_01',
-          name: 'Carlos Mendoza',
-          email: 'carlos@mendozalaw.com',
-          document_name: 'Contrato_Arrendamiento_Comercial.pdf',
-          lead_score: 92,
-          is_enterprise_candidate: true,
-          tags: ['🏢 ARRENDAMIENTO', '👑 PLATINUM_CFO', '🚨 HIGH_LEAKAGE'],
-          status: 'OFFER_SENT',
-          created_at: new Date(Date.now() - 3600000 * 2).toISOString()
-        },
-        {
-          id: 'lead_02',
-          name: 'Elena Rostova',
-          email: 'elena@techconsulting.io',
-          document_name: 'Factura_Servicios_IT_Q3.pdf',
-          lead_score: 88,
-          is_enterprise_candidate: true,
-          tags: ['🧾 FACTURACION', '👑 PLATINUM_CFO', '🚨 HIGH_LEAKAGE'],
-          status: 'UNLOCKED_PAYMENT',
-          created_at: new Date(Date.now() - 3600000 * 5).toISOString()
-        },
-        {
-          id: 'lead_03',
-          name: 'Roberto Gómez',
-          email: 'roberto@gomezlogistics.com',
-          document_name: 'Acuerdo_Proveedores_2026.pdf',
-          lead_score: 84,
-          is_enterprise_candidate: true,
-          tags: ['📜 CONTRATO_COMERCIAL', '⭐ GOLD_DIRECTOR', '🟡 MED_LEAKAGE'],
-          status: 'OFFER_SENT',
-          created_at: new Date(Date.now() - 3600000 * 12).toISOString()
-        },
-        {
-          id: 'lead_04',
-          name: 'Mariana Silva',
-          email: 'mariana.silva@innovatech.es',
-          document_name: 'SLA_Infraestructura_Cloud.pdf',
-          lead_score: 79,
-          is_enterprise_candidate: true,
-          tags: ['💻 SERVICIOS_IT', '⭐ GOLD_DIRECTOR', '🚨 HIGH_LEAKAGE'],
-          status: 'UNLOCKED_PAYMENT',
-          created_at: new Date(Date.now() - 3600000 * 24).toISOString()
-        },
-        {
-          id: 'lead_05',
-          name: 'Javier Peralta',
-          email: 'jperalta@constructora.sv',
-          document_name: 'Contrato_Obra_Civil.pdf',
-          lead_score: 65,
-          is_enterprise_candidate: false,
-          tags: ['📜 CONTRATO_COMERCIAL', 'SILVER_MANAGER', '🟡 MED_LEAKAGE'],
-          status: 'LEAD_CAPTURED',
-          created_at: new Date(Date.now() - 3600000 * 48).toISOString()
-        }
-      ];
+      leads = generate500Leads();
     }
 
     if (transactions.length === 0) {
