@@ -246,7 +246,11 @@
                 <span data-i18n="nav_firewall_badge" class="text-accent-emerald font-mono text-xs hidden sm:inline px-2.5 py-1 rounded bg-emerald-950/40 border border-emerald-500/30 font-bold">
                     🔒 Firewall & WAF Activo (AES-256)
                 </span>
-                <!-- BOTÓN HEADER PARA ABRIR PLAN CORPORATIVO ($49/MES O $399/AÑO) EN CUALQUIER MOMENTO -->
+                <!-- ENLACE DIRECTO A TABLA DE PRECIOS -->
+                <a href="#pricing-section" class="text-xs font-mono font-bold text-gray-300 hover:text-accent-blue transition-all hidden md:inline-flex items-center gap-1">
+                    💰 <span data-i18n="nav_pricing">Precios</span>
+                </a>
+                <!-- BOTÓN HEADER PARA ABRIR PLAN CORPORATIVO ($69/MES O $590/AÑO) EN CUALQUIER MOMENTO -->
                 <button onclick="window.AppHandler.subscribeEnterprise()" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-xs shadow-glow hover:opacity-90 transition-all flex items-center gap-1.5">
                     🚀 <span data-i18n="nav_corp_plan">Plan Corporativo B2B</span>
                 </button>
@@ -457,6 +461,84 @@
                         <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
                             <strong data-i18n="step_3_title" class="text-purple-400 block mb-1">3. Vista Previa Gratis</strong>
                             <p data-i18n="step_3_desc" class="text-gray-300 leading-relaxed">Ves el diagnóstico en pantalla de forma gratuita. Decides pagar $19 solo si deseas descargar las soluciones en Word + PDF.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN DE PRECIOS Y TARIFAS TRANSPARENTES B2B -->
+                <div id="pricing-section" class="mb-12 text-left">
+                    <div class="text-center max-w-xl mx-auto mb-8">
+                        <span class="px-3 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue font-mono text-xs font-bold uppercase tracking-wider inline-block mb-2">Precios Claros</span>
+                        <h3 data-i18n="pricing_section_title" class="text-xl sm:text-2xl font-extrabold text-white mb-2">💰 Planes y Tarifas Transparentes B2B</h3>
+                        <p data-i18n="pricing_section_sub" class="text-gray-400 text-xs sm:text-sm">Sin costos ocultos ni letras pequeñas. Prueba gratis y escala según el volumen de tu empresa.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+                        <!-- TARJETA 1: ESCANEO GRATIS ($0) -->
+                        <div class="p-6 rounded-2xl bg-dark-card border border-border-dark flex flex-col justify-between hover:border-gray-600 transition-all">
+                            <div>
+                                <span data-i18n="pricing_card1_tag" class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-dark-surface border border-border-dark text-gray-400 uppercase">GRATUITO</span>
+                                <h4 data-i18n="pricing_card1_title" class="text-lg font-bold text-white mt-3 mb-1">Escaneo Inicial</h4>
+                                <div class="flex items-baseline gap-1 mb-3">
+                                    <span data-i18n="pricing_card1_price" class="text-3xl font-extrabold text-white font-mono">$0</span>
+                                    <span data-i18n="pricing_card1_period" class="text-xs text-gray-400 font-mono">Siempre Gratis</span>
+                                </div>
+                                <p data-i18n="pricing_card1_desc" class="text-xs text-gray-300 mb-6 leading-relaxed">Ideal para conocer el estado de tu contrato o factura antes de tomar decisiones.</p>
+                                <ul class="space-y-2.5 text-xs text-gray-300 font-sans mb-6">
+                                    <li data-i18n="pricing_card1_f1" class="flex items-center gap-2 text-gray-300"><span class="text-emerald-400 font-bold">✓</span> Vista previa de 3 anomalías financieras</li>
+                                    <li data-i18n="pricing_card1_f2" class="flex items-center gap-2 text-gray-300"><span class="text-emerald-400 font-bold">✓</span> Cálculo de fuga económica estimada</li>
+                                    <li data-i18n="pricing_card1_f3" class="flex items-center gap-2 text-gray-300"><span class="text-emerald-400 font-bold">✓</span> Procesamiento en RAM volátil (&lt; 5s)</li>
+                                    <li data-i18n="pricing_card1_f4" class="flex items-center gap-2 text-gray-300"><span class="text-emerald-400 font-bold">✓</span> 0 Almacenamiento en disco</li>
+                                </ul>
+                            </div>
+                            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-secondary w-full py-2.5 text-xs font-bold text-center">
+                                <span data-i18n="pricing_card1_btn">⚡ Iniciar Escaneo Gratis</span>
+                            </button>
+                        </div>
+
+                        <!-- TARJETA 2: REPORTE EJECUTIVO ($19 USD) - DESTACADA -->
+                        <div class="p-6 rounded-2xl bg-gradient-to-b from-dark-card to-dark-surface border-2 border-accent-blue flex flex-col justify-between shadow-2xl relative">
+                            <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-blue text-black font-extrabold font-mono text-[10px] px-3 py-1 rounded-full shadow-glow uppercase">MÁS POPULAR • RECOMENDADO</span>
+                            <div>
+                                <span data-i18n="pricing_card2_tag" class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-accent-blue/15 text-accent-blue border border-accent-blue/40 uppercase">PAGO ÚNICO</span>
+                                <h4 data-i18n="pricing_card2_title" class="text-lg font-bold text-white mt-3 mb-1">Reporte Ejecutivo</h4>
+                                <div class="flex items-baseline gap-1 mb-3">
+                                    <span data-i18n="pricing_card2_price" class="text-3xl font-extrabold text-accent-blue font-mono">$19</span>
+                                    <span data-i18n="pricing_card2_period" class="text-xs text-gray-400 font-mono">USD / por auditoría</span>
+                                </div>
+                                <p data-i18n="pricing_card2_desc" class="text-xs text-gray-300 mb-6 leading-relaxed">Auditoría exhaustiva completa con documentos editables para tu equipo legal.</p>
+                                <ul class="space-y-2.5 text-xs text-gray-200 font-sans mb-6">
+                                    <li data-i18n="pricing_card2_f1" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Desbloqueo de 3 Soluciones Tácticas</li>
+                                    <li data-i18n="pricing_card2_f2" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Redlines en Word .docx con Control de Cambios</li>
+                                    <li data-i18n="pricing_card2_f3" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Informe Oficial PDF Firmado Digitalmente</li>
+                                    <li data-i18n="pricing_card2_f4" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Pago único sin suscripciones recurrentes</li>
+                                </ul>
+                            </div>
+                            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="btn-primary w-full py-3 text-xs font-bold text-center shadow-glow">
+                                <span data-i18n="pricing_card2_btn">🔓 Auditar 1 Documento ($19 USD)</span>
+                            </button>
+                        </div>
+
+                        <!-- TARJETA 3: PLAN CORPORATIVO ($69/MES O $590/AÑO) -->
+                        <div class="p-6 rounded-2xl bg-dark-card border border-purple-500/40 flex flex-col justify-between hover:border-purple-500 transition-all">
+                            <div>
+                                <span data-i18n="pricing_card3_tag" class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-950/60 border border-purple-500/40 text-purple-300 uppercase">EMPRESAS • ILIMITADO</span>
+                                <h4 data-i18n="pricing_card3_title" class="text-lg font-bold text-white mt-3 mb-1">Plan Corporativo</h4>
+                                <div class="flex items-baseline gap-1 mb-3">
+                                    <span data-i18n="pricing_card3_price" class="text-3xl font-extrabold text-purple-400 font-mono">$69</span>
+                                    <span data-i18n="pricing_card3_period" class="text-xs text-gray-400 font-mono">USD / mes o $590/año</span>
+                                </div>
+                                <p data-i18n="pricing_card3_desc" class="text-xs text-gray-300 mb-6 leading-relaxed">Para despachos legales, constructoras y empresas con alto volumen de contratos.</p>
+                                <ul class="space-y-2.5 text-xs text-gray-300 font-sans mb-6">
+                                    <li data-i18n="pricing_card3_f1" class="flex items-center gap-2"><span class="text-purple-400 font-bold">✓</span> Auditorías Ilimitadas 24/7 multi-usuario</li>
+                                    <li data-i18n="pricing_card3_f2" class="flex items-center gap-2"><span class="text-purple-400 font-bold">✓</span> Cross-Audit 2-Way (Contrato vs Factura)</li>
+                                    <li data-i18n="pricing_card3_f3" class="flex items-center gap-2"><span class="text-purple-400 font-bold">✓</span> Asistente Copiloto IA de Documentos</li>
+                                    <li data-i18n="pricing_card3_f4" class="flex items-center gap-2"><span class="text-purple-400 font-bold">✓</span> Soporte prioritario & cuota compartida</li>
+                                </ul>
+                            </div>
+                            <button onclick="window.AppHandler.subscribeEnterprise()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue w-full py-2.5 text-xs font-bold text-center">
+                                <span data-i18n="pricing_card3_btn">🚀 Ver Planes ($69/mes o $590/año)</span>
+                            </button>
                         </div>
                     </div>
                 </div>
