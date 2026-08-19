@@ -81,12 +81,14 @@ if (fs.existsSync(serverPath)) {
   const content = fs.readFileSync(serverPath, 'utf8');
   assert(content.includes("app.post('/api/cross-audit'"), 'server.js monta /api/cross-audit');
   assert(content.includes("app.post('/api/export-docx'"), 'server.js monta /api/export-docx');
+  assert(content.includes("app.post('/api/chat-document'"), 'server.js monta /api/chat-document');
 }
 
 if (fs.existsSync(vercelPath)) {
   const content = fs.readFileSync(vercelPath, 'utf8');
   assert(content.includes('/api/cross-audit'), 'vercel.json define ruta para /api/cross-audit');
   assert(content.includes('/api/export-docx'), 'vercel.json define ruta para /api/export-docx');
+  assert(content.includes('/api/chat-document'), 'vercel.json define ruta para /api/chat-document');
 }
 
 // RESUMEN FINAL

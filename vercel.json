@@ -38,6 +38,10 @@
       "use": "@vercel/node"
     },
     {
+      "src": "api/chat-document.js",
+      "use": "@vercel/node"
+    },
+    {
       "src": "frontend/**",
       "use": "@vercel/static"
     }
@@ -106,6 +110,10 @@
     {
       "src": "/api/export-docx",
       "dest": "api/export-docx.js"
+    },
+    {
+      "src": "/api/chat-document",
+      "dest": "api/chat-document.js"
     },
     {
       "src": "/api/report-issue",
