@@ -22,10 +22,6 @@
       "use": "@vercel/node"
     },
     {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
       "src": "api/indexnow.js",
       "use": "@vercel/node"
     },
@@ -39,6 +35,26 @@
     },
     {
       "src": "api/chat-document.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/download-pdf.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/outreach.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/payment.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "api/webhook.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "server.js",
       "use": "@vercel/node"
     },
     {
