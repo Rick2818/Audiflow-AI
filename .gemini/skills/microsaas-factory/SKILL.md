@@ -31,10 +31,10 @@ Este documento es el activo de conocimiento supremo y la memoria técnica del ag
 2. Registros DNS (A, CNAME) apuntando a Vercel / Cloudflare con redirección 301 forzada de HTTP a HTTPS y de www a la raíz.
 3. Registros TXT de correo: SPF (`include:_spf.google.com`), DKIM y DMARC (`v=DMARC1; p=none;`).
 
-### FASE 2: ARQUITECTURA TÉCNICA DUAL (VERCEL SERVERLESS + EXPRESS)
-1. `server.js` para desarrollo local y contenedores Render/Docker.
-2. Funciones serverless en `/api` (`api/audit.js`, `api/admin.js`, `api/outreach.js`).
-3. `vercel.json` con reescrituras estáticas (rewrites) limpias.
+### FASE 2: ARQUITECTURA VERCEL SERVERLESS MULTI-ENDPOINT (+ SERVIDOR DUAL)
+1. Backend basado en **Arquitectura Vercel Serverless Multi-Endpoint** con 13 handlers independientes en `/api/` (`api/audit.js`, `api/cross-audit.js`, `api/chat-document.js`, `api/export-docx.js`, `api/download-pdf.js`, `api/payment.js`, `api/subscribe.js`, `api/outreach.js`, `api/webhook.js`, `api/indexnow.js`, `api/admin.js`, `api/lead.js`, `api/report-issue.js`).
+2. **Paridad de Reglas 1-a-1 en `vercel.json`**: Todo handler en `/api/*.js` DEBE estar declarado simultáneamente en el array `"builds"` (con `"use": "@vercel/node"`) y en el array `"routes"`.
+3. `server.js` con Express.js para ejecución local en desarrollo y contenedores Docker.
 4. Procesamiento volátil en memoria RAM (0 archivos persistidos en disco duro, 100% GDPR/SOC2 compliance).
 
 ### FASE 3: SEO TÉCNICO, INDEXNOW Y GOOGLE SEARCH CONSOLE

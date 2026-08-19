@@ -25,14 +25,31 @@ FASE 1: INFRAESTRUCTURA DE DOMINIO, DNS, SSL Y HOSTING
      * DMARC: v=DMARC1; p=none; ruo=mailto:admin@tudominio.com
 
 ================================================================================
-FASE 2: ARQUITECTURA TÉCNICA DUAL (VERCEL SERVERLESS + NODE.JS EXPRESS)
+FASE 2: ARQUITECTURA VERCEL SERVERLESS MULTI-ENDPOINT (+ SERVIDOR DUAL)
 ================================================================================
-1. BACKEND DUAL:
-   - Crear `server.js` con Express.js para desarrollo local y contenedores Docker/Render.
-   - Crear funciones serverless en `/api` (`api/audit.js`, `api/admin.js`, `api/outreach.js`) para Vercel.
-   - Configurar `vercel.json` con reescrituras estáticas (rewrites) limpias para APIs y landing pages.
+1. ARQUITECTURA VERCEL SERVERLESS MULTI-ENDPOINT:
+   - Estructurar el backend mediante una **Arquitectura Serverless Multi-Endpoint** con funciones Lambda desacopladas en la carpeta `/api/`.
+   - **REGLA DE ORO DE PARIDAD (1-a-1)**: Cada handler en `/api/<nombre>.js` DEBE declararse explícitamente en `vercel.json` tanto en el bloque `"builds"` (con `"use": "@vercel/node"`) como en el bloque `"routes"`.
+   - Catálogo de Endpoints Serverless Obligatorios:
+     * `api/audit.js`: Auditoría individual con Gemini 2.5 Flash.
+     * `api/cross-audit.js`: Auditoría cruzada Contrato vs Factura.
+     * `api/chat-document.js`: Copiloto Chat interactivo de documentos.
+     * `api/export-docx.js`: Exportación de Redlines editables en Word `.docx`.
+     * `api/download-pdf.js`: Generador de informes PDF marca blanca.
+     * `api/payment.js`: Pasarela de cobro individual ($7 USD / Sats Bitcoin Lightning).
+     * `api/subscribe.js`: Suscripción a Planes Corporativos B2B ($49/mes - $399/año).
+     * `api/outreach.js`: Motor de Prospección B2B & Vercel Crons.
+     * `api/webhook.js`: Webhooks Salientes Bidireccionales B2B.
+     * `api/indexnow.js`: Notificación de indexación instantánea en Bing/IndexNow.
+     * `api/admin.js`: Control de Dashboard y dataset de 500 Leads Tagged.
+     * `api/lead.js`: Captura y deduplicación de prospectos B2B.
+     * `api/report-issue.js`: Diagnóstico de fallos en tiempo real con IA.
 
-2. SEGURIDAD Y PROCESAMIENTO EN MEMORIA VOLÁTIL:
+2. BACKEND DUAL PARA ENTORNO LOCAL:
+   - Mantener `server.js` con Express.js para ejecución local en desarrollo y contenedores Docker.
+   - En `vercel.json`, la última ruta debe ser el catch-all `{"src": "/api/(.*)", "dest": "server.js"}`.
+
+3. SEGURIDAD Y PROCESAMIENTO EN MEMORIA VOLÁTIL:
    - Procesar archivos/documentos exclusivamente en memoria RAM volátil (buffers).
    - 0 almacenamiento en disco duro (100% cumplimiento GDPR y SOC2 compliance).
    - Cabeceras de seguridad HTTP en todas las respuestas:

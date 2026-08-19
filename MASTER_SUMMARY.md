@@ -16,7 +16,8 @@
 
 ---
 
-## 🏗️ 2. Arquitectura Full-Stack & Memoria Volátil (0 Disco)
+## 🏗️ 2. Arquitectura Vercel Serverless Multi-Endpoint & Memoria Volátil (0 Disco)
+- **Vercel Serverless Multi-Endpoint Architecture**: Estructura backend desacoplada con 13 handlers serverless en `/api/` (`api/audit.js`, `api/cross-audit.js`, `api/chat-document.js`, `api/export-docx.js`, `api/download-pdf.js`, `api/payment.js`, `api/subscribe.js`, `api/outreach.js`, `api/webhook.js`, `api/indexnow.js`, `api/admin.js`, `api/lead.js`, `api/report-issue.js`), con paridad 1-a-1 en los bloques `"builds"` y `"routes"` de `vercel.json`.
 - **Motor de IA**: Integrado con la API de **Gemini 2.5 Flash** para auditorías de contratos y facturas en menos de 4 segundos.
 - **Privacidad Estricta**: Procesamiento en memoria RAM volátil (`multer.memoryStorage()`) con purga garantizada en el bloque `finally` (`fileBuffer = null`, `global.gc()`), sin guardar archivos físicos en disco.
 - **Base de Datos Supabase & BoxLang**: Esquema PostgreSQL en [`db/schema.sql`](db/schema.sql) para gestionar leads, reportes y suscripciones corporativas de $49/mes, respaldado por la arquitectura de microservicios en BoxLang (`backend/`).
