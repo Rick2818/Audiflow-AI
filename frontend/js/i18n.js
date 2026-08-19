@@ -145,6 +145,7 @@ window.I18n = {
             feat_3_desc: "Mira los hallazgos gratis. Paga $19 sólo para descargar las soluciones en Word .docx + PDF.",
 
             // Pricing Grid Section (ES)
+            pricing_badge_clear: "Precios Claros",
             pricing_section_title: "💰 Planes y Tarifas Transparentes B2B",
             pricing_section_sub: "Sin costos ocultos ni letras pequeñas. Prueba gratis y escala según el volumen de tu empresa.",
             
@@ -159,6 +160,7 @@ window.I18n = {
             pricing_card1_f4: "✓ 0 Almacenamiento en disco",
             pricing_card1_btn: "⚡ Iniciar Escaneo Gratis",
 
+            pricing_card2_top_badge: "MÁS POPULAR • RECOMENDADO",
             pricing_card2_tag: "POPULAR • PAGO ÚNICO",
             pricing_card2_title: "Reporte Ejecutivo",
             pricing_card2_price: "$19",
@@ -338,6 +340,7 @@ window.I18n = {
             feat_3_desc: "See findings free. Pay $19 only to unlock renegotiation Word .docx + PDF.",
 
             // Pricing Grid Section (EN)
+            pricing_badge_clear: "Transparent Pricing",
             pricing_section_title: "💰 Transparent B2B Pricing & Plans",
             pricing_section_sub: "No hidden fees, no fine print. Test for free and scale according to your enterprise document volume.",
             
@@ -352,6 +355,7 @@ window.I18n = {
             pricing_card1_f4: "✓ 0 Disk retention guarantee",
             pricing_card1_btn: "⚡ Start Free Scan",
 
+            pricing_card2_top_badge: "MOST POPULAR • RECOMMENDED",
             pricing_card2_tag: "POPULAR • ONE-TIME",
             pricing_card2_title: "Executive Report",
             pricing_card2_price: "$19",
