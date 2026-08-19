@@ -37,8 +37,8 @@ FASE 2: ARQUITECTURA SERVERLESS DUAL & MEMORIA VOLÁTIL RAM (0 DISCO)
      * `api/chat-document.js`: Copiloto interactivo de chat sobre documentos en tiempo real.
      * `api/export-docx.js`: Exportador a Microsoft Word (.docx) con marcas de revisión (*Track Changes*).
      * `api/download-pdf.js`: Generador de informes PDF marca blanca.
-     * `api/payment.js`: Cobro individual ($7 USD Express / $19 USD Ejecutivo / Satoshis Lightning).
-     * `api/subscribe.js`: Suscripción Corporativa B2B ($49/mes - $399/año).
+     * `api/payment.js`: Cobro individual ($19.00 USD Ejecutivo / Satoshis Lightning).
+     * `api/subscribe.js`: Suscripción B2B ($69/mes Mensual / $590/año Anual).
      * `api/outreach.js`: Motor de prospección B2B & Vercel Crons (`0 9 * * 1,2`).
      * `api/webhook.js`: Webhooks salientes y entrantes bidireccionales.
      * `api/indexnow.js`: Pinger instantáneo a Bing/IndexNow en <5 segundos.
@@ -91,11 +91,11 @@ FASE 5: MOTOR DE CORREO TRIPLE-TIER (RESEND SDK + SMTP + GMAIL)
    - Enviar en bloques de 20-25 correos con barra de progreso en vivo para evitar cierres de conexión HTTP.
 
 ================================================================================
-FASE 6: ARQUITECTURA DE PRECIOS B2B DE 3 NIVELES (ALTA FACTURACIÓN)
+FASE 6: ARQUITECTURA DE PRECIOS B2B DE ALTO TICKET & CONVERSIÓN
 ================================================================================
-- **Nivel 1 — Reporte Express ($7.00 USD / Sats):** Diagnóstico rápido de fugas y cláusulas de riesgo.
-- **Nivel 2 — Reporte Ejecutivo Completo ($19.00 USD):** Auditoría profunda + Redlines en Word `.docx` con control de cambios + PDF con marca blanca.
-- **Nivel 3 — Suscripción Corporativa Ilimitada ($49.00 USD/mes o $399.00 USD/año):** Auditorías ilimitadas multi-usuario, Cross-Audit 2-Way y Copiloto Chat 24/7.
+- **Nivel 1 — Reporte Ejecutivo Individual ($19.00 USD / Sats):** Auditoría profunda con Gemini 2.5 Flash + Desbloqueo de las 3 Soluciones Tácticas + Exportación de Redlines a Word `.docx` editable con Control de Cambios + PDF Certificado Marca Blanca.
+- **Nivel 2 — Suscripción Mensual Ilimitada ($69.00 USD / mes):** Auditorías ilimitadas multi-usuario, Cross-Audit 2-Way (Contrato vs Factura), Copiloto Chat 24/7 y purga RAM automática.
+- **Nivel 3 — Suscripción Anual Ilimitada ($590.00 USD / año):** Equivale a **$49 USD/mes** (Ahorro real de **$238 USD al año** / ~3.5 meses gratis). Soporte prioritario y cuota multi-abogado compartida.
 
 ================================================================================
 FASE 7: SEO TÉCNICO, INDEXNOW Y SEO PROGRAMÁTICO

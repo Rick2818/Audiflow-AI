@@ -40,7 +40,7 @@ export default async function handler(req, res) {
         console.warn('Usando precio BTC por defecto $65,000 USD');
       }
 
-      const satsAmount = Math.round((7 / btcPrice) * 100000000);
+      const satsAmount = Math.round((19 / btcPrice) * 100000000);
       const openNodeKey = process.env.OPENNODE_API_KEY;
 
       if (openNodeKey && !openNodeKey.includes('tu_opennode')) {
@@ -53,7 +53,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
               amount: satsAmount,
-              description: `AuditFlow AI Unblur: ${document_name || report_id}`,
+              description: `AuditFlow AI Reporte Ejecutivo B2B: ${document_name || report_id}`,
               currency: 'SATS',
               callback_url: `${req.headers.origin || 'https://audiflowai.com'}/api/webhooks/lightning`,
               success_url: `${req.headers.origin || 'https://audiflowai.com'}/?reportId=${report_id}&status=success`
@@ -74,13 +74,13 @@ export default async function handler(req, res) {
       }
 
       return res.json({
-        lightning_invoice: "lnbc70u1p3...mock_lightning_invoice_auditflow_ai",
+        lightning_invoice: "lnbc190u1p3...mock_lightning_invoice_auditflow_ai",
         sats_amount: satsAmount,
         checkout_url: `${req.headers.origin || 'https://audiflowai.com'}/?reportId=${report_id}&status=success`
       });
     }
 
-    // Flujo Stripe Checkout ($7.00 USD)
+    // Flujo Stripe Checkout ($19.00 USD)
     if (stripe) {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -88,10 +88,10 @@ export default async function handler(req, res) {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Reporte Desenfocado + Soluciones Tácticas de Auditoría',
-              description: `AuditFlow AI - Desbloqueo de 3 cláusulas tácticas para ${document_name || 'contrato.pdf'}`
+              name: 'Reporte Ejecutivo + Word DOCX Redlines + PDF Certificado',
+              description: `AuditFlow AI - Auditoría profunda con 3 soluciones tácticas para ${document_name || 'contrato.pdf'}`
             },
-            unit_amount: 700,
+            unit_amount: 1900,
           },
           quantity: 1,
         }],

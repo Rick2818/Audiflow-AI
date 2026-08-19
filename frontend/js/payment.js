@@ -112,17 +112,17 @@ window.PaymentHandler = {
     },
 
     /**
-     * Inicia Checkout en Stripe para $7.00 USD
+     * Inicia Checkout en Stripe para $19.00 USD
      */
     async processStripeCheckout() {
         const btnPayStripe = document.getElementById('btn-pay-stripe');
-        if (btnPayStripe) btnPayStripe.innerText = '⏳ Procesando Pago $7 USD...';
+        if (btnPayStripe) btnPayStripe.innerText = '⏳ Procesando Pago $19 USD...';
 
         if (typeof window.gtag === 'function') {
             window.gtag('event', 'begin_checkout', {
-                value: 7.0,
+                value: 19.0,
                 currency: 'USD',
-                items: [{ item_id: 'report_unlock_7', item_name: 'Desbloqueo PDF Reporte Táctico' }]
+                items: [{ item_id: 'report_unlock_19', item_name: 'Desbloqueo Reporte Ejecutivo + Word DOCX + PDF' }]
             });
         }
 
@@ -133,7 +133,8 @@ window.PaymentHandler = {
                 body: JSON.stringify({
                     report_id: this.currentReportId || 'rep_123456',
                     email: this.currentLeadEmail || 'cliente@empresa.com',
-                    document_name: this.currentDocName || 'contrato.pdf'
+                    document_name: this.currentDocName || 'contrato.pdf',
+                    amount_usd: 19.00
                 })
             });
 
@@ -146,25 +147,18 @@ window.PaymentHandler = {
                 if (window.AppHandler && window.AppHandler.unblurReport) {
                     window.AppHandler.unblurReport();
                 }
-                alert('🎉 ¡Pago Exitoso de $7.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF firmada a tu correo.');
-            } else {
-                // Modo interactivo o fallback local de pago exitoso
-                this.closePaymentModal();
-                if (window.AppHandler && window.AppHandler.unblurReport) {
-                    window.AppHandler.unblurReport();
-                }
-                alert('🎉 ¡Pago Exitoso de $7.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF firmada a tu correo.');
+                alert('🎉 ¡Pago Exitoso de $19.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF + Word editable a tu correo.');
             }
         } catch (err) {
             console.error('Error en checkout Stripe:', err);
             alert('⚠️ No se pudo procesar la solicitud de Stripe (' + err.message + '). Por favor intenta de nuevo.');
         } finally {
-            if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($7 USD)';
+            if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($19 USD)';
         }
     },
 
     /**
-     * Genera Factura Lightning Network BOLT11 en Satoshis
+     * Genera Factura Lightning Network BOLT11 en Satoshis ($19 USD)
      */
     async generateLightningInvoice() {
         try {
@@ -173,20 +167,21 @@ window.PaymentHandler = {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     report_id: this.currentReportId || 'rep_123456',
-                    document_name: this.currentDocName || 'contrato.pdf'
+                    document_name: this.currentDocName || 'contrato.pdf',
+                    amount_usd: 19.00
                 })
             });
 
             const data = await res.json();
             const bolt11 = data.lightningInvoice || 'lightning:rick28@strike.me';
-            const satsAmount = data.amountSats || 10769;
+            const satsAmount = data.amountSats || 29230;
 
             const inputInvoice = document.getElementById('ln-invoice-input');
             const satsAmountEl = document.getElementById('ln-sats-amount');
 
             if (inputInvoice) inputInvoice.value = bolt11;
             if (satsAmountEl) {
-                satsAmountEl.innerText = `${satsAmount.toLocaleString()} Sats`;
+                satsAmountEl.innerText = `${satsAmount.toLocaleString()} Sats (~$19 USD)`;
             }
 
             // Generar Código QR interactivo de alta fiabilidad (Zero dependencies)

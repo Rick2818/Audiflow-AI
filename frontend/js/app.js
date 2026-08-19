@@ -562,9 +562,9 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 btnAnnual.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-emerald-500 transition-all flex flex-col items-center justify-center relative';
             }
             if (planLabel) planLabel.innerText = 'Plan Corporativo Anual';
-            if (priceLabel) priceLabel.innerText = '$399.00 USD / año';
-            if (planDesc) planDesc.innerText = '2 meses GRATIS incluidos. Un solo pago anual por adelantado con auditorías ilimitadas para todo tu equipo.';
-            if (submitBtnText) submitBtnText.innerText = '⭐ Activar Suscripción Anual por $399/año';
+            if (priceLabel) priceLabel.innerText = '$590.00 USD / año';
+            if (planDesc) planDesc.innerText = 'Equivale a $49 USD/mes (Ahorras $238 USD al año). Auditorías ilimitadas, Cross-Audit 2-Way y soporte prioritario para todo tu equipo.';
+            if (submitBtnText) submitBtnText.innerText = '⭐ Activar Suscripción Anual ($590/año)';
             if (multiBadge) multiBadge.classList.remove('hidden');
         } else {
             if (btnMonthly) {
@@ -574,9 +574,9 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 btnAnnual.className = 'py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex flex-col items-center justify-center relative';
             }
             if (planLabel) planLabel.innerText = 'Plan Corporativo Mensual';
-            if (priceLabel) priceLabel.innerText = '$49.00 USD / mes';
-            if (planDesc) planDesc.innerText = 'Incluye acceso ilimitado para todo tu equipo, purga automática de RAM y reportes PDF sin marcas de agua.';
-            if (submitBtnText) submitBtnText.innerText = '🚀 Activar Suscripción por $49/mes';
+            if (priceLabel) priceLabel.innerText = '$69.00 USD / mes';
+            if (planDesc) planDesc.innerText = 'Incluye acceso ilimitado para todo tu equipo, Cross-Audit 2-Way, purga automática de RAM y reportes Word + PDF sin marcas de agua.';
+            if (submitBtnText) submitBtnText.innerText = '🚀 Activar Suscripción por $69/mes';
             if (multiBadge) multiBadge.classList.add('hidden');
         }
     },
@@ -593,7 +593,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const qrBox = document.getElementById('ent-qrcode-box');
 
         const isAnnual = (this.selectedEnterpriseInterval === 'annual');
-        const satsAmount = isAnnual ? '613,846 Sats' : '75,384 Sats';
+        const satsAmount = isAnnual ? '907,690 Sats (~$590 USD)' : '106,150 Sats (~$69 USD)';
 
         if (satsAmountEl) satsAmountEl.innerText = satsAmount;
 

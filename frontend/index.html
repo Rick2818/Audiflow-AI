@@ -81,7 +81,7 @@
       "operatingSystem": "Web",
       "offers": {
         "@type": "Offer",
-        "price": "7.00",
+        "price": "19.00",
         "priceCurrency": "USD",
         "availability": "https://schema.org/InStock"
       },
@@ -679,12 +679,12 @@
             <div id="unlock-banner" class="bg-gradient-to-r from-accent-blue/10 via-dark-card to-accent-emerald/10 border border-accent-blue/30 rounded-2xl p-6 sm:p-8 text-center relative overflow-hidden shadow-2xl">
                 <div class="max-w-xl mx-auto">
                     <span class="w-12 h-12 rounded-full bg-accent-blue/20 text-accent-blue inline-flex items-center justify-center font-bold text-xl mb-4 shadow-glow">🔓</span>
-                    <h3 data-i18n="banner_title" class="text-xl sm:text-2xl font-bold text-white mb-2">Desbloquea las 3 Soluciones Tácticas + Reporte PDF</h3>
+                    <h3 data-i18n="banner_title" class="text-xl sm:text-2xl font-bold text-white mb-2">Desbloquea las 3 Soluciones Tácticas + Word DOCX + PDF</h3>
                     <p data-i18n="banner_sub" class="text-gray-300 text-xs sm:text-sm mb-6 leading-relaxed">
-                        Ya viste los hallazgos en pantalla. Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos y el PDF firmado por solo $7.00 USD o Satoshis.
+                        Ya viste los hallazgos en pantalla. Obtén el texto exacto para renegociar contratos, objeción de cargos indebidos, Word .docx editable y el PDF firmado por solo $19.00 USD o Satoshis.
                     </p>
                     <button id="btn-open-payment-modal" onclick="window.PaymentHandler.openPaymentModal()" class="btn-primary text-sm sm:text-base px-6 sm:px-8 py-3.5 shadow-glow w-full sm:w-auto">
-                        <span data-i18n="banner_btn">Desbloquear Reporte Completo + PDF ($7 USD)</span>
+                        <span data-i18n="btn_unlock_report">Desbloquear Reporte Ejecutivo + Word + PDF ($19 USD)</span>
                     </button>
 
                     <!-- BOTÓN DISCRETO: COPIAR ENLACE PARA ENVIAR AL JEFE / SOCIO -->
@@ -694,21 +694,21 @@
                 </div>
             </div>
 
-            <!-- BANNER DE UPSELL CORPORATIVO ($49/MES) CON CALCULADORA DE ROI -->
+            <!-- BANNER DE UPSELL CORPORATIVO ($69/MES - $590/AÑO) CON CALCULADORA DE ROI -->
             <div id="upsell-banner" class="hidden mt-8 bg-gradient-to-r from-purple-900/30 via-dark-card to-blue-900/30 border border-purple-500/40 rounded-2xl p-6 sm:p-8 text-center shadow-xl">
                 <div class="max-w-2xl mx-auto">
                     <h3 data-i18n="upsell_title" class="text-xl sm:text-2xl font-bold text-white mb-2">🚀 ¿Necesitas Auditorías Ilimitadas para tu Empresa?</h3>
                     <p data-i18n="upsell_sub" class="text-gray-300 text-xs sm:text-sm mb-4 leading-relaxed">
-                        Actualiza a la suscripción Corporativa por $49/mes. Auditorías ilimitadas, equipo multi-usuario y soporte legal prioritario.
+                        Actualiza a la suscripción Mensual ($69/mes) o Anual ($590/año). Auditorías ilimitadas, equipo multi-usuario, Cross-Audit 2-Way y soporte prioritario.
                     </p>
 
                     <!-- CHIP DE CALCULADORA DE ROI DE AHORRO CORPORATIVO -->
                     <div class="mb-6 p-3 rounded-xl bg-purple-950/60 border border-purple-500/30 text-purple-200 text-xs font-mono inline-flex items-center gap-2">
-                        💡 <span data-i18n="roi_calculator_chip"><strong>Calculadora de ROI:</strong> 10 auditorías/mes ahorran ~$1,250 USD en honorarios legales. ¡Tu ROI es del <strong>2,450%</strong> por $49/mes!</span>
+                        💡 <span data-i18n="roi_calculator_chip"><strong>Calculadora de ROI:</strong> 10 auditorías/mes ahorran ~$1,850 USD en honorarios legales. ¡Tu ROI es del <strong>2,680%</strong> por $69/mes!</span>
                     </div>
 
                     <button onclick="window.AppHandler.subscribeEnterprise()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue text-sm sm:text-base px-6 sm:px-8 py-3.5 shadow-glow w-full sm:w-auto block mx-auto">
-                        <span data-i18n="upsell_btn">Suscribirme por $49/mes</span>
+                        <span data-i18n="upsell_btn">Ver Planes Corporativos ($69/mes o $590/año)</span>
                     </button>
                 </div>
             </div>
@@ -745,14 +745,14 @@
                 <button id="btn-close-payment-modal" onclick="window.PaymentHandler.closePaymentModal()" aria-label="Cerrar modal de pago" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
 
                 <h3 data-i18n="pay_title" class="text-xl font-bold text-white mb-1">Selecciona Método de Pago</h3>
-                <p data-i18n="pay_sub" class="text-xs text-gray-400 mb-6 font-mono">Tarifa plana de $7.00 USD • Liquidación inmediata</p>
+                <p data-i18n="pay_sub" class="text-xs text-gray-400 mb-6 font-mono">Tarifa plana de $19.00 USD • Liquidación inmediata</p>
 
                 <!-- PESTAÑAS SELECCIONADORAS: STRIPE ($ USD) VS LIGHTNING (SATS) -->
                 <div class="grid grid-cols-2 gap-2 p-1.5 bg-dark-surface rounded-xl mb-6 border border-border-dark">
-                    <button id="tab-stripe" data-i18n="pay_tab_stripe" class="py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-accent-blue transition-all flex items-center justify-center gap-1.5">
-                        💳 Stripe ($7.00 USD)
+                    <button id="tab-stripe" data-i18n="tab_stripe" class="py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-accent-blue transition-all flex items-center justify-center gap-1.5">
+                        💳 Stripe ($19.00 USD)
                     </button>
-                    <button id="tab-lightning" data-i18n="pay_tab_ln" class="py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
+                    <button id="tab-lightning" data-i18n="tab_lightning" class="py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
                         ⚡ Lightning (Satoshis)
                     </button>
                 </div>

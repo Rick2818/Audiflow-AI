@@ -1,6 +1,6 @@
 # 🚀 AuditFlow AI - Resumen Maestro del Proyecto (Master Summary - Grado 9.5)
 
-**AuditFlow AI** es un sistema Micro-SaaS B2B de grado corporativo 9.5 diseñado para operar 24/7 sin intervención humana, auditando contratos y facturas con IA (Gemini 2.5 Flash), estricta privacidad en memoria RAM volátil (0 almacenamiento en disco), certificación formal SOC2/GDPR con cláusula de No-Entrenamiento de modelos IA, motor de correo dual (SMTP Corporativo + Gmail) y un embudo de precios B2B escalonado ($7 Express, $19 Reporte Ejecutivo con Word DOCX Redlines, $49/mes Ilimitado).
+**AuditFlow AI** es un sistema Micro-SaaS B2B de grado corporativo 9.5 diseñado para operar 24/7 sin intervención humana, auditando contratos y facturas con IA (Gemini 2.5 Flash), estricta privacidad en memoria RAM volátil (0 almacenamiento en disco), certificación formal SOC2/GDPR con cláusula de No-Entrenamiento de modelos IA, motor de correo dual (Resend SDK + SMTP Corporativo + Gmail) y un embudo de precios B2B escalonado ($19 Reporte Ejecutivo con Word DOCX Redlines + PDF, $69/mes Mensual Ilimitado, $590/año Anual Ilimitado).
 
 ---
 
@@ -20,24 +20,24 @@
 
 ## 🏗️ 2. Arquitectura Vercel Serverless Multi-Endpoint & Transporte Dual de Correo
 - **Vercel Serverless Multi-Endpoint Architecture**: Estructura backend desacoplada con 13 handlers serverless en `/api/` (`api/audit.js`, `api/cross-audit.js`, `api/chat-document.js`, `api/export-docx.js`, `api/download-pdf.js`, `api/payment.js`, `api/subscribe.js`, `api/outreach.js`, `api/webhook.js`, `api/indexnow.js`, `api/admin.js`, `api/lead.js`, `api/report-issue.js`), con paridad 1-a-1 en los bloques `"builds"` y `"routes"` de `vercel.json`.
-- **Motor de Correo Dual (Dual-Transport Engine)**:
-  - Soporte para **SMTP Corporativo** (Resend, Zoho, dominios propios `@audiflowai.com`) con máxima entregabilidad (SPF, DKIM, DMARC).
+- **Motor de Correo Modular (Resend SDK + SMTP + Gmail)**:
+  - Soporte nativo para **Resend SDK** y **SMTP Corporativo** (Zoho, dominios propios `@audiflowai.com`) con máxima entregabilidad (SPF, DKIM, DMARC).
   - Fallback automático a **Gmail SMTP** para pruebas y desarrollo.
 - **Motor de IA**: Integrado con la API de **Gemini 2.5 Flash** para auditorías de contratos y facturas en menos de 4 segundos.
 - **Privacidad Estricta**: Procesamiento en memoria RAM volátil (`multer.memoryStorage()`) con purga garantizada en el bloque `finally` (`fileBuffer = null`, `global.gc()`), sin guardar archivos físicos en disco.
-- **Base de Datos Supabase & BoxLang**: Esquema PostgreSQL en [`db/schema.sql`](db/schema.sql) para gestionar leads, reportes y suscripciones corporativas de $49/mes, respaldado por la arquitectura de microservicios en BoxLang (`backend/`).
+- **Base de Datos Supabase & BoxLang**: Esquema PostgreSQL en [`db/schema.sql`](db/schema.sql) para gestionar leads, reportes y suscripciones corporativas ($69/mes o $590/año), respaldado por la arquitectura de microservicios en BoxLang (`backend/`).
 
 ---
 
 ## 🛡️ 3. Mitigaciones Comerciales e Ingeniería de Confianza
-- **Mitigación 1: Embudo de Upsell Corporativo ($49/mes)**: Los clientes que realizan la auditoría *Tripwire* de $7 USD con perfiles empresariales (`lead_score >= 75`) son dirigidos a la suscripción mensual ilimitada por $49/mes.
+- **Mitigación 1: Embudo de Upsell Corporativo ($69/mes - $590/año)**: Los clientes que realizan la auditoría individual de $19 USD con perfiles empresariales (`lead_score >= 75`) son dirigidos a la suscripción mensual ($69/mes) o anual ($590/año).
 - **Mitigación 2: Micro-Copys de Seguridad y Confianza**: Banners de visibilidad garantizada sobre Procesamiento Efímero, Cifrado AES-256 y Cero Guardado en Disco.
-- **Mitigación 3: Filtro Pre-Vuelo OCR Anti-Garbage**: Validación previa al cobro que rechaza documentos con `<50 palabras legibles` o borrosos, mostrando la alerta *"Documento Ilegible"* sin emitir facturas ni cobrar los $7 USD.
+- **Mitigación 3: Filtro Pre-Vuelo OCR Anti-Garbage**: Validación previa al cobro que rechaza documentos con `<50 palabras legibles` o borrosos, mostrando la alerta *"Documento Ilegible"* sin emitir facturas ni cobrar los $19 USD.
 
 ---
 
-## 💳 4. Pasarelas de Pago Híbridas ($7.00 USD / Satoshis)
-- **Stripe Checkout**: Integración oficial para cobros en USD mediante tarjetas de crédito/débito.
+## 💳 4. Pasarelas de Pago Híbridas ($19.00 USD / Satoshis)
+- **Stripe Checkout**: Integración oficial para cobros en USD mediante tarjetas de crédito/débito ($19.00 USD).
 - **Lightning Network (Satoshis)**: Integración OpenNode/Strike que calcula la tasa BTC/USD en tiempo real, genera facturas **BOLT11**, códigos QR interactivos con expiración a 10 minutos y dirección de nodo personalizable en `.env`.
 
 ---

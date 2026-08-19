@@ -18,10 +18,10 @@ async function sendSubscriptionWelcomeEmail({ to, name, interval = 'monthly', la
   const isAnnual = (interval === 'annual');
 
   const planText = isEn
-    ? (isAnnual ? 'Enterprise Annual Plan ($399.00 USD/yr)' : 'Enterprise Monthly Plan ($49.00 USD/mo)')
-    : (isAnnual ? 'Plan Corporativo Anual ($399.00 USD/año)' : 'Plan Corporativo Mensual ($49.00 USD/mes)');
+    ? (isAnnual ? 'Enterprise Annual Plan ($590.00 USD/yr)' : 'Enterprise Monthly Plan ($69.00 USD/mo)')
+    : (isAnnual ? 'Plan Corporativo Anual ($590.00 USD/año)' : 'Plan Corporativo Mensual ($69.00 USD/mes)');
     
-  const amountText = isAnnual ? '$399.00 USD' : '$49.00 USD';
+  const amountText = isAnnual ? '$590.00 USD' : '$69.00 USD';
   const recId = 'REC-' + Math.random().toString(36).substring(2, 9).toUpperCase();
   const appUrl = 'https://audiflowai.com';
   
@@ -185,8 +185,8 @@ export default async function handler(req, res) {
     const customerEmail = email || 'cliente@empresa.com';
     const customerName = name || 'Cliente Corporativo';
     const planInterval = interval === 'annual' ? 'annual' : 'monthly';
-    const priceUsd = planInterval === 'annual' ? 399.00 : 49.00;
-    const unitAmount = planInterval === 'annual' ? 39900 : 4900;
+    const priceUsd = planInterval === 'annual' ? 590.00 : 69.00;
+    const unitAmount = planInterval === 'annual' ? 59000 : 6900;
     const stripeInterval = planInterval === 'annual' ? 'year' : 'month';
     const appUrl = 'https://auditflow-ai-theta.vercel.app';
 
@@ -216,7 +216,7 @@ export default async function handler(req, res) {
               <table style="width: 100%; color: #d1d5db; font-size: 14px; border-collapse: collapse; margin-top: 15px;">
                 <tr><td style="padding: 6px 0; color: #9ca3af;">Cliente / Empresa:</td><td style="text-align: right; font-weight: bold; color: #ffffff;">${customerName}</td></tr>
                 <tr><td style="padding: 6px 0; color: #9ca3af;">Correo del Cliente:</td><td style="text-align: right; font-weight: bold; color: #38bdf8;">${customerEmail}</td></tr>
-                <tr><td style="padding: 6px 0; color: #9ca3af;">Plan Contratado:</td><td style="text-align: right; font-weight: bold; color: #a855f7;">${planInterval === 'annual' ? 'Enterprise Annual ($399/año)' : 'Enterprise Monthly ($49/mes)'}</td></tr>
+                <tr><td style="padding: 6px 0; color: #9ca3af;">Plan Contratado:</td><td style="text-align: right; font-weight: bold; color: #a855f7;">${planInterval === 'annual' ? 'Enterprise Annual ($590/año)' : 'Enterprise Monthly ($69/mes)'}</td></tr>
                 <tr><td style="padding: 6px 0; color: #9ca3af;">Pasarela / Nodo:</td><td style="text-align: right; font-weight: bold; color: #f59e0b;">Stripe &amp; Strike Lightning (rick28@strike.me)</td></tr>
                 <tr><td style="padding: 6px 0; color: #9ca3af;">Fecha y Hora:</td><td style="text-align: right; color: #9ca3af;">${new Date().toLocaleString('es-ES')}</td></tr>
               </table>
@@ -240,7 +240,7 @@ export default async function handler(req, res) {
               price_data: {
                 currency: 'usd',
                 product_data: {
-                  name: `AuditFlow AI - Plan Corporativo B2B (${planInterval === 'annual' ? '$399/año' : '$49/mes'})`,
+                  name: `AuditFlow AI - Plan Corporativo B2B (${planInterval === 'annual' ? '$590/año' : '$69/mes'})`,
                   description: 'Acceso ilimitado 24/7 a auditorías de contratos con memoria volátil RAM'
                 },
                 unit_amount: unitAmount,
