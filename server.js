@@ -110,6 +110,15 @@ app.get('/admin.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'admin.html'));
 });
 
+// Rutas de Páginas Legales & Compliance B2B
+app.get('/privacy', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'privacy.html'));
+});
+
+app.get('/terms', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'terms.html'));
+});
+
 // Endpoint de notificación instantánea a Bing & IndexNow API
 app.post('/api/indexnow/submit', async (req, res) => {
   try {

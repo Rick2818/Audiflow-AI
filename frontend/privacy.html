@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad & Cumplimiento de Datos | AuditFlow AI</title>
+    <meta name="description" content="Política de Privacidad y Cumplimiento B2B de AuditFlow AI. Procesamiento 100% efímero en memoria RAM volátil, cero almacenamiento en disco duro y garantía de no-entrenamiento de modelos IA.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://audiflowai.com/privacy">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            DEFAULT: '#0B0F19',
+                            card: '#111827',
+                            surface: '#1F2937',
+                            border: '#374151'
+                        },
+                        accent: {
+                            blue: '#38BDF8',
+                            emerald: '#10B981',
+                            purple: '#A855F7',
+                            gold: '#F59E0B'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark text-gray-100 min-h-screen font-sans flex flex-col justify-between antialiased">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="border-b border-dark-border bg-dark-card sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent-purple to-accent-blue flex items-center justify-center font-bold text-white shadow-glow">
+                    ⚡
+                </div>
+                <span class="font-bold text-lg tracking-tight text-white">AuditFlow <span class="text-accent-blue">AI</span></span>
+            </a>
+            <div class="flex items-center gap-4">
+                <a href="/" class="text-sm text-gray-300 hover:text-white transition-colors">← Volver al Inicio</a>
+                <a href="/#dropzone" class="px-4 py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue text-xs font-bold border border-accent-blue/30 transition-all">
+                    Probar Auditoría Gratis
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-1">
+        <div class="bg-dark-card border border-dark-border rounded-2xl p-8 sm:p-12 shadow-2xl space-y-8">
+            
+            <!-- HEADER DE LA PÁGINA -->
+            <div class="border-b border-dark-border pb-6">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 text-xs font-mono mb-4">
+                    🛡️ CUMPLIMIENTO SOC2 & GDPR COMPLIANCE
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Política de Privacidad y Seguridad de Datos</h1>
+                <p class="text-gray-400 text-sm mt-2 font-mono">Última actualización: Agosto 2026 • Versión 2.5</p>
+            </div>
+
+            <!-- SECCIÓN 1: EL PRINCIPIO DE MEMORIA VOLÁTIL (0 DISCO) -->
+            <section class="space-y-4">
+                <h2 class="text-xl font-bold text-accent-blue flex items-center gap-2">
+                    <span>1. Procesamiento Efímero en Memoria RAM Volátil (0 Guardado en Disco)</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    En <strong>AuditFlow AI</strong> entendemos que los contratos comerciales, acuerdos de confidencialidad (NDAs) y facturas de proveedores contienen información corporativa altamente confidencial. Por diseño arquitectónico, nuestra infraestructura opera bajo el principio de <strong>Cero Almacenamiento Persistente</strong>:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-4">
+                    <div class="p-4 rounded-xl bg-dark-surface border border-dark-border">
+                        <div class="text-2xl mb-1">🧠</div>
+                        <div class="font-bold text-white text-xs mb-1">En Memoria RAM</div>
+                        <div class="text-[11px] text-gray-400">Los documentos se leen únicamente en buffers de memoria RAM temporal durante el escaneo.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-dark-surface border border-dark-border">
+                        <div class="text-2xl mb-1">🧹</div>
+                        <div class="font-bold text-white text-xs mb-1">Purga Inmediata</div>
+                        <div class="text-[11px] text-gray-400">Al finalizar la auditoría, los buffers se liberan y destruyen automáticamente de la memoria.</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-dark-surface border border-dark-border">
+                        <div class="text-2xl mb-1">🚫</div>
+                        <div class="font-bold text-white text-xs mb-1">0 Disco Duro</div>
+                        <div class="text-[11px] text-gray-400">Ningún archivo PDF, imagen o texto se guarda en bases de datos ni servidores físicos.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN 2: GARANTÍA DE NO-ENTRENAMIENTO DE IA -->
+            <section class="space-y-4">
+                <h2 class="text-xl font-bold text-accent-purple flex items-center gap-2">
+                    <span>2. Cláusula Estricta de No-Entrenamiento de Modelos de IA</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    Utilizamos la API empresarial de <strong>Google Gemini 2.5 Flash</strong> bajo acuerdos comerciales de protección de datos. Garantizamos expresamente que:
+                </p>
+                <ul class="list-disc list-inside text-gray-300 text-sm space-y-2 ml-2">
+                    <li><strong>Ningún contrato, cláusula, importe o dato del cliente</strong> es utilizado para re-entrenar, mejorar o ajustar modelos de inteligencia artificial públicos ni privados.</li>
+                    <li>Las llamadas a la API se ejecutan en canales aislados con retención de datos temporal de cero días (Zero Data Retention).</li>
+                </ul>
+            </section>
+
+            <!-- SECCIÓN 3: CIFRADO Y SEGURIDAD EN TRÁNSITO -->
+            <section class="space-y-4">
+                <h2 class="text-xl font-bold text-accent-emerald flex items-center gap-2">
+                    <span>3. Cifrado de Grado Bancario (TLS 1.3 & AES-256)</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    Toda la comunicación entre tu navegador web y nuestros nodos de cómputo serverless está protegida mediante certificados SSL/TLS con cifrado forzado de 256 bits. Cualquier intento de conexión insegura HTTP es redirigido automáticamente a HTTPS.
+                </p>
+            </section>
+
+            <!-- SECCIÓN 4: INFORMACIÓN RECOPILADA -->
+            <section class="space-y-4">
+                <h2 class="text-xl font-bold text-white flex items-center gap-2">
+                    <span>4. Datos que Sí Recopilamos (Mínimo Necesario)</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    Únicamente solicitamos y almacenamos la información estrictamente necesaria para la prestación del servicio y facturación:
+                </p>
+                <ul class="list-disc list-inside text-gray-300 text-sm space-y-1 ml-2">
+                    <li><strong>Correo electrónico corporativo:</strong> Para enviarte el reporte en PDF/Word o gestionar tu suscripción.</li>
+                    <li><strong>Datos de facturación:</strong> Procesados directamente por pasarelas seguras certificadas PCI-DSS (Stripe) o mediante Lightning Network (Satoshis Bitcoin). AuditFlow AI nunca tiene acceso a los números completos de tu tarjeta.</li>
+                </ul>
+            </section>
+
+            <!-- SECCIÓN 5: DERECHOS DEL USUARIO & CONTACTO -->
+            <section class="space-y-4 border-t border-dark-border pt-6">
+                <h2 class="text-xl font-bold text-accent-gold flex items-center gap-2">
+                    <span>5. Tus Derechos (GDPR & Privacidad Internacional)</span>
+                </h2>
+                <p class="text-gray-300 leading-relaxed text-sm">
+                    Tienes derecho en todo momento a solicitar la eliminación de tu correo de nuestra lista de clientes o notificaciones. Para cualquier solicitud de privacidad o cumplimiento normativo, puedes contactar a nuestro equipo de seguridad en:
+                </p>
+                <div class="p-4 rounded-xl bg-dark-surface border border-dark-border font-mono text-xs text-accent-blue">
+                    📧 Departamento de Privacidad: <a href="mailto:admin@audiflowai.com" class="hover:underline text-white">admin@audiflowai.com</a>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-dark-border bg-dark-card py-8 text-center text-xs text-gray-400 font-mono">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>© 2026 AuditFlow AI • Auditoría B2B en Memoria RAM Volátil.</div>
+            <div class="flex items-center gap-6">
+                <a href="/privacy" class="text-accent-blue font-bold">Privacidad</a>
+                <a href="/terms" class="hover:text-white transition-colors">Términos de Servicio</a>
+                <a href="/#pricing" class="hover:text-white transition-colors">Planes</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

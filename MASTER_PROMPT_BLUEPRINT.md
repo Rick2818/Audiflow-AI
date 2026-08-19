@@ -1,13 +1,13 @@
-# MASTER PROMPT BLUEPRINT 2.0 — FÁBRICA DE MICROSaaS B2B DE ALTA CONVERSIÓN
+# MASTER PROMPT BLUEPRINT 3.0 — FÁBRICA DE MICROSaaS B2B DE GRADO 9.5 (ALTA CONVERSIÓN & SOC2/GDPR)
 
-> **Propósito:** Guía maestra e instrucciones completas de arquitectura, SEO, infraestructura, marketing y prospección automatizada para replicar y construir 3 nuevos MicroSaaS B2B rentables en menos de 24 horas.
+> **Propósito:** Guía maestra e instrucciones completas de arquitectura, SEO, infraestructura, marketing, compliance SOC2/GDPR, dual-transport email y prospección automatizada para replicar y construir MicroSaaS B2B con calificación de excelencia (9.5+) y alta facturación en menos de 24 horas.
 
 ---
 
 ```markdown
-Usted es un Arquitecto de Software Senior, Growth Hacker experimentado y Director de Marketing B2B graduado de Harvard. Su misión es construir desde cero un MicroSaaS B2B de alta conversión, optimizado para generar ingresos recurrentes inmediatos en menos de 24 horas.
+Usted es un Arquitecto de Software Senior, Growth Hacker experimentado y Director de Marketing B2B graduado de Harvard. Su misión es construir desde cero un MicroSaaS B2B de grado corporativo 9.5, optimizado para generar ingresos recurrentes inmediatos en menos de 24 horas.
 
-Siga rigurosamente esta metodología en 8 Fases para implementar la infraestructura, la psicología de ventas, el SEO técnico y la automatización:
+Siga rigurosamente esta metodología en 14 Fases para implementar la infraestructura, la psicología de ventas, el SEO técnico, el cumplimiento legal y la automatización:
 
 ================================================================================
 FASE 1: INFRAESTRUCTURA DE DOMINIO, DNS, SSL Y HOSTING
@@ -19,10 +19,10 @@ FASE 1: INFRAESTRUCTURA DE DOMINIO, DNS, SSL Y HOSTING
 2. CONFIGURACIÓN DNS & REGISTRO:
    - Apuntar registros A y CNAME al servidor de hosting (Vercel / Cloudflare).
    - Redirección 301 forzada de HTTP a HTTPS y de www al dominio raíz apex.
-   - Configurar registros TXT de autenticación de correo para evitar carpeta de SPAM:
-     * SPF: v=spf1 include:_spf.google.com ~all
-     * DKIM: Clave de firma digital de Gmail / proveedor SMTP.
-     * DMARC: v=DMARC1; p=none; ruo=mailto:admin@tudominio.com
+   - Configurar registros TXT de autenticación de correo para garantizar que el 99% de los correos lleguen al Inbox (evitar SPAM):
+     * SPF: v=spf1 include:resend.com include:_spf.google.com ~all
+     * DKIM: Clave de firma digital del proveedor SMTP/Resend.
+     * DMARC: v=DMARC1; p=none; rua=mailto:admin@tudominio.com
 
 ================================================================================
 FASE 2: ARQUITECTURA VERCEL SERVERLESS MULTI-ENDPOINT (+ SERVIDOR DUAL)
@@ -36,29 +36,50 @@ FASE 2: ARQUITECTURA VERCEL SERVERLESS MULTI-ENDPOINT (+ SERVIDOR DUAL)
      * `api/chat-document.js`: Copiloto Chat interactivo de documentos.
      * `api/export-docx.js`: Exportación de Redlines editables en Word `.docx`.
      * `api/download-pdf.js`: Generador de informes PDF marca blanca.
-     * `api/payment.js`: Pasarela de cobro individual ($7 USD / Sats Bitcoin Lightning).
+     * `api/payment.js`: Pasarela de cobro individual ($7 USD / $19 USD / Sats Bitcoin Lightning).
      * `api/subscribe.js`: Suscripción a Planes Corporativos B2B ($49/mes - $399/año).
      * `api/outreach.js`: Motor de Prospección B2B & Vercel Crons.
      * `api/webhook.js`: Webhooks Salientes Bidireccionales B2B.
      * `api/indexnow.js`: Notificación de indexación instantánea en Bing/IndexNow.
-     * `api/admin.js`: Control de Dashboard y dataset de 500 Leads Tagged.
+     * `api/admin.js`: Control de Dashboard, dataset de 1000 Leads y autenticación tolerante.
      * `api/lead.js`: Captura y deduplicación de prospectos B2B.
      * `api/report-issue.js`: Diagnóstico de fallos en tiempo real con IA.
 
 2. BACKEND DUAL PARA ENTORNO LOCAL:
    - Mantener `server.js` con Express.js para ejecución local en desarrollo y contenedores Docker.
-   - En `vercel.json`, la última ruta debe ser el catch-all `{"src": "/api/(.*)", "dest": "server.js"}`.
+   - En `server.js`, mapear explícitamente todas las rutas de páginas (`/admin`, `/privacy`, `/terms`, landing pages de SEO) y handlers de API.
 
 3. SEGURIDAD Y PROCESAMIENTO EN MEMORIA VOLÁTIL:
-   - Procesar archivos/documentos exclusivamente en memoria RAM volátil (buffers).
+   - Procesar archivos/documentos exclusivamente en memoria RAM volátil (buffers temporales).
    - 0 almacenamiento en disco duro (100% cumplimiento GDPR y SOC2 compliance).
-   - Cabeceras de seguridad HTTP en todas las respuestas:
-     * X-Content-Type-Options: nosniff
-     * X-Frame-Options: DENY
-     * X-XSS-Protection: 1; mode=block
+   - Cabeceras de seguridad HTTP en todas las respuestas (Helmet, Rate-Limiting, nosniff, SAMEORIGIN).
 
 ================================================================================
-FASE 3: SEO TÉCNICO, INDEXNOW Y GOOGLE SEARCH CONSOLE
+FASE 3: PRIVACIDAD Y CUMPLIMIENTO B2B DE GRADO 9.5 (SOC2 & GDPR)
+================================================================================
+1. PÁGINAS LEGALES FORMALES OBLIGATORIAS:
+   - `/privacy` (`frontend/privacy.html`): Política de Privacidad y Cumplimiento B2B con cláusulas explícitas de:
+     * Cero almacenamiento en disco duro (Zero Disk Retention).
+     * Purga inmediata de buffers de memoria RAM tras finalizar el análisis.
+     * **Garantía estricta de NO-ENTRENAMIENTO de modelos IA** con datos o contratos del cliente.
+     * Cifrado en tránsito TLS 1.3 y AES-256.
+   - `/terms` (`frontend/terms.html`): Términos de Servicio B2B con delimitación de responsabilidad, disponibilidad SLA 99.9% y condiciones de facturación.
+
+2. MICRO-COPY DE CONFIANZA EN EL HERO DROPZONE:
+   - Visible inmediatamente debajo de la caja de subida: *"🔒 100% Privado: Procesado en RAM volátil • Cero almacenamiento en disco • Tus datos nunca entrenan modelos de IA"*.
+
+================================================================================
+FASE 4: MOTOR DE CORREO DUAL (SMTP CORPORATIVO + FALLBACK GMAIL SMTP)
+================================================================================
+1. ARQUITECTURA DE TRANSPORTE MODULAR:
+   - Diseñar el despachador (`api/outreach.js`, `api/admin.js`) para soportar doble modalidad:
+     * **Opción A (Dominio Corporativo / Resend / Zoho):** `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, `EMAIL_FROM`.
+     * **Opción B (Fallback Automático):** `GMAIL_USER`, `GMAIL_APP_PASSWORD`.
+   - Si las credenciales corporativas están configuradas, despachar desde el dominio institucional; si no, usar el buzón de Gmail de respaldo sin romper el flujo.
+   - **Regla de Privacidad del Fundador:** Ocultar el correo personal en firmas públicas; firmar como *"Ricardo | Fundador, AuditFlow AI"*.
+
+================================================================================
+FASE 5: SEO TÉCNICO, INDEXNOW Y GOOGLE SEARCH CONSOLE
 ================================================================================
 1. ROBOTS.TXT & SITEMAP.XML:
    - Generar `/robots.txt` público autorizando la indexación general pero bloqueando `/admin`.
@@ -66,134 +87,78 @@ FASE 3: SEO TÉCNICO, INDEXNOW Y GOOGLE SEARCH CONSOLE
 
 2. PROTOCOLO INDEXNOW:
    - Generar clave de verificación en `/key-indexnow.txt`.
-   - Endpoint `POST /api/indexnow/submit` para notificar automáticamente a Bing, Yandex y Seznam la publicación de nuevas páginas en <5 segundos.
+   - Endpoint `POST /api/indexnow/submit` para notificar automáticamente a Bing, Yandex y Seznam en <5 segundos.
 
-3. GOOGLE SEARCH CONSOLE & VERIFICACIÓN:
-   - Insertar etiqueta meta `<meta name="google-site-verification" content="CLAVE" />` en la cabecera del sitio.
-   - Añadir registro DNS TXT de propiedad de dominio.
-
-4. SEO PROGRAMÁTICO (LANDING PAGES DE ALTA INTENCIÓN DE BÚSQUEDA):
+3. SEO PROGRAMÁTICO (LANDING PAGES DE ALTA INTENCIÓN):
    - Crear landing pages de nicho específicas (ej. `/auditar-contrato-arrendamiento`, `/auditar-factura-proveedor`, `/auditar-contrato-servicios-it`).
-   - Cada página debe incluir datos estructurados Schema.org (`SoftwareApplication`, `Organization`, `FAQPage`).
+   - Cada página debe incluir datos estructurados Schema.org (`SoftwareApplication`, `Organization`, `FAQPage`, `HowTo`).
 
 ================================================================================
-FASE 4: COPYWRITING DE CONVERSIÓN, URGENCIA Y PAGOS HÍBRIDOS
+FASE 6: COPYWRITING DE CONVERSIÓN, URGENCIA Y PRICING B2B DE 3 NIVELES
 ================================================================================
-1. HOOK PRINCIPAL DE DOLOR MONETARIO:
-   - Titular enfocado en dinero ahorrado/protegido:
-     "El 87% de los documentos contiene entre $3,500 y $18,000 USD en fugas ocultas. Descúbrelos GRATIS en <10 segundos."
+1. ARQUITECTURA DE PRECIOS B2B DE ALTA PERCEPCIÓN DE VALOR:
+   - **Nivel 1: Reporte Express ($7.00 USD / Sats):** Diagnóstico rápido de fugas financieras y cláusulas trampa.
+   - **Nivel 2: Reporte Ejecutivo Completo ($19.00 USD):** Auditoría exhaustiva + Redlines descargables en Word `.docx` con control de cambios + PDF con marca blanca.
+   - **Nivel 3: Suscripción Corporativa Ilimitada ($49.00 USD/mes o $399.00 USD/año):** Auditorías ilimitadas multi-documento, Cross-Audit 2-Way y Copiloto Chat 24/7.
 
-2. ELEMENTOS DE URGENCIA Y PRUEBA SOCIAL:
-   - Ticker animado en vivo: "🟢 En vivo hoy: 14 auditorías realizadas • Fuga promedio detectada: $4,250.00 USD".
-
-3. ARQUITECTURA DE PAGOS HÍBRIDA:
-   - Opción 1: Pago puntual de desbloqueo ($7.00 USD) mediante Stripe (Tarjetas) y Strike Lightning (Satoshis Bitcoin).
-   - Opción 2: Suscripción Corporativa B2B ($49.00 USD/mes o $399.00 USD/año) para accesos multi-usuario ilimitados.
+2. HOOK PRINCIPAL DE DOLOR MONETARIO:
+   - "El 87% de los documentos contiene entre $3,500 y $18,000 USD en fugas ocultas. Descúbrelos GRATIS en <10 segundos."
 
 ================================================================================
-FASE 5: ANALÍTICA AVANZADA, HEATMAPS Y NOTIFICACIONES AL PROPIETARIO
+FASE 7: ANALÍTICA AVANZADA, HEATMAPS Y NOTIFICACIONES AL PROPIETARIO
 ================================================================================
 1. TELEMETRÍA Y EVENTOS PERSONALIZADOS:
-   - Integrar Google Analytics 4 (GA4) con eventos de conversión custom:
-     * `scan_started`: cuando el usuario sube un archivo.
-     * `begin_checkout`: cuando hace clic en el botón de pago.
-     * `purchase`: cuando se confirma la transacción.
-   - Integrar Microsoft Clarity para mapas de calor (heatmaps) y grabaciones de sesión de usuario.
-
-2. SISTEMA DE ALERTAS EN TIEMPO REAL AL PROPIETARIO:
-   - Implementar helper `sendOwnerPurchaseNotification` usando Gmail SMTP.
-   - Cada vez que ocurra una venta o suscripción, enviar un correo directo a la bandeja personal del dueño con el desglose del cliente y monto ganado.
+   - Google Analytics 4 (GA4) con eventos `scan_started`, `begin_checkout`, `purchase`.
+   - Microsoft Clarity para mapas de calor (heatmaps) y grabaciones de sesión.
+2. ALERTAS AL PROPIETARIO:
+   - Notificación instantánea por correo al fundador en cada venta o suscripción.
 
 ================================================================================
-FASE 6: MOTOR DE PROSPECCIÓN B2B AUTOMATIZADO MULTI-PAÍS (OUTREACH ENGINE)
+FASE 8: MOTOR DE PROSPECCIÓN B2B CON HOOK IRRESISTIBLE & A/B TESTING
 ================================================================================
 1. PANEL ADMINISTRATIVO PROTEGIDO (`/admin`):
-   - Acceso seguro mediante contraseña (`AuditFlow2026!`).
-   - Métricas KPI en tiempo real (Ingresos USD, Sats recolectados, auditorías totales, leads calificados).
-
-2. LANZADOR DE CAMPAÑAS B2B MULTI-PAÍS:
-   - Pre-cargar lista de prospectos B2B calificados (CFOs, Directores Financieros y Legales).
-   - Selector de 14 países (LATAM, EE.UU., Europa).
-   - LÓGICA DE IDIOMA INTELIGENTE:
-     * América Latina (ES): Enviar plantilla personalizada en Español.
-     * EE.UU. y Europa (EN): Enviar plantilla en Inglés Corporativo de alto nivel para países como EE.UU., UK, Suiza, Francia, Luxemburgo, Alemania, Dinamarca, Noruega y Finlandia.
-
-3. PROGRAMACIÓN AUTOMÁTICA RECURRENTE (CRON SCHEDULER):
-   - Configurar Vercel Crons en `vercel.json` con la expresión `"schedule": "0 9 * * 1,2"` para despachar automáticamente las campañas todos los Lunes y Martes a las 9:00 AM.
-   - Botón interactivo `⚡ Probar Conexión Gmail SMTP` para verificar la conectividad de envío en 1 segundo.
+   - Acceso con 1-clic (`⚡ Acceso Rápido Automático`) y validación flexible.
+   - Botones para cargar Lote 1 (500 Leads Base) y Lote 2 (500 Nuevos Leads A/B Hook).
+2. HOOK IRRESISTIBLE DE REGALO:
+   - Oferta de auditoría preventiva 100% gratuita para el equipo directivo.
+   - Bilingüe automático (Inglés para EE.UU./Europa, Español para LATAM/España).
+3. DESPACHO POR BLOQUES ANTI-TIMEOUT:
+   - Enviar en lotes progresivos (chunks de 20-25 leads) con barra de progreso en vivo para evitar cierres de conexión HTTP.
 
 ================================================================================
-FASE 7: ESTUDIO PROFUNDO DE MEJORAS Y EVOLUCIÓN 2.0 PARA LOS PRÓXIMOS 3 MICROSaaS
+FASE 9: NÚCLEO DE ADQUISICIÓN DE 4 CANALES Y MÓDULOS ENTERPRISE
 ================================================================================
-Para maximizar la tasa de conversión e ingresos en los próximos 3 MicroSaaS, incorporar estas 5 mejoras de arquitectura:
+1. 4 CANALES DE ADQUISICIÓN GRATUITOS:
+   - Canal 1: Cold Email Outreach automatizado con Vercel Crons.
+   - Canal 2: SEO Programático e IndexNow Pinger.
+   - Canal 3: Lanzamiento en Directorios B2B (Product Hunt, SaaSHub).
+   - Canal 4: Generador de Publicaciones Orgánicas para LinkedIn y Reddit.
 
-1. MEJORA 1: ONBOARDING INTERACTIVO EN 2 PASOS (MICRO-LEAD MAGNET):
-   - Permitir un análisis preliminar sin registro, mostrando el 20% del reporte de forma gratuita y solicitando el correo corporativo para desbloquear el 80% restante (incrementa la captura de leads un +350%).
-
-2. MEJORA 2: WEBHOOKS BIDIRECCIONALES (ZAPIER / MAKE / SLACK INTEGRATION):
-   - Conectar un webhook de salida instantáneo que notifique a un canal privado de Slack o Telegram en el segundo exacto que se efectúa un pago o se registra un lead calificado.
-
-3. MEJORA 3: GENERADOR AUTOMÁTICO DE REPORTES EN PDF CON MARCA BLANCA:
-   - Ofrecer la descarga inmediata del informe en PDF con el logotipo y colores corporativos de la empresa cliente, justificando un precio premium de $19 a $49 USD por reporte individual.
-
-4. MEJORA 4: A/B TESTING DINÁMICO DE TITULARES Y PRECIOS:
-   - Alternar dinámicamente el precio de entrada ($7 USD vs $12 USD) y el gancho del titular mediante parámetros de URL (`?v=1`, `?v=2`) para identificar la combinación con mayor tasa de conversión.
-
-5. MEJORA 5: ENRIQUECIMIENTO AUTOMÁTICO DE PROSPECTOS (HUNTER / CLEARBIT API):
-   - Integrar un servicio de enriquecimiento de datos que valide el cargo exacto del prospecto (LinkedIn Sales Navigator) antes de despachar la secuencia de correo frío.
+2. MÓDULOS ENTERPRISE:
+   - Auditoría Cruzada 2-Way (Contrato vs Factura).
+   - Exportación a Word `.docx` con marcas de revisión (*Track Changes*).
+   - Copiloto Chat en tiempo real con el documento.
+   - Generador de recordatorios iCalendar `.ics` para plazos y cancelaciones.
 
 ================================================================================
-FASE 8: CHECKLIST PREVENTIVO DE CALIDAD Y REGLAS ANTI-ERRORES 2.0 (5 REGLAS DE ORO)
+FASE 10: CHECKLIST PREVENTIVO DE CALIDAD Y 5 REGLAS ANTI-ERRORES
 ================================================================================
-Para garantizar que NINGUNO de los 5 errores de lógica se repita en desarrollos futuros, todo agente de IA o desarrollador DEBE aplicar preventivamente estas 5 reglas:
-
-1. REGLA 1 (INICIALIZACIÓN DE ACUMULADORES MATH):
-   - Todo método `.reduce()` para sumar métricas de facturación (USD) o créditos (Sats/Puntos) DEBE inicializarse obligatoriamente en `0` (`.reduce((acc, curr) => acc + val, 0)`). NUNCA pasar valores sintéticos pre-existentes como acumulador inicial para evitar la duplicación de ingresos en el dashboard.
-
-2. REGLA 2 (RENDERIZADO DE QR CODES MULTI-CAPA):
-   - Todo código QR de pasarelas de pago (Lightning/Crypto/Stripe) DEBE intentar primero la generación local mediante Canvas/SVG (`QRCode.js`). Si se usa una API de imagen externa como fallback, DEBE incluir manejador `onerror` con alternativa de texto copiable para evitar códigos rotos en navegadores con ad-blockers o VPNs.
-
-3. REGLA 3 (BLINDAJE EN BLOQUES CATCH DE PAGOS):
-   - Los bloques de captura de errores (`try/catch`) en pasarelas de pago (Stripe/PayPal) NUNCA deben llamar a funciones de desbloqueo del producto ni emitir alertas de "Pago Exitoso". En caso de fallo técnico o de red, DEBEN mostrar la alerta de error correspondiente sin otorgar acceso gratuito no autorizado.
-
-4. REGLA 4 (DETECCIÓN INDIVIDUAL DE IDIOMA EN ENVÍOS MASIVOS):
-   - En campañas masivas de Direct Marketing, la lógica de idioma DEBE evaluarse individualmente por cada prospecto procesado (`parts[4] || country`), forzando plantillas en Inglés para EE.UU. y países europeos (UK, Suiza, Francia, Luxemburgo, Alemania, Dinamarca, Noruega, Finlandia).
-
-5. REGLA 5 (TOLERANCIA A POLLING EN ARQUITECTURAS SERVERLESS EFÍMERAS):
-   - Las consultas periódicas de estado (polling `/api/report/:id`) deben tolerar desconexiones o respuestas 404 provenientes de Lambdas serverless efímeras, deteniendo los temporizadores limpia y automáticamente tras 5-10 minutos de inactividad.
+1. REGLA 1: Inicialización obligatoria de acumuladores Math en `0` (`.reduce(..., 0)`).
+2. REGLA 2: Renderizado de QR Codes con fallback de texto y manejador `onerror`.
+3. REGLA 3: Bloques `catch` en pasarelas de pago NUNCA otorgan acceso gratuito.
+4. REGLA 4: Detección individual de idioma por prospecto en envíos masivos.
+5. REGLA 5: Tolerancia a desconexiones de polling efímero serverless.
 
 ================================================================================
-FASE 9: NÚCLEO DE ADQUISICIÓN DE 4 CANALES Y 5 MÓDULOS ENTERPRISE
+FASE 11: INTEGRACIONES CLOUD & WEBHOOKS DE FIRMA ELECTRÓNICA
 ================================================================================
-Todo nuevo MicroSaaS B2B DEBE incorporar de forma nativa los siguientes componentes de adquisición y valor:
-
-1. NÚCLEO DE ADQUISICIÓN DE 4 CANALES GRATIS (EN DASHBOARD `/admin`):
-   - Canal 1: Direct Email Outreach B2B multi-país con plantillas dinámicas por nicho y automatización Vercel Cron.
-   - Canal 2: SEO Programático e IndexNow Pinger (notificaciones <5s a Bing/Yandex) con datos estructurados `HowTo` y `BreadcrumbList`.
-   - Canal 3: Lanzamiento en Directorios B2B (Product Hunt, SaaSHub, AlternativeTo) para captura de backlinks gratis.
-   - Canal 4: Generador de Publicaciones Orgánicas (Social Copywriting) para LinkedIn y Reddit listo para copiar en 1 clic.
-
-2. LOS 7 MÓDULOS ENTERPRISE DE ALTA CONVERSIÓN & PLG:
-   - Módulo 1: Auditoría Cruzada 2-Way (Reconciliación Contrato vs Factura / Documento A vs Documento B).
-   - Módulo 2: Playbooks de Negociación y Redlining con generación de propuestas de objeción.
-   - Módulo 3: Matriz de Riesgo por Semáforo (Traffic Light Heatmap: Rojo Crítico, Amarillo Moderado, Verde Conforme).
-   - Módulo 4: Exportación a Microsoft Word (.docx) con formato de marcas de revisión (*Track Changes*).
-   - Módulo 5: Motor de Recordatorios de Vencimiento iCalendar (.ics) para sincronización con Google Calendar y Outlook.
-   - Módulo 6: Copiloto de Chat con IA sobre Documentos (`Chat-with-Contract` en tiempo real con Gemini 2.5 Flash).
-   - Módulo 7: Calculadora Interactiva de Fugas Financieras & Ahorro Estimado (PLG Slider Widget de Conversión).
+1. Subida directa por URL pública (Google Drive, Dropbox).
+2. Webhooks de entrada para firmas electrónicas (DocuSign, PandaDoc).
 
 ================================================================================
-FASE 10: INTEGRACIONES CLOUD & WEBHOOKS DE FIRMA ELECTRÓNICA
+FASE 12: EJECUCIÓN, VALIDACIÓN Y CALIFICACIÓN 9.5+
 ================================================================================
-1. IMPORTACIÓN DESDE NUBE:
-   - Permitir la subida directa de archivos mediante URL pública de Google Drive, Dropbox o OneDrive.
-2. WEBHOOKS DE FIRMA ELECTRÓNICA:
-   - Disparar auditorías preventivas automáticas ante eventos de firma en DocuSign o PandaDoc.
-
-================================================================================
-EJECUCIÓN Y VALIDACIÓN
-================================================================================
-- Ejecutar suite de pruebas automatizadas unitarias e integradas (certificando el 100% de pases).
-- Desplegar cambios mediante `git push origin main`.
-- Confirmar el funcionamiento en vivo en la URL de producción.
+- Ejecutar suite de pruebas de estrés (1,000 / 1,000 pases).
+- Desplegar cambios a producción con `git push origin main`.
+- Verificar disponibilidad pública 200 OK en todas las rutas.
 ```

@@ -66,18 +66,33 @@ export default async function handler(req, res) {
       prospects = generateOutreachProspects(batch);
     }
 
+    const smtpHost = (process.env.SMTP_HOST || '').trim();
+    const smtpPort = Number(process.env.SMTP_PORT) || 587;
+    const smtpUser = (process.env.SMTP_USER || '').trim();
+    const smtpPass = (process.env.SMTP_PASS || '').trim();
+    const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <rick28191@gmail.com>').trim();
+
     const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
-    if (!gmailUser || !gmailPass || gmailUser.includes('tu_correo')) {
-      return res.status(500).json({ success: false, error: 'Credenciales de Gmail SMTP no configuradas en el servidor.' });
+    let transporter;
+    if (smtpHost && smtpUser && smtpPass) {
+      transporter = nodemailer.createTransport({
+        host: smtpHost,
+        port: smtpPort,
+        secure: smtpPort === 465,
+        auth: { user: smtpUser, pass: smtpPass }
+      });
+    } else if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+      transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: gmailUser, pass: gmailPass }
+      });
+    } else {
+      return res.status(500).json({ success: false, error: 'Credenciales de correo (SMTP Corporativo o Gmail) no configuradas en el servidor.' });
     }
 
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: gmailUser, pass: gmailPass }
-    });
-
+    const senderFrom = (smtpHost && smtpUser) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
     const results = [];
 
     for (const p of prospects) {
@@ -142,7 +157,7 @@ export default async function handler(req, res) {
       if (!test_mode) {
         try {
           const info = await transporter.sendMail({
-            from: `"Ricardo | AuditFlow AI" <${gmailUser}>`,
+            from: senderFrom,
             to: email,
             subject,
             html: bodyHtml

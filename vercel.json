@@ -96,6 +96,14 @@
       "dest": "frontend/admin.html"
     },
     {
+      "src": "/privacy",
+      "dest": "frontend/privacy.html"
+    },
+    {
+      "src": "/terms",
+      "dest": "frontend/terms.html"
+    },
+    {
       "src": "/api/admin/(.*)",
       "dest": "api/admin.js"
     },

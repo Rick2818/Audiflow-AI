@@ -130,21 +130,37 @@ export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { action, email, name, prospects, test_mode = false } = req.body || {};
 
-    // Acción: Probar Conexión Gmail SMTP Outbound
+    // Acción: Probar Conexión Gmail / SMTP Outbound
     if (action === 'test_smtp_connection') {
+      const smtpHost = (process.env.SMTP_HOST || '').trim();
+      const smtpPort = Number(process.env.SMTP_PORT) || 587;
+      const smtpUser = (process.env.SMTP_USER || '').trim();
+      const smtpPass = (process.env.SMTP_PASS || '').trim();
       const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
       const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
       try {
-        const transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: { user: gmailUser, pass: gmailPass }
-        });
+        let transporter;
+        let providerName = 'Gmail SMTP';
+        if (smtpHost && smtpUser && smtpPass) {
+          transporter = nodemailer.createTransport({
+            host: smtpHost,
+            port: smtpPort,
+            secure: smtpPort === 465,
+            auth: { user: smtpUser, pass: smtpPass }
+          });
+          providerName = `SMTP Corporativo (${smtpHost})`;
+        } else {
+          transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: { user: gmailUser, pass: gmailPass }
+          });
+        }
         await transporter.verify();
         return res.status(200).json({
           success: true,
-          message: `Conexión Gmail SMTP AUTENTICADA Y VERIFICADA con éxito (${gmailUser})`,
-          gmailUser
+          message: `Conexión ${providerName} AUTENTICADA Y VERIFICADA con éxito`,
+          provider: providerName
         });
       } catch (err) {
         return res.status(500).json({ success: false, error: err.message });
@@ -157,13 +173,32 @@ export default async function handler(req, res) {
         return res.status(400).json({ success: false, error: 'Se requiere una lista de prospectos B2B en req.body.prospects' });
       }
 
-      const results = [];
+      const smtpHost = (process.env.SMTP_HOST || '').trim();
+      const smtpPort = Number(process.env.SMTP_PORT) || 587;
+      const smtpUser = (process.env.SMTP_USER || '').trim();
+      const smtpPass = (process.env.SMTP_PASS || '').trim();
+      const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <rick28191@gmail.com>').trim();
+
       const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
       const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
-      const transporter = (gmailUser && gmailPass && !gmailUser.includes('tu_correo'))
-        ? nodemailer.createTransport({ service: 'gmail', auth: { user: gmailUser, pass: gmailPass } })
-        : null;
+      let transporter;
+      if (smtpHost && smtpUser && smtpPass) {
+        transporter = nodemailer.createTransport({
+          host: smtpHost,
+          port: smtpPort,
+          secure: smtpPort === 465,
+          auth: { user: smtpUser, pass: smtpPass }
+        });
+      } else if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+        transporter = nodemailer.createTransport({
+          service: 'gmail',
+          auth: { user: gmailUser, pass: gmailPass }
+        });
+      }
+
+      const senderFrom = (smtpHost && smtpUser) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
+      const results = [];
 
       for (const p of prospects) {
         const { name: pName = 'Ejecutivo', company = 'Empresa B2B', role = 'Director', email: pEmail, country = 'El Salvador', lang = 'es' } = p;
@@ -227,7 +262,7 @@ export default async function handler(req, res) {
         if (!test_mode && transporter) {
           try {
             const info = await transporter.sendMail({
-              from: `"Ricardo | AuditFlow AI" <${gmailUser}>`,
+              from: senderFrom,
               to: pEmail,
               subject,
               html: bodyHtml

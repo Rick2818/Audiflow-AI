@@ -256,7 +256,7 @@
 
     <!-- HÉROE PRINCIPAL / UPLOAD SECTION -->
     <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full">
-        <section id="upload-section" class="text-center py-4 sm:py-8">
+        <section id="upload-section" class="text-center py-4 sm:py-8 hero-spotlight-bg relative">
             <div class="max-w-3xl mx-auto">
 
                 <!-- BADGE DE ESCANEO DE PRUEBA 100% GRATUITO -->
@@ -1106,14 +1106,16 @@
             <div data-i18n="footer_rights">
                 © 2026 AuditFlow AI. Infraestructura Micro-SaaS B2B Operando 24/7.
             </div>
-            <div class="flex items-center gap-4 text-gray-400">
+            <div class="flex items-center gap-4 text-gray-400 flex-wrap justify-center">
+                <a href="/privacy" class="hover:text-accent-blue transition-colors underline">Privacidad &amp; SOC2</a>
+                <span>•</span>
+                <a href="/terms" class="hover:text-accent-blue transition-colors underline">Términos B2B</a>
+                <span>•</span>
+                <a href="/admin" class="hover:text-purple-400 transition-colors">Admin Panel</a>
+                <span>•</span>
                 <button onclick="window.AppHandler.openConfigIssueModal()" class="hover:text-red-400 transition-all underline flex items-center gap-1">
-                    🛠️ <span data-i18n="footer_report_issue">Reportar Fallo de Configuración</span>
+                    🛠️ <span data-i18n="footer_report_issue">Diagnóstico IA</span>
                 </button>
-                <span>•</span>
-                <span data-i18n="footer_privacy_link">Garantía Memoria Volátil</span>
-                <span>•</span>
-                <span>Stripe &amp; Lightning</span>
             </div>
         </div>
 

@@ -1,23 +1,28 @@
-# 🚀 AuditFlow AI - Resumen Maestro del Proyecto (Master Summary)
+# 🚀 AuditFlow AI - Resumen Maestro del Proyecto (Master Summary - Grado 9.5)
 
-**AuditFlow AI** es un sistema Micro-SaaS B2B diseñado para operar 24/7 sin intervención humana, auditando contratos y facturas con IA (Gemini 2.5 Flash), estricta privacidad en memoria RAM volátil (0 almacenamiento en disco), filtro pre-vuelo anti-OCR defectuoso y un embudo de cobros híbridos ($7 USD Tripwire / Satoshis Lightning Network) con Upsell Corporativo ($49/mes).
+**AuditFlow AI** es un sistema Micro-SaaS B2B de grado corporativo 9.5 diseñado para operar 24/7 sin intervención humana, auditando contratos y facturas con IA (Gemini 2.5 Flash), estricta privacidad en memoria RAM volátil (0 almacenamiento en disco), certificación formal SOC2/GDPR con cláusula de No-Entrenamiento de modelos IA, motor de correo dual (SMTP Corporativo + Gmail) y un embudo de precios B2B escalonado ($7 Express, $19 Reporte Ejecutivo con Word DOCX Redlines, $49/mes Ilimitado).
 
 ---
 
-## 🔍 1. Optimización SEO & Estrategia de Marketing Digital B2B
+## 🔍 1. Optimización SEO, Compliance Legal & Confianza B2B
+- **Páginas Legales Formales**:
+  - `/privacy` ([`frontend/privacy.html`](frontend/privacy.html)): Cláusulas explícitas de procesamiento efímero en RAM volátil, cero almacenamiento en disco y garantía de No-Entrenamiento de modelos de IA.
+  - `/terms` ([`frontend/terms.html`](frontend/terms.html)): Términos de Servicio B2B, disponibilidad SLA 99.9% y delimitación de responsabilidad.
 - **Palabras Clave de Alta Intención de Búsqueda (High-Intent Keywords)**:
   - *"auditar contrato online con IA"*, *"auditor de contratos IA"*, *"detectar sobrecargos en facturas B2B"*, *"AI contract auditor online free preview"*, *"revisión de contratos empresas"*, *"cláusulas de riesgo en contratos comerciales"*.
 - **Etiquetas Meta & Social Cards**:
   - Encabezados Meta Title y Description optimizados para conversión.
   - Tarjetas **OpenGraph** (`og:title`, `og:description`, `og:image`) para previsualización profesional en LinkedIn, WhatsApp, Twitter/X y Facebook.
 - **Datos Estructurados Schema.org (JSON-LD)**:
-  - Marcado `SoftwareApplication` para motores de búsqueda.
-  - Marcado `FAQPage` para enriquecer los resultados orgánicos de Google con **Rich Snippets** (Preguntas y Respuestas destacadas directamente en las búsquedas).
+  - Marcado `SoftwareApplication`, `Organization`, `FAQPage`, `HowTo` y `BreadcrumbList`.
 
 ---
 
-## 🏗️ 2. Arquitectura Vercel Serverless Multi-Endpoint & Memoria Volátil (0 Disco)
+## 🏗️ 2. Arquitectura Vercel Serverless Multi-Endpoint & Transporte Dual de Correo
 - **Vercel Serverless Multi-Endpoint Architecture**: Estructura backend desacoplada con 13 handlers serverless en `/api/` (`api/audit.js`, `api/cross-audit.js`, `api/chat-document.js`, `api/export-docx.js`, `api/download-pdf.js`, `api/payment.js`, `api/subscribe.js`, `api/outreach.js`, `api/webhook.js`, `api/indexnow.js`, `api/admin.js`, `api/lead.js`, `api/report-issue.js`), con paridad 1-a-1 en los bloques `"builds"` y `"routes"` de `vercel.json`.
+- **Motor de Correo Dual (Dual-Transport Engine)**:
+  - Soporte para **SMTP Corporativo** (Resend, Zoho, dominios propios `@audiflowai.com`) con máxima entregabilidad (SPF, DKIM, DMARC).
+  - Fallback automático a **Gmail SMTP** para pruebas y desarrollo.
 - **Motor de IA**: Integrado con la API de **Gemini 2.5 Flash** para auditorías de contratos y facturas en menos de 4 segundos.
 - **Privacidad Estricta**: Procesamiento en memoria RAM volátil (`multer.memoryStorage()`) con purga garantizada en el bloque `finally` (`fileBuffer = null`, `global.gc()`), sin guardar archivos físicos en disco.
 - **Base de Datos Supabase & BoxLang**: Esquema PostgreSQL en [`db/schema.sql`](db/schema.sql) para gestionar leads, reportes y suscripciones corporativas de $49/mes, respaldado por la arquitectura de microservicios en BoxLang (`backend/`).

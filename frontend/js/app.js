@@ -23,6 +23,12 @@ window.AppHandler = {
         if (dropZone && fileInput) {
             dropZone.addEventListener('click', () => fileInput.click());
 
+            dropZone.addEventListener('mousemove', (e) => {
+                const rect = dropZone.getBoundingClientRect();
+                dropZone.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                dropZone.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+
             ['dragenter', 'dragover'].forEach(eventName => {
                 dropZone.addEventListener(eventName, (e) => {
                     e.preventDefault();
