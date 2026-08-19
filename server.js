@@ -99,6 +99,15 @@ app.get('/auditar-contrato-servicios-it', (req, res) => {
   res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-servicios-it.html'));
 });
 
+// Ruta explícita del Panel de Administración
+app.get('/admin', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'admin.html'));
+});
+
+app.get('/admin.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'frontend', 'admin.html'));
+});
+
 // Endpoint de notificación instantánea a Bing & IndexNow API
 app.post('/api/indexnow/submit', async (req, res) => {
   try {
