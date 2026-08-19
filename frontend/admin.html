@@ -630,8 +630,8 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 body.innerHTML = leads.map(l => {
                     const isEnt = l.is_enterprise_candidate || (l.lead_score >= 75);
                     const entBadge = isEnt 
-                        ? `<span class="px-2.5 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 font-mono text-xs font-bold shadow-sm">🚀 Candidato $49/mes</span>`
-                        : `<span class="px-2.5 py-1 rounded-full bg-dark-surface border border-dark-border text-gray-400 font-mono text-xs">Estándar ($7)</span>`;
+                        ? `<span class="px-2.5 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 font-mono text-xs font-bold shadow-sm">🚀 Candidato $69/mes</span>`
+                        : `<span class="px-2.5 py-1 rounded-full bg-dark-surface border border-dark-border text-gray-400 font-mono text-xs">Ejecutivo ($19)</span>`;
 
                     const scoreColor = l.lead_score >= 85 ? 'text-accent-emerald font-extrabold' : (l.lead_score >= 75 ? 'text-accent-blue font-bold' : 'text-gray-300');
 
@@ -695,9 +695,9 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     const isLn = t.provider === 'lightning';
                     const provBadge = isLn
                         ? `<span class="px-2.5 py-1 rounded bg-amber-950/80 text-amber-400 border border-amber-500/40 font-mono">⚡ Strike Lightning</span>`
-                        : `<span class="px-2.5 py-1 rounded bg-blue-950/80 text-blue-400 border border-blue-500/40 font-mono">💳 Stripe ($7 USD)</span>`;
+                        : `<span class="px-2.5 py-1 rounded bg-blue-950/80 text-blue-400 border border-blue-500/40 font-mono">💳 Stripe ($19 USD)</span>`;
 
-                    const amountText = isLn ? `⚡ ${t.amount_sats || 10769} Sats ($7.00)` : `$${t.amount_usd || 7.00} USD`;
+                    const amountText = isLn ? `⚡ ${t.amount_sats || 29230} Sats ($19.00)` : `$${t.amount_usd || 19.00} USD`;
 
                     return `
                         <tr class="hover:bg-dark-surface/50 transition-all font-mono text-xs">

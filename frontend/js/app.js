@@ -497,7 +497,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
 
             const teaserLabel = window.I18n ? window.I18n.t('rep_teaser_label') : '🔍 Resumen de la Anomalía (Gratis):';
             const solutionLabel = window.I18n ? window.I18n.t('rep_solution_label') : '💡 Solución Táctica & Texto Sustitutivo de Renegociación:';
-            const unlockBtnText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Desbloquear Solución Táctica ($7 USD)';
+            const unlockBtnText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Desbloquear Solución Táctica ($19 USD)';
 
             card.innerHTML = `
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-border-dark">

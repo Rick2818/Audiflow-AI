@@ -117,6 +117,9 @@ window.I18n = {
             rep_leakage_label: "Fuga Financiera Total",
             rep_lead_score_label: "Lead Score",
             rep_findings_title: "3 Fallas Financieras & Cláusulas de Riesgo Detectadas",
+            rep_teaser_label: "🔍 Resumen de la Anomalía (Gratis):",
+            rep_solution_label: "💡 Solución Táctica & Texto Sustitutivo de Renegociación:",
+            rep_unlock_btn: "🔒 Desbloquear Solución Táctica ($19 USD)",
 
             // Unlock Banner & Payment Modal
             banner_title: "Desbloquea las 3 Soluciones Tácticas + Word DOCX + PDF",
@@ -268,6 +271,9 @@ window.I18n = {
             rep_leakage_label: "Total Financial Leakage",
             rep_lead_score_label: "Lead Score",
             rep_findings_title: "3 Financial Flaws & Risk Clauses Detected",
+            rep_teaser_label: "🔍 Flaw Summary (Free Preview):",
+            rep_solution_label: "💡 Tactical Solution & Replacement Renegotiation Clause:",
+            rep_unlock_btn: "🔒 Unlock Tactical Solution ($19 USD)",
 
             // Unlock Banner & Payment Modal
             banner_title: "Unlock 3 Tactical Solutions + Word DOCX + PDF Report",
