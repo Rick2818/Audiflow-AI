@@ -433,6 +433,8 @@ window.AppHandler = {
         if (leadModal) leadModal.classList.add('hidden');
 
         this.renderAuditReportDashboard();
+    },
+
     renderAuditReportDashboard() {
         const uploadSec = document.getElementById('upload-section');
         const scanSec = document.getElementById('scanner-section');
@@ -796,7 +798,8 @@ window.AppHandler = {
     },
 
     async checkUrlForPaymentSuccess() {
-        const urlParams = new URLSearchParams(window.location.search);
+        if (typeof window === 'undefined' || !window.location) return;
+        const urlParams = new URLSearchParams(window.location.search || '');
         const reportId = urlParams.get('reportId');
         const status = urlParams.get('status');
 
