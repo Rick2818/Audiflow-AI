@@ -668,6 +668,34 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (diagBox) diagBox.classList.add('hidden');
     },
 
+    startFreeScanFromPricing() {
+        const uploadSec = document.getElementById('upload-section');
+        if (uploadSec) {
+            uploadSec.scrollIntoView({ behavior: 'smooth' });
+            const dropzone = document.getElementById('dropzone');
+            if (dropzone) {
+                dropzone.classList.add('border-accent-blue');
+                setTimeout(() => dropzone.classList.remove('border-accent-blue'), 2000);
+            }
+        } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    },
+
+    openSingleAuditPurchase() {
+        const reportId = this.currentReportId || 'rep_' + Math.random().toString(36).substring(2, 11);
+        const leadEmail = this.currentLeadEmail || 'cliente@empresa.com';
+        const docName = this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf';
+
+        if (window.PaymentHandler) {
+            window.PaymentHandler.init(reportId, leadEmail, docName);
+            window.PaymentHandler.openPaymentModal();
+        } else {
+            const modal = document.getElementById('payment-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+    },
+
     async handleEnterpriseCheckout(e) {
         if (e) e.preventDefault();
         const emailInput = document.getElementById('ent-email-input');
@@ -698,12 +726,12 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 window.location.href = data.checkoutUrl;
             } else {
                 this.closeEnterpriseModal();
-                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$590/año' : '$69/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
             }
         } catch (err) {
             console.error('Error en suscripción:', err);
             this.closeEnterpriseModal();
-            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$399/año' : '$49/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$590/año' : '$69/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
         } finally {
             this.selectEnterpriseInterval(this.selectedEnterpriseInterval);
         }
