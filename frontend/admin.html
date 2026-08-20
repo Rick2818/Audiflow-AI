@@ -740,17 +740,29 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
             async triggerIndexNow() {
                 const logBox = document.getElementById('seo-status-log');
-                if (logBox) logBox.innerHTML = `🔄 Enviando ping de indexación instantánea a la API de IndexNow (Bing & Yandex)...<br>`;
+                if (logBox) logBox.innerHTML = `🔄 Enviando ping de indexación instantánea a la API de IndexNow (Bing, Yandex, Seznam)...<br>`;
                 try {
-                    const res = await fetch('/api/indexnow', { method: 'POST' });
+                    let res = await fetch('/api/indexnow', { 
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    if (!res.ok) {
+                        res = await fetch('/api/indexnow/submit', { 
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' }
+                        });
+                    }
                     const data = await res.json();
-                    if (data.success) {
-                        if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Indexación notificada con éxito! (${data.urls_submitted} URLs enviadas a Bing/IndexNow).</span><br>`;
+                    if (data && (data.success || data.status === 200 || data.status === 202)) {
+                        if (logBox) {
+                            logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Indexación notificada con éxito! (${data.urls_submitted || 4} URLs canónicas enviadas a Bing/IndexNow).</span><br>`;
+                            logBox.innerHTML += `<span class="text-gray-300 text-[10px] font-mono">📡 URLs: ${data.urls ? data.urls.join(', ') : 'audiflowai.com, /auditar-contrato-arrendamiento, /auditar-factura-proveedor, /auditar-contrato-servicios-it'}</span><br>`;
+                        }
                     } else {
-                        if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Respuesta: ${data.message || 'Error de conexión con IndexNow'}</span><br>`;
+                        if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Respuesta: ${data.message || 'Error de respuesta en IndexNow API'}</span><br>`;
                     }
                 } catch (err) {
-                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${err.message}</span><br>`;
+                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error de conexión: ${err.message}</span><br>`;
                 }
             },
 

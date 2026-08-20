@@ -122,7 +122,7 @@ app.get('/terms', (req, res) => {
 });
 
 // Endpoint de notificación instantánea a Bing & IndexNow API
-app.post('/api/indexnow/submit', async (req, res) => {
+async function handleIndexNowRequest(req, res) {
   try {
     const host = 'audiflowai.com';
     const key = 'auditflow2026indexnowkey';
@@ -147,12 +147,17 @@ app.post('/api/indexnow/submit', async (req, res) => {
     return res.json({
       success: response.ok,
       status: response.status,
-      message: response.ok ? 'Notificación de indexación enviada a Bing y motores IndexNow' : 'Respuesta IndexNow API: ' + response.status
+      urls_submitted: urlList.length,
+      urls: urlList,
+      message: response.ok ? 'Notificación de indexación enviada exitosamente a los motores IndexNow (Bing, Yandex, Seznam)' : 'Respuesta IndexNow API: ' + response.status
     });
   } catch (err) {
-    return res.status(500).json({ error: err.message });
+    return res.status(500).json({ success: false, error: err.message });
   }
-});
+}
+
+app.all('/api/indexnow', handleIndexNowRequest);
+app.all('/api/indexnow/submit', handleIndexNowRequest);
 
 app.post('/api/cross-audit', crossAuditHandler);
 app.post('/api/export-docx', exportDocxHandler);
