@@ -1,63 +1,73 @@
 {
   "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "server.js",
-      "use": "@vercel/node"
+      "source": "/robots.txt",
+      "destination": "/frontend/robots.txt"
     },
     {
-      "src": "frontend/**",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/robots.txt",
-      "dest": "frontend/robots.txt"
+      "source": "/sitemap.xml",
+      "destination": "/frontend/sitemap.xml"
     },
     {
-      "src": "/sitemap.xml",
-      "dest": "frontend/sitemap.xml"
+      "source": "/google3767930768036b5b.html",
+      "destination": "/frontend/google3767930768036b5b.html"
     },
     {
-      "src": "/google3767930768036b5b.html",
-      "dest": "frontend/google3767930768036b5b.html"
+      "source": "/auditflow2026indexnow.txt",
+      "destination": "/frontend/auditflow2026indexnow.txt"
     },
     {
-      "src": "/auditflow2026indexnow.txt",
-      "dest": "frontend/auditflow2026indexnow.txt"
+      "source": "/auditar-contrato-arrendamiento",
+      "destination": "/frontend/auditar-contrato-arrendamiento.html"
     },
     {
-      "src": "/auditar-contrato-arrendamiento",
-      "dest": "frontend/auditar-contrato-arrendamiento.html"
+      "source": "/auditar-factura-proveedor",
+      "destination": "/frontend/auditar-factura-proveedor.html"
     },
     {
-      "src": "/auditar-factura-proveedor",
-      "dest": "frontend/auditar-factura-proveedor.html"
+      "source": "/auditar-contrato-servicios-it",
+      "destination": "/frontend/auditar-contrato-servicios-it.html"
     },
     {
-      "src": "/auditar-contrato-servicios-it",
-      "dest": "frontend/auditar-contrato-servicios-it.html"
+      "source": "/admin",
+      "destination": "/frontend/admin.html"
     },
     {
-      "src": "/admin",
-      "dest": "frontend/admin.html"
+      "source": "/privacy",
+      "destination": "/frontend/privacy.html"
     },
     {
-      "src": "/privacy",
-      "dest": "frontend/privacy.html"
+      "source": "/terms",
+      "destination": "/frontend/terms.html"
     },
     {
-      "src": "/terms",
-      "dest": "frontend/terms.html"
+      "source": "/api/audit/download-pdf",
+      "destination": "/api/audit"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "server.js"
+      "source": "/api/payment/subscribe",
+      "destination": "/api/payment"
     },
     {
-      "src": "/(.*)",
-      "dest": "frontend/$1"
+      "source": "/api/payment/stripe",
+      "destination": "/api/payment"
+    },
+    {
+      "source": "/api/payment/lightning",
+      "destination": "/api/payment"
+    },
+    {
+      "source": "/api/outreach/send-campaign",
+      "destination": "/api/outreach"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/frontend/$1"
     }
   ],
   "crons": [

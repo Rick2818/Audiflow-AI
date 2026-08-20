@@ -1,5 +1,5 @@
 import Stripe from 'stripe';
-import subscribeHandler from './subscribe.js';
+import subscribeHandler from '../lib/subscribe.js';
 
 const stripeSecret = process.env.STRIPE_SECRET_KEY || '';
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;

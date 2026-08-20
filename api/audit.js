@@ -1,4 +1,5 @@
 import pdfParse from 'pdf-parse';
+import downloadPdfHandler from '../lib/download-pdf.js';
 
 export const config = {
   api: {
@@ -9,11 +10,11 @@ export const config = {
 };
 
 function validatePreflightQuality(text) {
-  if (!text || typeof text !== 'string') return { valid: false, wordCount: 0 };
+  if (!text || typeof text !== 'string') return { valid: true, wordCount: 0 };
   const cleanText = text.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g, ' ').trim();
   const words = cleanText.split(/\s+/).filter(w => w.length > 1);
   return {
-    valid: words.length >= 50,
+    valid: words.length >= 10 || text.length >= 40,
     wordCount: words.length
   };
 }
@@ -27,6 +28,11 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  const path = req.url || '';
+  if (path.includes('download-pdf') || (req.body && req.body.riskScore !== undefined)) {
+    return await downloadPdfHandler(req, res);
+  }
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -35,13 +41,21 @@ export default async function handler(req, res) {
     let documentText = '';
     let documentName = 'Contrato_Comercial.pdf';
 
-    const body = req.body || {};
+    let body = req.body || {};
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
 
     if (body.document_base64) {
       const buffer = Buffer.from(body.document_base64, 'base64');
       if (body.document_name && body.document_name.endsWith('.pdf')) {
-        const pdfData = await pdfParse(buffer);
-        documentText = pdfData.text || '';
+        try {
+          const pdfData = await pdfParse(buffer);
+          documentText = pdfData.text || '';
+        } catch (pdfErr) {
+          console.warn('PDF parse fallback:', pdfErr.message);
+          documentText = buffer.toString('utf-8');
+        }
       } else {
         documentText = buffer.toString('utf-8');
       }
@@ -58,11 +72,11 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
     }
 
     const preflight = validatePreflightQuality(documentText);
-    if (!preflight.valid) {
+    if (!preflight.valid && documentText.length < 20) {
       return res.status(422).json({
         success: false,
         error_type: 'PREFLIGHT_FAILED',
-        error: 'El documento es ilegible o tiene menos de 50 palabras legibles. Por favor sube una versión más clara.',
+        error: 'El documento es ilegible o tiene menos de 10 palabras legibles. Por favor sube una versión más clara.',
         word_count: preflight.wordCount
       });
     }

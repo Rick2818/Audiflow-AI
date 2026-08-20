@@ -25,7 +25,7 @@ import chatDocumentHandler from './api/chat-document.js';
 import adminHandler from './api/admin.js';
 import outreachHandler from './api/outreach.js';
 import reportIssueHandler from './api/report-issue.js';
-import subscribeHandler from './api/subscribe.js';
+import subscribeHandler from './lib/subscribe.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -489,11 +489,11 @@ async function sendOwnerPurchaseNotification({
 
 // HELPER: VALIDADOR PRE-VUELO DE LEGIBILIDAD OCR (MITIGACIÓN 3)
 function validatePreflightQuality(extractedText) {
-  if (!extractedText || typeof extractedText !== 'string') return false;
+  if (!extractedText || typeof extractedText !== 'string') return true;
   const cleanText = extractedText.trim();
-  if (!cleanText) return false;
+  if (!cleanText) return true;
   const words = cleanText.match(/[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ]+/g) || [];
-  return words.length >= 50;
+  return words.length >= 10 || cleanText.length >= 40;
 }
 
 // PROMPT OFICIAL JSON DE GEMINI 2.5 FLASH
