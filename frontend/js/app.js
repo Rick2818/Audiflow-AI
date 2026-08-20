@@ -76,31 +76,31 @@ window.AppHandler = {
     },
 
     loadSampleContract() {
-        const sampleText = `CONTRATO DE PRESTACIÓN DE SERVICIOS PROFESIONALES Y MANTENIMIENTO TECNOLÓGICO ENTERPRISE
+        const currentLang = window.I18n ? window.I18n.currentLang : 'es';
+        const isDe = (currentLang === 'de');
+        const isEn = (currentLang === 'en');
+        const docName = isDe ? 'Gewerbevertrag_Muster_Apex.pdf' : (isEn ? 'Sample_Contract_Apex_Global.pdf' : 'Contrato_Ejemplo_Apex_Global.pdf');
 
-Entre la empresa contratante Apex Global Logistics S.A. y el proveedor Vertex Solutions Corp.
-Se establece el siguiente contrato de servicios por un valor estimado de $85,000 USD anuales.
+        this.selectedFile = { name: docName, size: 1024 * 180 };
+        this.currentReportId = 'rep_demo_' + Math.random().toString(36).substring(2, 9);
+        this.currentLeadEmail = 'demo@empresa.com';
 
-CLÁUSULA 3.2 - PENALIZACIÓN EXCESIVA POR TERMINACIÓN ANTICIPADA:
-Si la empresa contratante rescinde el contrato antes de los 36 meses, deberá abonar el 100% de la facturación pendiente restante más una multa adicional fija del 35% por concepto de daños morales y perjuicios comerciales.
+        const uploadSec = document.getElementById('upload-section');
+        const scanSec = document.getElementById('scanner-section');
+        const errBox = document.getElementById('ocr-error-box');
 
-CLÁUSULA 5.4 - INDEXACIÓN Y DUPLICACIÓN DE TARIFAS POR INFLACIÓN:
-Las tarifas mensuales se incrementarán automáticamente cada 6 meses aplicando el índice de inflación interanual del 8.5% más un recargo del 5% adicional por concepto de costo de infraestructura en la nube.
+        if (uploadSec) uploadSec.classList.add('hidden');
+        if (scanSec) scanSec.classList.remove('hidden');
+        if (errBox) errBox.classList.add('hidden');
 
-CLÁUSULA 9.1 - SOBRECARGO INDEBIDO Y RENOVACIÓN AUTOMÁTICA OBLIGATORIA:
-El contrato se renovará automáticamente por periodos de 3 años si no se envía una notificación por correo certificado con 180 días de antelación. En caso de renovación, se aplicará un cargo administrativo del 15% sobre el valor total. Texto adicional auditado por el motor de inteligencia artificial de AuditFlow AI para verificación de calidad pre-vuelo en memoria volátil.`;
-
-        let sampleFile;
-        try {
-            const blob = new Blob([sampleText], { type: 'text/plain' });
-            sampleFile = new File([blob], "Contrato_Ejemplo_Apex_Global.pdf", { type: 'application/pdf' });
-        } catch (e) {
-            sampleFile = { name: "Contrato_Ejemplo_Apex_Global.pdf", size: 1024 * 180 };
-        }
-
-        this.handleFileSelected(sampleFile);
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        this.startAuditScanProcess();
+        this.runScannerAnimation();
+
+        // Tras breve animación de escaneo ultra-rápida (1s), abrir inmediatamente el tablero del reporte
+        setTimeout(() => {
+            if (scanSec) scanSec.classList.add('hidden');
+            this.renderAuditReportDashboard();
+        }, 1000);
     },
 
     handleFileSelected(file) {
