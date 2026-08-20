@@ -183,6 +183,68 @@ window.I18n = {
             pricing_card3_f4: "✓ Soporte prioritario & cuota compartida",
             pricing_card3_btn: "🚀 Ver Planes ($69/mes o $590/año)",
 
+            // Actions Toolbar
+            btn_chat_contract: "💬 Chatear con la IA sobre este Contrato",
+            btn_download_docx: "📄 Descargar Word (.docx) Redlines",
+            btn_download_ics: "📅 Recordatorios Calendario (.ics)",
+
+            // Success Purchase Banner
+            success_banner_title: "¡Compra Procesada &amp; Reporte Desbloqueado!",
+            success_banner_sub: "Has obtenido acceso completo a las 3 Soluciones Tácticas. Se ha enviado una copia firmada en PDF a tu correo.",
+            success_btn_home: "🏠 Regresar al Inicio / Auditar Nuevo Documento",
+
+            // Enterprise Modal
+            ent_modal_title: "Plan Corporativo B2B",
+            ent_modal_sub: "Auditorías Ilimitadas 24/7 • Soporte Prioritario por IA",
+            ent_tab_monthly: "💳 Mensual",
+            ent_tab_annual_badge: "AHORRA $238 USD",
+            ent_tab_annual: "⭐ Anual (~3.5 Meses Gratis)",
+            ent_label_email: "Correo Electrónico Corporativo",
+            ent_label_company: "Nombre de la Empresa / Abogado",
+            ent_pay_card: "💳 Tarjeta ($ USD)",
+            ent_pay_ln: "⚡ Lightning (Strike Sats)",
+            ent_label_card_num: "Número de Tarjeta de Crédito / Débito",
+            ent_label_expiry: "Expiración (MM/YY)",
+            ent_label_cvc: "Código CVC",
+            ent_ln_title: "⚡ Pago Lightning (Strike)",
+            ent_ln_node_label: "Nodo Destino Strike El Salvador:",
+            ent_plan_monthly_name: "Plan Mensual",
+            ent_plan_monthly_price: "$69.00 USD / mes",
+            ent_plan_annual_name: "Plan Anual (~3.5 Meses Gratis)",
+            ent_plan_annual_price: "$590.00 USD / año",
+            ent_plan_desc: "Incluye acceso ilimitado para todo tu equipo, Cross-Audit 2-Way, purga automática de RAM y reportes Word + PDF sin marcas de agua.",
+            ent_btn_submit_monthly: "🚀 Activar Suscripción por $69/mes",
+            ent_btn_submit_annual: "🚀 Activar Suscripción Anual por $590/año",
+
+            // Sample PDF Modal
+            sample_pdf_badge: "DOCUMENTO OFICIAL MODELO",
+            sample_pdf_ram: "MEMORIA VOLÁTIL RAM (0 DISCO) • SELLO DE AUDITORÍA OFICIAL",
+            sample_pdf_doc_label: "Documento Auditado",
+            sample_pdf_risk_label: "Nivel de Riesgo",
+            sample_pdf_leakage_label: "Fuga Financiera Detectada",
+            sample_pdf_solutions_title: "Desglose de Soluciones Tácticas de Renegociación:",
+            sample_pdf_seal: "Firma Digital &amp; Sello de Validación por IA Gemini 2.5 Flash",
+            sample_pdf_btn_unlock: "🔓 Desbloquear Mi Reporte Oficial ($19 USD)",
+
+            // Interactive Copilot Chat Modal
+            chat_copilot_title: "Copiloto IA — Consulta sobre Documento",
+            chat_copilot_ram_badge: "Gemini 2.5 Flash • Memoria RAM Volátil",
+            chat_copilot_welcome: "👋 Hola. Soy tu Copiloto Legal y Financiero. Puedes hacerme cualquier pregunta sobre este documento (cláusulas, penalizaciones, sugerencias de objeción o plazos).",
+            chat_chip_penalty: "❓ Multa cancelación",
+            chat_chip_surcharges: "❓ Sobrecargos ocultos",
+            chat_chip_letter: "❓ Carta de objeción",
+            chat_btn_send: "Enviar",
+            chat_placeholder: "Escribe tu pregunta sobre el contrato o factura...",
+
+            // Footer Links
+            footer_privacy: "Privacidad &amp; SOC2",
+            footer_terms: "Términos B2B",
+            footer_admin: "Admin Panel",
+
+            // Social Proof Toast
+            social_proof_title_default: "Nueva Auditoría Realizada",
+            social_proof_time_default: "Hace 2 minutos • Memoria Volátil RAM",
+
             footer_rights: "© 2026 AuditFlow AI. Infraestructura Micro-SaaS B2B Operando 24/7.",
             footer_privacy_link: "Garantía Memoria Volátil",
             footer_report_issue: "Reportar Fallo de Configuración",
@@ -198,9 +260,9 @@ window.I18n = {
             issue_opt_4: "Fallo de Configuración General",
             issue_desc_label: "Descripción del Fallo (Opcional)",
             issue_ai_heading: "🤖 Diagnóstico IA en Tiempo Real:",
-            issue_btn_submit: "🛠️ Enviar Reporte & Diagnosticar con IA",
+            issue_btn_submit: "🛠️ Enviar Reporte &amp; Diagnosticar con IA",
             ent_multi_lawyer_text: "Cuota Anual Multiusuario: Puede ser compartida entre varios abogados de tu firma o despacho legal.",
-            legal_disclaimer: "<strong>Aviso Legal & Deslinde de Responsabilidad:</strong> AuditFlow AI es una herramienta de análisis automatizado asistido por Inteligencia Artificial. Los reportes y sugerencias tácticas no constituyen asesoría legal o financiera profesional vinculante. El desarrollador y la plataforma quedan completamente eximidos de toda responsabilidad derivada del uso o interpretación de la información procesada."
+            legal_disclaimer: "<strong>Aviso Legal &amp; Deslinde de Responsabilidad:</strong> AuditFlow AI es una herramienta de análisis automatizado asistido por Inteligencia Artificial. Los reportes y sugerencias tácticas no constituyen asesoría legal o financiera profesional vinculante. El desarrollador y la plataforma quedan completamente eximidos de toda responsabilidad derivada del uso o interpretación de la información procesada."
         },
         en: {
             // Header
@@ -378,6 +440,68 @@ window.I18n = {
             pricing_card3_f4: "✓ Priority 24/7 support & shared lawyer seat",
             pricing_card3_btn: "🚀 View Enterprise Plans ($69/mo)",
 
+            // Actions Toolbar
+            btn_chat_contract: "💬 Chat with AI about this Contract",
+            btn_download_docx: "📄 Download Word (.docx) Redlines",
+            btn_download_ics: "📅 Calendar Reminders (.ics)",
+
+            // Success Purchase Banner
+            success_banner_title: "Purchase Processed &amp; Report Unlocked!",
+            success_banner_sub: "You have gained full access to the 3 Tactical Solutions. A signed PDF copy has been sent to your email.",
+            success_btn_home: "🏠 Back to Home / Audit New Document",
+
+            // Enterprise Modal
+            ent_modal_title: "B2B Enterprise Plan",
+            ent_modal_sub: "Unlimited Audits 24/7 • Priority AI Legal Support",
+            ent_tab_monthly: "💳 Monthly",
+            ent_tab_annual_badge: "SAVE $238 USD",
+            ent_tab_annual: "⭐ Annual (~3.5 Months Free)",
+            ent_label_email: "Corporate Email Address",
+            ent_label_company: "Company / Law Firm Name",
+            ent_pay_card: "💳 Card ($ USD)",
+            ent_pay_ln: "⚡ Lightning (Strike Sats)",
+            ent_label_card_num: "Credit / Debit Card Number",
+            ent_label_expiry: "Expiration (MM/YY)",
+            ent_label_cvc: "CVC Security Code",
+            ent_ln_title: "⚡ Lightning Payment (Strike)",
+            ent_ln_node_label: "Strike Destination Node (El Salvador):",
+            ent_plan_monthly_name: "Monthly Plan",
+            ent_plan_monthly_price: "$69.00 USD / mo",
+            ent_plan_annual_name: "Annual Plan (~3.5 Months Free)",
+            ent_plan_annual_price: "$590.00 USD / yr",
+            ent_plan_desc: "Includes unlimited access for your entire team, 2-Way Cross-Audit, automatic RAM memory purge, and watermark-free Word + PDF reports.",
+            ent_btn_submit_monthly: "🚀 Activate Subscription for $69/mo",
+            ent_btn_submit_annual: "🚀 Activate Annual Subscription for $590/yr",
+
+            // Sample PDF Modal
+            sample_pdf_badge: "OFFICIAL MODEL DOCUMENT",
+            sample_pdf_ram: "VOLATILE RAM MEMORY (0 DISK) • OFFICIAL AUDIT SEAL",
+            sample_pdf_doc_label: "Audited Document",
+            sample_pdf_risk_label: "Risk Level",
+            sample_pdf_leakage_label: "Detected Financial Leakage",
+            sample_pdf_solutions_title: "Breakdown of Renegotiation Tactical Solutions:",
+            sample_pdf_seal: "Digital Signature &amp; Validation Seal by Gemini 2.5 Flash AI",
+            sample_pdf_btn_unlock: "🔓 Unlock My Official Report ($19 USD)",
+
+            // Interactive Copilot Chat Modal
+            chat_copilot_title: "AI Copilot — Document Consultation",
+            chat_copilot_ram_badge: "Gemini 2.5 Flash • Volatile RAM Memory",
+            chat_copilot_welcome: "👋 Hello. I am your Legal and Financial Copilot. Ask me any question about this document (clauses, penalties, objection drafts, or deadlines).",
+            chat_chip_penalty: "❓ Termination penalty",
+            chat_chip_surcharges: "❓ Hidden surcharges",
+            chat_chip_letter: "❓ Objection letter",
+            chat_btn_send: "Send",
+            chat_placeholder: "Type your question about the contract or invoice...",
+
+            // Footer Links
+            footer_privacy: "Privacy &amp; SOC2",
+            footer_terms: "B2B Terms",
+            footer_admin: "Admin Panel",
+
+            // Social Proof Toast
+            social_proof_title_default: "New Audit Performed",
+            social_proof_time_default: "2 minutes ago • Volatile RAM Memory",
+
             footer_rights: "© 2026 AuditFlow AI. 24/7 B2B Micro-SaaS Infrastructure.",
             footer_privacy_link: "Volatile Memory Guarantee",
             footer_report_issue: "Report Configuration Issue",
@@ -393,9 +517,9 @@ window.I18n = {
             issue_opt_4: "General Configuration Issue",
             issue_desc_label: "Issue Description (Optional)",
             issue_ai_heading: "🤖 Real-Time AI Diagnosis:",
-            issue_btn_submit: "🛠️ Submit Report & Diagnose with AI",
+            issue_btn_submit: "🛠️ Submit Report &amp; Diagnose with AI",
             ent_multi_lawyer_text: "Multi-User Annual Quota: Can be shared among multiple attorneys in your firm or legal practice.",
-            legal_disclaimer: "<strong>Legal Disclaimer & Limitation of Liability:</strong> AuditFlow AI is an automated analysis tool powered by Artificial Intelligence. Reports and tactical suggestions do not constitute binding professional legal or financial advice. The app developer and platform are fully released from any liability arising from the use or interpretation of processed information."
+            legal_disclaimer: "<strong>Legal Disclaimer &amp; Limitation of Liability:</strong> AuditFlow AI is an automated analysis tool powered by Artificial Intelligence. Reports and tactical suggestions do not constitute binding professional legal or financial advice. The app developer and platform are fully released from any liability arising from the use or interpretation of processed information."
         },
         de: {
             // Header (DE)
@@ -478,7 +602,7 @@ window.I18n = {
             faq_q3: "Was beinhaltet der Ausführliche Prüfbericht für 19.00 USD / Satoshis?",
             faq_a3: "Die Vorschau ist 100% kostenlos. Bei Zahlung von 19.00 USD (über Stripe oder Bitcoin Lightning) schalten Sie 3 taktische Nachverhandlungslösungen, bearbeitbare Word .docx-Redlines mit Änderungsnachverfolgung und das offiziell digital signierte PDF-Dokument frei.",
             faq_q4: "Gibt es einen Unternehmensplan für unbegrenzte Prüfungen?",
-            faq_a4: "Ja. Für Kanzleien und Unternehmen bieten wir das monatliche Abonnement (69 $/Monat) oder das jährliche Abonnement (590 $/Jahr mit ~3,5 Monaten gratis) mit unbegrenzten Prüfungen, 2-Way Cross-Audit und bevorzugtem Support an.",
+            faq_a4: "Ja. Für Kanzleien und Unternehmen bieten wir das monatliche Abonnement (69 $/Monat) oder das jährliche Abonnement (590 $/Jahr mit ~3,5 Monaten kostenlos) mit unbegrenzten Prüfungen, 2-Way Cross-Audit und bevorzugtem Support an.",
 
             // Scanner Section (DE)
             scan_init: "Scanner im flüchtigen Speicher wird initialisiert...",
@@ -573,6 +697,68 @@ window.I18n = {
             pricing_card3_f4: "✓ Bevorzugter 24/7-Support & geteilte Kanzlei-Lizenz",
             pricing_card3_btn: "🚀 Unternehmens-Pläne Ansehen (69 $/Monat)",
 
+            // Actions Toolbar (DE)
+            btn_chat_contract: "💬 Mit KI über diesen Vertrag chatten",
+            btn_download_docx: "📄 Word (.docx) Redlines herunterladen",
+            btn_download_ics: "📅 Kalender-Erinnerungen (.ics)",
+
+            // Success Purchase Banner (DE)
+            success_banner_title: "Kauf bestätigt &amp; Bericht freigeschaltet!",
+            success_banner_sub: "Sie haben vollen Zugriff auf die 3 taktischen Lösungen erhalten. Eine signierte PDF-Kopie wurde an Ihre E-Mail gesendet.",
+            success_btn_home: "🏠 Zurück zur Startseite / Neues Dokument prüfen",
+
+            // Enterprise Modal (DE)
+            ent_modal_title: "B2B-Unternehmensplan",
+            ent_modal_sub: "Unbegrenzte Audits 24/7 • Bevorzugter KI-Rechtssupport",
+            ent_tab_monthly: "💳 Monatlich",
+            ent_tab_annual_badge: "SPAREN SIE 238 $ USD",
+            ent_tab_annual: "⭐ Jährlich (~3,5 Monate kostenlos)",
+            ent_label_email: "Geschäftliche E-Mail-Adresse",
+            ent_label_company: "Unternehmens- / Kanzleiname",
+            ent_pay_card: "💳 Karte ($ USD)",
+            ent_pay_ln: "⚡ Lightning (Strike Sats)",
+            ent_label_card_num: "Kredit- / Debitkartennummer",
+            ent_label_expiry: "Ablaufdatum (MM/JJ)",
+            ent_label_cvc: "CVC-Sicherheitscode",
+            ent_ln_title: "⚡ Lightning-Zahlung (Strike)",
+            ent_ln_node_label: "Strike-Zielknoten (El Salvador):",
+            ent_plan_monthly_name: "Monatlicher Plan",
+            ent_plan_monthly_price: "69,00 $ USD / Monat",
+            ent_plan_annual_name: "Jahresplan (~3,5 Monate kostenlos)",
+            ent_plan_annual_price: "590,00 $ USD / Jahr",
+            ent_plan_desc: "Beinhaltet unbegrenzten Zugriff für Ihr gesamtes Team, 2-Way Cross-Audit, automatische RAM-Löschung und wasserzeichenfreie Word- + PDF-Berichte.",
+            ent_btn_submit_monthly: "🚀 Abonnement für 69 $/Monat aktivieren",
+            ent_btn_submit_annual: "🚀 Jahres-Abonnement für 590 $/Jahr aktivieren",
+
+            // Sample PDF Modal (DE)
+            sample_pdf_badge: "OFFIZIELLES MUSTERDOKUMENT",
+            sample_pdf_ram: "FLÜCHTIGER RAM-SPEICHER (0 FESTPLATTE) • OFFIZIELLES AUDIT-SIEGEL",
+            sample_pdf_doc_label: "Geprüftes Dokument",
+            sample_pdf_risk_label: "Risikostufe",
+            sample_pdf_leakage_label: "Festgestelltes finanzielles Risiko",
+            sample_pdf_solutions_title: "Aufschlüsselung der taktischen Neuverhandlungslösungen:",
+            sample_pdf_seal: "Digitale Signatur &amp; Validierungssiegel durch Gemini 2.5 Flash KI",
+            sample_pdf_btn_unlock: "🔓 Meinen offiziellen Bericht freischalten (19 $ USD)",
+
+            // Interactive Copilot Chat Modal (DE)
+            chat_copilot_title: "KI-Copilot — Dokumentenberatung",
+            chat_copilot_ram_badge: "Gemini 2.5 Flash • Flüchtiger RAM-Speicher",
+            chat_copilot_welcome: "👋 Hallo. Ich bin Ihr rechtlicher und finanzieller Copilot. Stellen Sie mir beliebige Fragen zu diesem Dokument (Klauseln, Vertragsstrafen, Einwandentwürfe oder Fristen).",
+            chat_chip_penalty: "❓ Kündigungsstrafe",
+            chat_chip_surcharges: "❓ Versteckte Aufschläge",
+            chat_chip_letter: "❓ Einwandschreiben",
+            chat_btn_send: "Senden",
+            chat_placeholder: "Geben Sie Ihre Frage zum Vertrag oder zur Rechnung ein...",
+
+            // Footer Links (DE)
+            footer_privacy: "Datenschutz &amp; SOC2",
+            footer_terms: "B2B-AGB",
+            footer_admin: "Admin-Panel",
+
+            // Social Proof Toast (DE)
+            social_proof_title_default: "Neues Audit Durchgeführt",
+            social_proof_time_default: "Vor 2 Minuten • Flüchtiger RAM-Speicher",
+
             footer_rights: "© 2026 AuditFlow AI. 24/7 B2B Micro-SaaS Infrastruktur.",
             footer_privacy_link: "Garantie für flüchtigen Speicher",
             footer_report_issue: "Konfigurationsfehler Melden",
@@ -588,9 +774,9 @@ window.I18n = {
             issue_opt_4: "Allgemeiner Konfigurationsfehler",
             issue_desc_label: "Beschreibung des Fehlers (Optional)",
             issue_ai_heading: "🤖 Echtzeit-KI-Diagnose:",
-            issue_btn_submit: "🛠️ Bericht Senden & mit KI Diagnostizieren",
+            issue_btn_submit: "🛠️ Bericht Senden &amp; mit KI Diagnostizieren",
             ent_multi_lawyer_text: "Multi-User-Jahreslizenz: Kann von mehreren Anwälten Ihrer Kanzlei gemeinsam genutzt werden.",
-            legal_disclaimer: "<strong>Rechtlicher Hinweis & Haftungsausschluss:</strong> AuditFlow AI ist ein automatisiertes Analysetool auf Basis Künstlicher Intelligenz. Berichte und taktische Vorschläge stellen keine rechtsverbindliche Rechts- oder Finanzberatung dar. Entwickler und Plattform sind vollständig von jeglicher Haftung freigestellt."
+            legal_disclaimer: "<strong>Rechtlicher Hinweis &amp; Haftungsausschluss:</strong> AuditFlow AI ist ein automatisiertes Analysetool auf Basis Künstlicher Intelligenz. Berichte und taktische Vorschläge stellen keine rechtsverbindliche Rechts- oder Finanzberatung dar. Entwickler und Plattform sind vollständig von jeglicher Haftung freigestellt."
         }
     },
 

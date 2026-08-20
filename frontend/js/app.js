@@ -216,42 +216,44 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
                 // Fallback automático para garantizar experiencia fluida
                 const fileName = this.selectedFile ? this.selectedFile.name : 'Contrato_Comercial.pdf';
                 const currentLang = window.I18n ? window.I18n.currentLang : 'es';
+                const isDe = (currentLang === 'de');
+                const isEn = (currentLang === 'en');
                 
                 this.currentAuditData = {
                     report_id: 'rep_' + Math.random().toString(36).substring(2, 11),
                     document_name: fileName,
-                    document_type: currentLang === 'de' ? 'Gewerbevertrag & SLA' : (currentLang === 'en' ? 'Commercial Service Agreement' : 'Contrato de Servicios Comercial'),
+                    document_type: isDe ? 'Gewerbevertrag & SLA' : (isEn ? 'Commercial Service Agreement' : 'Contrato de Servicios Comercial'),
                     total_financial_leakage: 14850,
                     leakage_detected_usd: '$14,850 USD',
-                    risk_level: currentLang === 'de' ? 'HOCH' : (currentLang === 'en' ? 'HIGH' : 'RIESGO ALTO'),
+                    risk_level: isDe ? 'HOCH' : (isEn ? 'HIGH' : 'RIESGO ALTO'),
                     lead_score: 92,
                     findings: [
                         {
                             id: 1,
-                            title: currentLang === 'de' ? 'Unverhältnismäßige Kündigungsstrafe' : (currentLang === 'en' ? 'Excessive Early Termination Penalty' : 'Penalización Excesiva por Cancelación Anticipada'),
-                            clause_reference: 'Cláusula 7.3',
-                            severity: 'CRITICAL',
+                            title: isDe ? 'Unverhältnismäßige Kündigungsstrafe' : (isEn ? 'Excessive Early Termination Penalty' : 'Penalización Excesiva por Cancelación Anticipada'),
+                            clause_reference: isDe ? 'Klausel 7.3' : (isEn ? 'Clause 7.3' : 'Cláusula 7.3'),
+                            severity: isDe ? 'KRITISCH' : (isEn ? 'CRITICAL' : 'CRÍTICO'),
                             financial_impact: 8500,
-                            teaser_preview: currentLang === 'de' ? 'Klausel sieht automatische Strafzahlung von 35% vor.' : (currentLang === 'en' ? 'Clause imposes an automatic 35% surcharge without justification.' : 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.'),
-                            actionable_solution: currentLang === 'de' ? 'Begrenzung der Vertragsstrafe auf maximal 30 Tage Vorankündigung.' : (currentLang === 'en' ? 'Replace clause with standard 30-day notice without financial penalties.' : 'Notificar objeción legal y sustituir con la cláusula de terminación estándar a 30 días sin penalización.')
+                            teaser_preview: isDe ? 'Klausel sieht automatische Strafzahlung von 35% vor.' : (isEn ? 'Clause imposes an automatic 35% surcharge without justification.' : 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.'),
+                            actionable_solution: isDe ? 'Begrenzung der Vertragsstrafe auf maximal 30 Tage Vorankündigung.' : (isEn ? 'Replace clause with standard 30-day notice without financial penalties.' : 'Notificar objeción legal y sustituir con la cláusula de terminación estándar a 30 días sin penalización.')
                         },
                         {
                             id: 2,
-                            title: currentLang === 'de' ? 'Doppelte Inflationsanpassung' : (currentLang === 'en' ? 'Compounded Inflation Indexation' : 'Duplicación de Ajuste por Inflación'),
-                            clause_reference: 'Cláusula 12.1',
-                            severity: 'HIGH',
+                            title: isDe ? 'Doppelte Inflationsanpassung' : (isEn ? 'Compounded Inflation Indexation' : 'Duplicación de Ajuste por Inflación'),
+                            clause_reference: isDe ? 'Klausel 12.1' : (isEn ? 'Clause 12.1' : 'Cláusula 12.1'),
+                            severity: isDe ? 'HOCH' : (isEn ? 'HIGH' : 'ALTO'),
                             financial_impact: 4200,
-                            teaser_preview: currentLang === 'de' ? 'Doppelte Indexierung durch Kombination aus VPI und Festzins.' : (currentLang === 'en' ? 'Dual indexation combining CPI and fixed rate.' : 'Ajuste inflacionario duplicado combinando IPC local y tasa fija.'),
-                            actionable_solution: currentLang === 'de' ? 'Ausschließliche Bindung an den tatsächlichen VPI.' : (currentLang === 'en' ? 'Cap adjustment strictly to single annual CPI index.' : 'Eliminar el cargo adicional y fijar el ajuste estrictamente al IPC anual.')
+                            teaser_preview: isDe ? 'Doppelte Indexierung durch Kombination aus VPI und Festzins.' : (isEn ? 'Dual indexation combining CPI and fixed rate.' : 'Ajuste inflacionario duplicado combinando IPC local y tasa fija.'),
+                            actionable_solution: isDe ? 'Ausschließliche Bindung an den tatsächlichen VPI.' : (isEn ? 'Cap adjustment strictly to single annual CPI index.' : 'Eliminar el cargo adicional y fijar el ajuste estrictamente al IPC anual.')
                         },
                         {
                             id: 3,
-                            title: currentLang === 'de' ? 'Fehlende SLA-Gutschriften' : (currentLang === 'en' ? 'Uncredited Infrastructure Maintenance' : 'Cobro de Honorarios de Mantenimiento No Prestados'),
-                            clause_reference: 'Anexo B',
-                            severity: 'MEDIUM',
+                            title: isDe ? 'Fehlende SLA-Gutschriften' : (isEn ? 'Uncredited Infrastructure Maintenance' : 'Cobro de Honorarios de Mantenimiento No Prestados'),
+                            clause_reference: isDe ? 'Anhang B - Support' : (isEn ? 'Exhibit B - Billing' : 'Anexo B - Facturación'),
+                            severity: isDe ? 'MITTEL' : (isEn ? 'MEDIUM' : 'MEDIO'),
                             financial_impact: 2150,
-                            teaser_preview: currentLang === 'de' ? 'Monatliche Gebühr für nicht erbrachte Supportleistungen.' : (currentLang === 'en' ? 'Recurring maintenance fee for non-rendered cloud support.' : 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.'),
-                            actionable_solution: currentLang === 'de' ? 'Gutschrift über 10% bei Unterschreitung der Verfügbarkeit.' : (currentLang === 'en' ? 'Issue credit note for non-rendered services.' : 'Solicitar la eliminación de la partida presupuestaria e imputar nota de crédito a la facturación.')
+                            teaser_preview: isDe ? 'Monatliche Gebühr für nicht erbrachte Supportleistungen.' : (isEn ? 'Recurring maintenance fee for non-rendered cloud support.' : 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.'),
+                            actionable_solution: isDe ? 'Gutschrift über 10% bei Unterschreitung der Verfügbarkeit.' : (isEn ? 'Issue credit note for non-rendered services.' : 'Solicitar la eliminación de la partida presupuestaria e imputar nota de crédito a la facturación.')
                         }
                     ]
                 };
@@ -429,44 +431,48 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
 
     renderAuditReportDashboard() {
         const repSec = document.getElementById('report-section');
-        if (repSec) repSec.classList.remove('hidden');
+        const currentLang = window.I18n ? window.I18n.currentLang : 'es';
+        const isDe = (currentLang === 'de');
+        const isEn = (currentLang === 'en');
+
+        const localizedDefaultFindings = [
+            {
+                id: 1,
+                title: isDe ? 'Unverhältnismäßige Kündigungsstrafe' : (isEn ? 'Excessive Early Termination Penalty' : 'Penalización Excesiva por Cancelación Anticipada'),
+                clause_reference: isDe ? 'Klausel 7.3' : (isEn ? 'Clause 7.3' : 'Cláusula 7.3 / Línea 42'),
+                severity: isDe ? 'KRITISCH' : (isEn ? 'CRITICAL' : 'CRÍTICO'),
+                financial_impact: 8500,
+                teaser_preview: isDe ? 'Klausel sieht automatische Strafzahlung von 35% vor.' : (isEn ? 'Clause imposes an automatic 35% surcharge without justification.' : 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.'),
+                actionable_solution: isDe ? 'Begrenzung der Vertragsstrafe auf maximal 30 Tage Vorankündigung.' : (isEn ? 'Replace clause with standard 30-day notice without financial penalties.' : 'Notificar objeción basada en el Art. 1244 del Código Comercial y sustituir con la cláusula de terminación estándar a 30 días sin penalización.')
+            },
+            {
+                id: 2,
+                title: isDe ? 'Doppelte Inflationsanpassung' : (isEn ? 'Compounded Inflation Indexation' : 'Duplicación de Ajuste por Inflación'),
+                clause_reference: isDe ? 'Klausel 12.1' : (isEn ? 'Clause 12.1' : 'Cláusula 12.1'),
+                severity: isDe ? 'HOCH' : (isEn ? 'HIGH' : 'ALTO'),
+                financial_impact: 4200,
+                teaser_preview: isDe ? 'Doppelte Indexierung durch Kombination aus VPI und Festzins.' : (isEn ? 'Dual indexation combining CPI and fixed rate.' : 'Ajuste inflacionario duplicado combinando IPC local y tasa fija en USD.'),
+                actionable_solution: isDe ? 'Ausschließliche Bindung an den tatsächlichen VPI.' : (isEn ? 'Cap adjustment strictly to single annual CPI index.' : 'Eliminar la cláusula de ajuste en USD y fijar el ajuste estrictamente al IPC anual acumulado.')
+            },
+            {
+                id: 3,
+                title: isDe ? 'Fehlende SLA-Gutschriften' : (isEn ? 'Uncredited Infrastructure Maintenance' : 'Cobro de Honorarios de Mantenimiento No Prestados'),
+                clause_reference: isDe ? 'Anhang B - Support' : (isEn ? 'Exhibit B - Billing' : 'Anexo B - Facturación'),
+                severity: isDe ? 'MITTEL' : (isEn ? 'MEDIUM' : 'MEDIO'),
+                financial_impact: 2150,
+                teaser_preview: isDe ? 'Monatliche Gebühr für nicht erbrachte Supportleistungen.' : (isEn ? 'Recurring maintenance fee for non-rendered cloud support.' : 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.'),
+                actionable_solution: isDe ? 'Gutschrift über 10% bei Unterschreitung der Verfügbarkeit.' : (isEn ? 'Issue credit note for non-rendered services.' : 'Solicitar la eliminación de la partida presupuestaria B-4 e imputar nota de crédito a la facturación del trimestre.')
+            }
+        ];
 
         const data = this.currentAuditData || {
-            document_type: 'Contrato de Servicios Comercial',
-            company_estimate: 'Empresa Detectada',
+            document_type: isDe ? 'Gewerblicher Vertrag' : (isEn ? 'Commercial Agreement' : 'Contrato de Servicios Comercial'),
+            company_estimate: isDe ? 'Erkanntes Unternehmen' : (isEn ? 'Detected Enterprise' : 'Empresa Detectada'),
             total_contract_value: 85000,
-            total_financial_leakage: 3450,
-            risk_level: 'HIGH',
+            total_financial_leakage: 14850,
+            risk_level: isDe ? 'HOCH' : (isEn ? 'HIGH' : 'RIESGO ALTO'),
             lead_score: 88,
-            findings: [
-                {
-                    id: 1,
-                    title: 'Penalización Excesiva por Cancelación Anticipada',
-                    clause_reference: 'Cláusula 7.3 / Línea 42',
-                    severity: 'CRITICAL',
-                    financial_impact: 1800,
-                    teaser_preview: 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.',
-                    actionable_solution: 'Notificar objeción basada en el Art. 1244 del Código Comercial y sustituir con la cláusula de terminación estándar a 30 días sin penalización.'
-                },
-                {
-                    id: 2,
-                    title: 'Duplicación de Ajuste por Inflación',
-                    clause_reference: 'Cláusula 12.1',
-                    severity: 'HIGH',
-                    financial_impact: 950,
-                    teaser_preview: 'Ajuste inflacionario duplicado combinando IPC local y tasa fija en USD.',
-                    actionable_solution: 'Eliminar la cláusula de ajuste en USD y fijar el ajuste strictly al IPC anual acumulado.'
-                },
-                {
-                    id: 3,
-                    title: 'Cobro de Honorarios de Mantenimiento No Prestados',
-                    clause_reference: 'Anexo B - Facturación',
-                    severity: 'MEDIUM',
-                    financial_impact: 450,
-                    teaser_preview: 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.',
-                    actionable_solution: 'Solicitar la eliminación de la partida presupuestaria B-4 e imputar nota de crédito a la facturación del trimestre.'
-                }
-            ]
+            findings: localizedDefaultFindings
         };
 
         const docNameEl = document.getElementById('rep-doc-name');
@@ -476,13 +482,13 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         const scoreBadgeEl = document.getElementById('rep-lead-score-badge');
         const reportIdEl = document.getElementById('rep-id-display');
 
-        if (docNameEl) docNameEl.innerText = (this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf');
-        if (docTypeEl) docTypeEl.innerText = data.document_type || 'Contrato Comercial';
+        if (docNameEl) docNameEl.innerText = (this.selectedFile ? this.selectedFile.name : (isDe ? 'Gewerbevertrag.pdf' : (isEn ? 'Commercial_Agreement.pdf' : 'Contrato_Servicios.pdf')));
+        if (docTypeEl) docTypeEl.innerText = data.document_type || (isDe ? 'Gewerblicher Vertrag' : (isEn ? 'Commercial Agreement' : 'Contrato Comercial'));
         if (reportIdEl) reportIdEl.innerText = this.currentReportId || 'rep_123456';
 
         const leakageVal = (typeof data.total_financial_leakage === 'number' && !isNaN(data.total_financial_leakage)) 
             ? data.total_financial_leakage 
-            : 3450;
+            : 14850;
             
         if (leakageEl) leakageEl.innerText = `$${leakageVal.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD`;
 
@@ -499,62 +505,35 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         container.innerHTML = '';
 
         const rawFindings = data.findings || data.summary || [];
-        const findings = (Array.isArray(rawFindings) && rawFindings.length > 0) ? rawFindings : [
-            {
-                id: 1,
-                title: 'Penalización Excesiva por Cancelación Anticipada',
-                clause_reference: 'Cláusula 7.3 / Línea 42',
-                severity: 'CRITICAL',
-                financial_impact: 1800,
-                teaser_preview: 'Cláusula leonina detectada que impone un recargo automático del 35% sin causa justificada.',
-                actionable_solution: 'Notificar objeción basada en el Art. 1244 del Código Comercial y sustituir con la cláusula de terminación estándar a 30 días sin penalización.'
-            },
-            {
-                id: 2,
-                title: 'Duplicación de Ajuste por Inflación',
-                clause_reference: 'Cláusula 12.1',
-                severity: 'HIGH',
-                financial_impact: 950,
-                teaser_preview: 'Ajuste inflacionario duplicado combinando IPC local y tasa fija en USD.',
-                actionable_solution: 'Eliminar la cláusula de ajuste en USD y fijar el ajuste strictly al IPC anual acumulado.'
-            },
-            {
-                id: 3,
-                title: 'Cobro de Honorarios de Mantenimiento No Prestados',
-                clause_reference: 'Anexo B - Facturación',
-                severity: 'MEDIUM',
-                financial_impact: 450,
-                teaser_preview: 'Cargo recurrente mensual por soporte de infraestructura no incluido en la propuesta base.',
-                actionable_solution: 'Solicitar la eliminación de la partida presupuestaria B-4 e imputar nota de crédito a la facturación del trimestre.'
-            }
-        ];
+        const findings = (Array.isArray(rawFindings) && rawFindings.length > 0) ? rawFindings : localizedDefaultFindings;
 
         findings.forEach((finding, idx) => {
             const card = document.createElement('div');
             card.className = 'p-6 sm:p-8 rounded-2xl bg-dark-card border border-border-dark hover:border-gray-700 transition-all text-left shadow-lg';
 
-            const severityClass = finding.severity === 'CRITICAL' ? 'bg-red-500/20 text-red-400 border-red-500/30' :
-                                  finding.severity === 'HIGH' ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' :
+            const severityClass = (finding.severity === 'CRITICAL' || finding.severity === 'KRITISCH' || finding.severity === 'CRÍTICO') ? 'bg-red-500/20 text-red-400 border-red-500/30' :
+                                  (finding.severity === 'HIGH' || finding.severity === 'HOCH' || finding.severity === 'ALTO') ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' :
                                   'bg-blue-500/20 text-blue-400 border-blue-500/30';
 
             const impactVal = (typeof finding.financial_impact === 'number' && !isNaN(finding.financial_impact)) 
                 ? finding.financial_impact 
-                : 1000;
+                : Math.round(leakageVal / 3);
 
-            const teaserText = finding.teaser_preview || 'Anomalía detectada en el contrato.';
-            const solutionText = finding.actionable_solution || 'Texto de renegociación táctica listo.';
+            const teaserText = finding.teaser_preview || (isDe ? 'Im Vertrag festgestellte finanzielle Anomalie.' : (isEn ? 'Anomaly detected in the contract.' : 'Anomalía detectada en el contrato.'));
+            const solutionText = finding.actionable_solution || (isDe ? 'Taktischer Nachverhandlungstext bereit.' : (isEn ? 'Tactical renegotiation text ready.' : 'Texto de renegociación táctica listo.'));
 
-            const teaserLabel = window.I18n ? window.I18n.t('rep_teaser_label') : '🔍 Resumen de la Anomalía (Gratis):';
-            const solutionLabel = window.I18n ? window.I18n.t('rep_solution_label') : '💡 Solución Táctica & Texto Sustitutivo de Renegociación:';
+            const teaserLabel = window.I18n ? window.I18n.t('rep_teaser_label') : '🔍 Resumen de la Anomalía:';
+            const solutionLabel = window.I18n ? window.I18n.t('rep_solution_label') : '💡 Solución Táctica:';
             const unlockBtnText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Desbloquear Solución Táctica ($19 USD)';
+            const defaultClauseLabel = isDe ? 'Klausel' : (isEn ? 'Clause' : 'Cláusula');
 
             card.innerHTML = `
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-border-dark">
                     <div class="flex items-center gap-3">
                         <span class="w-8 h-8 rounded-lg bg-accent-blue/15 text-accent-blue font-bold font-mono flex items-center justify-center text-sm">#${idx + 1}</span>
                         <div>
-                            <h4 class="font-bold text-white text-base sm:text-lg">${finding.title || 'Falla Detectada'}</h4>
-                            <span class="text-xs font-mono text-gray-400">${finding.clause_reference || 'Cláusula'}</span>
+                            <h4 class="font-bold text-white text-base sm:text-lg">${finding.title || (isDe ? 'Erkannter Mangel' : (isEn ? 'Detected Anomaly' : 'Falla Detectada'))}</h4>
+                            <span class="text-xs font-mono text-gray-400">${finding.clause_reference || defaultClauseLabel}</span>
                         </div>
                     </div>
                     <div class="flex items-center gap-3 self-start sm:self-auto">
