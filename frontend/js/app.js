@@ -427,10 +427,21 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         if (leadModal) leadModal.classList.add('hidden');
 
         this.renderAuditReportDashboard();
-    },
-
     renderAuditReportDashboard() {
+        const uploadSec = document.getElementById('upload-section');
+        const scanSec = document.getElementById('scanner-section');
         const repSec = document.getElementById('report-section');
+        const leadModal = document.getElementById('lead-modal');
+
+        if (uploadSec) uploadSec.classList.add('hidden');
+        if (scanSec) scanSec.classList.add('hidden');
+        if (leadModal) leadModal.classList.add('hidden');
+        if (repSec) {
+            repSec.classList.remove('hidden');
+            repSec.scrollIntoView({ behavior: 'smooth' });
+        }
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
         const currentLang = window.I18n ? window.I18n.currentLang : 'es';
         const isDe = (currentLang === 'de');
         const isEn = (currentLang === 'en');
@@ -566,7 +577,11 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
         });
 
         if (window.PaymentHandler) {
-            window.PaymentHandler.init(this.currentReportId);
+            window.PaymentHandler.init(
+                this.currentReportId, 
+                this.currentLeadData ? this.currentLeadData.email : null, 
+                this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf'
+            );
         }
     },
 
