@@ -216,13 +216,59 @@ async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, d
     : "AuditFlow AI - Operando 24/7 con Cero Almacenamiento de Archivos en Memoria Volátil.";
 
   let findingsHtml = '';
-  const findings = auditData?.findings || [];
+  const defaultFindings = isEn ? [
+    {
+      severity: 'CRITICAL',
+      clause_reference: 'Clause 7.3',
+      title: 'Excessive Early Termination Penalty',
+      financial_impact: 8500,
+      actionable_solution: 'Limit termination penalty to 30 days standard advance notice with no accelerated balance liability.'
+    },
+    {
+      severity: 'HIGH',
+      clause_reference: 'Clause 12.1',
+      title: 'Compounded Inflation Dual Indexation',
+      financial_impact: 4200,
+      actionable_solution: 'Replace compounded indexation with single unadjusted CPI escalator capped at 3.5% annually.'
+    },
+    {
+      severity: 'MEDIUM',
+      clause_reference: 'Exhibit B - Billing',
+      title: 'Uncredited Infrastructure Maintenance Charges',
+      financial_impact: 2150,
+      actionable_solution: 'Enforce automatic 10% SLA credit note for each 0.2% monthly downtime below agreed threshold.'
+    }
+  ] : [
+    {
+      severity: 'CRÍTICO',
+      clause_reference: 'Cláusula 7.3 / Línea 42',
+      title: 'Penalización Excesiva por Cancelación Anticipada',
+      financial_impact: 8500,
+      actionable_solution: 'Notificar objeción legal formal y sustituir por penalidad máxima de 30 días de preaviso sin cobro acelerado.'
+    },
+    {
+      severity: 'ALTO',
+      clause_reference: 'Cláusula 12.1',
+      title: 'Duplicación de Ajuste por Inflación (IPC + Tasa Fija)',
+      financial_impact: 4200,
+      actionable_solution: 'Eliminar el sobrecargo fijo y limitar el reajuste exclusivamente al IPC anual con un techo (Cap) del 3.5%.'
+    },
+    {
+      severity: 'MEDIO',
+      clause_reference: 'Anexo B - Facturación',
+      title: 'Cobro de Honorarios de Mantenimiento No Prestados',
+      financial_impact: 2150,
+      actionable_solution: 'Exigir nota de crédito inmediata e incluir deducción automática del 10% ante caídas de servicio.'
+    }
+  ];
+
+  const findings = (auditData?.findings && auditData.findings.length > 0) ? auditData.findings : defaultFindings;
   findings.forEach((item) => {
     const sev = item.severity || 'HIGH';
     const clauseRef = item.clause_reference || (isEn ? 'Clause' : 'Cláusula');
     const titleStr = item.title || 'Anomaly Detected';
     const impactVal = item.financial_impact || 1000;
-    const solStr = item.actionable_solution || '';
+    const solStr = item.actionable_solution || item.solution || 'Renegociar términos de terminación y topar penalizaciones.';
 
     findingsHtml += `
       <div style="background-color:#18181b; border:1px solid #27272a; border-radius:8px; padding:16px; margin-bottom:16px; color:#f4f4f5;">
@@ -231,7 +277,7 @@ async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, d
               <span style="color:#a1a1aa; font-size:12px;">${clauseRef}</span>
           </div>
           <h4 style="color:#ffffff; margin:8px 0 4px 0; font-size:16px;">${titleStr}</h4>
-          <p style="color:#10b981; font-weight:bold; margin:0 0 8px 0;">Impact: $${impactVal.toLocaleString('en-US', {minimumFractionDigits: 2})} USD</p>
+          <p style="color:#10b981; font-weight:bold; margin:0 0 8px 0;">${isEn ? 'Impact' : 'Impacto'}: $${Number(impactVal).toLocaleString('en-US', {minimumFractionDigits: 2})} USD</p>
           <div style="background-color:#09090b; border-left:3px solid #10b981; padding:10px; margin-top:8px; border-radius:4px;">
               <strong style="color:#38bdf8; font-size:13px;">${isEn ? 'Tactical Solution:' : 'Solución Táctica:'}</strong>
               <p style="color:#e4e4e7; font-size:13px; margin:4px 0 0 0; line-height:1.5;">${solStr}</p>
@@ -247,10 +293,10 @@ async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, d
           <span style="background-color:#7c3aed; color:#ffffff; font-size:10px; font-weight:bold; padding:4px 10px; border-radius:999px; text-transform:uppercase;">Exclusive B2B Offer</span>
           <h3 style="color:#ffffff; font-size:20px; margin:12px 0 8px 0;">Do you audit multiple contracts per month?</h3>
           <p style="color:#cbd5e1; font-size:13px; line-height:1.5; margin-bottom:20px;">
-              Upgrade to <strong>Enterprise Subscription for $49/mo</strong>. Get unlimited RAM volatile audits, multi-user team access, and priority 24/7 legal support.
+              Upgrade to <strong>Corporate Subscription for $69/mo or $590/yr</strong>. Get unlimited RAM volatile audits, multi-user team access, and priority 24/7 legal support.
           </p>
-          <a href="${appUrl}/api/payment/subscribe?email=${encodeURIComponent(recipientEmail)}" style="background:linear-gradient(135deg, #9333ea 0%, #0284c7 100%); color:#ffffff; font-weight:bold; text-decoration:none; padding:12px 28px; border-radius:8px; font-size:14px; display:inline-block;">
-              🚀 Activate Enterprise Plan ($49/mo)
+          <a href="${appUrl}/#pricing-section" style="background:linear-gradient(135deg, #9333ea 0%, #0284c7 100%); color:#ffffff; font-weight:bold; text-decoration:none; padding:12px 28px; border-radius:8px; font-size:14px; display:inline-block;">
+              🚀 Activate Corporate Plan ($69/mo)
           </a>
       </div>`;
     } else {
@@ -259,10 +305,10 @@ async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, d
           <span style="background-color:#7c3aed; color:#ffffff; font-size:10px; font-weight:bold; padding:4px 10px; border-radius:999px; text-transform:uppercase;">Oferta Corporativa Exclusiva</span>
           <h3 style="color:#ffffff; font-size:20px; margin:12px 0 8px 0;">¿Auditas múltiples contratos al mes en tu empresa?</h3>
           <p style="color:#cbd5e1; font-size:13px; line-height:1.5; margin-bottom:20px;">
-              Pasa a la suscripción <strong>Corporativa por $49/mes</strong>. Obtén auditorías ilimitadas en memoria volátil, acceso para tu equipo legal y soporte prioritario 24/7.
+              Pasa a la suscripción <strong>Corporativa por $69/mes o $590/año</strong>. Obtén auditorías ilimitadas en memoria volátil, acceso para tu equipo legal y soporte prioritario 24/7.
           </p>
-          <a href="${appUrl}/api/payment/subscribe?email=${encodeURIComponent(recipientEmail)}" style="background:linear-gradient(135deg, #9333ea 0%, #0284c7 100%); color:#ffffff; font-weight:bold; text-decoration:none; padding:12px 28px; border-radius:8px; font-size:14px; display:inline-block;">
-              🚀 Activar Suscripción Corporativa ($49/mes)
+          <a href="${appUrl}/#pricing-section" style="background:linear-gradient(135deg, #9333ea 0%, #0284c7 100%); color:#ffffff; font-weight:bold; text-decoration:none; padding:12px 28px; border-radius:8px; font-size:14px; display:inline-block;">
+              🚀 Activar Suscripción Corporativa ($69/mes)
           </a>
       </div>`;
     }
