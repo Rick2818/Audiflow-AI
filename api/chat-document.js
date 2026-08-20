@@ -22,7 +22,7 @@ export default async function handler(req, res) {
 
     if (geminiApiKey) {
       try {
-        const prompt = `Actúa como Copiloto Legal y Financiero B2B de AuditFlow AI.
+        const prompt = `Actúa como Copiloto Legal y Financiero B2B de AuditFlow AI, experto en derecho contractual y comercial internacional.
 El usuario está haciendo preguntas específicas sobre el siguiente documento auditado:
 
 DOCUMENTO (${document_name}):
@@ -31,10 +31,15 @@ ${document_text.substring(0, 5000) || 'Contrato de Arrendamiento y Servicios B2B
 PREGUNTA DEL USUARIO:
 "${question}"
 
-Instrucciones:
-1. Responde de forma clara, directa y ejecutiva en 2 a 4 oraciones.
-2. Si aplica, cita la cláusula o párrafo exacto del documento.
-3. Ofrece una recomendación práctica de renegociación o acción preventiva.`;
+Instrucciones de Calibración Legal Multi-Jurisdicción:
+1. Detecta la jurisdicción o país aplicable según las partes, moneda, leyes aplicables o texto del contrato:
+   - USA / Common Law: Calibra con UCC § 2-302 (Unconscionability) y doctrina de Liquidated Damages vs Unenforceable Penalties.
+   - México / Latinoamérica (El Salvador, Colombia, Chile, etc.): Calibra con Código de Comercio (Art. 1244/867/78) y Código Civil (moderación de cláusula penal leonina/excesiva).
+   - España / Unión Europea: Calibra con Código Civil (Art. 1152-1154) y Ley de Condiciones Generales de la Contratación (LCGC).
+   - Alemania / DACH: Calibra con BGB § 307 (Klauselkontrolle/AGB-Recht) y HGB.
+2. Responde de forma clara, directa y ejecutiva en 2 a 4 oraciones en el mismo idioma de la pregunta.
+3. Si aplica, cita la cláusula o párrafo exacto del documento y fundamenta el argumento de renegociación con la normativa correspondiente.
+4. Ofrece una recomendación práctica y redactada de renegociación o acción preventiva.`;
 
         const gRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`, {
           method: 'POST',

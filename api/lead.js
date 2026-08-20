@@ -11,24 +11,7 @@ const resendClient = resendKey ? new Resend(resendKey) : null;
 const emailFrom = process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>';
 
 async function sendAuditReportEmail({ to, subject, html }) {
-  // 1. Prioridad: Resend SDK (Dominio corporativo ricardo@audiflowai.com)
-  if (resendClient) {
-    try {
-      const res = await resendClient.emails.send({
-        from: emailFrom,
-        to: [to],
-        subject,
-        html
-      });
-      if (res && (res.id || res.data?.id)) {
-        return { success: true, provider: 'resend', id: res.id || res.data?.id };
-      }
-    } catch (resendErr) {
-      console.warn('Resend send warning in lead.js:', resendErr.message);
-    }
-  }
-
-  // 2. Respaldo: Gmail SMTP
+  // 1. Prioridad: Gmail SMTP Corporativo (Verificado y con entrega directa a cualquier buzón)
   const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
@@ -43,9 +26,32 @@ async function sendAuditReportEmail({ to, subject, html }) {
       subject,
       html
     });
+    console.log(`✅ [EMAIL DELIVERED VIA GMAIL SMTP] To: ${to} | ID: ${info.messageId}`);
     return { success: true, provider: 'gmail_smtp', id: info.messageId };
-  } catch (err) {
-    console.warn('Gmail SMTP Fallback to Ethereal:', err.message);
+  } catch (gmailErr) {
+    console.warn('Gmail SMTP error, attempting Resend fallback:', gmailErr.message);
+  }
+
+  // 2. Respaldo: Resend SDK
+  if (resendClient) {
+    try {
+      const res = await resendClient.emails.send({
+        from: emailFrom,
+        to: [to],
+        subject,
+        html
+      });
+      if (res && (res.id || res.data?.id)) {
+        console.log(`✅ [EMAIL DELIVERED VIA RESEND] To: ${to} | ID: ${res.id || res.data?.id}`);
+        return { success: true, provider: 'resend', id: res.id || res.data?.id };
+      }
+    } catch (resendErr) {
+      console.warn('Resend send warning in lead.js:', resendErr.message);
+    }
+  }
+
+  // 3. Fallback: Ethereal
+  try {
     const testAccount = await nodemailer.createTestAccount();
     const fallbackTransporter = nodemailer.createTransport({
       host: 'smtp.ethereal.email',
@@ -60,6 +66,9 @@ async function sendAuditReportEmail({ to, subject, html }) {
       html
     });
     return { success: true, provider: 'ethereal_fallback', id: info.messageId };
+  } catch (err) {
+    console.error('All email providers failed:', err.message);
+    return { success: false, error: err.message };
   }
 }
 
@@ -114,6 +123,7 @@ export default async function handler(req, res) {
     }
 
     const { name, email, document_name, audit_data, lang } = body;
+    const auditData = audit_data || {};
 
     if (!name || !email) {
       return res.status(400).json({ error: 'Nombre y correo electrónico son requeridos.' });
