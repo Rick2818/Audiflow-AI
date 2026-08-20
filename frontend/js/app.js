@@ -90,10 +90,16 @@ Las tarifas mensuales se incrementarán automáticamente cada 6 meses aplicando 
 CLÁUSULA 9.1 - SOBRECARGO INDEBIDO Y RENOVACIÓN AUTOMÁTICA OBLIGATORIA:
 El contrato se renovará automáticamente por periodos de 3 años si no se envía una notificación por correo certificado con 180 días de antelación. En caso de renovación, se aplicará un cargo administrativo del 15% sobre el valor total. Texto adicional auditado por el motor de inteligencia artificial de AuditFlow AI para verificación de calidad pre-vuelo en memoria volátil.`;
 
-        const blob = new Blob([sampleText], { type: 'text/plain' });
-        const sampleFile = new File([blob], "Contrato_Ejemplo_Apex_Global.txt", { type: 'text/plain' });
+        let sampleFile;
+        try {
+            const blob = new Blob([sampleText], { type: 'text/plain' });
+            sampleFile = new File([blob], "Contrato_Ejemplo_Apex_Global.pdf", { type: 'application/pdf' });
+        } catch (e) {
+            sampleFile = { name: "Contrato_Ejemplo_Apex_Global.pdf", size: 1024 * 180 };
+        }
 
         this.handleFileSelected(sampleFile);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         this.startAuditScanProcess();
     },
 
@@ -262,7 +268,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
             setTimeout(() => {
                 if (scanSec) scanSec.classList.add('hidden');
                 this.showLeadModal();
-            }, 3000);
+            }, 2000);
 
         } catch (err) {
             console.error('Error en escaneo:', err);
@@ -270,7 +276,7 @@ El contrato se renovará automáticamente por periodos de 3 años si no se enví
             setTimeout(() => {
                 if (scanSec) scanSec.classList.add('hidden');
                 this.showLeadModal();
-            }, 1500);
+            }, 1200);
         }
     },
 
