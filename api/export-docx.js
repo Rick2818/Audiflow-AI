@@ -28,10 +28,15 @@ export default async function handler(req, res) {
           .footer { margin-top: 40px; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; }
         </style>
       </head>
-      <body>
-        <h1>AuditFlow AI — Documento de Auditoría y Control de Cambios (.docx)</h1>
+        <div style='background-color:#09090b; color:#ffffff; padding:15px; border-radius:6px; border-left:5px solid #10b981; margin-bottom:20px;'>
+          <span style='background-color:#10b981; color:#000000; font-weight:bold; font-size:10px; padding:2px 6px; border-radius:3px;'>✓ AUDITORÍA B2B VERIFICADA</span>
+          <h2 style='color:#ffffff; margin:6px 0 0 0; font-size:15px;'>AuditFlow AI — Control de Cambios & Redlines para Negociación Corporativa</h2>
+          <p style='color:#cbd5e1; font-size:11px; margin:3px 0 0 0;'>Auditado en memoria RAM volátil • Conforme a SOC2 & GDPR • 0 Persistencia en disco</p>
+        </div>
+
+        <h1>${cleanTitle}</h1>
         <p><strong>Fecha de Generación:</strong> ${new Date().toLocaleDateString('es-ES')}</p>
-        <p><strong>Estado de Revisión:</strong> Redlines y Sugerencias de Negociación Aplicadas</p>
+        <p><strong>Estado de Negociación:</strong> Redlines Aplicados y Listos para Envío al Proveedor</p>
         <hr>
 
         <h2>1. Resumen Ejecutivo & Marcas de Revisión (Redlines)</h2>
@@ -44,8 +49,9 @@ export default async function handler(req, res) {
           ${(counter_proposal || 'Por medio de la presente, solicitamos el ajuste inmediato de los términos conforme al contrato marco pactado.').replace(/\n/g, '<br>')}
         </div>
 
-        <div class='footer'>
-          Generado automáticamente por AuditFlow AI • Procesamiento Seguro en Memoria Volátil RAM (0 Almacenamiento en Disco)
+        <div class='footer' style='margin-top:40px; font-size:11px; color:#475569; border-top:2px solid #e2e8f0; padding-top:12px;'>
+          <p><strong>Verificación Institucional:</strong> Documento auditado mediante la infraestructura B2B de <strong>AuditFlow AI</strong> (<a href='https://audiflowai.com' style='color:#0284c7;'>https://audiflowai.com</a>). Procesado de forma efímera en memoria RAM sin persistencia en disco.</p>
+          <p style='color:#94a3b8; font-size:10px;'>Audita tus contratos o facturas en &lt;10s con prueba gratuita en <a href='https://audiflowai.com' style='color:#0284c7;'>https://audiflowai.com</a>.</p>
         </div>
       </body>
       </html>

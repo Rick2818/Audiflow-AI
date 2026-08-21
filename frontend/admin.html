@@ -250,24 +250,35 @@
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- FORMULARIO DE ENVIADOR -->
                 <div class="lg:col-span-2 space-y-4">
-                    <div>
-                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar País Objetivo:</label>
-                        <select id="outreach-country" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
-                            <option value="El Salvador">El Salvador (Español)</option>
-                            <option value="Guatemala">Guatemala (Español)</option>
-                            <option value="Costa Rica">Costa Rica (Español)</option>
-                            <option value="Panama">Panamá (Español)</option>
-                            <option value="Mexico">México (Español)</option>
-                            <option value="Estados Unidos">Estados Unidos (English)</option>
-                            <option value="Inglaterra">Inglaterra / UK (English)</option>
-                            <option value="Suiza">Suiza (English/German)</option>
-                            <option value="Francia">Francia (English/French)</option>
-                            <option value="Luxemburgo">Luxemburgo (English/French)</option>
-                            <option value="Alemania">Alemania (English/German)</option>
-                            <option value="Dinamarca">Dinamarca (English)</option>
-                            <option value="Noruega">Noruega (English)</option>
-                            <option value="Finlandia">Finlandia (English)</option>
-                        </select>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar País Objetivo (14 Mercados):</label>
+                            <select id="outreach-country" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
+                                <option value="El Salvador">🇸🇻 El Salvador (Español - 72 Leads)</option>
+                                <option value="Guatemala">🇬🇹 Guatemala (Español - 72 Leads)</option>
+                                <option value="Costa Rica">🇨🇷 Costa Rica (Español - 72 Leads)</option>
+                                <option value="Panama">🇵🇦 Panamá (Español - 72 Leads)</option>
+                                <option value="Mexico">🇲🇽 México (Español - 72 Leads)</option>
+                                <option value="Estados Unidos">🇺🇸 Estados Unidos (English - 72 Leads)</option>
+                                <option value="Inglaterra">🇬🇧 Inglaterra / UK (English - 72 Leads)</option>
+                                <option value="Suiza">🇨🇭 Suiza (Deutsch - 72 Leads)</option>
+                                <option value="Alemania">🇩🇪 Alemania (Deutsch - 72 Leads)</option>
+                                <option value="Francia">🇫🇷 Francia (English - 72 Leads)</option>
+                                <option value="Luxemburgo">🇱🇺 Luxemburgo (English - 70 Leads)</option>
+                                <option value="Dinamarca">🇩🇰 Dinamarca (English - 70 Leads)</option>
+                                <option value="Noruega">🇳🇴 Noruega (English - 70 Leads)</option>
+                                <option value="Finlandia">🇫🇮 Finlandia (English - 70 Leads)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 mb-1">Cadencia Outbound (4 Toques):</label>
+                            <select id="outreach-cadence-touch" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
+                                <option value="touch_1_gift">🎯 Toque 1: Gancho Aversión a Pérdida & Auditoría Gratis (Día 1)</option>
+                                <option value="touch_2_roi">📊 Toque 2: Caso de Estudio ROI & Fuga $4,200 (Día 3)</option>
+                                <option value="touch_3_diagnostic">🔍 Toque 3: Pregunta Diagnóstico en TI / Proveedores (Día 7)</option>
+                                <option value="touch_4_breakup">🚪 Toque 4: Break-Up Email & Acceso Permanente (Día 12)</option>
+                            </select>
+                        </div>
                     </div>
 
                     <div class="flex items-center justify-between">
@@ -1008,6 +1019,7 @@ Escaneo de prueba gratuito:
                                 action: 'send_outreach_campaign',
                                 prospects: chunk,
                                 test_mode: testMode,
+                                cadence_touch: document.getElementById('outreach-cadence-touch')?.value || 'touch_1_gift',
                                 admin_password: savedPass
                             })
                         });

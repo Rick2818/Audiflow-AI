@@ -363,6 +363,14 @@
                             }
 
                             if (!slider || !valEl || !lossEl || !netEl) return;
+                            if (window.location && window.location.search) {
+                                var params = new URLSearchParams(window.location.search);
+                                if (params.get('roi') && !slider.dataset.userChanged) {
+                                    var lossParam = parseInt(params.get('roi'), 10) || 14400;
+                                    slider.value = Math.max(1, Math.min(50, Math.round(lossParam / 1800)));
+                                    slider.dataset.userChanged = 'true';
+                                }
+                            }
                             var count = parseInt(slider.value, 10) || 8;
 
                             var docUnit = (lang === 'de') ? ' Dok./Monat' : ((lang === 'en') ? ' docs/month' : ' documentos/mes');
