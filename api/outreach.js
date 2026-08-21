@@ -236,12 +236,15 @@ export default async function handler(req, res) {
             <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para ${company}</a>
           </p>
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a su disposición para cualquier consulta,</p>
+            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a su total disposición para cualquier consulta,</p>
             <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador, AuditFlow AI</p>
+            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador &amp; Desarrollador, AuditFlow AI</p>
+            <p style="margin: 4px 0 0 0; font-size: 13px;">
+              <span style="color: #6b7280;">Email directo:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+            </p>
           </div>
           <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
-            AuditFlow AI • Memoria RAM Volátil Efímera • Cifrado AES-256 de Grado Bancario • Conforme a SOC-2 & GDPR
+            AuditFlow AI • Memoria RAM Volátil Efímera • Cifrado AES-256 de Grado Bancario • Conforme a SOC-2 &amp; GDPR
           </p>
         </div>`;
 
@@ -259,7 +262,10 @@ export default async function handler(req, res) {
             </p>
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
               <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Gründer, AuditFlow AI</p>
+              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Gründer &amp; Entwickler, AuditFlow AI</p>
+              <p style="margin: 4px 0 0 0; font-size: 13px;">
+                <span style="color: #6b7280;">Direkte E-Mail:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+              </p>
             </div>
           </div>`;
       } else if (isEn) {
@@ -276,7 +282,10 @@ export default async function handler(req, res) {
             </p>
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
               <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Founder, AuditFlow AI</p>
+              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Founder &amp; Developer, AuditFlow AI</p>
+              <p style="margin: 4px 0 0 0; font-size: 13px;">
+                <span style="color: #6b7280;">Direct Email:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+              </p>
             </div>
           </div>`;
       }
@@ -289,6 +298,7 @@ export default async function handler(req, res) {
             await resendClient.emails.send({
               from: emailFrom,
               to: email,
+              reply_to: 'rick28191@gmail.com',
               subject,
               html: bodyHtml,
               headers: {
@@ -300,6 +310,7 @@ export default async function handler(req, res) {
             await transporter.sendMail({
               from: senderFrom,
               to: email,
+              replyTo: 'rick28191@gmail.com',
               subject,
               html: bodyHtml
             });

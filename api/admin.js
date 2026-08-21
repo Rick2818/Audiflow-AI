@@ -272,7 +272,7 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?roi=14400&ref=cadence_t2_${encodeURIComponent(country)}" style="background-color: #38bdf8; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🧮 Ver Calculadora de Fugas para ${escapeHtml(pComp)}</a>
               </p>
-              <p style="color: #9ca3af; font-size: 13px;">Saludos cordiales,<br><strong>Ricardo</strong> — Fundador, AuditFlow AI</p>
+              <p style="color: #9ca3af; font-size: 13px;">Saludos cordiales,<br><strong style="color: #ffffff;">Ricardo</strong> — Fundador &amp; Desarrollador, AuditFlow AI<br><span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a></p>
             </div>`;
         } else if (touch === 'touch_3_diagnostic') {
           subject = isEn ? `🔍 How does ${pComp} review vendor contract clauses?` : `🔍 ¿Cómo audita ${pComp} las cláusulas en contratos de TI y proveedores?`;
@@ -286,7 +286,7 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=cadence_t3_${encodeURIComponent(country)}" style="background-color: #a855f7; color: #ffffff; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🚀 Probar Auditoría Gratuita en Memoria Volátil</a>
               </p>
-              <p style="color: #9ca3af; font-size: 13px;">Saludos,<br><strong>Ricardo</strong> — AuditFlow AI</p>
+              <p style="color: #9ca3af; font-size: 13px;">Saludos,<br><strong style="color: #ffffff;">Ricardo</strong> — AuditFlow AI<br><span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a></p>
             </div>`;
         } else if (touch === 'touch_4_breakup') {
           subject = isEn ? `🚪 Permanent access link to AuditFlow AI for ${pComp}` : `🚪 Acceso permanente a AuditFlow AI para ${pComp}`;
@@ -300,7 +300,7 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=cadence_t4_${encodeURIComponent(country)}" style="background-color: #374151; color: #ffffff; font-weight: bold; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">🔗 Guardar Enlace de AuditFlow AI</a>
               </p>
-              <p style="color: #9ca3af; font-size: 13px;">Muchos éxitos,<br><strong>Ricardo</strong></p>
+              <p style="color: #9ca3af; font-size: 13px;">Muchos éxitos,<br><strong style="color: #ffffff;">Ricardo</strong><br><span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a></p>
             </div>`;
         } else {
           // Touch 1 (Predeterminado)
@@ -321,7 +321,10 @@ export default async function handler(req, res) {
               <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
                 <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a tu total disposición,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador, AuditFlow AI</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador &amp; Desarrollador, AuditFlow AI</p>
+                <p style="margin: 4px 0 0 0; font-size: 13px;">
+                  <span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+                </p>
               </div>
             </div>`;
         }
@@ -332,6 +335,7 @@ export default async function handler(req, res) {
               const { data, error } = await resendClient.emails.send({
                 from: senderFrom,
                 to: [pEmail],
+                reply_to: 'rick28191@gmail.com',
                 subject,
                 html: bodyHtml,
                 headers: {
@@ -348,6 +352,7 @@ export default async function handler(req, res) {
               await transporter.sendMail({
                 from: senderFrom,
                 to: pEmail,
+                replyTo: 'rick28191@gmail.com',
                 subject,
                 html: bodyHtml
               });
