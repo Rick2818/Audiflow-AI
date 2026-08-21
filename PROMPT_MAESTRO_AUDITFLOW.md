@@ -272,5 +272,31 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 2. **Precedencia de Instrucciones:** Las reglas contenidas en los archivos `SKILL.md` tienen prioridad de ejecución sobre cualquier suposición contextual genérica.
 3. **Persistencia en Nuevos Proyectos:** Al crear un nuevo repositorio o MicroSaaS, la carpeta `.gemini/skills/` debe ser clonada o inicializada para que el asistente conserve sus capacidades especializadas desde el primer día.
 
+---
+
+## 📋 17. PROTOCOLO OBLIGATORIO DE PLANIFICACIÓN ESTRATÉGICA DE CLASE MUNDIAL (PLAN DE IMPLEMENTACIÓN 5 ESTRELLAS)
+
+**MANDATO INCONDICIONAL:** Inmediatamente después de que el usuario envíe o invoque el **Prompt Maestro**, el asistente **TIENE PROHIBIDO** realizar modificaciones de código apresuradas, desordenadas o improvisadas. El asistente **DEBE OBLIGATORIAMENTE** preparar, estructurar y presentar un **Plan de Implementación de Clase Mundial 5 Estrellas** (`implementation_plan.md`) y esperar la aprobación explícita del usuario antes de escribir una sola línea de código en producción.
+
+### A. Estándares Innegociables del Plan 5 Estrellas:
+1. **Investigación Profunda Previa (Fase 0 - Cero Código):**
+   - El asistente debe mapear exhaustivamente la arquitectura del proyecto, dependencias en `package.json`, variables de entorno, endpoints en `/api/`, reglas en `vercel.json` y la estructura visual de la interfaz.
+   - Debe leer y sincronizar las directivas de las Skills involucradas ([`microsaas-factory`](.gemini/skills/microsaas-factory/SKILL.md), [`b2b-growth-engine`](.gemini/skills/b2b-growth-engine/SKILL.md), [`contract-copilot`](.gemini/skills/contract-copilot/SKILL.md)).
+2. **Estructura Lógica, Rigurosa y Secuencial:**
+   - **Objetivo Estratégico & Propuesta de Valor:** Definición clara del valor cuantificable para el cliente final (ROI, ahorro de tiempo, mitigación de riesgos).
+   - **User Review Required & Preguntas Abiertas:** Señalización explícita de decisiones clave mediante alertas GitHub (`[!IMPORTANT]` / `[!WARNING]`).
+   - **Desglose Modular de Cambios (Por Capas):**
+     * *Capa 1:* Infraestructura, DNS, Seguridad y Paridad Serverless en `vercel.json`.
+     * *Capa 2:* Backend & Motor de IA en Memoria RAM Volátil (0 disco).
+     * *Capa 3:* Frontend de Alta Conversión, UX Sin Fricciones, Selectores i18n (`ES | EN | DE`) y Botones de Retorno.
+     * *Capa 4:* Pasarelas de Pago Híbridas ($ USD / Lightning Satoshis) y Tripwire de $19.
+     * *Capa 5:* Motor de Prospección B2B y Panel `/admin` con Manual Interactivo.
+   - **Plan de Verificación Automatizada:** Suite de pruebas sintácticas, de red, estrés, simulación de pasarelas y validación de correo.
+3. **Cero Incoherencias y Cero Parches Superficiales:**
+   - Cada solución propuesta debe ser integral, robusta y compatible al 100% con la **Narrativa Institucional de Firma (+10 Años de Experiencia)** y el **Protocolo de Cero Fricción UX**.
+4. **Puerta de Aprobación Obligatoria (Approval Gate):**
+   - El asistente publicará el documento de planificación (`implementation_plan.md` con `request_feedback = true`) y **SE DETENDRÁ A ESPERAR** la confirmación y visto bueno del usuario antes de proceder a la ejecución.
+
+
 
 
