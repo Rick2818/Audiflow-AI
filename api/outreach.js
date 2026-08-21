@@ -290,7 +290,11 @@ export default async function handler(req, res) {
               from: emailFrom,
               to: email,
               subject,
-              html: bodyHtml
+              html: bodyHtml,
+              headers: {
+                'List-Unsubscribe': '<mailto:unsubscribe@audiflowai.com?subject=unsubscribe>',
+                'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+              }
             });
           } else {
             await transporter.sendMail({

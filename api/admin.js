@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
-import { verifyAdminAuth, safeCompare, escapeHtml } from '../lib/security.js';
+import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
 
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
@@ -140,6 +140,11 @@ export default async function handler(req, res) {
 
   // POST Handlers
   if (req.method === 'POST') {
+    const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'client_ip';
+    const rateCheck = checkRateLimit(`admin_post_${clientIp}`, 20, 60000);
+    if (!rateCheck.allowed) {
+      return res.status(429).json({ success: false, error: `Límite de tasa excedido. Por favor espera ${rateCheck.retryAfter} segundos.` });
+    }
     // 1. Login Request
     if (action === 'login' || (!action && (body.password || body.admin_password))) {
       if (verifyAdminAuth(req)) {
@@ -328,7 +333,11 @@ export default async function handler(req, res) {
                 from: senderFrom,
                 to: [pEmail],
                 subject,
-                html: bodyHtml
+                html: bodyHtml,
+                headers: {
+                  'List-Unsubscribe': '<mailto:unsubscribe@audiflowai.com?subject=unsubscribe>',
+                  'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+                }
               });
               if (error) {
                 results.push({ email: pEmail, name: pName, company: pComp, status: 'error', error: error.message });
