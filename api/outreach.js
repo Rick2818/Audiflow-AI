@@ -1,100 +1,90 @@
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 
-// 1. DATASETS DE BASE
-const firstNamesLatam = [
-  'Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina',
-  'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Andrés', 'Valeria', 'Rodrigo', 'Daniela',
-  'Gonzalo', 'Natalia', 'Esteban', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio',
-  'Paula', 'Ricardo', 'Guillermo', 'Alfonso', 'Claudio', 'Beatriz', 'Raquel', 'Manuel', 'Pablo', 'Joaquín'
+// 14 PAÍSES OBJETIVO OFICIALES CON DIVISIÓN EQUITATIVA
+const targetCountries = [
+  { name: 'El Salvador', lang: 'es', dom: 'sv' },
+  { name: 'Guatemala', lang: 'es', dom: 'gt' },
+  { name: 'Costa Rica', lang: 'es', dom: 'cr' },
+  { name: 'Panamá', lang: 'es', dom: 'pa' },
+  { name: 'México', lang: 'es', dom: 'mx' },
+  { name: 'Estados Unidos', lang: 'en', dom: 'us' },
+  { name: 'Inglaterra', lang: 'en', dom: 'co.uk' },
+  { name: 'Suiza', lang: 'de', dom: 'ch' },
+  { name: 'Alemania', lang: 'de', dom: 'de' },
+  { name: 'Francia', lang: 'en', dom: 'fr' },
+  { name: 'Luxemburgo', lang: 'en', dom: 'lu' },
+  { name: 'Dinamarca', lang: 'en', dom: 'dk' },
+  { name: 'Noruega', lang: 'en', dom: 'no' },
+  { name: 'Finlandia', lang: 'en', dom: 'fi' }
 ];
 
-const lastNamesLatam = [
-  'Mendoza', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Alvarado',
-  'Bermúdez', 'Cisneros', 'Delgado', 'Escobar', 'Fuentes', 'Guzmán', 'Herrera', 'Ibáñez', 'Jiménez', 'Lara',
-  'Montero', 'Noriega', 'Orellana', 'Paredes', 'Quezada', 'Ramírez', 'Salazar', 'Trejo', 'Urrutia', 'Velasco',
-  'Ortega', 'Santana', 'Castañeda', 'Palacios', 'Fuenzalida', 'Montenegro', 'Barrios', 'Carrasco', 'Valdés', 'Rojas'
-];
+const firstNamesLatam = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Andrés', 'Valeria', 'Rodrigo', 'Daniela', 'Gonzalo', 'Natalia', 'Esteban', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio', 'Paula', 'Ricardo', 'Guillermo', 'Alfonso', 'Claudio', 'Beatriz', 'Raquel', 'Manuel', 'Pablo', 'Joaquín'];
+const lastNamesLatam = ['Mendoza', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Alvarado', 'Bermúdez', 'Cisneros', 'Delgado', 'Escobar', 'Fuentes', 'Guzmán', 'Herrera', 'Ibáñez', 'Jiménez', 'Lara', 'Montero', 'Noriega', 'Orellana', 'Paredes', 'Quezada', 'Ramírez', 'Salazar', 'Trejo', 'Urrutia', 'Velasco', 'Ortega', 'Santana', 'Castañeda', 'Palacios', 'Fuenzalida', 'Montenegro', 'Barrios', 'Carrasco', 'Valdés', 'Rojas'];
 
-const firstNamesGlobal = [
-  'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia',
-  'Henry', 'Evelyn', 'Sebastian', 'Harper', 'Arthur', 'Grace', 'Chloe', 'Liam', 'Zoe', 'Noah',
-  'Lily', 'Mason', 'Hannah', 'Ethan', 'Ella', 'James', 'Aria', 'Thomas', 'Marcus', 'Stefan',
-  'Lars', 'Astrid', 'Pierre', 'Isabelle', 'Jean', 'Hans', 'Katrin', 'Mikko', 'Juha', 'Bjørn'
-];
+const firstNamesGlobal = ['Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper', 'Arthur', 'Grace', 'Chloe', 'Liam', 'Zoe', 'Noah', 'Lily', 'Mason', 'Hannah', 'Ethan', 'Ella', 'James', 'Aria', 'Thomas', 'Marcus', 'Stefan', 'Lars', 'Astrid', 'Pierre', 'Isabelle', 'Jean', 'Hans', 'Katrin', 'Mikko', 'Juha', 'Bjørn'];
+const lastNamesGlobal = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Wilson', 'Anderson', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'King', 'Wright', 'Scott', 'Green', 'Baker', 'Adams', 'Nelson', 'Carter', 'Mitchell', 'Perez', 'Roberts', 'Turner', 'Schmidt', 'Mueller', 'Schneider', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Hoffmann', 'Schäfer'];
 
-const lastNamesGlobal = [
-  'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Wilson', 'Anderson', 'Taylor',
-  'Moore', 'Jackson', 'Martin', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'King', 'Wright',
-  'Scott', 'Green', 'Baker', 'Adams', 'Nelson', 'Carter', 'Mitchell', 'Perez', 'Roberts', 'Turner',
-  'Schmidt', 'Mueller', 'Schneider', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Hoffmann', 'Schäfer'
-];
+const companiesByCountry = {
+  'El Salvador': ['Alvarado Holdings SV', 'Constructora Central SV', 'Mendoza Retail SV', 'Distribuidora Global SV', 'Central Logistics SV'],
+  'Guatemala': ['Servicios Corporativos GT', 'AgroIndustrias GT', 'Peralta Builders GT', 'Guatemala Tech Corp', 'Retail Guatemala SA'],
+  'Costa Rica': ['CR Tech Solutions', 'Costa Rica Logistics', 'Morales Assets CR', 'Servicios Médicos CR', 'Costa Rica Export Group'],
+  'Panamá': ['Panamá Logistics & Services', 'Capital Financiero PA', 'Operadora Portuaria PA', 'Desarrollos Inmobiliarios PA', 'Herrera Trade PA'],
+  'México': ['Grupo México Retail', 'Mexican Software Corp', 'Automotriz Mexicana SA', 'Farma México SA', 'Transportes & Logística MX'],
+  'Estados Unidos': ['US Enterprise Software Inc', 'US Corporate Law Group', 'Healthcare Solutions US', 'US National Logistics Corp', 'US Clean Energy Corp'],
+  'Inglaterra': ['UK Legal Services Ltd', 'London Financial Partners Plc', 'UK SaaS Enterprise', 'UK Retail Holdings Ltd', 'Apex Global UK'],
+  'Suiza': ['Swiss Financial AG', 'Swiss Biotech SA', 'Zurich Enterprise AG', 'Lombard Capital Partners', 'Geneva Global Trade SA'],
+  'Alemania': ['Deutschland Tech Holding AG', 'German Auto Engineering GmbH', 'Berlin Enterprise SaaS', 'Bavaria Software AG', 'Frankfurt Holdings AG'],
+  'Francia': ['France Enterprise Tech SAS', 'Paris Investment Group', 'Logistics France SA', 'Paris Innovate SAS', 'Lumiere Finance SA'],
+  'Luxemburgo': ['Luxembourg Capital Partners', 'Global Funds Luxembourg', 'Lux Enterprise Solutions', 'Benelux Ventures Lux', 'Grand Duchy Finance'],
+  'Dinamarca': ['Denmark Solutions A/S', 'Nordic Shipping DK', 'Copenhagen SaaS A/S', 'Nordic Scale DK', 'Danish Logistics A/S'],
+  'Noruega': ['Norway Logistics AS', 'Nordic Energy Norway', 'Oslo Enterprise Software', 'Fjord Capital AS', 'Bergen Maritime AS'],
+  'Finlandia': ['Finland Enterprise Software', 'Finnish Industrial Group', 'Helsinki Tech Solutions', 'Nordic Clean Energy FI', 'Helsinki Fintech Group']
+};
 
-const companiesLatam = [
-  'Alvarado Holdings', 'Bermúdez Capital', 'Cisneros Logistics', 'Delgado Group', 'Escobar Enterprise',
-  'Fuentes Industries', 'Guzmán Partners', 'Herrera Trade', 'Mendoza Corp', 'Vargas Retail Group',
-  'Constructora Central SV', 'Gómez Logistics MX', 'Castillo Inversiones', 'Navarro Trade Latam', 'Ríos Banking Group',
-  'Peralta Builders', 'Morales Assets', 'Silva & Asociados', 'Central American Tech', 'Logística del Pacífico',
-  'Grupo Industrial Mexicano', 'Inversiones del Valle', 'Servicios Corporativos GT', 'Agroindustrias del Sur', 'Distribuidora Global SA'
-];
+const domainsByCountry = {
+  'El Salvador': ['alvarado.sv', 'constructora.sv', 'mendozacorp.sv', 'distribuidora.sv', 'centrallogistics.sv'],
+  'Guatemala': ['serviciosgt.com', 'agrogt.com', 'peraltabuilders.gt', 'guatech.gt', 'retailgt.com'],
+  'Costa Rica': ['crtech.co.cr', 'crlogistics.cr', 'moralesassets.cr', 'serviciosmedicos.cr', 'crexport.cr'],
+  'Panamá': ['panamalogistics.pa', 'capitalpa.com', 'puertospa.com', 'inmobiliariapa.com', 'herreratrade.pa'],
+  'México': ['grupomx.com.mx', 'softwaremex.mx', 'automotrizmx.com', 'farmamx.com.mx', 'logisticamx.mx'],
+  'Estados Unidos': ['usenterprisetech.com', 'uslawgroup.com', 'ushealthsolutions.com', 'usnationallogistics.com', 'uscleanenergy.com'],
+  'Inglaterra': ['uklegal.co.uk', 'londonfinancial.co.uk', 'uksaas.co.uk', 'ukretail.co.uk', 'apexglobal.co.uk'],
+  'Suiza': ['swissfinancial.ch', 'swissbiotech.ch', 'zurichenterprise.ch', 'lombardcapital.ch', 'genevaglobal.ch'],
+  'Alemania': ['deutschlandtech.de', 'germanauto.de', 'berlinsaas.de', 'bavariasoftware.de', 'frankfurtholdings.de'],
+  'Francia': ['francetech.fr', 'parisinvestment.fr', 'logisticsfrance.fr', 'parisinnovate.fr', 'lumierefinance.fr'],
+  'Luxemburgo': ['luxcapital.lu', 'globalfunds.lu', 'luxenterprise.lu', 'beneluxventures.lu', 'grandduchy.lu'],
+  'Dinamarca': ['denmarksolutions.dk', 'nordicshipping.dk', 'copenhagensaas.dk', 'nordicscale.dk', 'danishlogistics.dk'],
+  'Noruega': ['norwaylogistics.no', 'nordicenergy.no', 'oslosoftware.no', 'fjordcapital.no', 'bergenmaritime.no'],
+  'Finlandia': ['finlandsoftware.fi', 'finnishindustrial.fi', 'helsinkitech.fi', 'nordicenergy.fi', 'helsinkifintech.fi']
+};
 
-const companiesGlobal = [
-  'Apex Global Holdings', 'Lombard Capital Partners', 'Vertex Trading Group', 'Nordic Logistics AS', 'Finanze Prova SA',
-  'Cloudscale Systems', 'Benelux Ventures BV', 'Helsinki Fintech Group', 'Pacific Corporate Law', 'Summit Advisors Inc',
-  'Manhattan Asset Management', 'London Tech Group Plc', 'Bavaria Software AG', 'Paris Innovate SAS', 'Zurich Enterprise AG',
-  'Copenhagen SaaS A/S', 'Oslo Energy Partners', 'Vienna Capital Management', 'Geneva Global Trade', 'Frankfurt Holdings AG'
-];
-
-const domainsLatam = [
-  'alvaradoholdings.sv', 'bermudezcapital.mx', 'cisneroslogistics.co', 'delgadogroup.cl', 'escobarenterprise.pe',
-  'fuentesindustries.gt', 'guzmanpartners.cr', 'herreratrade.pa', 'mendozacorp.sv', 'vargasretail.co',
-  'constructora.sv', 'gomezlogistics.mx', 'castilloinversiones.com', 'navarrotrade.cl', 'riosbanking.pe',
-  'peraltabuilders.gt', 'moralesassets.cr', 'silvacorp.ar', 'centraltech.io', 'pacificlogistics.pa'
-];
-
-const domainsGlobal = [
-  'apexglobal.co.uk', 'lombardcapital.ch', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it',
-  'cloudscale.fr', 'beneluxventures.nl', 'helsinkifintech.fi', 'pacificlawcorp.us', 'summitadvisors.us',
-  'manhattanassets.us', 'londontechgroup.co.uk', 'bavariasoftware.de', 'parisinnovate.fr', 'zurichenterprise.ch',
-  'copenhagensaas.dk', 'osloenergy.no', 'viennacapital.at', 'genevaglobal.ch', 'frankfurtholdings.de'
-];
-
-const countriesLatam = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'Panamá', 'España'];
-const countriesGlobal = ['Estados Unidos', 'Inglaterra', 'Alemania', 'Suiza', 'Francia', 'Luxemburgo', 'Dinamarca', 'Noruega', 'Finlandia', 'Austria'];
-
-// 2. GENERADOR 500 DIRECTORES FINANCIEROS (CFOs)
 export function generateCfos(count = 500) {
   const list = [];
-  for (let i = 1; i <= count; i++) {
-    const isLatam = i % 2 === 1;
+  for (let i = 0; i < count; i++) {
+    const tc = targetCountries[i % targetCountries.length];
+    const isLatam = (tc.lang === 'es');
     const fnList = isLatam ? firstNamesLatam : firstNamesGlobal;
     const lnList = isLatam ? lastNamesLatam : lastNamesGlobal;
-    const compList = isLatam ? companiesLatam : companiesGlobal;
-    const domList = isLatam ? domainsLatam : domainsGlobal;
-    const countryList = isLatam ? countriesLatam : countriesGlobal;
+    const compList = companiesByCountry[tc.name];
+    const domList = domainsByCountry[tc.name];
 
-    const fn = fnList[(i * 3) % fnList.length];
-    const ln = lnList[(i * 7) % lnList.length];
-    const comp = compList[(i * 5) % compList.length];
-    const dom = domList[(i * 11) % domList.length];
-    const country = countryList[(i * 13) % countryList.length];
+    const idx = i + 1;
+    const fn = fnList[(idx * 3) % fnList.length];
+    const ln = lnList[(idx * 7) % lnList.length];
+    const comp = compList[(idx) % compList.length];
+    const dom = domList[(idx) % domList.length];
 
-    const roleVariants = [
-      'Chief Financial Officer (CFO)',
-      'VP of Finance & Operations',
-      'Director Financiero Corporativo',
-      'Head of Corporate Finance',
-      'Director de Finanzas y Tesorería'
-    ];
-    const role = roleVariants[i % roleVariants.length];
-    const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+    const role = ['Chief Financial Officer (CFO)', 'VP of Finance & Operations', 'Director Financiero Corporativo', 'Head of Corporate Finance', 'Director de Finanzas y Tesorería'][idx % 5];
+    const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${idx}@${dom}`;
 
     list.push({
       email,
       name: `${fn} ${ln}`,
       company: comp,
       role,
-      country,
+      country: tc.name,
+      lang: tc.lang,
       category: 'CFO',
       tag: '👑 CFO_FINANCE',
       batch: 'cfos_500',
@@ -104,39 +94,32 @@ export function generateCfos(count = 500) {
   return list;
 }
 
-// 3. GENERADOR 500 FINANCIAL CONTROLLERS
 export function generateControllers(count = 500) {
   const list = [];
-  for (let i = 1; i <= count; i++) {
-    const isLatam = i % 2 === 0;
+  for (let i = 0; i < count; i++) {
+    const tc = targetCountries[i % targetCountries.length];
+    const isLatam = (tc.lang === 'es');
     const fnList = isLatam ? firstNamesLatam : firstNamesGlobal;
     const lnList = isLatam ? lastNamesLatam : lastNamesGlobal;
-    const compList = isLatam ? companiesLatam : companiesGlobal;
-    const domList = isLatam ? domainsLatam : domainsGlobal;
-    const countryList = isLatam ? countriesLatam : countriesGlobal;
+    const compList = companiesByCountry[tc.name];
+    const domList = domainsByCountry[tc.name];
 
-    const fn = fnList[(i * 2) % fnList.length];
-    const ln = lnList[(i * 5) % lnList.length];
-    const comp = compList[(i * 4) % compList.length];
-    const dom = domList[(i * 9) % domList.length];
-    const country = countryList[(i * 17) % countryList.length];
+    const idx = i + 1;
+    const fn = fnList[(idx * 2) % fnList.length];
+    const ln = lnList[(idx * 5) % lnList.length];
+    const comp = compList[(idx) % compList.length];
+    const dom = domList[(idx) % domList.length];
 
-    const roleVariants = [
-      'Senior Financial Controller',
-      'Contralor Financiero Corporativo',
-      'Corporate Controller & Auditor',
-      'Gerente de Contraloría y Auditoría Interna',
-      'Financial Controlling Manager'
-    ];
-    const role = roleVariants[i % roleVariants.length];
-    const email = `controller.${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+    const role = ['Senior Financial Controller', 'Contralor Financiero Corporativo', 'Corporate Controller & Auditor', 'Gerente de Contraloría y Auditoría Interna', 'Financial Controlling Manager'][idx % 5];
+    const email = `controller.${fn.toLowerCase()}.${ln.toLowerCase()}${idx}@${dom}`;
 
     list.push({
       email,
       name: `${fn} ${ln}`,
       company: comp,
       role,
-      country,
+      country: tc.name,
+      lang: tc.lang,
       category: 'CONTROLLER',
       tag: '📊 FINANCIAL_CONTROLLER',
       batch: 'controllers_500',
@@ -146,7 +129,6 @@ export function generateControllers(count = 500) {
   return list;
 }
 
-// 4. GENERADOR COMPATIBLE CON LOTES
 export function generateOutreachProspects(batch = 'cfos_500') {
   if (batch === 'cfos_500' || batch === 1 || batch === '1') {
     return generateCfos(500);
@@ -160,7 +142,6 @@ export function generateOutreachProspects(batch = 'cfos_500') {
   return generateCfos(500);
 }
 
-// 5. SERVERLESS DISPATCHER HANDLER
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
@@ -224,7 +205,6 @@ export default async function handler(req, res) {
     const senderFrom = (resendClient || (smtpHost && smtpUser)) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
     const results = [];
 
-    // Limitar envío en tiempo real a 20 por lote para respetar límites de SMTP y alta entregabilidad
     const sendLimit = test_mode ? Math.min(5, prospects.length) : Math.min(25, prospects.length);
     const executionProspects = prospects.slice(0, sendLimit);
 
@@ -295,7 +275,6 @@ export default async function handler(req, res) {
               <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Try Free Audit for ${company}</a>
             </p>
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Feel free to reach out directly if you have any questions,</p>
               <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
               <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Founder, AuditFlow AI</p>
             </div>
@@ -303,7 +282,7 @@ export default async function handler(req, res) {
       }
 
       if (test_mode) {
-        results.push({ email, name, status: 'simulated_success', reason: 'Test Mode: email simulated.' });
+        results.push({ email, name, country, status: 'simulated_success', reason: 'Test Mode: email simulated with Resend.' });
       } else {
         try {
           if (resendClient) {
@@ -321,9 +300,9 @@ export default async function handler(req, res) {
               html: bodyHtml
             });
           }
-          results.push({ email, name, status: 'sent' });
+          results.push({ email, name, country, status: 'sent_resend' });
         } catch (dispatchErr) {
-          results.push({ email, name, status: 'error', error: dispatchErr.message });
+          results.push({ email, name, country, status: 'error', error: dispatchErr.message });
         }
       }
     }
