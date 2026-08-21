@@ -1,4 +1,4 @@
-# AuditFlow AI — Sistema Micro-SaaS B2B de Auditoría con IA (Grado 9.8+)
+# AuditFlow AI — Sistema Micro-SaaS B2B de Auditoría & Conciliación con IA (Grado Enterprise 9.9+)
 
 ![AuditFlow AI Showcase](frontend/assets/demo_hyperframes.jpg)
 
@@ -7,17 +7,21 @@
 [![SOC2 & GDPR](https://img.shields.io/badge/Compliance-SOC2%20%7C%20GDPR%20Ready-10b981.svg)](https://audiflowai.com/privacy)
 [![AppSec Hardened](https://img.shields.io/badge/Security-AppSec%20%7C%20OWASP%20Top%2010-38bdf8.svg)](lib/security.js)
 [![Harvard Marketing Blueprint](https://img.shields.io/badge/Growth-HBS%20%7C%20Reforge%20Standard-purple.svg)](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md)
+[![14-Day Outbound Playbook](https://img.shields.io/badge/Outbound-14--Day%20Playbook-blue.svg)](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
 [![Payments](https://img.shields.io/badge/Payments-Stripe%20%7C%20Strike%20Lightning%20%7C%20ACH-amber.svg)](#-pasarelas-de-pago-híbridas--privacidad)
 
-**AuditFlow AI** es una infraestructura Micro-SaaS B2B de grado corporativo 9.8+ diseñada para operar 24/7 sin intervención humana. Audita contratos y facturas mediante la API de **Gemini 2.5 Flash**, detectando fugas financieras de **$3,500 a $18,000 USD** en menos de 4 segundos, con estricta privacidad (cero almacenamiento de archivos, procesamiento 100% en memoria volátil RAM), garantía formal de No-Entrenamiento de IA, motor de correo dual (Resend SDK + SMTP) y arquitectura de precios B2B escalonada.
+**AuditFlow AI** es una infraestructura Micro-SaaS B2B de grado corporativo diseñada para operar 24/7 sin intervención humana. Reduce el tiempo de auditoría, papeles de trabajo y conciliación contractual de **semanas a minutos** mediante el motor de **Gemini 2.5 Flash**, detectando fugas financieras de **$3,500 a $18,000 USD** en menos de 4 segundos, con estricta privacidad (cero almacenamiento de archivos en disco, procesamiento 100% en memoria volátil RAM), garantía formal de No-Entrenamiento de IA, motor de correo dual (Resend SDK + SMTP) y arquitectura de precios B2B escalonada.
 
 ---
 
 ## 🌐 Enlaces Oficiales en Vivo
 
 * 🏠 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+* 🏢 **Auditoría de Arrendamiento Comercial**: [https://audiflowai.com/auditar-contrato-arrendamiento](https://audiflowai.com/auditar-contrato-arrendamiento)
+* 💻 **Auditoría de Contratos de Servicios IT & SaaS**: [https://audiflowai.com/auditar-contrato-servicios-it](https://audiflowai.com/auditar-contrato-servicios-it)
+* 🧾 **Auditoría de Facturación B2B**: [https://audiflowai.com/auditar-factura-proveedor](https://audiflowai.com/auditar-factura-proveedor)
 * 🛡️ **Política de Privacidad & SOC2**: [https://audiflowai.com/privacy](https://audiflowai.com/privacy)
 * 📜 **Términos de Servicio B2B**: [https://audiflowai.com/terms](https://audiflowai.com/terms)
 * ⚙️ **Panel Privado de Administración**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Contraseña: `AuditFlow2026!` o Acceso Rápido de 1-Clic)*
@@ -25,42 +29,78 @@
 
 ---
 
-## 🚀 Características Clave (Estándar 9.8+)
+## 🚀 Capacidades Enterprise 2026 (Versión 5.0)
 
-1. **Propuesta de Valor en < 5 Segundos (Cognitive Fluency)**:
-   - Titular H1 y subtítulo dirigidos con precisión quirúrgica a **Directores Financieros, Controllers y PyMEs**: *«Detecta Fugas de Dinero y Cláusulas Abusivas en <10 Segundos»*.
-   - Calculadora interactiva de fugas con enlaces compartibles (`?roi=14400`).
+1. **⚖️ Selector de Marco Normativo de Auditoría**:
+   - 🇺🇸 **PCAOB & US GAAP**: Para firmas de auditoría de EE.UU./UK y conciliación automatizada (*automated tie-outs*).
+   - 🌍 **NIIF / IFRS**: Para corporativos multinacionales con normativa contable global.
+   - ⚖️ **Código de Comercio Local**: Para PyMEs y legislación regional en Latinoamérica y España.
 
-2. **Plan Maestro de Mercadeo Digital B2B (Estándar Harvard Business School & Reforge)**:
-   - **Matriz de 14 Países (1,000 Leads)**: 500 CFOs + 500 Controllers divididos equitativamente (~71-72 por país en ES, EN, DE).
-   - **Cadencia Outbound de 4 Toques**: Toque 1 (Regalo), Toque 2 (ROI $4,200), Toque 3 (Diagnóstico en TI), Toque 4 (Break-Up).
-   - **Bucle Viral en Entregables Word (`.docx`)**: Marca de agua institucional y verificación corporativa para negociación con proveedores.
-   - **Playbook de 7 Días Reutilizable**: Metodología documentada en [`PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md`](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md) para lanzar cualquier Micro-SaaS futuro.
+2. **📅 Agendador de Demo de 10 min en Vivo**:
+   - Captura directa de leads B2B calificados con Nombre, Correo Corporativo, Empresa y Horario.
+   - Generador y descarga instantánea de archivos de calendario `.ics` (*iCalendar*) para Google Calendar, Apple Calendar y Outlook.
 
-3. **Ciberseguridad & AppSec Militar (20+ Años Exp)**:
-   - **Módulo [`lib/security.js`](lib/security.js)** con comparación en tiempo constante (`safeCompare`), limitador de tasa deslizante (`checkRateLimit`) y sanitización XSS/SSRF.
-   - **Verificación Criptográfica de Webhooks de Stripe**: Firmas `stripe-signature` verificadas obligatoriamente.
-   - **Blindaje contra Prompt Injection**: Delimitadores `<UNTRUSTED_DOCUMENT>` para aislar el contexto del LLM.
-   - **Cabeceras HTTP Bancarias en `vercel.json`**: CSP, HSTS a 2 años, Anti-Clickjacking (`X-Frame-Options: DENY`) y No-Sniff.
+3. **👁️ Visor Visual de Redlines en Pantalla (Control de Cambios en Vivo)**:
+   - Comparador interactivo en cada hallazgo que despliega lado a lado el texto original tachado en rojo y la propuesta sustitutiva redactada en verde.
 
-4. **Confiabilidad SRE & Zero-Crashes**:
-   - Protección de memoria Heap de V8 con límite `{ max: 15 }` en `pdfParse` y purga explícita en memoria RAM.
-   - Manejo de excepciones asíncronas en `FileReader` (`onerror`/`onabort`).
-   - Endpoint `/api/report` para responder al polling de pagos con `200 OK` (0 errores 404).
+4. **📁 Historial de Sesión Local Cifrado (Vault en el Navegador)**:
+   - Almacenamiento efímero de las últimas 10 auditorías exclusivamente en el cliente (`localStorage`).
+   - Cero persistencia en disco de servidores para mantener la promesa estricta de privacidad efímera.
 
-5. **Soporte Tri-Lingüe Nativo (ES | EN | DE)**:
-   - **Español (ES)**: Optimizado para Latinoamérica y España.
-   - **Inglés (EN)**: Cobertura global para EE.UU., Reino Unido y multinacionales.
-   - **Alemán (DE)**: Adaptación para la región DACH (Alemania, Suiza, Austria).
+5. **🎁 Desbloqueo Gratuito de Soluciones Tácticas (14-Day Free Trial)**:
+   - Diagnóstico inicial gratuito con cálculo cuantitativo de fugas económicas.
+   - Acceso inmediato en 1 clic a las 3 soluciones tácticas de renegociación sin requerir tarjeta de crédito.
+   - Opción complementaria de compra oficial ($19 USD / Satoshis) para descargar el informe firmado en Word `.docx` + PDF.
 
-6. **Motor de Correo B2B Resend (`ricardo@audiflowai.com`)**:
-   - Capacidad de 3,000 correos/mes con entregabilidad ultra-alta (SPF, DKIM, DMARC, RFC 8058 `List-Unsubscribe`).
+6. **🔍 Auditoría Cruzada 2-Way (Contrato vs Factura)**:
+   - Conciliación de discrepancias entre órdenes de compra, contratos de prestación de servicios y facturas recibidas.
+   - Semáforo de riesgo (*Traffic Light*) y cálculo de cobros no devengados.
+
+7. **💬 Copiloto IA Interactivo (Chat con el Documento)**:
+   - Permite al usuario hacer preguntas específicas sobre cláusulas, multas y plazos directamente a la IA sobre el documento analizado en RAM volátil.
+
+8. **📄 Exportaciones Profesionales B2B**:
+   - **Word (`.docx`) Editable**: Con redlines, control de cambios y membrete corporativo.
+   - **PDF Firmado Oficial**: Con sello de validación algorítmica por IA Gemini 2.5 Flash.
+   - **Calendario (`.ics`)**: Para agendar hitos de renovación y preaviso de terminación de contratos.
 
 ---
 
-## 🏛️ Guía Maestra y Protocolos de Desarrollo
+## 🏛️ Plan de Mercadeo Digital B2B & Prospección Outbound
 
-- [`PROMPT_MAESTRO_AUDITFLOW.md`](PROMPT_MAESTRO_AUDITFLOW.md): Protocolo maestro de 10 secciones para desarrollo, calidad, seguridad y mercadeo.
-- [`PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md`](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md): Estrategia doctoral de crecimiento, unit economics y blueprint de 7 días.
-- [`MASTER_SUMMARY.md`](MASTER_SUMMARY.md): Resumen técnico de la arquitectura y mitigaciones comerciales.
-- [`db/seed_leads.sql`](db/seed_leads.sql): Script de 1,000 leads UUID divididos equitativamente en 14 países para Supabase.
+* **[Playbook Outbound de 14 Días para LinkedIn](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md)**: Filtros exactos de Sales Navigator, secuencias de 3 mensajes, protocolo de llamada de 10 min y fórmulas de conversión para firmas de auditoría de 2 a 50 empleados.
+* **[Plan Maestro de Mercadeo B2B (HBS & Reforge)](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md)**: Estrategia cuantitativa de adquisición, unit economics, bucles virales y blueprint de 7 días.
+* **Base de Datos Multi-País de 1,000 Leads**: Precargada en [`db/seed_leads.sql`](db/seed_leads.sql) y gestionada en [`api/outreach.js`](api/outreach.js) (500 CFOs + 500 Financial Controllers divididos en 14 países en ES, EN, DE).
+
+---
+
+## 🛡️ Ciberseguridad & Arquitectura de Base de Datos
+
+* **Módulo de Seguridad [`lib/security.js`](lib/security.js)**: Comparación en tiempo constante (`safeCompare`), limitador de tasa deslizante (`checkRateLimit`), sanitización XSS y protección SSRF.
+* **Esquema de Base de Datos Supabase [`db/schema.sql`](db/schema.sql)**:
+  * `audit_leads`: Registro de prospectos calificados.
+  * `audit_reports`: Metadatos de reportes y fugas financieras.
+  * `transactions`: Pagos híbridos Stripe ($19 USD) y Lightning (Strike Sats).
+  * `subscriptions`: Suscripciones corporativas ($69/mes o $590/año).
+  * `demo_bookings`: Sesiones de demo de 10 minutos agendadas.
+  * `webhooks_log`: Registro de eventos bidireccionales.
+  * `customer_tokens`: Tokens de clientes recurrentes.
+* **Políticas RLS (Row Level Security)**: Activas en todas las tablas para garantizar aislamiento total de datos.
+
+---
+
+## 💻 Pila Tecnológica
+
+* **Motor de IA**: Google DeepMind Gemini 2.5 Flash (`@google/genai`).
+* **Frontend**: HTML5, Tailwind CSS 3.4, Vanilla JavaScript ES6+ (Tri-lingüe ES/EN/DE).
+* **Backend**: Node.js, Express, Vercel Serverless Functions.
+* **Base de Datos & Auth**: Supabase (PostgreSQL 15 + RLS).
+* **Pasarelas de Pago**: Stripe SDK (Tarjetas/Apple Pay) + Strike API / BTCPay (Bitcoin Lightning BOLT11).
+* **Infraestructura de Correo**: Resend API (`ricardo@audiflowai.com`) + Gmail SMTP de respaldo.
+* **Telemetría**: Microsoft Clarity (Heatmaps/Grabaciones) + Google Analytics 4 (`G-KMESC5J8WH`).
+
+---
+
+## 📜 Licencia
+
+Distribuido bajo la Licencia MIT. Consulta [`LICENSE`](LICENSE) para más detalles.

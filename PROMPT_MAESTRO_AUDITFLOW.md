@@ -1,5 +1,5 @@
 # 🏛️ PROMPT MAESTRO & PROTOCOLO DE CALIDAD UNIVERSAL AUDITFLOW AI
-**Versión:** 4.0 Enterprise Definitiva • **Fecha:** Agosto 2026 • **Estado:** Producción Oficial (100% Blindado)
+**Versión:** 5.0 Enterprise Definitiva • **Fecha:** Agosto 2026 • **Estado:** Producción Oficial (100% Blindado)
 
 ---
 
@@ -146,3 +146,48 @@ AuditFlow AI y cualquier nuevo Micro-SaaS operan bajo el Playbook de Adquisició
 3. **Erradicación de Rutas 404 en Polling:** Disponibilidad del endpoint `/api/report` para responder al estado de desbloqueo de reportes con código `200 OK`.
 4. **Cero Fugas de Temporizadores:** Destrucción preventiva de intervalos activos (`clearPollingAndTimers()`) antes de instanciar nuevos contadores en pasarelas de pago.
 5. **Timeouts Defensivos en APIs Externas:** Todas las llamadas `fetch()` hacia servicios de terceros (Gemini, CoinGecko, Resend) deben incorporar `signal: AbortSignal.timeout(8000)` para evitar cuelgues *504 Gateway Timeout*.
+
+---
+
+## 🚀 11. LAS 4 CAPACIDADES ENTERPRISE DE ALTA CONVERSIÓN (V5.0)
+
+1. **Selector de Marco Normativo de Auditoría:**
+   - Permite al auditor seleccionar el estándar de validación:
+     * 🇺🇸 **PCAOB & US GAAP:** Para firmas de auditoría de EE.UU./UK y conciliación automatizada (*automated tie-outs*).
+     * 🌍 **NIIF / IFRS:** Para corporativos multinacionales con normativa contable global.
+     * ⚖️ **Código de Comercio Local:** Para PyMEs y legislación regional en Latinoamérica y España.
+   - Refleja automáticamente la insignia normativa en el informe interactivo y en la exportación Word/PDF.
+
+2. **Agendador de Demo de 10 min en Vivo (`#booking-modal`):**
+   - Captura directa de leads calificados con Nombre, Correo Corporativo, Firma/Empresa y Horario preferido.
+   - Generación instantánea y descarga del archivo de calendario `.ics` (*iCalendar*) para Google Calendar, Apple Calendar y Outlook.
+   - Telemetría vinculada a Microsoft Clarity y Google Analytics 4 (`demo_10min_booked`).
+
+3. **Visor Visual de Redlines en Pantalla (Control de Cambios en Vivo):**
+   - Comparador interactivo en cada hallazgo que despliega lado a lado:
+     * 🔴 **Texto Original Detectado:** Cláusula tachada en rojo extraída del documento.
+     * 🟢 **Propuesta Sustitutiva Optimizada:** Cláusula de renegociación fundamentada en verde.
+
+4. **Historial de Sesión Local Cifrado (Vault en Navegador):**
+   - Almacenamiento efímero de las últimas 10 auditorías exclusivamente en el cliente (`localStorage` / `IndexedDB`).
+   - Cero persistencia en disco de servidores para mantener la promesa estricta de privacidad.
+   - Restauración instantánea de análisis previos sin necesidad de volver a subir o procesar el archivo.
+
+---
+
+## 🎯 12. MODELO DE ACCESO LIBRE & DESBLOQUEO TÁCTICO (14-DAY FREE TRIAL)
+
+- **Auditoría Inicial:** 100% gratuita con cálculo cuantitativo de fuga económica y resumen de anomalías.
+- **Desbloqueo de Soluciones Tácticas:** 1-Click Free Trial Unlock (`window.AppHandler.unblurReport('free_trial')`) disponible en cada tarjeta de hallazgo y en el banner principal sin requerir tarjeta de crédito.
+- **Tripwire Oficial ($19 USD):** Opción complementaria para adquirir la copia oficial firmada con sello de auditoría IA en formato Word .docx editable y PDF.
+
+---
+
+## 📈 13. PLAYBOOK OUTBOUND LINKEDIN DE 14 DÍAS PARA FIRMAS DE AUDITORÍA
+
+- **Segmentación:** Senior Auditor, Audit Manager y Partner en firmas de 2 a 50 empleados.
+- **Secuencia de 3 Mensajes:**
+  * **Día 1:** Dolor y promesa de reducción de semanas a minutos en papeles de trabajo y conciliación.
+  * **Día +3:** Caso de estudio con reducción del 60% en horas de tie-out.
+  * **Día +7:** Invitación a sesión en vivo de 10 minutos con entrega de plantilla Word redlines.
+- **Documentación Completa:** Conectado directamente en [`PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md`](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md).
