@@ -82,6 +82,9 @@ window.AppHandler = {
                 event_label: 'sample_contract_button'
             });
         }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'sample_demo_click');
+        }
         const currentLang = window.I18n ? window.I18n.currentLang : 'es';
         const isDe = (currentLang === 'de');
         const isEn = (currentLang === 'en');
@@ -165,12 +168,15 @@ window.AppHandler = {
     async startAuditScanProcess() {
         if (!this.selectedFile) return;
 
-        // Disparar evento personalizado GA4 de inicio de auditoria
+        // Disparar evento personalizado GA4 y Clarity de inicio de auditoria
         if (typeof window.gtag === 'function') {
             window.gtag('event', 'scan_started', {
                 file_name: this.selectedFile.name,
                 file_size: this.selectedFile.size
             });
+        }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'free_trial_scan_started');
         }
 
         const uploadSec = document.getElementById('upload-section');
@@ -681,6 +687,9 @@ window.AppHandler = {
                 event_label: 'b2b_corp_plan_modal'
             });
         }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'enterprise_modal_opened');
+        }
         const modal = document.getElementById('enterprise-modal');
         if (modal) {
             modal.classList.remove('hidden');
@@ -720,6 +729,16 @@ window.AppHandler = {
     },
 
     openSingleAuditPurchase() {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'begin_checkout', {
+                event_category: 'ecommerce',
+                value: 19.00,
+                currency: 'USD'
+            });
+        }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'single_audit_checkout_opened');
+        }
         const reportId = this.currentReportId || 'rep_' + Math.random().toString(36).substring(2, 11);
         const leadEmail = this.currentLeadEmail || 'cliente@empresa.com';
         const docName = this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf';

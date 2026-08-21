@@ -57,8 +57,11 @@ El modelo se basa en tres pilares de la literatura de Harvard Business School:
 
 ## 🚀 PARTE 2: LO QUE FALTA POR REALIZAR (ROADMAP ESTRATÉGICO DE CRECIMIENTO)
 
-### 📍 Fase 1: Activación Outbound & Cadencia de 4 Toques (Días 1 a 14)
+### 📍 Fase 1: Activación Outbound & Cadencias Especializadas (Días 1 a 14)
 *Objetivo: Generar las primeras 200 visitas calificadas y 10 a 25 conversiones pagadas.*
+
+> 📘 **Playbook Específico de LinkedIn para Firmas Contables & Auditores:**  
+> Consulta el documento detallado [PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md) para la prospección directa hacia *Senior Auditors, Audit Managers y Partners* con enfoque en PCAOB/AICPA/GAAP y conciliación automatizada.
 
 #### 🔄 Cadencia de 4 Toques hacia los 1,000 CFOs/Controllers:
 1. **Toque 1 (Día 1) — Gancho Irresistible (Resend API / LinkedIn DM):**

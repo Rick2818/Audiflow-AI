@@ -68,11 +68,11 @@ function generate500Leads() {
   const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
   const statuses = ['PROSPECT', 'LEAD_CAPTURED', 'AUDIT_DOWNLOADED', 'CHECKOUT_STARTED', 'PAID'];
   const rolesData = [
-    { role: 'CFO & VP of Finance', tag: '👑 PLATINUM_CFO' },
-    { role: 'Director de Compras & Procurement', tag: '🛒 PROCUREMENT_LEAD' },
-    { role: 'General Counsel & Director Legal', tag: '⚖️ LEGAL_DIRECTOR' },
-    { role: 'Financial Controller & Auditor', tag: '📊 FINANCIAL_CONTROLLER' },
-    { role: 'Property Manager & Real Estate Lead', tag: '🏢 PROPERTY_MANAGER' }
+    { role: 'CFO & VP of Finance', tag: '👑 PLATINUM_CFO', tier: 'PLATINUM (CFO/Legal Counsel)' },
+    { role: 'Director de Compras & Procurement', tag: '🛒 PROCUREMENT_LEAD', tier: 'GOLD (Procurement/Operations)' },
+    { role: 'General Counsel & Director Legal', tag: '⚖️ LEGAL_DIRECTOR', tier: 'PLATINUM (CFO/Legal Counsel)' },
+    { role: 'Financial Controller & Auditor', tag: '📊 FINANCIAL_CONTROLLER', tier: 'GOLD (Controller/Auditor)' },
+    { role: 'Property Manager & Real Estate Lead', tag: '🏢 PROPERTY_MANAGER', tier: 'SILVER (SMB/Property)' }
   ];
 
   const leads = [];

@@ -29,11 +29,11 @@ window.I18n = {
             support_btn_submit: "🤖 Re-Analizar y Corregir con IA",
             
             // Hero
-            hero_free_badge: "🎁 Escaneo Inicial 100% Gratuito • Sin tarjeta para analizar",
+            hero_free_badge: "🎁 Prueba Gratuita de 14 Días • Sin tarjeta de crédito requerida",
             hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido",
-            hero_title_1: "Detecta Fugas de Dinero y Cláusulas Abusivas en ",
-            hero_title_2: "<10 Segundos",
-            hero_sub: "La plataforma de auditoría de contratos y facturas con IA para Directores Financieros y PyMEs. Evita penalizaciones y sobrecostos antes de firmar o pagar. Escaneo de prueba 100% Gratis en memoria volátil.",
+            hero_title_1: "Reduce el tiempo de auditoría y conciliación de ",
+            hero_title_2: "semanas a minutos",
+            hero_sub: "Guía instantánea y verificada bajo estándares PCAOB, AICPA y GAAP con conciliación automatizada. Cero retención de datos para entrenamiento de IA en memoria RAM volátil.",
             hero_privacy_guarantee: "<strong>Privacidad Total Garantizada:</strong> Tu documento se destruye automáticamente de la memoria RAM efímera tras la auditoría (0 Almacenamiento en Disco).",
             
             // Live Stats Ticker (Confianza Social)
@@ -54,11 +54,11 @@ window.I18n = {
             // Dropzone & Sample Demo Button
             drag_title: "Arrastra tu archivo aquí o ",
             drag_browse: "explora tus archivos",
-            drag_sub_free: "Análisis inicial 100% Gratis • Revisa los hallazgos antes de pagar $19",
+            drag_sub_free: "Prueba gratuita de 14 días • Sin tarjeta requerida • Conciliación automatizada",
             drag_formats: "Soporta PDF, PNG, JPG o WebP (Hasta 15MB)",
             btn_sample_demo: "⚡ Probar con Contrato de Ejemplo (Sin subir archivo)",
             file_ready_ram: "MB • Memoria RAM lista",
-            btn_start_scan: "Iniciar Auditoría Gratuita IA",
+            btn_start_scan: "Comenzar Prueba Gratuita de 14 Días — Sin Tarjeta",
 
             // Trust Micro-Copys & Compliance Badges
             trust_title_1: "🔒 Procesamiento efímero:",
@@ -292,11 +292,11 @@ window.I18n = {
             support_btn_submit: "🤖 Re-Analyze & Fix with AI",
             
             // Hero
-            hero_free_badge: "🎁 100% Free Initial Scan • No card required to analyze",
+            hero_free_badge: "🎁 Start 14-Day Free Trial • No Credit Card Required",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultra-fast processing",
-            hero_title_1: "Detect Financial Leakages & Abusive Clauses in ",
-            hero_title_2: "<10 Seconds",
-            hero_sub: "AI-powered contract & invoice audit infrastructure for CFOs, Controllers, and SMBs. Prevent overcharges and toxic clauses before signing or paying. 100% Free initial scan in volatile RAM.",
+            hero_title_1: "Cut audit workpaper and tie-out time from ",
+            hero_title_2: "weeks to minutes",
+            hero_sub: "Instant, verified guidance from PCAOB, AICPA, and GAAP standards with automated tie-outs. Zero data retention for AI training in volatile RAM.",
             hero_privacy_guarantee: "<strong>Total Privacy Guaranteed:</strong> Your document is automatically purged from volatile RAM memory immediately after auditing (0 Disk Storage).",
             
             // Live Stats Ticker
@@ -317,11 +317,11 @@ window.I18n = {
             // Dropzone & Sample Demo Button
             drag_title: "Drag & drop your file here or ",
             drag_browse: "browse your files",
-            drag_sub_free: "100% Free initial analysis • Review findings before paying $19",
+            drag_sub_free: "Start 14-day free trial • No credit card required • Automated tie-outs",
             drag_formats: "Supports PDF, PNG, JPG or WebP (Up to 15MB)",
             btn_sample_demo: "⚡ Try Sample Contract Demo (No file upload needed)",
             file_ready_ram: "MB • RAM memory ready",
-            btn_start_scan: "Start Free AI Audit",
+            btn_start_scan: "Start 14-Day Free Trial — No Credit Card Required",
 
             // Trust Micro-Copys & Compliance Badges
             trust_title_1: "🔒 Ephemeral Processing:",
@@ -555,11 +555,11 @@ window.I18n = {
             support_btn_submit: "🤖 Mit KI neu analysieren & korrigieren",
             
             // Hero (DE)
-            hero_free_badge: "🎁 100% Kostenlose Erstprüfung • Keine Kreditkarte erforderlich",
+            hero_free_badge: "🎁 14 Tage kostenlos testen • Keine Kreditkarte erforderlich",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultraschnelle Verarbeitung",
-            hero_title_1: "Finanzverluste & Risikoklauseln erkennen in ",
-            hero_title_2: "<10 Sekunden",
-            hero_sub: "Die KI-Vertragsprüfungsplattform für Finanzchefs, Controller und KMUs. Vermeiden Sie Überzahlungen und Knebelklauseln vor der Unterschrift. 100% kostenlose Erstprüfung im flüchtigen RAM.",
+            hero_title_1: "Audit- und Abstimmungszeit reduzieren von ",
+            hero_title_2: "Wochen auf Minuten",
+            hero_sub: "Sofortige, verifizierte Anleitung nach PCAOB-, AICPA- und GAAP-Standards mit automatisierten Abstimmungen. Null Datenspeicherung für KI-Training im flüchtigen RAM.",
             hero_privacy_guarantee: "<strong>Garantierter Datenschutz:</strong> Ihr Dokument wird unmittelbar nach der Prüfung automatisch aus dem flüchtigen RAM-Speicher gelöscht (0 Festplattenspeicherung).",
             
             // Live Stats Ticker (DE)
@@ -580,11 +580,11 @@ window.I18n = {
             // Dropzone & Sample Demo Button (DE)
             drag_title: "Ziehen Sie Ihre Datei hierher oder ",
             drag_browse: "Dateien durchsuchen",
-            drag_sub_free: "100% Kostenlose Erstprüfung • Ergebnisse vor Zahlung von 19 $ ansehen",
+            drag_sub_free: "14 Tage kostenlos testen • Keine Kreditkarte erforderlich • Sofortige automatisierte Abstimmung",
             drag_formats: "Unterstützt PDF, PNG, JPG oder WebP (Bis zu 15MB)",
             btn_sample_demo: "⚡ Mustervertrag ausprobieren (Kein Datei-Upload erforderlich)",
             file_ready_ram: "MB • RAM-Speicher bereit",
-            btn_start_scan: "Kostenlose KI-Prüfung starten",
+            btn_start_scan: "14 Tage kostenlos testen — Keine Kreditkarte erforderlich",
 
             // Trust Micro-Copys & Compliance Badges (DE)
             trust_title_1: "🔒 Flüchtige Verarbeitung:",

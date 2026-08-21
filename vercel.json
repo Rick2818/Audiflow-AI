@@ -93,6 +93,18 @@
       "destination": "/api/payment"
     },
     {
+      "source": "/api/cross-audit",
+      "destination": "/api/cross-audit"
+    },
+    {
+      "source": "/api/export-docx",
+      "destination": "/api/export-docx"
+    },
+    {
+      "source": "/api/chat-document",
+      "destination": "/api/chat-document"
+    },
+    {
       "source": "/api/outreach/send-campaign",
       "destination": "/api/outreach"
     },
@@ -112,7 +124,7 @@
   "crons": [
     {
       "path": "/api/outreach/send-campaign",
-      "schedule": "0 9 * * 1,2,3"
+      "schedule": "0 9 * * 1,2"
     }
   ]
 }

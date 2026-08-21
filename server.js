@@ -1606,9 +1606,9 @@ app.get('/api/admin/stats', async (req, res) => {
 // INICIALIZACIÓN DEL SERVIDOR HTTP (LOCAL & VERCEL SERVERLESS EXPORT)
 // ==============================================================================
 if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-  app.listen(PORT, '0.0.0.0', () => {
+  app.listen(PORT, () => {
     console.log(`=======================================================`);
-    console.log(`🚀 AUDITFLOW AI corriendo en http://0.0.0.0:${PORT}`);
+    console.log(`🚀 AUDITFLOW AI corriendo en http://localhost:${PORT} (o http://127.0.0.1:${PORT})`);
     console.log(`🔒 Procesamiento en memoria volátil ACTIVO + Filtro Pre-Vuelo OCR`);
     console.log(`⚡ Pagos Híbridos Tripwire ($19 USD / Sats) + Upsell $69/mes o $590/año`);
     console.log(`📧 Agente de Correo Activo (Resend API / Gmail SMTP)`);
