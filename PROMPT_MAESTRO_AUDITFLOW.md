@@ -1,4 +1,4 @@
-﻿# 🏛️ PROMPT MAESTRO & PROTOCOLO DE CALIDAD AUDITFLOW AI
+# 🏛️ PROMPT MAESTRO & PROTOCOLO DE CALIDAD AUDITFLOW AI
 **Versión:** 3.5 Enterprise • **Fecha:** Agosto 2026 • **Estado:** Producción Oficial
 
 ---
@@ -63,3 +63,21 @@ AuditFlow AI calibra sus respuestas, análisis y redacciones de cláusulas segú
 - Ningún archivo PDF o TXT subido por clientes se almacena en el disco duro del servidor.
 - El análisis se ejecuta en búfer de memoria RAM volátil que se destruye automáticamente tras procesar la respuesta.
 - Cumplimiento estricto de estándares SOC-2, HIPAA, GDPR y secreto profesional corporativo.
+
+---
+
+## 👥 6. BASE DE DATOS DE PROSPECCIÓN DIRECTA (1,000 EJECUTIVOS B2B)
+- **500 Directores Financieros (CFOs)**: Segmentados por país (Latam, EE.UU., Europa), empresa y score de riesgo (`👑 CFO_FINANCE`).
+- **500 Financial Controllers**: Supervisores de auditoría interna y facturación (`📊 FINANCIAL_CONTROLLER`).
+- **Motor de Envío con Resend API**: `ricardo@audiflowai.com` con capacidad de 3,000 correos/mes, entregabilidad ultra-alta y respaldo automático con Gmail SMTP.
+- **Persistencia en Supabase**: Script de migración y seed `db/seed_leads.sql` con 1,000 registros UUID indexados.
+
+---
+
+## 📊 7. TELEMETRÍA DEL EMBUDO Y EVENTOS GA4 (G-KMESC5J8WH)
+- `sample_demo_click`: Registro de interacción con contrato de ejemplo.
+- `scan_started`: Inicio de auditoría en memoria RAM.
+- `free_scan_completed`: Render de los 3 hallazgos diagnósticos gratuitos.
+- `begin_checkout`: Intento de desbloqueo ($19 USD / Satoshis).
+- `enterprise_modal_opened`: Apertura del Plan Corporativo ($69/mes o $590/año).
+- `roi_calculator_interacted`: Diagnóstico cuantitativo de fugas financieras.

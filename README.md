@@ -39,7 +39,8 @@
 3. **Motor de Correo B2B Resend & Remitente Corporativo**:
    - **Resend SDK Nativo (`resend`)**: Capacidad de hasta 3,000 correos/mes con entregabilidad ultra-alta y autenticación DKIM/SPF/DMARC.
    - **Remitente Oficial**: `Ricardo | AuditFlow AI <ricardo@audiflowai.com>`.
-   - Plantillas de prospección automatizadas con gancho irresistible de auditoría gratuita en los 3 idiomas.
+   - **Base de 1,000 Ejecutivos Calificados**: 500 Directores Financieros (CFOs) + 500 Financial Controllers segmentados por país, empresa y score de riesgo, listos para prospección 1 a 1 y campañas outbound automatizadas en el Panel de Administración.
+   - **Plantillas de Prospección Multicanal**: Guiones optimizados para LinkedIn DMs, Cold Emails y Follow-ups en español, inglés y alemán.
 
 4. **Arquitectura de Precios B2B de Alto Valor ($19 / $69 / $590)**:
    - **Escaneo Diagnóstico ($0 USD):** Vista previa gratuita de 3 anomalías y cálculo de fuga financiera.

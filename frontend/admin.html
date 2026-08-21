@@ -173,10 +173,11 @@
             <!-- ESTRATEGIA DE TAGS & BARRA DE FILTRO POR ETIQUETAS -->
             <div class="px-6 py-3 border-b border-dark-border bg-dark-surface/60 flex items-center gap-2 overflow-x-auto text-xs font-mono">
                 <span class="text-gray-400 font-bold whitespace-nowrap">🏷️ Estrategia de Tags:</span>
-                <button onclick="AdminApp.filterByTag('ALL')" class="px-2.5 py-1 rounded-full bg-accent-blue text-black font-bold">Todos</button>
-                <button onclick="AdminApp.filterByTag('👑 PLATINUM_CFO')" class="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/40">👑 PLATINUM_CFO</button>
+                <button onclick="AdminApp.filterByTag('ALL')" class="px-2.5 py-1 rounded-full bg-accent-blue text-black font-bold">Todos (1,000)</button>
+                <button onclick="AdminApp.filterByTag('👑 CFO_FINANCE')" class="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/40">👑 CFO_FINANCE (500)</button>
+                <button onclick="AdminApp.filterByTag('📊 FINANCIAL_CONTROLLER')" class="px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">📊 FINANCIAL_CONTROLLER (500)</button>
                 <button onclick="AdminApp.filterByTag('🏢 ARRENDAMIENTO')" class="px-2.5 py-1 rounded-full bg-blue-950/80 text-blue-300 border border-blue-500/40">🏢 ARRENDAMIENTO</button>
-                <button onclick="AdminApp.filterByTag('🧾 FACTURACION')" class="px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">🧾 FACTURACION</button>
+                <button onclick="AdminApp.filterByTag('🧾 FACTURACION')" class="px-2.5 py-1 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/40">🧾 FACTURACION</button>
                 <button onclick="AdminApp.filterByTag('💻 SERVICIOS_IT')" class="px-2.5 py-1 rounded-full bg-sky-950/80 text-sky-300 border border-sky-500/40">💻 SERVICIOS_IT</button>
                 <button onclick="AdminApp.filterByTag('🚨 HIGH_LEAKAGE')" class="px-2.5 py-1 rounded-full bg-red-950/80 text-red-300 border border-red-500/40">🚨 HIGH_LEAKAGE</button>
             </div>
@@ -241,7 +242,7 @@
                 </div>
                 <div class="flex items-center gap-2">
                     <button id="btn-test-smtp" onclick="AdminApp.testSmtpConnection()" class="px-3.5 py-1.5 rounded-full bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 text-xs font-mono font-bold border border-emerald-500/30 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm">
-                        ⚡ Probar Conexión Gmail SMTP Outbound
+                        ⚡ Probar Conexión Resend API / Outbound
                     </button>
                 </div>
             </div>
@@ -336,11 +337,14 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                         <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
                             🧪 Simulación de Prueba (Test Mode)
                         </button>
-                        <button onclick="AdminApp.loadProspectsBatch(1)" class="px-3.5 py-2.5 rounded-xl bg-dark-surface border border-blue-500/40 text-blue-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
-                            📦 Cargar Lote 1 (500 Leads Base)
+                        <button onclick="AdminApp.loadProspectsBatch('cfos_500')" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                            👑 Cargar 500 Directores Financieros (CFOs)
                         </button>
-                        <button onclick="AdminApp.loadProspectsBatch(2)" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
-                            🔥 Cargar Lote 2 (500 Nuevos Leads - Hook A/B)
+                        <button onclick="AdminApp.loadProspectsBatch('controllers_500')" class="px-4 py-2.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                            📊 Cargar 500 Financial Controllers
+                        </button>
+                        <button onclick="AdminApp.loadProspectsBatch('all_1000')" class="px-4 py-2.5 rounded-xl bg-accent-blue/20 border border-accent-blue/50 text-accent-blue hover:text-white font-mono text-xs transition-all cursor-pointer">
+                            🚀 Cargar 1,000 Ejecutivos (CFOs + Controllers)
                         </button>
                     </div>
                 </div>
@@ -348,7 +352,8 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 <!-- GUÍAS & STATUS -->
                 <div class="bg-dark-surface border border-dark-border rounded-xl p-4 text-xs space-y-3 font-mono">
                     <h4 class="font-bold text-accent-blue text-sm border-b border-dark-border pb-2">📋 Estado del Despachador</h4>
-                    <p class="text-gray-300">Remitente: <span class="text-emerald-400">rick28191@gmail.com</span></p>
+                    <p class="text-gray-300">Remitente Primario: <span class="text-emerald-400 font-bold">Resend API (ricardo@audiflowai.com / 3,000/mes)</span></p>
+                    <p class="text-gray-300">Respaldo Automático: <span class="text-blue-400">Gmail SMTP (rick28191@gmail.com)</span></p>
                     <p class="text-gray-300">Hook Activo: <span class="text-emerald-400">🎁 Auditoría 100% Gratis de Regalo</span></p>
                     <p class="text-gray-300">Detección: <span class="text-amber-400">$3,500 - $18,000 USD en <8s</span></p>
                     <div id="outreach-status-log" class="p-3 bg-black/40 border border-dark-border rounded-lg text-[11px] text-gray-400 min-h-[100px] overflow-y-auto font-mono">
@@ -769,41 +774,62 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 }
             },
 
-            loadProspectsBatch(batch = 2) {
+            loadProspectsBatch(batch = 'cfos_500') {
                 const area = document.getElementById('outreach-emails-input');
                 const logBox = document.getElementById('outreach-status-log');
                 if (!area) return;
 
-                const firstNamesBatch1 = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
-                const lastNamesBatch1 = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
-                const domainsBatch1 = ['mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx', 'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar', 'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'];
+                const firstNamesLatam = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Andrés', 'Valeria', 'Rodrigo', 'Daniela', 'Gonzalo', 'Natalia', 'Esteban', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio', 'Paula', 'Ricardo', 'Guillermo', 'Alfonso', 'Claudio', 'Beatriz', 'Raquel', 'Manuel', 'Pablo', 'Joaquín'];
+                const lastNamesLatam = ['Mendoza', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Alvarado', 'Bermúdez', 'Cisneros', 'Delgado', 'Escobar', 'Fuentes', 'Guzmán', 'Herrera', 'Ibáñez', 'Jiménez', 'Lara', 'Montero', 'Noriega', 'Orellana', 'Paredes', 'Quezada', 'Ramírez', 'Salazar', 'Trejo', 'Urrutia', 'Velasco', 'Ortega', 'Santana', 'Castañeda', 'Palacios', 'Fuenzalida', 'Montenegro', 'Barrios', 'Carrasco', 'Valdés', 'Rojas'];
+                const firstNamesGlobal = ['Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper', 'Arthur', 'Grace', 'Chloe', 'Liam', 'Zoe', 'Noah', 'Lily', 'Mason', 'Hannah', 'Ethan', 'Ella', 'James', 'Aria', 'Thomas', 'Marcus', 'Stefan', 'Lars', 'Astrid', 'Pierre', 'Isabelle', 'Jean', 'Hans', 'Katrin', 'Mikko', 'Juha', 'Bjørn'];
+                const lastNamesGlobal = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Miller', 'Davis', 'Wilson', 'Anderson', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Walker', 'Hall', 'Allen', 'Young', 'King', 'Wright', 'Scott', 'Green', 'Baker', 'Adams', 'Nelson', 'Carter', 'Mitchell', 'Perez', 'Roberts', 'Turner', 'Schmidt', 'Mueller', 'Schneider', 'Fischer', 'Weber', 'Meyer', 'Wagner', 'Becker', 'Hoffmann', 'Schäfer'];
 
-                const firstNamesBatch2 = ['Andrés', 'Valeria', 'Rodrigo', 'Daniela', 'Gonzalo', 'Natalia', 'Esteban', 'Camila', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio', 'Paula', 'Arthur', 'Grace', 'Lucas', 'Chloe', 'Liam', 'Zoe', 'Noah', 'Lily', 'Mason', 'Hannah', 'Ethan', 'Ella', 'James', 'Aria'];
-                const lastNamesBatch2 = ['Alvarado', 'Bermúdez', 'Cisneros', 'Delgado', 'Escobar', 'Fuentes', 'Guzmán', 'Herrera', 'Ibáñez', 'Jiménez', 'Lara', 'Montero', 'Noriega', 'Orellana', 'Paredes', 'Quezada', 'Ramírez', 'Salazar', 'Trejo', 'Urrutia', 'Velasco', 'Walker', 'White', 'Harris', 'Clark', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen'];
-                const domainsBatch2 = ['alvaradoholdings.sv', 'bermudezcapital.mx', 'cisneroslogistics.co', 'delgadogroup.cl', 'escobarenterprise.pe', 'fuentesindustries.gt', 'guzmanpartners.cr', 'herreratrade.pa', 'ibanezventures.es', 'monteroglobal.ch', 'apexcorp.co.uk', 'bavariasoftware.de', 'nordicscale.se', 'parisinnovate.fr', 'beneluxcloud.nl', 'helsinkifintech.fi', 'pacificlawcorp.us', 'summitadvisors.us', 'manhattanassets.us', 'londontechgroup.co.uk'];
+                const companiesLatam = ['Alvarado Holdings', 'Bermúdez Capital', 'Cisneros Logistics', 'Delgado Group', 'Escobar Enterprise', 'Fuentes Industries', 'Guzmán Partners', 'Herrera Trade', 'Mendoza Corp', 'Vargas Retail Group', 'Constructora Central SV', 'Gómez Logistics MX', 'Castillo Inversiones', 'Navarro Trade Latam', 'Ríos Banking Group', 'Peralta Builders', 'Morales Assets', 'Silva & Asociados', 'Central American Tech', 'Logística del Pacífico'];
+                const companiesGlobal = ['Apex Global Holdings', 'Lombard Capital Partners', 'Vertex Trading Group', 'Nordic Logistics AS', 'Finanze Prova SA', 'Cloudscale Systems', 'Benelux Ventures BV', 'Helsinki Fintech Group', 'Pacific Corporate Law', 'Summit Advisors Inc', 'Manhattan Asset Management', 'London Tech Group Plc', 'Bavaria Software AG', 'Paris Innovate SAS', 'Zurich Enterprise AG', 'Copenhagen SaaS A/S', 'Oslo Energy Partners', 'Vienna Capital Management', 'Geneva Global Trade', 'Frankfurt Holdings AG'];
 
-                const firstNames = batch === 2 ? firstNamesBatch2 : firstNamesBatch1;
-                const lastNames = batch === 2 ? lastNamesBatch2 : lastNamesBatch1;
-                const domains = batch === 2 ? domainsBatch2 : domainsBatch1;
-                const roles = ['CFO & VP of Finance', 'Director Legal B2B', 'Gerente de Compras & Procurement', 'General Counsel', 'Director de Operaciones & Finanzas'];
-                const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
+                const domainsLatam = ['alvaradoholdings.sv', 'bermudezcapital.mx', 'cisneroslogistics.co', 'delgadogroup.cl', 'escobarenterprise.pe', 'fuentesindustries.gt', 'guzmanpartners.cr', 'herreratrade.pa', 'mendozacorp.sv', 'vargasretail.co', 'constructora.sv', 'gomezlogistics.mx', 'castilloinversiones.com', 'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesassets.cr', 'silvacorp.ar', 'centraltech.io', 'pacificlogistics.pa'];
+                const domainsGlobal = ['apexglobal.co.uk', 'lombardcapital.ch', 'vertextrading.de', 'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkifintech.fi', 'pacificlawcorp.us', 'summitadvisors.us', 'manhattanassets.us', 'londontechgroup.co.uk', 'bavariasoftware.de', 'parisinnovate.fr', 'zurichenterprise.ch', 'copenhagensaas.dk', 'osloenergy.no', 'viennacapital.at', 'genevaglobal.ch', 'frankfurtholdings.de'];
+
+                const countriesLatam = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'Panamá', 'España'];
+                const countriesGlobal = ['Estados Unidos', 'Inglaterra', 'Alemania', 'Suiza', 'Francia', 'Luxemburgo', 'Dinamarca', 'Noruega', 'Finlandia', 'Austria'];
 
                 const lines = [];
-                for (let i = 1; i <= 500; i++) {
-                    const fn = firstNames[i % firstNames.length];
-                    const ln = lastNames[(i * 3) % lastNames.length];
-                    const dom = domains[(i * 7) % domains.length];
-                    const role = roles[i % roles.length];
-                    const country = countries[i % countries.length];
-                    const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
-                    const company = dom.split('.')[0].toUpperCase();
-                    lines.push(`${email}, ${fn} ${ln}, ${company}, ${role}, ${country}`);
+
+                if (batch === 'cfos_500' || batch === 'all_1000' || batch === 1) {
+                    for (let i = 1; i <= 500; i++) {
+                        const isLatam = (i % 2 === 1);
+                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 3) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
+                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
+                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 5) % (isLatam ? companiesLatam : companiesGlobal).length];
+                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 11) % (isLatam ? domainsLatam : domainsGlobal).length];
+                        const country = (isLatam ? countriesLatam : countriesGlobal)[(i * 13) % (isLatam ? countriesLatam : countriesGlobal).length];
+                        const role = ['Chief Financial Officer (CFO)', 'VP of Finance & Operations', 'Director Financiero Corporativo', 'Head of Corporate Finance', 'Director de Finanzas y Tesorería'][i % 5];
+                        const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, 👑 CFO_FINANCE`);
+                    }
+                }
+
+                if (batch === 'controllers_500' || batch === 'all_1000' || batch === 2) {
+                    for (let i = 1; i <= 500; i++) {
+                        const isLatam = (i % 2 === 0);
+                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 2) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
+                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 5) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
+                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 4) % (isLatam ? companiesLatam : companiesGlobal).length];
+                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 9) % (isLatam ? domainsLatam : domainsGlobal).length];
+                        const country = (isLatam ? countriesLatam : countriesGlobal)[(i * 17) % (isLatam ? countriesLatam : countriesGlobal).length];
+                        const role = ['Senior Financial Controller', 'Contralor Financiero Corporativo', 'Corporate Controller & Auditor', 'Gerente de Contraloría y Auditoría Interna', 'Financial Controlling Manager'][i % 5];
+                        const email = `controller.${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, 📊 FINANCIAL_CONTROLLER`);
+                    }
                 }
 
                 area.value = lines.join('\n');
-                const batchLabel = batch === 2 ? 'Lote 2 (500 Nuevos Prospectos - Hook A/B Irresistible)' : 'Lote 1 (500 Prospectos Base)';
-                if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡${batchLabel} cargados exitosamente en el despachador!</span><br>`;
-                alert(`⚡ ¡${batchLabel} pre-cargados exitosamente!`);
+                let batchLabel = '500 Directores Financieros (CFOs)';
+                if (batch === 'controllers_500') batchLabel = '500 Financial Controllers';
+                if (batch === 'all_1000') batchLabel = '1,000 Ejecutivos (500 CFOs + 500 Controllers)';
+                
+                if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡${batchLabel} cargados exitosamente (${lines.length} registros listos para Resend / SMTP)!</span><br>`;
+                alert(`⚡ ¡${batchLabel} pre-cargados exitosamente! (${lines.length} registros)`);
             },
 
             load500Prospects() {
