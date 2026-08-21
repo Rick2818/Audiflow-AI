@@ -247,6 +247,7 @@ Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y as
 1. **Regla de Retorno a Inicio:** Ninguna sección, modal, visor de reporte o panel de administración puede quedar aislado sin un botón explícito de **«🏠 Regresar al Inicio»**.
 2. **Conmutación Universal de Idiomas (i18n):** Los selectores de idiomas (`ES | EN | DE`) deben estar presentes tanto en la barra principal como en el interior de los modales y secciones dedicadas, sincronizando el estado global (`[data-lang-btn]`) de forma reactiva instantánea.
 3. **Pestañas Flotantes de Soporte:** Pestañas fijas de acceso rápido (`fixed bottom-5 left-5 z-40`) disponibles en todas las páginas para abrir guías y manuales interactivos en cualquier momento.
+4. **Barra Lateral de Desplazamiento Siempre Visible (Always-On Scrollbar):** Toda página web, landing, panel `/admin` o visor documental DEBE forzar la barra de desplazamiento vertical visible (`html { overflow-y: scroll !important; scrollbar-gutter: stable; }`) con estilos contrastantes (`width: 10px; background: #374151; hover: #38BDF8;`), garantizando que el usuario siempre pueda subir o bajar cómodamente sin que la barra desaparezca o se oculte.
 
 ### D. Protocolo de Validación en Tiempo Real
 - Cada vez que se configure una campaña de correo o infraestructura de notificación, se debe despachar automáticamente un correo de comprobación a la bandeja personal (`rick28191@gmail.com`) para validar formato visual, entregabilidad y legibilidad antes de iniciar envíos masivos.

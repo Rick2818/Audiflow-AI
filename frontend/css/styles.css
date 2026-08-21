@@ -345,24 +345,35 @@ body {
 }
 
 /* ==============================================================================
-   PERSONALIZACIÓN DE SCROLLBARS
+   PERSONALIZACIÓN DE SCROLLBARS (SIEMPRE VISIBLE Y DE ALTO CONTRASTE)
    ============================================================================== */
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
 ::-webkit-scrollbar {
-    width: 7px;
-    height: 7px;
+    width: 10px;
+    height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--bg-canvas);
+    background: #0B0F19;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #27272a;
-    border-radius: 4px;
+    background: #374151;
+    border-radius: 6px;
+    border: 2px solid #0B0F19;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #3f3f46;
+    background: #38BDF8;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #374151 #0B0F19;
 }
 
 /* ==============================================================================

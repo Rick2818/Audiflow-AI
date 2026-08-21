@@ -103,6 +103,8 @@ Este documento es el activo de conocimiento supremo y la memoria técnica del ag
      * Pestaña flotante permanente de acceso rápido (`fixed bottom-5 left-5 z-40`).
 3. **Despacho Automático de Validación al Propietario:**
    - Toda configuración de correo debe despachar de inmediato un correo de prueba a la bandeja del dueño (`rick28191@gmail.com`) para validar diseño, entregabilidad y legibilidad antes de cualquier envío masivo.
+4. **Barra Lateral de Desplazamiento Siempre Visible (Always-On Scrollbar):**
+   - En toda vista, landing page, modal o dashboard, la barra de desplazamiento vertical DEBE forzarse activa (`html { overflow-y: scroll !important; scrollbar-gutter: stable; }`) con colores contrastantes (`#374151` con hover `#38BDF8`) para que el usuario siempre pueda subir o bajar con total comodidad.
 
 ---
 
