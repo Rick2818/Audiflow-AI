@@ -247,6 +247,14 @@
                 <span data-i18n="nav_firewall_badge" class="text-accent-emerald font-mono text-xs hidden sm:inline px-2.5 py-1 rounded bg-emerald-950/40 border border-emerald-500/30 font-bold">
                     🔒 Firewall & WAF Activo (AES-256)
                 </span>
+                <!-- BOTÓN AGENDAR DEMO 10 MIN -->
+                <button onclick="window.AppHandler.openBookingModal()" class="px-2.5 py-1.5 rounded-lg bg-emerald-950/50 hover:bg-emerald-900/70 border border-emerald-500/40 text-emerald-300 font-bold text-xs shadow-glow transition-all hidden lg:inline-flex items-center gap-1.5">
+                    📅 <span data-i18n="nav_book_demo">Demo 10 min</span>
+                </button>
+                <!-- BOTÓN HISTORIAL DE SESIÓN LOCAL -->
+                <button onclick="window.AppHandler.openVaultModal()" class="px-2.5 py-1.5 rounded-lg bg-dark-card hover:bg-dark-surface border border-gray-700 text-gray-300 hover:text-white font-mono text-xs transition-all hidden md:inline-flex items-center gap-1.5">
+                    📁 <span data-i18n="nav_vault">Historial Local</span>
+                </button>
                 <!-- ENLACE DIRECTO A TABLA DE PRECIOS -->
                 <a href="#pricing-section" class="text-xs font-mono font-bold text-gray-300 hover:text-accent-blue transition-all hidden md:inline-flex items-center gap-1">
                     💰 <span data-i18n="nav_pricing">Precios</span>
@@ -388,6 +396,18 @@
                     window.updateRoiCalculator = updateRoiCalculator;
                     document.addEventListener('DOMContentLoaded', updateRoiCalculator);
                 </script>
+
+                <!-- SELECTOR DE MARCO NORMATIVO DE AUDITORÍA -->
+                <div class="mb-5 inline-flex flex-col sm:flex-row items-center justify-center gap-2.5 p-2 rounded-xl bg-dark-card border border-accent-blue/30 text-xs font-mono shadow-sm mx-auto">
+                    <span data-i18n="standard_selector_label" class="text-gray-300 font-semibold flex items-center gap-1">
+                        ⚖️ Marco Normativo:
+                    </span>
+                    <select id="audit-standard-select" onchange="window.AppHandler &amp;&amp; window.AppHandler.setAuditStandard(this.value)" class="bg-dark-surface border border-accent-blue/50 text-accent-blue rounded-lg px-3 py-1.5 font-bold focus:outline-none focus:ring-1 focus:ring-accent-blue cursor-pointer">
+                        <option value="PCAOB_GAAP" data-i18n="opt_pcaob_gaap">🇺🇸 PCAOB &amp; US GAAP (Firmas de Auditoría)</option>
+                        <option value="IFRS_NIIF" data-i18n="opt_ifrs_niif">🌍 NIIF / IFRS (Corporativo Internacional)</option>
+                        <option value="LOCAL_CODE" data-i18n="opt_local_code">⚖️ Código de Comercio Local (PyMEs &amp; LatAm)</option>
+                    </select>
+                </div>
 
                 <!-- ÁREA DRAG & DROP -->
                 <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-4 focus:outline-none focus:ring-2 focus:ring-accent-blue">
@@ -736,8 +756,9 @@
 
             <div class="bg-dark-card border border-border-dark rounded-2xl p-6 sm:p-8 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-xl">
                 <div>
-                    <div class="flex items-center gap-3 mb-2">
+                    <div class="flex items-center gap-3 mb-2 flex-wrap">
                         <span id="rep-doc-type" data-i18n="rep_doc_default" class="px-3 py-1 rounded-full bg-border-dark text-accent-blue text-xs font-mono font-medium">Contrato Comercial</span>
+                        <span id="rep-standard-badge" class="px-3 py-1 rounded-full bg-accent-blue/15 text-accent-blue border border-accent-blue/30 text-xs font-mono font-bold">🇺🇸 PCAOB &amp; US GAAP</span>
                         <span id="rep-risk-badge" data-i18n="rep_risk_high" class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">RIESGO ALTO</span>
                     </div>
                     <h2 id="rep-doc-name" class="text-xl sm:text-2xl font-bold text-white">Auditoría: Contrato_Servicios.pdf</h2>
@@ -1199,6 +1220,80 @@
                         <span data-i18n="chat_btn_send">Enviar</span>
                     </button>
                 </form>
+            </div>
+        </div>
+
+        <!-- MODAL DE AGENDAMIENTO DE DEMO DE 10 MINUTOS EN VIVO -->
+        <div id="booking-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-emerald-500/50 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto">
+                <button onclick="window.AppHandler.closeBookingModal()" aria-label="Cerrar modal de demo" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-2xl mb-4 mx-auto">
+                    📅
+                </div>
+                <h3 data-i18n="booking_modal_title" class="text-xl font-bold text-white text-center mb-1">Agendar Sesión de 10 min en Vivo</h3>
+                <p data-i18n="booking_modal_sub" class="text-xs text-gray-400 text-center mb-6 font-mono">Revisa cómo AuditFlow AI reduce el tiempo de auditoría con un especialista en conciliación automatizada.</p>
+
+                <form onsubmit="window.AppHandler.handleBookingSubmit(event)" class="space-y-4 text-left">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Nombre Completo</label>
+                        <input type="text" id="booking-name-input" placeholder="Lic. Carlos Mendoza" required class="input-field text-xs font-mono">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Correo Electrónico Corporativo</label>
+                        <input type="email" id="booking-email-input" placeholder="carlos@firma-auditoria.com" required class="input-field text-xs font-mono">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 mb-1">Empresa / Firma</label>
+                            <input type="text" id="booking-company-input" placeholder="Mendoza &amp; Asociados" required class="input-field text-xs font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-mono text-gray-300 mb-1">Fecha / Hora</label>
+                            <input type="datetime-local" id="booking-date-input" required class="input-field text-xs font-mono text-gray-200">
+                        </div>
+                    </div>
+
+                    <div id="booking-confirm-box" class="hidden p-3.5 rounded-xl bg-emerald-950/60 border border-emerald-500/50 text-xs font-mono text-emerald-300 leading-relaxed text-center">
+                        ✅ ¡Cita confirmada! Se ha generado tu invitación .ics para Google Calendar/Outlook.
+                    </div>
+
+                    <button type="submit" class="btn-primary bg-gradient-to-r from-emerald-600 to-accent-blue w-full py-3.5 text-center font-bold text-xs shadow-glow flex justify-center items-center gap-2">
+                        <span data-i18n="booking_btn_submit">📅 Confirmar y Descargar Cita (.ics)</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- MODAL DE HISTORIAL DE AUDITORÍAS DE SESIÓN LOCAL (VAULT CIFRADO) -->
+        <div id="vault-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-accent-blue/40 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl my-auto">
+                <button onclick="window.AppHandler.closeVaultModal()" aria-label="Cerrar historial local" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="w-10 h-10 rounded-xl bg-accent-blue/20 text-accent-blue flex items-center justify-center font-bold text-xl">
+                        📁
+                    </div>
+                    <div>
+                        <h3 data-i18n="vault_modal_title" class="text-lg font-bold text-white">Historial de Auditorías de Sesión (Cifrado Local)</h3>
+                        <p data-i18n="vault_modal_sub" class="text-xs text-gray-400 font-mono">Tus últimas auditorías guardadas exclusivamente en la memoria local de tu navegador (0 servidores).</p>
+                    </div>
+                </div>
+
+                <div id="vault-records-list" class="my-4 max-h-64 overflow-y-auto space-y-2.5 pr-1">
+                    <!-- Registros dinámicos -->
+                </div>
+
+                <div class="pt-3 border-t border-border-dark flex items-center justify-between">
+                    <button onclick="window.AppHandler.clearSessionVault()" class="text-xs font-mono text-red-400 hover:text-red-300 underline">
+                        <span data-i18n="vault_clear_btn">Vaciar Historial</span>
+                    </button>
+                    <button onclick="window.AppHandler.closeVaultModal()" class="btn-secondary text-xs px-4 py-2 font-mono">
+                        Cerrar
+                    </button>
+                </div>
             </div>
         </div>
 

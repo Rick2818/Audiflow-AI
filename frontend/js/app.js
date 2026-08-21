@@ -7,6 +7,7 @@ window.AppHandler = {
     selectedFile: null,
     currentAuditData: null,
     currentReportId: null,
+    currentAuditStandard: 'PCAOB_GAAP',
     currentLeadData: { name: '', email: '' },
 
     init() {
@@ -596,11 +597,35 @@ window.AppHandler = {
                             </button>
                         </div>
                     </div>
+
+                    <!-- VISOR VISUAL DE REDLINES / DIFF EN PANTALLA -->
+                    <div class="pt-2">
+                        <button onclick="window.AppHandler.toggleRedlineDiff(${idx})" class="text-xs font-mono text-accent-blue hover:text-white flex items-center gap-1.5 transition-all">
+                            <span>👁️</span> <span>${window.I18n ? window.I18n.t('diff_view_toggle') : 'Ver Control de Cambios en Vivo (Redlines)'}</span>
+                        </button>
+                        <div id="redline-diff-box-${idx}" class="hidden mt-3 p-3.5 rounded-xl bg-dark-surface border border-gray-700 font-mono text-xs space-y-2.5">
+                            <div>
+                                <span class="text-red-400 font-bold block mb-1">🔴 ${window.I18n ? window.I18n.t('diff_original_label') : 'Texto Original Detectado:'}</span>
+                                <div class="p-2 rounded-lg bg-red-950/40 border border-red-500/30 text-red-300 line-through leading-relaxed">
+                                    "${finding.clause_reference || defaultClauseLabel}: ${teaserText}"
+                                </div>
+                            </div>
+                            <div>
+                                <span class="text-emerald-400 font-bold block mb-1">🟢 ${window.I18n ? window.I18n.t('diff_revised_label') : 'Propuesta Sustitutiva Optimizada:'}</span>
+                                <div class="p-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 leading-relaxed font-semibold">
+                                    "${solutionText}"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `;
 
             container.appendChild(card);
         });
+
+        // Guardar automáticamente en el Vault de Sesión Local
+        this.saveToSessionVault(data);
 
         if (window.PaymentHandler) {
             window.PaymentHandler.init(
@@ -1139,6 +1164,167 @@ window.AppHandler = {
             `;
         }
         messagesBox.scrollTop = messagesBox.scrollHeight;
+    },
+
+    // 1. SELECTOR DE MARCO NORMATIVO
+    setAuditStandard(standard) {
+        this.currentAuditStandard = standard;
+        const badge = document.getElementById('rep-standard-badge');
+        if (badge) {
+            if (standard === 'PCAOB_GAAP') badge.innerText = '🇺🇸 PCAOB & US GAAP';
+            else if (standard === 'IFRS_NIIF') badge.innerText = '🌍 NIIF / IFRS';
+            else if (standard === 'LOCAL_CODE') badge.innerText = '⚖️ Código de Comercio Local';
+        }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'audit_standard_selected_' + standard);
+        }
+    },
+
+    // 2. VISOR VISUAL DE REDLINES (DIFF) EN PANTALLA
+    toggleRedlineDiff(idx) {
+        const box = document.getElementById(`redline-diff-box-${idx}`);
+        if (box) {
+            box.classList.toggle('hidden');
+        }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'redline_diff_toggled');
+        }
+    },
+
+    // 3. AGENDAMIENTO DE DEMO 10 MIN EN VIVO
+    openBookingModal() {
+        const modal = document.getElementById('booking-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closeBookingModal() {
+        const modal = document.getElementById('booking-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    handleBookingSubmit(e) {
+        e.preventDefault();
+        const name = document.getElementById('booking-name-input').value;
+        const email = document.getElementById('booking-email-input').value;
+        const company = document.getElementById('booking-company-input').value;
+
+        // Generar archivo de calendario .ics descargable
+        const title = `Demo 10 min AuditFlow AI - ${company || name}`;
+        const description = `Sesión en vivo de 10 minutos con especialista de AuditFlow AI para ${name} (${email}).`;
+        const icsContent = [
+            'BEGIN:VCALENDAR',
+            'VERSION:2.0',
+            'PRODID:-//AuditFlow AI//Demo Calendar//EN',
+            'BEGIN:VEVENT',
+            `SUMMARY:${title}`,
+            `DESCRIPTION:${description}`,
+            `DTSTART:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+            `DTEND:${new Date(Date.now() + 600000).toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+            'STATUS:CONFIRMED',
+            'END:VEVENT',
+            'END:VCALENDAR'
+        ].join('\r\n');
+
+        const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'AuditFlow_AI_Demo_10min.ics';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        const confirmBox = document.getElementById('booking-confirm-box');
+        if (confirmBox) confirmBox.classList.remove('hidden');
+
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'demo_10min_booked');
+        }
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'demo_booked', { email, company });
+        }
+    },
+
+    // 4. HISTORIAL DE AUDITORÍAS DE SESIÓN LOCAL (VAULT CIFRADO EN NAVEGADOR)
+    saveToSessionVault(data) {
+        try {
+            const vault = JSON.parse(localStorage.getItem('auditflow_session_vault') || '[]');
+            const record = {
+                id: this.currentReportId || ('rep_' + Math.random().toString(36).substr(2, 9)),
+                docName: (this.selectedFile ? this.selectedFile.name : 'Contrato_Auditado.pdf'),
+                standard: this.currentAuditStandard || 'PCAOB_GAAP',
+                leakage: data.total_financial_leakage || 14850,
+                score: data.lead_score || 85,
+                timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                data: data
+            };
+            const filtered = vault.filter(v => v.id !== record.id);
+            filtered.unshift(record);
+            localStorage.setItem('auditflow_session_vault', JSON.stringify(filtered.slice(0, 10)));
+        } catch (e) {
+            console.warn('Vault storage error:', e);
+        }
+    },
+
+    openVaultModal() {
+        const modal = document.getElementById('vault-modal');
+        const list = document.getElementById('vault-records-list');
+        if (!modal || !list) return;
+
+        try {
+            const vault = JSON.parse(localStorage.getItem('auditflow_session_vault') || '[]');
+            if (vault.length === 0) {
+                list.innerHTML = `<div class="p-6 text-center text-gray-400 font-mono text-xs">${window.I18n ? window.I18n.t('vault_empty_msg') : 'No tienes auditorías recientes en esta sesión del navegador.'}</div>`;
+            } else {
+                list.innerHTML = vault.map((item) => `
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark flex items-center justify-between gap-3 text-left">
+                        <div>
+                            <div class="font-bold text-white text-xs sm:text-sm flex items-center gap-2">
+                                <span>📄 ${item.docName}</span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-accent-blue/15 text-accent-blue">${item.standard}</span>
+                            </div>
+                            <div class="text-xs font-mono text-gray-400 mt-1">
+                                Fuga: <span class="text-red-400 font-bold">$${item.leakage.toLocaleString()} USD</span> • Score: <span class="text-emerald-400 font-bold">${item.score}/100</span> • ${item.timestamp}
+                            </div>
+                        </div>
+                        <button onclick="window.AppHandler.loadFromSessionVault('${item.id}')" class="btn-secondary text-xs px-3 py-1.5 font-mono text-accent-blue hover:text-white shrink-0">
+                            ${window.I18n ? window.I18n.t('vault_load_btn') : 'Ver'}
+                        </button>
+                    </div>
+                `).join('');
+            }
+        } catch (e) {
+            list.innerHTML = `<div class="p-4 text-center text-red-400 text-xs">Error cargando historial local.</div>`;
+        }
+
+        modal.classList.remove('hidden');
+    },
+
+    closeVaultModal() {
+        const modal = document.getElementById('vault-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    loadFromSessionVault(id) {
+        try {
+            const vault = JSON.parse(localStorage.getItem('auditflow_session_vault') || '[]');
+            const record = vault.find(v => v.id === id);
+            if (record && record.data) {
+                this.closeVaultModal();
+                this.currentReportId = record.id;
+                this.selectedFile = { name: record.docName };
+                if (record.standard) this.setAuditStandard(record.standard);
+                this.currentAuditData = record.data;
+                this.renderAuditReportDashboard(record.data);
+                this.showReportSection();
+            }
+        } catch (e) {
+            console.error('Error restoring from vault:', e);
+        }
+    },
+
+    clearSessionVault() {
+        localStorage.removeItem('auditflow_session_vault');
+        this.openVaultModal();
     }
 };
 

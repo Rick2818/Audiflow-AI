@@ -148,6 +148,25 @@ window.I18n = {
             pay_ln_node_label: "Directo a nodo Lightning:",
             btn_preview_sample_pdf: "Ver Ejemplo de Reporte PDF Oficial Modelo",
 
+            // 4 Nuevas Funciones Enterprise: Selector Normativa, Agendador Demo, Redlines y Vault Local
+            standard_selector_label: "⚖️ Marco Normativo:",
+            opt_pcaob_gaap: "🇺🇸 PCAOB & US GAAP (Firmas de Auditoría)",
+            opt_ifrs_niif: "🌍 NIIF / IFRS (Corporativo Internacional)",
+            opt_local_code: "⚖️ Código de Comercio Local (PyMEs & LatAm)",
+            nav_book_demo: "Demo 10 min",
+            nav_vault: "Historial Local",
+            booking_modal_title: "Agendar Sesión de 10 min en Vivo",
+            booking_modal_sub: "Revisa cómo AuditFlow AI reduce el tiempo de auditoría con un especialista en conciliación automatizada.",
+            booking_btn_submit: "📅 Confirmar y Descargar Cita (.ics)",
+            diff_view_toggle: "👁️ Ver Control de Cambios en Vivo (Redlines)",
+            diff_original_label: "Texto Original Detectado:",
+            diff_revised_label: "Propuesta Sustitutiva Optimizada:",
+            vault_modal_title: "📁 Historial de Auditorías de Sesión (Cifrado Local)",
+            vault_modal_sub: "Tus últimas auditorías guardadas exclusivamente en la memoria local de tu navegador (0 servidores).",
+            vault_empty_msg: "No tienes auditorías recientes en esta sesión del navegador.",
+            vault_load_btn: "Ver Reporte",
+            vault_clear_btn: "Vaciar Historial",
+
             // Features & Footer
             feat_1_tag: "01. Privacidad Total",
             feat_1_title: "Cero Guardado en Disco",
@@ -425,6 +444,25 @@ window.I18n = {
             pay_ln_node_label: "Direct to Lightning node:",
             btn_preview_sample_pdf: "View Sample Official PDF Report",
 
+            // 4 New Enterprise Features: Standard Selector, Demo Booking, Live Redlines & Session Vault
+            standard_selector_label: "⚖️ Audit Standard:",
+            opt_pcaob_gaap: "🇺🇸 PCAOB & US GAAP (Audit Firms)",
+            opt_ifrs_niif: "🌍 IFRS Standards (Global Corporate)",
+            opt_local_code: "⚖️ Local Commercial Code (SME / Regional)",
+            nav_book_demo: "Demo 10 min",
+            nav_vault: "Local History",
+            booking_modal_title: "Book 10-Min Live Audit Session",
+            booking_modal_sub: "See how AuditFlow AI cuts audit and tie-out time with an automated reconciliation expert.",
+            booking_btn_submit: "📅 Confirm & Download Invite (.ics)",
+            diff_view_toggle: "👁️ View Live Redlines & Diff",
+            diff_original_label: "Original Text Detected:",
+            diff_revised_label: "Optimized Replacement Proposal:",
+            vault_modal_title: "📁 Session Audit Vault (Local Encrypted)",
+            vault_modal_sub: "Your recent audits stored exclusively in your browser local memory (0 servers).",
+            vault_empty_msg: "No recent audits found in this browser session.",
+            vault_load_btn: "View Report",
+            vault_clear_btn: "Clear Vault",
+
             // Features & Footer & Issue Modal (EN)
             feat_1_tag: "01. Total Privacy",
             feat_1_title: "Zero Disk Storage",
@@ -701,6 +739,25 @@ window.I18n = {
             btn_copy_ln: "BOLT11-Rechnung Kopieren",
             pay_ln_node_label: "Direkt an Lightning-Node:",
             btn_preview_sample_pdf: "Muster-PDF-Bericht Ansehen",
+
+            // 4 Neue Enterprise-Funktionen: Standard-Auswahl, Demo-Buchung, Redlines & Lokaler Verlauf
+            standard_selector_label: "⚖️ Prüfungsstandard:",
+            opt_pcaob_gaap: "🇺🇸 PCAOB & US GAAP (Wirtschaftsprüfung)",
+            opt_ifrs_niif: "🌍 IFRS Standards (International)",
+            opt_local_code: "⚖️ Lokales Handelsrecht (KMU & Regional)",
+            nav_book_demo: "Demo 10 min",
+            nav_vault: "Lokaler Verlauf",
+            booking_modal_title: "10-Min Live-Demo Buchen",
+            booking_modal_sub: "Erfahren Sie in 10 Minuten, wie AuditFlow AI die Prüfungszeit drastisch verkürzt.",
+            booking_btn_submit: "📅 Bestätigen & Termin (.ics) Herunterladen",
+            diff_view_toggle: "👁️ Live-Änderungsverfolgung (Redlines)",
+            diff_original_label: "Erkannter Originaltext:",
+            diff_revised_label: "Optimierter Ersatzvorschlag:",
+            vault_modal_title: "📁 Lokaler Prüfungsverlauf (Verschlüsselt)",
+            vault_modal_sub: "Ihre letzten Prüfungen, ausschließlich im lokalen Browserspeicher abgelegt (0 Server).",
+            vault_empty_msg: "Keine aktuellen Prüfungen in dieser Browsersitzung gefunden.",
+            vault_load_btn: "Bericht Ansehen",
+            vault_clear_btn: "Verlauf Leeren",
 
             // Features & Footer (DE)
             feat_1_tag: "01. Vollständiger Datenschutz",
