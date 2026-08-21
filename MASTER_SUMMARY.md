@@ -21,8 +21,9 @@
 ## 🏗️ 2. Arquitectura Vercel Serverless Multi-Endpoint & Transporte Dual de Correo
 - **Vercel Serverless Multi-Endpoint Architecture**: Estructura backend desacoplada con 13 handlers serverless en `/api/` (`api/audit.js`, `api/cross-audit.js`, `api/chat-document.js`, `api/export-docx.js`, `api/download-pdf.js`, `api/payment.js`, `api/subscribe.js`, `api/outreach.js`, `api/webhook.js`, `api/indexnow.js`, `api/admin.js`, `api/lead.js`, `api/report-issue.js`), con paridad 1-a-1 en los bloques `"builds"` y `"routes"` de `vercel.json`.
 - **Motor de Correo Modular (Resend SDK + SMTP + Gmail)**:
-  - Soporte nativo para **Resend SDK** y **SMTP Corporativo** (Zoho, dominios propios `@audiflowai.com`) con máxima entregabilidad (SPF, DKIM, DMARC).
-  - Fallback automático a **Gmail SMTP** para pruebas y desarrollo.
+  - Soporte nativo para **Resend SDK** y **SMTP Corporativo** (`ricardo@audiflowai.com`) con máxima entregabilidad (SPF, DKIM, DMARC).
+  - Fallback automático a **Gmail SMTP** para redundancia total.
+  - **Matriz Permanente de Prospección (14 Países / 1,000 Leads)**: Distribución equitativa y obligatoria de 500 CFOs (`👑 CFO_FINANCE`) y 500 Controllers (`📊 FINANCIAL_CONTROLLER`) entre los 14 mercados objetivo (ES/EN/DE), persistida en `db/seed_leads.sql` y `api/outreach.js`.
 - **Motor de IA**: Integrado con la API de **Gemini 2.5 Flash** para auditorías de contratos y facturas en menos de 4 segundos.
 - **Privacidad Estricta**: Procesamiento en memoria RAM volátil (`multer.memoryStorage()`) con purga garantizada en el bloque `finally` (`fileBuffer = null`, `global.gc()`), sin guardar archivos físicos en disco.
 - **Base de Datos Supabase & BoxLang**: Esquema PostgreSQL en [`db/schema.sql`](db/schema.sql) para gestionar leads, reportes y suscripciones corporativas ($69/mes o $590/año), respaldado por la arquitectura de microservicios en BoxLang (`backend/`).

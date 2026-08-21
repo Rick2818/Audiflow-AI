@@ -66,11 +66,16 @@ AuditFlow AI calibra sus respuestas, análisis y redacciones de cláusulas segú
 
 ---
 
-## 👥 6. BASE DE DATOS DE PROSPECCIÓN DIRECTA (1,000 EJECUTIVOS B2B)
-- **500 Directores Financieros (CFOs)**: Segmentados por país (Latam, EE.UU., Europa), empresa y score de riesgo (`👑 CFO_FINANCE`).
-- **500 Financial Controllers**: Supervisores de auditoría interna y facturación (`📊 FINANCIAL_CONTROLLER`).
-- **Motor de Envío con Resend API**: `ricardo@audiflowai.com` con capacidad de 3,000 correos/mes, entregabilidad ultra-alta y respaldo automático con Gmail SMTP.
-- **Persistencia en Supabase**: Script de migración y seed `db/seed_leads.sql` con 1,000 registros UUID indexados.
+## 👥 6. MATRIZ PERMANENTE DE PROSPECCIÓN DIRECTA (14 PAÍSES • 1,000 LEADS)
+Esta distribución es la **REGLA ESTÁNDAR Y PERMANENTE** para todos los lotes y futuros envíos de direct marketing B2B:
+- **División Equitativa:** 1,000 ejecutivos divididos entre los 14 países objetivo (~70 a 72 ejecutivos por país).
+- **Proporción 50/50:** 500 Directores Financieros (`👑 CFO_FINANCE`) y 500 Financial Controllers (`📊 FINANCIAL_CONTROLLER`) (35-36 de cada rol por país).
+- **Enrutamiento Lingüístico Estricto:**
+  * **🇪🇸 Español (5 Países - 360 Leads):** El Salvador (72), Guatemala (72), Costa Rica (72), Panamá (72), México (72).
+  * **🇺🇸 / 🇬🇧 Inglés (7 Países - 500 Leads):** Estados Unidos (72), Inglaterra (72), Francia (72), Luxemburgo (70), Dinamarca (70), Noruega (70), Finlandia (70).
+  * **🇩🇪 Alemán (2 Países - 144 Leads):** Alemania (72), Suiza (72).
+- **Canal Oficial de Salida:** **Resend API (`ricardo@audiflowai.com`)** como remitente primario con failover a Gmail SMTP.
+- **Persistencia en Supabase:** Script `db/seed_leads.sql` y generador centralizado en `api/outreach.js`.
 
 ---
 
