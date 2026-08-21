@@ -479,11 +479,14 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 <!-- SELECCIÓN DE NICHO -->
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar Nicho B2B:</label>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar Tipo de Mensaje / Nicho:</label>
                         <select id="social-niche-select" onchange="AdminApp.generateSocialCopy()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
-                            <option value="realestate">🏠 Bienes Raíces & Arrendamientos Comerciales</option>
-                            <option value="finance">🧾 Facturación & CFOs (Sobreprecios)</option>
-                            <option value="it">💻 Servicios IT & SLA de Software</option>
+                            <option value="cfo_dm">🎯 1. LinkedIn / X DM (Para CFOs y Controllers - Prospección 1 a 1)</option>
+                            <option value="cfo_email">📧 2. Cold Email B2B (Directores Financieros & PyMEs)</option>
+                            <option value="cfo_followup">💬 3. Mensaje de Seguimiento / Follow-Up (Día 3)</option>
+                            <option value="finance">🧾 4. Post Orgánico: Facturación & Fugas en CFOs</option>
+                            <option value="realestate">🏠 5. Post Orgánico: Bienes Raíces & Arrendamientos</option>
+                            <option value="it">💻 6. Post Orgánico: Servicios IT & SLA</option>
                         </select>
                     </div>
                     <div class="p-4 bg-dark-surface border border-dark-border rounded-xl text-xs space-y-2 text-gray-400">
@@ -815,7 +818,32 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 const niche = selectEl.value;
                 let copyText = '';
 
-                if (niche === 'realestate') {
+                if (niche === 'cfo_dm') {
+                    copyText = `Hola [Nombre], vi que lideras el área de finanzas/operaciones en [Empresa].
+
+Desarrollamos una herramienta con IA que audita contratos de proveedores, IT y servicios en 10 segundos, detectando penalizaciones ocultas, sobrecostos y cláusulas de renovación automática antes de firmar.
+
+¿Te gustaría que te corra gratis una auditoría de prueba en algún contrato que tengas pendiente de revisión y te comparta el reporte de riesgos en 2 minutos? (El archivo se procesa en memoria volátil y no se guarda en ningún servidor: https://audiflowai.com)`;
+                } else if (niche === 'cfo_email') {
+                    copyText = `Asunto: Auditoría rápida de contratos para [Empresa]
+
+Hola [Nombre],
+
+Veo que en [Empresa] gestionan múltiples contratos con proveedores de tecnología y servicios. El 80% de estos contratos suelen esconder cláusulas de indexación o penalizaciones desproporcionadas.
+
+Creamos AuditFlow AI para que directores financieros puedan auditar cualquier contrato en <10 segundos sin costo inicial ni almacenamiento de datos en disco.
+
+Puedes probarlo directamente con 1 documento aquí: https://audiflowai.com
+
+Si tienes un contrato en negociación y prefieres que te genere el reporte ejecutivo directamente, respóndeme este correo y te lo preparo hoy mismo.
+
+Saludos,
+Ricardo`;
+                } else if (niche === 'cfo_followup') {
+                    copyText = `Hola [Nombre], te escribo brevemente por si tuviste oportunidad de revisar mi mensaje anterior. Si esta semana están por renovar o firmar algún contrato comercial, con gusto te paso una prueba guiada para que veas el desglose de cláusulas de riesgo al instante.
+
+Puedes hacer una prueba en vivo con 0 costo aquí: https://audiflowai.com`;
+                } else if (niche === 'realestate') {
                     copyText = `🚨 ¡Cuidado con la cláusula de indexación doble en contratos de alquiler comercial! 🏬✍️
 
 Recientemente auditamos un contrato de arrendamiento de local comercial en 8 segundos con AuditFlow AI y detectamos una penalización por cancelación anticipada del 40% del contrato restante + un sobrecargo no declarado en mantenimiento del edificio ($4,200 USD/año extra).

@@ -76,6 +76,12 @@ window.AppHandler = {
     },
 
     loadSampleContract() {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'sample_demo_click', {
+                event_category: 'engagement',
+                event_label: 'sample_contract_button'
+            });
+        }
         const currentLang = window.I18n ? window.I18n.currentLang : 'es';
         const isDe = (currentLang === 'de');
         const isEn = (currentLang === 'en');
@@ -667,6 +673,12 @@ window.AppHandler = {
     },
 
     subscribeEnterprise() {
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'enterprise_modal_opened', {
+                event_category: 'conversion',
+                event_label: 'b2b_corp_plan_modal'
+            });
+        }
         const modal = document.getElementById('enterprise-modal');
         if (modal) {
             modal.classList.remove('hidden');
