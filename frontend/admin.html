@@ -204,6 +204,26 @@
                 <button onclick="AdminApp.filterByTag('🚨 HIGH_LEAKAGE')" class="px-2.5 py-1 rounded-full bg-red-950/80 text-red-300 border border-red-500/40">🚨 HIGH_LEAKAGE</button>
             </div>
 
+            <!-- BARRA DE ACCIÓN MASIVA: RE-ENVÍO AUTOMÁTICO A LEADS FILTRADOS -->
+            <div class="px-6 py-3.5 bg-gradient-to-r from-purple-950/40 via-dark-surface to-blue-950/40 border-b border-dark-border flex flex-wrap items-center justify-between gap-3">
+                <div class="flex items-center gap-2">
+                    <span class="text-base">⚡</span>
+                    <div>
+                        <span class="text-xs font-mono text-white font-bold">Despachador Automático Masivo:</span>
+                        <span class="text-[11px] text-gray-300 font-sans block sm:inline sm:ml-1">Re-envía la oferta de cortesía a todos los prospectos visibles en 1 solo clic.</span>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2.5">
+                    <button id="btn-batch-resend" onclick="AdminApp.resendOffersToFilteredLeads()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue hover:opacity-90 text-white font-mono font-bold text-xs shadow-glow transition-all flex items-center gap-1.5 cursor-pointer">
+                        <span>🚀 Re-enviar Oferta a TODOS los Leads Visibles</span>
+                        <span id="batch-leads-count" class="bg-black/40 px-2 py-0.5 rounded text-[11px] font-mono text-cyan-300">(0)</span>
+                    </button>
+                    <button onclick="AdminApp.exportToCSV()" class="px-3 py-2 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all flex items-center gap-1">
+                        📥 Exportar CSV
+                    </button>
+                </div>
+            </div>
+
             <div class="overflow-x-auto">
                 <table class="w-full text-left text-sm text-gray-300">
                     <thead class="bg-dark-surface text-xs font-mono uppercase text-gray-400 border-b border-dark-border">
@@ -823,9 +843,12 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
             renderLeads(leads) {
                 const body = document.getElementById('leads-table-body');
                 const badge = document.getElementById('leads-count-badge');
+                const batchCount = document.getElementById('batch-leads-count');
                 if (!body) return;
 
+                this.currentFilteredLeads = leads || [];
                 if (badge) badge.innerText = `${(leads || []).length} Registros`;
+                if (batchCount) batchCount.innerText = `(${(leads || []).length})`;
 
                 if (!leads || leads.length === 0) {
                     body.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500 font-mono">No hay leads registrados aún.</td></tr>`;
@@ -1147,6 +1170,54 @@ Escaneo de prueba gratuito:
                     }
                 } catch (e) {
                     alert('Error enviando correo: ' + e.message);
+                }
+            },
+
+            async resendOffersToFilteredLeads() {
+                const targetLeads = this.currentFilteredLeads || (this.statsData && this.statsData.leads) || [];
+                if (targetLeads.length === 0) {
+                    alert('⚠️ No hay prospectos visibles en la tabla para re-enviar ofertas.');
+                    return;
+                }
+
+                const confirmed = confirm(`¿Deseas re-enviar la oferta corporativa de cortesía en automático a los ${targetLeads.length} prospectos visibles en la tabla?`);
+                if (!confirmed) return;
+
+                const btn = document.getElementById('btn-batch-resend');
+                const originalHtml = btn ? btn.innerHTML : '';
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = `<span>⏳ Despachando a ${targetLeads.length} leads...</span>`;
+                }
+
+                const savedPass = sessionStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
+                try {
+                    const res = await fetch('/api/admin', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Admin-Password': savedPass,
+                            'Authorization': `Bearer ${this.authToken || 'admin_token_auditflow_2026'}`
+                        },
+                        body: JSON.stringify({
+                            action: 'batch_resend_offers',
+                            leads: targetLeads,
+                            admin_password: savedPass
+                        })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        alert(`🎉 ¡Despacho Automático Completado!\n\n${data.message}`);
+                    } else {
+                        alert(`⚠️ ${data.error || 'Ocurrió un error al despachar el lote.'}`);
+                    }
+                } catch (err) {
+                    alert(`❌ Error al conectar con el despachador: ${err.message}`);
+                } finally {
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.innerHTML = originalHtml;
+                    }
                 }
             },
 

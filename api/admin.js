@@ -466,6 +466,100 @@ export default async function handler(req, res) {
       }
     }
 
+    // Acción: Despacho Automático Masivo a Leads Seleccionados/Filtrados
+    if (action === 'batch_resend_offers') {
+      const targetLeads = Array.isArray(body.leads) ? body.leads : [];
+      if (targetLeads.length === 0) {
+        return res.status(400).json({ success: false, error: 'No se recibieron prospectos en el lote de re-envío.' });
+      }
+
+      const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+      const resend = resendApiKey ? new Resend(resendApiKey) : null;
+      const emailFrom = (process.env.EMAIL_FROM || '"AuditFlow AI | Auditoría Corporativa" <ricardo@audiflowai.com>').trim();
+
+      let successCount = 0;
+      const errors = [];
+
+      for (const lead of targetLeads) {
+        const leadEmail = (lead.email || '').trim();
+        const leadName = lead.name || 'Director';
+        const leadCompany = lead.company || 'su Empresa';
+
+        if (!leadEmail || !leadEmail.includes('@')) continue;
+
+        const subject = `AuditFlow AI — Solución Táctica y Auditoría Preventiva para ${leadCompany}`;
+        const htmlBody = `
+          <!DOCTYPE html>
+          <html>
+          <head><meta charset="utf-8"></head>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0f172a; color: #f8fafc;">
+            <div style="max-width: 600px; margin: 30px auto; background-color: #1e293b; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+              <div style="padding: 24px; border-bottom: 1px solid #334155; text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+                <span style="font-size: 24px; font-weight: bold; color: #38bdf8; letter-spacing: -0.5px;">AuditFlow <span style="color: #a855f7;">AI</span></span>
+                <p style="margin: 4px 0 0; font-size: 11px; color: #94a3b8; font-family: monospace;">FIRMA ESPECIALIZADA EN AUDITORÍA FINANCIERA & LEGAL • +10 AÑOS DE TRAYECTORIA</p>
+              </div>
+              <div style="padding: 30px 24px;">
+                <p style="font-size: 15px; color: #cbd5e1; line-height: 1.6; margin-top: 0;">
+                  Estimado(a) <strong>${escapeHtml(leadName)}</strong>,
+                </p>
+                <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6;">
+                  En <strong>AuditFlow AI</strong> somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales con más de 10 años de experiencia asesorando a directores ejecutivos y departamentos corporativos.
+                </p>
+                <div style="background-color: #0f172a; border-left: 4px solid #38bdf8; padding: 16px; border-radius: 6px; margin: 20px 0;">
+                  <p style="margin: 0; font-size: 13px; color: #e2e8f0; line-height: 1.5;">
+                    🔍 <strong>Auditoría Preventiva de Cortesía:</strong> Nuestro motor inteligente en memoria RAM volátil (0 retención en disco) analiza y concilia sus contratos, facturas y papeles de trabajo en menos de 10 segundos.
+                  </p>
+                </div>
+                <div style="text-align: center; margin: 28px 0;">
+                  <a href="https://audiflowai.com/?ref=batch_offer" style="background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%); color: #ffffff; padding: 12px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 4px 12px rgba(37,99,235,0.3);">
+                    🚀 Acceder a su Auditoría de Cortesía
+                  </a>
+                </div>
+                <p style="font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 0;">
+                  Atentamente,<br>
+                  <strong style="color: #f8fafc;">Equipo de Auditoría &amp; Consultoría Corporativa</strong><br>
+                  <span style="font-size: 12px; color: #64748b;">AuditFlow AI • Cumplimiento Normativo PCAOB / GAAP / NIIF</span>
+                </p>
+              </div>
+              <div style="padding: 16px 24px; background-color: #0f172a; border-top: 1px solid #334155; text-align: center;">
+                <p style="font-size: 11px; color: #64748b; margin: 0;">
+                  © 2026 AuditFlow AI • Procesado en Memoria Volátil RAM • Cifrado AES-256
+                </p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+
+        try {
+          if (resend) {
+            await resend.emails.send({
+              from: emailFrom,
+              to: [leadEmail],
+              reply_to: 'rick28191@gmail.com',
+              subject,
+              html: htmlBody
+            });
+            successCount++;
+          } else {
+            await sendGmailEmail({ to: leadEmail, subject, html: htmlBody });
+            successCount++;
+          }
+        } catch (mErr) {
+          console.warn(`Fallo al enviar a ${leadEmail}:`, mErr.message);
+          errors.push({ email: leadEmail, error: mErr.message });
+        }
+      }
+
+      return res.status(200).json({
+        success: true,
+        total_requested: targetLeads.length,
+        total_sent: successCount,
+        message: `¡Despacho masivo completado con éxito! Se han enviado ${successCount} ofertas corporativas automatizadas.`,
+        errors: errors.length > 0 ? errors : undefined
+      });
+    }
+
     return res.status(400).json({ success: false, error: 'Acción no reconocida.' });
   }
 
