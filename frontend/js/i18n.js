@@ -193,6 +193,12 @@ window.I18n = {
             success_banner_sub: "Has obtenido acceso completo a las 3 Soluciones Tácticas. Se ha enviado una copia firmada en PDF a tu correo.",
             success_btn_home: "🏠 Regresar al Inicio / Auditar Nuevo Documento",
 
+            // Upsell Banner
+            upsell_title: "🛡️ Blindaje Financiero Continuo: Auditorías Ilimitadas para tu Empresa",
+            upsell_sub: "Actualiza a la suscripción Mensual ($69/mes) o Anual ($590/año). Auditorías ilimitadas, equipo multi-usuario, Cross-Audit 2-Way y soporte prioritario.",
+            upsell_btn: "Ver Planes Corporativos ($69/mes o $590/año)",
+            roi_calculator_chip: "<strong>Calculadora de ROI:</strong> 10 auditorías/mes ahorran ~$1,850 USD en honorarios legales. ¡Tu ROI es del <strong>2,680%</strong> por $69/mes!",
+
             // Enterprise Modal
             ent_modal_title: "Plan Corporativo B2B",
             ent_modal_sub: "Auditorías Ilimitadas 24/7 • Soporte Prioritario por IA",
@@ -449,6 +455,12 @@ window.I18n = {
             success_banner_title: "Purchase Processed &amp; Report Unlocked!",
             success_banner_sub: "You have gained full access to the 3 Tactical Solutions. A signed PDF copy has been sent to your email.",
             success_btn_home: "🏠 Back to Home / Audit New Document",
+
+            // Upsell Banner
+            upsell_title: "🛡️ Continuous Financial Shield: Unlimited Audits for Your Enterprise",
+            upsell_sub: "Upgrade to Monthly ($69/mo) or Annual ($590/yr) subscription. Unlimited audits, multi-user team, 2-Way Cross-Audit and priority support.",
+            upsell_btn: "View Enterprise Plans ($69/mo or $590/yr)",
+            roi_calculator_chip: "<strong>ROI Calculator:</strong> 10 audits/month save ~$1,850 USD in legal fees. Your ROI is <strong>2,680%</strong> at $69/month!",
 
             // Enterprise Modal
             ent_modal_title: "B2B Enterprise Plan",
