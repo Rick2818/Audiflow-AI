@@ -70,5 +70,8 @@ ${htmlContent}
 `;
 
 fs.writeFileSync(docPathWorkspace, wordDocument, 'utf8');
-fs.writeFileSync(docPathArtifact, wordDocument, 'utf8');
+try {
+  fs.writeFileSync(docPathArtifact, wordDocument, 'utf8');
+} catch (e) {}
 console.log('DOC files generated successfully!');
+

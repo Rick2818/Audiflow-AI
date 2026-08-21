@@ -1325,6 +1325,20 @@ window.AppHandler = {
     clearSessionVault() {
         localStorage.removeItem('auditflow_session_vault');
         this.openVaultModal();
+    },
+
+    // 5. MODAL DE MANUAL DE USUARIO / DUDAS
+    openManualModal() {
+        const modal = document.getElementById('manual-modal');
+        if (modal) modal.classList.remove('hidden');
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'user_manual_modal_opened');
+        }
+    },
+
+    closeManualModal() {
+        const modal = document.getElementById('manual-modal');
+        if (modal) modal.classList.add('hidden');
     }
 };
 

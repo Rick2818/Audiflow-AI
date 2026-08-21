@@ -167,6 +167,20 @@ window.I18n = {
             vault_load_btn: "Ver Reporte",
             vault_clear_btn: "Vaciar Historial",
 
+            // Pestaña y Modal de Manual de Usuario
+            tab_user_manual: "📘 ¿Dudas? Manual de Usuario",
+            manual_modal_title: "📘 Manual de Usuario — AuditFlow AI",
+            manual_modal_sub: "Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.",
+            manual_step1_title: "1. Selección de Normativa y Carga",
+            manual_step1_desc: "Elige tu marco legal (PCAOB/US GAAP, NIIF/IFRS o Código Local) y arrastra tu PDF o imagen.",
+            manual_step2_title: "2. Análisis Volátil en < 10 Segundos",
+            manual_step2_desc: "Gemini 2.5 Flash audita en memoria RAM volátil (0 disco) y calcula tu fuga económica en USD.",
+            manual_step3_title: "3. Diagnóstico Gratuito y Desbloqueo",
+            manual_step3_desc: "Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Prueba 14 Días).",
+            manual_step4_title: "4. Herramientas Avanzadas y Negociación",
+            manual_step4_desc: "Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.",
+            manual_btn_close: "Entendido, Cerrar",
+
             // Features & Footer
             feat_1_tag: "01. Privacidad Total",
             feat_1_title: "Cero Guardado en Disco",
@@ -463,6 +477,20 @@ window.I18n = {
             vault_load_btn: "View Report",
             vault_clear_btn: "Clear Vault",
 
+            // User Manual Tab & Modal (EN)
+            tab_user_manual: "📘 Questions? User Manual",
+            manual_modal_title: "📘 User Manual — AuditFlow AI",
+            manual_modal_sub: "Step-by-step guide to audit documents, understand metrics, and execute renegotiation tactics.",
+            manual_step1_title: "1. Select Standard & Upload",
+            manual_step1_desc: "Choose your regulatory framework (PCAOB/US GAAP, IFRS, or Local Code) and drag your PDF or image.",
+            manual_step2_title: "2. Volatile Scan in < 10 Seconds",
+            manual_step2_desc: "Gemini 2.5 Flash audits in volatile RAM (0 disk storage) and computes financial leakage in USD.",
+            manual_step3_title: "3. Free Diagnosis & Unlock",
+            manual_step3_desc: "Review the 3 critical anomalies for free and unblur tactical solutions in 1 click (14-Day Free Trial).",
+            manual_step4_title: "4. Advanced Tools & Negotiation",
+            manual_step4_desc: "Toggle live redlines diff, download Word .docx, chat with AI Copilot, or book a 10-min live session.",
+            manual_btn_close: "Got it, Close",
+
             // Features & Footer & Issue Modal (EN)
             feat_1_tag: "01. Total Privacy",
             feat_1_title: "Zero Disk Storage",
@@ -758,6 +786,20 @@ window.I18n = {
             vault_empty_msg: "Keine aktuellen Prüfungen in dieser Browsersitzung gefunden.",
             vault_load_btn: "Bericht Ansehen",
             vault_clear_btn: "Verlauf Leeren",
+
+            // User Manual Tab & Modal (DE)
+            tab_user_manual: "📘 Fragen? Benutzerhandbuch",
+            manual_modal_title: "📘 Benutzerhandbuch — AuditFlow AI",
+            manual_modal_sub: "Schritt-für-Schritt-Anleitung zur Prüfung von Verträgen, Risikoanalyse und taktischen Lösungen.",
+            manual_step1_title: "1. Standard Wählen & Hochladen",
+            manual_step1_desc: "Wählen Sie den Rechtsrahmen (PCAOB/US GAAP, IFRS oder lokales Recht) und ziehen Sie Ihr PDF/Bild hinein.",
+            manual_step2_title: "2. Flüchtige Prüfung in < 10 Sekunden",
+            manual_step2_desc: "Gemini 2.5 Flash prüft im flüchtigen RAM (0 Festplattenspeicherung) und berechnet finanzielle Lecks in USD.",
+            manual_step3_title: "3. Kostenlose Diagnose & Freischaltung",
+            manual_step3_desc: "Prüfen Sie 3 kritische Mängel kostenlos und schalten Sie taktische Lösungen mit 1 Klick frei (14-Tage-Test).",
+            manual_step4_title: "4. Erweiterte Tools & Verhandlung",
+            manual_step4_desc: "Aktivieren Sie Live-Redlines, laden Sie Word .docx herunter oder buchen Sie eine 10-Minuten-Live-Session.",
+            manual_btn_close: "Verstanden, Schließen",
 
             // Features & Footer (DE)
             feat_1_tag: "01. Vollständiger Datenschutz",

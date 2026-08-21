@@ -66,6 +66,13 @@
 
 ---
 
+## 📚 Manuales y Guías de Uso Oficiales
+
+* 📘 **[Manual de Usuario — Web App (`MANUAL_DE_USUARIO_APP.md`)](MANUAL_DE_USUARIO_APP.md)**: Guía paso a paso para usuarios finales, auditores y directores financieros. Incluye cómo seleccionar normativas (PCAOB/GAAP/IFRS), interpretar hallazgos, desbloquear soluciones tácticas y exportar redlines Word `.docx` y PDF oficial.
+* ⚙️ **[Manual de Administración — Panel B2B (`MANUAL_DE_ADMINISTRACION_ADMIN.md`)](MANUAL_DE_ADMINISTRACION_ADMIN.md)**: Guía de control operativo para administradores. Detalla la gestión de los 1,000 leads en 14 países, lanzamiento de campañas de correo (Resend API + Gmail SMTP), enriquecimiento por Tiers (Platinum/Gold/Silver) y exportación a CSV.
+
+---
+
 ## 🏛️ Plan de Mercadeo Digital B2B & Prospección Outbound
 
 * **[Playbook Outbound de 14 Días para LinkedIn](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md)**: Filtros exactos de Sales Navigator, secuencias de 3 mensajes, protocolo de llamada de 10 min y fórmulas de conversión para firmas de auditoría de 2 a 50 empleados.

@@ -1297,6 +1297,77 @@
             </div>
         </div>
 
+        <!-- PESTAÑA FLOTANTE INFERIOR IZQUIERDA: MANUAL DE USUARIO / DUDAS -->
+        <div class="fixed bottom-5 left-5 z-40">
+            <button onclick="window.AppHandler.openManualModal()" 
+                    class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-dark-surface/95 border border-accent-blue/40 hover:border-accent-blue text-white shadow-xl hover:shadow-accent-blue/20 hover:scale-105 transition-all duration-300 backdrop-blur-md group"
+                    title="Manual de Usuario y Guía Rápida">
+                <span class="text-base group-hover:rotate-12 transition-transform">📘</span>
+                <span data-i18n="tab_user_manual" class="text-xs font-mono font-medium text-gray-200 group-hover:text-accent-blue">¿Dudas? Manual de Usuario</span>
+            </button>
+        </div>
+
+        <!-- MODAL: GUÍA Y MANUAL DE USUARIO -->
+        <div id="manual-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+            <div class="bg-dark-card border border-border-dark w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col">
+                <button onclick="window.AppHandler.closeManualModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-mono">✕</button>
+                <div class="flex items-center gap-3 border-b border-border-dark pb-4">
+                    <div class="w-10 h-10 rounded-xl bg-accent-blue/10 border border-accent-blue/30 flex items-center justify-center text-xl shrink-0">📘</div>
+                    <div>
+                        <h3 data-i18n="manual_modal_title" class="text-lg sm:text-xl font-bold text-white">Manual de Usuario — AuditFlow AI</h3>
+                        <p data-i18n="manual_modal_sub" class="text-xs text-gray-400 font-mono">Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.</p>
+                    </div>
+                </div>
+
+                <div class="overflow-y-auto space-y-3.5 my-4 pr-1 text-left">
+                    <!-- Paso 1 -->
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                        <span class="text-lg shrink-0">⚖️</span>
+                        <div>
+                            <h4 data-i18n="manual_step1_title" class="text-xs sm:text-sm font-bold text-white">1. Selección de Normativa y Carga</h4>
+                            <p data-i18n="manual_step1_desc" class="text-xs text-gray-400 font-sans mt-0.5">Elige tu marco legal (PCAOB/US GAAP, NIIF/IFRS o Código Local) y arrastra tu PDF o imagen.</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 2 -->
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                        <span class="text-lg shrink-0">⚡</span>
+                        <div>
+                            <h4 data-i18n="manual_step2_title" class="text-xs sm:text-sm font-bold text-emerald-400">2. Análisis Volátil en &lt; 10 Segundos</h4>
+                            <p data-i18n="manual_step2_desc" class="text-xs text-gray-400 font-sans mt-0.5">Gemini 2.5 Flash audita en memoria RAM volátil (0 disco) y calcula tu fuga económica en USD.</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 3 -->
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                        <span class="text-lg shrink-0">🎁</span>
+                        <div>
+                            <h4 data-i18n="manual_step3_title" class="text-xs sm:text-sm font-bold text-yellow-400">3. Diagnóstico Gratuito y Desbloqueo</h4>
+                            <p data-i18n="manual_step3_desc" class="text-xs text-gray-400 font-sans mt-0.5">Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Prueba 14 Días).</p>
+                        </div>
+                    </div>
+
+                    <!-- Paso 4 -->
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                        <span class="text-lg shrink-0">🛠️</span>
+                        <div>
+                            <h4 data-i18n="manual_step4_title" class="text-xs sm:text-sm font-bold text-accent-blue">4. Herramientas Avanzadas y Negociación</h4>
+                            <p data-i18n="manual_step4_desc" class="text-xs text-gray-400 font-sans mt-0.5">Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-border-dark flex items-center justify-between gap-3">
+                    <button onclick="window.AppHandler.closeManualModal(); window.AppHandler.loadSampleContract();" class="text-xs font-mono text-emerald-400 hover:text-emerald-300">
+                        ⚡ Probar con Contrato de Ejemplo
+                    </button>
+                    <button onclick="window.AppHandler.closeManualModal()" class="btn-primary text-xs px-5 py-2 font-mono">
+                        <span data-i18n="manual_btn_close">Entendido, Cerrar</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- FOOTER CON ENLACE DE REPORTE DE FALLOS Y CLÁUSULA DE DESLINDE DE RESPONSABILIDAD -->
