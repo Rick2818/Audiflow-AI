@@ -1199,7 +1199,7 @@ window.AppHandler = {
             // Auto-prellenar con fecha y hora por defecto (Mañana a las 10:00 AM)
             const dateInput = document.getElementById('booking-date-input');
             if (dateInput && !dateInput.value) {
-                this.setQuickBookingDate(1, 10);
+                this.setQuickBookingDate(1, '10:00');
             }
         }
     },
@@ -1209,22 +1209,22 @@ window.AppHandler = {
         if (modal) modal.classList.add('hidden');
     },
 
-    setQuickBookingDate(daysAhead, hour) {
+    setQuickBookingDate(daysAhead, timeStr) {
         const dateInput = document.getElementById('booking-date-input');
+        const timeSelect = document.getElementById('booking-time-select');
         if (!dateInput) return;
         const d = new Date();
         d.setDate(d.getDate() + (daysAhead || 1));
-        d.setHours(hour || 10, 0, 0, 0);
 
         const pad = (n) => String(n).padStart(2, '0');
         const year = d.getFullYear();
         const month = pad(d.getMonth() + 1);
         const day = pad(d.getDate());
-        const hours = pad(d.getHours());
-        const minutes = pad(d.getMinutes());
 
-        dateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
-        dateInput.setCustomValidity(''); // Limpiar cualquier error previo
+        dateInput.value = `${year}-${month}-${day}`;
+        if (timeSelect && timeStr) {
+            timeSelect.value = timeStr;
+        }
     },
 
     handleBookingSubmit(e) {
@@ -1232,14 +1232,18 @@ window.AppHandler = {
         const name = document.getElementById('booking-name-input').value.trim();
         const email = document.getElementById('booking-email-input').value.trim();
         const company = document.getElementById('booking-company-input').value.trim();
-        const rawDate = document.getElementById('booking-date-input').value;
+        const rawDate = document.getElementById('booking-date-input').value; // YYYY-MM-DD
+        const timeSelect = document.getElementById('booking-time-select');
+        const rawTime = timeSelect ? timeSelect.value : '10:00'; // HH:mm
 
-        // Parsear fecha seleccionada con tolerancia a fallos
+        // Construir objeto Date exacto local
         let startDate;
         if (rawDate) {
-            startDate = new Date(rawDate);
+            const [y, m, d] = rawDate.split('-').map(Number);
+            const [h, min] = (rawTime || '10:00').split(':').map(Number);
+            startDate = new Date(y, m - 1, d, h, min, 0);
             if (isNaN(startDate.getTime())) {
-                startDate = new Date(Date.now() + 86400000); // Mañana
+                startDate = new Date(Date.now() + 86400000);
             }
         } else {
             startDate = new Date(Date.now() + 86400000);
