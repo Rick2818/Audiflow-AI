@@ -111,8 +111,8 @@
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full">
+    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD (OCULTO HASTA AUTENTICARSE) -->
+    <main id="admin-dashboard-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full hidden">
 
         <!-- METRICAS Y KPI CARDS (TOP STRIP) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
@@ -676,21 +676,30 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
     <!-- LÓGICA JAVASCRIPT DEL DASHBOARD -->
     <script>
         window.AdminApp = {
-            authToken: localStorage.getItem('auditflow_admin_token') || sessionStorage.getItem('auditflow_admin_token') || '',
+            authToken: sessionStorage.getItem('auditflow_admin_token') || '',
             statsData: null,
 
             init() {
+                // Purgar cualquier token viejo guardado permanentemente en localStorage
+                try {
+                    localStorage.removeItem('auditflow_admin_token');
+                    localStorage.removeItem('auditflow_admin_pass');
+                } catch(e) {}
+
                 const modal = document.getElementById('admin-login-modal');
+                const content = document.getElementById('admin-dashboard-content');
+
                 if (this.authToken) {
-                    // Verificar si el token sigue siendo válido en el servidor
                     this.loadStats().then(valid => {
                         if (valid) {
                             if (modal) modal.classList.add('hidden');
+                            if (content) content.classList.remove('hidden');
                         } else {
                             this.logout();
                         }
                     });
                 } else {
+                    if (content) content.classList.add('hidden');
                     if (modal) modal.classList.remove('hidden');
                 }
             },
@@ -707,6 +716,8 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 const password = passInput ? passInput.value.trim() : '';
                 const errEl = document.getElementById('login-error');
                 const btn = document.getElementById('btn-admin-login');
+                const modal = document.getElementById('admin-login-modal');
+                const content = document.getElementById('admin-dashboard-content');
 
                 if (!password) {
                     if (errEl) {
@@ -734,13 +745,12 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
                     if (res.ok && data.success) {
                         this.authToken = data.token || 'admin_token_auditflow_2026';
-                        localStorage.setItem('auditflow_admin_token', this.authToken);
-                        localStorage.setItem('auditflow_admin_pass', password);
                         sessionStorage.setItem('auditflow_admin_token', this.authToken);
                         sessionStorage.setItem('auditflow_admin_pass', password);
 
                         if (errEl) errEl.classList.add('hidden');
-                        document.getElementById('admin-login-modal').classList.add('hidden');
+                        if (modal) modal.classList.add('hidden');
+                        if (content) content.classList.remove('hidden');
                         await this.loadStats();
                         return;
                     } else {
@@ -766,7 +776,7 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
             async loadStats() {
                 try {
-                    const savedPass = localStorage.getItem('auditflow_admin_pass') || sessionStorage.getItem('auditflow_admin_pass') || '';
+                    const savedPass = sessionStorage.getItem('auditflow_admin_pass') || '';
                     const res = await fetch('/api/admin', {
                         headers: {
                             'Authorization': `Bearer ${this.authToken}`,
@@ -1306,6 +1316,8 @@ Escaneo de prueba gratuito:
                 if (passInput) passInput.value = '';
                 const errEl = document.getElementById('login-error');
                 if (errEl) errEl.classList.add('hidden');
+                const content = document.getElementById('admin-dashboard-content');
+                if (content) content.classList.add('hidden');
                 document.getElementById('admin-login-modal').classList.remove('hidden');
             }
         };
