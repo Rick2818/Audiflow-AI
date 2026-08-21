@@ -265,65 +265,68 @@ export default async function handler(req, res) {
           bodyHtml = `
             <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #38bdf8; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #38bdf8; margin-top: 0; font-size: 20px;">AuditFlow AI — Caso de Estudio Cuantitativo (${escapeHtml(country)})</h2>
-              <p>Hola <strong>${escapeHtml(pName)}</strong> (${escapeHtml(pRole)} en <strong>${escapeHtml(pComp)}</strong>),</p>
+              <p>Estimado/a <strong>${escapeHtml(pName)}</strong> (${escapeHtml(pRole)} en <strong>${escapeHtml(pComp)}</strong>),</p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                Al auditar contratos de servicios e IT en empresas de ${escapeHtml(country)}, nuestro algoritmo detecta entre <strong>$4,200 y $14,400 USD anuales</strong> en sobrecargos de indexación y penalizaciones no declaradas.
+                En nuestra experiencia de más de 10 años auditando contratos de servicios e IT corporativos en empresas de ${escapeHtml(country)}, nuestros algoritmos detectan entre <strong>$4,200 y $14,400 USD anuales</strong> en sobrecargos de indexación y penalizaciones no declaradas.
               </p>
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?roi=14400&ref=cadence_t2_${encodeURIComponent(country)}" style="background-color: #38bdf8; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🧮 Ver Calculadora de Fugas para ${escapeHtml(pComp)}</a>
               </p>
-              <p style="color: #9ca3af; font-size: 13px;">Saludos cordiales,<br><strong style="color: #ffffff;">Ricardo</strong> — Fundador &amp; Desarrollador, AuditFlow AI<br><span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a></p>
+              <p style="color: #9ca3af; font-size: 13px;">Saludos cordiales,<br><strong style="color: #ffffff;">Equipo de Auditoría &amp; Consultoría Corporativa</strong><br>AuditFlow AI — Blindaje Contractual &amp; Cumplimiento</p>
             </div>`;
         } else if (touch === 'touch_3_diagnostic') {
           subject = isEn ? `🔍 How does ${pComp} review vendor contract clauses?` : `🔍 ¿Cómo audita ${pComp} las cláusulas en contratos de TI y proveedores?`;
           bodyHtml = `
             <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #a855f7; max-width: 600px; margin: 0 auto;">
               <h2 style="color: #a855f7; margin-top: 0; font-size: 20px;">AuditFlow AI — Diagnóstico Operativo (${escapeHtml(country)})</h2>
-              <p>Hola <strong>${escapeHtml(pName)}</strong> (${escapeHtml(pRole)} en <strong>${escapeHtml(pComp)}</strong>),</p>
+              <p>Estimado/a <strong>${escapeHtml(pName)}</strong> (${escapeHtml(pRole)} en <strong>${escapeHtml(pComp)}</strong>),</p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                ¿Actualmente en <strong>${escapeHtml(pComp)}</strong> realizan la revisión de cláusulas de penalización de forma manual o cuentan con un protocolo automatizado?
+                ¿Actualmente en <strong>${escapeHtml(pComp)}</strong> realizan la revisión de cláusulas de penalización e indexación de forma manual o cuentan con un protocolo de auditoría automatizado?
               </p>
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=cadence_t3_${encodeURIComponent(country)}" style="background-color: #a855f7; color: #ffffff; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🚀 Probar Auditoría Gratuita en Memoria Volátil</a>
               </p>
-              <p style="color: #9ca3af; font-size: 13px;">Saludos,<br><strong style="color: #ffffff;">Ricardo</strong> — AuditFlow AI<br><span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a></p>
+              <p style="color: #9ca3af; font-size: 13px;">Atentamente,<br><strong style="color: #ffffff;">Equipo de Consultoría Corporativa</strong><br>AuditFlow AI</p>
             </div>`;
         } else if (touch === 'touch_4_breakup') {
           subject = isEn ? `🚪 Permanent access link to AuditFlow AI for ${pComp}` : `🚪 Acceso permanente a AuditFlow AI para ${pComp}`;
           bodyHtml = `
             <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #6b7280; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #9ca3af; margin-top: 0; font-size: 20px;">AuditFlow AI — Último Contacto (${escapeHtml(country)})</h2>
-              <p>Hola <strong>${escapeHtml(pName)}</strong>,</p>
+              <h2 style="color: #9ca3af; margin-top: 0; font-size: 20px;">AuditFlow AI — Enlace Institucional Permanente (${escapeHtml(country)})</h2>
+              <p>Estimado/a <strong>${escapeHtml(pName)}</strong>,</p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                Entiendo que están con prioridades de cierre. Si en el futuro necesitan auditar un contrato urgente en &lt;10 segundos con total privacidad (0 disco), les dejo el enlace:
+                Entendemos que pueden encontrarse en periodos de alta demanda operativa. Si en el futuro <strong>${escapeHtml(pComp)}</strong> requiere auditar un contrato o factura urgente en &lt;10 segundos con total privacidad y garantía de no almacenamiento en disco, le dejamos a disposición nuestro portal:
               </p>
               <p style="text-align: center; margin: 25px 0;">
-                <a href="https://audiflowai.com/?ref=cadence_t4_${encodeURIComponent(country)}" style="background-color: #374151; color: #ffffff; font-weight: bold; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">🔗 Guardar Enlace de AuditFlow AI</a>
+                <a href="https://audiflowai.com/?ref=cadence_t4_${encodeURIComponent(country)}" style="background-color: #374151; color: #ffffff; font-weight: bold; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">🔗 Portal Institucional AuditFlow AI</a>
               </p>
-              <p style="color: #9ca3af; font-size: 13px;">Muchos éxitos,<br><strong style="color: #ffffff;">Ricardo</strong><br><span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a></p>
+              <p style="color: #9ca3af; font-size: 13px;">Éxitos en su gestión empresarial,<br><strong style="color: #ffffff;">AuditFlow AI — División B2B</strong></p>
             </div>`;
         } else {
           // Touch 1 (Predeterminado)
           subject = isEn ? `🎁 Free preventive contract & invoice audit for ${pComp}` : `🎁 Análisis preventivo de contratos y facturas para ${pComp} (100% Gratis)`;
           bodyHtml = `
             <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría de Contratos B2B (${escapeHtml(country)})</h2>
-              <p>Hola <strong>${escapeHtml(pName)}</strong> (${escapeHtml(pRole)} en <strong>${escapeHtml(pComp)}</strong>):</p>
+              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría Financiera y Blindaje Legal (${escapeHtml(country)})</h2>
+              <p>Estimado/a <strong>${escapeHtml(pName)}</strong> (${escapeHtml(pRole)} en <strong>${escapeHtml(pComp)}</strong>):</p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                Mi nombre es <strong>Ricardo</strong> y recientemente lancé <strong>AuditFlow AI</strong>, una IA que revisa contratos y facturas en <strong>menos de 10 segundos</strong> para encontrar cláusulas trampa y fugas de <strong>$3,500 a $18,000 USD</strong>.
+                En <strong>AuditFlow AI</strong> somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales con <strong>más de 10 años de experiencia</strong> protegiendo a directores financieros y departamentos corporativos.
               </p>
               <p style="line-height: 1.6; color: #e5e7eb;">
-                Queremos regalarte a ti y a tu equipo de <strong>${escapeHtml(pComp)}</strong> un <strong>análisis 100% gratis</strong> en memoria volátil RAM (0 archivos en disco).
+                Desarrollamos una infraestructura de Inteligencia Artificial que revisa contratos y facturas en <strong>menos de 10 segundos</strong> para encontrar penalizaciones abusivas y fugas de <strong>$3,500 a $18,000 USD</strong> antes de firma o pago.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Nos complace poner a disposición de su equipo en <strong>${escapeHtml(pComp)}</strong> un <strong>análisis de diagnóstico 100% gratis y confidencial</strong> en memoria volátil RAM (0 almacenamiento en disco).
               </p>
               <p style="text-align: center; margin: 25px 0;">
-                <a href="https://audiflowai.com/?ref=outreach_gift_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Probar Auditoría Gratuita de ${escapeHtml(pComp)}</a>
+                <a href="https://audiflowai.com/?ref=outreach_gift_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para ${escapeHtml(pComp)}</a>
               </p>
               <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a tu total disposición,</p>
-                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador &amp; Desarrollador, AuditFlow AI</p>
+                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedamos a su entera disposición,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Equipo de Auditoría &amp; Consultoría Corporativa</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infraestructura B2B de Blindaje Legal</p>
                 <p style="margin: 4px 0 0 0; font-size: 13px;">
-                  <span style="color: #6b7280;">Email personal:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+                  <span style="color: #6b7280;">Contacto Institucional:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
                 </p>
               </div>
             </div>`;

@@ -992,36 +992,38 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 let copyText = '';
 
                 if (niche === 'cfo_dm') {
-                    copyText = `Hola [Nombre], vi que lideras el área de finanzas/operaciones en [Empresa].
+                    copyText = `Estimado/a [Nombre], le contacto de parte del equipo de auditoría de AuditFlow AI.
 
-Desarrollamos una herramienta con IA que audita contratos de proveedores, IT y servicios en 10 segundos, detectando penalizaciones ocultas, sobrecostos y cláusulas de renovación automática antes de firmar.
+Somos una firma especializada con más de 10 años de experiencia asesorando a directores financieros en la revisión de contratos de proveedores, IT y servicios.
 
-¿Te gustaría que te corra gratis una auditoría de prueba en algún contrato que tengas pendiente de revisión y te comparta el reporte de riesgos en 2 minutos? (El archivo se procesa en memoria volátil y no se guarda en ningún servidor: https://audiflowai.com)`;
+Desarrollamos una infraestructura de IA que audita acuerdos en 10 segundos, detectando penalizaciones ocultas, sobrecostos e indexaciones abusivas antes de firma.
+
+¿Le gustaría que le habilitemos un diagnóstico gratuito y confidencial para su próximo contrato comercial en memoria volátil (0 datos en disco)?: https://audiflowai.com`;
                 } else if (niche === 'cfo_email') {
-                    copyText = `Asunto: Auditoría rápida de contratos para [Empresa]
+                    copyText = `Asunto: Auditoría preventiva de contratos y facturas para [Empresa]
 
-Hola [Nombre],
+Estimado/a [Nombre],
 
-Veo que en [Empresa] gestionan múltiples contratos con proveedores de tecnología y servicios. El 80% de estos contratos suelen esconder cláusulas de indexación o penalizaciones desproporcionadas.
+En AuditFlow AI somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales con más de 10 años de experiencia asesorando a directores financieros y departamentos corporativos.
 
-Creamos AuditFlow AI para que directores financieros puedan auditar cualquier contrato en <10 segundos sin costo inicial ni almacenamiento de datos en disco.
+Sabemos que hasta el 80% de los contratos de proveedores tecnológicos y de servicios contienen cláusulas de indexación o penalizaciones desproporcionadas (con fugas promedio de $3,500 a $18,000 USD).
 
-Puedes probarlo directamente con 1 documento aquí: https://audiflowai.com
+Nuestra infraestructura de IA audita cualquier contrato o factura en <10 segundos, en memoria volátil RAM efímera (0 almacenamiento en disco).
 
-Si tienes un contrato en negociación y prefieres que te genere el reporte ejecutivo directamente, respóndeme este correo o escríbeme directamente a mi email personal (rick28191@gmail.com) y te lo preparo hoy mismo.
+Le invitamos a realizar una auditoría de diagnóstico 100% gratuita para [Empresa] aquí: https://audiflowai.com
+
+Atentamente,
+Equipo de Auditoría & Consultoría Corporativa
+AuditFlow AI — Infraestructura B2B de Blindaje Legal
+Contacto: soporte@audiflowai.com • https://audiflowai.com`;
+                } else if (niche === 'cfo_followup') {
+                    copyText = `Estimado/a [Nombre], le escribimos brevemente como seguimiento institucional. Si esta semana en [Empresa] se encuentran en proceso de revisión o renovación de contratos comerciales, ponemos a su disposición una sesión de diagnóstico gratuito para identificar riesgos contractuales al instante.
+
+Portal de acceso confidencial: https://audiflowai.com
 
 Saludos cordiales,
-Ricardo
-Fundador & Desarrollador, AuditFlow AI
-Email directo: rick28191@gmail.com • ricardo@audiflowai.com`;
-                } else if (niche === 'cfo_followup') {
-                    copyText = `Hola [Nombre], te escribo brevemente por si tuviste oportunidad de revisar mi mensaje anterior. Si esta semana están por renovar o firmar algún contrato comercial, con gusto te paso una prueba guiada para que veas el desglose de cláusulas de riesgo al instante.
-
-Puedes hacer una prueba en vivo con 0 costo aquí: https://audiflowai.com
-O si lo prefieres, me puedes escribir directamente a mi correo personal: rick28191@gmail.com
-
-Saludos,
-Ricardo`;
+Equipo de Consultoría Corporativa
+AuditFlow AI`;
                 } else if (niche === 'realestate') {
                     copyText = `🚨 ¡Cuidado con la cláusula de indexación doble en contratos de alquiler comercial! 🏬✍️
 

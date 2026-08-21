@@ -178,7 +178,7 @@ export default async function handler(req, res) {
     const smtpPort = Number(process.env.SMTP_PORT) || 587;
     const smtpUser = (process.env.SMTP_USER || '').trim();
     const smtpPass = (process.env.SMTP_PASS || '').trim();
-    const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
+    const emailFrom = (process.env.EMAIL_FROM || '"AuditFlow AI | Auditoría Corporativa" <ricardo@audiflowai.com>').trim();
 
     const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
@@ -202,7 +202,7 @@ export default async function handler(req, res) {
       }
     }
 
-    const senderFrom = (resendClient || (smtpHost && smtpUser)) ? emailFrom : `"Ricardo | AuditFlow AI" <${gmailUser}>`;
+    const senderFrom = (resendClient || (smtpHost && smtpUser)) ? emailFrom : `"AuditFlow AI | Auditoría Corporativa" <${gmailUser}>`;
     const results = [];
 
     const sendLimit = test_mode ? Math.min(5, prospects.length) : Math.min(25, prospects.length);
@@ -218,29 +218,29 @@ export default async function handler(req, res) {
       const isDe = lang === 'de' || germanCountries.some(c => (country || '').toLowerCase().includes(c)) || (email || '').endsWith('.de') || (email || '').endsWith('.at') || (email || '').endsWith('.ch');
       const isEn = !isDe && (lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c)));
 
-      let subject = `🎁 Auditoría preventiva gratuita de contratos y facturas para ${company}`;
+      let subject = `🎁 Auditoría preventiva de contratos y facturas para ${company}`;
       let bodyHtml = `
         <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Detección de Fugas Financieras (${country})</h2>
-          <p>Hola <strong>${name}</strong> (${role} en <strong>${company}</strong>),</p>
+          <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría Financiera y Blindaje Legal (${country})</h2>
+          <p>Estimado/a <strong>${name}</strong> (${role} en <strong>${company}</strong>),</p>
           <p style="line-height: 1.6; color: #e5e7eb;">
-            Mi nombre es <strong>Ricardo</strong>. Desarrollé <strong>AuditFlow AI</strong>, una infraestructura de IA diseñada para directores financieros y contralores que audita contratos de proveedores y facturas en <strong>menos de 10 segundos</strong>.
+            En <strong>AuditFlow AI</strong> somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales con <strong>más de 10 años de experiencia</strong> asesorando a directores financieros y departamentos legales corporativos.
           </p>
           <p style="line-height: 1.6; color: #e5e7eb;">
-            Detecta cláusulas abusivas, sobrecostos y fugas financieras promedio de <strong>$3,500 a $18,000 USD</strong> antes de firmar o emitir pagos.
+            Desarrollamos una infraestructura de Inteligencia Artificial que audita contratos de proveedores, acuerdos de IT y facturas en <strong>menos de 10 segundos</strong>, detectando penalizaciones ocultas, indexaciones dobles y sobrecostos promedio de <strong>$3,500 a $18,000 USD</strong> antes de firma o pago.
           </p>
           <p style="line-height: 1.6; color: #e5e7eb;">
-            Queremos obsequiarle a su equipo en <strong>${company}</strong> una <strong>auditoría de prueba 100% gratuita</strong> en cualquier contrato o factura activa para comprobar los hallazgos en memoria volátil (0 almacenamiento en disco).
+            Nos complace otorgar a <strong>${company}</strong> una <strong>auditoría de diagnóstico 100% gratuita y confidencial</strong> procesada estrictamente en memoria RAM volátil efímera (0 almacenamiento en disco).
           </p>
           <p style="text-align: center; margin: 25px 0;">
             <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para ${company}</a>
           </p>
           <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedo a su total disposición para cualquier consulta,</p>
-            <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Fundador &amp; Desarrollador, AuditFlow AI</p>
+            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedamos a su entera disposición,</p>
+            <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Equipo de Auditoría &amp; Consultoría Corporativa</p>
+            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infraestructura B2B de Blindaje Legal</p>
             <p style="margin: 4px 0 0 0; font-size: 13px;">
-              <span style="color: #6b7280;">Email directo:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+              <span style="color: #6b7280;">Contacto Corporativo:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
             </p>
           </div>
           <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
@@ -252,41 +252,61 @@ export default async function handler(req, res) {
         subject = `🎁 Kostenlose präventive Vertragsprüfung für ${company}`;
         bodyHtml = `
           <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B-Vertragsprüfung (${country})</h2>
-            <p>Guten Tag <strong>${name}</strong> (${role} bei <strong>${company}</strong>),</p>
+            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B-Vertragsprüfung &amp; Rechtsschutz (${country})</h2>
+            <p>Sehr geehrte(r) Frau/Herr <strong>${name}</strong> (${role} bei <strong>${company}</strong>),</p>
             <p style="line-height: 1.6; color: #e5e7eb;">
-              mein Name ist <strong>Ricardo</strong>. Ich habe <strong>AuditFlow AI</strong> entwickelt – eine KI-Engine für CFOs und Controller, die gewerbliche Verträge und Rechnungen in <strong>unter 10 Sekunden</strong> prüft, um versteckte Risikoklauseln und finanzielle Verluste von <strong>3.500 $ bis 18.000 $</strong> aufzudecken.
+              <strong>AuditFlow AI</strong> ist ein spezialisiertes Prüfungs- und Technologieunternehmen mit <strong>über 10 Jahren Branchenerfahrung</strong> in der Optimierung und Absicherung gewerblicher Verträge für CFOs und Rechtsabteilungen.
+            </p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              Unsere KI-Infrastruktur prüft Lieferantenverträge, IT-Vereinbarungen und Rechnungen in <strong>unter 10 Sekunden</strong>, um versteckte Risikoklauseln und finanzielle Mehrkosten von durchschnittlich <strong>3.500 $ bis 18.000 $</strong> vor Unterzeichnung zu identifizieren.
+            </p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              Wir freuen uns, <strong>${company}</strong> eine <strong>100% kostenlose und vertrauliche Diagnoseprüfung</strong> im flüchtigen RAM-Speicher (0 Festplattenspeicherung) anzubieten.
             </p>
             <p style="text-align: center; margin: 25px 0;">
               <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose Prüfung für ${company} starten</a>
             </p>
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Gründer &amp; Entwickler, AuditFlow AI</p>
+              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Mit freundlichen Grüßen,</p>
+              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Team für Unternehmensprüfung &amp; Compliance</p>
+              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — B2B-Rechts- und Finanzinfrastruktur</p>
               <p style="margin: 4px 0 0 0; font-size: 13px;">
-                <span style="color: #6b7280;">Direkte E-Mail:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+                <span style="color: #6b7280;">Unternehmenskontakt:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
               </p>
             </div>
+            <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
+              AuditFlow AI • Flüchtiger RAM-Speicher • AES-256 Bankenverschlüsselung • SOC-2 &amp; DSGVO Konform
+            </p>
           </div>`;
       } else if (isEn) {
         subject = `🎁 Free preventive contract & invoice audit for ${company}`;
         bodyHtml = `
           <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B Financial Audit (${country})</h2>
-            <p>Hello <strong>${name}</strong> (${role} at <strong>${company}</strong>):</p>
+            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Corporate Audit &amp; Legal Protection (${country})</h2>
+            <p>Dear <strong>${name}</strong> (${role} at <strong>${company}</strong>),</p>
             <p style="line-height: 1.6; color: #e5e7eb;">
-              My name is <strong>Ricardo</strong>, and I built <strong>AuditFlow AI</strong> to help CFOs and Controllers audit vendor contracts and invoices in <strong><10 seconds</strong> to uncover hidden fee traps and leakages of <strong>$3,500 to $18,000 USD</strong>.
+              At <strong>AuditFlow AI</strong>, we are a corporate audit and legal risk intelligence firm with <strong>over 10 years of combined industry expertise</strong> protecting financial controllers and corporate legal teams.
+            </p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              We engineered an enterprise AI infrastructure that scans vendor agreements, IT service contracts, and invoices in <strong>under 10 seconds</strong>—uncovering abusive penalty clauses, double-indexations, and financial leakages averaging <strong>$3,500 to $18,000 USD</strong> prior to signature.
+            </p>
+            <p style="line-height: 1.6; color: #e5e7eb;">
+              We are pleased to provide <strong>${company}</strong> with a <strong>100% complimentary, confidential diagnostic audit</strong> executed strictly in volatile RAM memory (zero disk storage).
             </p>
             <p style="text-align: center; margin: 25px 0;">
-              <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Try Free Audit for ${company}</a>
+              <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Start Free Audit for ${company}</a>
             </p>
             <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Ricardo</p>
-              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">Founder &amp; Developer, AuditFlow AI</p>
+              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Sincerely,</p>
+              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Corporate Audit &amp; Compliance Team</p>
+              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Global Legal &amp; Financial Infrastructure</p>
               <p style="margin: 4px 0 0 0; font-size: 13px;">
-                <span style="color: #6b7280;">Direct Email:</span> <a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>
+                <span style="color: #6b7280;">Corporate Desk:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
               </p>
             </div>
+            <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
+              AuditFlow AI • Ephemeral Volatile RAM • Bank-Grade AES-256 Encryption • SOC-2 &amp; GDPR Compliant
+            </p>
           </div>`;
       }
 

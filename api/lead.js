@@ -357,7 +357,7 @@ export default async function handler(req, res) {
           <!-- FOOTER PRIVACIDAD -->
           <hr style="border: 0; border-top: 1px solid #1e293b; margin: 28px 0 16px 0;">
           <p style="font-size: 12px; color: #64748b; text-align: center; margin: 0; line-height: 1.5;">
-            AuditFlow AI • ${isDe ? 'Gesendet von Ricardo' : (isEn ? 'Sent by Ricardo' : 'Enviado por Ricardo')} &lt;<a href="mailto:rick28191@gmail.com" style="color: #38bdf8; text-decoration: none;">rick28191@gmail.com</a> • <a href="mailto:ricardo@audiflowai.com" style="color: #38bdf8; text-decoration: none;">ricardo@audiflowai.com</a>&gt;<br>
+            AuditFlow AI • ${isDe ? 'Unternehmensprüfung & Compliance' : (isEn ? 'Corporate Audit & Compliance' : 'Auditoría & Consultoría Corporativa')} &lt;<a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a>&gt;<br>
             ${isDe ? 'Flüchtiger RAM-Speicher nach Verarbeitung automatisch bereinigt.' : (isEn ? 'RAM memory automatically wiped after audit.' : 'Memoria RAM volátil purgada automáticamente tras el análisis.')}
           </p>
 
