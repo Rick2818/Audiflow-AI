@@ -251,4 +251,26 @@ Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y as
 ### D. Protocolo de Validación en Tiempo Real
 - Cada vez que se configure una campaña de correo o infraestructura de notificación, se debe despachar automáticamente un correo de comprobación a la bandeja personal (`rick28191@gmail.com`) para validar formato visual, entregabilidad y legibilidad antes de iniciar envíos masivos.
 
+---
+
+## 🧠 16. PROTOCOLO OBLIGATORIO DE INVOCACIÓN Y EJECUCIÓN DE SKILLS (SKILL REGISTRY & AUTONOMOUS DISPATCH)
+
+Para garantizar la máxima especialización y cero omisiones técnicas en el desarrollo de software, la IA asistente (**Antigravity**) tiene el **mandato estricto e innegociable** de consultar y ejecutar las Skills especializadas registradas en el repositorio antes de comenzar la implementación de cualquier funcionalidad:
+
+### A. Catálogo Maestro de Skills y Criterios de Activación
+
+| Skill | Ruta de Instrucciones | Criterio de Activación Obligatoria (Trigger) |
+| :--- | :--- | :--- |
+| 🏭 **`microsaas-factory`** | [`.gemini/skills/microsaas-factory/SKILL.md`](.gemini/skills/microsaas-factory/SKILL.md) | **Creación de Nuevos Proyectos y MicroSaaS:** Activación obligatoria cuando se solicite crear una nueva aplicación, configurar la arquitectura dual Vercel Serverless + Express, implementar pasarelas de pago híbridas ($ USD / Satoshis), o estructurar el embudo de conversión y PLG desde cero. |
+| 📈 **`b2b-growth-engine`** | [`.gemini/skills/b2b-growth-engine/SKILL.md`](.gemini/skills/b2b-growth-engine/SKILL.md) | **Prospección B2B y Outbound Marketing:** Activación obligatoria al diseñar campañas de correo masivo, gestionar listas de prospectos ejecutivos (1,000 CFOs/Controllers en 14 países), configurar entregabilidad de correo (Resend/Gmail SMTP) o implementar los 4 canales de adquisición gratuitos en `/admin`. |
+| ⚖️ **`contract-copilot`** | [`.gemini/skills/contract-copilot/SKILL.md`](.gemini/skills/contract-copilot/SKILL.md) | **Motor de Inteligencia Artificial Legal y Documental:** Activación obligatoria al implementar o calibrar análisis de contratos en memoria RAM volátil, generación de documentos Word `.docx` con control de cambios redlines, visualizadores PDF, cálculo cuantitativo de fugas monetarias o copilotos conversacionales sobre documentos. |
+| 🔌 **`mcp-orchestrator`** | [`.gemini/skills/mcp-orchestrator/SKILL.md`](.gemini/skills/mcp-orchestrator/SKILL.md) | **Orquestación de Protocolos y Herramientas Externas (MCP):** Activación obligatoria cuando se requiera automatización con Puppeteer para auditorías visuales/E2E, integración con repositorios GitHub, scraping avanzado vía Fetch MCP o consultas a bases de datos PostgreSQL/Supabase. |
+| 🛠️ **`agy-customizations` & `antigravity-guide`** | Builtin (`skills/agy-customizations/` & `skills/antigravity_guide/`) | **Configuración del Entorno de Desarrollo y Metaprogramación:** Activación al configurar nuevas skills, reglas globales de Antigravity, subagentes, sidecars o comandos personalizados del asistente. |
+
+### B. Regla de Oro de Consulta Previa (`view_file`)
+1. **Paso 0 de Cada Tarea:** Antes de generar código, el asistente DEBE leer el archivo `SKILL.md` correspondiente utilizando la herramienta de lectura de archivos (`view_file`), absorbiendo las directivas de calidad específicas y ejecutando la receta paso a paso.
+2. **Precedencia de Instrucciones:** Las reglas contenidas en los archivos `SKILL.md` tienen prioridad de ejecución sobre cualquier suposición contextual genérica.
+3. **Persistencia en Nuevos Proyectos:** Al crear un nuevo repositorio o MicroSaaS, la carpeta `.gemini/skills/` debe ser clonada o inicializada para que el asistente conserve sus capacidades especializadas desde el primer día.
+
+
 
