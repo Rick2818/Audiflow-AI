@@ -191,3 +191,32 @@ AuditFlow AI y cualquier nuevo Micro-SaaS operan bajo el Playbook de Adquisició
   * **Día +3:** Caso de estudio con reducción del 60% en horas de tie-out.
   * **Día +7:** Invitación a sesión en vivo de 10 minutos con entrega de plantilla Word redlines.
 - **Documentación Completa:** Conectado directamente en [`PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md`](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md).
+
+---
+
+## 📚 14. PROTOCOLO OBLIGATORIO DE MANUALES DE USUARIO Y ADMINISTRACIÓN
+
+Todo sistema, Micro-SaaS o módulo desarrollado bajo este estándar debe contar **obligatoriamente** con dos manuales exhaustivos y sincronizados:
+
+### A. Manual de Usuario de la Aplicación ([`MANUAL_DE_USUARIO_APP.md`](MANUAL_DE_USUARIO_APP.md))
+1. **Estructura Requerida:**
+   - **Propuesta de Valor:** Tiempo de respuesta (<10s) y garantía estricta de memoria volátil RAM (0 disco).
+   - **Navegación e Idiomas:** Conmutador trilingüe (ES, EN, DE) y selector de estándares normativos (PCAOB/US GAAP, NIIF/IFRS, Código Local).
+   - **Carga y Filtro OCR:** Métodos de carga, validación de legibilidad previa y contrato de ejemplo.
+   - **Interpretación del Diagnóstico:** Métricas financieras (Fuga en USD, Lead Score, Semáforo de Riesgo) y anomalías críticas.
+   - **Modelo de Desbloqueo:** Modo prueba gratuita de 14 días (1 clic sin tarjeta) y compra oficial ($19 USD / Satoshis).
+   - **Herramientas Avanzadas:** Visor de redlines diff en vivo, descargas Word `.docx` con control de cambios, PDF firmado, recordatorios `.ics`, copiloto IA y vault local de sesión.
+2. **Acceso Visual Obligatorio en la App:** Debe existir siempre una **pestaña flotante o botón permanente en la interfaz** (ej. esquina inferior izquierda `fixed bottom-5 left-5 z-40`) que abra una guía interactiva (`#manual-modal`) ante cualquier duda del usuario.
+
+### B. Manual de Administración del Sistema ([`MANUAL_DE_ADMINISTRACION_ADMIN.md`](MANUAL_DE_ADMINISTRACION_ADMIN.md))
+1. **Estructura Requerida:**
+   - **Seguridad y Acceso:** Autenticación con contraseña maestra (`AuditFlow2026!`), tokens cifrados, mitigación de ataques de temporización (`crypto.timingSafeEqual`) y rate limits.
+   - **Dashboard Ejecutivo:** Monitoreo en tiempo real de Leads, Fuga Financiera Global, Ingresos Proyectados y Tasa de Conversión.
+   - **Motor de Prospección B2B:** Matriz multi-país (1,000 leads en 14 países), segmentación 50/50 (CFOs y Controllers) y despacho de campañas automatizadas (Resend API + Gmail SMTP).
+   - **Clasificación por Tiers:** Enriquecimiento automático de prospectos (Platinum, Gold, Silver).
+   - **Exportaciones y Transacciones:** Exportación CSV hacia CRMs y seguimiento de transacciones Stripe y Lightning.
+   - **Diagnóstico y Salud:** Pruebas de conectividad SMTP y monitoreo de infraestructura.
+
+### C. Regla de Oro de Mantenimiento de Documentación
+- **Sincronización Inmediata:** Cualquier cambio de arquitectura, precios, rutas o nuevas características debe actualizar de inmediato el `README.md`, el `PROMPT_MAESTRO` y ambos manuales.
+

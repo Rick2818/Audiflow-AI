@@ -1,5 +1,5 @@
 # 🏛️ PROMPT MAESTRO & PROTOCOLO DE CALIDAD UNIVERSAL AUDITFLOW AI
-**Versión:** 4.0 Enterprise Definitiva • **Fecha:** Agosto 2026 • **Estado:** Producción Oficial (100% Blindado)
+**Versión:** 5.0 Enterprise Definitiva • **Fecha:** Agosto 2026 • **Estado:** Producción Oficial (100% Blindado)
 
 ---
 
@@ -146,3 +146,77 @@ AuditFlow AI y cualquier nuevo Micro-SaaS operan bajo el Playbook de Adquisició
 3. **Erradicación de Rutas 404 en Polling:** Disponibilidad del endpoint `/api/report` para responder al estado de desbloqueo de reportes con código `200 OK`.
 4. **Cero Fugas de Temporizadores:** Destrucción preventiva de intervalos activos (`clearPollingAndTimers()`) antes de instanciar nuevos contadores en pasarelas de pago.
 5. **Timeouts Defensivos en APIs Externas:** Todas las llamadas `fetch()` hacia servicios de terceros (Gemini, CoinGecko, Resend) deben incorporar `signal: AbortSignal.timeout(8000)` para evitar cuelgues *504 Gateway Timeout*.
+
+---
+
+## 🚀 11. LAS 4 CAPACIDADES ENTERPRISE DE ALTA CONVERSIÓN (V5.0)
+
+1. **Selector de Marco Normativo de Auditoría:**
+   - Permite al auditor seleccionar el estándar de validación:
+     * 🇺🇸 **PCAOB & US GAAP:** Para firmas de auditoría de EE.UU./UK y conciliación automatizada (*automated tie-outs*).
+     * 🌍 **NIIF / IFRS:** Para corporativos multinacionales con normativa contable global.
+     * ⚖️ **Código de Comercio Local:** Para PyMEs y legislación regional en Latinoamérica y España.
+   - Refleja automáticamente la insignia normativa en el informe interactivo y en la exportación Word/PDF.
+
+2. **Agendador de Demo de 10 min en Vivo (`#booking-modal`):**
+   - Captura directa de leads calificados con Nombre, Correo Corporativo, Firma/Empresa y Horario preferido.
+   - Generación instantánea y descarga del archivo de calendario `.ics` (*iCalendar*) para Google Calendar, Apple Calendar y Outlook.
+   - Telemetría vinculada a Microsoft Clarity y Google Analytics 4 (`demo_10min_booked`).
+
+3. **Visor Visual de Redlines en Pantalla (Control de Cambios en Vivo):**
+   - Comparador interactivo en cada hallazgo que despliega lado a lado:
+     * 🔴 **Texto Original Detectado:** Cláusula tachada en rojo extraída del documento.
+     * 🟢 **Propuesta Sustitutiva Optimizada:** Cláusula de renegociación fundamentada en verde.
+
+4. **Historial de Sesión Local Cifrado (Vault en Navegador):**
+   - Almacenamiento efímero de las últimas 10 auditorías exclusivamente en el cliente (`localStorage` / `IndexedDB`).
+   - Cero persistencia en disco de servidores para mantener la promesa estricta de privacidad.
+   - Restauración instantánea de análisis previos sin necesidad de volver a subir o procesar el archivo.
+
+---
+
+## 🎯 12. MODELO DE ACCESO LIBRE & DESBLOQUEO TÁCTICO (14-DAY FREE TRIAL)
+
+- **Auditoría Inicial:** 100% gratuita con cálculo cuantitativo de fuga económica y resumen de anomalías.
+- **Desbloqueo de Soluciones Tácticas:** 1-Click Free Trial Unlock (`window.AppHandler.unblurReport('free_trial')`) disponible en cada tarjeta de hallazgo y en el banner principal sin requerir tarjeta de crédito.
+- **Tripwire Oficial ($19 USD):** Opción complementaria para adquirir la copia oficial firmada con sello de auditoría IA en formato Word .docx editable y PDF.
+
+---
+
+## 📈 13. PLAYBOOK OUTBOUND LINKEDIN DE 14 DÍAS PARA FIRMAS DE AUDITORÍA
+
+- **Segmentación:** Senior Auditor, Audit Manager y Partner en firmas de 2 a 50 empleados.
+- **Secuencia de 3 Mensajes:**
+  * **Día 1:** Dolor y promesa de reducción de semanas a minutos en papeles de trabajo y conciliación.
+  * **Día +3:** Caso de estudio con reducción del 60% en horas de tie-out.
+  * **Día +7:** Invitación a sesión en vivo de 10 minutos con entrega de plantilla Word redlines.
+- **Documentación Completa:** Conectado directamente en [`PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md`](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md).
+
+---
+
+## 📚 14. PROTOCOLO OBLIGATORIO DE MANUALES DE USUARIO Y ADMINISTRACIÓN
+
+Todo sistema, Micro-SaaS o módulo desarrollado bajo este estándar debe contar **obligatoriamente** con dos manuales exhaustivos y sincronizados:
+
+### A. Manual de Usuario de la Aplicación ([`MANUAL_DE_USUARIO_APP.md`](MANUAL_DE_USUARIO_APP.md))
+1. **Estructura Requerida:**
+   - **Propuesta de Valor:** Tiempo de respuesta (<10s) y garantía estricta de memoria volátil RAM (0 disco).
+   - **Navegación e Idiomas:** Conmutador trilingüe (ES, EN, DE) y selector de estándares normativos (PCAOB/US GAAP, NIIF/IFRS, Código Local).
+   - **Carga y Filtro OCR:** Métodos de carga, validación de legibilidad previa y contrato de ejemplo.
+   - **Interpretación del Diagnóstico:** Métricas financieras (Fuga en USD, Lead Score, Semáforo de Riesgo) y anomalías críticas.
+   - **Modelo de Desbloqueo:** Modo prueba gratuita de 14 días (1 clic sin tarjeta) y compra oficial ($19 USD / Satoshis).
+   - **Herramientas Avanzadas:** Visor de redlines diff en vivo, descargas Word `.docx` con control de cambios, PDF firmado, recordatorios `.ics`, copiloto IA y vault local de sesión.
+2. **Acceso Visual Obligatorio en la App:** Debe existir siempre una **pestaña flotante o botón permanente en la interfaz** (ej. esquina inferior izquierda `fixed bottom-5 left-5 z-40`) que abra una guía interactiva (`#manual-modal`) ante cualquier duda del usuario.
+
+### B. Manual de Administración del Sistema ([`MANUAL_DE_ADMINISTRACION_ADMIN.md`](MANUAL_DE_ADMINISTRACION_ADMIN.md))
+1. **Estructura Requerida:**
+   - **Seguridad y Acceso:** Autenticación con contraseña maestra (`AuditFlow2026!`), tokens cifrados, mitigación de ataques de temporización (`crypto.timingSafeEqual`) y rate limits.
+   - **Dashboard Ejecutivo:** Monitoreo en tiempo real de Leads, Fuga Financiera Global, Ingresos Proyectados y Tasa de Conversión.
+   - **Motor de Prospección B2B:** Matriz multi-país (1,000 leads en 14 países), segmentación 50/50 (CFOs y Controllers) y despacho de campañas automatizadas (Resend API + Gmail SMTP).
+   - **Clasificación por Tiers:** Enriquecimiento automático de prospectos (Platinum, Gold, Silver).
+   - **Exportaciones y Transacciones:** Exportación CSV hacia CRMs y seguimiento de transacciones Stripe y Lightning.
+   - **Diagnóstico y Salud:** Pruebas de conectividad SMTP y monitoreo de infraestructura.
+
+### C. Regla de Oro de Mantenimiento de Documentación
+- **Sincronización Inmediata:** Cualquier cambio de arquitectura, precios, rutas o nuevas características debe actualizar de inmediato el `README.md`, el `PROMPT_MAESTRO` y ambos manuales.
+
