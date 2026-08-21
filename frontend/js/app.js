@@ -1194,7 +1194,14 @@ window.AppHandler = {
     // 3. AGENDAMIENTO DE DEMO 10 MIN EN VIVO
     openBookingModal() {
         const modal = document.getElementById('booking-modal');
-        if (modal) modal.classList.remove('hidden');
+        if (modal) {
+            modal.classList.remove('hidden');
+            // Auto-prellenar con fecha y hora por defecto (Mañana a las 10:00 AM)
+            const dateInput = document.getElementById('booking-date-input');
+            if (dateInput && !dateInput.value) {
+                this.setQuickBookingDate(1, 10);
+            }
+        }
     },
 
     closeBookingModal() {
@@ -1202,24 +1209,63 @@ window.AppHandler = {
         if (modal) modal.classList.add('hidden');
     },
 
+    setQuickBookingDate(daysAhead, hour) {
+        const dateInput = document.getElementById('booking-date-input');
+        if (!dateInput) return;
+        const d = new Date();
+        d.setDate(d.getDate() + (daysAhead || 1));
+        d.setHours(hour || 10, 0, 0, 0);
+
+        const pad = (n) => String(n).padStart(2, '0');
+        const year = d.getFullYear();
+        const month = pad(d.getMonth() + 1);
+        const day = pad(d.getDate());
+        const hours = pad(d.getHours());
+        const minutes = pad(d.getMinutes());
+
+        dateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+        dateInput.setCustomValidity(''); // Limpiar cualquier error previo
+    },
+
     handleBookingSubmit(e) {
         e.preventDefault();
-        const name = document.getElementById('booking-name-input').value;
-        const email = document.getElementById('booking-email-input').value;
-        const company = document.getElementById('booking-company-input').value;
+        const name = document.getElementById('booking-name-input').value.trim();
+        const email = document.getElementById('booking-email-input').value.trim();
+        const company = document.getElementById('booking-company-input').value.trim();
+        const rawDate = document.getElementById('booking-date-input').value;
 
-        // Generar archivo de calendario .ics descargable
+        // Parsear fecha seleccionada con tolerancia a fallos
+        let startDate;
+        if (rawDate) {
+            startDate = new Date(rawDate);
+            if (isNaN(startDate.getTime())) {
+                startDate = new Date(Date.now() + 86400000); // Mañana
+            }
+        } else {
+            startDate = new Date(Date.now() + 86400000);
+        }
+        const endDate = new Date(startDate.getTime() + 600000); // 10 min duración
+
+        // Formatear fechas para iCalendar estándar UTC
+        const pad = (n) => String(n).padStart(2, '0');
+        const formatIcs = (d) => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}00Z`;
+
         const title = `Demo 10 min AuditFlow AI - ${company || name}`;
         const description = `Sesión en vivo de 10 minutos con especialista de AuditFlow AI para ${name} (${email}).`;
         const icsContent = [
             'BEGIN:VCALENDAR',
             'VERSION:2.0',
             'PRODID:-//AuditFlow AI//Demo Calendar//EN',
+            'CALSCALE:GREGORIAN',
+            'METHOD:REQUEST',
             'BEGIN:VEVENT',
+            `UID:auditflow-demo-${Date.now()}@audiflowai.com`,
+            `DTSTAMP:${formatIcs(new Date())}`,
+            `DTSTART:${formatIcs(startDate)}`,
+            `DTEND:${formatIcs(endDate)}`,
             `SUMMARY:${title}`,
             `DESCRIPTION:${description}`,
-            `DTSTART:${new Date().toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
-            `DTEND:${new Date(Date.now() + 600000).toISOString().replace(/[-:]/g, '').split('.')[0]}Z`,
+            'LOCATION:Videollamada Google Meet / Zoom',
             'STATUS:CONFIRMED',
             'END:VEVENT',
             'END:VCALENDAR'
@@ -1234,13 +1280,32 @@ window.AppHandler = {
         document.body.removeChild(link);
 
         const confirmBox = document.getElementById('booking-confirm-box');
-        if (confirmBox) confirmBox.classList.remove('hidden');
+        if (confirmBox) {
+            const dateStr = startDate.toLocaleDateString([], { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            const timeStr = startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            confirmBox.innerHTML = `✅ ¡Cita agendada para el <strong>${dateStr} a las ${timeStr}</strong>!<br>Se ha descargado tu archivo <code>AuditFlow_AI_Demo_10min.ics</code> para agregarlo a tu Google Calendar / Outlook.`;
+            confirmBox.classList.remove('hidden');
+        }
+
+        // Registrar lead en backend de manera silenciosa
+        fetch('/api/lead', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name,
+                email,
+                company,
+                preferred_date: startDate.toISOString(),
+                document_type: 'DEMO_10MIN_BOOKING',
+                lead_score: 95
+            })
+        }).catch(err => console.warn('Booking lead sync:', err));
 
         if (typeof window.clarity === 'function') {
             window.clarity('event', 'demo_10min_booked');
         }
         if (typeof window.gtag === 'function') {
-            window.gtag('event', 'demo_booked', { email, company });
+            window.gtag('event', 'demo_booked', { email, company, date: startDate.toISOString() });
         }
     },
 

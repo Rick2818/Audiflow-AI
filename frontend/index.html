@@ -1251,8 +1251,24 @@
                             <input type="text" id="booking-company-input" placeholder="Mendoza &amp; Asociados" required class="input-field text-xs font-mono">
                         </div>
                         <div>
-                            <label class="block text-xs font-mono text-gray-300 mb-1">Fecha / Hora</label>
+                            <label class="block text-xs font-mono text-gray-300 mb-1">Fecha y Hora Preferida</label>
                             <input type="datetime-local" id="booking-date-input" required class="input-field text-xs font-mono text-gray-200">
+                        </div>
+                    </div>
+
+                    <!-- Botones de Selección Rápida de Horario -->
+                    <div>
+                        <span class="block text-[11px] font-mono text-gray-400 mb-1.5">⚡ Horarios rápidos sugeridos:</span>
+                        <div class="flex flex-wrap gap-1.5">
+                            <button type="button" onclick="window.AppHandler.setQuickBookingDate(1, 10)" class="px-2.5 py-1 rounded bg-dark-surface border border-border-dark hover:border-emerald-500 text-[10px] font-mono text-gray-300 hover:text-emerald-400 transition-colors">
+                                Mañana 10:00 AM
+                            </button>
+                            <button type="button" onclick="window.AppHandler.setQuickBookingDate(1, 15)" class="px-2.5 py-1 rounded bg-dark-surface border border-border-dark hover:border-emerald-500 text-[10px] font-mono text-gray-300 hover:text-emerald-400 transition-colors">
+                                Mañana 3:00 PM
+                            </button>
+                            <button type="button" onclick="window.AppHandler.setQuickBookingDate(2, 11)" class="px-2.5 py-1 rounded bg-dark-surface border border-border-dark hover:border-emerald-500 text-[10px] font-mono text-gray-300 hover:text-emerald-400 transition-colors">
+                                En 2 días 11:00 AM
+                            </button>
                         </div>
                     </div>
 
