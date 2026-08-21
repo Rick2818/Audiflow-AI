@@ -50,7 +50,7 @@ export default async function handler(req, res) {
       const buffer = Buffer.from(body.document_base64, 'base64');
       if (body.document_name && body.document_name.endsWith('.pdf')) {
         try {
-          const pdfData = await pdfParse(buffer);
+          const pdfData = await pdfParse(buffer, { max: 15 });
           documentText = pdfData.text || '';
         } catch (pdfErr) {
           console.warn('PDF parse fallback:', pdfErr.message);

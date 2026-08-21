@@ -161,6 +161,7 @@ window.PaymentHandler = {
      * Genera Factura Lightning Network BOLT11 en Satoshis ($19 USD)
      */
     async generateLightningInvoice() {
+        this.clearPollingAndTimers();
         try {
             const res = await fetch('/api/payment/lightning', {
                 method: 'POST',

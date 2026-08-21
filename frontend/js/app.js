@@ -186,9 +186,11 @@ window.AppHandler = {
         try {
             let res;
             if (this.selectedFile) {
-                const base64 = await new Promise((resolve) => {
+                const base64 = await new Promise((resolve, reject) => {
                     const reader = new FileReader();
                     reader.onload = () => resolve(reader.result.split(',')[1]);
+                    reader.onerror = (err) => reject(new Error('Error de lectura de archivo: ' + err));
+                    reader.onabort = () => reject(new Error('Lectura de archivo cancelada'));
                     reader.readAsDataURL(this.selectedFile);
                 });
 
@@ -909,20 +911,6 @@ window.AppHandler = {
         // Mostrar primer toast a los 1.5s y rotar cada 14 segundos
         setTimeout(showNext, 1500);
         setInterval(showNext, 14000);
-    },
-
-    resetToHome() {
-        const uploadSec = document.getElementById('upload-section');
-        const repSec = document.getElementById('report-section');
-        const fileInput = document.getElementById('file-input');
-        const isBanner = document.getElementById('unlocked-success-banner');
-
-        if (repSec) repSec.classList.add('hidden');
-        if (uploadSec) uploadSec.classList.remove('hidden');
-        if (fileInput) fileInput.value = '';
-        if (isBanner) isBanner.classList.add('hidden');
-
-        window.scrollTo({ top: 0, behavior: 'smooth' });
     },
 
     unblurReport() {
