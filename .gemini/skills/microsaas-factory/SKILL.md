@@ -90,13 +90,28 @@ Este documento es el activo de conocimiento supremo y la memoria técnica del ag
 1. Subida directa por URL pública de Google Drive, Dropbox y OneDrive.
 2. Webhooks para disparar auditorías automáticas desde DocuSign o PandaDoc.
 
+### FASE 11: PROTOCOLO DE ANTICIPACIÓN PROACTIVA Y NARRATIVA CORPORATIVA B2B (REGLA DE ENTREGA EN DÍA 1)
+1. **Autoridad Institucional Innegociable (+10 Años de Experiencia):**
+   - Todo MicroSaaS B2B DEBE presentarse desde el primer día como una **firma/empresa especializada con más de 10 años de trayectoria acumulada**.
+   - Prohibición total de redacciones unipersonales amateurs (*«Hola, mi nombre es [X]...»*).
+   - Firma oficial: `Equipo de Auditoría & Consultoría Corporativa` / `Corporate Audit & Compliance Team`.
+   - Remitente corporativo verificado con `reply-to` enrutado en segundo plano al correo personal del dueño (`rick28191@gmail.com`).
+2. **Navegabilidad Omnipresente y Cero Bloqueos (Frictionless UX):**
+   - Todo modal (Manual, Onboarding, Reporte, Checkout, Módulo Admin) DEBE incluir de fábrica:
+     * Botón explícito **«🏠 Regresar al Inicio»**.
+     * Conmutador trilingüe (`ES | EN | DE`) sincronizado globalmente en tiempo real (`[data-lang-btn]`).
+     * Pestaña flotante permanente de acceso rápido (`fixed bottom-5 left-5 z-40`).
+3. **Despacho Automático de Validación al Propietario:**
+   - Toda configuración de correo debe despachar de inmediato un correo de prueba a la bandeja del dueño (`rick28191@gmail.com`) para validar diseño, entregabilidad y legibilidad antes de cualquier envío masivo.
+
 ---
 
 ## 🛠️ Comando Maestro de Creación
 
-Cuando el usuario solicite construir un nuevo MicroSaaS B2B, ejecuta autónomamente toda esta arquitectura dual, SEO programático, embudo de ventas de $7/$49, los 4 canales de adquisición gratis y los 5 módulos enterprise, realizando la verificación completa mediante pruebas automatizadas antes de concluir.
+Cuando el usuario solicite construir un nuevo MicroSaaS B2B, ejecuta autónomamente toda esta arquitectura dual, SEO programático, embudo de ventas, los 4 canales de adquisición gratis, la suite de módulos enterprise y el **Protocolo de Autoridad Corporativa B2B de la Fase 11**, realizando la verificación completa mediante pruebas automatizadas antes de concluir.
 
 ---
+
 
 ## 🚀 Guía de Activación para Nuevos MicroSaaS
 

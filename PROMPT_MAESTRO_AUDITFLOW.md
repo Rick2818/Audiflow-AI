@@ -220,3 +220,35 @@ Todo sistema, Micro-SaaS o módulo desarrollado bajo este estándar debe contar 
 ### C. Regla de Oro de Mantenimiento de Documentación
 - **Sincronización Inmediata:** Cualquier cambio de arquitectura, precios, rutas o nuevas características debe actualizar de inmediato el `README.md`, el `PROMPT_MAESTRO` y ambos manuales.
 
+---
+
+## 🚀 15. PROTOCOLO DE ANTICIPACIÓN PROACTIVA, EFICIENCIA Y NARRATIVA CORPORATIVA B2B (ENTREGA DIRECTA DESDE EL DÍA 1)
+
+Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y asegurar que todo nuevo proyecto o módulo nazca con excelencia de nivel producción desde el primer segundo, se establece el siguiente **Decálogo de Anticipación y Eficiencia Operativa**:
+
+### A. Diagnóstico de Causa Raíz: ¿Por qué surgen mejoras tardías y cómo prevenirlas?
+1. **Desconexión entre Fontanería Técnica y Empatía de Usuario:** El desarrollo temprano suele centrarse en que el código "funcione" (endpoints, base de datos, parseo), relegando la experiencia comercial y visual a etapas posteriores.
+2. **Solución Sistemática:** Aplicar desde el Minuto Cero la **Matriz de Auditoría Proactiva de 5 Dimensiones** antes de considerar cualquier tarea terminada:
+   - **Dimensión 1 (Autoridad Comercial):** ¿El mensaje suena a una corporación establecida de alto nivel o a un proyecto individual amateur?
+   - **Dimensión 2 (Navegabilidad Sin Fricción):** ¿El usuario puede regresar al inicio, cambiar de idioma o cerrar cualquier vista desde cualquier parte?
+   - **Dimensión 3 (Paridad Lingüística Global):** ¿Todos los modales, secciones y encabezados cambian de idioma instantáneamente al unísono?
+   - **Dimensión 4 (Infraestructura de Entrega Blindada):** ¿Los correos salen con DNS certificado, failover activo y copia de verificación al propietario?
+   - **Dimensión 5 (Visibilidad Operativa):** ¿El módulo de administración cuenta con manuales interactivos y herramientas de prospección listas para usar?
+
+### B. Mandato de Narrativa Institucional B2B (+10 Años de Experiencia)
+1. **Prohibición de Marcas Personales Amateurs en B2B:** Queda estrictamente prohibido redactar correos, cold emails o mensajes de prospección con enfoque unipersonal (*«Hola, mi nombre es [Persona] y recientemente creé una app...»*).
+2. **Estándar de Firma y Autoridad Institucional:**
+   - **Presentación Oficial:** *«En AuditFlow AI somos una firma especializada en auditoría financiera e infraestructura legal con más de 10 años de experiencia acumulada asesorando a directores financieros, contralores y departamentos corporativos...»*
+   - **Remitente Oficial:** `AuditFlow AI | Auditoría Corporativa <ricardo@audiflowai.com>` / `<soporte@audiflowai.com>`.
+   - **Firma Oficial:** `Equipo de Auditoría & Consultoría Corporativa — AuditFlow AI`.
+   - **Enrutamiento Oculto (`reply-to`):** Las respuestas de los prospectos siempre se dirigen automáticamente a la bandeja personal del dueño (`rick28191@gmail.com`) en segundo plano sin exponer correos personales en el texto público.
+
+### C. Mandato de Navegabilidad Omnipresente y UX Sin Fricciones
+1. **Regla de Retorno a Inicio:** Ninguna sección, modal, visor de reporte o panel de administración puede quedar aislado sin un botón explícito de **«🏠 Regresar al Inicio»**.
+2. **Conmutación Universal de Idiomas (i18n):** Los selectores de idiomas (`ES | EN | DE`) deben estar presentes tanto en la barra principal como en el interior de los modales y secciones dedicadas, sincronizando el estado global (`[data-lang-btn]`) de forma reactiva instantánea.
+3. **Pestañas Flotantes de Soporte:** Pestañas fijas de acceso rápido (`fixed bottom-5 left-5 z-40`) disponibles en todas las páginas para abrir guías y manuales interactivos en cualquier momento.
+
+### D. Protocolo de Validación en Tiempo Real
+- Cada vez que se configure una campaña de correo o infraestructura de notificación, se debe despachar automáticamente un correo de comprobación a la bandeja personal (`rick28191@gmail.com`) para validar formato visual, entregabilidad y legibilidad antes de iniciar envíos masivos.
+
+
