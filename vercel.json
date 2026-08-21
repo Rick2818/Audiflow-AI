@@ -109,6 +109,10 @@
       "destination": "/api/outreach"
     },
     {
+      "source": "/api/admin/(.*)",
+      "destination": "/api/admin"
+    },
+    {
       "source": "/api/report/(.*)",
       "destination": "/api/report"
     },

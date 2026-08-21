@@ -497,6 +497,13 @@ export default async function handler(req, res) {
         resend_monthly_quota: '3,000/mes',
         resend_sender: 'ricardo@audiflowai.com'
       },
+      kpis: {
+        total_revenue_usd: `$${totalRevenue.toLocaleString('en-US', { minimumFractionDigits: 2 })} USD`,
+        total_sats_collected: '14,800 Sats',
+        total_audits_count: leads.length,
+        total_leads_captured: leads.length,
+        enterprise_leads_count: enterpriseCount
+      },
       leads,
       transactions,
       reports

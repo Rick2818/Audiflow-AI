@@ -77,28 +77,36 @@
     </header>
 
     <!-- PANTALLA DE AUTENTICACIÓN (MODAL DE CLAVE ADMIN) -->
-    <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-md p-4">
+    <!-- PANTALLA DE AUTENTICACIÓN (MODAL DE CLAVE ADMIN) -->
+    <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
         <div class="bg-dark-card border border-dark-border rounded-2xl max-w-md w-full p-8 shadow-2xl relative">
-            <div class="w-12 h-12 rounded-xl bg-accent-purple/20 border border-accent-purple/40 text-accent-purple flex items-center justify-center text-2xl mx-auto mb-4">
+            <div class="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-500/40 text-purple-400 flex items-center justify-center text-2xl mx-auto mb-4">
                 🔒
             </div>
             <h2 class="text-2xl font-extrabold text-center text-white mb-2">Panel de Administración</h2>
-            <p class="text-sm text-gray-400 text-center mb-6">Ingresa la contraseña de administrador para ver la facturación, leads y transacciones en tiempo real.</p>
+            <p class="text-sm text-gray-400 text-center mb-6">Módulo restringido. Ingresa la contraseña maestra autorizada para acceder al panel de control.</p>
             
             <form onsubmit="AdminApp.handleLogin(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-mono text-gray-300 mb-1">Contraseña de Administración</label>
-                    <input type="text" id="admin-password-input" value="AuditFlow2026!" placeholder="AuditFlow2026!" required class="w-full px-4 py-3 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-accent-purple font-mono">
+                    <label class="block text-xs font-mono text-gray-300 mb-1">Contraseña Maestra de Administrador</label>
+                    <div class="relative">
+                        <input type="password" id="admin-password-input" value="" placeholder="Introduce tu contraseña..." required class="w-full px-4 py-3 pr-12 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-purple-500 font-mono tracking-wider">
+                        <button type="button" onclick="AdminApp.togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-sm p-1">
+                            👁️
+                        </button>
+                    </div>
                 </div>
-                <div id="login-error" class="text-xs text-red-400 font-mono hidden text-center">
-                    ❌ Contraseña incorrecta. Intenta de nuevo con: <span class="font-bold text-accent-blue">AuditFlow2026!</span>
+                <div id="login-error" class="text-xs text-red-400 font-mono hidden text-center bg-red-950/40 border border-red-500/30 p-2.5 rounded-lg">
+                    ❌ Contraseña incorrecta. Acceso denegado.
                 </div>
-                <button type="submit" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-accent-purple to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow cursor-pointer">
-                    🚀 Entrar al Panel de Control
+                <button type="submit" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow cursor-pointer">
+                    🔐 Autenticar y Entrar
                 </button>
-                <button type="button" onclick="AdminApp.quickLogin()" class="w-full py-2 rounded-xl bg-dark-surface hover:bg-dark-border border border-dark-border text-gray-300 font-mono text-xs transition-all cursor-pointer">
-                    ⚡ Acceso Rápido Automático (1-Click)
-                </button>
+                <div class="text-center pt-2">
+                    <a href="/" class="text-xs font-mono text-gray-400 hover:text-white transition-colors">
+                        ← Regresar a la Web Principal
+                    </a>
+                </div>
             </form>
         </div>
     </div>
@@ -668,96 +676,120 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
     <!-- LÓGICA JAVASCRIPT DEL DASHBOARD -->
     <script>
         window.AdminApp = {
-            authToken: localStorage.getItem('auditflow_admin_token') || '',
+            authToken: localStorage.getItem('auditflow_admin_token') || sessionStorage.getItem('auditflow_admin_token') || '',
             statsData: null,
 
             init() {
+                const modal = document.getElementById('admin-login-modal');
                 if (this.authToken) {
-                    document.getElementById('admin-login-modal').classList.add('hidden');
-                    this.loadStats();
+                    // Verificar si el token sigue siendo válido en el servidor
+                    this.loadStats().then(valid => {
+                        if (valid) {
+                            if (modal) modal.classList.add('hidden');
+                        } else {
+                            this.logout();
+                        }
+                    });
                 } else {
-                    document.getElementById('admin-login-modal').classList.remove('hidden');
+                    if (modal) modal.classList.remove('hidden');
                 }
             },
 
-            quickLogin() {
-                const passInput = document.getElementById('admin-password-input');
-                if (passInput) passInput.value = 'AuditFlow2026!';
-                this.handleLogin();
+            togglePasswordVisibility() {
+                const input = document.getElementById('admin-password-input');
+                if (!input) return;
+                input.type = (input.type === 'password') ? 'text' : 'password';
             },
 
             async handleLogin(e) {
                 if (e) e.preventDefault();
                 const passInput = document.getElementById('admin-password-input');
-                const password = passInput ? passInput.value.trim() : 'AuditFlow2026!';
+                const password = passInput ? passInput.value.trim() : '';
                 const errEl = document.getElementById('login-error');
-                const cleanInput = password.toLowerCase().replace(/!+$/, '');
+                const btn = document.getElementById('btn-admin-login');
 
-                const isLocallyValid = (
-                    cleanInput === 'auditflow2026' || 
-                    cleanInput === 'admin' || 
-                    cleanInput === 'auditflow' ||
-                    password === 'AuditFlow2026!'
-                );
+                if (!password) {
+                    if (errEl) {
+                        errEl.innerText = '❌ Por favor ingresa la contraseña maestra.';
+                        errEl.classList.remove('hidden');
+                    }
+                    return;
+                }
+
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = '🔄 Verificando credenciales...';
+                }
 
                 try {
-                    const res = await fetch('/api/admin/login', {
+                    const res = await fetch('/api/admin', {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json',
                             'X-Admin-Password': password
                         },
-                        body: JSON.stringify({ password })
+                        body: JSON.stringify({ action: 'login', password })
                     });
                     const data = await res.json();
 
-                    if (data.success || isLocallyValid) {
+                    if (res.ok && data.success) {
                         this.authToken = data.token || 'admin_token_auditflow_2026';
                         localStorage.setItem('auditflow_admin_token', this.authToken);
-                        localStorage.setItem('auditflow_admin_pass', password || 'AuditFlow2026!');
+                        localStorage.setItem('auditflow_admin_pass', password);
+                        sessionStorage.setItem('auditflow_admin_token', this.authToken);
+                        sessionStorage.setItem('auditflow_admin_pass', password);
+
+                        if (errEl) errEl.classList.add('hidden');
                         document.getElementById('admin-login-modal').classList.add('hidden');
-                        this.loadStats();
+                        await this.loadStats();
                         return;
+                    } else {
+                        if (errEl) {
+                            errEl.innerText = '❌ Contraseña incorrecta. Acceso no autorizado.';
+                            errEl.classList.remove('hidden');
+                        }
+                        if (passInput) passInput.focus();
                     }
                 } catch (err) {
-                    console.warn('Login online falló, verificando validación local:', err);
-                    if (isLocallyValid) {
-                        this.authToken = 'admin_token_auditflow_2026';
-                        localStorage.setItem('auditflow_admin_token', this.authToken);
-                        localStorage.setItem('auditflow_admin_pass', 'AuditFlow2026!');
-                        document.getElementById('admin-login-modal').classList.add('hidden');
-                        this.loadStats();
-                        return;
+                    console.error('Error de autenticación:', err);
+                    if (errEl) {
+                        errEl.innerText = `❌ Error de conexión al verificar contraseña: ${err.message}`;
+                        errEl.classList.remove('hidden');
+                    }
+                } finally {
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.innerHTML = '🔐 Autenticar y Entrar';
                     }
                 }
-
-                if (errEl) errEl.classList.remove('hidden');
             },
 
             async loadStats() {
                 try {
-                    const savedPass = localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
-                    const res = await fetch('/api/admin/stats', {
+                    const savedPass = localStorage.getItem('auditflow_admin_pass') || sessionStorage.getItem('auditflow_admin_pass') || '';
+                    const res = await fetch('/api/admin', {
                         headers: {
                             'Authorization': `Bearer ${this.authToken}`,
                             'X-Admin-Password': savedPass
                         }
                     });
 
-                    if (res.status === 401) {
-                        this.logout();
-                        return;
+                    if (res.status === 401 || res.status === 403) {
+                        return false;
                     }
 
                     const data = await res.json();
                     if (data.success) {
                         this.statsData = data;
-                        this.renderKPIs(data.kpis);
+                        this.renderKPIs(data.kpis || data.stats);
                         this.renderLeads(data.leads);
                         this.renderTransactions(data.transactions);
+                        return true;
                     }
+                    return false;
                 } catch (err) {
                     console.error('Error cargando estadísticas:', err);
+                    return false;
                 }
             },
 
@@ -1266,7 +1298,14 @@ Escaneo de prueba gratuito:
 
             logout() {
                 localStorage.removeItem('auditflow_admin_token');
+                localStorage.removeItem('auditflow_admin_pass');
+                sessionStorage.removeItem('auditflow_admin_token');
+                sessionStorage.removeItem('auditflow_admin_pass');
                 this.authToken = '';
+                const passInput = document.getElementById('admin-password-input');
+                if (passInput) passInput.value = '';
+                const errEl = document.getElementById('login-error');
+                if (errEl) errEl.classList.add('hidden');
                 document.getElementById('admin-login-modal').classList.remove('hidden');
             }
         };
