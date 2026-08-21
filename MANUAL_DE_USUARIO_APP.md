@@ -17,7 +17,7 @@
 ## 🧭 2. PRIMEROS PASOS: NAVEGACIÓN Y CONFIGURACIÓN
 
 ### 2.1. Selector de Idioma (Tri-Lingüe)
-En la esquina superior derecha de la barra de navegación encontrarás el conmutador de idioma:
+Tanto en la barra de navegación superior como dentro de la ventana interactiva del **Manual de Usuario** (`#manual-modal`), dispones del conmutador de idioma en tiempo real con botón directo para regresar al inicio:
 * **ES:** Español (Latinoamérica y España).
 * **EN:** Inglés (Estados Unidos, Reino Unido y corporativos globales).
 * **DE:** Alemán (Región DACH: Alemania, Suiza y Austria).

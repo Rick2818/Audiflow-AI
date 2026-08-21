@@ -169,6 +169,7 @@ window.I18n = {
 
             // Pestaña y Modal de Manual de Usuario
             tab_user_manual: "📘 ¿Dudas? Manual de Usuario",
+            tab_user_manual_nav: "Manual",
             manual_modal_title: "📘 Manual de Usuario — AuditFlow AI",
             manual_modal_sub: "Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.",
             manual_step1_title: "1. Selección de Normativa y Carga",
@@ -180,6 +181,7 @@ window.I18n = {
             manual_step4_title: "4. Herramientas Avanzadas y Negociación",
             manual_step4_desc: "Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.",
             manual_btn_close: "Entendido, Cerrar",
+            manual_btn_home: "🏠 Regresar al Inicio",
             tab_return_home: "🏠 Regresar al Inicio",
 
             // Features & Footer
@@ -480,6 +482,7 @@ window.I18n = {
 
             // User Manual Tab & Modal (EN)
             tab_user_manual: "📘 Questions? User Manual",
+            tab_user_manual_nav: "Manual",
             manual_modal_title: "📘 User Manual — AuditFlow AI",
             manual_modal_sub: "Step-by-step guide to audit documents, understand metrics, and execute renegotiation tactics.",
             manual_step1_title: "1. Select Standard & Upload",
@@ -491,6 +494,7 @@ window.I18n = {
             manual_step4_title: "4. Advanced Tools & Negotiation",
             manual_step4_desc: "Toggle live redlines diff, download Word .docx, chat with AI Copilot, or book a 10-min live session.",
             manual_btn_close: "Got it, Close",
+            manual_btn_home: "🏠 Return to Home",
             tab_return_home: "🏠 Back to Home",
 
             // Features & Footer & Issue Modal (EN)
@@ -791,6 +795,7 @@ window.I18n = {
 
             // User Manual Tab & Modal (DE)
             tab_user_manual: "📘 Fragen? Benutzerhandbuch",
+            tab_user_manual_nav: "Handbuch",
             manual_modal_title: "📘 Benutzerhandbuch — AuditFlow AI",
             manual_modal_sub: "Schritt-für-Schritt-Anleitung zur Prüfung von Verträgen, Risikoanalyse und taktischen Lösungen.",
             manual_step1_title: "1. Standard Wählen & Hochladen",
@@ -802,6 +807,7 @@ window.I18n = {
             manual_step4_title: "4. Erweiterte Tools & Verhandlung",
             manual_step4_desc: "Aktivieren Sie Live-Redlines, laden Sie Word .docx herunter oder buchen Sie eine 10-Minuten-Live-Session.",
             manual_btn_close: "Verstanden, Schließen",
+            manual_btn_home: "🏠 Zur Startseite",
             tab_return_home: "🏠 Zur Startseite",
 
             // Features & Footer (DE)
@@ -948,16 +954,35 @@ window.I18n = {
         }
         this.updateDOM();
 
+        const inactiveClass = "px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none";
+        const activeClass = "px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none";
+        const modalInactiveClass = "px-2 py-0.5 rounded text-gray-300 hover:text-white transition-all focus:outline-none";
+        const modalActiveClass = "px-2 py-0.5 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none";
+
+        document.querySelectorAll('[data-lang-btn]').forEach(btn => {
+            const btnLang = btn.getAttribute('data-lang-btn');
+            const isSmall = btn.classList.contains('px-2') || btn.classList.contains('py-0.5') || btn.id.includes('manual');
+            const isActive = (btnLang === lang);
+            if (isSmall) {
+                btn.className = isActive ? modalActiveClass : modalInactiveClass;
+            } else {
+                btn.className = isActive ? activeClass : inactiveClass;
+            }
+        });
+
         const btnEs = document.getElementById('btn-lang-es');
         const btnEn = document.getElementById('btn-lang-en');
         const btnDe = document.getElementById('btn-lang-de');
-
-        const inactiveClass = "px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none";
-        const activeClass = "px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none";
-
         if (btnEs) btnEs.className = (lang === 'es' ? activeClass : inactiveClass);
         if (btnEn) btnEn.className = (lang === 'en' ? activeClass : inactiveClass);
         if (btnDe) btnDe.className = (lang === 'de' ? activeClass : inactiveClass);
+
+        const btnManualEs = document.getElementById('btn-manual-lang-es');
+        const btnManualEn = document.getElementById('btn-manual-lang-en');
+        const btnManualDe = document.getElementById('btn-manual-lang-de');
+        if (btnManualEs) btnManualEs.className = (lang === 'es' ? modalActiveClass : modalInactiveClass);
+        if (btnManualEn) btnManualEn.className = (lang === 'en' ? modalActiveClass : modalInactiveClass);
+        if (btnManualDe) btnManualDe.className = (lang === 'de' ? modalActiveClass : modalInactiveClass);
     },
 
     t(key) {

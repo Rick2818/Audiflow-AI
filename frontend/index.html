@@ -235,15 +235,19 @@
             <div class="flex items-center gap-3 sm:gap-4 text-sm">
                 <!-- SWITCHER TRI-LINGÜE (ES / EN / DE) -->
                 <div class="inline-flex items-center bg-dark-card border border-border-dark rounded-lg p-1 text-xs font-mono">
-                    <button id="btn-lang-es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
-                    <button id="btn-lang-en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
-                    <button id="btn-lang-de" aria-label="Sprache auf Deutsch umstellen" onclick="window.I18n.setLanguage('de')" class="px-2 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">DE</button>
+                    <button id="btn-lang-es" data-lang-btn="es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
+                    <button id="btn-lang-en" data-lang-btn="en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
+                    <button id="btn-lang-de" data-lang-btn="de" aria-label="Sprache auf Deutsch umstellen" onclick="window.I18n.setLanguage('de')" class="px-2 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">DE</button>
                 </div>
 
                 <span class="badge-privacy hidden sm:inline-flex items-center gap-2">
                     <span class="pulse-dot"></span>
                     <span data-i18n="nav_privacy_badge">Memoria Volátil Activa (0 Disco)</span>
                 </span>
+                <!-- ENLACE DIRECTO A SECCIÓN MANUAL DE USUARIO -->
+                <a href="#manual-section" class="text-xs font-mono font-bold text-gray-300 hover:text-accent-blue transition-all hidden md:inline-flex items-center gap-1">
+                    📘 <span data-i18n="tab_user_manual_nav">Manual</span>
+                </a>
                 <!-- BOTÓN AGENDAR DEMO 10 MIN -->
                 <button onclick="window.AppHandler.openBookingModal()" class="px-2.5 py-1.5 rounded-lg bg-emerald-950/50 hover:bg-emerald-900/70 border border-emerald-500/40 text-emerald-300 font-bold text-xs shadow-glow transition-all hidden lg:inline-flex items-center gap-1.5">
                     📅 <span data-i18n="nav_book_demo">Demo 10 min</span>
@@ -597,6 +601,79 @@
                     </div>
                 </div>
 
+                <!-- SECCIÓN VISUAL DEL MANUAL DE USUARIO & GUÍA DE USO -->
+                <div id="manual-section" class="p-6 sm:p-8 rounded-2xl bg-dark-card border border-border-dark text-left mb-8 shadow-xl">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border-dark pb-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 rounded-xl bg-accent-blue/10 border border-accent-blue/30 flex items-center justify-center text-2xl shrink-0">📘</div>
+                            <div>
+                                <h3 data-i18n="manual_modal_title" class="text-lg sm:text-xl font-bold text-white">Manual de Usuario — AuditFlow AI</h3>
+                                <p data-i18n="manual_modal_sub" class="text-xs text-gray-400 font-mono">Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 flex-wrap">
+                            <!-- SWITCHER DE IDIOMAS DE LA SECCIÓN MANUAL -->
+                            <div class="inline-flex items-center bg-dark-surface border border-border-dark rounded-lg p-1 text-xs font-mono">
+                                <button data-lang-btn="es" id="btn-section-lang-es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
+                                <button data-lang-btn="en" id="btn-section-lang-en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
+                                <button data-lang-btn="de" id="btn-section-lang-de" aria-label="Sprache auf Deutsch umstellen" onclick="window.I18n.setLanguage('de')" class="px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">DE</button>
+                            </div>
+                            <button onclick="window.AppHandler.resetToHome()" class="btn-secondary text-xs px-3.5 py-2 font-mono flex items-center gap-1.5 border border-border-dark text-gray-300 hover:text-white hover:bg-dark-surface transition-all rounded-xl">
+                                <span data-i18n="manual_btn_home">🏠 Regresar al Inicio</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 text-left">
+                        <!-- Paso 1 -->
+                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                            <span class="text-2xl shrink-0">⚖️</span>
+                            <div>
+                                <h4 data-i18n="manual_step1_title" class="text-xs sm:text-sm font-bold text-white">1. Selección de Normativa y Carga</h4>
+                                <p data-i18n="manual_step1_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Elige tu marco legal (PCAOB/US GAAP, NIIF/IFRS o Código Local) y arrastra tu PDF o imagen.</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 2 -->
+                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                            <span class="text-2xl shrink-0">⚡</span>
+                            <div>
+                                <h4 data-i18n="manual_step2_title" class="text-xs sm:text-sm font-bold text-emerald-400">2. Análisis Volátil en &lt; 10 Segundos</h4>
+                                <p data-i18n="manual_step2_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Gemini 2.5 Flash audita en memoria RAM volátil (0 disco) y calcula tu fuga económica en USD.</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 3 -->
+                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                            <span class="text-2xl shrink-0">🎁</span>
+                            <div>
+                                <h4 data-i18n="manual_step3_title" class="text-xs sm:text-sm font-bold text-yellow-400">3. Diagnóstico Gratuito y Desbloqueo</h4>
+                                <p data-i18n="manual_step3_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Prueba 14 Días).</p>
+                            </div>
+                        </div>
+
+                        <!-- Paso 4 -->
+                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
+                            <span class="text-2xl shrink-0">🛠️</span>
+                            <div>
+                                <h4 data-i18n="manual_step4_title" class="text-xs sm:text-sm font-bold text-accent-blue">4. Herramientas Avanzadas y Negociación</h4>
+                                <p data-i18n="manual_step4_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-border-dark flex flex-wrap items-center justify-between gap-3">
+                        <button onclick="window.AppHandler.loadSampleContract()" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5">
+                            ⚡ <span data-i18n="btn_sample_demo">Probar con Contrato de Ejemplo</span>
+                        </button>
+                        <div class="flex items-center gap-2 flex-wrap">
+                            <button onclick="window.AppHandler.resetToHome()" class="btn-primary text-xs px-5 py-2 font-mono flex items-center gap-1.5 shadow-glow">
+                                <span data-i18n="manual_btn_home">🏠 Regresar al Inicio</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- INDICADOR DE SELECCIÓN DE ARCHIVO -->
                 <div id="file-selected-box" class="hidden mt-4 p-4 sm:p-5 rounded-xl bg-dark-card border border-accent-blue/40 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg animate-fade-in">
                     <div class="flex items-center gap-3 text-left w-full sm:w-auto">
@@ -710,28 +787,23 @@
 
         <!-- DASHBOARD DE REPORTE CON BLUR -->
         <section id="report-section" class="hidden py-6 animate-fade-in">
-            <!-- BARRA DE ACCIONES: REGRESAR AL INICIO, IMPRIMIR Y SOPORTE IA -->
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-6 no-print">
-                <button onclick="window.AppHandler.resetToHome()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-border-dark text-gray-300 hover:text-white hover:bg-dark-card transition-all flex items-center gap-2">
-                    <span data-i18n="btn_back_home">← Regresar al Inicio / Auditar Otro</span>
+            <!-- BARRA DE ACCIONES: IMPRIMIR, DESCARGAR Y SOPORTE IA -->
+            <div class="flex flex-wrap items-center justify-end gap-2 mb-6 no-print">
+                <button onclick="window.AppHandler.openChatCopilotModal()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-sky-500/40 text-sky-400 hover:bg-sky-500/10 transition-all flex items-center gap-1.5 shadow-sm">
+                    <span data-i18n="btn_chat_contract">💬 Chatear con la IA sobre este Contrato</span>
                 </button>
-                <div class="flex items-center gap-2 flex-wrap">
-                    <button onclick="window.AppHandler.openChatCopilotModal()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-sky-500/40 text-sky-400 hover:bg-sky-500/10 transition-all flex items-center gap-1.5 shadow-sm">
-                        <span data-i18n="btn_chat_contract">💬 Chatear con la IA sobre este Contrato</span>
-                    </button>
-                    <button onclick="window.AppHandler.downloadDocxRedlines()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5 shadow-sm">
-                        <span data-i18n="btn_download_docx">📄 Descargar Word (.docx) Redlines</span>
-                    </button>
-                    <button onclick="window.AppHandler.downloadIcalEvents()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 transition-all flex items-center gap-1.5 shadow-sm">
-                        <span data-i18n="btn_download_ics">📅 Recordatorios Calendario (.ics)</span>
-                    </button>
-                    <button onclick="window.AppHandler.openSupportModal()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-purple-500/40 text-purple-400 hover:bg-purple-500/10 transition-all flex items-center gap-2 shadow-sm">
-                        <span data-i18n="btn_ai_support">🤖 Soporte IA 24/7 (Corregir con IA)</span>
-                    </button>
-                    <button onclick="window.AppHandler.downloadPdfReport()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 shadow-sm">
-                        <span data-i18n="btn_print_report">🖨️ Imprimir / Guardar en PDF</span>
-                    </button>
-                </div>
+                <button onclick="window.AppHandler.downloadDocxRedlines()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5 shadow-sm">
+                    <span data-i18n="btn_download_docx">📄 Descargar Word (.docx) Redlines</span>
+                </button>
+                <button onclick="window.AppHandler.downloadIcalEvents()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 transition-all flex items-center gap-1.5 shadow-sm">
+                    <span data-i18n="btn_download_ics">📅 Recordatorios Calendario (.ics)</span>
+                </button>
+                <button onclick="window.AppHandler.openSupportModal()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-purple-500/40 text-purple-400 hover:bg-purple-500/10 transition-all flex items-center gap-2 shadow-sm">
+                    <span data-i18n="btn_ai_support">🤖 Soporte IA 24/7 (Corregir con IA)</span>
+                </button>
+                <button onclick="window.AppHandler.downloadPdfReport()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 shadow-sm">
+                    <span data-i18n="btn_print_report">🖨️ Imprimir / Guardar en PDF</span>
+                </button>
             </div>
             <!-- BANNER DE ÉXITO Y BOTÓN REGRESAR AL DASHBOARD TRAS LA COMPRA -->
             <div id="unlocked-success-banner" class="hidden mb-8 bg-gradient-to-r from-emerald-950/70 via-dark-card to-sky-950/70 border border-emerald-500/50 rounded-2xl p-6 text-center shadow-2xl backdrop-blur-md">
@@ -1345,12 +1417,22 @@
         <!-- MODAL: GUÍA Y MANUAL DE USUARIO -->
         <div id="manual-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
             <div class="bg-dark-card border border-border-dark w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col">
-                <button onclick="window.AppHandler.closeManualModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl font-mono">✕</button>
-                <div class="flex items-center gap-3 border-b border-border-dark pb-4">
-                    <div class="w-10 h-10 rounded-xl bg-accent-blue/10 border border-accent-blue/30 flex items-center justify-center text-xl shrink-0">📘</div>
-                    <div>
-                        <h3 data-i18n="manual_modal_title" class="text-lg sm:text-xl font-bold text-white">Manual de Usuario — AuditFlow AI</h3>
-                        <p data-i18n="manual_modal_sub" class="text-xs text-gray-400 font-mono">Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.</p>
+                <div class="flex items-center justify-between border-b border-border-dark pb-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-accent-blue/10 border border-accent-blue/30 flex items-center justify-center text-xl shrink-0">📘</div>
+                        <div>
+                            <h3 data-i18n="manual_modal_title" class="text-lg sm:text-xl font-bold text-white">Manual de Usuario — AuditFlow AI</h3>
+                            <p data-i18n="manual_modal_sub" class="text-xs text-gray-400 font-mono">Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 sm:gap-3 shrink-0 ml-2">
+                        <!-- SWITCHER TRI-LINGÜE EN MANUAL -->
+                        <div class="inline-flex items-center bg-dark-surface border border-border-dark rounded-lg p-0.5 text-xs font-mono">
+                            <button id="btn-manual-lang-es" data-lang-btn="es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2 py-0.5 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
+                            <button id="btn-manual-lang-en" data-lang-btn="en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2 py-0.5 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
+                            <button id="btn-manual-lang-de" data-lang-btn="de" aria-label="Sprache auf Deutsch umstellen" onclick="window.I18n.setLanguage('de')" class="px-2 py-0.5 rounded text-gray-300 hover:text-white transition-all focus:outline-none">DE</button>
+                        </div>
+                        <button onclick="window.AppHandler.closeManualModal()" class="text-gray-400 hover:text-white text-xl font-mono p-1 leading-none" title="Cerrar">✕</button>
                     </div>
                 </div>
 
@@ -1392,13 +1474,18 @@
                     </div>
                 </div>
 
-                <div class="pt-3 border-t border-border-dark flex items-center justify-between gap-3">
+                <div class="pt-3 border-t border-border-dark flex flex-wrap items-center justify-between gap-3">
                     <button onclick="window.AppHandler.closeManualModal(); window.AppHandler.loadSampleContract();" class="text-xs font-mono text-emerald-400 hover:text-emerald-300">
                         ⚡ Probar con Contrato de Ejemplo
                     </button>
-                    <button onclick="window.AppHandler.closeManualModal()" class="btn-primary text-xs px-5 py-2 font-mono">
-                        <span data-i18n="manual_btn_close">Entendido, Cerrar</span>
-                    </button>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <button onclick="window.AppHandler.closeManualModal(); window.AppHandler.resetToHome();" class="btn-secondary text-xs px-3.5 py-2 font-mono flex items-center gap-1.5 border border-border-dark text-gray-300 hover:text-white hover:bg-dark-surface transition-all rounded-xl">
+                            <span data-i18n="manual_btn_home">🏠 Regresar al Inicio</span>
+                        </button>
+                        <button onclick="window.AppHandler.closeManualModal()" class="btn-primary text-xs px-5 py-2 font-mono">
+                            <span data-i18n="manual_btn_close">Entendido, Cerrar</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1433,8 +1520,8 @@
     </footer>
 
     <!-- LÓGICA BILINGÜE Y FRONTEND JS CON CACHE-BUSTER -->
-    <script src="js/i18n.js?v=3.0"></script>
-    <script src="js/payment.js?v=3.0"></script>
-    <script src="js/app.js?v=3.0"></script>
+    <script src="js/i18n.js?v=3.1"></script>
+    <script src="js/payment.js?v=3.1"></script>
+    <script src="js/app.js?v=3.1"></script>
 </body>
 </html>
