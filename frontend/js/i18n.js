@@ -31,9 +31,9 @@ window.I18n = {
             // Hero
             hero_free_badge: "🎁 Escaneo Inicial 100% Gratuito • Sin tarjeta para analizar",
             hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido",
-            hero_title_1: "Audita tus Contratos y Facturas en ",
+            hero_title_1: "Detecta Fugas de Dinero y Cláusulas Abusivas en ",
             hero_title_2: "<10 Segundos",
-            hero_sub: "El 87% de los contratos de arrendamiento, facturas y servicios B2B contienen entre $3,500 y $18,000 USD en sobrecargos ocultos. Descúbrelos GRATIS en <10s antes de firmar o pagar.",
+            hero_sub: "La plataforma de auditoría de contratos y facturas con IA para Directores Financieros y PyMEs. Evita penalizaciones y sobrecostos antes de firmar o pagar. Escaneo de prueba 100% Gratis en memoria volátil.",
             hero_privacy_guarantee: "<strong>Privacidad Total Garantizada:</strong> Tu documento se destruye automáticamente de la memoria RAM efímera tras la auditoría (0 Almacenamiento en Disco).",
             
             // Live Stats Ticker (Confianza Social)
@@ -288,9 +288,9 @@ window.I18n = {
             // Hero
             hero_free_badge: "🎁 100% Free Initial Scan • No card required to analyze",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultra-fast processing",
-            hero_title_1: "Audit Contracts & Invoices in ",
+            hero_title_1: "Detect Financial Leakages & Abusive Clauses in ",
             hero_title_2: "<10 Seconds",
-            hero_sub: "87% of commercial leases, invoices, and B2B contracts contain between $3,500 and $18,000 USD in hidden financial leakages. Discover them FREE in <10s before signing or paying.",
+            hero_sub: "AI-powered contract & invoice audit infrastructure for CFOs, Controllers, and SMBs. Prevent overcharges and toxic clauses before signing or paying. 100% Free initial scan in volatile RAM.",
             hero_privacy_guarantee: "<strong>Total Privacy Guaranteed:</strong> Your document is automatically purged from volatile RAM memory immediately after auditing (0 Disk Storage).",
             
             // Live Stats Ticker
@@ -545,9 +545,9 @@ window.I18n = {
             // Hero (DE)
             hero_free_badge: "🎁 100% Kostenlose Erstprüfung • Keine Kreditkarte erforderlich",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultraschnelle Verarbeitung",
-            hero_title_1: "Verträge & Rechnungen prüfen in ",
+            hero_title_1: "Finanzverluste & Risikoklauseln erkennen in ",
             hero_title_2: "<10 Sekunden",
-            hero_sub: "87% der Gewerbemietverträge, Rechnungen und B2B-Verträge enthalten zwischen 3.500 $ und 18.000 $ an versteckten finanziellen Verlusten. Entdecken Sie diese KOSTENLOS in <10s vor der Unterschrift oder Zahlung.",
+            hero_sub: "Die KI-Vertragsprüfungsplattform für Finanzchefs, Controller und KMUs. Vermeiden Sie Überzahlungen und Knebelklauseln vor der Unterschrift. 100% kostenlose Erstprüfung im flüchtigen RAM.",
             hero_privacy_guarantee: "<strong>Garantierter Datenschutz:</strong> Ihr Dokument wird unmittelbar nach der Prüfung automatisch aus dem flüchtigen RAM-Speicher gelöscht (0 Festplattenspeicherung).",
             
             // Live Stats Ticker (DE)
