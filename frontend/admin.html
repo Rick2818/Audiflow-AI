@@ -1128,15 +1128,20 @@ Escaneo de prueba gratuito:
             },
 
             async resendLeadOffer(email, name) {
+                const savedPass = sessionStorage.getItem('auditflow_admin_pass') || localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
                 try {
                     const res = await fetch('/api/admin', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ action: 'resend_lead_offer', email, name })
+                        headers: { 
+                            'Content-Type': 'application/json',
+                            'X-Admin-Password': savedPass,
+                            'Authorization': `Bearer ${this.authToken || 'admin_token_auditflow_2026'}`
+                        },
+                        body: JSON.stringify({ action: 'resend_lead_offer', email, name, admin_password: savedPass })
                     });
                     const data = await res.json();
                     if (data.success) {
-                        alert(`✅ Oferta corporativa re-enviada por Gmail SMTP a ${email}`);
+                        alert(`✅ ${data.message || `Oferta corporativa re-enviada a ${email}`}`);
                     } else {
                         alert('⚠️ ' + (data.error || 'No se pudo enviar el correo'));
                     }

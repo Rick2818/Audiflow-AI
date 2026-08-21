@@ -213,7 +213,7 @@ export default async function handler(req, res) {
     }
 
     // Acción: Disparar Campaña de Prospección B2B Automatizada
-    if (action === 'send_outreach_campaign' || req.url.includes('outreach')) {
+    if (action === 'send_outreach_campaign' || (req.url && req.url.includes('outreach'))) {
       if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
         return res.status(400).json({ success: false, error: 'Se requiere una lista de prospectos B2B en req.body.prospects' });
       }
@@ -380,30 +380,89 @@ export default async function handler(req, res) {
       });
     }
 
-    // Acción: Envío de Correo Individual
-    if (action === 'send_direct_email' || action === 'send_lead_email') {
+    // Acción: Envío de Correo Individual / Re-enviar Oferta a Lead
+    if (action === 'send_direct_email' || action === 'send_lead_email' || action === 'resend_lead_offer') {
       if (!email || !email.includes('@')) {
         return res.status(400).json({ error: 'Dirección de correo inválida.' });
       }
 
-      const subject = `AuditFlow AI — Solución Táctica para ${company || 'su Empresa'} (${document_name || 'Contrato'})`;
+      const subject = `AuditFlow AI — Solución Táctica y Auditoría Preventiva para ${company || 'su Empresa'}`;
       const htmlBody = `
-        <div style="font-family: Arial, sans-serif; color: #1e293b; max-width: 600px; margin: 0 auto; padding: 24px; border: 1px solid #e2e8f0; border-radius: 12px;">
-          <h2 style="color: #0284c7; margin-top: 0;">AuditFlow AI — Reporte Ejecutivo</h2>
-          <p>Estimado(a) <strong>${escapeHtml(name || 'Director')}</strong>,</p>
-          <p>Adjuntamos el informe de auditoría preventiva y marcas de revisión (.docx) para <strong>${escapeHtml(document_name || 'su documento')}</strong>.</p>
-          ${custom_notes ? `<div style="background-color: #f8fafc; border-left: 4px solid #0284c7; padding: 12px; margin: 16px 0;"><p style="margin: 0; font-size: 14px;">${escapeHtml(custom_notes)}</p></div>` : ''}
-          <p style="font-size: 12px; color: #64748b; margin-top: 32px; border-top: 1px solid #e2e8f0; padding-top: 12px;">
-            AuditFlow AI • Procesado en Memoria Volátil RAM • Cifrado AES-256
-          </p>
-        </div>
+        <!DOCTYPE html>
+        <html>
+        <head><meta charset="utf-8"></head>
+        <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0f172a; color: #f8fafc;">
+          <div style="max-width: 600px; margin: 30px auto; background-color: #1e293b; border-radius: 12px; border: 1px solid #334155; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <div style="padding: 24px; border-bottom: 1px solid #334155; text-align: center; background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);">
+              <span style="font-size: 24px; font-weight: bold; color: #38bdf8; letter-spacing: -0.5px;">AuditFlow <span style="color: #a855f7;">AI</span></span>
+              <p style="margin: 4px 0 0; font-size: 11px; color: #94a3b8; font-family: monospace;">FIRMA ESPECIALIZADA EN AUDITORÍA FINANCIERA & LEGAL • +10 AÑOS DE TRAYECTORIA</p>
+            </div>
+            
+            <div style="padding: 30px 24px;">
+              <p style="font-size: 15px; color: #cbd5e1; line-height: 1.6; margin-top: 0;">
+                Estimado(a) <strong>${escapeHtml(name || 'Director')}</strong>,
+              </p>
+              
+              <p style="font-size: 14px; color: #cbd5e1; line-height: 1.6;">
+                En <strong>AuditFlow AI</strong> somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales con más de 10 años de experiencia asesorando a departamentos financieros y directores ejecutivos.
+              </p>
+
+              <div style="background-color: #0f172a; border-left: 4px solid #38bdf8; padding: 16px; border-radius: 6px; margin: 20px 0;">
+                <p style="margin: 0; font-size: 13px; color: #e2e8f0; line-height: 1.5;">
+                  🔍 <strong>Diagnóstico de Cortesía Disponible:</strong> Nuestro motor de auditoría preventiva en memoria RAM volátil (0 almacenamiento en disco) está listo para auditar sus papeles de trabajo, contratos de arrendamiento y facturas de proveedores en menos de 10 segundos.
+                </p>
+              </div>
+
+              ${custom_notes ? `<div style="background-color: #0f172a; border-left: 4px solid #a855f7; padding: 14px; margin: 16px 0; border-radius: 6px;"><p style="margin: 0; font-size: 13px; color: #cbd5e1;">${escapeHtml(custom_notes)}</p></div>` : ''}
+
+              <div style="text-align: center; margin: 28px 0;">
+                <a href="https://audiflowai.com/?ref=lead_offer" style="background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%); color: #ffffff; padding: 12px 28px; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 4px 12px rgba(37,99,235,0.3);">
+                  🚀 Acceder a su Auditoría de Cortesía
+                </a>
+              </div>
+
+              <p style="font-size: 13px; color: #94a3b8; line-height: 1.5; margin-bottom: 0;">
+                Atentamente,<br>
+                <strong style="color: #f8fafc;">Equipo de Auditoría &amp; Consultoría Corporativa</strong><br>
+                <span style="font-size: 12px; color: #64748b;">AuditFlow AI • Infraestructura de Auditoría y Cumplimiento PCAOB / GAAP / NIIF</span>
+              </p>
+            </div>
+            
+            <div style="padding: 16px 24px; background-color: #0f172a; border-top: 1px solid #334155; text-align: center;">
+              <p style="font-size: 11px; color: #64748b; margin: 0;">
+                © 2026 AuditFlow AI • Procesamiento Exclusivo en Memoria Volátil RAM • Cifrado Bancario AES-256
+              </p>
+            </div>
+          </div>
+        </body>
+        </html>
       `;
 
       try {
+        const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+        if (resendApiKey) {
+          const resend = new Resend(resendApiKey);
+          const emailFrom = (process.env.EMAIL_FROM || '"AuditFlow AI | Auditoría Corporativa" <ricardo@audiflowai.com>').trim();
+          await resend.emails.send({
+            from: emailFrom,
+            to: [email],
+            reply_to: 'rick28191@gmail.com',
+            subject,
+            html: htmlBody
+          });
+          return res.status(200).json({ success: true, message: `Oferta corporativa enviada con éxito a ${email} vía Resend API` });
+        }
+
         await sendGmailEmail({ to: email, subject, html: htmlBody });
-        return res.status(200).json({ success: true, message: `Correo enviado exitosamente a ${email}` });
+        return res.status(200).json({ success: true, message: `Oferta corporativa enviada con éxito a ${email} vía Gmail SMTP` });
       } catch (err) {
-        return res.status(500).json({ error: 'Error enviando correo: ' + err.message });
+        console.warn('Fallo en Resend/SMTP individual, ejecutando fallback:', err.message);
+        try {
+          await sendGmailEmail({ to: email, subject, html: htmlBody });
+          return res.status(200).json({ success: true, message: `Oferta corporativa enviada con éxito a ${email} vía Gmail SMTP Fallback` });
+        } catch (fErr) {
+          return res.status(500).json({ error: 'Error enviando correo: ' + fErr.message });
+        }
       }
     }
 
