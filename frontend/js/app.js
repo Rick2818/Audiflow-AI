@@ -557,7 +557,8 @@ window.AppHandler = {
 
             const teaserLabel = window.I18n ? window.I18n.t('rep_teaser_label') : '🔍 Resumen de la Anomalía:';
             const solutionLabel = window.I18n ? window.I18n.t('rep_solution_label') : '💡 Solución Táctica:';
-            const unlockBtnText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Desbloquear Solución Táctica ($19 USD)';
+            const unlockBtnFreeText = window.I18n ? window.I18n.t('rep_unlock_btn_free') : '🎁 Desbloquear Solución Gratis (Prueba 14 Días)';
+            const unlockBtnBuyText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Comprar Reporte ($19 USD)';
             const defaultClauseLabel = isDe ? 'Klausel' : (isEn ? 'Clause' : 'Cláusula');
 
             card.innerHTML = `
@@ -586,9 +587,12 @@ window.AppHandler = {
                         <div class="blurred-content select-none transition-all duration-500 text-sm text-gray-300 leading-relaxed font-mono">
                             ${solutionText}
                         </div>
-                        <div class="blur-overlay absolute inset-0 flex items-center justify-center bg-dark-card/60 backdrop-blur-xs p-4">
-                            <button onclick="window.PaymentHandler.openPaymentModal()" class="btn-primary text-xs py-2.5 px-5 shadow-glow font-semibold flex items-center gap-2">
-                                <span>${unlockBtnText}</span>
+                        <div class="blur-overlay absolute inset-0 flex flex-col sm:flex-row items-center justify-center gap-2.5 bg-dark-card/85 backdrop-blur-xs p-3">
+                            <button onclick="window.AppHandler.unblurReport('free_trial')" class="btn-primary bg-gradient-to-r from-emerald-600 to-accent-blue text-xs py-2.5 px-4 shadow-glow font-bold flex items-center gap-1.5">
+                                <span>${unlockBtnFreeText}</span>
+                            </button>
+                            <button onclick="window.PaymentHandler.openPaymentModal()" class="btn-secondary text-xs py-2 px-3 font-semibold text-gray-300 hover:text-white flex items-center gap-1">
+                                <span>${unlockBtnBuyText}</span>
                             </button>
                         </div>
                     </div>
@@ -932,7 +936,7 @@ window.AppHandler = {
         setInterval(showNext, 14000);
     },
 
-    unblurReport() {
+    unblurReport(source = 'free_trial') {
         document.querySelectorAll('.blurred-content').forEach(el => {
             el.classList.remove('blurred-content', 'select-none');
             el.classList.add('unblurred');
@@ -947,8 +951,21 @@ window.AppHandler = {
 
         const successBanner = document.getElementById('unlocked-success-banner');
         if (successBanner) {
+            const titleEl = successBanner.querySelector('[data-i18n="success_banner_title"]');
+            const subEl = successBanner.querySelector('[data-i18n="success_banner_sub"]');
+            if (source === 'free_trial') {
+                if (titleEl) titleEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_title') : '🎉 ¡Soluciones Tácticas Desbloqueadas!';
+                if (subEl) subEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_sub') : 'Has desbloqueado el acceso completo a las 3 Soluciones Tácticas con tu Prueba Gratuita de 14 Días. Puedes leer las soluciones y exportar Word .docx o PDF.';
+            }
             successBanner.classList.remove('hidden');
             successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'report_unlocked_' + source);
+        }
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'report_unlocked', { unlock_source: source });
         }
     },
 
