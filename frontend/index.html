@@ -1335,6 +1335,16 @@
             </button>
         </div>
 
+        <!-- PESTAÑA FLOTANTE INFERIOR DERECHA: REGRESAR AL INICIO -->
+        <div class="fixed bottom-5 right-5 z-40">
+            <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" 
+                    class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-dark-surface/95 border border-emerald-500/40 hover:border-emerald-500 text-white shadow-xl hover:shadow-emerald-500/20 hover:scale-105 transition-all duration-300 backdrop-blur-md group"
+                    title="Regresar al Inicio">
+                <span class="text-base group-hover:-translate-y-0.5 transition-transform">🏠</span>
+                <span data-i18n="tab_return_home" class="text-xs font-mono font-medium text-gray-200 group-hover:text-emerald-400">Regresar al Inicio</span>
+            </button>
+        </div>
+
         <!-- MODAL: GUÍA Y MANUAL DE USUARIO -->
         <div id="manual-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
             <div class="bg-dark-card border border-border-dark w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col">

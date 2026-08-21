@@ -180,6 +180,7 @@ window.I18n = {
             manual_step4_title: "4. Herramientas Avanzadas y Negociación",
             manual_step4_desc: "Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.",
             manual_btn_close: "Entendido, Cerrar",
+            tab_return_home: "🏠 Regresar al Inicio",
 
             // Features & Footer
             feat_1_tag: "01. Privacidad Total",
@@ -490,6 +491,7 @@ window.I18n = {
             manual_step4_title: "4. Advanced Tools & Negotiation",
             manual_step4_desc: "Toggle live redlines diff, download Word .docx, chat with AI Copilot, or book a 10-min live session.",
             manual_btn_close: "Got it, Close",
+            tab_return_home: "🏠 Back to Home",
 
             // Features & Footer & Issue Modal (EN)
             feat_1_tag: "01. Total Privacy",
@@ -800,6 +802,7 @@ window.I18n = {
             manual_step4_title: "4. Erweiterte Tools & Verhandlung",
             manual_step4_desc: "Aktivieren Sie Live-Redlines, laden Sie Word .docx herunter oder buchen Sie eine 10-Minuten-Live-Session.",
             manual_btn_close: "Verstanden, Schließen",
+            tab_return_home: "🏠 Zur Startseite",
 
             // Features & Footer (DE)
             feat_1_tag: "01. Vollständiger Datenschutz",
