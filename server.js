@@ -24,7 +24,7 @@ import exportDocxHandler from './api/export-docx.js';
 import chatDocumentHandler from './api/chat-document.js';
 import adminHandler from './api/admin.js';
 import outreachHandler from './api/outreach.js';
-import reportIssueHandler from './api/report-issue.js';
+import reportHandler from './api/report.js';
 import subscribeHandler from './lib/subscribe.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -162,7 +162,7 @@ app.all('/api/indexnow/submit', handleIndexNowRequest);
 app.post('/api/cross-audit', crossAuditHandler);
 app.post('/api/export-docx', exportDocxHandler);
 app.post('/api/chat-document', chatDocumentHandler);
-app.all('/api/report-issue', reportIssueHandler);
+app.all('/api/report-issue', reportHandler);
 app.all('/api/payment/subscribe', subscribeHandler);
 app.all('/api/admin', adminHandler);
 app.all('/api/outreach', outreachHandler);

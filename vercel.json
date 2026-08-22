@@ -117,6 +117,10 @@
       "destination": "/api/admin"
     },
     {
+      "source": "/api/report-issue",
+      "destination": "/api/report"
+    },
+    {
       "source": "/api/report/(.*)",
       "destination": "/api/report"
     },
