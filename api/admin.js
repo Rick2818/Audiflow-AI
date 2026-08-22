@@ -547,6 +547,7 @@ export default async function handler(req, res) {
           }
         } catch (mErr) {
           console.warn(`Fallo al enviar a ${leadEmail}:`, mErr.message);
+        }
       }
 
       // Mandato Universal: Copiar siempre al propietario (rick28191@gmail.com)
