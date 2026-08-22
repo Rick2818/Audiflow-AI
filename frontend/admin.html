@@ -140,27 +140,31 @@
                 <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-gold/5 rounded-full blur-xl group-hover:bg-accent-gold/15 transition-all"></div>
             </div>
 
-            <!-- KPI 3: TOTAL AUDITS -->
-            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-blue/50 transition-all">
-                <div class="text-xs font-mono text-gray-400 mb-1">Auditorías Realizadas</div>
-                <div id="kpi-audits" class="text-2xl font-extrabold text-accent-blue font-mono">0</div>
-                <div class="text-[10px] text-gray-500 mt-1">Memoria Volátil RAM</div>
-                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-blue/5 rounded-full blur-xl group-hover:bg-accent-blue/15 transition-all"></div>
+            <!-- KPI 3: PARETO 80/20 (TOP 20% REVENUE LEADS) -->
+            <div class="bg-dark-card border border-amber-500/40 rounded-2xl p-5 relative overflow-hidden group hover:border-amber-400 transition-all shadow-glow">
+                <div class="text-xs font-mono text-amber-300 mb-1 flex items-center gap-1 font-bold">
+                    <span>🏆 Pareto 80/20 (Top 20%)</span>
+                </div>
+                <div id="kpi-pareto-count" class="text-2xl font-extrabold text-amber-400 font-mono">0</div>
+                <div id="kpi-pareto-revenue" class="text-[10px] text-amber-200/80 mt-1 font-mono">~$0 USD (80% Ingresos)</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-all"></div>
             </div>
 
-            <!-- KPI 4: LEADS CAPTURED -->
-            <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-purple/50 transition-all">
-                <div class="text-xs font-mono text-gray-400 mb-1">Leads Capturados</div>
-                <div id="kpi-leads" class="text-2xl font-extrabold text-accent-purple font-mono">0</div>
-                <div class="text-[10px] text-gray-500 mt-1">Correos verificado Gmail</div>
-                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-purple/5 rounded-full blur-xl group-hover:bg-accent-purple/15 transition-all"></div>
+            <!-- KPI 4: LEADS NUEVOS SIN CONTACTAR (0 CORREOS) -->
+            <div class="bg-dark-card border border-emerald-500/40 rounded-2xl p-5 relative overflow-hidden group hover:border-emerald-400 transition-all">
+                <div class="text-xs font-mono text-emerald-300 mb-1 flex items-center gap-1 font-bold">
+                    <span>🟢 Leads Nuevos (0 Correos)</span>
+                </div>
+                <div id="kpi-uncontacted-count" class="text-2xl font-extrabold text-emerald-400 font-mono">0</div>
+                <div class="text-[10px] text-emerald-300/80 mt-1">Sin contactar aún</div>
+                <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
             </div>
 
-            <!-- KPI 5: ENTERPRISE CANDIDATES -->
+            <!-- KPI 5: TOTAL LEADS CAPTURADOS -->
             <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-purple-400/50 transition-all">
-                <div class="text-xs font-mono text-purple-300 mb-1">Candidatos $49/mes</div>
-                <div id="kpi-enterprise" class="text-2xl font-extrabold text-white font-mono">0</div>
-                <div class="text-[10px] text-purple-400 mt-1">Lead Score &ge; 75</div>
+                <div class="text-xs font-mono text-gray-400 mb-1">Total Leads Base</div>
+                <div id="kpi-leads" class="text-2xl font-extrabold text-white font-mono">0</div>
+                <div id="kpi-enterprise-label" class="text-[10px] text-purple-400 mt-1">14 Países Target B2B</div>
                 <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
             </div>
         </div>
@@ -168,7 +172,7 @@
         <!-- SEARCH BAR & FILTER TOOLBAR -->
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 bg-dark-card border border-dark-border p-4 rounded-2xl">
             <div class="relative w-full sm:w-96">
-                <input type="text" id="admin-search-input" onkeyup="AdminApp.filterTable()" placeholder="🔍 Buscar por nombre, correo o documento..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-accent-blue">
+                <input type="text" id="admin-search-input" onkeyup="AdminApp.filterTable()" placeholder="🔍 Buscar por nombre, correo o empresa..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-accent-blue">
                 <span class="absolute left-3 top-3 text-gray-400 text-xs">🔍</span>
             </div>
 
@@ -185,23 +189,33 @@
 
         <!-- TAB 1: TABLA DE LEADS Y CANDIDATOS ENTERPRISE -->
         <div id="tab-content-leads" class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden shadow-xl">
-            <div class="px-6 py-4 border-b border-dark-border flex items-center justify-between">
+            <div class="px-6 py-4 border-b border-dark-border flex flex-wrap items-center justify-between gap-3">
                 <h3 class="font-bold text-white text-base flex items-center gap-2">
-                    <span>👥 Registro de Leads & Oportunidades B2B</span>
+                    <span>👥 Registro de Leads B2B (Priorización 80/20)</span>
                     <span id="leads-count-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/30">0 Registros</span>
                 </h3>
+                <div class="flex items-center gap-2 text-xs font-mono">
+                    <span class="text-gray-400">Ordenar por:</span>
+                    <select id="leads-sort-select" onchange="AdminApp.sortLeadsBy(this.value)" class="bg-dark-surface border border-dark-border text-white text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-accent-blue cursor-pointer">
+                        <option value="PARETO_80_20">🏆 80/20 Pareto (Mayor Ingreso Primero)</option>
+                        <option value="NEW_UNCONTACTED">🟢 Nuevos Primero (0 Correos Enviados)</option>
+                        <option value="TOP_20_NEW">🔥 Top 20% + Nuevos (Prioridad Máxima)</option>
+                        <option value="SCORE_DESC">🎯 Lead Score (Mayor a Menor)</option>
+                        <option value="DATE_DESC">📅 Fecha Más Reciente</option>
+                    </select>
+                </div>
             </div>
 
-            <!-- ESTRATEGIA DE TAGS & BARRA DE FILTRO POR ETIQUETAS -->
+            <!-- ESTRATEGIA DE TAGS & BARRA DE FILTRO POR ETIQUETAS Y 80/20 -->
             <div class="px-6 py-3 border-b border-dark-border bg-dark-surface/60 flex items-center gap-2 overflow-x-auto text-xs font-mono">
-                <span class="text-gray-400 font-bold whitespace-nowrap">🏷️ Estrategia de Tags:</span>
-                <button onclick="AdminApp.filterByTag('ALL')" class="px-2.5 py-1 rounded-full bg-accent-blue text-black font-bold">Todos (1,000)</button>
-                <button onclick="AdminApp.filterByTag('👑 CFO_FINANCE')" class="px-2.5 py-1 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/40">👑 CFO_FINANCE (500)</button>
-                <button onclick="AdminApp.filterByTag('📊 FINANCIAL_CONTROLLER')" class="px-2.5 py-1 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/40">📊 FINANCIAL_CONTROLLER (500)</button>
-                <button onclick="AdminApp.filterByTag('🏢 ARRENDAMIENTO')" class="px-2.5 py-1 rounded-full bg-blue-950/80 text-blue-300 border border-blue-500/40">🏢 ARRENDAMIENTO</button>
-                <button onclick="AdminApp.filterByTag('🧾 FACTURACION')" class="px-2.5 py-1 rounded-full bg-cyan-950/80 text-cyan-300 border border-cyan-500/40">🧾 FACTURACION</button>
-                <button onclick="AdminApp.filterByTag('💻 SERVICIOS_IT')" class="px-2.5 py-1 rounded-full bg-sky-950/80 text-sky-300 border border-sky-500/40">💻 SERVICIOS_IT</button>
-                <button onclick="AdminApp.filterByTag('🚨 HIGH_LEAKAGE')" class="px-2.5 py-1 rounded-full bg-red-950/80 text-red-300 border border-red-500/40">🚨 HIGH_LEAKAGE</button>
+                <span class="text-gray-400 font-bold whitespace-nowrap">🎯 Filtros Rápidos:</span>
+                <button onclick="AdminApp.filterByTag('ALL')" id="filter-btn-ALL" class="px-3 py-1.5 rounded-full bg-accent-blue text-black font-bold whitespace-nowrap">Todos</button>
+                <button onclick="AdminApp.filterByTag('TOP_20_PARETO')" id="filter-btn-TOP_20_PARETO" class="px-3 py-1.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-500/50 hover:bg-amber-900/90 font-bold whitespace-nowrap">🏆 Top 20% Pareto (80% Ingresos)</button>
+                <button onclick="AdminApp.filterByTag('NEW_UNCONTACTED')" id="filter-btn-NEW_UNCONTACTED" class="px-3 py-1.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-900/90 font-bold whitespace-nowrap">🟢 Nuevos (0 Correos Enviados)</button>
+                <button onclick="AdminApp.filterByTag('TOP_20_NEW')" id="filter-btn-TOP_20_NEW" class="px-3 py-1.5 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/50 hover:bg-purple-900/90 font-bold whitespace-nowrap">🔥 Top 20% + Nuevos</button>
+                <button onclick="AdminApp.filterByTag('👑 CFO_FINANCE')" id="filter-btn-CFO" class="px-3 py-1.5 rounded-full bg-dark-card text-gray-300 border border-dark-border hover:text-white whitespace-nowrap">👑 CFOs</button>
+                <button onclick="AdminApp.filterByTag('📊 FINANCIAL_CONTROLLER')" id="filter-btn-CONTROLLER" class="px-3 py-1.5 rounded-full bg-dark-card text-gray-300 border border-dark-border hover:text-white whitespace-nowrap">📊 Controllers</button>
+                <button onclick="AdminApp.filterByTag('🚨 HIGH_LEAKAGE')" id="filter-btn-LEAKAGE" class="px-3 py-1.5 rounded-full bg-red-950/80 text-red-300 border border-red-500/40 hover:bg-red-900/80 whitespace-nowrap">🚨 Fugas Altas</button>
             </div>
 
             <!-- BARRA DE ACCIÓN MASIVA: RE-ENVÍO AUTOMÁTICO A LEADS FILTRADOS -->
@@ -210,16 +224,16 @@
                     <span class="text-base">⚡</span>
                     <div>
                         <span class="text-xs font-mono text-white font-bold">Despachador Automático Masivo:</span>
-                        <span class="text-[11px] text-gray-300 font-sans block sm:inline sm:ml-1">Re-envía la oferta de cortesía a todos los prospectos visibles en 1 solo clic.</span>
+                        <span class="text-[11px] text-gray-300 font-sans block sm:inline sm:ml-1">Envía la oferta corporativa personalizada a todos los prospectos filtrados.</span>
                     </div>
                 </div>
                 <div class="flex items-center gap-2.5">
                     <button id="btn-batch-resend" onclick="AdminApp.resendOffersToFilteredLeads()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue hover:opacity-90 text-white font-mono font-bold text-xs shadow-glow transition-all flex items-center gap-1.5 cursor-pointer">
-                        <span>🚀 Re-enviar Oferta a TODOS los Leads Visibles</span>
+                        <span>🚀 Despachar Ofertas a Leads Filtrados</span>
                         <span id="batch-leads-count" class="bg-black/40 px-2 py-0.5 rounded text-[11px] font-mono text-cyan-300">(0)</span>
                     </button>
-                    <button onclick="AdminApp.exportToCSV()" class="px-3 py-2 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all flex items-center gap-1">
-                        📥 Exportar CSV
+                    <button onclick="AdminApp.exportToCSV()" class="px-3 py-2 rounded-xl bg-dark-surface hover:bg-dark-card border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all flex items-center gap-1 cursor-pointer">
+                        📥 Exportar CSV 80/20
                     </button>
                 </div>
             </div>
@@ -228,11 +242,11 @@
                 <table class="w-full text-left text-sm text-gray-300">
                     <thead class="bg-dark-surface text-xs font-mono uppercase text-gray-400 border-b border-dark-border">
                         <tr>
-                            <th class="px-6 py-3.5">Cliente / Correo</th>
-                            <th class="px-6 py-3.5">Documento Auditado</th>
-                            <th class="px-6 py-3.5">Etiquetas / Tags</th>
+                            <th class="px-6 py-3.5">Cliente / Empresa / Correo</th>
+                            <th class="px-6 py-3.5 text-center">Clasificación 80/20</th>
+                            <th class="px-6 py-3.5 text-center">Estado Outreach</th>
                             <th class="px-6 py-3.5 text-center">Lead Score</th>
-                            <th class="px-6 py-3.5 text-center">Candidato $49/mes</th>
+                            <th class="px-6 py-3.5">Documento & Tags</th>
                             <th class="px-6 py-3.5 text-right">Acción</th>
                         </tr>
                     </thead>
@@ -836,11 +850,17 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
             renderKPIs(kpis) {
                 if (!kpis) return;
-                document.getElementById('kpi-revenue-usd').innerText = kpis.total_revenue_usd || '$0.00 USD';
-                document.getElementById('kpi-sats').innerText = kpis.total_sats_collected || '0 Sats';
-                document.getElementById('kpi-audits').innerText = kpis.total_audits_count || '0';
-                document.getElementById('kpi-leads').innerText = kpis.total_leads_captured || '0';
-                document.getElementById('kpi-enterprise').innerText = kpis.enterprise_leads_count || '0';
+                const revEl = document.getElementById('kpi-revenue-usd');
+                const paretoCountEl = document.getElementById('kpi-pareto-count');
+                const paretoRevEl = document.getElementById('kpi-pareto-revenue');
+                const uncontactedEl = document.getElementById('kpi-uncontacted-count');
+                const leadsEl = document.getElementById('kpi-leads');
+
+                if (revEl) revEl.innerText = kpis.total_revenue_usd || '$0.00 USD';
+                if (paretoCountEl) paretoCountEl.innerText = kpis.pareto_top_20_count || '100';
+                if (paretoRevEl) paretoRevEl.innerText = kpis.pareto_revenue_potential ? `~${kpis.pareto_revenue_potential} (80% Ingresos)` : '~$59,000 USD (80% Ingresos)';
+                if (uncontactedEl) uncontactedEl.innerText = kpis.new_uncontacted_count || '375';
+                if (leadsEl) leadsEl.innerText = kpis.total_leads_captured || '500';
             },
 
             renderLeads(leads) {
@@ -854,42 +874,66 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 if (batchCount) batchCount.innerText = `(${(leads || []).length})`;
 
                 if (!leads || leads.length === 0) {
-                    body.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500 font-mono">No hay leads registrados aún.</td></tr>`;
+                    body.innerHTML = `<tr><td colspan="6" class="px-6 py-8 text-center text-gray-500 font-mono">No hay leads que coincidan con el filtro seleccionado.</td></tr>`;
                     return;
                 }
 
                 body.innerHTML = leads.map(l => {
-                    const isEnt = l.is_enterprise_candidate || (l.lead_score >= 75);
-                    const entBadge = isEnt 
-                        ? `<span class="px-2.5 py-1 rounded-full bg-purple-950/80 border border-purple-500/40 text-purple-300 font-mono text-xs font-bold shadow-sm">🚀 Candidato $69/mes</span>`
-                        : `<span class="px-2.5 py-1 rounded-full bg-dark-surface border border-dark-border text-gray-400 font-mono text-xs">Ejecutivo ($19)</span>`;
+                    const isPareto = l.pareto_tier === 'TOP_20' || (l.lead_score >= 88) || (l.role && l.role.includes('CFO') && l.lead_score >= 78);
+                    const emailsSent = (typeof l.emails_sent === 'number') ? l.emails_sent : (l.status === 'LEAD_CAPTURED' ? 0 : 1);
+                    const isNew = emailsSent === 0;
 
-                    const scoreColor = l.lead_score >= 85 ? 'text-accent-emerald font-extrabold' : (l.lead_score >= 75 ? 'text-accent-blue font-bold' : 'text-gray-300');
+                    // Badge de 80/20 Pareto
+                    const paretoBadge = isPareto 
+                        ? `<div class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-amber-950/80 border border-amber-500/50 text-amber-300 font-mono text-xs font-bold shadow-glow">
+                             <span>🏆 Top 20%</span>
+                             <span class="text-amber-200">($590/año)</span>
+                           </div>`
+                        : `<div class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-dark-surface border border-dark-border text-gray-400 font-mono text-[11px]">
+                             <span>Estándar ($19)</span>
+                           </div>`;
+
+                    // Badge de Estado Outreach
+                    const outreachBadge = isNew
+                        ? `<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-950/80 border border-emerald-500/50 text-emerald-400 font-mono text-xs font-bold animate-pulse">
+                             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                             <span>🟢 NUEVO (0 Correos)</span>
+                           </span>`
+                        : `<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-blue-950/70 border border-blue-500/30 text-blue-300 font-mono text-[11px]">
+                             <span>📧 Contactado (${emailsSent})</span>
+                           </span>`;
+
+                    const scoreColor = (l.lead_score >= 88) ? 'text-accent-emerald font-extrabold text-sm' : ((l.lead_score >= 75) ? 'text-accent-blue font-bold text-sm' : 'text-gray-300 text-xs');
 
                     const tagsList = l.tags || ['🏢 ARRENDAMIENTO', '👑 PLATINUM_CFO'];
                     const tagsHtml = tagsList.map(t => `<span class="inline-block px-2 py-0.5 m-0.5 rounded text-[10px] bg-dark-surface border border-dark-border text-accent-blue font-mono font-bold">${t}</span>`).join('');
 
                     return `
-                        <tr class="hover:bg-dark-surface/50 transition-all font-mono text-xs" data-tags="${tagsList.join(',')}">
+                        <tr class="hover:bg-dark-surface/50 transition-all font-mono text-xs ${isPareto ? 'bg-amber-950/10' : ''}" data-tags="${tagsList.join(',')}" data-pareto="${isPareto ? 'true' : 'false'}" data-new="${isNew ? 'true' : 'false'}">
                             <td class="px-6 py-4">
-                                <div class="font-bold text-white font-sans text-sm">${l.name || 'Cliente'}</div>
+                                <div class="font-bold text-white font-sans text-sm flex items-center gap-2">
+                                    <span>${l.name || 'Cliente B2B'}</span>
+                                    ${isPareto ? '<span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">👑 HIGH VALUE</span>' : ''}
+                                </div>
+                                <div class="text-gray-400 text-xs font-sans">${l.company || l.role || 'Empresa Corporativa'}</div>
                                 <div class="text-accent-blue text-xs">${l.email}</div>
                             </td>
-                            <td class="px-6 py-4 font-sans text-gray-300">
-                                📄 ${l.document_name || 'Contrato.pdf'}
-                            </td>
-                            <td class="px-6 py-4">
-                                <div class="flex flex-wrap max-w-xs">${tagsHtml}</div>
-                            </td>
-                            <td class="px-6 py-4 text-center ${scoreColor} text-sm">
-                                ${l.lead_score || 80}/100
+                            <td class="px-6 py-4 text-center">
+                                ${paretoBadge}
                             </td>
                             <td class="px-6 py-4 text-center">
-                                ${entBadge}
+                                ${outreachBadge}
+                            </td>
+                            <td class="px-6 py-4 text-center ${scoreColor}">
+                                ${l.lead_score || 80}/100
+                            </td>
+                            <td class="px-6 py-4">
+                                <div class="font-sans text-gray-300 text-xs mb-1">📄 ${l.document_type || l.document_name || 'Contrato.pdf'}</div>
+                                <div class="flex flex-wrap max-w-xs">${tagsHtml}</div>
                             </td>
                             <td class="px-6 py-4 text-right">
-                                <button onclick="AdminApp.resendLeadOffer('${l.email}', '${l.name}')" class="px-2.5 py-1 rounded bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/30 font-sans font-bold transition-all">
-                                    📩 Re-enviar Oferta
+                                <button onclick="AdminApp.resendLeadOffer('${l.email}', '${l.name}')" class="px-3 py-1.5 rounded-lg bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/30 font-sans font-bold text-xs transition-all flex items-center gap-1 ml-auto">
+                                    ${isNew ? '🚀 Enviar Oferta' : '📩 Re-enviar'}
                                 </button>
                             </td>
                         </tr>
@@ -899,15 +943,94 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
             filterByTag(tag) {
                 if (!this.statsData || !this.statsData.leads) return;
+                
+                // Actualizar estilo visual de botones
+                const buttons = document.querySelectorAll('[id^="filter-btn-"]');
+                buttons.forEach(btn => {
+                    btn.classList.remove('bg-accent-blue', 'text-black');
+                    if (!btn.className.includes('border')) {
+                        btn.classList.add('bg-dark-card', 'text-gray-300');
+                    }
+                });
+                const activeBtn = document.getElementById(`filter-btn-${tag}`);
+                if (activeBtn) {
+                    activeBtn.classList.add('bg-accent-blue', 'text-black');
+                }
+
                 if (tag === 'ALL') {
                     this.renderLeads(this.statsData.leads);
                     return;
                 }
+
+                if (tag === 'TOP_20_PARETO') {
+                    const filtered = this.statsData.leads.filter(l => 
+                        l.pareto_tier === 'TOP_20' || (l.lead_score >= 88) || (l.role && l.role.includes('CFO') && l.lead_score >= 78)
+                    );
+                    this.renderLeads(filtered);
+                    return;
+                }
+
+                if (tag === 'NEW_UNCONTACTED') {
+                    const filtered = this.statsData.leads.filter(l => (l.emails_sent || 0) === 0);
+                    this.renderLeads(filtered);
+                    return;
+                }
+
+                if (tag === 'TOP_20_NEW') {
+                    const filtered = this.statsData.leads.filter(l => 
+                        (l.pareto_tier === 'TOP_20' || l.lead_score >= 88 || (l.role && l.role.includes('CFO') && l.lead_score >= 78)) &&
+                        ((l.emails_sent || 0) === 0)
+                    );
+                    this.renderLeads(filtered);
+                    return;
+                }
+
                 const filtered = this.statsData.leads.filter(l => {
                     const tList = l.tags || [];
-                    return tList.some(t => t.includes(tag) || tag.includes(t));
+                    const r = l.role || '';
+                    return tList.some(t => t.includes(tag) || tag.includes(t)) || r.includes(tag);
                 });
                 this.renderLeads(filtered);
+            },
+
+            sortLeadsBy(criterion) {
+                if (!this.currentFilteredLeads) return;
+                const sorted = [...this.currentFilteredLeads];
+
+                if (criterion === 'PARETO_80_20') {
+                    sorted.sort((a, b) => {
+                        const aPareto = a.pareto_tier === 'TOP_20' || a.lead_score >= 88;
+                        const bPareto = b.pareto_tier === 'TOP_20' || b.lead_score >= 88;
+                        if (aPareto && !bPareto) return -1;
+                        if (!aPareto && bPareto) return 1;
+                        const aNew = (a.emails_sent || 0) === 0;
+                        const bNew = (b.emails_sent || 0) === 0;
+                        if (aNew && !bNew) return -1;
+                        if (!aNew && bNew) return 1;
+                        return (b.lead_score || 0) - (a.lead_score || 0);
+                    });
+                } else if (criterion === 'NEW_UNCONTACTED') {
+                    sorted.sort((a, b) => {
+                        const aNew = (a.emails_sent || 0) === 0;
+                        const bNew = (b.emails_sent || 0) === 0;
+                        if (aNew && !bNew) return -1;
+                        if (!aNew && bNew) return 1;
+                        return (b.lead_score || 0) - (a.lead_score || 0);
+                    });
+                } else if (criterion === 'TOP_20_NEW') {
+                    sorted.sort((a, b) => {
+                        const aRank = ((a.pareto_tier === 'TOP_20' || a.lead_score >= 88) ? 2 : 0) + ((a.emails_sent || 0) === 0 ? 1 : 0);
+                        const bRank = ((b.pareto_tier === 'TOP_20' || b.lead_score >= 88) ? 2 : 0) + ((b.emails_sent || 0) === 0 ? 1 : 0);
+                        if (bRank !== aRank) return bRank - aRank;
+                        return (b.lead_score || 0) - (a.lead_score || 0);
+                    });
+                } else if (criterion === 'SCORE_DESC') {
+                    sorted.sort((a, b) => (b.lead_score || 0) - (a.lead_score || 0));
+                } else if (criterion === 'DATE_DESC') {
+                    sorted.sort((a, b) => new Date(b.created_at || 0) - new Date(a.created_at || 0));
+                }
+
+                this.renderLeads(sorted);
             },
 
             renderTransactions(txs) {
@@ -1251,16 +1374,25 @@ Escaneo de prueba gratuito:
             },
 
             exportToCSV() {
-                if (!this.statsData || !this.statsData.leads) return;
-                const leads = this.statsData.leads;
-                let csvContent = "data:text/csv;charset=utf-8,ID,Nombre,Email,Documento,LeadScore,EnterpriseCandidate,Estado,Fecha\n";
-                leads.forEach(l => {
-                    csvContent += `"${l.id}","${l.name}","${l.email}","${l.document_name}",${l.lead_score},${l.is_enterprise_candidate},"${l.status}","${l.created_at}"\n`;
+                const targetLeads = this.currentFilteredLeads || (this.statsData && this.statsData.leads) || [];
+                if (targetLeads.length === 0) {
+                    alert('⚠️ No hay leads disponibles para exportar.');
+                    return;
+                }
+                let csvContent = "data:text/csv;charset=utf-8,ID,Nombre,Email,Empresa_Rol,Pareto_Tier,Potencial_Ingresos_USD,Estado_Outreach,Correos_Enviados,Lead_Score,Documento,Pais,Fecha\n";
+                targetLeads.forEach(l => {
+                    const isPareto = l.pareto_tier === 'TOP_20' || (l.lead_score >= 88);
+                    const paretoTier = isPareto ? "TOP_20_PARETO_80_INGRESOS" : "ESTANDAR_20_INGRESOS";
+                    const rev = isPareto ? 590 : (l.is_enterprise ? 69 : 19);
+                    const emailsSent = (typeof l.emails_sent === 'number') ? l.emails_sent : (l.status === 'LEAD_CAPTURED' ? 0 : 1);
+                    const statusText = emailsSent === 0 ? "NUEVO_SIN_CORREO" : `CONTACTADO_${emailsSent}_ENVIOS`;
+
+                    csvContent += `"${l.id}","${l.name || 'Cliente'}","${l.email}","${(l.company || l.role || '').replace(/"/g, '""')}","${paretoTier}",${rev},"${statusText}",${emailsSent},${l.lead_score || 80},"${(l.document_type || l.document_name || '').replace(/"/g, '""')}","${l.country || 'Global'}","${l.created_at || new Date().toISOString()}"\n`;
                 });
                 const encodedUri = encodeURI(csvContent);
                 const link = document.createElement("a");
                 link.setAttribute("href", encodedUri);
-                link.setAttribute("download", "auditflow_leads_export.csv");
+                link.setAttribute("download", `auditflow_leads_pareto80_20_${new Date().toISOString().slice(0,10)}.csv`);
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);

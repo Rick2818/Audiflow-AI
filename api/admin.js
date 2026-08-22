@@ -90,7 +90,22 @@ function generate500Leads() {
     const leadScore = 60 + ((i * 13) % 39);
     const isEnterprise = leadScore >= 75;
 
+    // Pareto 80/20: Top 20% son los leads con mayor score / rol ejecutivo (CFO o Legal Director o Score >= 88)
+    const isTop20Pareto = (leadScore >= 88) || (roleObj.role.includes('CFO') && leadScore >= 78) || (roleObj.role.includes('Legal') && leadScore >= 80);
+    const revenuePotential = isTop20Pareto ? 590 : (isEnterprise ? 69 : 19);
+    const paretoTier = isTop20Pareto ? 'TOP_20' : 'STANDARD_80';
+
+    // Estado de contacto: ~75% son leads nuevos a los que NO se les ha enviado ningún correo (emails_sent = 0)
+    const emailsSent = (i % 4 === 0) ? ((i % 3) + 1) : 0;
+    const emailStatus = (emailsSent === 0) ? 'NUEVO_SIN_CORREO' : 'CONTACTADO';
+
     const tags = [docObj.tag, roleObj.tag];
+    if (isTop20Pareto) {
+      tags.unshift('🏆 TOP_20_PARETO');
+    }
+    if (emailsSent === 0) {
+      tags.push('🟢 NUEVO_LEAD');
+    }
     if (leadScore >= 88) {
       tags.push('🚨 HIGH_LEAKAGE');
     } else {
@@ -114,10 +129,26 @@ function generate500Leads() {
       role_tag: roleObj.tag,
       country: country,
       is_enterprise: isEnterprise,
+      pareto_tier: paretoTier,
+      revenue_potential_usd: revenuePotential,
+      emails_sent: emailsSent,
+      email_status: emailStatus,
       created_at: new Date(now - (hoursAgo * 3600 * 1000)).toISOString(),
       status: status
     });
   }
+
+  // Ordenar leads con el principio de Pareto 80/20:
+  // 1°: Top 20% de mayor valor que genera el 80% de ingresos (TOP_20)
+  // 2°: Leads nuevos sin contactar primero (emails_sent === 0)
+  // 3°: Lead Score descendente
+  leads.sort((a, b) => {
+    if (a.pareto_tier === 'TOP_20' && b.pareto_tier !== 'TOP_20') return -1;
+    if (a.pareto_tier !== 'TOP_20' && b.pareto_tier === 'TOP_20') return 1;
+    if (a.emails_sent === 0 && b.emails_sent > 0) return -1;
+    if (a.emails_sent > 0 && b.emails_sent === 0) return 1;
+    return (b.lead_score || 0) - (a.lead_score || 0);
+  });
 
   return leads;
 }
@@ -663,6 +694,9 @@ export default async function handler(req, res) {
     const totalRevenue = transactions.reduce((acc, t) => acc + (Number(t.amount_usd) || 0), 0);
     const enterpriseCount = leads.filter(l => l.is_enterprise).length;
     const avgScore = Math.round(leads.reduce((acc, l) => acc + (l.lead_score || 0), 0) / (leads.length || 1));
+    const paretoTop20 = leads.filter(l => l.pareto_tier === 'TOP_20');
+    const newUncontacted = leads.filter(l => (l.emails_sent || 0) === 0);
+    const paretoRevenue = paretoTop20.reduce((acc, l) => acc + (l.revenue_potential_usd || 590), 0);
 
     return res.status(200).json({
       success: true,
@@ -671,6 +705,9 @@ export default async function handler(req, res) {
         enterprise_leads: enterpriseCount,
         average_score: avgScore,
         total_revenue_usd: totalRevenue,
+        pareto_top_20_count: paretoTop20.length,
+        pareto_revenue_potential: paretoRevenue,
+        new_uncontacted_count: newUncontacted.length,
         active_subscriptions: 14,
         outreach_prospects_total: 1000,
         resend_monthly_quota: '3,000/mes',
@@ -681,7 +718,10 @@ export default async function handler(req, res) {
         total_sats_collected: '14,800 Sats',
         total_audits_count: leads.length,
         total_leads_captured: leads.length,
-        enterprise_leads_count: enterpriseCount
+        enterprise_leads_count: enterpriseCount,
+        pareto_top_20_count: paretoTop20.length,
+        pareto_revenue_potential: `$${paretoRevenue.toLocaleString('en-US')} USD`,
+        new_uncontacted_count: newUncontacted.length
       },
       leads,
       transactions,
