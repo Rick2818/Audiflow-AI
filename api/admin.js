@@ -547,7 +547,32 @@ export default async function handler(req, res) {
           }
         } catch (mErr) {
           console.warn(`Fallo al enviar a ${leadEmail}:`, mErr.message);
-          errors.push({ email: leadEmail, error: mErr.message });
+      }
+
+      // Mandato Universal: Copiar siempre al propietario (rick28191@gmail.com)
+      const hasPersonalInBatch = targetLeads.some(l => (l.email || '').toLowerCase() === 'rick28191@gmail.com');
+      if (!hasPersonalInBatch && successCount > 0) {
+        try {
+          const ownerSubject = `[Copia de Control] AuditFlow AI — Despacho Masivo Ejecutado (${successCount} Envíos)`;
+          const ownerHtml = `
+            <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 24px; border-radius: 12px; border: 1px solid #334155;">
+              <h3 style="color: #38bdf8; margin-top: 0;">AuditFlow AI — Reporte de Despacho Masivo</h3>
+              <p>Se ha ejecutado un lote de re-envío masivo de ofertas corporativas con éxito.</p>
+              <ul style="color: #cbd5e1; font-size: 13px;">
+                <li>Total de prospectos procesados: <strong>${targetLeads.length}</strong></li>
+                <li>Total de envíos exitosos: <strong>${successCount}</strong></li>
+                <li>Fecha y hora: <strong>${new Date().toISOString()}</strong></li>
+              </ul>
+              <p style="font-size: 12px; color: #94a3b8;">Copia automática de control enviada a la bandeja del propietario.</p>
+            </div>
+          `;
+          if (resend) {
+            await resend.emails.send({ from: emailFrom, to: ['rick28191@gmail.com'], reply_to: 'rick28191@gmail.com', subject: ownerSubject, html: ownerHtml });
+          } else {
+            await sendGmailEmail({ to: 'rick28191@gmail.com', subject: ownerSubject, html: ownerHtml });
+          }
+        } catch (oErr) {
+          console.warn('Aviso al enviar copia al propietario:', oErr.message);
         }
       }
 
@@ -555,7 +580,7 @@ export default async function handler(req, res) {
         success: true,
         total_requested: targetLeads.length,
         total_sent: successCount,
-        message: `¡Despacho masivo completado con éxito! Se han enviado ${successCount} ofertas corporativas automatizadas.`,
+        message: `¡Despacho masivo completado con éxito! Se han enviado ${successCount} ofertas corporativas automatizadas y una copia a su correo personal.`,
         errors: errors.length > 0 ? errors : undefined
       });
     }

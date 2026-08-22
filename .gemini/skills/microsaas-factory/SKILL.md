@@ -101,8 +101,8 @@ Este documento es el activo de conocimiento supremo y la memoria técnica del ag
      * Botón explícito **«🏠 Regresar al Inicio»**.
      * Conmutador trilingüe (`ES | EN | DE`) sincronizado globalmente en tiempo real (`[data-lang-btn]`).
      * Pestaña flotante permanente de acceso rápido (`fixed bottom-5 left-5 z-40`).
-3. **Despacho Automático de Validación al Propietario:**
-   - Toda configuración de correo debe despachar de inmediato un correo de prueba a la bandeja del dueño (`rick28191@gmail.com`) para validar diseño, entregabilidad y legibilidad antes de cualquier envío masivo.
+3. **Mandato Universal de Copia al Propietario en Toda Campaña:**
+   - En **CUALQUIER campaña** que se diseñe o ejecute (campañas de frío B2B, secuencias de LinkedIn, re-envíos masivos de ofertas a leads o transacciones), el sistema DEBE enviar SIEMPRE una copia íntegra y resumen ejecutivo a la bandeja personal del dueño (`rick28191@gmail.com`), además de validar entregabilidad previa con una prueba automatizada.
 4. **Barra Lateral de Desplazamiento Siempre Visible (Always-On Scrollbar):**
    - En toda vista, landing page, modal o dashboard, la barra de desplazamiento vertical DEBE forzarse activa (`html { overflow-y: scroll !important; scrollbar-gutter: stable; }`) con colores contrastantes (`#374151` con hover `#38BDF8`) para que el usuario siempre pueda subir o bajar con total comodidad.
 

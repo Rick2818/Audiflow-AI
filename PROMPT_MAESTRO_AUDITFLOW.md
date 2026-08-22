@@ -249,8 +249,9 @@ Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y as
 3. **Pestañas Flotantes de Soporte:** Pestañas fijas de acceso rápido (`fixed bottom-5 left-5 z-40`) disponibles en todas las páginas para abrir guías y manuales interactivos en cualquier momento.
 4. **Barra Lateral de Desplazamiento Siempre Visible (Always-On Scrollbar):** Toda página web, landing, panel `/admin` o visor documental DEBE forzar la barra de desplazamiento vertical visible (`html { overflow-y: scroll !important; scrollbar-gutter: stable; }`) con estilos contrastantes (`width: 10px; background: #374151; hover: #38BDF8;`), garantizando que el usuario siempre pueda subir o bajar cómodamente sin que la barra desaparezca o se oculte.
 
-### D. Protocolo de Validación en Tiempo Real
-- Cada vez que se configure una campaña de correo o infraestructura de notificación, se debe despachar automáticamente un correo de comprobación a la bandeja personal (`rick28191@gmail.com`) para validar formato visual, entregabilidad y legibilidad antes de iniciar envíos masivos.
+### D. Protocolo de Copia Obligatoria al Propietario & Validación en Tiempo Real
+1. **Mandato Universal de Copia al Propietario:** En **CUALQUIER campaña** que se diseñe o ejecute (campañas de frío B2B, secuencias de LinkedIn, re-envíos masivos de ofertas a leads, transacciones o actualizaciones comerciales), es una **regla innegociable enviar SIEMPRE una copia íntegra y resumen ejecutivo a la bandeja personal del propietario (`rick28191@gmail.com`)**.
+2. **Validación de Entregabilidad:** Antes de iniciar cualquier lote de envíos, el sistema despachará automáticamente un correo de verificación a `rick28191@gmail.com` para comprobar renderizado visual, tipografías, enlaces activos y respuesta en servidor.
 
 ---
 
