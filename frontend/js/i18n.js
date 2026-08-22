@@ -29,7 +29,7 @@ window.I18n = {
             support_btn_submit: "🤖 Re-Analizar y Corregir con IA",
             
             // Hero
-            hero_free_badge: "🎁 Prueba Gratuita de 14 Días • Sin tarjeta de crédito requerida",
+            hero_free_badge: "🎁 Diagnóstico Inicial Gratuito • Sin tarjeta de crédito requerida",
             hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido",
             hero_title_1: "Reduce el tiempo de auditoría y conciliación de ",
             hero_title_2: "semanas a minutos",
@@ -54,11 +54,11 @@ window.I18n = {
             // Dropzone & Sample Demo Button
             drag_title: "Arrastra tu archivo aquí o ",
             drag_browse: "explora tus archivos",
-            drag_sub_free: "Prueba gratuita de 14 días • Sin tarjeta requerida • Conciliación automatizada",
+            drag_sub_free: "Diagnóstico inicial gratuito • Sin tarjeta requerida • Conciliación automatizada",
             drag_formats: "Soporta PDF, PNG, JPG o WebP (Hasta 15MB)",
             btn_sample_demo: "⚡ Probar con Contrato de Ejemplo (Sin subir archivo)",
             file_ready_ram: "MB • Memoria RAM lista",
-            btn_start_scan: "Comenzar Prueba Gratuita de 14 Días — Sin Tarjeta",
+            btn_start_scan: "Comenzar Diagnóstico Inicial Gratis — Sin Tarjeta",
 
             // Trust Micro-Copys & Compliance Badges
             trust_title_1: "🔒 Procesamiento efímero:",
@@ -121,15 +121,15 @@ window.I18n = {
             rep_teaser_label: "🔍 Resumen de la Anomalía (Gratis):",
             rep_solution_label: "💡 Solución Táctica & Texto Sustitutivo de Renegociación:",
             rep_unlock_btn: "🔒 Comprar Reporte ($19 USD)",
-            rep_unlock_btn_free: "🎁 Desbloquear Solución Gratis (Prueba 14 Días)",
+            rep_unlock_btn_free: "🎁 Desbloquear Solución Gratis (Diagnóstico Inicial)",
 
             // Unlock Banner & Payment Modal
             banner_title: "Desbloquea las 3 Soluciones Tácticas + Word DOCX + PDF",
-            banner_sub: "Ya viste los hallazgos en pantalla. Accede a las soluciones tácticas gratis con tu prueba de 14 días o adquiere el reporte oficial firmado en Word .docx + PDF.",
+            banner_sub: "Ya viste los hallazgos en pantalla. Accede a las soluciones tácticas con tu diagnóstico inicial o adquiere el reporte oficial firmado en Word .docx + PDF.",
             btn_unlock_report: "🔓 O Comprar Reporte Oficial Firmado ($19 USD)",
-            btn_unlock_report_free: "🎁 Desbloquear 3 Soluciones Tácticas Gratis (Prueba de 14 Días)",
+            btn_unlock_report_free: "🎁 Desbloquear 3 Soluciones Tácticas Gratis (Diagnóstico Inicial)",
             trial_unlocked_title: "🎉 ¡Soluciones Tácticas Desbloqueadas!",
-            trial_unlocked_sub: "Has desbloqueado el acceso completo a las 3 Soluciones Tácticas con tu Prueba Gratuita de 14 Días. Puedes leer los textos de renegociación y exportar Word .docx o PDF.",
+            trial_unlocked_sub: "Has desbloqueado el acceso completo a las 3 Soluciones Tácticas con tu Diagnóstico Inicial Gratuito. Puedes leer los textos de renegociación y exportar Word .docx o PDF.",
             modal_pay_title: "Desbloquear Auditoría Completa",
             modal_pay_sub: "Pago único de $19.00 USD para descargar las soluciones tácticas, Word editable y el reporte oficial firmado.",
             pay_title: "Selecciona Método de Pago ($19.00 USD)",
@@ -177,7 +177,7 @@ window.I18n = {
             manual_step2_title: "2. Análisis Volátil en < 10 Segundos",
             manual_step2_desc: "Gemini 2.5 Flash audita en memoria RAM volátil (0 disco) y calcula tu fuga económica en USD.",
             manual_step3_title: "3. Diagnóstico Gratuito y Desbloqueo",
-            manual_step3_desc: "Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Prueba 14 Días).",
+            manual_step3_desc: "Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Diagnóstico Inicial).",
             manual_step4_title: "4. Herramientas Avanzadas y Negociación",
             manual_step4_desc: "Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.",
             manual_btn_close: "Entendido, Cerrar",
@@ -343,7 +343,7 @@ window.I18n = {
             support_btn_submit: "🤖 Re-Analyze & Fix with AI",
             
             // Hero
-            hero_free_badge: "🎁 Start 14-Day Free Trial • No Credit Card Required",
+            hero_free_badge: "🎁 Free Initial Diagnostic • No Credit Card Required",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultra-fast processing",
             hero_title_1: "Cut audit workpaper and tie-out time from ",
             hero_title_2: "weeks to minutes",
@@ -368,11 +368,11 @@ window.I18n = {
             // Dropzone & Sample Demo Button
             drag_title: "Drag & drop your file here or ",
             drag_browse: "browse your files",
-            drag_sub_free: "Start 14-day free trial • No credit card required • Automated tie-outs",
+            drag_sub_free: "Free initial diagnostic • No credit card required • Automated tie-outs",
             drag_formats: "Supports PDF, PNG, JPG or WebP (Up to 15MB)",
             btn_sample_demo: "⚡ Try Sample Contract Demo (No file upload needed)",
             file_ready_ram: "MB • RAM memory ready",
-            btn_start_scan: "Start 14-Day Free Trial — No Credit Card Required",
+            btn_start_scan: "Start Free Initial Diagnostic — No Card Required",
 
             // Trust Micro-Copys & Compliance Badges
             trust_title_1: "🔒 Ephemeral Processing:",
@@ -434,15 +434,15 @@ window.I18n = {
             rep_findings_title: "3 Financial Flaws & Risk Clauses Detected",
             rep_teaser_label: "🔍 Flaw Summary (Free Preview):",
             rep_unlock_btn: "🔒 Buy Official Report ($19 USD)",
-            rep_unlock_btn_free: "🎁 Unlock Tactical Solution Free (14-Day Trial)",
+            rep_unlock_btn_free: "🎁 Unlock Tactical Solution Free (Initial Diagnostic)",
 
             // Unlock Banner & Payment Modal
             banner_title: "Unlock 3 Tactical Solutions + Word DOCX + PDF Report",
-            banner_sub: "You already saw findings on screen. Access actionable tactical solutions free with your 14-day trial or purchase the signed official report in Word .docx + PDF.",
+            banner_sub: "You already saw findings on screen. Access actionable tactical solutions free with your initial diagnostic or purchase the signed official report in Word .docx + PDF.",
             btn_unlock_report: "🔓 Or Buy Signed Official Report ($19 USD)",
-            btn_unlock_report_free: "🎁 Unlock 3 Tactical Solutions Free (14-Day Free Trial)",
+            btn_unlock_report_free: "🎁 Unlock 3 Tactical Solutions Free (Initial Diagnostic)",
             trial_unlocked_title: "🎉 Tactical Solutions Unlocked!",
-            trial_unlocked_sub: "You have unlocked full access to all 3 Tactical Solutions with your 14-Day Free Trial. You can read the renegotiation clauses and export Word .docx or PDF.",
+            trial_unlocked_sub: "You have unlocked full access to all 3 Tactical Solutions with your Free Initial Diagnostic. You can read the renegotiation clauses and export Word .docx or PDF.",
             modal_pay_title: "Unlock Full Audit",
             modal_pay_sub: "One-time $19.00 USD payment to download tactical solutions, editable Word DOCX, and signed official report.",
             pay_title: "Select Payment Method ($19.00 USD)",
@@ -490,7 +490,7 @@ window.I18n = {
             manual_step2_title: "2. Volatile Scan in < 10 Seconds",
             manual_step2_desc: "Gemini 2.5 Flash audits in volatile RAM (0 disk storage) and computes financial leakage in USD.",
             manual_step3_title: "3. Free Diagnosis & Unlock",
-            manual_step3_desc: "Review the 3 critical anomalies for free and unblur tactical solutions in 1 click (14-Day Free Trial).",
+            manual_step3_desc: "Review the 3 critical anomalies for free and unblur tactical solutions in 1 click (Initial Diagnostic).",
             manual_step4_title: "4. Advanced Tools & Negotiation",
             manual_step4_desc: "Toggle live redlines diff, download Word .docx, chat with AI Copilot, or book a 10-min live session.",
             manual_btn_close: "Got it, Close",
@@ -656,7 +656,7 @@ window.I18n = {
             support_btn_submit: "🤖 Mit KI neu analysieren & korrigieren",
             
             // Hero (DE)
-            hero_free_badge: "🎁 14 Tage kostenlos testen • Keine Kreditkarte erforderlich",
+            hero_free_badge: "🎁 Kostenlose Erstdiagnose • Keine Kreditkarte erforderlich",
             hero_engine_badge: "⚡ Gemini 2.5 Flash Engine • Ultraschnelle Verarbeitung",
             hero_title_1: "Audit- und Abstimmungszeit reduzieren von ",
             hero_title_2: "Wochen auf Minuten",
@@ -681,11 +681,11 @@ window.I18n = {
             // Dropzone & Sample Demo Button (DE)
             drag_title: "Ziehen Sie Ihre Datei hierher oder ",
             drag_browse: "Dateien durchsuchen",
-            drag_sub_free: "14 Tage kostenlos testen • Keine Kreditkarte erforderlich • Sofortige automatisierte Abstimmung",
+            drag_sub_free: "Kostenlose Erstdiagnose • Keine Kreditkarte erforderlich • Sofortige automatisierte Abstimmung",
             drag_formats: "Unterstützt PDF, PNG, JPG oder WebP (Bis zu 15MB)",
             btn_sample_demo: "⚡ Mustervertrag ausprobieren (Kein Datei-Upload erforderlich)",
             file_ready_ram: "MB • RAM-Speicher bereit",
-            btn_start_scan: "14 Tage kostenlos testen — Keine Kreditkarte erforderlich",
+            btn_start_scan: "Kostenlose Erstdiagnose starten — Ohne Kreditkarte",
 
             // Trust Micro-Copys & Compliance Badges (DE)
             trust_title_1: "🔒 Flüchtige Verarbeitung:",
@@ -747,15 +747,15 @@ window.I18n = {
             rep_findings_title: "3 Finanzielle Mängel & Risikoklauseln Erkannt",
             rep_teaser_label: "🔍 Zusammenfassung der Anomalie (Kostenlose Vorschau):",
             rep_unlock_btn: "🔒 Offiziellen Bericht Kaufen (19 USD)",
-            rep_unlock_btn_free: "🎁 Taktische Lösung Kostenlos Freischalten (14 Tage Test)",
+            rep_unlock_btn_free: "🎁 Taktische Lösung Kostenlos Freischalten (Erstdiagnose)",
 
             // Unlock Banner & Payment Modal (DE)
             banner_title: "3 Taktische Lösungen + Word DOCX + PDF-Bericht Freischalten",
-            banner_sub: "Sie haben die Ergebnisse auf dem Bildschirm gesehen. Greifen Sie mit Ihrem 14-tägigen kostenlosen Test kostenlos auf taktische Lösungen zu oder erwerben Sie den signierten Bericht.",
+            banner_sub: "Sie haben die Ergebnisse auf dem Bildschirm gesehen. Greifen Sie mit Ihrer kostenlosen Erstdiagnose auf taktische Lösungen zu oder erwerben Sie den signierten Bericht in Word .docx + PDF.",
             btn_unlock_report: "🔓 Oder Signierten Bericht Kaufen (19 USD)",
-            btn_unlock_report_free: "🎁 3 Taktische Lösungen Kostenlos Freischalten (14 Tage Gratis)",
+            btn_unlock_report_free: "🎁 3 Taktische Lösungen Kostenlos Freischalten (Erstdiagnose)",
             trial_unlocked_title: "🎉 Taktische Lösungen Freigeschaltet!",
-            trial_unlocked_sub: "Sie haben mit Ihrer 14-tägigen kostenlosen Testversion vollen Zugriff auf alle 3 taktischen Lösungen erhalten.",
+            trial_unlocked_sub: "Sie haben mit Ihrer kostenlosen Erstdiagnose vollen Zugriff auf alle 3 taktischen Lösungen erhalten.",
             modal_pay_title: "Vollständige Prüfung Freischalten",
             modal_pay_sub: "Einmalige Zahlung von 19.00 USD zum Download der taktischen Lösungen, bearbeitbaren Word-Dokumente und des signierten Prüfberichts.",
             pay_title: "Zahlungsmethode Wählen (19.00 USD)",
@@ -803,7 +803,7 @@ window.I18n = {
             manual_step2_title: "2. Flüchtige Prüfung in < 10 Sekunden",
             manual_step2_desc: "Gemini 2.5 Flash prüft im flüchtigen RAM (0 Festplattenspeicherung) und berechnet finanzielle Lecks in USD.",
             manual_step3_title: "3. Kostenlose Diagnose & Freischaltung",
-            manual_step3_desc: "Prüfen Sie 3 kritische Mängel kostenlos und schalten Sie taktische Lösungen mit 1 Klick frei (14-Tage-Test).",
+            manual_step3_desc: "Prüfen Sie 3 kritische Mängel kostenlos und schalten Sie taktische Lösungen mit 1 Klick frei (Erstdiagnose).",
             manual_step4_title: "4. Erweiterte Tools & Verhandlung",
             manual_step4_desc: "Aktivieren Sie Live-Redlines, laden Sie Word .docx herunter oder buchen Sie eine 10-Minuten-Live-Session.",
             manual_btn_close: "Verstanden, Schließen",

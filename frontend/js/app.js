@@ -558,7 +558,7 @@ window.AppHandler = {
 
             const teaserLabel = window.I18n ? window.I18n.t('rep_teaser_label') : '🔍 Resumen de la Anomalía:';
             const solutionLabel = window.I18n ? window.I18n.t('rep_solution_label') : '💡 Solución Táctica:';
-            const unlockBtnFreeText = window.I18n ? window.I18n.t('rep_unlock_btn_free') : '🎁 Desbloquear Solución Gratis (Prueba 14 Días)';
+            const unlockBtnFreeText = window.I18n ? window.I18n.t('rep_unlock_btn_free') : '🎁 Desbloquear Solución Gratis (Diagnóstico Inicial)';
             const unlockBtnBuyText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Comprar Reporte ($19 USD)';
             const defaultClauseLabel = isDe ? 'Klausel' : (isEn ? 'Clause' : 'Cláusula');
 
@@ -980,7 +980,7 @@ window.AppHandler = {
             const subEl = successBanner.querySelector('[data-i18n="success_banner_sub"]');
             if (source === 'free_trial') {
                 if (titleEl) titleEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_title') : '🎉 ¡Soluciones Tácticas Desbloqueadas!';
-                if (subEl) subEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_sub') : 'Has desbloqueado el acceso completo a las 3 Soluciones Tácticas con tu Prueba Gratuita de 14 Días. Puedes leer las soluciones y exportar Word .docx o PDF.';
+                if (subEl) subEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_sub') : 'Has desbloqueado el acceso completo a las 3 Soluciones Tácticas con tu Diagnóstico Inicial Gratuito. Puedes leer las soluciones y exportar Word .docx o PDF.';
             }
             successBanner.classList.remove('hidden');
             successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
