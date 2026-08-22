@@ -29,40 +29,38 @@
 
 ---
 
-## 🚀 Capacidades Enterprise 2026 (Versión 5.0)
+## 🚀 Capacidades Enterprise 2026 (Versión 6.0)
 
 1. **⚖️ Selector de Marco Normativo de Auditoría**:
    - 🇺🇸 **PCAOB & US GAAP**: Para firmas de auditoría de EE.UU./UK y conciliación automatizada (*automated tie-outs*).
-   - 🌍 **NIIF / IFRS**: Para corporativos multinacionales con normativa contable global.
+   - 🌍 **NIIF / IFRS**: Para corporativos multinacionales con normativa contable global (NIIF 16 Arrendamientos).
    - ⚖️ **Código de Comercio Local**: Para PyMEs y legislación regional en Latinoamérica y España.
 
-2. **📅 Agendador de Demo de 10 min en Vivo**:
-   - Captura directa de leads B2B calificados con Nombre, Correo Corporativo, Empresa y Horario.
-   - Generador y descarga instantánea de archivos de calendario `.ics` (*iCalendar*) para Google Calendar, Apple Calendar y Outlook.
+2. **🤖 Automatización de Prospección B2B Multicanal (0 Intervención Humana)**:
+   - **Waalaxy / LinkedIn Cloud**: Dataset estructurado de 500 directores segmentados (125 CFOs, 125 CPAs, 125 Socios de Auditoría, 125 Real Estate) con secuencias de 1 y 3 días.
+   - **Despachador Masivo de Cold Email (`api/admin.js`)**: Resend API con 3,000 envíos/mes y failover a Gmail SMTP con narrativa de firma (+10 años).
+   - **Recuperación Automática de Leads (`api/lead-recovery.js`)**: Cron semanal (`0 10 * * 3,5`) que nutre a leads no convertidos con cupones de cortesía.
+   - **Notificaciones Flotantes de Prueba Social en Vivo**: Ticker dinámico cada 14s que incrementa la conversión social en la landing.
 
-3. **👁️ Visor Visual de Redlines en Pantalla (Control de Cambios en Vivo)**:
-   - Comparador interactivo en cada hallazgo que despliega lado a lado el texto original tachado en rojo y la propuesta sustitutiva redactada en verde.
+3. **📄 Generador y Entrega Automática de Word (`.docx`) con Control de Cambios**:
+   - Descarga directa de plantillas oficiales con marcas de revisión tachadas en rojo y propuestas de blindaje en verde.
+   - Entrega automática post-pago por correo electrónico sin intervención manual.
 
-4. **📁 Historial de Sesión Local Cifrado (Vault en el Navegador)**:
-   - Almacenamiento efímero de las últimas 10 auditorías exclusivamente en el cliente (`localStorage`).
-   - Cero persistencia en disco de servidores para mantener la promesa estricta de privacidad efímera.
+4. **📬 Mandato Universal de Copia al Propietario (`rick28191@gmail.com`)**:
+   - Toda campaña, re-envío masivo, captura de lead o venta genera automáticamente una copia idéntica y resumen ejecutivo a la bandeja personal del dueño.
 
-5. **🎁 Desbloqueo Gratuito de Soluciones Tácticas (14-Day Free Trial)**:
-   - Diagnóstico inicial gratuito con cálculo cuantitativo de fugas económicas.
-   - Acceso inmediato en 1 clic a las 3 soluciones tácticas de renegociación sin requerir tarjeta de crédito.
-   - Opción complementaria de compra oficial ($19 USD / Satoshis) para descargar el informe firmado en Word `.docx` + PDF.
-
-6. **🔍 Auditoría Cruzada 2-Way (Contrato vs Factura)**:
+5. **🔍 Auditoría Cruzada 2-Way (Contrato vs Factura)**:
    - Conciliación de discrepancias entre órdenes de compra, contratos de prestación de servicios y facturas recibidas.
    - Semáforo de riesgo (*Traffic Light*) y cálculo de cobros no devengados.
 
-7. **💬 Copiloto IA Interactivo (Chat con el Documento)**:
+6. **💬 Copiloto IA Interactivo (Chat con el Documento)**:
    - Permite al usuario hacer preguntas específicas sobre cláusulas, multas y plazos directamente a la IA sobre el documento analizado en RAM volátil.
 
-8. **📄 Exportaciones Profesionales B2B**:
-   - **Word (`.docx`) Editable**: Con redlines, control de cambios y membrete corporativo.
-   - **PDF Firmado Oficial**: Con sello de validación algorítmica por IA Gemini 2.5 Flash.
-   - **Calendario (`.ics`)**: Para agendar hitos de renovación y preaviso de terminación de contratos.
+7. **⚡ Indexación SEO Instantánea (IndexNow Protocol)**:
+   - Notificación directa a Bing, Yandex y Seznam de las 4 landing pages canónicas de alta intención comercial.
+
+8. **🛡️ Ciberseguridad & Privacidad de Grado Bancario**:
+   - Autenticación con comparación en tiempo constante (`safeCompare`), modo oscuro `#09090b` forzado, sanitización XSS y protección SSRF.
 
 ---
 

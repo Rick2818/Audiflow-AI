@@ -299,6 +299,33 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 4. **Puerta de Aprobación Obligatoria (Approval Gate):**
    - El asistente publicará el documento de planificación (`implementation_plan.md` con `request_feedback = true`) y **SE DETENDRÁ A ESPERAR** la confirmación y visto bueno del usuario antes de proceder a la ejecución.
 
+---
 
+## 🔁 18. PROTOCOLO DE RECUPERACIÓN AUTOMÁTICA DE LEADS Y NUTRICIÓN B2B (CART ABANDONMENT CRONS)
 
+1. **Detección y Seguimiento Autónomo:**
+   - Todo MicroSaaS B2B DEBE incorporar un endpoint `/api/lead-recovery` que identifique a prospectos que realizaron una auditoría de prueba o interactuaron con el motor pero no completaron la compra del informe completo (\$19 USD o suscripción \$69/mes).
+2. **Secuencia de Re-enganche:**
+   - Disparo automatizado mediante Vercel Crons los **miércoles y viernes a las 10:00 AM** (`0 10 * * 3,5`) con un recordatorio formal de mitigación de contingencias legales y oferta de cortesía.
+3. **Mandato de Notificación al Propietario:**
+   - Cada lote de recuperación despachado genera automáticamente un informe consolidado con copia a **`rick28191@gmail.com`**.
 
+---
+
+## 📄 19. ARQUITECTURA DE ENTREGA Y EXPORTACIÓN EN WORD (.DOCX) CON CONTROL DE CAMBIOS
+
+1. **Generación Nube Nativa (.docx):**
+   - El sistema DEBE generar informes ejecutivos en formato Word `.docx` con marcas de revisión estandarizadas:
+     * *Rojo tachado:* Cláusulas leoninas, sobrecostos discrecionales y penalizaciones desmedidas.
+     * *Verde negrita:* Propuestas de contra-cláusula blindadas bajo estándares PCAOB / US GAAP / NIIF 16.
+2. **Entrega Automática Post-Pago (Cero Intervención Humana):**
+   - La confirmación de webhook de Stripe o Lightning Network dispara de inmediato la entrega del archivo Word y PDF certificado a la bandeja del cliente, notificando la venta en tiempo real al propietario.
+
+---
+
+## ⚡ 20. MOTOR DE PRUEBA SOCIAL EN VIVO (LIVE SOCIAL PROOF TICKER)
+
+1. **Conversión Psicológica B2B:**
+   - La interfaz pública debe incluir un toast dinámico no invasivo cada 14-25 segundos que exhiba actividad real o simulada de auditorías realizadas en diversos países (ej. *«⚡ Empresa en San Salvador auditó contrato de arrendamiento — Fuga prevenida: \$18,500 USD»*).
+2. **Respeto a la Privacidad:**
+   - Las notificaciones deben operar de forma anónima y agregada, reforzando la percepción de autoridad institucional y volumen de operaciones sin exponer datos sensibles de clientes.
