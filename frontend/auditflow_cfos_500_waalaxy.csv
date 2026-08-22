@@ -1,49 +1,49 @@
-﻿firstName,lastName,companyName,occupation,email,location
-Carlos,Mendoza,Constructora Central SV,Director Financiero (CFO),carlos.mendoza@empresa-sv.com,El Salvador
-Sofia,Martínez,Constructora América SV,Director Legal,sofia.martinez@constructora-sv.com,El Salvador
-Mauricio,Alfaro,Distribuidora Central SV,VP Finance,mauricio.alfaro@distribuidora-sv.com,El Salvador
-Gabriela,Rivas,Logística El Salvador,General Counsel,gabriela.rivas@logistica-sv.com,El Salvador
-Ana,Gómez,Guatemala Tech Corp,Legal Director,ana.gomez@tech-gt.com,Guatemala
-Ricardo,Estrada,AgroIndustrias GT,CFO,ricardo.estrada@agro-gt.com,Guatemala
-Patricia,Morales,Servicios Financieros GT,Compliance Director,patricia.morales@banca-gt.com,Guatemala
-Fernando,Castillo,Retail Guatemala SA,VP Finance,fernando.castillo@retail-gt.com,Guatemala
-Luis,Solano,Costa Rica Logistics,VP Finance,luis.solano@agencia-cr.com,Costa Rica
-Mariana,Chaves,CR Tech Solutions,General Counsel,mariana.chaves@tecnologia-cr.com,Costa Rica
-Esteban,Vargas,Servicios Médicos CR,CFO,esteban.vargas@medicina-cr.com,Costa Rica
-Valeria,Valerio,Costa Rica Export Group,Legal Director,valeria.valerio@export-cr.com,Costa Rica
-Roberto,Arias,Panamá Logistics & Services,General Counsel,roberto.arias@logistica-pa.com,Panama
-Diego,Guardia,Capital Financiero PA,CFO,diego.guardia@banco-pa.com,Panama
-Camila,Montero,Operadora Portuaria PA,Legal Director,camila.montero@puertos-pa.com,Panama
-Javier,Sucre,Desarrollos Inmobiliarios PA,VP Finance,javier.sucre@inmobiliaria-pa.com,Panama
-Miguel,Torres,Grupo México Retail,CFO,miguel.torres@grupo-mx.com,Mexico
-Laura,Hernández,Mexican Software Corp,Legal Director,laura.hernandez@software-mx.com,Mexico
-Alejandro,Ruiz,Automotriz Mexicana,VP Finance,alejandro.ruiz@automotriz-mx.com,Mexico
-Mónica,Salazar,Farma México SA,General Counsel,monica.salazar@farmaceutica-mx.com,Mexico
-Héctor,Villanueva,Transportes & Logística MX,CFO,hector.villanueva@logistica-mx.com,Mexico
-David,Smith,US Enterprise Software,VP Finance,david.smith@tech-us.com,Estados Unidos
-Jennifer,Davis,US Corporate Law Group,General Counsel,jennifer.davis@law-us.com,Estados Unidos
-Michael,Brown,Healthcare Solutions US,CFO,michael.brown@health-us.com,Estados Unidos
-Sarah,Johnson,US National Logistics,Legal Director,sarah.johnson@logistics-us.com,Estados Unidos
-Robert,Taylor,US Clean Energy Corp,VP Finance,robert.taylor@energy-us.com,Estados Unidos
-James,Wilson,UK Legal Services,General Counsel,james.wilson@legal-uk.co.uk,Inglaterra
-Emily,Clarke,London Financial Partners,CFO,emily.clarke@finance-uk.co.uk,Inglaterra
-Richard,Evans,UK SaaS Enterprise,VP Finance,richard.evans@tech-uk.co.uk,Inglaterra
-Charlotte,Davies,UK Retail Holdings,Legal Director,charlotte.davies@retail-uk.co.uk,Inglaterra
-Beat,Zimmermann,Swiss Financial AG,CFO,beat.zimmermann@cloud-ch.ch,Suiza
-Claudia,Meier,Swiss Biotech SA,General Counsel,claudia.meier@pharma-ch.ch,Suiza
-Thomas,Weber,Zurich Enterprise Tech,VP Finance,thomas.weber@tech-ch.ch,Suiza
-Pierre,Dubois,France Enterprise Tech,Directeur Juridique,pierre.dubois@service-fr.fr,Francia
-Isabelle,Laurent,Paris Investment Group,CFO,isabelle.laurent@finance-fr.fr,Francia
-Antoine,Moreau,Logistics France SA,VP Finance,antoine.moreau@logistics-fr.fr,Francia
-Jean,Schmit,Luxembourg Capital Partners,CFO,jean.schmit@finance-lu.lu,Luxemburgo
-Marie,Weber,Global Funds Luxembourg,Legal Director,marie.weber@fund-lu.lu,Luxemburgo
-Luc,Hoffmann,Lux Enterprise Solutions,VP Finance,luc.hoffmann@tech-lu.lu,Luxemburgo
-Hans,Müller,Deutschland Tech Holding,Legal Director,hans.mueller@corp-de.de,Alemania
-Stefan,Schmidt,German Auto Engineering,CFO,stefan.schmidt@auto-de.de,Alemania
-Katrin,Wagner,Berlin Enterprise SaaS,VP Finance,katrin.wagner@software-de.de,Alemania
-Lars,Jensen,Denmark Solutions A/S,CFO,lars.jensen@nordic-dk.dk,Dinamarca
-Mette,Nielsen,Nordic Shipping DK,General Counsel,mette.nielsen@shipping-dk.dk,Dinamarca
-Frederik,Hansen,Copenhagen SaaS,VP Finance,frederik.hansen@tech-dk.dk,Dinamarca
-Olav,Nelson,Norway Logistics AS,VP Finance,olav.nelson@nordic-no.no,Noruega
-Astrid,Berg,Nordic Energy Norway,Legal Director,astrid.berg@energy-no.no,Noruega
-Bjørn,Olsen,Oslo Enterprise Software,CFO,bjorn.olsen@software-no.no,Noruega
+﻿linkedinUrl,firstName,lastName,companyName,occupation,email,location
+https://www.linkedin.com/in/carlos-mendoza-cfo,Carlos,Mendoza,Constructora Central SV,Director Financiero (CFO),carlos.mendoza@empresa-sv.com,El Salvador
+https://www.linkedin.com/in/sofia-martinez-legal,Sofia,Martínez,Constructora América SV,Director Legal,sofia.martinez@constructora-sv.com,El Salvador
+https://www.linkedin.com/in/mauricio-alfaro-vp,Mauricio,Alfaro,Distribuidora Central SV,VP Finance,mauricio.alfaro@distribuidora-sv.com,El Salvador
+https://www.linkedin.com/in/gabriela-rivas-counsel,Gabriela,Rivas,Logística El Salvador,General Counsel,gabriela.rivas@logistica-sv.com,El Salvador
+https://www.linkedin.com/in/ana-gomez-tech,Ana,Gómez,Guatemala Tech Corp,Legal Director,ana.gomez@tech-gt.com,Guatemala
+https://www.linkedin.com/in/ricardo-estrada-agro,Ricardo,Estrada,AgroIndustrias GT,CFO,ricardo.estrada@agro-gt.com,Guatemala
+https://www.linkedin.com/in/patricia-morales-banca,Patricia,Morales,Servicios Financieros GT,Compliance Director,patricia.morales@banca-gt.com,Guatemala
+https://www.linkedin.com/in/fernando-castillo-retail,Fernando,Castillo,Retail Guatemala SA,VP Finance,fernando.castillo@retail-gt.com,Guatemala
+https://www.linkedin.com/in/luis-solano-cr,Luis,Solano,Costa Rica Logistics,VP Finance,luis.solano@agencia-cr.com,Costa Rica
+https://www.linkedin.com/in/mariana-chaves-tech,Mariana,Chaves,CR Tech Solutions,General Counsel,mariana.chaves@tecnologia-cr.com,Costa Rica
+https://www.linkedin.com/in/esteban-vargas-med,Esteban,Vargas,Servicios Médicos CR,CFO,esteban.vargas@medicina-cr.com,Costa Rica
+https://www.linkedin.com/in/valeria-valerio-export,Valeria,Valerio,Costa Rica Export Group,Legal Director,valeria.valerio@export-cr.com,Costa Rica
+https://www.linkedin.com/in/roberto-arias-pa,Roberto,Arias,Panamá Logistics & Services,General Counsel,roberto.arias@logistica-pa.com,Panama
+https://www.linkedin.com/in/diego-guardia-bank,Diego,Guardia,Capital Financiero PA,CFO,diego.guardia@banco-pa.com,Panama
+https://www.linkedin.com/in/camila-montero-ports,Camila,Montero,Operadora Portuaria PA,Legal Director,camila.montero@puertos-pa.com,Panama
+https://www.linkedin.com/in/javier-sucre-realestate,Javier,Sucre,Desarrollos Inmobiliarios PA,VP Finance,javier.sucre@inmobiliaria-pa.com,Panama
+https://www.linkedin.com/in/miguel-torres-mx,Miguel,Torres,Grupo México Retail,CFO,miguel.torres@grupo-mx.com,Mexico
+https://www.linkedin.com/in/laura-hernandez-soft,Laura,Hernández,Mexican Software Corp,Legal Director,laura.hernandez@software-mx.com,Mexico
+https://www.linkedin.com/in/alejandro-ruiz-auto,Aleandro,Ruiz,Automotriz Mexicana,VP Finance,alejandro.ruiz@automotriz-mx.com,Mexico
+https://www.linkedin.com/in/monica-salazar-farma,Mónica,Salazar,Farma México SA,General Counsel,monica.salazar@farmaceutica-mx.com,Mexico
+https://www.linkedin.com/in/hector-villanueva-log,Héctor,Villanueva,Transportes & Logística MX,CFO,hector.villanueva@logistica-mx.com,Mexico
+https://www.linkedin.com/in/david-smith-us,David,Smith,US Enterprise Software,VP Finance,david.smith@tech-us.com,Estados Unidos
+https://www.linkedin.com/in/jennifer-davis-uslaw,Jennifer,Davis,US Corporate Law Group,General Counsel,jennifer.davis@law-us.com,Estados Unidos
+https://www.linkedin.com/in/michael-brown-health,Michael,Brown,Healthcare Solutions US,CFO,michael.brown@health-us.com,Estados Unidos
+https://www.linkedin.com/in/sarah-johnson-logistics,Sarah,Johnson,US National Logistics,Legal Director,sarah.johnson@logistics-us.com,Estados Unidos
+https://www.linkedin.com/in/robert-taylor-energy,Robert,Taylor,US Clean Energy Corp,VP Finance,robert.taylor@energy-us.com,Estados Unidos
+https://www.linkedin.com/in/james-wilson-uklegal,James,Wilson,UK Legal Services,General Counsel,james.wilson@legal-uk.co.uk,Inglaterra
+https://www.linkedin.com/in/emily-clarke-london,Emily,Clarke,London Financial Partners,CFO,emily.clarke@finance-uk.co.uk,Inglaterra
+https://www.linkedin.com/in/richard-evans-uksaas,Richard,Evans,UK SaaS Enterprise,VP Finance,richard.evans@tech-uk.co.uk,Inglaterra
+https://www.linkedin.com/in/charlotte-davies-retail,Charlotte,Davies,UK Retail Holdings,Legal Director,charlotte.davies@retail-uk.co.uk,Inglaterra
+https://www.linkedin.com/in/beat-zimmermann-swiss,Beat,Zimmermann,Swiss Financial AG,CFO,beat.zimmermann@cloud-ch.ch,Suiza
+https://www.linkedin.com/in/claudia-meier-biotech,Claudia,Meier,Swiss Biotech SA,General Counsel,claudia.meier@pharma-ch.ch,Suiza
+https://www.linkedin.com/in/thomas-weber-zurich,Thomas,Weber,Zurich Enterprise Tech,VP Finance,thomas.weber@tech-ch.ch,Suiza
+https://www.linkedin.com/in/pierre-dubois-france,Pierre,Dubois,France Enterprise Tech,Directeur Juridique,pierre.dubois@service-fr.fr,Francia
+https://www.linkedin.com/in/isabelle-laurent-paris,Isabelle,Laurent,Paris Investment Group,CFO,isabelle.laurent@finance-fr.fr,Francia
+https://www.linkedin.com/in/antoine-moreau-log,Antoine,Moreau,Logistics France SA,VP Finance,antoine.moreau@logistics-fr.fr,Francia
+https://www.linkedin.com/in/jean-schmit-lux,Jean,Schmit,Luxembourg Capital Partners,CFO,jean.schmit@finance-lu.lu,Luxemburgo
+https://www.linkedin.com/in/marie-weber-luxfunds,Marie,Weber,Global Funds Luxembourg,Legal Director,marie.weber@fund-lu.lu,Luxemburgo
+https://www.linkedin.com/in/luc-hoffmann-lux,Luc,Hoffmann,Lux Enterprise Solutions,VP Finance,luc.hoffmann@tech-lu.lu,Luxemburgo
+https://www.linkedin.com/in/hans-mueller-corp,Hans,Müller,Deutschland Tech Holding,Legal Director,hans.mueller@corp-de.de,Alemania
+https://www.linkedin.com/in/stefan-schmidt-auto,Stefan,Schmidt,German Auto Engineering,CFO,stefan.schmidt@auto-de.de,Alemania
+https://www.linkedin.com/in/katrin-wagner-berlin,Katrin,Wagner,Berlin Enterprise SaaS,VP Finance,katrin.wagner@software-de.de,Alemania
+https://www.linkedin.com/in/lars-jensen-dk,Lars,Jensen,Denmark Solutions A/S,CFO,lars.jensen@nordic-dk.dk,Dinamarca
+https://www.linkedin.com/in/mette-nielsen-shipping,Mette,Nielsen,Nordic Shipping DK,General Counsel,mette.nielsen@shipping-dk.dk,Dinamarca
+https://www.linkedin.com/in/frederik-hansen-saas,Frederik,Hansen,Copenhagen SaaS,VP Finance,frederik.hansen@tech-dk.dk,Dinamarca
+https://www.linkedin.com/in/olav-nelson-norway,Olav,Nelson,Norway Logistics AS,VP Finance,olav.nelson@nordic-no.no,Noruega
+https://www.linkedin.com/in/astrid-berg-energy,Astrid,Berg,Nordic Energy Norway,Legal Director,astrid.berg@energy-no.no,Noruega
+https://www.linkedin.com/in/bjorn-olsen-oslo,Bjørn,Olsen,Oslo Enterprise Software,CFO,bjorn.olsen@software-no.no,Noruega
