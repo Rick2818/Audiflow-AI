@@ -399,6 +399,9 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                         <button onclick="AdminApp.loadProspectsBatch('all_1000')" class="px-4 py-2.5 rounded-xl bg-accent-blue/20 border border-accent-blue/50 text-accent-blue hover:text-white font-mono text-xs transition-all cursor-pointer">
                             🚀 Cargar 1,000 Ejecutivos (CFOs + Controllers)
                         </button>
+                        <button onclick="AdminApp.triggerLeadRecovery()" class="px-4 py-2.5 rounded-xl bg-amber-950/80 border border-amber-500/40 text-amber-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                            🔁 Recuperar Leads Abandonados
+                        </button>
                     </div>
                 </div>
 
@@ -991,6 +994,32 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     }
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error de conexión: ${err.message}</span><br>`;
+                }
+            },
+
+            async triggerLeadRecovery() {
+                const logBox = document.getElementById('outreach-status-log');
+                if (logBox) logBox.innerHTML = `🔄 Ejecutando secuencia de recuperación y seguimiento para leads no convertidos...<br>`;
+                try {
+                    const token = sessionStorage.getItem('auditflow_admin_auth') || 'Bearer admin_token_auditflow_2026';
+                    const res = await fetch('/api/lead-recovery', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': token.startsWith('Bearer ') ? token : `Bearer ${token}`
+                        }
+                    });
+                    const data = await res.json();
+                    if (data && data.success) {
+                        if (logBox) {
+                            logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Lote de recuperación ejecutado con éxito! (${data.total_processed || 0} prospectos contactados).</span><br>`;
+                            logBox.innerHTML += `<span class="text-gray-300 text-[10px]">Copia de control enviada a rick28191@gmail.com.</span><br>`;
+                        }
+                    } else {
+                        if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Aviso: ${data.error || 'No se pudieron procesar leads de recuperación.'}</span><br>`;
+                    }
+                } catch (err) {
+                    if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${err.message}</span><br>`;
                 }
             },
 
