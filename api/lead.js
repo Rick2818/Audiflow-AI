@@ -372,6 +372,19 @@ export default async function handler(req, res) {
       html: emailHtml
     });
 
+    // Copia Automática de Notificación al Propietario
+    if (email.toLowerCase() !== 'rick28191@gmail.com') {
+      try {
+        await sendAuditReportEmail({
+          to: 'rick28191@gmail.com',
+          subject: `[Nuevo Lead Capturado] ${name} (${docType} - Score ${leadScore}/100)`,
+          html: emailHtml
+        });
+      } catch (oErr) {
+        console.warn('Aviso en copia al propietario:', oErr.message);
+      }
+    }
+
     return res.status(200).json({
       success: true,
       report_id: reportId,

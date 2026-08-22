@@ -8,16 +8,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { title = 'Informe de Auditoría y Redlines B2B', content = '', counter_proposal = '' } = req.body || {};
+    let body = req.body || {};
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
 
-    const cleanTitle = title.replace(/[^a-zA-Z0-9\s]/g, '');
+    const { title = 'Informe de Auditoría y Redlines B2B', content = '', counter_proposal = '' } = body;
+
+    const safeTitle = (typeof title === 'string' ? title : 'Informe_Auditoria')
+      .replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s_\-]/g, '')
+      .trim();
 
     // Generación de documento .docx compatible en formato HTML/Word XML
     const docxHtml = `
       <html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
       <head>
         <meta charset='utf-8'>
-        <title>${cleanTitle}</title>
+        <title>${safeTitle}</title>
         <style>
           body { font-family: 'Calibri', 'Arial', sans-serif; margin: 30px; color: #1e293b; line-height: 1.6; }
           h1 { color: #0f172a; border-bottom: 2px solid #3b82f6; padding-bottom: 8px; }
@@ -28,13 +35,14 @@ export default async function handler(req, res) {
           .footer { margin-top: 40px; font-size: 11px; color: #64748b; border-top: 1px solid #e2e8f0; padding-top: 10px; }
         </style>
       </head>
+      <body>
         <div style='background-color:#09090b; color:#ffffff; padding:15px; border-radius:6px; border-left:5px solid #10b981; margin-bottom:20px;'>
           <span style='background-color:#10b981; color:#000000; font-weight:bold; font-size:10px; padding:2px 6px; border-radius:3px;'>✓ AUDITORÍA B2B VERIFICADA</span>
           <h2 style='color:#ffffff; margin:6px 0 0 0; font-size:15px;'>AuditFlow AI — Control de Cambios & Redlines para Negociación Corporativa</h2>
           <p style='color:#cbd5e1; font-size:11px; margin:3px 0 0 0;'>Auditado en memoria RAM volátil • Conforme a SOC2 & GDPR • 0 Persistencia en disco</p>
         </div>
 
-        <h1>${cleanTitle}</h1>
+        <h1>${safeTitle}</h1>
         <p><strong>Fecha de Generación:</strong> ${new Date().toLocaleDateString('es-ES')}</p>
         <p><strong>Estado de Negociación:</strong> Redlines Aplicados y Listos para Envío al Proveedor</p>
         <hr>
@@ -58,7 +66,7 @@ export default async function handler(req, res) {
     `;
 
     res.setHeader('Content-Type', 'application/vnd.ms-word');
-    res.setHeader('Content-Disposition', `attachment; filename="${cleanTitle || 'AuditFlow_Redlines'}.doc"`);
+    res.setHeader('Content-Disposition', `attachment; filename="${encodeURIComponent(safeTitle || 'AuditFlow_Redlines')}.doc"`);
     return res.status(200).send(docxHtml);
 
   } catch (err) {

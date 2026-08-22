@@ -28,22 +28,38 @@ export default async function handler(req, res) {
     let invoiceText = '';
 
     if (contract_base64) {
-      const cBuffer = Buffer.from(contract_base64, 'base64');
-      if (contract_name.endsWith('.pdf')) {
-        const parsed = await pdfParse(cBuffer);
-        contractText = parsed.text || '';
-      } else {
-        contractText = cBuffer.toString('utf-8');
+      try {
+        const cBuffer = Buffer.from(contract_base64, 'base64');
+        if (contract_name && contract_name.toLowerCase().endsWith('.pdf')) {
+          try {
+            const parsed = await pdfParse(cBuffer);
+            contractText = parsed.text || '';
+          } catch (pErr) {
+            contractText = cBuffer.toString('utf-8');
+          }
+        } else {
+          contractText = cBuffer.toString('utf-8');
+        }
+      } catch (cErr) {
+        console.warn('Error decodificando contrato base64:', cErr.message);
       }
     }
 
     if (invoice_base64) {
-      const iBuffer = Buffer.from(invoice_base64, 'base64');
-      if (invoice_name.endsWith('.pdf')) {
-        const parsed = await pdfParse(iBuffer);
-        invoiceText = parsed.text || '';
-      } else {
-        invoiceText = iBuffer.toString('utf-8');
+      try {
+        const iBuffer = Buffer.from(invoice_base64, 'base64');
+        if (invoice_name && invoice_name.toLowerCase().endsWith('.pdf')) {
+          try {
+            const parsed = await pdfParse(iBuffer);
+            invoiceText = parsed.text || '';
+          } catch (pErr) {
+            invoiceText = iBuffer.toString('utf-8');
+          }
+        } else {
+          invoiceText = iBuffer.toString('utf-8');
+        }
+      } catch (iErr) {
+        console.warn('Error decodificando factura base64:', iErr.message);
       }
     }
 
