@@ -19,6 +19,8 @@
 ## 🌐 Enlaces Oficiales en Vivo
 
 * 🏠 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+* 🎬 **Video Oficial Ejecutivo (34s • Voz Neuronal Femenina)**: [https://audiflowai.com/video](https://audiflowai.com/video)
+* ⚖️ **Comparador SEM / Alternativas DocuSign & Ironclad**: [https://audiflowai.com/alternativas-docusign](https://audiflowai.com/alternativas-docusign)
 * 🏢 **Auditoría de Arrendamiento Comercial**: [https://audiflowai.com/auditar-contrato-arrendamiento](https://audiflowai.com/auditar-contrato-arrendamiento)
 * 💻 **Auditoría de Contratos de Servicios IT & SaaS**: [https://audiflowai.com/auditar-contrato-servicios-it](https://audiflowai.com/auditar-contrato-servicios-it)
 * 🧾 **Auditoría de Facturación B2B**: [https://audiflowai.com/auditar-factura-proveedor](https://audiflowai.com/auditar-factura-proveedor)
@@ -29,38 +31,35 @@
 
 ---
 
-## 🚀 Capacidades Enterprise 2026 (Versión 6.0)
+## 🚀 Capacidades Enterprise 2026 (Versión 7.0)
 
-1. **⚖️ Selector de Marco Normativo de Auditoría**:
-   - 🇺🇸 **PCAOB & US GAAP**: Para firmas de auditoría de EE.UU./UK y conciliación automatizada (*automated tie-outs*).
-   - 🌍 **NIIF / IFRS**: Para corporativos multinacionales con normativa contable global (NIIF 16 Arrendamientos).
-   - ⚖️ **Código de Comercio Local**: Para PyMEs y legislación regional en Latinoamérica y España.
+1. **🎬 Video Oficial HyperFrames de 34s con Audio Neuronal Femenino HD (`/video`)**:
+   - 4 Actos fiduciarios sincronizados por fin de audio con pausas de respiración de 1.0s.
+   - Voces femeninas de alta fidelidad: 🇪🇸 `Elvira Neural`, 🇺🇸 `Jenny Neural`, 🇩🇪 `Katja Neural`.
 
-2. **🤖 Automatización de Prospección B2B Multicanal (0 Intervención Humana)**:
-   - **Waalaxy / LinkedIn Cloud**: Dataset estructurado de 500 directores segmentados (125 CFOs, 125 CPAs, 125 Socios de Auditoría, 125 Real Estate) con secuencias de 1 y 3 días.
-   - **Despachador Masivo de Cold Email (`api/admin.js`)**: Resend API con 3,000 envíos/mes y failover a Gmail SMTP con narrativa de firma (+10 años).
-   - **Recuperación Automática de Leads (`api/lead-recovery.js`)**: Cron semanal (`0 10 * * 3,5`) que nutre a leads no convertidos con cupones de cortesía.
-   - **Notificaciones Flotantes de Prueba Social en Vivo**: Ticker dinámico cada 14s que incrementa la conversión social en la landing.
+2. **⚖️ Estrategia SEM Orgánica & Comparador Multilingüe 4 Idiomas (`/alternativas-docusign`)**:
+   - Captura orgánica de directores que buscan DocuSign CLM e Ironclad sin pagar \$15-\$45 USD por clic.
+   - Sección dedicada de 4 pilares: *"¿Por qué elegir AuditFlow AI frente a las alternativas tradicionales?"*.
+   - Soporte nativo instantáneo en `[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]` con Schema.org FAQPage para Posición Cero.
 
-3. **📄 Generador y Entrega Automática de Word (`.docx`) con Control de Cambios**:
+3. **📬 Protocolo Inviolable de Enrutamiento Dual de Correos**:
+   - **`tendenciaaitufuturo@gmail.com`:** Receptor de leads, auditorías shadow, aperturas de email y reportes de crons.
+   - **`rick28191@gmail.com`:** Única y exclusivamente para **notificaciones de compras confirmadas (\$19, \$69, \$590 USD)**. Cero spam operativo.
+
+4. **👑 Campaña Pareto VIP 80/20 & Cron Semanal Programado**:
+   - Disparo automático los lunes a las 7:00 AM El Salvador (13:00 UTC) a los 400 directores clave del Top 20% en 14 países en su idioma nativo.
+
+5. **📄 Generador y Entrega Automática de Word (`.docx`) con Control de Cambios**:
    - Descarga directa de plantillas oficiales con marcas de revisión tachadas en rojo y propuestas de blindaje en verde.
-   - Entrega automática post-pago por correo electrónico sin intervención manual.
 
-4. **📬 Mandato Universal de Copia al Propietario (`rick28191@gmail.com`)**:
-   - Toda campaña, re-envío masivo, captura de lead o venta genera automáticamente una copia idéntica y resumen ejecutivo a la bandeja personal del dueño.
-
-5. **🔍 Auditoría Cruzada 2-Way (Contrato vs Factura)**:
+6. **🔍 Auditoría Cruzada 2-Way (Contrato vs Factura)**:
    - Conciliación de discrepancias entre órdenes de compra, contratos de prestación de servicios y facturas recibidas.
-   - Semáforo de riesgo (*Traffic Light*) y cálculo de cobros no devengados.
 
-6. **💬 Copiloto IA Interactivo (Chat con el Documento)**:
+7. **💬 Copiloto IA Interactivo (Chat con el Documento)**:
    - Permite al usuario hacer preguntas específicas sobre cláusulas, multas y plazos directamente a la IA sobre el documento analizado en RAM volátil.
 
-7. **⚡ Indexación SEO Instantánea (IndexNow Protocol)**:
-   - Notificación directa a Bing, Yandex y Seznam de las 4 landing pages canónicas de alta intención comercial.
-
-8. **🛡️ Ciberseguridad & Privacidad de Grado Bancario**:
-   - Autenticación con comparación en tiempo constante (`safeCompare`), modo oscuro `#09090b` forzado, sanitización XSS y protección SSRF.
+8. **⚡ Indexación SEO Instantánea (IndexNow Protocol)**:
+   - Notificación directa a Bing, Yandex y Seznam de las URLs canónicas.
 
 ---
 

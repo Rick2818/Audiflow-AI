@@ -407,12 +407,36 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
    - Disparo automatizado semanal al Top 20% Pareto VIP (400 CFOs/CLOs) con la regla de los 3 mensajes (Trigger + Fuga EBITDA + CTA de bajo roce).
    - Prospección diaria en LinkedIn con Auditorías Sombra y carruseles PDF.
 2. **Plan B — Alianzas Estratégicas B2B & Red de Afiliados de Alto Ticket (Rev-Share):**
-   - Alianzas con **Bufetes Boutique y Firmas Contables/Auditoras** (comisión del 30% recurrente o \$150 USD por referido) para que auditen la cartera de sus clientes corporativos.
+   - Alianzas con **Bufetes Boutique y Firmas Contables/Auditoras** (comisión del 30% recurrente o $150 USD por referido) para que auditen la cartera de sus clientes corporativos.
    - Acuerdos con **Consultores de Compras y Procurement** que asesoran en renegociación de software y arrendamientos.
 3. **Plan C — Búsqueda de Inversionistas y Aceleración de Capital B2B:**
-   - **TinySeed:** Aplicación al fondo acelerador remoto #1 para B2B SaaS (\$120k–\$240k USD) enfocado en rentabilidad sin dilución masiva.
+   - **TinySeed:** Aplicación al fondo acelerador remoto #1 para B2B SaaS ($120k–$240k USD) enfocado en rentabilidad sin dilución masiva.
    - **Forum Ventures & Alchemist Accelerator:** Aceleradoras líderes en Silicon Valley para expansión de ventas corporativas B2B y redes de CFOs.
    - **Acquire.com / MicroAcquire:** Preparación de métricas de tracción (LTV, CAC, MRR) para atracción de inversores ángeles y micro-fondos de capital privado.
+
+---
+
+## 🎬 29. MOTOR DE VIDEO HYPERFRAMES (34s), AUDIO NEURONAL FEMENINO Y ESTRATEGIA SEM ORGÁNICA MULTILINGÜE
+
+1. **Reproductor HyperFrames Ejecutivo de 34 Segundos (`frontend/video.html` - `/video`):**
+   - Estructurado en 4 actos fiduciarios: 01. ¿Qué es?, 02. ¿Para qué sirve?, 03. Consecuencias/Contras, 04. Beneficios & CTA Final.
+   - Pausa de respiración de 1.0 segundo entre actos gobernada por eventos (`audioPlayer.onended`) para garantizar una transición suave, profesional y no saturada.
+   - 12 archivos de audio neuronal MP3 de estudio en alta definición (`frontend/audio/`):
+     - 🇪🇸 Español: `Elvira Neural` (Voz femenina suave, elegante y ejecutiva).
+     - 🇺🇸 English: `Jenny Neural` (Voz femenina nativa y clara).
+     - 🇩🇪 Deutsch: `Katja Neural` (Voz femenina alemana profesional).
+   - Control de volumen/silencio, selección interactiva por acto y selector de 3 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE]`).
+
+2. **Página de Captura SEM Orgánica Multilingüe (`frontend/alternativas-docusign.html` - `/alternativas-docusign`):**
+   - Intercepción de búsquedas de alto costo por clic (DocuSign CLM, Ironclad, software revisión contratos).
+   - Tabla comparativa de 5 factores clave (Tiempo, Coste, Privacidad RAM, Detección EBITDA, Redlines Word).
+   - Sección dedicada de 4 pilares: *"¿Por qué elegir AuditFlow AI frente a las alternativas tradicionales?"*.
+   - Soporte multilingüe completo en 4 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]`) con marcado estructurado `Schema.org/FAQPage` para Posición Cero en Google y Bing.
+
+3. **Protocolo Inviolable de Enrutamiento Dual de Correos:**
+   - **`tendenciaaitufuturo@gmail.com`:** Receptor exclusivo de interacciones de usuarios, aperturas de emails, capturas de leads, auditorías shadow y reportes de crons.
+   - **`rick28191@gmail.com`:** Única y exclusivamente reservado para notificaciones de **PAGOS Y COMPRAS CONFIRMADAS ($19, $69, $590 USD)**. Cero spam o logs operativos en esta bandeja.
+
 
 
 
