@@ -359,9 +359,16 @@ Siempre que el módulo de administración (`/admin`), los crons de recuperación
 
 ---
 
-## ⚙️ 24. REGLA DE OPTIMIZACIÓN SERVERLESS VERCEL (MÁXIMO 12 FUNCIONES)
+---
 
-- **Límite Estricto de Funciones:** Para garantizar compatibilidad total con el plan Hobby/Pro de Vercel sin errores de compilación (`deploy_failed`), el directorio `/api/` no debe exceder de 12 archivos de funciones serverless, consolidando micro-endpoints auxiliares dentro de `api/admin.js` o módulos correspondientes mediante enrutamiento semántico en `vercel.json`.
-- **Hero Streamlined de Alta Conversión:** El área superior pública debe priorizar el llamado a la acción (`🚀 Ver Demo Interactivo en 1 Clic` y Dropzone) sobre métricas secundarias, las cuales deben ubicarse ordenadamente en la sección de descubrimiento inferior.
+## 🛡️ 25. BLINDAJE DE ARQUITECTURA DOM SPA Y NAVEGACIÓN DE PESTAÑAS EN `/admin`
+
+1. **Aislamiento de Contenedores Sibling (DOM Tree Integrity):**
+   - Cada una de las 8 pestañas administrativas (`tab-content-leads`, `tab-content-tx`, `tab-content-outreach`, `tab-content-seo`, `tab-content-directories`, `tab-content-shadow`, `tab-content-verify`, `tab-content-social`) debe mantenerse como un elemento hermano (`sibling`) cerrado independientemente al mismo nivel bajo `<main id="admin-dashboard-content">`.
+2. **Cero Bloqueo de Hilo Principal (No Native Alerts):**
+   - Todas las notificaciones deben gestionarse a través del componente reactivo de Toasts flotantes (`AdminApp.showToast`), evitando llamadas a `alert()` que congelan el event loop de JavaScript en navegadores modernos.
+3. **Persistencia Híbrida y Auto-Acceso Seguro:**
+   - Soporte transparente para autenticación por token en cabeceras `Authorization` y `X-Admin-Password`, sincronizando almacenamiento en `sessionStorage` y `localStorage`, con soporte de acceso rápido por parámetro seguro de URL (`?pass=...`).
+
 
 
