@@ -184,6 +184,8 @@ export default async function handler(req, res) {
     try { body = JSON.parse(body); } catch (e) { body = {}; }
   }
 
+  const { action, email, name, role, company, document_name, custom_notes, prospects, test_mode = false } = body;
+
   // 0. Tracker de Aperturas y Visitas Waalaxy/LinkedIn (Píxel o POST)
   if (req.url && (req.url.includes('track-open') || action === 'track_open')) {
     try {
@@ -242,8 +244,6 @@ export default async function handler(req, res) {
       return res.status(200).send(TRANSPARENT_GIF_BUFFER);
     }
   }
-
-  const { action, email, name, role, company, document_name, custom_notes, prospects, test_mode = false } = body;
 
   // POST Handlers
   if (req.method === 'POST') {
