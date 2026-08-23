@@ -324,9 +324,15 @@
                         No le pidas al CFO que suba su contrato privado. Envíale un diagnóstico pre-calculado de los proveedores que su empresa ya utiliza hoy.
                     </p>
                 </div>
+                <div class="flex items-center gap-2 bg-dark-surface p-1.5 rounded-xl border border-dark-border">
+                    <span class="text-xs font-mono text-gray-400 px-2">🌐 Idioma / Language:</span>
+                    <button type="button" id="shadow-lang-btn-es" onclick="AdminApp.setShadowLanguage('es')" class="px-3 py-1.5 rounded-lg bg-accent-blue text-black font-mono text-xs font-bold transition-all cursor-pointer">🇪🇸 Español</button>
+                    <button type="button" id="shadow-lang-btn-en" onclick="AdminApp.setShadowLanguage('en')" class="px-3 py-1.5 rounded-lg text-gray-400 hover:text-white font-mono text-xs transition-all cursor-pointer">🇺🇸 English</button>
+                    <button type="button" id="shadow-lang-btn-fr" onclick="AdminApp.setShadowLanguage('fr')" class="px-3 py-1.5 rounded-lg text-gray-400 hover:text-white font-mono text-xs transition-all cursor-pointer">🇫🇷 Français</button>
+                </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div id="shadow-audits-cards-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- CARD 1: LICENCIAS CLOUD & SAAS -->
                 <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
                     <div>
@@ -2129,19 +2135,258 @@ Escaneo de prueba gratuito:
                 }
             },
 
+            shadowLanguage: 'es',
+
+            setShadowLanguage(lang) {
+                this.shadowLanguage = lang || 'es';
+                ['es', 'en', 'fr'].forEach(l => {
+                    const btn = document.getElementById(`shadow-lang-btn-${l}`);
+                    if (btn) {
+                        if (l === this.shadowLanguage) {
+                            btn.className = 'px-3 py-1.5 rounded-lg bg-accent-blue text-black font-mono text-xs font-bold transition-all cursor-pointer shadow-sm';
+                        } else {
+                            btn.className = 'px-3 py-1.5 rounded-lg text-gray-400 hover:text-white font-mono text-xs transition-all cursor-pointer';
+                        }
+                    }
+                });
+                this.renderShadowAudits();
+                const langLabels = { es: 'Español 🇪🇸', en: 'English 🇺🇸', fr: 'Français 🇫🇷' };
+                this.showToast(`Idioma de Auditorías Sombra cambiado a: ${langLabels[this.shadowLanguage]}`, 'info');
+            },
+
+            renderShadowAudits() {
+                const container = document.getElementById('shadow-audits-cards-container');
+                if (!container) return;
+
+                const lang = this.shadowLanguage || 'es';
+                const i18n = {
+                    es: {
+                        cloud: {
+                            badge: '💻 Cloud / SaaS (M365, AWS, Salesforce)',
+                            leakage: '-$14,400 USD/año',
+                            title: 'Cláusula de Auto-Renovación e Indexación Silenciosa',
+                            desc: 'Renovación automática forzosa a 36 meses con incremento unilateral de hasta +15% si no se notifica con 90 días de anticipación por escrito.',
+                            clause: '🛡️ <strong>Contra-cláusula de blindaje:</strong> Notificación reducida a 30 días con tope de IPC máximo del +3% anual o derecho de rescisión sin penalización.',
+                            btn: '📋 Copiar Mensaje Waalaxy (Español)'
+                        },
+                        lease: {
+                            badge: '🏢 Arrendamiento Comercial / Naves',
+                            leakage: '-$18,500 USD/año',
+                            title: 'Penalización Abusiva por Rescisión Anticipada',
+                            desc: 'Obligación de liquidar el 100% de los cánones restantes del contrato si el arrendatario reduce operaciones o rescinde antes de tiempo.',
+                            clause: '🛡️ <strong>Contra-cláusula de blindaje:</strong> Penalización máxima de 2 mensualidades con preaviso de 60 días en caso de reestructuración corporativa.',
+                            btn: '📋 Copiar Mensaje Waalaxy (Español)'
+                        },
+                        it: {
+                            badge: '⚙️ Servicios IT / Dev Outsourcing',
+                            leakage: '-$9,200 USD/año',
+                            title: 'Vacíos en SLAs y Cesión Condicionada de IP',
+                            desc: 'Ausencia de descuentos económicos por caída de servicio (Downtime) y retención del código fuente o repositorios ante disputas de facturación.',
+                            clause: '🛡️ <strong>Contra-cláusula de blindaje:</strong> Cesión inmediata de propiedad intelectual desde la creación y crédito del 15% por cada hora fuera de SLA.',
+                            btn: '📋 Copiar Mensaje Waalaxy (Español)'
+                        },
+                        invoice: {
+                            badge: '🧾 Facturación Proveedores / Logística',
+                            leakage: '-$6,300 USD/año',
+                            title: 'Sobrecargos de Combustible y Gastos No Cotizados',
+                            desc: 'Facturación recurrente de conceptos accesorios (\'manejo administrativo\', \'ajuste de combustible\') no pactados en la orden de compra original.',
+                            clause: '🛡️ <strong>Contra-cláusula de blindaje:</strong> Cláusula de precio cerrado vinculante. Toda partida adicional requiere aprobación previa por escrito.',
+                            btn: '📋 Copiar Mensaje Waalaxy (Español)'
+                        }
+                    },
+                    en: {
+                        cloud: {
+                            badge: '💻 Cloud / SaaS (M365, AWS, Salesforce)',
+                            leakage: '-$14,400 USD/yr',
+                            title: 'Forced Auto-Renewal & Hidden Indexation Clause',
+                            desc: '36-month mandatory auto-renewal with unilateral price hikes up to +15% unless written notice is given 90 days prior to contract anniversary.',
+                            clause: '🛡️ <strong>Shielding counter-clause:</strong> 30-day notice requirement with a strict CPI cap of +3% annually and penalty-free termination rights.',
+                            btn: '📋 Copy Waalaxy Message (English)'
+                        },
+                        lease: {
+                            badge: '🏢 Commercial Leases / Warehouses',
+                            leakage: '-$18,500 USD/yr',
+                            title: 'Excessive Early Termination Penalties',
+                            desc: 'Tenant liability for 100% of remaining lease payments if downsizing or terminating early due to corporate restructuring.',
+                            clause: '🛡️ <strong>Shielding counter-clause:</strong> Maximum penalty capped at 2 monthly installments with 60-day written notice during restructuring.',
+                            btn: '📋 Copy Waalaxy Message (English)'
+                        },
+                        it: {
+                            badge: '⚙️ IT Outsourcing / Software Development',
+                            leakage: '-$9,200 USD/yr',
+                            title: 'SLA Gaps & Conditional IP Assignment',
+                            desc: 'No automated billing credits for system outages (downtime) and vendor IP retention over contested invoices.',
+                            clause: '🛡️ <strong>Shielding counter-clause:</strong> Immediate work-for-hire IP assignment upon creation + 15% billing credit per hour outside SLA.',
+                            btn: '📋 Copy Waalaxy Message (English)'
+                        },
+                        invoice: {
+                            badge: '🧾 Vendor Invoicing / Supply Chain',
+                            leakage: '-$6,300 USD/yr',
+                            title: 'Unquoted Fuel & Administrative Surcharges',
+                            desc: 'Hidden accessory charges (\'administrative processing\', \'fuel adjustment index\') billed outside the agreed purchase order scope.',
+                            clause: '🛡️ <strong>Shielding counter-clause:</strong> Fixed-price binding terms. All supplementary fees require prior written authorization.',
+                            btn: '📋 Copy Waalaxy Message (English)'
+                        }
+                    },
+                    fr: {
+                        cloud: {
+                            badge: '💻 Cloud / SaaS (M365, AWS, Salesforce)',
+                            leakage: '-$14,400 USD/an',
+                            title: 'Reconduction Tacite & Clause d\'Indexation Abusive',
+                            desc: 'Renouvellement automatique forcé sur 36 mois avec hausse tarifaire unilatérale jusqu\'à +15% sans préavis écrit de 90 jours.',
+                            clause: '🛡️ <strong>Contre-clause de blindage:</strong> Préavis réduit à 30 jours, plafonnement de l\'indexation à +3%/an max ou résiliation sans pénalité.',
+                            btn: '📋 Copier Message Waalaxy (Français)'
+                        },
+                        lease: {
+                            badge: '🏢 Baux Commerciaux & Locaux',
+                            leakage: '-$18,500 USD/an',
+                            title: 'Pénalités Excessives de Résiliation Anticipée',
+                            desc: 'Obligation de régler l\'intégralité des loyers restants si l\'entreprise réduit ses surfaces ou résilie prématurément.',
+                            clause: '🛡️ <strong>Contre-clause de blindage:</strong> Indemnité plafonnée à 2 mois de loyer avec préavis de 60 jours en cas de restructuration.',
+                            btn: '📋 Copier Message Waalaxy (Français)'
+                        },
+                        it: {
+                            badge: '⚙️ Prestations IT & Dév Logiciel',
+                            leakage: '-$9,200 USD/an',
+                            title: 'Failles SLA & Rétention de Propriété Intellectuelle',
+                            desc: 'Absence de crédits financiers automatiques en cas d\'indisponibilité et rétention du code source lors de litiges de facturation.',
+                            clause: '🛡️ <strong>Contre-clause de blindage:</strong> Cession immédiate des droits d\'auteur dès création + crédit de 15% par heure hors SLA.',
+                            btn: '📋 Copier Message Waalaxy (Français)'
+                        },
+                        invoice: {
+                            badge: '🧾 Facturation Fournisseurs & Logistique',
+                            leakage: '-$6,300 USD/an',
+                            title: 'Surcharges Carburant et Frais Non Devisés',
+                            desc: 'Facturation récurrente de frais accessoires (\'gestion administrative\', \'indexation carburant\') non convenus dans le bon de commande.',
+                            clause: '🛡️ <strong>Contre-clause de blindage:</strong> Clause de prix ferme et définitif. Tout dépassement requiert un accord écrit préalable.',
+                            btn: '📋 Copier Message Waalaxy (Français)'
+                        }
+                    }
+                };
+
+                const data = i18n[lang] || i18n.es;
+                container.innerHTML = `
+                    <!-- CARD 1: CLOUD / SAAS -->
+                    <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono font-bold text-accent-blue bg-blue-950/60 px-2.5 py-1 rounded-lg border border-accent-blue/30">${data.cloud.badge}</span>
+                                <span class="text-xs font-mono font-extrabold text-red-400">${data.cloud.leakage}</span>
+                            </div>
+                            <h4 class="text-white font-bold text-sm mb-1">${data.cloud.title}</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-3">${data.cloud.desc}</p>
+                            <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                                ${data.cloud.clause}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2">
+                            <button onclick="AdminApp.copyShadowAuditMessage('cloud')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                                ${data.cloud.btn}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 2: LEASE -->
+                    <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono font-bold text-accent-emerald bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-accent-emerald/30">${data.lease.badge}</span>
+                                <span class="text-xs font-mono font-extrabold text-red-400">${data.lease.leakage}</span>
+                            </div>
+                            <h4 class="text-white font-bold text-sm mb-1">${data.lease.title}</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-3">${data.lease.desc}</p>
+                            <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                                ${data.lease.clause}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2">
+                            <button onclick="AdminApp.copyShadowAuditMessage('lease')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                                ${data.lease.btn}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 3: IT -->
+                    <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-lg border border-purple-500/30">${data.it.badge}</span>
+                                <span class="text-xs font-mono font-extrabold text-red-400">${data.it.leakage}</span>
+                            </div>
+                            <h4 class="text-white font-bold text-sm mb-1">${data.it.title}</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-3">${data.it.desc}</p>
+                            <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                                ${data.it.clause}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2">
+                            <button onclick="AdminApp.copyShadowAuditMessage('it')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                                ${data.it.btn}
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- CARD 4: INVOICE -->
+                    <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-mono font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-lg border border-amber-500/30">${data.invoice.badge}</span>
+                                <span class="text-xs font-mono font-extrabold text-red-400">${data.invoice.leakage}</span>
+                            </div>
+                            <h4 class="text-white font-bold text-sm mb-1">${data.invoice.title}</h4>
+                            <p class="text-xs text-gray-300 leading-relaxed mb-3">${data.invoice.desc}</p>
+                            <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                                ${data.invoice.clause}
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2 pt-2">
+                            <button onclick="AdminApp.copyShadowAuditMessage('invoice')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                                ${data.invoice.btn}
+                            </button>
+                        </div>
+                    </div>
+                `;
+            },
+
             copyShadowAuditMessage(type) {
+                const lang = this.shadowLanguage || 'es';
                 let msg = '';
-                if (type === 'cloud') {
-                    msg = `Hola [Nombre], auditamos los términos de renovación estándar de licencias Cloud/SaaS (M365, AWS, Salesforce) y detectamos que la cláusula de auto-renovación forzosa a 36 meses con incremento del +15% genera una fuga promedio de $14,400 USD/año si no se preavisa con 90 días.\n\nTe preparé un diagnóstico preventivo de 1 página con la contra-cláusula de blindaje (tope IPC +3% y preaviso a 30 días) lista para copiar y pegar.\n\n¿Te gustaría que te la comparta por aquí o revisamos tu próximo contrato en memoria volátil de forma 100% gratuita?: https://audiflowai.com/?ref=waalaxy`;
-                } else if (type === 'lease') {
-                    msg = `Hola [Nombre], en revisión de contratos de arrendamiento comercial detectamos que las penalizaciones por rescisión anticipada (exigir el 100% de los cánones restantes) representan un riesgo de más de $18,500 USD para el arrendatario ante cualquier reestructuración.\n\nDesarrollamos una contra-cláusula blindada que limita la penalización a 2 meses con 60 días de preaviso.\n\nPuedes auditar tu contrato de arrendamiento en 10 segundos gratis aquí: https://audiflowai.com/auditar-contrato-arrendamiento?ref=waalaxy`;
-                } else if (type === 'it') {
-                    msg = `Hola [Nombre], antes de renovar o firmar contratos de desarrollo de software o soporte IT, asegúrate de que el SLA incluya créditos por caídas y cesión inmediata de propiedad intelectual. La ausencia de estas cláusulas genera disputas promedio de $9,200 USD.\n\nTe comparto el acceso al auditor de contratos de TI con diagnóstico inicial gratuito: https://audiflowai.com/auditar-contrato-servicios-it?ref=waalaxy`;
+
+                if (lang === 'en') {
+                    if (type === 'cloud') {
+                        msg = `Hi [Name], we recently audited standard enterprise Cloud/SaaS contracts (M365, AWS, Salesforce) and found that mandatory 36-month auto-renewal clauses with +15% price hikes cause an average of $14,400 USD/year in financial leakage without a 90-day written notice.\n\nI prepared a 1-page preventive diagnostic report with a pre-drafted shielding counter-clause (strict +3% CPI cap & 30-day notice) ready to plug into your agreements.\n\nWould you like me to send it over, or would you prefer a free confidential audit of your upcoming renewal in volatile RAM?: https://audiflowai.com/?ref=waalaxy`;
+                    } else if (type === 'lease') {
+                        msg = `Hi [Name], in our commercial lease audits, we identified that early termination penalties requiring 100% of remaining lease terms represent over $18,500 USD in corporate exposure during any company restructuring.\n\nWe engineered a shielding counter-clause capping early exit liabilities to 2 months with 60 days notice.\n\nYou can run an instant, zero-storage audit on your commercial lease for free here: https://audiflowai.com/auditar-contrato-arrendamiento?ref=waalaxy`;
+                    } else if (type === 'it') {
+                        msg = `Hi [Name], before executing or renewing IT outsourcing or custom dev contracts, ensure your SLA includes automatic downtime penalty credits and immediate IP work-for-hire assignment. The absence of these clauses drives an average of $9,200 USD in dispute costs.\n\nAccess our automated IT contract auditor with a free initial diagnostic here: https://audiflowai.com/auditar-contrato-servicios-it?ref=waalaxy`;
+                    } else {
+                        msg = `Hi [Name], up to 68% of enterprise vendor invoices contain unquoted surcharge lines ($6,300 USD/year in preventable leakage). AuditFlow AI reconciles vendor bills against purchase orders in <10s in volatile RAM: https://audiflowai.com/auditar-factura-proveedor?ref=waalaxy`;
+                    }
+                } else if (lang === 'fr') {
+                    if (type === 'cloud') {
+                        msg = `Bonjour [Nom], nous avons audité les contrats SaaS/Cloud (M365, AWS, Salesforce) et constaté que les clauses de reconduction tacite sur 36 mois avec hausses de +15% créent une fuite moyenne de 14 400 $ USD/an sans préavis de 90 jours.\n\nJ'ai préparé un diagnostic préventif d'une page avec la contre-clause de blindage (plafond IPC +3% et préavis à 30 jours) prête à l'emploi.\n\nSouhaitez-vous que je vous la transmette ou préférez-vous auditer gratuitement votre prochain contrat en mémoire éphémère?: https://audiflowai.com/?ref=waalaxy`;
+                    } else if (type === 'lease') {
+                        msg = `Bonjour [Nom], lors de l'audit de baux commerciaux, nous avons identifié que les pénalités de résiliation anticipée exigeant 100% des loyers restants exposent l'entreprise à plus de 18 500 $ USD de risques.\n\nNous avons conçu une contre-clause limitant la pénalité à 2 mois avec un préavis de 60 jours.\n\nVous pouvez auditer votre bail commercial gratuitement en 10s ici: https://audiflowai.com/auditar-contrato-arrendamiento?ref=waalaxy`;
+                    } else if (type === 'it') {
+                        msg = `Bonjour [Nom], avant de renouveler vos contrats de prestations IT ou de développement, vérifiez que le SLA inclut des crédits de pénalité et la cession immédiate de propriété intellectuelle. L'absence de ces clauses génère en moyenne 9 200 $ USD de litiges.\n\nAccédez à notre auditeur de contrats IT avec diagnostic initial offert: https://audiflowai.com/auditar-contrato-servicios-it?ref=waalaxy`;
+                    } else {
+                        msg = `Bonjour [Nom], jusqu'à 68% des factures fournisseurs comportent des surcharges non devisées (6 300 $ USD/an de pertes). AuditFlow AI concilie vos factures en <10s en mémoire RAM volatile: https://audiflowai.com/auditar-factura-proveedor?ref=waalaxy`;
+                    }
                 } else {
-                    msg = `Hola [Nombre], detectamos que hasta el 68% de las facturas de proveedores incluyen partidas de sobrecargo no cotizadas ($6,300 USD/año en fugas). Con AuditFlow AI puedes conciliar tus facturas en <10s en memoria RAM: https://audiflowai.com/auditar-factura-proveedor?ref=waalaxy`;
+                    if (type === 'cloud') {
+                        msg = `Hola [Nombre], auditamos los términos de renovación estándar de licencias Cloud/SaaS (M365, AWS, Salesforce) y detectamos que la cláusula de auto-renovación forzosa a 36 meses con incremento del +15% genera una fuga promedio de $14,400 USD/año si no se preavisa con 90 días.\n\nTe preparé un diagnóstico preventivo de 1 página con la contra-cláusula de blindaje (tope IPC +3% y preaviso a 30 días) lista para copiar y pegar.\n\n¿Te gustaría que te la comparta por aquí o revisamos tu próximo contrato en memoria volátil de forma 100% gratuita?: https://audiflowai.com/?ref=waalaxy`;
+                    } else if (type === 'lease') {
+                        msg = `Hola [Nombre], en revisión de contratos de arrendamiento comercial detectamos que las penalizaciones por rescisión anticipada (exigir el 100% de los cánones restantes) representan un riesgo de más de $18,500 USD para el arrendatario ante cualquier reestructuración.\n\nDesarrollamos una contra-cláusula blindada que limita la penalización a 2 meses con 60 días de preaviso.\n\nPuedes auditar tu contrato de arrendamiento en 10 segundos gratis aquí: https://audiflowai.com/auditar-contrato-arrendamiento?ref=waalaxy`;
+                    } else if (type === 'it') {
+                        msg = `Hola [Nombre], antes de renovar o firmar contratos de desarrollo de software o soporte IT, asegúrate de que el SLA incluya créditos por caídas y cesión inmediata de propiedad intelectual. La ausencia de estas cláusulas genera disputas promedio de $9,200 USD.\n\nTe comparto el acceso al auditor de contratos de TI con diagnóstico inicial gratuito: https://audiflowai.com/auditar-contrato-servicios-it?ref=waalaxy`;
+                    } else {
+                        msg = `Hola [Nombre], detectamos que hasta el 68% de las facturas de proveedores incluyen partidas de sobrecargo no cotizadas ($6,300 USD/año en fugas). Con AuditFlow AI puedes conciliar tus facturas en <10s en memoria RAM: https://audiflowai.com/auditar-factura-proveedor?ref=waalaxy`;
+                    }
                 }
+
                 navigator.clipboard.writeText(msg).then(() => {
-                    this.showToast('¡Mensaje de Auditoría Sombra copiado! Listo para Waalaxy / LinkedIn.', 'success');
+                    const langName = (lang === 'es') ? 'Español' : (lang === 'en' ? 'English' : 'Français');
+                    this.showToast(`¡Mensaje de Auditoría Sombra (${langName}) copiado al portapapeles! Listo para Waalaxy / LinkedIn.`, 'success');
                 }).catch(() => {
                     this.showToast('Mensaje preparado para envío.', 'info');
                 });
