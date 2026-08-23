@@ -119,8 +119,21 @@
             </table>
         </div>
 
+        <!-- SECCIÓN: ¿POR QUÉ USAR AUDITFLOW AI FRENTE A LAS ALTERNATIVAS? -->
+        <div class="mt-16 text-left max-w-5xl mx-auto">
+            <div class="text-center mb-8">
+                <span class="text-xs font-mono text-accent-blue font-bold uppercase tracking-widest" id="why-badge">VENTAJAS COMPETITIVAS CLAVE</span>
+                <h2 class="text-2xl sm:text-4xl font-extrabold text-white mt-1" id="why-title">¿Por qué elegir AuditFlow AI frente a las alternativas tradicionales?</h2>
+                <p class="text-gray-400 text-xs sm:text-sm mt-2 max-w-2xl mx-auto" id="why-desc">Diseñado para directores de finanzas, legales y compras que exigen velocidad fiduciaria sin burocracia comercial.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="why-cards-container">
+                <!-- Rellenado dinámicamente por JS -->
+            </div>
+        </div>
+
         <!-- CTA INMEDIATO -->
-        <div class="mt-10 p-8 rounded-3xl bg-gradient-to-r from-dark-card via-dark-surface to-dark-card border border-accent-blue/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-left">
+        <div class="mt-14 p-8 rounded-3xl bg-gradient-to-r from-dark-card via-dark-surface to-dark-card border border-accent-blue/40 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-6 text-left">
             <div>
                 <h3 class="text-xl font-bold text-white" id="cta-title">Prueba la velocidad de AuditFlow AI con tu contrato</h3>
                 <p class="text-gray-400 text-xs mt-1" id="cta-desc">Sin tarjeta de crédito. Arrastra tu documento PDF y obtén el análisis en 8 segundos.</p>
@@ -165,6 +178,15 @@
                     { factor: 'Detección de Fugas de EBITDA', comp: 'Gestión de flujo, no cálculo monetario', af: 'Cálculo exacto de fugas en USD' },
                     { factor: 'Entrega de Redlines', comp: 'Módulo interno propietario', af: 'Archivo Word (.docx) listo para firmar' }
                 ],
+                whyBadge: 'VENTAJAS COMPETITIVAS CLAVE',
+                whyTitle: '¿Por qué elegir AuditFlow AI frente a las alternativas tradicionales?',
+                whyDesc: 'Diseñado para directores de finanzas, legales y compras que exigen velocidad fiduciaria sin burocracia comercial.',
+                whyCards: [
+                    { icon: '🔒', title: '1. Cero Retención en Disco (Memoria Volátil RAM)', desc: 'DocuSign e Ironclad almacenan tus contratos en servidores remotos. AuditFlow AI procesa en RAM efímera bajo SOC-2 y destruye el buffer inmediatamente tras el análisis.' },
+                    { icon: '💰', title: '2. Cuantificación Real de Fugas de EBITDA', desc: 'No nos limitamos a organizar flujos de firma. Calculamos exactamente el dinero que perderías por indexación de IPC abusiva ($3,500 - $18,500 USD).' },
+                    { icon: '⚡', title: '3. Resultados en Menos de 8 Segundos', desc: 'Sin reuniones comerciales de 45 minutos ni demos obligatorias. Subes tu contrato o factura y recibes tu diagnóstico forense al instante.' },
+                    { icon: '📝', title: '4. Redlines Listos en Word (.docx)', desc: 'Recibes contra-cláusulas blindadas listas para negociar con tu contraparte con límites de IPC (+3%) y exenciones de penalización.' }
+                ],
                 ctaTitle: 'Prueba la velocidad de AuditFlow AI con tu contrato',
                 ctaDesc: 'Sin tarjeta de crédito. Arrastra tu documento PDF y obtén el análisis en 8 segundos.',
                 ctaBtn: '⚡ Probar Diagnóstico Gratis →',
@@ -189,6 +211,15 @@
                     { factor: 'Privacy & Data Storage', comp: 'Stored on vendor cloud servers', af: 'Ephemeral RAM (Zero-Disk Retention)' },
                     { factor: 'EBITDA Leakage Calculation', comp: 'Workflow routing, no monetary risk engine', af: 'Exact EBITDA financial loss quantification' },
                     { factor: 'Redlines Delivery Format', comp: 'Proprietary in-app review silo', af: 'Negotiation-ready Word (.docx) Redlines' }
+                ],
+                whyBadge: 'KEY COMPETITIVE ADVANTAGES',
+                whyTitle: 'Why Choose AuditFlow AI Over Legacy CLM Alternatives?',
+                whyDesc: 'Engineered for CFOs, General Counsels, and Procurement Heads demanding immediate fiduciary protection without enterprise sales gatekeeping.',
+                whyCards: [
+                    { icon: '🔒', title: '1. Zero-Disk Retention (Volatile RAM Architecture)', desc: 'Unlike DocuSign or Ironclad which store agreements indefinitely, AuditFlow AI operates in volatile RAM under SOC-2 standards and purges memory buffers immediately.' },
+                    { icon: '💰', title: '2. Exact EBITDA Leakage Quantification', desc: 'We do not just route signatures. We calculate the exact dollar loss ($3,500 - $18,500 USD) caused by predatory CPI indexation and silent auto-renewals.' },
+                    { icon: '⚡', title: '3. Instant Results in Under 8 Seconds', desc: 'No 45-minute sales calls or demo gatekeepers. Drop your PDF contract and receive actionable forensic intelligence in seconds.' },
+                    { icon: '📝', title: '4. Turnkey Word (.docx) Redlines', desc: 'Get negotiation-ready shielded counter-clauses with CPI caps (+3%) and termination fee waivers ready to sign.' }
                 ],
                 ctaTitle: 'Benchmark your contract with AuditFlow AI speed',
                 ctaDesc: 'No credit card required. Upload your PDF agreement and get results in 8 seconds.',
@@ -215,6 +246,15 @@
                     { factor: 'EBITDA-Verlustberechnung', comp: 'Nur Workflow-Routing, keine Währungssumme', af: 'Exakte Berechnung des Schadens in USD' },
                     { factor: 'Lieferung von Redlines', comp: 'Proprietäres In-App-System', af: 'Unterschriftsbereite Word (.docx) Datei' }
                 ],
+                whyBadge: 'WICHTIGSTE WETTBEWERBSVORTEILE',
+                whyTitle: 'Warum AuditFlow AI gegenüber herkömmlichen Alternativen wählen?',
+                whyDesc: 'Entwickelt für Finanz- und Rechtsvorstände, die sofortige Sicherheit ohne langwierige Verkaufsgespräche verlangen.',
+                whyCards: [
+                    { icon: '🔒', title: '1. Null Festplattenspeicherung (Flüchtiger RAM)', desc: 'Im Gegensatz zu DocuSign oder Ironclad verarbeitet AuditFlow AI Dokumente im flüchtigen Arbeitsspeicher unter SOC-2-Standards und löscht Daten sofort nach der Analyse.' },
+                    { icon: '💰', title: '2. Exakte EBITDA-Verlustquantifizierung', desc: 'Wir verwalten nicht nur Unterschriften. Wir berechnen den genauen finanziellen Verlust (3.500 - 18.500 USD) durch überhöhte Indexierungen.' },
+                    { icon: '⚡', title: '3. Sofortige Ergebnisse in unter 8 Sekunden', desc: 'Keine Pflicht-Demos. Laden Sie Ihren Vertrag hoch und erhalten Sie innerhalb von Sekunden Ihren forensischen Prüfbericht.' },
+                    { icon: '📝', title: '4. Verhandlungsbereite Word (.docx) Redlines', desc: 'Erhalten Sie rechtssichere Gegenklauseln mit VPI-Deckel (+3%) und Verzicht auf Kündigungsstrafen direkt in Word.' }
+                ],
                 ctaTitle: 'Testen Sie AuditFlow AI mit Ihrem Vertrag',
                 ctaDesc: 'Keine Kreditkarte erforderlich. PDF hochladen und in 8 Sekunden Ergebnis erhalten.',
                 ctaBtn: '⚡ Kostenlose Prüfung Starten →',
@@ -239,6 +279,15 @@
                     { factor: 'Confidentialité et Stockage', comp: 'Contrats stockés sur leurs serveurs', af: 'Mémoire RAM Éphémère (0-Disque)' },
                     { factor: 'Détection des Pertes d’EBITDA', comp: 'Gestion de flux, aucun calcul financier', af: 'Calcul exact des fuites financières en USD' },
                     { factor: 'Livraison des Redlines', comp: 'Module interne fermé', af: 'Fichier Word (.docx) prêt à signer' }
+                ],
+                whyBadge: 'AVANTAGES COMPÉTITIFS CLÉS',
+                whyTitle: 'Pourquoi Choisir AuditFlow AI Face aux Solutions Traditionnelles ?',
+                whyDesc: 'Conçu pour les directeurs financiers et juridiques qui exigent une protection immédiate sans bureaucratie commerciale.',
+                whyCards: [
+                    { icon: '🔒', title: '1. Zéro Rétention sur Disque (Mémoire RAM Éphémère)', desc: 'Contrairement à DocuSign et Ironclad, AuditFlow AI traite vos documents en mémoire vive sous standard SOC-2 et détruit les tampons immédiatement.' },
+                    { icon: '💰', title: '2. Quantification Financière des Pertes d’EBITDA', desc: 'Nous ne faisons pas que gérer des signatures. Nous chiffrons exactement les pertes financières (3 500 - 18 500 USD) causées par les clauses abusives.' },
+                    { icon: '⚡', title: '3. Résultats Instantanés en Moins de 8 Secondes', desc: 'Aucune démo commerciale imposée. Déposez votre contrat PDF et obtenez votre rapport forensique immédiatement.' },
+                    { icon: '📝', title: '4. Redlines Prêts à Négocier en Word (.docx)', desc: 'Recevez des contre-clauses blindées avec plafonnement IPC (+3%) et suppression des pénalités prêtes à être signées.' }
                 ],
                 ctaTitle: 'Testez la rapidité d’AuditFlow AI sur votre contrat',
                 ctaDesc: 'Sans carte de crédit. Glissez votre fichier PDF et obtenez l’analyse en 8 secondes.',
@@ -280,7 +329,7 @@
                 document.getElementById('th-comp').innerText = d.thComp;
                 document.getElementById('th-auditflow').innerText = d.thAuditFlow;
 
-                // Render Table Rows
+                // Render Table Rows (Comparador)
                 const tbody = document.getElementById('table-body');
                 tbody.innerHTML = d.rows.map(r => `
                     <tr class="hover:bg-dark-surface/30 transition-all">
@@ -288,6 +337,19 @@
                         <td class="p-4 sm:p-5 text-gray-400">${r.comp}</td>
                         <td class="p-4 sm:p-5 font-bold text-accent-emerald bg-accent-blue/5 border-l border-r border-accent-blue/20">${r.af}</td>
                     </tr>
+                `).join('');
+
+                // Render Why AuditFlow AI Section
+                document.getElementById('why-badge').innerText = d.whyBadge;
+                document.getElementById('why-title').innerText = d.whyTitle;
+                document.getElementById('why-desc').innerText = d.whyDesc;
+                const whyContainer = document.getElementById('why-cards-container');
+                whyContainer.innerHTML = d.whyCards.map(c => `
+                    <div class="p-6 rounded-2xl bg-dark-card border border-dark-border hover:border-accent-blue/40 transition-all shadow-md flex flex-col justify-start">
+                        <div class="text-2xl mb-2">${c.icon}</div>
+                        <h3 class="text-base sm:text-lg font-bold text-white mb-2">${c.title}</h3>
+                        <p class="text-gray-400 text-xs sm:text-sm leading-relaxed">${c.desc}</p>
+                    </div>
                 `).join('');
 
                 // Render CTA
