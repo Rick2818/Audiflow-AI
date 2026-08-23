@@ -109,10 +109,35 @@ export default async function handler(req, res) {
           `;
 
           if (resendKey) {
-            const { Resend } = await import('resend');
-            const resend = new Resend(resendKey);
-            await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: 'rick28191@gmail.com', subject: clientSubject, html: clientHtml });
-            await resend.emails.send({ from: emailFrom, to: ['rick28191@gmail.com'], reply_to: 'rick28191@gmail.com', subject: `[Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
+            try {
+              const { Resend } = await import('resend');
+              const resend = new Resend(resendKey);
+              await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: 'tendenciaaitufuturo@gmail.com', subject: clientSubject, html: clientHtml });
+              // Notificación de Venta al Correo Personal del Propietario (rick28191@gmail.com) y al Operativo
+              await resend.emails.send({ from: emailFrom, to: ['rick28191@gmail.com', 'tendenciaaitufuturo@gmail.com'], reply_to: 'tendenciaaitufuturo@gmail.com', subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
+            } catch (rErr) {
+              console.warn('Resend webhook notice error:', rErr.message);
+            }
+          }
+
+          // Fallback a Gmail SMTP para garantizar la llegada al correo personal
+          const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+          if (gmailPass) {
+            try {
+              const nodemailer = (await import('nodemailer')).default;
+              const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: { user: 'rick28191@gmail.com', pass: gmailPass }
+              });
+              await transporter.sendMail({
+                from: '"AuditFlow AI | Sistema de Ventas" <rick28191@gmail.com>',
+                to: 'rick28191@gmail.com, tendenciaaitufuturo@gmail.com',
+                subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`,
+                html: ownerNotificationHtml
+              });
+            } catch (smtpErr) {
+              console.warn('SMTP purchase notice error:', smtpErr.message);
+            }
           }
         } catch (eErr) {
           console.warn('Aviso en envío de correo post-pago:', eErr.message);

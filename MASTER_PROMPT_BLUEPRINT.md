@@ -332,10 +332,14 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 
 ---
 
-## 📬 21. MANDATO UNIVERSAL: COPIA Y CONTROL DE DESPACHOS AL PROPIETARIO (`rick28191@gmail.com`)
+## 📬 21. MANDATO UNIVERSAL: ENRUTAMIENTO DUAL DE NOTIFICACIONES Y VENTAS
 
 **Regla Inviolable:**
-Siempre que el módulo de administración (`/admin`), los crons de recuperación (`/api/lead-recovery`), las campañas outbound (`/api/outreach`), las ofertas individuales/masivas o las notificaciones de ventas por webhook procesen un envío de correo electrónico, el backend **DEBE OBLIGATORIAMENTE** despachar una **Copia de Control** transparente a **`rick28191@gmail.com`** mediante transporte autenticado de Gmail SMTP / Resend, garantizando total visibilidad en tiempo real al propietario del sistema sobre cada acción ejecutada.
+1. **Canal Administrativo y Operativo General (`tendenciaaitufuturo@gmail.com`):**
+   - Recibe **todas las notificaciones de interacción de usuarios con la app**: captura de leads, auditorías de contratos/facturas, solicitudes de soporte, reportes de salud del sistema, alertas del radar de tráfico/píxeles de apertura y copias de despacho de campañas outbound (Cold Email / Pareto VIP).
+2. **Canal Personal Exclusivo del Propietario (`rick28191@gmail.com`):**
+   - **ÚNICA Y EXCLUSIVAMENTE cuando un usuario realice una COMPRA / PAGO ($9, $29, $69, $590 USD).**
+   - Ningún otro aviso operativo, lead ni reporte de campaña interrumpe la bandeja personal. Únicamente las alertas inmediatas de confirmación de ingresos y ventas en tiempo real vía Webhook / Stripe / Resend / Gmail SMTP.
 
 ---
 
@@ -382,7 +386,4 @@ Siempre que el módulo de administración (`/admin`), los crons de recuperación
    - **3 Beneficios Inmediatos:** Diagnóstico en &lt;10s; Memoria RAM 100% efímera (cero almacenamiento); Contra-cláusulas listas para firmar (topes IPC +3%).
    - **Soporte Cuatrilingüe Nativo:** 🇪🇸 Español, 🇺🇸 English, 🇩🇪 Deutsch, 🇫🇷 Français según el país.
 3. **Cron Job Programado (Lunes 7:00 AM El Salvador / 13:00 UTC):**
-   - Registrado en `vercel.json` con expresión `"0 13 * * 1"` hacia `/api/outreach?campaign=pareto_top20`. Despacha automáticamente cada lunes al Top 20% con copia a `rick28191@gmail.com`. Próximo disparo programado: **Lunes 24 de Agosto a las 7:00 AM**.
-
-
 

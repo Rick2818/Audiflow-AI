@@ -319,7 +319,7 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
      * *Rojo tachado:* Cláusulas leoninas, sobrecostos discrecionales y penalizaciones desmedidas.
      * *Verde negrita:* Propuestas de contra-cláusula blindadas bajo estándares PCAOB / US GAAP / NIIF 16.
 2. **Entrega Automática Post-Pago (Cero Intervención Humana):**
-   - La confirmación de webhook de Stripe o Lightning Network dispara de inmediato la entrega del archivo Word y PDF certificado a la bandeja del cliente, notificando la venta en tiempo real al propietario.
+   - La confirmación de webhook de Stripe o Lightning Network dispara de inmediato la entrega del archivo Word y PDF certificado a la bandeja del cliente, notificando la venta en tiempo real.
 
 ---
 
@@ -332,10 +332,14 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 
 ---
 
-## 📬 21. MANDATO UNIVERSAL: COPIA Y CONTROL DE DESPACHOS AL PROPIETARIO (`rick28191@gmail.com`)
+## 📬 21. MANDATO UNIVERSAL: ENRUTAMIENTO DUAL DE NOTIFICACIONES Y VENTAS
 
 **Regla Inviolable:**
-Siempre que el módulo de administración (`/admin`), los crons de recuperación (`/api/lead-recovery`), las campañas outbound (`/api/outreach`), las ofertas individuales/masivas o las notificaciones de ventas por webhook procesen un envío de correo electrónico, el backend **DEBE OBLIGATORIAMENTE** despachar una **Copia de Control** transparente a **`rick28191@gmail.com`** mediante transporte autenticado de Gmail SMTP / Resend, garantizando total visibilidad en tiempo real al propietario del sistema sobre cada acción ejecutada.
+1. **Canal Administrativo y Operativo General (`tendenciaaitufuturo@gmail.com`):**
+   - Recibe **todas las notificaciones de interacción de usuarios con la app**: captura de leads, auditorías de contratos/facturas, solicitudes de soporte, reportes de salud del sistema, alertas del radar de tráfico/píxeles de apertura y copias de despacho de campañas outbound (Cold Email / Pareto VIP).
+2. **Canal Personal Exclusivo del Propietario (`rick28191@gmail.com`):**
+   - **ÚNICA Y EXCLUSIVAMENTE cuando un usuario realice una COMPRA / PAGO ($9, $29, $69, $590 USD).**
+   - Ningún otro aviso operativo, lead ni reporte de campaña interrumpe la bandeja personal. Únicamente las alertas inmediatas de confirmación de ingresos y ventas en tiempo real vía Webhook / Stripe / Resend / Gmail SMTP.
 
 ---
 
@@ -355,12 +359,6 @@ Siempre que el módulo de administración (`/admin`), los crons de recuperación
 1. **Rastreo de Aperturas de Correo:**
    - Inyección de píxel transparente 1x1 (`/api/track-open?email=...`) con cabeceras estrictas `no-cache`, actualizando el mapa de lecturas, el badge `👀 Visto (X veces)` en la tabla Pareto y despachando alerta por Gmail al propietario en la 1ra y 3ra apertura.
 2. **Radar de Tráfico Inbound Waalaxy / LinkedIn:**
-   - Detección automática en `app.js` de parámetros `?ref=waalaxy`, `?ref=linkedin`, etc., reportando la visita al backend y disparando alerta de lead caliente en tiempo real a `rick28191@gmail.com`.
-
----
-
----
-
 ## 🛡️ 25. BLINDAJE DE ARQUITECTURA DOM SPA Y NAVEGACIÓN DE PESTAÑAS EN `/admin`
 
 1. **Aislamiento de Contenedores Sibling (DOM Tree Integrity):**

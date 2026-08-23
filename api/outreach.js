@@ -199,7 +199,7 @@ export default async function handler(req, res) {
     const smtpPass = (process.env.SMTP_PASS || '').trim();
     const emailFrom = (process.env.EMAIL_FROM || '"AuditFlow AI | Auditoría Corporativa" <ricardo@audiflowai.com>').trim();
 
-    const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+    const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
     let transporter;
@@ -509,7 +509,7 @@ export default async function handler(req, res) {
             await resendClient.emails.send({
               from: emailFrom,
               to: email,
-              reply_to: 'rick28191@gmail.com',
+              reply_to: 'tendenciaaitufuturo@gmail.com',
               subject,
               html: bodyHtml,
               headers: {
@@ -521,7 +521,7 @@ export default async function handler(req, res) {
             await transporter.sendMail({
               from: senderFrom,
               to: email,
-              replyTo: 'rick28191@gmail.com',
+              replyTo: 'tendenciaaitufuturo@gmail.com',
               subject,
               html: bodyHtml
             });
@@ -530,6 +530,46 @@ export default async function handler(req, res) {
         } catch (dispatchErr) {
           results.push({ email, name, country, status: 'error', error: dispatchErr.message });
         }
+      }
+    }
+
+    // Mandato Universal: Despachar reporte de control a tendenciaaitufuturo@gmail.com
+    if (results.length > 0 && !test_mode) {
+      try {
+        const successCount = results.filter(r => r.status === 'sent_resend').length;
+        const ownerSubject = `[Copia de Control • Outreach] ${batch === 'pareto_top20' ? '👑 PARETO VIP (Top 20%)' : '🚀 Outreach B2B'} — ${successCount} correos despachados`;
+        const ownerHtml = `
+          <div style="font-family: Arial, sans-serif; background: #0f172a; color: #fff; padding: 24px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px;">
+            <h3 style="color: #10b981; margin-top: 0;">🚀 Reporte de Despacho de Campaña Outbound</h3>
+            <p>Se ha ejecutado un lote de correos de prospección corporativa en AuditFlow AI:</p>
+            <ul style="color: #cbd5e1; font-size: 14px; line-height: 1.6;">
+              <li>Campaña / Lote: <strong>${batch}</strong></li>
+              <li>Total enviados con éxito: <strong>${successCount}</strong> de ${results.length}</li>
+              <li>Hora de ejecución: <strong>${new Date().toLocaleString()}</strong></li>
+              <li>Destinatarios de muestra: <strong>${results.slice(0, 3).map(r => r.email).join(', ')}</strong></li>
+            </ul>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada a la bandeja oficial: tendenciaaitufuturo@gmail.com</p>
+          </div>
+        `;
+        if (resendClient) {
+          await resendClient.emails.send({
+            from: emailFrom,
+            to: ['tendenciaaitufuturo@gmail.com'],
+            reply_to: 'tendenciaaitufuturo@gmail.com',
+            subject: ownerSubject,
+            html: ownerHtml
+          }).catch(() => {});
+        } else if (transporter) {
+          await transporter.sendMail({
+            from: senderFrom,
+            to: 'tendenciaaitufuturo@gmail.com',
+            replyTo: 'tendenciaaitufuturo@gmail.com',
+            subject: ownerSubject,
+            html: ownerHtml
+          }).catch(() => {});
+        }
+      } catch (oErr) {
+        console.warn('Aviso reporte outreach al propietario:', oErr.message);
       }
     }
 

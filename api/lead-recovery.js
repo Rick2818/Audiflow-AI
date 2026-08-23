@@ -15,7 +15,7 @@ async function sendRecoveryEmail({ to, subject, html }) {
   if (resendKey) {
     try {
       const resend = new Resend(resendKey);
-      const r = await resend.emails.send({ from: emailFrom, to: [to], reply_to: 'rick28191@gmail.com', subject, html });
+      const r = await resend.emails.send({ from: emailFrom, to: [to], reply_to: 'tendenciaaitufuturo@gmail.com', subject, html });
       if (r && (r.id || r.data?.id)) return { success: true, provider: 'resend', id: r.id || r.data?.id };
     } catch (e) {
       console.warn('Resend fallback in lead-recovery:', e.message);
@@ -24,7 +24,7 @@ async function sendRecoveryEmail({ to, subject, html }) {
 
   // 2. Gmail SMTP
   try {
-    const user = process.env.GMAIL_USER || 'rick28191@gmail.com';
+    const user = process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com';
     const pass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
     const transporter = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
     const info = await transporter.sendMail({ from: `"AuditFlow AI" <${user}>`, to, subject, html });
@@ -115,7 +115,7 @@ export default async function handler(req, res) {
       results.push({ email: lEmail, status: sendRes.success ? 'sent' : 'error', provider: sendRes.provider });
     }
 
-    // Mandato Universal: Copia al Propietario (rick28191@gmail.com)
+    // Mandato Universal: Copia al Propietario (tendenciaaitufuturo@gmail.com)
     const ownerSubject = `[Recuperación de Leads] AuditFlow AI — Lote de Seguimiento Ejecutado (${results.length} Leads)`;
     const ownerHtml = `
       <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #38bdf8;">
@@ -125,7 +125,7 @@ export default async function handler(req, res) {
         <p style="font-size: 12px; color: #94a3b8;">Copia de control enviada a la bandeja del propietario.</p>
       </div>
     `;
-    await sendRecoveryEmail({ to: 'rick28191@gmail.com', subject: ownerSubject, html: ownerHtml });
+    await sendRecoveryEmail({ to: 'tendenciaaitufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
 
     return res.status(200).json({
       success: true,
