@@ -386,4 +386,18 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
    - **3 Beneficios Inmediatos:** Diagnóstico en &lt;10s; Memoria RAM 100% efímera (cero almacenamiento); Contra-cláusulas listas para firmar (topes IPC +3%).
    - **Soporte Cuatrilingüe Nativo:** 🇪🇸 Español, 🇺🇸 English, 🇩🇪 Deutsch, 🇫🇷 Français según el país.
 3. **Cron Job Programado (Lunes 7:00 AM El Salvador / 13:00 UTC):**
+   - Registrado en `vercel.json` con expresión `"0 13 * * 1"` hacia `/api/outreach?campaign=pareto_top20`. Despacha automáticamente cada lunes al Top 20% con copia a `tendenciaaitufuturo@gmail.com`. Próximo disparo programado: **Lunes 24 de Agosto a las 7:00 AM**.
+
+---
+
+## 🛡️ 27. PROTOCOLO DE BLINDAJE COMERCIAL & MITIGACIÓN DE FRACASO EN MICROSAAS
+
+1. **Regla de Oro 1 — Code Freeze & 80% Distribución:**
+   - Detención formal de desarrollos secundarios o características cosméticas no solicitadas. El 80% del tiempo y recursos se destinan a prospección activa, llamadas de validación y distribución de contenido técnico de alto dolor fiduciario.
+2. **Regla de Oro 2 — Validación por Transacción Inmediata:**
+   - El interés del mercado se valida con transacciones reales en Stripe/OpenNode (\$19 USD diagnóstico Word .docx, \$69 USD/mes, \$590 USD/año Platinum), no con encuestas ni elogios.
+3. **Regla de Oro 3 — 4 Canales de Distribución Activa Diaria:**
+   - Outbound Pareto VIP (Cron lunes 7:00 AM), Auditorías Sombra vía LinkedIn/Waalaxy, Validador Público de Sellos [`/verificar`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/frontend/verificar.html) e IndexNow Inbound SEO.
+4. **Regla de Oro 4 — Blindaje Contra el Churn (Retención Recurrente):**
+   - Transformación del dolor único en valor perpetuo mediante el Radar de Renovaciones Trimestrales (alertas 60 días antes del vencimiento de contratos) y Bóveda Fiduciaria de Proveedores multi-usuario.
 
