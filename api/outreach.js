@@ -272,7 +272,21 @@ export default async function handler(req, res) {
                   <li><strong>Verhandlungsfertige Schutzklauseln:</strong> Sofortige Bereitstellung rechtssicherer Gegenklauseln mit VPI-Deckelung (+3%).</li>
                 </ol>
               </div>
-              <p style="text-align: center; margin: 28px 0;">
+              <!-- 2 RECURSOS EJECUTIVOS OFICIALES -->
+              <div style="background-color: #111827; border: 1px solid #f59e0b; border-radius: 10px; padding: 18px; margin: 24px 0;">
+                <h4 style="margin: 0 0 10px 0; color: #fbbf24; font-size: 14px; font-weight: bold; text-transform: uppercase;">📦 2 Offizielle Ressourcen für Ihr Unternehmen (${company}):</h4>
+                <div style="margin-bottom: 12px; padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">📄 1. Fiduciäres Dossier &amp; Word (.docx) Schutzklausel-Vorlage</p>
+                  <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Verhandlungsbereite Gegenklauseln mit VPI-Deckel (+3%) und IFRS/NIIF-Konformität.</p>
+                </div>
+                <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Offizielles HyperFrames Video (34s • Professionelle Sprecherin)</p>
+                  <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Prägnante visuelle Demonstration: Was AuditFlow AI tut, Risiken ungeprüfter Verträge und sofortige Vorteile.</p>
+                  <a href="https://audiflowai.com/video?lang=de&ref=outreach_pareto_de" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ HyperFrames Video Ansehen (34s) →</a>
+                </div>
+              </div>
+
+              <p style="text-align: center; margin: 28px 0 16px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_pareto_vip_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose VIP-Prüfung für ${company} durchführen</a>
               </p>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
@@ -310,7 +324,22 @@ export default async function handler(req, res) {
                   <li><strong>Contre-clauses de blindage prêtes à l'emploi:</strong> Plafonnement de l'IPC (+3%) et préavis réduit à 30 jours.</li>
                 </ol>
               </div>
-              <p style="text-align: center; margin: 28px 0;">
+
+              <!-- 2 RECURSOS EJECUTIVOS OFICIALES -->
+              <div style="background-color: #111827; border: 1px solid #f59e0b; border-radius: 10px; padding: 18px; margin: 24px 0;">
+                <h4 style="margin: 0 0 10px 0; color: #fbbf24; font-size: 14px; font-weight: bold; text-transform: uppercase;">📦 2 Ressources Officielles Incluses pour ${company} :</h4>
+                <div style="margin-bottom: 12px; padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">📄 1. Dossier Exécutif &amp; Modèle Word (.docx) de Contre-Clauses</p>
+                  <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Clauses protectrices prêtes à l'emploi avec plafonnement de l'IPC (+3%).</p>
+                </div>
+                <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Vidéo Officielle HyperFrames (34s • Voix Féminine Studio)</p>
+                  <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Démonstration visuelle claire : ce que fait AuditFlow AI, risques financiers évités et bénéfices immédiats.</p>
+                  <a href="https://audiflowai.com/video?lang=fr&ref=outreach_pareto_fr" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Voir la Vidéo HyperFrames (34s) →</a>
+                </div>
+              </div>
+
+              <p style="text-align: center; margin: 28px 0 16px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_pareto_vip_fr_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Lancer l'Audit Gratuit pour ${company}</a>
               </p>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
@@ -348,14 +377,24 @@ export default async function handler(req, res) {
                   <li><strong>Negotiation-Ready Shielding Counter-Clauses:</strong> Pre-drafted clauses with +3% CPI caps and 30-day exit rights.</li>
                 </ol>
               </div>
-              <p style="text-align: center; margin: 24px 0 16px 0;">
+
+              <!-- 2 RECURSOS EJECUTIVOS OFICIALES -->
+              <div style="background-color: #111827; border: 1px solid #f59e0b; border-radius: 10px; padding: 18px; margin: 24px 0;">
+                <h4 style="margin: 0 0 10px 0; color: #fbbf24; font-size: 14px; font-weight: bold; text-transform: uppercase;">📦 2 Official Executive Deliverables Included for ${company}:</h4>
+                <div style="margin-bottom: 12px; padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">📄 1. Executive Fiduciary Dossier &amp; Word (.docx) Shielding Template</p>
+                  <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Turnkey fiduciary counter-clauses with CPI caps ready to sign.</p>
+                </div>
+                <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Official HyperFrames Video (34s • Neural Female Voice)</p>
+                  <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Visual executive walkthrough demonstrating what AuditFlow AI does, unshielded agreement pitfalls, and instant EBITDA savings.</p>
+                  <a href="https://audiflowai.com/video?lang=en&ref=outreach_pareto_en" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Play 34s HyperFrames Video →</a>
+                </div>
+              </div>
+
+              <p style="text-align: center; margin: 28px 0 16px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_pareto_vip_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Run Free Executive Audit for ${company}</a>
               </p>
-              <!-- HYPERFRAMES 15s VIDEO EMBED TEASER -->
-              <div style="background-color: #111827; border: 1px solid #38bdf8; border-radius: 8px; padding: 14px; margin: 18px 0; text-align: center;">
-                <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: bold;">🎬 Prefer a 15-second executive walkthrough?</p>
-                <a href="https://audiflowai.com/video?ref=outreach_pareto_en" style="color: #ffffff; background-color: #1e293b; border: 1px solid #38bdf8; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Play 15s HyperFrames Video: What it is, Pitfalls &amp; Benefits</a>
-              </div>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Sincerely,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Executive Audit Desk • AuditFlow AI</p>
@@ -391,14 +430,24 @@ export default async function handler(req, res) {
                   <li><strong>Contra-Cláusulas Listas para Negociar:</strong> Redacción jurídica blindada con tope de IPC (+3%) y salida a 30 días sin penalización.</li>
                 </ol>
               </div>
-              <p style="text-align: center; margin: 24px 0 16px 0;">
+
+              <!-- 2 RECURSOS EJECUTIVOS OFICIALES -->
+              <div style="background-color: #111827; border: 1px solid #f59e0b; border-radius: 10px; padding: 18px; margin: 24px 0;">
+                <h4 style="margin: 0 0 10px 0; color: #fbbf24; font-size: 14px; font-weight: bold; text-transform: uppercase;">📦 2 Recursos Ejecutivos Oficiales Incluidos para ${company}:</h4>
+                <div style="margin-bottom: 12px; padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">📄 1. Dossier Ejecutivo &amp; Plantilla Word (.docx) de Contra-Cláusulas</p>
+                  <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Redlines blindados con límites de IPC (+3%) y exenciones de penalización listos para firmar.</p>
+                </div>
+                <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Video Demostrativo HyperFrames (34s • Voz Neuronal Femenina)</p>
+                  <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Demostración visual clara de qué hace AuditFlow AI, riesgos evitados y beneficios inmediatos en 34 segundos.</p>
+                  <a href="https://audiflowai.com/video?lang=es&ref=outreach_pareto_es" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Ver Video HyperFrames (34s) →</a>
+                </div>
+              </div>
+
+              <p style="text-align: center; margin: 28px 0 16px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_pareto_vip_es_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Diagnóstico Gratuito para ${company}</a>
               </p>
-              <!-- REPRODUCTOR DE VIDEO HIPER-FRAME 15s -->
-              <div style="background-color: #111827; border: 1px solid #38bdf8; border-radius: 8px; padding: 14px; margin: 18px 0; text-align: center;">
-                <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: bold;">🎬 ¿Prefiere ver una demostración de 15 segundos?</p>
-                <a href="https://audiflowai.com/video?ref=outreach_pareto_es" style="color: #ffffff; background-color: #1e293b; border: 1px solid #38bdf8; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Ver Video Ejecutivo HyperFrames (15s): Qué es, Contras y Beneficios</a>
-              </div>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Atentamente,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Equipo de Auditoría y Consultoría Corporativa • AuditFlow AI</p>
