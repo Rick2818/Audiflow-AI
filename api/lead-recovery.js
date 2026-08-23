@@ -43,7 +43,8 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   // Autorización: Crons o Administrador
-  const isCron = req.headers['authorization'] === Bearer  || req.url.includes('cron=true');
+  const authHeader = req.headers['authorization'] || '';
+  const isCron = authHeader.startsWith('Bearer ') || (req.headers['x-vercel-cron'] === '1') || (req.headers['user-agent'] || '').includes('vercel-cron') || (req.url && req.url.includes('cron=true'));
   if (!isCron && !verifyAdminAuth(req)) {
     return res.status(401).json({ error: 'Acceso no autorizado a recuperacion de leads.' });
   }

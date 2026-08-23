@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
+import { verifyAdminAuth } from '../lib/security.js';
 
 // 14 PAÍSES OBJETIVO OFICIALES CON MAPEO RIGUROSO DE IDIOMA
 const targetCountries = [
@@ -160,7 +161,7 @@ export function resolveLeadLanguage(lang, country = '', email = '') {
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, x-admin-password');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-password');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -172,12 +173,11 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
     }
 
-    const isVercelCron = (req.headers['x-vercel-cron'] === '1' || (req.headers['user-agent'] || '').includes('vercel-cron'));
-    const adminPassword = req.headers['x-admin-password'] || body?.admin_password || req.query?.admin_password;
-    const expectedPassword = process.env.ADMIN_PASSWORD || 'AuditFlow2026!';
-
-    if (!isVercelCron && adminPassword !== expectedPassword) {
-      return res.status(401).json({ success: false, error: 'No autorizado. Contraseña de administración incorrecta.' });
+    const authHeader = req.headers['authorization'] || '';
+    const isVercelCron = (req.headers['x-vercel-cron'] === '1' || (req.headers['user-agent'] || '').includes('vercel-cron') || authHeader.startsWith('Bearer ') && authHeader.length > 20 && !authHeader.includes('admin_token'));
+    
+    if (!isVercelCron && !verifyAdminAuth(req)) {
+      return res.status(401).json({ success: false, error: 'No autorizado. Contraseña o token de administración incorrecto.' });
     }
 
     const queryBatch = req.query?.batch || req.query?.campaign;

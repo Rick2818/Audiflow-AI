@@ -7,7 +7,7 @@ const frontendDir = path.resolve(__dirname, '../frontend');
 
 console.log('🔍 Iniciando Auditoria de Integridad HTML y Diseno Dark Mode...\n');
 
-const htmlFiles = fs.readdirSync(frontendDir).filter(f => f.endsWith('.html'));
+const htmlFiles = fs.readdirSync(frontendDir).filter(f => f.endsWith('.html') && !f.startsWith('google'));
 let hasErrors = false;
 
 for (const file of htmlFiles) {

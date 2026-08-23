@@ -14,7 +14,7 @@ function validatePreflightQuality(text) {
   const cleanText = text.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g, ' ').trim();
   const words = cleanText.split(/\s+/).filter(w => w.length > 1);
   return {
-    valid: words.length >= 10 || text.length >= 40,
+    valid: words.length >= 50 || words.length >= 10 || text.length >= 40,
     wordCount: words.length
   };
 }
