@@ -425,7 +425,7 @@
         };
 
         const VideoPlayer = {
-            duration: 32, // 32s Totales (+2s al final)
+            duration: 34, // 34 Segundos Totales con 1s de espacio de respiración entre frames
             currentTime: 0,
             isPlaying: false,
             voiceEnabled: true,
@@ -459,7 +459,7 @@
                 this.applyLanguage(lang);
                 if (this.isPlaying) {
                     const currentActIdx = this.getActIndex(this.currentTime);
-                    this.speakAct(currentActIdx);
+                    if (currentActIdx >= 0) this.speakAct(currentActIdx);
                 }
             },
 
@@ -518,12 +518,33 @@
             getFemaleVoice(langCode) {
                 if (!window.speechSynthesis) return null;
                 const voices = this.cachedVoices.length ? this.cachedVoices : window.speechSynthesis.getVoices();
-                let matching = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(langCode.substring(0, 2)));
-                const femaleKeywords = ['sabina', 'helena', 'monica', 'paulina', 'lucia', 'elvira', 'victoria', 'samantha', 'zira', 'karen', 'hedda', 'marlene', 'katja', 'vicki', 'female', 'natural', 'google', 'microsoft'];
-                for (const kw of femaleKeywords) {
-                    const found = matching.find(v => v.name.toLowerCase().includes(kw));
+                if (!voices || voices.length === 0) return null;
+
+                const langPrefix = langCode.substring(0, 2).toLowerCase();
+                
+                // Voces que coinciden con el idioma seleccionado
+                let matching = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(langPrefix));
+                if (matching.length === 0) matching = voices;
+
+                // Lista de nombres o identificadores estrictamente masculinos a excluir
+                const maleBanned = ['david', 'raul', 'george', 'mark', 'stefan', 'pablo', 'manuel', 'jorge', 'carlos', 'male', 'man', 'guy', 'alvaro', 'enrique'];
+                const femalePreferred = ['sabina', 'helena', 'monica', 'paulina', 'lucia', 'elvira', 'victoria', 'samantha', 'zira', 'karen', 'hedda', 'marlene', 'katja', 'vicki', 'clara', 'eva', 'laura', 'female', 'natural', 'google'];
+
+                // 1. Filtrar voces del idioma excluyendo hombres
+                const cleanMatching = matching.filter(v => {
+                    const n = v.name.toLowerCase();
+                    return !maleBanned.some(m => n.includes(m));
+                });
+
+                // 2. Buscar por nombre femenino prioritario
+                for (const kw of femalePreferred) {
+                    const found = cleanMatching.find(v => v.name.toLowerCase().includes(kw));
                     if (found) return found;
                 }
+
+                // 3. Retornar cualquier voz no masculina del idioma
+                if (cleanMatching.length > 0) return cleanMatching[0];
+
                 return matching[0] || null;
             },
 
@@ -541,7 +562,7 @@
             },
 
             speakAct(actIndex) {
-                if (!this.voiceEnabled || !window.speechSynthesis) return;
+                if (!this.voiceEnabled || !window.speechSynthesis || actIndex < 0) return;
                 if (this.lastActSpoken === actIndex) return;
                 this.lastActSpoken = actIndex;
 
@@ -552,8 +573,8 @@
 
                 const utter = new SpeechSynthesisUtterance(text);
                 utter.lang = d.voiceLang;
-                utter.pitch = 1.15; // Tono suave y femenino
-                utter.rate = 0.98;  // Ritmo pausado y ejecutivo
+                utter.pitch = 1.25; // Tono femenino suave, bonito y agudo
+                utter.rate = 0.92;  // Ritmo pausado, claro y ejecutivo
                 utter.volume = 1.0;
 
                 const femaleVoice = this.getFemaleVoice(d.voiceLang);
@@ -564,10 +585,18 @@
                 window.speechSynthesis.speak(utter);
             },
 
+            // Pacing con 1 segundo de separación/pausa entre cada acto:
+            // Acto 0 (0s - 7.0s), Transición (7.0s - 8.0s)
+            // Acto 1 (8.0s - 15.0s), Transición (15.0s - 16.0s)
+            // Acto 2 (16.0s - 23.0s), Transición (23.0s - 24.0s)
+            // Acto 3 (24.0s - 34.0s)
             getActIndex(time) {
-                if (time < 8) return 0;
-                if (time < 16) return 1;
-                if (time < 24) return 2;
+                if (time <= 7.0) return 0;
+                if (time > 7.0 && time < 8.0) return -1; // Transición / Pausa de 1s
+                if (time >= 8.0 && time <= 15.0) return 1;
+                if (time > 15.0 && time < 16.0) return -1; // Transición / Pausa de 1s
+                if (time >= 16.0 && time <= 23.0) return 2;
+                if (time > 23.0 && time < 24.0) return -1; // Transición / Pausa de 1s
                 return 3;
             },
 
@@ -637,7 +666,7 @@
             render() {
                 const currentSec = Math.floor(this.currentTime);
                 const displaySec = currentSec < 10 ? `0${currentSec}` : `${currentSec}`;
-                document.getElementById('timestamp-display').innerText = `00:${displaySec} / 00:32`;
+                document.getElementById('timestamp-display').innerText = `00:${displaySec} / 00:34`;
 
                 const progressPct = (this.currentTime / this.duration) * 100;
                 document.getElementById('progress-fill').style.width = `${progressPct}%`;
@@ -653,11 +682,15 @@
                 ];
 
                 const actTagEl = document.getElementById('act-tag');
-                actTagEl.innerText = d.actNames[activeActIndex];
-                actTagEl.className = tagColors[activeActIndex];
-
-                if (this.isPlaying) {
-                    this.speakAct(activeActIndex);
+                if (activeActIndex >= 0) {
+                    actTagEl.innerText = d.actNames[activeActIndex];
+                    actTagEl.className = tagColors[activeActIndex];
+                    if (this.isPlaying) {
+                        this.speakAct(activeActIndex);
+                    }
+                } else {
+                    actTagEl.innerText = '⚡ ...';
+                    actTagEl.className = 'text-gray-400 font-bold ml-1';
                 }
 
                 const acts = [
