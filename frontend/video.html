@@ -59,17 +59,18 @@
                 </div>
             </a>
             
-            <!-- SELECTOR DE IDIOMAS (ES / EN / DE) -->
+            <!-- SELECTOR DE 4 IDIOMAS (ES / EN / DE / FR) Y BOTONES DE APP -->
             <div class="flex items-center gap-2 sm:gap-3">
                 <div class="flex items-center bg-dark-surface p-1 rounded-xl border border-dark-border text-xs font-mono">
-                    <button onclick="VideoPlayer.setLanguage('es')" id="lang-btn-es" class="px-2.5 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all">🇪🇸 ES</button>
-                    <button onclick="VideoPlayer.setLanguage('en')" id="lang-btn-en" class="px-2.5 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇺🇸 EN</button>
-                    <button onclick="VideoPlayer.setLanguage('de')" id="lang-btn-de" class="px-2.5 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇩🇪 DE</button>
+                    <button onclick="VideoPlayer.setLanguage('es')" id="lang-btn-es" class="px-2 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all">🇪🇸 ES</button>
+                    <button onclick="VideoPlayer.setLanguage('en')" id="lang-btn-en" class="px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇺🇸 EN</button>
+                    <button onclick="VideoPlayer.setLanguage('de')" id="lang-btn-de" class="px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇩🇪 DE</button>
+                    <button onclick="VideoPlayer.setLanguage('fr')" id="lang-btn-fr" class="px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇫🇷 FR</button>
                 </div>
                 <a href="/admin" class="text-xs font-mono px-3 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-purple-500/50 transition-all hidden md:inline-flex items-center gap-1.5" id="nav-btn-dashboard">
                     <span>📊</span> <span id="nav-text-dashboard">Dashboard</span>
                 </a>
-                <a href="/#scanner-section" class="text-xs font-mono px-4 py-2 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black shadow-lg hover:scale-105 transition-all flex items-center gap-1.5" id="nav-btn-app">
+                <a href="/#scanner-section" class="text-xs font-mono px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black shadow-lg hover:scale-105 transition-all flex items-center gap-1.5" id="nav-btn-app">
                     <span>🚀</span> <span id="nav-text-app">Ir a la App Web / Comprar ($19)</span>
                 </a>
             </div>
@@ -175,7 +176,7 @@
                 <!-- ================= ACTO 5 (33s - 40s): CONOCE AUDITFLOW & COMPRA INMEDIATA ================= -->
                 <div id="frame-act-5" class="frame-transition absolute inset-0 p-6 sm:p-10 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
                     <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-blue/15 border border-accent-blue/40 text-accent-blue font-mono text-[10px] sm:text-xs font-bold mb-3 shadow-lg animate-pulse">
-                        <span>⚡ OFERTA DE LANZAMIENTO • ACCESO INMEDIATO</span>
+                        <span id="act5-badge">⚡ OFERTA DE LANZAMIENTO • ACCESO INMEDIATO</span>
                     </div>
                     <span class="text-xs font-mono text-accent-blue font-extrabold uppercase tracking-widest mb-1" id="act5-label">05. Conoce AuditFlow AI</span>
                     <h2 class="text-xl sm:text-3xl font-black text-white max-w-2xl leading-tight" id="act5-title">
@@ -190,9 +191,9 @@
                         </a>
                     </div>
                     <div class="mt-3 flex items-center gap-4 text-[10px] sm:text-[11px] font-mono text-gray-400">
-                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> Diagnóstico 0$ Gratis</span>
-                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> Word (.docx) en 8s</span>
-                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> RAM Efímera SOC-2</span>
+                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> <span id="act5-pill-1">Diagnóstico 0$ Gratis</span></span>
+                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> <span id="act5-pill-2">Word (.docx) en 8s</span></span>
+                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> <span id="act5-pill-3">RAM Efímera SOC-2</span></span>
                     </div>
                 </div>
 
@@ -211,7 +212,7 @@
                     <div id="progress-fill" class="h-full bg-gradient-to-r from-accent-blue via-amber-400 via-red-500 via-emerald-400 to-accent-blue w-0 transition-all duration-100"></div>
                 </div>
 
-                <!-- CONTROLES Y SEGMENTOS DE LOS 5 ACTOS -->
+                <!-- CONTROLES Y SEGMENTOS DE LOS 5 ACTOS (PESTAÑAS MULTILINGÜES) -->
                 <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-3 text-center text-[10px] sm:text-xs font-mono">
                     <button onclick="VideoPlayer.jumpToAct(0)" id="btn-act-1" class="p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all">
                         01. ¿Qué es?
@@ -232,7 +233,7 @@
 
                 <!-- BOTONERA DE REPRODUCCIÓN -->
                 <div class="flex items-center justify-between mt-4 pt-3 border-t border-dark-border">
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-2 sm:gap-3">
                         <button onclick="VideoPlayer.togglePlay()" id="btn-play-pause" class="px-4 py-2 rounded-xl bg-dark-surface border border-dark-border text-white text-xs font-mono flex items-center gap-2 hover:border-accent-blue transition-all">
                             <span id="play-icon">▶</span>
                             <span id="play-text">Reproducir</span>
@@ -243,10 +244,10 @@
                     </div>
 
                     <div class="flex items-center gap-2 sm:gap-3">
-                        <a href="/admin" class="px-3.5 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white text-xs font-mono transition-all hidden sm:inline-flex items-center gap-1">
-                            📊 Dashboard
+                        <a href="/admin" class="px-3.5 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white text-xs font-mono transition-all hidden sm:inline-flex items-center gap-1" id="btn-bar-dashboard">
+                            <span>📊</span> <span id="bar-text-dashboard">Dashboard</span>
                         </a>
-                        <a href="/#scanner-section" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black text-xs font-mono shadow-md hover:scale-105 transition-all flex items-center gap-1.5" id="btn-quick-scan">
+                        <a href="/#scanner-section" class="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black text-xs font-mono shadow-md hover:scale-105 transition-all flex items-center gap-1.5" id="btn-quick-scan">
                             <span>🚀</span> <span id="btn-quick-scan-text">Ir a la App Web &amp; Comprar ($19 USD) →</span>
                         </a>
                     </div>
@@ -283,7 +284,7 @@
             <div class="p-4 rounded-2xl bg-dark-card border border-accent-blue/40 bg-accent-blue/5">
                 <div class="text-accent-blue text-sm font-bold mb-1" id="card5-title">5. ¡Pruébalo Ahora!</div>
                 <p class="text-gray-300 text-xs leading-relaxed" id="card5-desc">
-                    Prueba tu primer contrato gratis en <a href="https://audiflowai.com" class="text-accent-blue underline">audiflowai.com</a> y asegura tu redlines Word por solo $19 USD.
+                    Prueba tu primer contrato gratis en audiflowai.com y asegura tu redlines Word por solo $19 USD.
                 </p>
             </div>
         </div>
@@ -300,7 +301,7 @@
                 <a href="/#scanner-section" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-sm shadow-xl hover:scale-105 transition-all" id="cta-bottom-btn">
                     🚀 Iniciar Mi Auditoría Gratuita en audiflowai.com →
                 </a>
-                <a href="/alternativas-docusign" class="px-6 py-3.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-accent-blue text-sm font-mono transition-all">
+                <a href="/alternativas-docusign" class="px-6 py-3.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-accent-blue text-sm font-mono transition-all" id="cta-bottom-btn-compare">
                     ⚖️ Comparar con DocuSign CLM
                 </a>
             </div>
@@ -310,20 +311,28 @@
     <!-- FOOTER -->
     <footer class="border-t border-dark-border py-6 text-center text-xs text-gray-400 font-mono bg-dark-surface">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div>© 2026 AuditFlow AI • Plataforma Fiduciaria B2B</div>
+            <div id="footer-copy">© 2026 AuditFlow AI • Plataforma Fiduciaria B2B</div>
             <div class="flex items-center gap-4">
-                <a href="/" class="hover:text-accent-blue transition-colors">Inicio</a>
+                <a href="/" class="hover:text-accent-blue transition-colors" id="footer-link-home">Inicio</a>
                 <span>•</span>
-                <a href="/video" class="text-accent-blue hover:underline">Video HyperFrames (40s)</a>
+                <a href="/video" class="text-accent-blue hover:underline" id="footer-link-video">Video HyperFrames (40s)</a>
                 <span>•</span>
-                <a href="/alternativas-docusign" class="hover:text-white transition-colors">Alternativas SEM</a>
+                <a href="/alternativas-docusign" class="hover:text-white transition-colors" id="footer-link-alt">Alternativas SEM</a>
                 <span>•</span>
-                <a href="/privacy" class="hover:text-white transition-colors">Privacidad</a>
+                <a href="/privacy" class="hover:text-white transition-colors" id="footer-link-priv">Privacidad</a>
             </div>
         </div>
     </footer>
 
-    <!-- LÓGICA DEL REPRODUCTOR HYPERFRAMES (40s • 5 ACTOS) -->
+    <!-- BOTÓN FLOTANTE RÁPIDO PARA REGRESAR A LA APP WEB / COMPRAR -->
+    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2">
+        <a href="/#scanner-section" class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-xs sm:text-sm font-mono shadow-2xl hover:scale-105 hover:shadow-accent-blue/30 transition-all border border-emerald-300/40 animate-bounce group" id="btn-floating-app">
+            <span class="text-base group-hover:rotate-12 transition-transform">🛒</span>
+            <span id="floating-btn-text">Regresar a la App Web / Comprar ($19 USD) →</span>
+        </a>
+    </div>
+
+    <!-- LÓGICA DEL REPRODUCTOR HYPERFRAMES CUATRILINGÜE (40s • 5 ACTOS) -->
     <script>
         const i18nData = {
             es: {
@@ -337,10 +346,19 @@
                 playBtn: 'Reproducir',
                 pauseBtn: 'Pausar',
                 restartBtn: '🔄 Reiniciar',
-                quickScan: '⚡ Auditar Gratis & Comprar ($19)',
-                homeBtn: '← Scanner',
+                navDashboard: 'Dashboard',
+                navApp: 'Ir a la App Web / Comprar ($19)',
+                barDashboard: 'Dashboard',
+                quickScan: 'Ir a la App Web & Comprar ($19 USD) →',
+                floatingBtn: 'Regresar a la App Web / Comprar ($19 USD) →',
+                compareBtn: '⚖️ Comparar con DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • Plataforma Fiduciaria B2B',
+                footerHome: 'Inicio',
+                footerVideo: 'Video HyperFrames (40s)',
+                footerAlt: 'Alternativas SEM',
+                footerPriv: 'Privacidad',
                 actNames: ['ACTO 1: ¿QUÉ ES?', 'ACTO 2: ¿PARA QUÉ SIRVE?', 'ACTO 3: CONSECUENCIAS', 'ACTO 4: BENEFICIOS', 'ACTO 5: CONOCE AUDITFLOW'],
-                actBtns: ['01. ¿Qué es? (0-7s)', '02. ¿Para qué sirve? (8-14s)', '03. Consecuencias (15-22s)', '04. Beneficios (23-31s)', '05. ¡Conoce y Compra! (32-40s)'],
+                actBtns: ['01. ¿Qué es? (0-7s)', '02. ¿Para qué sirve? (8-14s)', '03. Consecuencias (15-22s)', '04. Beneficios (23-31s)', '05. ¡Pruébalo ($19)!'],
                 act1: {
                     label: '01. ¿Qué es AuditFlow AI?',
                     title: 'El Primer Auditor de Contratos y Facturas B2B con IA Forense',
@@ -362,10 +380,14 @@
                     desc: 'Cumplimiento PCAOB / US GAAP / NIIF 16. Recibe redlines aplicados directamente en Word listos para enviar a tu contraparte.'
                 },
                 act5: {
+                    badge: '⚡ OFERTA DE LANZAMIENTO • ACCESO INMEDIATO',
                     label: '05. Conoce AuditFlow AI',
                     title: 'Te Invitamos a Conocer <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
                     desc: 'Audita tu contrato gratis hoy mismo y desbloquea el reporte completo con redlines blindados en Word (.docx) por solo <strong>$19 USD</strong> antes de firmar.',
-                    cta: '⚡ Auditar Gratis & Desbloquear Redlines ($19 USD) →'
+                    cta: '⚡ Auditar Gratis & Desbloquear Redlines ($19 USD) →',
+                    pill1: 'Diagnóstico 0$ Gratis',
+                    pill2: 'Word (.docx) en 8s',
+                    pill3: 'RAM Efímera SOC-2'
                 },
                 cards: [
                     { title: '1. ¿Qué es?', desc: 'Motor de inteligencia fiduciaria que audita contratos y facturas con IA Gemini 2.5 Flash en memoria volátil (cero almacenamiento en disco).' },
@@ -391,10 +413,19 @@
                 playBtn: 'Play',
                 pauseBtn: 'Pause',
                 restartBtn: '🔄 Restart',
-                quickScan: '⚡ Free Audit & Buy ($19)',
-                homeBtn: '← Scanner',
+                navDashboard: 'Dashboard',
+                navApp: 'Go to Web App / Buy ($19)',
+                barDashboard: 'Dashboard',
+                quickScan: 'Go to Web App & Buy ($19 USD) →',
+                floatingBtn: 'Return to Web App / Buy ($19 USD) →',
+                compareBtn: '⚖️ Compare with DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • B2B Fiduciary Platform',
+                footerHome: 'Home',
+                footerVideo: 'HyperFrames Video (40s)',
+                footerAlt: 'SEM Alternatives',
+                footerPriv: 'Privacy',
                 actNames: ['ACT 1: WHAT IS IT?', 'ACT 2: WHAT DOES IT DO?', 'ACT 3: CONSEQUENCES', 'ACT 4: BENEFITS', 'ACT 5: VISIT AUDITFLOW'],
-                actBtns: ['01. What is it? (0-7s)', '02. What does it do? (8-14s)', '03. Consequences (15-22s)', '04. Benefits (23-31s)', '05. Visit & Buy ($19)!'],
+                actBtns: ['01. What is it? (0-7s)', '02. What does it do? (8-14s)', '03. Consequences (15-22s)', '04. Benefits (23-31s)', '05. Try It ($19)!'],
                 act1: {
                     label: '01. What is AuditFlow AI?',
                     title: 'The First B2B Contract & Invoice Auditor Powered by Forensic AI',
@@ -416,10 +447,14 @@
                     desc: 'Full PCAOB / US GAAP / IFRS 16 compliance. Receive redlines applied directly in Word ready to negotiate.'
                 },
                 act5: {
+                    badge: '⚡ LAUNCH SPECIAL • INSTANT ACCESS',
                     label: '05. Visit AuditFlow AI',
                     title: 'We Invite You to Visit <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
                     desc: 'Run your free contract audit today and unlock the full report with shielded Word (.docx) redlines for just <strong>$19 USD</strong> before signing.',
-                    cta: '⚡ Free Audit & Unlock Word Redlines ($19 USD) →'
+                    cta: '⚡ Free Audit & Unlock Word Redlines ($19 USD) →',
+                    pill1: '0$ Free Diagnostic',
+                    pill2: 'Word (.docx) in 8s',
+                    pill3: 'SOC-2 Volatile RAM'
                 },
                 cards: [
                     { title: '1. What is it?', desc: 'Fiduciary AI intelligence engine auditing contracts & invoices in volatile RAM with zero persistent disk storage.' },
@@ -445,8 +480,17 @@
                 playBtn: 'Abspielen',
                 pauseBtn: 'Pause',
                 restartBtn: '🔄 Neustart',
-                quickScan: '⚡ Gratis Prüfen & Kaufen ($19)',
-                homeBtn: '← Scanner',
+                navDashboard: 'Dashboard',
+                navApp: 'Zur Web-App / Kaufen ($19)',
+                barDashboard: 'Dashboard',
+                quickScan: 'Zur Web-App & Kaufen ($19 USD) →',
+                floatingBtn: 'Zurück zur Web-App / Kaufen ($19 USD) →',
+                compareBtn: '⚖️ Mit DocuSign CLM vergleichen',
+                footerCopy: '© 2026 AuditFlow AI • B2B Fiduciäre Plattform',
+                footerHome: 'Startseite',
+                footerVideo: 'HyperFrames Video (40s)',
+                footerAlt: 'SEM Alternativen',
+                footerPriv: 'Datenschutz',
                 actNames: ['AKT 1: WAS IST ES?', 'AKT 2: WOZU DIENT ES?', 'AKT 3: KONSEQUENZEN', 'AKT 4: VORTEILE', 'AKT 5: AUDITFLOW KENNENLERNEN'],
                 actBtns: ['01. Was ist es? (0-7s)', '02. Wozu dient es? (8-14s)', '03. Konsequenzen (15-22s)', '04. Vorteile (23-31s)', '05. Jetzt Testen ($19)!'],
                 act1: {
@@ -470,10 +514,14 @@
                     desc: 'Konform mit PCAOB / US GAAP / IFRS 16. Erhalten Sie einsatzbereite Redlines direkt in Word für Verhandlungen.'
                 },
                 act5: {
+                    badge: '⚡ EINFÜHRUNGSANGEBOT • SOFORTIGER ZUGANG',
                     label: '05. AuditFlow AI Kennenlernen',
                     title: 'Wir Laden Sie Ein Zu <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
                     desc: 'Starten Sie Ihre kostenlose Prüfung heute und sichern Sie sich den vollständigen Bericht mit Word-Redlines für nur <strong>19 USD</strong> vor der Unterschrift.',
-                    cta: '⚡ Kostenlos Prüfen & Word-Redlines Freischalten ($19 USD) →'
+                    cta: '⚡ Kostenlos Prüfen & Word-Redlines Freischalten ($19 USD) →',
+                    pill1: '0$ Kostenlose Diagnose',
+                    pill2: 'Word (.docx) in 8s',
+                    pill3: 'Flüchtiger RAM SOC-2'
                 },
                 cards: [
                     { title: '1. Was ist es?', desc: 'Fiduciäre KI-Engine zur Prüfung von Verträgen und Rechnungen im flüchtigen RAM ohne dauerhafte Speicherung.' },
@@ -486,6 +534,73 @@
                     title: 'Bereit, Ihre Verträge zu sichern und EBITDA in 8 Sekunden zu schützen?',
                     desc: 'Laden Sie Ihren Vertrag oder Ihre Rechnung sicher als PDF hoch. Ohne Registrierungspflicht, 100% flüchtiger RAM.',
                     btn: '🚀 Kostenlose Prüfung auf audiflowai.com Starten →'
+                }
+            },
+            fr: {
+                subtitle: 'Intelligence du Risque Contractuel',
+                headerBadge: 'DÉMONSTRATION DIRIGEANTS HYPER-FRAMES • 40 SECONDES',
+                mainTitle: "Qu'est-ce que AuditFlow AI et comment protège-t-il votre EBITDA ?",
+                mainDesc: 'Explication exécutive de 40 secondes avec narration vocale féminine de studio et 5 actes fiduciaires.',
+                playOverlay: 'CLIQUER POUR LIRE (40s)',
+                voiceBtn: 'Voix Féminine Studio',
+                voiceMute: 'Muet',
+                playBtn: 'Lecture',
+                pauseBtn: 'Pause',
+                restartBtn: '🔄 Recommencer',
+                navDashboard: 'Tableau de Bord',
+                navApp: "Accéder à l'App / Acheter (19 $)",
+                barDashboard: 'Tableau de Bord',
+                quickScan: "Accéder à l'App & Acheter (19 $ USD) →",
+                floatingBtn: "Retour à l'App Web / Acheter (19 $ USD) →",
+                compareBtn: '⚖️ Comparer avec DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • Plateforme Fiduciaire B2B',
+                footerHome: 'Accueil',
+                footerVideo: 'Vidéo HyperFrames (40s)',
+                footerAlt: 'Alternatives SEM',
+                footerPriv: 'Confidentialité',
+                actNames: ['ACTE 1 : QU’EST-CE QUE C’EST ?', 'ACTE 2 : À QUOI ÇA SERT ?', 'ACTE 3 : CONSÉQUENCES', 'ACTE 4 : BÉNÉFICES', 'ACTE 5 : DÉCOUVRIR AUDITFLOW'],
+                actBtns: ['01. Qu’est-ce que c’est ? (0-7s)', '02. À quoi ça sert ? (8-14s)', '03. Conséquences (15-22s)', '04. Bénéfices (23-31s)', '05. Essayer (19 $)!'],
+                act1: {
+                    label: '01. Qu’est-ce que AuditFlow AI ?',
+                    title: 'Le Premier Auditeur B2B de Contrats et Factures par IA Forensique',
+                    desc: 'Analyse les documents légaux en mémoire RAM éphémère en moins de <strong class="text-white">8 secondes</strong> avec confidentialité totale (0-disque).'
+                },
+                act2: {
+                    label: '02. À quoi sert-il ?',
+                    title: 'Détecte les Fuites d’EBITDA de <span class="text-amber-400 font-mono">3 500 à 18 500 $ USD</span>',
+                    desc: 'Identifie les pièges d’indexation de l’IPC, les surcoûts cachés, les doubles facturations et renouvellements automatiques avant signature.'
+                },
+                act3: {
+                    label: '03. Conséquences de NE PAS Auditer',
+                    title: 'Engagements de 36 Mois et Pénalités de 100%',
+                    desc: 'Signer sans révision fiduciaire expose votre entreprise à des contrats léonins forcés, litiges et coûts imprévus.'
+                },
+                act4: {
+                    label: '04. Bénéfices Immédiats',
+                    title: 'Contre-Clauses en Word (.docx) Prêtes à Négocier',
+                    desc: 'Conformité PCAOB / US GAAP / IFRS 16. Recevez des redlines directement applicables en Word prêts à être négociés.'
+                },
+                act5: {
+                    badge: '⚡ OFFRE DE LANCEMENT • ACCÈS IMMÉDIAT',
+                    label: '05. Découvrir AuditFlow AI',
+                    title: 'Nous Vous Invitons à Découvrir <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
+                    desc: 'Auditez votre contrat gratuitement dès aujourd’hui et débloquez le rapport complet avec contre-clauses Word pour seulement <strong>19 $ USD</strong>.',
+                    cta: '⚡ Audit Gratuit & Débloquer Redlines Word (19 $ USD) →',
+                    pill1: 'Diagnostic 0$ Gratuit',
+                    pill2: 'Word (.docx) en 8s',
+                    pill3: 'RAM Éphémère SOC-2'
+                },
+                cards: [
+                    { title: '1. Qu’est-ce que c’est ?', desc: 'Moteur d’intelligence fiduciaire analysant contrats et factures en mémoire volatile sans persistance sur disque.' },
+                    { title: '2. À quoi ça sert ?', desc: 'Évite les fuites d’EBITDA de 3 500 à 18 500 $ USD par contrat en détectant les clauses abusives.' },
+                    { title: '3. Les Risques', desc: 'Ne pas auditer entraîne des engagements de 36 mois et 100% de pénalités de résiliation anticipée.' },
+                    { title: '4. Bénéfices', desc: 'Fournit des contre-clauses prêtes à signer en Word .docx avec plafonnement IPC (+3%) et conformité IFRS.' },
+                    { title: '5. Essayer Maintenant !', desc: 'Testez votre premier contrat 100% gratuitement sur audiflowai.com et sécurisez vos redlines pour 19 $.' }
+                ],
+                ctaBottom: {
+                    title: 'Prêt à blinder vos contrats et protéger votre EBITDA en 8 secondes ?',
+                    desc: 'Téléversez votre contrat en PDF en toute sécurité. Sans inscription obligatoire, 100% RAM éphémère.',
+                    btn: '🚀 Lancer Mon Audit Gratuit sur audiflowai.com →'
                 }
             }
         };
@@ -504,13 +619,14 @@
             audioFiles: {
                 es: ['/audio/es_act1.mp3', '/audio/es_act2.mp3', '/audio/es_act3.mp3', '/audio/es_act4.mp3', '/audio/es_act5.mp3'],
                 en: ['/audio/en_act1.mp3', '/audio/en_act2.mp3', '/audio/en_act3.mp3', '/audio/en_act4.mp3', '/audio/en_act5.mp3'],
-                de: ['/audio/de_act1.mp3', '/audio/de_act2.mp3', '/audio/de_act3.mp3', '/audio/de_act4.mp3', '/audio/de_act5.mp3']
+                de: ['/audio/de_act1.mp3', '/audio/de_act2.mp3', '/audio/de_act3.mp3', '/audio/de_act4.mp3', '/audio/de_act5.mp3'],
+                fr: ['/audio/fr_act1.mp3', '/audio/fr_act2.mp3', '/audio/fr_act3.mp3', '/audio/fr_act4.mp3', '/audio/fr_act5.mp3']
             },
 
             init() {
                 const params = new URLSearchParams(window.location.search);
                 const urlLang = params.get('lang');
-                if (urlLang && (urlLang === 'en' || urlLang === 'de' || urlLang === 'es')) {
+                if (urlLang && (urlLang === 'en' || urlLang === 'de' || urlLang === 'es' || urlLang === 'fr')) {
                     this.currentLang = urlLang;
                 }
 
@@ -536,61 +652,93 @@
             },
 
             applyLanguage(lang) {
-                const d = i18nData[lang];
-                document.getElementById('nav-subtitle').innerText = d.subtitle;
-                document.getElementById('badge-video-header').innerText = d.headerBadge;
-                document.getElementById('main-video-title').innerText = d.mainTitle;
-                document.getElementById('main-video-desc').innerText = d.mainDesc;
-                document.getElementById('play-overlay-text').innerText = d.playOverlay;
-                document.getElementById('voice-text').innerText = this.voiceEnabled ? d.voiceBtn : d.voiceMute;
-                document.getElementById('play-text').innerText = this.isPlaying ? d.pauseBtn : d.playBtn;
-                document.getElementById('btn-restart-text').innerText = d.restartBtn;
-                document.getElementById('btn-quick-scan').innerText = d.quickScan;
-                document.getElementById('nav-btn-home').innerText = d.homeBtn;
+                const d = i18nData[lang] || i18nData['es'];
+                
+                const setTxt = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el && val !== undefined) el.innerText = val;
+                };
 
-                document.getElementById('act1-label').innerText = d.act1.label;
-                document.getElementById('act1-title').innerHTML = d.act1.title;
-                document.getElementById('act1-desc').innerHTML = d.act1.desc;
+                const setHtml = (id, val) => {
+                    const el = document.getElementById(id);
+                    if (el && val !== undefined) el.innerHTML = val;
+                };
 
-                document.getElementById('act2-label').innerText = d.act2.label;
-                document.getElementById('act2-title').innerHTML = d.act2.title;
-                document.getElementById('act2-desc').innerHTML = d.act2.desc;
+                setTxt('nav-subtitle', d.subtitle);
+                setTxt('badge-video-header', d.headerBadge);
+                setTxt('main-video-title', d.mainTitle);
+                setTxt('main-video-desc', d.mainDesc);
+                setTxt('play-overlay-text', d.playOverlay);
+                setTxt('voice-text', this.voiceEnabled ? d.voiceBtn : d.voiceMute);
+                setTxt('play-text', this.isPlaying ? d.pauseBtn : d.playBtn);
+                setTxt('btn-restart-text', d.restartBtn);
+                setTxt('nav-text-dashboard', d.navDashboard);
+                setTxt('nav-text-app', d.navApp);
+                setTxt('bar-text-dashboard', d.barDashboard);
+                setTxt('btn-quick-scan-text', d.quickScan);
+                setTxt('floating-btn-text', d.floatingBtn);
+                setTxt('cta-bottom-btn-compare', d.compareBtn);
+                setTxt('footer-copy', d.footerCopy);
+                setTxt('footer-link-home', d.footerHome);
+                setTxt('footer-link-video', d.footerVideo);
+                setTxt('footer-link-alt', d.footerAlt);
+                setTxt('footer-link-priv', d.footerPriv);
 
-                document.getElementById('act3-label').innerText = d.act3.label;
-                document.getElementById('act3-title').innerHTML = d.act3.title;
-                document.getElementById('act3-desc').innerHTML = d.act3.desc;
+                // Actos
+                setTxt('act1-label', d.act1.label);
+                setHtml('act1-title', d.act1.title);
+                setHtml('act1-desc', d.act1.desc);
 
-                document.getElementById('act4-label').innerText = d.act4.label;
-                document.getElementById('act4-title').innerHTML = d.act4.title;
-                document.getElementById('act4-desc').innerHTML = d.act4.desc;
+                setTxt('act2-label', d.act2.label);
+                setHtml('act2-title', d.act2.title);
+                setHtml('act2-desc', d.act2.desc);
 
-                document.getElementById('act5-label').innerText = d.act5.label;
-                document.getElementById('act5-title').innerHTML = d.act5.title;
-                document.getElementById('act5-desc').innerHTML = d.act5.desc;
-                document.getElementById('act5-btn-cta').innerText = d.act5.cta;
+                setTxt('act3-label', d.act3.label);
+                setHtml('act3-title', d.act3.title);
+                setHtml('act3-desc', d.act3.desc);
 
-                document.getElementById('cta-bottom-title').innerText = d.ctaBottom.title;
-                document.getElementById('cta-bottom-desc').innerText = d.ctaBottom.desc;
-                document.getElementById('cta-bottom-btn').innerText = d.ctaBottom.btn;
+                setTxt('act4-label', d.act4.label);
+                setHtml('act4-title', d.act4.title);
+                setHtml('act4-desc', d.act4.desc);
 
-                d.actBtns.forEach((name, idx) => {
-                    const btn = document.getElementById(`btn-act-${idx + 1}`);
-                    if (btn) btn.innerText = name;
-                });
+                setTxt('act5-badge', d.act5.badge);
+                setTxt('act5-label', d.act5.label);
+                setHtml('act5-title', d.act5.title);
+                setHtml('act5-desc', d.act5.desc);
+                setTxt('act5-btn-cta', d.act5.cta);
+                setTxt('act5-pill-1', d.act5.pill1);
+                setTxt('act5-pill-2', d.act5.pill2);
+                setTxt('act5-pill-3', d.act5.pill3);
 
-                d.cards.forEach((c, idx) => {
-                    const t = document.getElementById(`card${idx + 1}-title`);
-                    const desc = document.getElementById(`card${idx + 1}-desc`);
-                    if (t) t.innerText = c.title;
-                    if (desc) desc.innerText = c.desc;
-                });
+                setTxt('cta-bottom-title', d.ctaBottom.title);
+                setTxt('cta-bottom-desc', d.ctaBottom.desc);
+                setTxt('cta-bottom-btn', d.ctaBottom.btn);
 
-                ['es', 'en', 'de'].forEach(l => {
+                // Botones de las 5 pestañas de actos
+                if (d.actBtns && Array.isArray(d.actBtns)) {
+                    d.actBtns.forEach((name, idx) => {
+                        const btn = document.getElementById(`btn-act-${idx + 1}`);
+                        if (btn) btn.innerText = name;
+                    });
+                }
+
+                // Tarjetas resumen debajo del video
+                if (d.cards && Array.isArray(d.cards)) {
+                    d.cards.forEach((c, idx) => {
+                        setTxt(`card${idx + 1}-title`, c.title);
+                        setTxt(`card${idx + 1}-desc`, c.desc);
+                    });
+                }
+
+                // Actualizar estilo visual de los 4 botones de idiomas
+                ['es', 'en', 'de', 'fr'].forEach(l => {
                     const b = document.getElementById(`lang-btn-${l}`);
-                    if (l === lang) {
-                        b.className = 'px-2.5 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all';
-                    } else {
-                        b.className = 'px-2.5 py-1 rounded-lg text-gray-300 hover:text-white transition-all';
+                    if (b) {
+                        if (l === lang) {
+                            b.className = 'px-2 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all';
+                        } else {
+                            b.className = 'px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all';
+                        }
                     }
                 });
             },
@@ -663,7 +811,8 @@
                 this.showFrame(actIdx);
 
                 if (this.voiceEnabled) {
-                    const audioSrc = this.audioFiles[this.currentLang][actIdx];
+                    const langFiles = this.audioFiles[this.currentLang] || this.audioFiles['es'];
+                    const audioSrc = langFiles[actIdx];
                     this.audioPlayer.src = audioSrc;
                     this.audioPlayer.currentTime = 0;
                     this.audioPlayer.play().catch(e => {
@@ -700,7 +849,7 @@
             },
 
             showFrame(actIdx) {
-                const d = i18nData[this.currentLang];
+                const d = i18nData[this.currentLang] || i18nData['es'];
                 const tagColors = [
                     'text-accent-blue font-bold ml-1',
                     'text-amber-400 font-bold ml-1',
@@ -722,14 +871,16 @@
                 ];
 
                 acts.forEach((frame, idx) => {
-                    if (idx === actIdx) {
-                        frame.style.opacity = '1';
-                        frame.style.pointerEvents = 'auto';
-                        frame.style.transform = 'scale(1)';
-                    } else {
-                        frame.style.opacity = '0';
-                        frame.style.pointerEvents = 'none';
-                        frame.style.transform = 'scale(0.95)';
+                    if (frame) {
+                        if (idx === actIdx) {
+                            frame.style.opacity = '1';
+                            frame.style.pointerEvents = 'auto';
+                            frame.style.transform = 'scale(1)';
+                        } else {
+                            frame.style.opacity = '0';
+                            frame.style.pointerEvents = 'none';
+                            frame.style.transform = 'scale(0.95)';
+                        }
                     }
                 });
 
@@ -769,14 +920,5 @@
             VideoPlayer.init();
         });
     </script>
-
-    <!-- BOTÓN FLOTANTE RÁPIDO PARA REGRESAR A LA APP WEB / COMPRAR -->
-    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2">
-        <a href="/#scanner-section" class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-xs sm:text-sm font-mono shadow-2xl hover:scale-105 hover:shadow-accent-blue/30 transition-all border border-emerald-300/40 animate-bounce group" id="btn-floating-app">
-            <span class="text-base group-hover:rotate-12 transition-transform">🛒</span>
-            <span id="floating-btn-text">Regresar a la App Web / Comprar ($19 USD) →</span>
-        </a>
-    </div>
-
 </body>
 </html>
