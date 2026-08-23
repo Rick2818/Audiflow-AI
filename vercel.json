@@ -81,6 +81,14 @@
       "destination": "/frontend/verificar.html"
     },
     {
+      "source": "/video",
+      "destination": "/frontend/video.html"
+    },
+    {
+      "source": "/alternativas-docusign",
+      "destination": "/frontend/alternativas-docusign.html"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },

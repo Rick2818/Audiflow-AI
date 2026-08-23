@@ -348,9 +348,14 @@ export default async function handler(req, res) {
                   <li><strong>Negotiation-Ready Shielding Counter-Clauses:</strong> Pre-drafted clauses with +3% CPI caps and 30-day exit rights.</li>
                 </ol>
               </div>
-              <p style="text-align: center; margin: 28px 0;">
+              <p style="text-align: center; margin: 24px 0 16px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_pareto_vip_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Run Free Executive Audit for ${company}</a>
               </p>
+              <!-- HYPERFRAMES 15s VIDEO EMBED TEASER -->
+              <div style="background-color: #111827; border: 1px solid #38bdf8; border-radius: 8px; padding: 14px; margin: 18px 0; text-align: center;">
+                <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: bold;">🎬 Prefer a 15-second executive walkthrough?</p>
+                <a href="https://audiflowai.com/video?ref=outreach_pareto_en" style="color: #ffffff; background-color: #1e293b; border: 1px solid #38bdf8; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Play 15s HyperFrames Video: What it is, Pitfalls &amp; Benefits</a>
+              </div>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Sincerely,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Executive Audit Desk • AuditFlow AI</p>
@@ -386,9 +391,14 @@ export default async function handler(req, res) {
                   <li><strong>Contra-Cláusulas Listas para Negociar:</strong> Redacción jurídica blindada con tope de IPC (+3%) y salida a 30 días sin penalización.</li>
                 </ol>
               </div>
-              <p style="text-align: center; margin: 28px 0;">
+              <p style="text-align: center; margin: 24px 0 16px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_pareto_vip_es_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Diagnóstico Gratuito para ${company}</a>
               </p>
+              <!-- REPRODUCTOR DE VIDEO HIPER-FRAME 15s -->
+              <div style="background-color: #111827; border: 1px solid #38bdf8; border-radius: 8px; padding: 14px; margin: 18px 0; text-align: center;">
+                <p style="margin: 0 0 8px 0; font-size: 13px; color: #38bdf8; font-weight: bold;">🎬 ¿Prefiere ver una demostración de 15 segundos?</p>
+                <a href="https://audiflowai.com/video?ref=outreach_pareto_es" style="color: #ffffff; background-color: #1e293b; border: 1px solid #38bdf8; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Ver Video Ejecutivo HyperFrames (15s): Qué es, Contras y Beneficios</a>
+              </div>
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Atentamente,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Equipo de Auditoría y Consultoría Corporativa • AuditFlow AI</p>
