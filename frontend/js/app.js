@@ -14,6 +14,28 @@ window.AppHandler = {
         this.setupDragAndDrop();
         this.setupFormListeners();
         this.checkUrlForPaymentSuccess();
+        this.trackInboundLead();
+    },
+
+    trackInboundLead() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const ref = params.get('ref') || params.get('utm_source') || '';
+            const lead = params.get('lead') || params.get('email') || '';
+            const isWaalaxyOrOutbound = ref.includes('waalaxy') || ref.includes('linkedin') || ref.includes('outreach') || ref.includes('lead_offer') || ref.includes('batch_offer');
+
+            if (isWaalaxyOrOutbound || lead) {
+                fetch('/api/track-open', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: lead || 'lead_linkedin_waalaxy@prospecto.com',
+                        source: ref || 'waalaxy_visit',
+                        touch: params.get('touch') || 'web_visit'
+                    })
+                }).catch(() => {});
+            }
+        } catch(e) {}
     },
 
     setupDragAndDrop() {

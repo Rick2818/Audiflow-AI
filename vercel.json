@@ -77,6 +77,10 @@
       "destination": "/frontend/terms.html"
     },
     {
+      "source": "/verificar",
+      "destination": "/frontend/verificar.html"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },

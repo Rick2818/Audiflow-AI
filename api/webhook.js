@@ -47,14 +47,27 @@ export default async function handler(req, res) {
       const customerEmail = session.customer_details?.email || session.customer_email || session.email;
       const amountTotal = (session.amount_total ? session.amount_total / 100 : 19.00).toFixed(2);
 
-      if (reportId && supabase) {
+      if (supabase) {
         try {
+          if (reportId) {
+            await supabase
+              .from('audit_reports')
+              .update({ status: 'unlocked', updated_at: new Date().toISOString() })
+              .eq('id', reportId);
+          }
+
           await supabase
-            .from('audit_reports')
-            .update({ status: 'unlocked', updated_at: new Date().toISOString() })
-            .eq('id', reportId);
+            .from('transactions')
+            .insert([{
+              id: session.id || `tx_${Date.now()}`,
+              provider: session.subscription ? 'stripe_subscription' : 'stripe',
+              amount_usd: parseFloat(amountTotal),
+              customer_email: customerEmail || 'cliente@empresa.com',
+              status: 'paid',
+              created_at: new Date().toISOString()
+            }]);
         } catch (sErr) {
-          console.warn('Supabase unlock notice:', sErr.message);
+          console.warn('Supabase webhook record notice:', sErr.message);
         }
       }
 

@@ -79,3 +79,21 @@ El panel categoriza automáticamente a los prospectos según su volumen de fuga 
 * **Botón «🔄 Actualizar»:** Refresca las métricas directamente desde Supabase y la memoria del servidor.
 * **Comprobación de Conectividad SMTP / Resend:** Botón para enviar un correo de prueba y validar que las credenciales de correo se encuentren 100% operativas.
 * **Protección WAF y Firewall:** Monitoreo pasivo de peticiones bloqueadas por rate limit o payloads maliciosos.
+
+---
+
+## 📬 8. MANDATO UNIVERSAL: COPIA Y CONTROL DE DESPACHOS AL PROPIETARIO
+
+**Regla Inviolable de Operatividad:**
+Siempre que el módulo de administración (`/admin`) o cualquier servicio del backend ejecute un envío de correo electrónico —ya sea:
+1. Oferta individual a un lead (`🚀 Enviar Oferta` o `📩 Re-enviar`).
+2. Despacho masivo a prospectos filtrados (`🚀 Despachar Ofertas a Leads Filtrados`).
+3. Campaña de prospección B2B (`🚀 Disparar Campaña B2B Real`).
+4. Secuencia de recuperación de leads (`/api/lead-recovery`).
+5. Notificación post-pago de venta desbloqueada (`/api/webhook`).
+6. Prueba de conectividad SMTP (`⚡ Probar Conexión Gmail SMTP`).
+
+**Acción Obligatoria del Sistema:**
+* El sistema **DEBE SIEMPRE** enviar de forma automática e inmediata una **Copia de Control** detallada a la bandeja del propietario: **`rick28191@gmail.com`**.
+* Utiliza como canal seguro el transporte autenticado de **Gmail SMTP** con reintento garantizado y cero desvíos a sandboxes de prueba.
+

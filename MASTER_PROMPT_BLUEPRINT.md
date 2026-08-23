@@ -329,3 +329,11 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
    - La interfaz pública debe incluir un toast dinámico no invasivo cada 14-25 segundos que exhiba actividad real o simulada de auditorías realizadas en diversos países (ej. *«⚡ Empresa en San Salvador auditó contrato de arrendamiento — Fuga prevenida: \$18,500 USD»*).
 2. **Respeto a la Privacidad:**
    - Las notificaciones deben operar de forma anónima y agregada, reforzando la percepción de autoridad institucional y volumen de operaciones sin exponer datos sensibles de clientes.
+
+---
+
+## 📬 21. MANDATO UNIVERSAL: COPIA Y CONTROL DE DESPACHOS AL PROPIETARIO (`rick28191@gmail.com`)
+
+**Regla Inviolable:**
+Siempre que el módulo de administración (`/admin`), los crons de recuperación (`/api/lead-recovery`), las campañas outbound (`/api/outreach`), las ofertas individuales/masivas o las notificaciones de ventas por webhook procesen un envío de correo electrónico, el backend **DEBE OBLIGATORIAMENTE** despachar una **Copia de Control** transparente a **`rick28191@gmail.com`** mediante transporte autenticado de Gmail SMTP / Resend, garantizando total visibilidad en tiempo real al propietario del sistema sobre cada acción ejecutada.
+

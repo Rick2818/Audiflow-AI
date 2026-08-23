@@ -11,10 +11,12 @@ CREATE TABLE IF NOT EXISTS public.audit_leads (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255) NOT NULL,
     email VARCHAR(255) NOT NULL,
+    role VARCHAR(100) DEFAULT 'CFO / Controller',
     lead_score INT NOT NULL DEFAULT 0 CHECK (lead_score BETWEEN 0 AND 100),
     company_estimate VARCHAR(100) DEFAULT 'Desconocido',
     document_type VARCHAR(100) NOT NULL,
     is_enterprise BOOLEAN DEFAULT FALSE,
+    emails_sent INT DEFAULT 0,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );

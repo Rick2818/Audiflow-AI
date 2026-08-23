@@ -14,7 +14,9 @@ export default async function handler(req, res) {
       'https://audiflowai.com/',
       'https://audiflowai.com/auditar-contrato-arrendamiento',
       'https://audiflowai.com/auditar-factura-proveedor',
-      'https://audiflowai.com/auditar-contrato-servicios-it'
+      'https://audiflowai.com/auditar-contrato-servicios-it',
+      'https://audiflowai.com/privacy',
+      'https://audiflowai.com/terms'
     ];
 
     const response = await fetch('https://api.indexnow.org/indexnow', {
