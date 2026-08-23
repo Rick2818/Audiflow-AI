@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 
-// 14 PAÍSES OBJETIVO OFICIALES CON DIVISIÓN EQUITATIVA
+// 14 PAÍSES OBJETIVO OFICIALES CON MAPEO RIGUROSO DE IDIOMA
 const targetCountries = [
   { name: 'El Salvador', lang: 'es', dom: 'sv' },
   { name: 'Guatemala', lang: 'es', dom: 'gt' },
@@ -10,13 +10,13 @@ const targetCountries = [
   { name: 'México', lang: 'es', dom: 'mx' },
   { name: 'Estados Unidos', lang: 'en', dom: 'us' },
   { name: 'Inglaterra', lang: 'en', dom: 'co.uk' },
-  { name: 'Suiza', lang: 'de', dom: 'ch' },
-  { name: 'Alemania', lang: 'de', dom: 'de' },
-  { name: 'Francia', lang: 'en', dom: 'fr' },
-  { name: 'Luxemburgo', lang: 'en', dom: 'lu' },
   { name: 'Dinamarca', lang: 'en', dom: 'dk' },
   { name: 'Noruega', lang: 'en', dom: 'no' },
-  { name: 'Finlandia', lang: 'en', dom: 'fi' }
+  { name: 'Finlandia', lang: 'en', dom: 'fi' },
+  { name: 'Suiza', lang: 'de', dom: 'ch' },
+  { name: 'Alemania', lang: 'de', dom: 'de' },
+  { name: 'Francia', lang: 'fr', dom: 'fr' },
+  { name: 'Luxemburgo', lang: 'fr', dom: 'lu' }
 ];
 
 const firstNamesLatam = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Andrés', 'Valeria', 'Rodrigo', 'Daniela', 'Gonzalo', 'Natalia', 'Esteban', 'Felipe', 'Catalina', 'Mauricio', 'Lorena', 'Santiago', 'Adriana', 'Ignacio', 'Paula', 'Ricardo', 'Guillermo', 'Alfonso', 'Claudio', 'Beatriz', 'Raquel', 'Manuel', 'Pablo', 'Joaquín'];
@@ -134,6 +134,29 @@ export function generateOutreachProspects(batch = 'pareto_top20') {
   return allLeads.filter(l => l.pareto_tier === 'TOP_20');
 }
 
+export function resolveLeadLanguage(lang, country = '', email = '') {
+  const c = (country || '').toLowerCase().trim();
+  const e = (email || '').toLowerCase().trim();
+
+  // 1. Francés (Francia, Luxemburgo, dominios .fr / .lu)
+  if (lang === 'fr' || c.includes('francia') || c.includes('france') || c.includes('luxemburg') || c.includes('luxembourg') || e.endsWith('.fr') || e.endsWith('.lu')) {
+    return 'fr';
+  }
+
+  // 2. Alemán (Alemania, Suiza, Austria, dominios .de / .ch / .at)
+  if (lang === 'de' || c.includes('alemania') || c.includes('germany') || c.includes('deutschland') || c.includes('suiza') || c.includes('switzerland') || c.includes('schweiz') || c.includes('austria') || c.includes('österreich') || e.endsWith('.de') || e.endsWith('.ch') || e.endsWith('.at')) {
+    return 'de';
+  }
+
+  // 3. Español (El Salvador, Guatemala, Costa Rica, Panamá, México, España, dominios .sv / .gt / .cr / .pa / .mx / .es)
+  if (lang === 'es' || c.includes('salvador') || c.includes('guatemala') || c.includes('costa rica') || c.includes('panam') || c.includes('méxico') || c.includes('mexico') || c.includes('españa') || c.includes('spain') || c.includes('colombia') || c.includes('chile') || c.includes('perú') || c.includes('peru') || e.endsWith('.sv') || e.endsWith('.gt') || e.endsWith('.cr') || e.endsWith('.pa') || e.endsWith('.mx') || e.endsWith('.es')) {
+    return 'es';
+  }
+
+  // 4. Inglés (EE.UU., Inglaterra, Dinamarca, Noruega, Finlandia y default global)
+  return 'en';
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
@@ -208,13 +231,11 @@ export default async function handler(req, res) {
       const { name = 'Ejecutivo', company = 'Empresa B2B', role = 'Director Financiero', email, country = 'El Salvador', lang, category = 'CFO' } = p;
       if (!email || !email.includes('@')) continue;
 
-      const germanCountries = ['alemania', 'germany', 'deutschland', 'de', 'austria', 'österreich', 'at', 'suiza', 'switzerland', 'schweiz', 'ch', 'liechtenstein', 'li'];
-      const englishCountries = ['estados unidos', 'eeuu', 'ee.uu.', 'united states', 'us', 'usa', 'inglaterra', 'uk', 'united kingdom', 'england', 'dinamarca', 'denmark', 'dk', 'noruega', 'norway', 'no', 'suecia', 'sweden', 'se', 'finlandia', 'finland', 'fi', 'francia', 'france', 'fr', 'luxemburgo', 'luxembourg', 'lu', 'países bajos', 'netherlands', 'nl'];
-
-      const isDe = lang === 'de' || germanCountries.some(c => (country || '').toLowerCase().includes(c)) || (email || '').endsWith('.de') || (email || '').endsWith('.at') || (email || '').endsWith('.ch');
-      const isEn = !isDe && (lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c)));
-
-      const isFr = !isDe && !isEn && (lang === 'fr' || (country || '').toLowerCase().includes('francia') || (country || '').toLowerCase().includes('france') || (email || '').endsWith('.fr'));
+      const targetLang = resolveLeadLanguage(lang, country, email);
+      const isDe = (targetLang === 'de');
+      const isFr = (targetLang === 'fr');
+      const isEn = (targetLang === 'en');
+      const isEs = (targetLang === 'es');
 
       const isParetoVip = (batch === 'pareto_top20' || p.pareto_tier === 'TOP_20' || p.campaign === 'pareto_vip_benefits_consequences');
 
@@ -396,6 +417,30 @@ export default async function handler(req, res) {
                 <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Mit freundlichen Grüßen,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Team für Unternehmensprüfung &amp; Compliance</p>
                 <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — B2B-Rechts- und Finanzinfrastruktur</p>
+              </div>
+            </div>`;
+        } else if (isFr) {
+          subject = `🎁 Audit préventif gratuit de contrats et factures pour ${company}`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Audit B2B &amp; Protection Juridique (${country})</h2>
+              <p>Madame, Monsieur <strong>${name}</strong> (${role} chez <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                <strong>AuditFlow AI</strong> est un cabinet technologique spécialisé dans l'audit et la sécurisation des contrats d'entreprise pour directions financières et juridiques.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Notre infrastructure d'IA analyse les contrats fournisseurs, accords IT et factures en <strong>moins de 10 secondes</strong>, identifiant les clauses de surcoûts et pénalités de <strong>3 500 $ à 18 000 $ USD</strong> avant signature.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Nous sommes ravis d'offrir à <strong>${company}</strong> un <strong>audit de diagnostic 100% gratuit et confidentiel</strong> en mémoire RAM éphémère.
+              </p>
+              <p style="text-align: center; margin: 25px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_fr_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Démarrer l'Audit Gratuit pour ${company}</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Bien cordialement,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Équipe d'Audit &amp; Conformité</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infrastructure Juridique et Financière B2B</p>
               </div>
             </div>`;
         } else if (isEn) {
