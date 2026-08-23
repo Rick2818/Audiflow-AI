@@ -422,25 +422,38 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
 
 ---
 
-## 🎬 29. MOTOR DE VIDEO HYPERFRAMES (40s), AUDIO NEURONAL FEMENINO Y ESTRATEGIA SEM ORGÁNICA MULTILINGÜE
+## 🎬 29. MOTOR DE VIDEO HYPERFRAMES (40s), AUDIO NEURONAL FEMENINO DE ESTUDIO Y ESTRATEGIA SEM CUATRILINGÜE
 
-1. **Reproductor HyperFrames Ejecutivo de 34 Segundos (`frontend/video.html` - `/video`):**
-   - Estructurado en 4 actos fiduciarios: 01. ¿Qué es?, 02. ¿Para qué sirve?, 03. Consecuencias/Contras, 04. Beneficios & CTA Final.
-   - Pausa de respiración de 1.0 segundo entre actos gobernada por eventos (`audioPlayer.onended`) para garantizar una transición suave, profesional y no saturada.
-   - 12 archivos de audio neuronal MP3 de estudio en alta definición (`frontend/audio/`):
-     - 🇪🇸 Español: `Elvira Neural` (Voz femenina suave, elegante y ejecutiva).
-     - 🇺🇸 English: `Jenny Neural` (Voz femenina nativa y clara).
-     - 🇩🇪 Deutsch: `Katja Neural` (Voz femenina alemana profesional).
-   - Control de volumen/silencio, selección interactiva por acto y selector de 3 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE]`).
+1. **Reproductor HyperFrames Ejecutivo de 40 Segundos (`frontend/video.html` - `/video`):**
+   - Estructurado en 5 actos fiduciarios de alta conversión:
+     - **01. ¿Qué es AuditFlow AI?** (0s - 7s): Auditor fiduciario en memoria RAM efímera (cero retención en disco).
+     - **02. ¿Para qué sirve?** (8s - 14s): Detección de fugas de EBITDA de $3,500 a $18,500 USD en <8s.
+     - **03. Consecuencias de NO auditar** (15s - 22s): Ataduras forzosas de 36 meses y penalizaciones del 100%.
+     - **04. Beneficios Inmediatos** (23s - 31s): Contra-cláusulas blindadas en Word (.docx) listas para negociar.
+     - **05. Conoce audiflowai.com & Compra Inmediata ($19 USD)** (32s - 40s): Invitación directa con llamado a la acción y botones de compra.
+   - Pausa de respiración de 1.0 segundo entre actos gobernada por eventos (`audioPlayer.onended`) para una transición fluida y natural.
+   - **4 Voces Femeninas Neuronales de Estudio de Máxima Calidad:**
+     - 🇪🇸 **Español:** Dalia (`es-MX-DaliaNeural`) — Timbre dulce, envolvente y profesional (estilo ElevenLabs Bella).
+     - 🇺🇸 **English:** Ava (`en-US-AvaMultilingualNeural`) — Tono conversacional cautivador y de alta conversión.
+     - 🇩🇪 **Deutsch:** Seraphina (`de-DE-SeraphinaMultilingualNeural`) — Voz alemana refinada y ejecutiva.
+     - 🇫🇷 **Français:** Vivienne (`fr-FR-VivienneMultilingualNeural`) — Voz francesa clara y elegante.
+   - **Navegación Fluida hacia la App Web / Compra y Dashboard:**
+     - Botón superior Navbar: `🚀 Ir a la App Web / Comprar ($19)`.
+     - Botón flotante permanente en esquina inferior derecha: `🛒 Regresar a la App Web / Comprar ($19 USD) →`.
+     - Botones en barra de control: `📊 Dashboard` y `🚀 Ir a la App Web & Comprar ($19 USD) →`.
+     - Selector de 4 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]`) que traduce reactivamente cada botón, pestaña y texto.
 
-2. **Página de Captura SEM Orgánica Multilingüe (`frontend/alternativas-docusign.html` - `/alternativas-docusign`):**
+2. **Página de Captura SEM Orgánica Cuatrilingüe (`frontend/alternativas-docusign.html` - `/alternativas-docusign`):**
    - Intercepción de búsquedas de alto costo por clic (DocuSign CLM, Ironclad, software revisión contratos).
-   - Tabla comparativa de 5 factores clave (Tiempo, Coste, Privacidad RAM, Detección EBITDA, Redlines Word).
-   - Sección dedicada de 4 pilares: *"¿Por qué elegir AuditFlow AI frente a las alternativas tradicionales?"*.
-   - Soporte multilingüe completo en 4 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]`) con marcado estructurado `Schema.org/FAQPage` para Posición Cero en Google y Bing.
+   - Tabla comparativa de 5 factores fiduciarios y cuadrícula de 4 pilares ("¿Por qué elegir AuditFlow AI?").
+   - Soporte multilingüe completo en 4 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]`) con marcado estructurado `Schema.org/FAQPage` e indexación instantánea con protocolo IndexNow.
 
 3. **Protocolo Inviolable de Enrutamiento Dual de Correos:**
    - **`tendenciaaitufuturo@gmail.com`:** Receptor exclusivo de interacciones de usuarios, aperturas de emails, capturas de leads, auditorías shadow y reportes de crons.
    - **`rick28191@gmail.com`:** Única y exclusivamente reservado para notificaciones de **PAGOS Y COMPRAS CONFIRMADAS ($19, $69, $590 USD)**. Cero spam o logs operativos en esta bandeja.
 
-
+4. **Campaña Outreach Pareto VIP Programada (Lunes 7:00 AM El Salvador / 13:00 UTC):**
+   - Disparo automático en Vercel Cron (`0 13 * * 1`) a 400 directores financieros con los 2 entregables ejecutivos oficiales:
+     - 📄 1. Dossier Ejecutivo & Plantilla Word (.docx) de Contra-Cláusulas Blindadas.
+     - 🎬 2. Video Demostrativo HyperFrames de 40s con Voz Femenina de Estudio.
+   - Copia de control y reporte de despacho enviado a `tendenciaaitufuturo@gmail.com`.
