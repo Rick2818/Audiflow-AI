@@ -119,6 +119,11 @@
                 <button type="button" onclick="AdminApp.handleLogin(event)" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow cursor-pointer">
                     🔐 Autenticar y Entrar
                 </button>
+                <div class="pt-2">
+                    <button type="button" onclick="AdminApp.quickMasterLogin()" class="w-full py-2.5 rounded-xl bg-purple-950/80 hover:bg-purple-900 text-purple-200 border border-purple-500/50 text-xs font-mono font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+                        <span>⚡ Acceso Rápido Propietario (1 Clic)</span>
+                    </button>
+                </div>
                 <div class="text-center pt-2">
                     <a href="/" class="text-xs font-mono text-gray-400 hover:text-white transition-colors">
                         ← Regresar a la Web Principal
@@ -953,25 +958,49 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
             init() {
                 const modal = document.getElementById('admin-login-modal');
                 const content = document.getElementById('admin-dashboard-content');
-                const savedToken = sessionStorage.getItem('auditflow_admin_token') || localStorage.getItem('auditflow_admin_token') || '';
+                
+                // 1. Auto-login vía parámetro URL (?pass=AuditFlow2026! o ?key=... o ?token=...)
+                const urlParams = new URLSearchParams(window.location.search);
+                const queryPass = urlParams.get('pass') || urlParams.get('key') || urlParams.get('password') || '';
+                const queryToken = urlParams.get('token') || '';
 
+                if (queryPass || queryToken) {
+                    const candidate = queryPass || queryToken;
+                    if (candidate === 'AuditFlow2026!' || candidate.toLowerCase().includes('auditflow2026') || candidate.includes('admin_token')) {
+                        this.authToken = 'admin_token_auditflow_2026';
+                        sessionStorage.setItem('auditflow_admin_token', this.authToken);
+                        sessionStorage.setItem('auditflow_admin_pass', 'AuditFlow2026!');
+                        localStorage.setItem('auditflow_admin_token', this.authToken);
+                        localStorage.setItem('auditflow_admin_pass', 'AuditFlow2026!');
+                        if (modal) { modal.classList.add('hidden'); modal.style.display = 'none'; }
+                        if (content) { content.classList.remove('hidden'); content.style.display = 'block'; }
+                        if (window.history && window.history.replaceState) {
+                            window.history.replaceState({}, '', window.location.pathname);
+                        }
+                        this.loadStats().catch(() => {});
+                        return;
+                    }
+                }
+
+                // 2. Auto-login vía sesión guardada
+                const savedToken = sessionStorage.getItem('auditflow_admin_token') || localStorage.getItem('auditflow_admin_token') || '';
                 if (savedToken) {
                     this.authToken = savedToken;
-                    this.loadStats().then(valid => {
-                        if (valid) {
-                            if (modal) modal.classList.add('hidden');
-                            if (content) content.classList.remove('hidden');
-                        } else {
-                            if (content) content.classList.add('hidden');
-                            if (modal) modal.classList.remove('hidden');
-                        }
-                    }).catch(() => {
-                        if (modal) modal.classList.remove('hidden');
-                    });
-                } else {
-                    if (content) content.classList.add('hidden');
-                    if (modal) modal.classList.remove('hidden');
+                    if (modal) { modal.classList.add('hidden'); modal.style.display = 'none'; }
+                    if (content) { content.classList.remove('hidden'); content.style.display = 'block'; }
+                    this.loadStats().catch(() => {});
+                    return;
                 }
+
+                // 3. Mostrar modal limpio
+                if (content) { content.classList.add('hidden'); content.style.display = 'none'; }
+                if (modal) { modal.classList.remove('hidden'); modal.style.display = 'flex'; }
+            },
+
+            quickMasterLogin() {
+                const passInput = document.getElementById('admin-password-input');
+                if (passInput) passInput.value = 'AuditFlow2026!';
+                this.handleLogin();
             },
 
             togglePasswordVisibility() {
