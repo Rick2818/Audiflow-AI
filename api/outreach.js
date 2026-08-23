@@ -278,7 +278,8 @@ export default async function handler(req, res) {
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Mit kollegialen Grüßen,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Executive Audit Desk • AuditFlow AI</p>
-                <p style="margin: 2px 0 0 0;">Führungskräfte-Support: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a></p>
+                <p style="margin: 2px 0 0 0;">Unternehmenssitz: AuditFlow AI Corp. • Financial &amp; Legal Risk Intelligence • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Führungskräfte-Support: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         } else if (isFr) {
@@ -315,7 +316,8 @@ export default async function handler(req, res) {
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Bien cordialement,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Département d'Audit Exécutif • AuditFlow AI</p>
-                <p style="margin: 2px 0 0 0;">Contact: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a></p>
+                <p style="margin: 2px 0 0 0;">Siège Corporatif: AuditFlow AI Corp. • Financial &amp; Legal Risk Intelligence • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Support de Direction: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         } else if (isEn) {
@@ -352,7 +354,8 @@ export default async function handler(req, res) {
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Sincerely,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Executive Audit Desk • AuditFlow AI</p>
-                <p style="margin: 2px 0 0 0;">Corporate Contact: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a></p>
+                <p style="margin: 2px 0 0 0;">Corporate Headquarters: AuditFlow AI Corp. • Financial &amp; Legal Risk Intelligence • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Executive Desk: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         } else {
@@ -389,12 +392,12 @@ export default async function handler(req, res) {
               <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0;">Atentamente,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff;">Equipo de Auditoría y Consultoría Corporativa • AuditFlow AI</p>
+                <p style="margin: 2px 0 0 0;">Sede Corporativa: AuditFlow AI Corp. • Inteligencia de Riesgo Financiero y Legal • San Salvador, El Salvador &amp; Delaware, USA</p>
                 <p style="margin: 2px 0 0 0;">Mesa Ejecutiva: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         }
       } else {
-        // CAMPAÑA GENERAL ESTÁNDAR
         if (isDe) {
           subject = `🎁 Kostenlose präventive Vertragsprüfung für ${company}`;
           bodyHtml = `
@@ -413,10 +416,11 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose Prüfung für ${company} starten</a>
               </p>
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Mit freundlichen Grüßen,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Team für Unternehmensprüfung &amp; Compliance</p>
-                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — B2B-Rechts- und Finanzinfrastruktur</p>
+                <p style="margin: 2px 0 0 0;">Unternehmenssitz: AuditFlow AI Corp. • Financial &amp; Legal Risk Intelligence • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Kontakt: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         } else if (isFr) {
@@ -437,10 +441,11 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_fr_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Démarrer l'Audit Gratuit pour ${company}</a>
               </p>
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Bien cordialement,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Équipe d'Audit &amp; Conformité</p>
-                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infrastructure Juridique et Financière B2B</p>
+                <p style="margin: 2px 0 0 0;">Siège Corporatif: AuditFlow AI Corp. • Financial &amp; Legal Risk Intelligence • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Contact: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         } else if (isEn) {
@@ -461,10 +466,11 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Start Free Audit for ${company}</a>
               </p>
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Sincerely,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Corporate Audit &amp; Compliance Team</p>
-                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Global Legal &amp; Financial Infrastructure</p>
+                <p style="margin: 2px 0 0 0;">Corporate Headquarters: AuditFlow AI Corp. • Financial &amp; Legal Risk Intelligence • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Corporate Desk: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         } else {
@@ -485,10 +491,11 @@ export default async function handler(req, res) {
               <p style="text-align: center; margin: 25px 0;">
                 <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para ${company}</a>
               </p>
-              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
                 <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedamos a su entera disposición,</p>
                 <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Equipo de Auditoría &amp; Consultoría Corporativa</p>
-                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infraestructura B2B de Blindaje Legal</p>
+                <p style="margin: 2px 0 0 0;">Sede Corporativa: AuditFlow AI Corp. • Inteligencia de Riesgo Financiero y Legal • San Salvador, El Salvador &amp; Delaware, USA</p>
+                <p style="margin: 2px 0 0 0;">Mesa Ejecutiva: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
               </div>
             </div>`;
         }
