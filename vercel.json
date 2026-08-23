@@ -117,6 +117,10 @@
       "destination": "/api/lead-recovery"
     },
     {
+      "source": "/api/track-open",
+      "destination": "/api/admin"
+    },
+    {
       "source": "/api/admin/(.*)",
       "destination": "/api/admin"
     },

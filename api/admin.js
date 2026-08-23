@@ -2,7 +2,9 @@ import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
-import { openedLeadsMap } from './track-open.js';
+
+export const openedLeadsMap = new Map();
+const TRANSPARENT_GIF_BUFFER = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
 
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
@@ -180,6 +182,65 @@ export default async function handler(req, res) {
   let body = req.body || {};
   if (typeof body === 'string') {
     try { body = JSON.parse(body); } catch (e) { body = {}; }
+  }
+
+  // 0. Tracker de Aperturas y Visitas Waalaxy/LinkedIn (Píxel o POST)
+  if (req.url && (req.url.includes('track-open') || action === 'track_open')) {
+    try {
+      const parsedUrl = new URL(req.url || '', `http://${req.headers.host || 'localhost'}`);
+      const trackEmail = (parsedUrl.searchParams.get('email') || req.query?.email || body?.email || '').toLowerCase().trim();
+      const source = parsedUrl.searchParams.get('source') || req.query?.source || body?.source || 'email_open';
+      const companyParam = parsedUrl.searchParams.get('company') || req.query?.company || body?.company || 'Empresa B2B';
+
+      if (trackEmail && trackEmail.includes('@')) {
+        const existing = openedLeadsMap.get(trackEmail) || { count: 0, first_opened: new Date().toISOString() };
+        const newCount = existing.count + 1;
+        openedLeadsMap.set(trackEmail, {
+          count: newCount,
+          first_opened: existing.first_opened,
+          last_opened: new Date().toISOString(),
+          source,
+          company: companyParam
+        });
+
+        if (supabase) {
+          try {
+            await supabase.from('audit_leads').update({
+              email_opened: true,
+              opens_count: newCount,
+              opened_at: new Date().toISOString(),
+              updated_at: new Date().toISOString()
+            }).eq('email', trackEmail);
+          } catch (dbErr) {}
+        }
+
+        if (newCount === 1 || newCount === 3 || source.includes('waalaxy') || source.includes('linkedin')) {
+          const isWaalaxy = source.includes('waalaxy') || source.includes('linkedin');
+          const alertSubject = isWaalaxy 
+            ? `🚀 [Visita desde Waalaxy/LinkedIn] ${trackEmail} ingresó a la web`
+            : `👀 [Correo Abierto / Visto] ${trackEmail} abrió el correo #${newCount}`;
+          
+          sendGmailEmail({
+            to: 'rick28191@gmail.com',
+            subject: alertSubject,
+            html: `<div style="font-family:sans-serif;background:#0f172a;color:#fff;padding:20px;border-radius:10px;"><h3 style="color:#38bdf8;">${alertSubject}</h3><p>Prospecto: <strong>${trackEmail}</strong> (${companyParam})</p><p>Origen: <strong>${source}</strong> | Visto: <strong>${newCount} veces</strong></p></div>`
+          }).catch(() => {});
+        }
+      }
+
+      if (req.method === 'POST' || (req.headers.accept && req.headers.accept.includes('application/json'))) {
+        return res.status(200).json({ success: true, tracked: true, email: trackEmail });
+      }
+
+      res.setHeader('Content-Type', 'image/gif');
+      res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0');
+      res.setHeader('Pragma', 'no-cache');
+      res.setHeader('Expires', '0');
+      return res.status(200).send(TRANSPARENT_GIF_BUFFER);
+    } catch (tErr) {
+      res.setHeader('Content-Type', 'image/gif');
+      return res.status(200).send(TRANSPARENT_GIF_BUFFER);
+    }
   }
 
   const { action, email, name, role, company, document_name, custom_notes, prospects, test_mode = false } = body;
