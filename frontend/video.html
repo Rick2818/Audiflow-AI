@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es" class="dark">
 <head>
     <!-- Google tag (gtag.js) GA4 -->
@@ -65,12 +65,19 @@
                 </div>
                 <div class="flex flex-col">
                     <span class="font-bold text-white text-base tracking-tight group-hover:text-accent-blue transition-colors">AuditFlow <span class="text-accent-blue">AI</span></span>
-                    <span class="text-[10px] font-mono text-gray-400">Inteligencia de Riesgo Contractual</span>
+                    <span class="text-[10px] font-mono text-gray-400" id="nav-subtitle">Inteligencia de Riesgo Contractual</span>
                 </div>
             </a>
-            <div class="flex items-center gap-3">
-                <a href="/" class="text-xs font-mono px-3.5 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-accent-blue transition-all">
-                    ← Probar Scanner Gratis
+            
+            <!-- SELECTOR DE IDIOMAS (ES / EN / DE) -->
+            <div class="flex items-center gap-2">
+                <div class="flex items-center bg-dark-surface p-1 rounded-xl border border-dark-border text-xs font-mono">
+                    <button onclick="VideoPlayer.setLanguage('es')" id="lang-btn-es" class="px-2.5 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all">🇪🇸 ES</button>
+                    <button onclick="VideoPlayer.setLanguage('en')" id="lang-btn-en" class="px-2.5 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇺🇸 EN</button>
+                    <button onclick="VideoPlayer.setLanguage('de')" id="lang-btn-de" class="px-2.5 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇩🇪 DE</button>
+                </div>
+                <a href="/" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-accent-blue transition-all hidden sm:inline-block" id="nav-btn-home">
+                    ← Scanner
                 </a>
             </div>
         </div>
@@ -81,19 +88,19 @@
 
         <!-- HEADER DEL VIDEO -->
         <div class="text-center mb-6 max-w-2xl">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue font-mono text-xs font-bold mb-3">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue font-mono text-xs font-bold mb-3">
                 <span class="w-2 h-2 rounded-full bg-accent-blue animate-ping"></span>
-                <span>DEMOSTRACIÓN EJECUTIVA HIPER-FRAME • 30 SEGUNDOS</span>
+                <span id="badge-video-header">DEMOSTRACIÓN EJECUTIVA HIPER-FRAME • 32 SEGUNDOS</span>
             </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight">
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight" id="main-video-title">
                 ¿Qué es AuditFlow AI y cómo protege tu EBITDA?
             </h1>
-            <p class="text-gray-400 text-xs sm:text-sm mt-2 font-sans">
-                Explicación ejecutiva de 30 segundos con narración y desglose de 4 actos fiduciarios.
+            <p class="text-gray-400 text-xs sm:text-sm mt-2 font-sans" id="main-video-desc">
+                Explicación ejecutiva de 32 segundos con narración de voz suave y 4 actos fiduciarios.
             </p>
         </div>
 
-        <!-- REPRODUCTOR HYPERFRAMES DE 30 SEGUNDOS -->
+        <!-- REPRODUCTOR HYPERFRAMES DE 32 SEGUNDOS -->
         <div class="w-full bg-dark-card border-2 border-dark-border rounded-3xl p-4 sm:p-6 shadow-2xl relative overflow-hidden glow-blue" id="video-container">
             
             <!-- PANTALLA PRINCIPAL DE VISUALIZACIÓN DE FRAMES -->
@@ -102,14 +109,14 @@
                 <!-- WATERMARK TIMESTAMP & ACT -->
                 <div class="absolute top-4 left-4 z-30 flex items-center gap-2 font-mono text-xs px-3 py-1.5 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-gray-300">
                     <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                    <span id="timestamp-display">00:00 / 00:30</span>
+                    <span id="timestamp-display">00:00 / 00:32</span>
                     <span class="text-accent-blue font-bold ml-1" id="act-tag">ACTO 1: ¿QUÉ ES?</span>
                 </div>
 
                 <!-- BADGE SOC-2 & AUDIO CONTROLLER -->
                 <div class="absolute top-4 right-4 z-30 flex items-center gap-2">
-                    <button onclick="VideoPlayer.toggleVoice()" id="btn-voice-toggle" class="font-mono text-xs px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-gray-300 hover:text-white transition-all flex items-center gap-1">
-                        <span id="voice-icon">🔊</span> <span id="voice-text">Voz IA</span>
+                    <button onclick="VideoPlayer.toggleVoice()" id="btn-voice-toggle" class="font-mono text-xs px-3 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-pink-300 hover:text-white transition-all flex items-center gap-1.5 shadow-sm">
+                        <span id="voice-icon">🎙️</span> <span id="voice-text">Voz Femenina Suave</span>
                     </button>
                     <span class="font-mono text-[11px] px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-emerald-400 hidden sm:inline-block">
                         🔒 SOC-2 • RAM (0-Disco)
@@ -121,56 +128,56 @@
                     <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-accent-blue/15 border-2 border-accent-blue text-accent-blue flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-accent-blue/20 animate-pulse-glow">
                         ⚡
                     </div>
-                    <span class="text-xs font-mono text-accent-blue font-extrabold uppercase tracking-widest mb-1">01. ¿Qué es AuditFlow AI?</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight">
+                    <span class="text-xs font-mono text-accent-blue font-extrabold uppercase tracking-widest mb-1" id="act1-label">01. ¿Qué es AuditFlow AI?</span>
+                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act1-title">
                         El Primer Auditor de Contratos y Facturas B2B con IA Forense
                     </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed">
+                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act1-desc">
                         Analiza documentos legales y financieros en memoria RAM efímera en menos de <strong class="text-white">8 segundos</strong> con total confidencialidad.
                     </p>
                 </div>
 
-                <!-- ================= ACTO 2 (8s - 14s): ¿PARA QUÉ SIRVE? ================= -->
+                <!-- ================= ACTO 2 (8s - 15s): ¿PARA QUÉ SIRVE? ================= -->
                 <div id="frame-act-2" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
                     <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/15 border-2 border-amber-400 text-amber-400 flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-amber-500/20 animate-pulse-glow">
                         🔍
                     </div>
-                    <span class="text-xs font-mono text-amber-400 font-extrabold uppercase tracking-widest mb-1">02. ¿Para qué sirve?</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight">
+                    <span class="text-xs font-mono text-amber-400 font-extrabold uppercase tracking-widest mb-1" id="act2-label">02. ¿Para qué sirve?</span>
+                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act2-title">
                         Detecta Fugas de EBITDA de <span class="text-amber-400 font-mono">$3,500 a $18,500 USD</span>
                     </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed">
+                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act2-desc">
                         Identifica trampas de indexación de IPC, sobrecostos ocultos, doble facturación y renovaciones automáticas antes de firmar.
                     </p>
                 </div>
 
-                <!-- ================= ACTO 3 (15s - 22s): LOS CONTRAS DE NO AUDITAR ================= -->
+                <!-- ================= ACTO 3 (16s - 23s): LOS CONTRAS DE NO AUDITAR ================= -->
                 <div id="frame-act-3" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
                     <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-red-500/15 border-2 border-red-500 text-red-400 flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-red-500/20 animate-pulse-glow">
                         ⚠️
                     </div>
-                    <span class="text-xs font-mono text-red-400 font-extrabold uppercase tracking-widest mb-1">03. Consecuencias de NO Auditar</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight">
+                    <span class="text-xs font-mono text-red-400 font-extrabold uppercase tracking-widest mb-1" id="act3-label">03. Consecuencias de NO Auditar</span>
+                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act3-title">
                         Ataduras de 36 Meses y Penalizaciones del 100%
                     </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed">
+                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act3-desc">
                         Firmar sin revisión fiduciaria expone a tu empresa a contratos leoninos forzosos, disputas legales y gastos imprevistos.
                     </p>
                 </div>
 
-                <!-- ================= ACTO 4 (23s - 30s): BENEFICIOS & CTA ================= -->
+                <!-- ================= ACTO 4 (24s - 32s): BENEFICIOS & CTA (+2s EXTRA) ================= -->
                 <div id="frame-act-4" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
                     <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-500/15 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-emerald-500/20 animate-pulse-glow">
                         🏆
                     </div>
-                    <span class="text-xs font-mono text-emerald-400 font-extrabold uppercase tracking-widest mb-1">04. Beneficios Inmediatos</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight">
+                    <span class="text-xs font-mono text-emerald-400 font-extrabold uppercase tracking-widest mb-1" id="act4-label">04. Beneficios Inmediatos</span>
+                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act4-title">
                         Contra-Cláusulas en Word (.docx) Listas para Negociar
                     </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed">
+                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act4-desc">
                         Cumplimiento PCAOB / US GAAP / NIIF 16. Descarga tu informe y redlines de inmediato.
                     </p>
-                    <a href="/#scanner-section" class="mt-5 px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-black font-extrabold text-xs sm:text-sm shadow-lg hover:scale-105 transition-all">
+                    <a href="/#scanner-section" class="mt-5 px-8 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 text-black font-extrabold text-xs sm:text-sm shadow-lg hover:scale-105 transition-all" id="act4-btn-cta">
                         ⚡ Auditar Mi Primer Contrato 100% Gratis →
                     </a>
                 </div>
@@ -180,7 +187,7 @@
                     <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-black flex items-center justify-center text-3xl sm:text-4xl pl-1 shadow-2xl group-hover:scale-110 transition-all">
                         ▶
                     </div>
-                    <span class="text-white font-mono text-xs sm:text-sm font-bold mt-4 tracking-wider">HACER CLIC PARA REPRODUCIR (30s)</span>
+                    <span class="text-white font-mono text-xs sm:text-sm font-bold mt-4 tracking-wider" id="play-overlay-text">HACER CLIC PARA REPRODUCIR (32s)</span>
                 </div>
             </div>
 
@@ -190,19 +197,19 @@
                     <div id="progress-fill" class="h-full bg-gradient-to-r from-accent-blue via-amber-400 via-red-500 to-emerald-400 w-0 transition-all duration-100"></div>
                 </div>
 
-                <!-- CONTROLES Y SEGMENTOS DE LOS 4 ACTOS -->
+                <!-- CONTROLES Y SEGMENTOS DE LOS 4 ACTOS (32s) -->
                 <div class="grid grid-cols-4 gap-2 mt-3 text-center text-[10px] sm:text-xs font-mono">
                     <button onclick="VideoPlayer.jumpTo(0)" id="btn-act-1" class="p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all">
                         01. ¿Qué es? (0-7s)
                     </button>
                     <button onclick="VideoPlayer.jumpTo(8)" id="btn-act-2" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        02. ¿Para qué sirve? (8-14s)
+                        02. ¿Para qué sirve? (8-15s)
                     </button>
-                    <button onclick="VideoPlayer.jumpTo(15)" id="btn-act-3" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        03. Consecuencias (15-22s)
+                    <button onclick="VideoPlayer.jumpTo(16)" id="btn-act-3" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
+                        03. Consecuencias (16-23s)
                     </button>
-                    <button onclick="VideoPlayer.jumpTo(23)" id="btn-act-4" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        04. Beneficios (23-30s)
+                    <button onclick="VideoPlayer.jumpTo(24)" id="btn-act-4" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
+                        04. Beneficios (24-32s)
                     </button>
                 </div>
 
@@ -213,13 +220,13 @@
                             <span id="play-icon">▶</span>
                             <span id="play-text">Reproducir</span>
                         </button>
-                        <button onclick="VideoPlayer.restart()" class="px-3 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-400 hover:text-white text-xs font-mono transition-all" title="Reiniciar">
+                        <button onclick="VideoPlayer.restart()" class="px-3 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-400 hover:text-white text-xs font-mono transition-all" title="Reiniciar" id="btn-restart-text">
                             🔄 Reiniciar
                         </button>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <a href="/" class="px-5 py-2.5 rounded-xl bg-accent-blue text-black font-extrabold text-xs font-mono shadow-md hover:scale-105 transition-all">
+                        <a href="/" class="px-5 py-2.5 rounded-xl bg-accent-blue text-black font-extrabold text-xs font-mono shadow-md hover:scale-105 transition-all" id="btn-quick-scan">
                             ⚡ Probar Scanner Ahora
                         </a>
                     </div>
@@ -230,26 +237,26 @@
         <!-- RESUMEN EN TABLA EJECUTIVA PARA DIRECTORES -->
         <div class="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
             <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-accent-blue text-lg font-bold mb-1">1. ¿Qué es?</div>
-                <p class="text-gray-400 text-xs leading-relaxed">
+                <div class="text-accent-blue text-lg font-bold mb-1" id="card1-title">1. ¿Qué es?</div>
+                <p class="text-gray-400 text-xs leading-relaxed" id="card1-desc">
                     Motor de inteligencia fiduciaria que audita contratos y facturas con IA Gemini 2.5 Flash en memoria volátil (cero almacenamiento en disco).
                 </p>
             </div>
             <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-amber-400 text-lg font-bold mb-1">2. ¿Para qué sirve?</div>
-                <p class="text-gray-400 text-xs leading-relaxed">
+                <div class="text-amber-400 text-lg font-bold mb-1" id="card2-title">2. ¿Para qué sirve?</div>
+                <p class="text-gray-400 text-xs leading-relaxed" id="card2-desc">
                     Evita fugas de EBITDA de $3,500 a $18,500 USD por contrato, detectando sobrecostos e indexaciones abusivas antes de firmar.
                 </p>
             </div>
             <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-red-400 text-lg font-bold mb-1">3. Los Contras</div>
-                <p class="text-gray-400 text-xs leading-relaxed">
+                <div class="text-red-400 text-lg font-bold mb-1" id="card3-title">3. Los Contras</div>
+                <p class="text-gray-400 text-xs leading-relaxed" id="card3-desc">
                     No auditar resulta en ataduras de 36 meses, multas del 100% por terminación anticipada y costos ocultos acumulativos.
                 </p>
             </div>
             <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-emerald-400 text-lg font-bold mb-1">4. Beneficios</div>
-                <p class="text-gray-400 text-xs leading-relaxed">
+                <div class="text-emerald-400 text-lg font-bold mb-1" id="card4-title">4. Beneficios</div>
+                <p class="text-gray-400 text-xs leading-relaxed" id="card4-desc">
                     Entrega contra-cláusulas listas para firmar en Word (.docx), topes IPC (+3%) y cumplimiento fiduciario PCAOB / US GAAP / NIIF 16.
                 </p>
             </div>
@@ -262,55 +269,274 @@
         <p>AuditFlow AI Corp. • San Salvador, El Salvador &amp; Delaware, USA • soporte@audiflowai.com</p>
     </footer>
 
-    <!-- LÓGICA INTERACTIVA DEL REPRODUCTOR HYPERFRAMES (30s) -->
+    <!-- LÓGICA INTERACTIVA DEL REPRODUCTOR HYPERFRAMES (32s) & MULTILINGÜE -->
     <script>
+        const i18nData = {
+            es: {
+                subtitle: 'Inteligencia de Riesgo Contractual',
+                headerBadge: 'DEMOSTRACIÓN EJECUTIVA HIPER-FRAME • 32 SEGUNDOS',
+                mainTitle: '¿Qué es AuditFlow AI y cómo protege tu EBITDA?',
+                mainDesc: 'Explicación ejecutiva de 32 segundos con narración de voz suave y 4 actos fiduciarios.',
+                playOverlay: 'HACER CLIC PARA REPRODUCIR (32s)',
+                voiceBtn: 'Voz Femenina Suave',
+                voiceMute: 'Mudo',
+                playBtn: 'Reproducir',
+                pauseBtn: 'Pausar',
+                restartBtn: '🔄 Reiniciar',
+                quickScan: '⚡ Probar Scanner Ahora',
+                homeBtn: '← Scanner',
+                actNames: ['ACTO 1: ¿QUÉ ES?', 'ACTO 2: ¿PARA QUÉ SIRVE?', 'ACTO 3: CONSECUENCIAS', 'ACTO 4: BENEFICIOS'],
+                actBtns: ['01. ¿Qué es? (0-7s)', '02. ¿Para qué sirve? (8-15s)', '03. Consecuencias (16-23s)', '04. Beneficios (24-32s)'],
+                act1: {
+                    label: '01. ¿Qué es AuditFlow AI?',
+                    title: 'El Primer Auditor de Contratos y Facturas B2B con IA Forense',
+                    desc: 'Analiza documentos legales y financieros en memoria RAM efímera en menos de <strong class="text-white">8 segundos</strong> con total confidencialidad.'
+                },
+                act2: {
+                    label: '02. ¿Para qué sirve?',
+                    title: 'Detecta Fugas de EBITDA de <span class="text-amber-400 font-mono">$3,500 a $18,500 USD</span>',
+                    desc: 'Identifica trampas de indexación de IPC, sobrecostos ocultos, doble facturación y renovaciones automáticas antes de firmar.'
+                },
+                act3: {
+                    label: '03. Consecuencias de NO Auditar',
+                    title: 'Ataduras de 36 Meses y Penalizaciones del 100%',
+                    desc: 'Firmar sin revisión fiduciaria expone a tu empresa a contratos leoninos forzosos, disputas legales y gastos imprevistos.'
+                },
+                act4: {
+                    label: '04. Beneficios Inmediatos',
+                    title: 'Contra-Cláusulas en Word (.docx) Listas para Negociar',
+                    desc: 'Cumplimiento PCAOB / US GAAP / NIIF 16. Descarga tu informe y redlines de inmediato.',
+                    cta: '⚡ Auditar Mi Primer Contrato 100% Gratis →'
+                },
+                cards: [
+                    { title: '1. ¿Qué es?', desc: 'Motor de inteligencia fiduciaria que audita contratos y facturas con IA Gemini 2.5 Flash en memoria volátil (cero almacenamiento en disco).' },
+                    { title: '2. ¿Para qué sirve?', desc: 'Evita fugas de EBITDA de $3,500 a $18,500 USD por contrato, detectando sobrecostos e indexaciones abusivas antes de firmar.' },
+                    { title: '3. Los Contras', desc: 'No auditar resulta en ataduras de 36 meses, multas del 100% por terminación anticipada y costos ocultos acumulativos.' },
+                    { title: '4. Beneficios', desc: 'Entrega contra-cláusulas listas para firmar en Word (.docx), topes IPC (+3%) y cumplimiento fiduciario PCAOB / US GAAP / NIIF 16.' }
+                ],
+                narrations: [
+                    "¿Qué es AuditFlow AI? Es el primer auditor de contratos y facturas B2B con inteligencia artificial forense en memoria volátil.",
+                    "¿Para qué sirve? Detecta fugas invisibles de EBITDA de 3 mil 500 a 18 mil 500 dólares por contrato en menos de 8 segundos.",
+                    "Consecuencias de no auditar. Expones a tu empresa a ataduras forzosas de 36 meses y penalizaciones del 100 por ciento.",
+                    "Beneficios inmediatos. Recibe contra cláusulas blindadas listas para firmar en Word con diagnóstico 100 por ciento gratis."
+                ],
+                voiceLang: 'es-ES'
+            },
+            en: {
+                subtitle: 'Contract & Legal Risk Intelligence',
+                headerBadge: 'EXECUTIVE HYPER-FRAME DEMO • 32 SECONDS',
+                mainTitle: 'What is AuditFlow AI and how does it safeguard your EBITDA?',
+                mainDesc: '32-second executive walkthrough with gentle AI female narration across 4 fiduciary acts.',
+                playOverlay: 'CLICK TO PLAY (32s)',
+                voiceBtn: 'Soft Female AI Voice',
+                voiceMute: 'Mute',
+                playBtn: 'Play',
+                pauseBtn: 'Pause',
+                restartBtn: '🔄 Restart',
+                quickScan: '⚡ Launch Scanner Now',
+                homeBtn: '← Scanner',
+                actNames: ['ACT 1: WHAT IS IT?', 'ACT 2: WHAT DOES IT DO?', 'ACT 3: CONSEQUENCES', 'ACT 4: BENEFITS'],
+                actBtns: ['01. What is it? (0-7s)', '02. What does it do? (8-15s)', '03. Consequences (16-23s)', '04. Benefits (24-32s)'],
+                act1: {
+                    label: '01. What is AuditFlow AI?',
+                    title: 'The First B2B Contract & Invoice Auditor Powered by Forensic AI',
+                    desc: 'Analyzes legal and vendor agreements in ephemeral volatile RAM in under <strong class="text-white">8 seconds</strong> with zero disk retention.'
+                },
+                act2: {
+                    label: '02. What does it do?',
+                    title: 'Detects EBITDA Leakages of <span class="text-amber-400 font-mono">$3,500 to $18,500 USD</span>',
+                    desc: 'Pinpoints CPI gouging traps, hidden vendor surcharges, double billing, and auto-renewals before you sign.'
+                },
+                act3: {
+                    label: '03. Consequences of Unshielded Agreements',
+                    title: '36-Month Lock-Ins and 100% Termination Penalties',
+                    desc: 'Signing without fiduciary audit exposes your organization to mandatory lock-ins, legal disputes, and unforecasted costs.'
+                },
+                act4: {
+                    label: '04. Immediate Benefits',
+                    title: 'Shielded Counter-Clauses in Word (.docx) Ready to Sign',
+                    desc: 'Full PCAOB / US GAAP / IFRS 16 compliance. Download your executive report and redlines instantly.',
+                    cta: '⚡ Run My First Free Audit in 8s →'
+                },
+                cards: [
+                    { title: '1. What is it?', desc: 'Fiduciary AI intelligence engine auditing contracts & invoices in volatile RAM with zero persistent disk storage.' },
+                    { title: '2. What does it do?', desc: 'Prevents EBITDA leakages of $3,500 to $18,500 USD per contract, uncovering aggressive fee indexations.' },
+                    { title: '3. The Pitfalls', desc: 'Failing to audit causes 36-month lock-ins, 100% termination fees, and recurring vendor overcharges.' },
+                    { title: '4. Key Benefits', desc: 'Delivers negotiation-ready Word .docx redlines, +3% CPI caps, and PCAOB / US GAAP compliance.' }
+                ],
+                narrations: [
+                    "What is AuditFlow AI? It is the first B2B contract and invoice auditor powered by forensic AI in volatile RAM memory.",
+                    "What does it do? It detects invisible EBITDA leakages of 3,500 to 18,500 dollars per agreement in under 8 seconds.",
+                    "Consequences of unshielded agreements. Your company faces 36-month mandatory lock-ins and 100 percent termination penalties.",
+                    "Immediate benefits. Receive shielded counter-clauses in Word docx ready to sign with a 100 percent free audit."
+                ],
+                voiceLang: 'en-US'
+            },
+            de: {
+                subtitle: 'Intelligenz für Vertrags- & Finanzrisiken',
+                headerBadge: 'FÜHRUNGSKRÄFTE-DEMO HYPER-FRAME • 32 SEKUNDEN',
+                mainTitle: 'Was ist AuditFlow AI und wie schützt es Ihr EBITDA?',
+                mainDesc: '32-sekündige Führungskräfte-Erklärung mit sanfter KI-Stimme und 4 Prüfungsakten.',
+                playOverlay: 'ZUM ABSPIELEN KLICKEN (32s)',
+                voiceBtn: 'Sanfte KI-Stimme',
+                voiceMute: 'Stumm',
+                playBtn: 'Abspielen',
+                pauseBtn: 'Pause',
+                restartBtn: '🔄 Neustart',
+                quickScan: '⚡ Scanner Jetzt Starten',
+                homeBtn: '← Scanner',
+                actNames: ['AKT 1: WAS IST ES?', 'AKT 2: WOZU DIENT ES?', 'AKT 3: KONSEQUENZEN', 'AKT 4: VORTEILE'],
+                actBtns: ['01. Was ist es? (0-7s)', '02. Wozu dient es? (8-15s)', '03. Konsequenzen (16-23s)', '04. Vorteile (24-32s)'],
+                act1: {
+                    label: '01. Was ist AuditFlow AI?',
+                    title: 'Der erste B2B-Vertrags- und Rechnungsprüfer mit Forensischer KI',
+                    desc: 'Analysiert Verträge im flüchtigen RAM-Speicher in unter <strong class="text-white">8 Sekunden</strong> mit absoluter Vertraulichkeit (0-Festplatte).'
+                },
+                act2: {
+                    label: '02. Wozu dient es?',
+                    title: 'Erkennt EBITDA-Verluste von <span class="text-amber-400 font-mono">3.500 bis 18.500 USD</span>',
+                    desc: 'Identifiziert VPI-Indexierungsfallen, versteckte Aufpreise, Doppelabrechnungen und automatische Verlängerungen.'
+                },
+                act3: {
+                    label: '03. Risiken ungeprüfter Verträge',
+                    title: '36 Monate Zwangslaufzeit und 100% Kündigungsstrafen',
+                    desc: 'Das Unterzeichnen ohne fiduciäre Prüfung führt zu Knebelverträgen, Rechtsstreitigkeiten und unvorhergesehenen Kosten.'
+                },
+                act4: {
+                    label: '04. Sofortige Vorteile',
+                    title: 'Rechtssichere Gegenklauseln in Word (.docx) Sofort Unterschriftsbereit',
+                    desc: 'Konform mit PCAOB / US GAAP / IFRS 16. Laden Sie Ihren Bericht und Redlines sofort herunter.',
+                    cta: '⚡ Erste Vertragsprüfung 100% Kostenlos Starten →'
+                },
+                cards: [
+                    { title: '1. Was ist es?', desc: 'Fiduciäre KI-Engine zur Prüfung von Verträgen und Rechnungen im flüchtigen RAM ohne dauerhafte Speicherung.' },
+                    { title: '2. Wozu dient es?', desc: 'Verhindert EBITDA-Verluste von 3.500 bis 18.500 USD pro Vertrag und deckt unzulässige Preisklauseln auf.' },
+                    { title: '3. Die Risiken', desc: 'Ungeprüfte Verträge führen zu 36 Monaten Zwangslaufzeit und 100% vorzeitigen Kündigungsgebühren.' },
+                    { title: '4. Vorteile', desc: 'Liefert verhandlungsbereite Word .docx Gegenklauseln mit VPI-Deckel (+3%) und IFRS-Konformität.' }
+                ],
+                narrations: [
+                    "Was ist AuditFlow AI? Es ist der erste B2B-Vertrags- und Rechnungsprüfer mit forensischer KI im flüchtigen RAM-Speicher.",
+                    "Wofür dient es? Es erkennt versteckte EBITDA-Verluste von 3.500 bis 18.500 USD pro Vertrag in unter 8 Sekunden.",
+                    "Risiken ungeprüfter Verträge. Ihr Unternehmen droht eine 36-monatige Zwangslaufzeit und 100 Prozent Kündigungsstrafen.",
+                    "Sofortige Vorteile. Erhalten Sie rechtssichere Gegenklauseln in Word docx mit einer 100 Prozent kostenlosen Prüfung."
+                ],
+                voiceLang: 'de-DE'
+            }
+        };
+
         const VideoPlayer = {
-            duration: 30, // 30 Segundos
+            duration: 32, // 32s Totales (+2s al final)
             currentTime: 0,
             isPlaying: false,
             voiceEnabled: true,
+            currentLang: 'es',
             timer: null,
             lastActSpoken: -1,
+            cachedVoices: [],
 
-            narrations: [
-                "Acto uno: ¿Qué es AuditFlow AI? Es el primer auditor de contratos y facturas B2B con inteligencia artificial forense en memoria volátil.",
-                "Acto dos: ¿Para qué sirve? Detecta fugas invisibles de EBITDA de 3 mil 500 a 18 mil 500 dólares por contrato en menos de 8 segundos.",
-                "Acto tres: Consecuencias de no auditar. Expones a tu empresa a ataduras forzosas de 36 meses y penalizaciones del 100 por ciento.",
-                "Acto cuatro: Beneficios inmediatos. Recibe contra cláusulas blindadas listas para firmar en Word con diagnóstico 100 por ciento gratis."
-            ],
+            init() {
+                const params = new URLSearchParams(window.location.search);
+                const urlLang = params.get('lang');
+                if (urlLang && (urlLang === 'en' || urlLang === 'de' || urlLang === 'es')) {
+                    this.currentLang = urlLang;
+                }
 
-            elements: {
-                timestamp: document.getElementById('timestamp-display'),
-                actTag: document.getElementById('act-tag'),
-                progressFill: document.getElementById('progress-fill'),
-                playOverlay: document.getElementById('play-overlay'),
-                playIcon: document.getElementById('play-icon'),
-                playText: document.getElementById('play-text'),
-                voiceIcon: document.getElementById('voice-icon'),
-                voiceText: document.getElementById('voice-text'),
-                acts: [
-                    document.getElementById('frame-act-1'),
-                    document.getElementById('frame-act-2'),
-                    document.getElementById('frame-act-3'),
-                    document.getElementById('frame-act-4')
-                ],
-                btnActs: [
-                    document.getElementById('btn-act-1'),
-                    document.getElementById('btn-act-2'),
-                    document.getElementById('btn-act-3'),
-                    document.getElementById('btn-act-4')
-                ]
+                if (window.speechSynthesis) {
+                    window.speechSynthesis.onvoiceschanged = () => {
+                        this.cachedVoices = window.speechSynthesis.getVoices();
+                    };
+                    this.cachedVoices = window.speechSynthesis.getVoices();
+                }
+
+                this.applyLanguage(this.currentLang);
+                this.render();
+            },
+
+            setLanguage(lang) {
+                if (!i18nData[lang]) return;
+                this.currentLang = lang;
+                this.lastActSpoken = -1;
+                this.applyLanguage(lang);
+                if (this.isPlaying) {
+                    const currentActIdx = this.getActIndex(this.currentTime);
+                    this.speakAct(currentActIdx);
+                }
+            },
+
+            applyLanguage(lang) {
+                const d = i18nData[lang];
+                document.getElementById('nav-subtitle').innerText = d.subtitle;
+                document.getElementById('badge-video-header').innerText = d.headerBadge;
+                document.getElementById('main-video-title').innerText = d.mainTitle;
+                document.getElementById('main-video-desc').innerText = d.mainDesc;
+                document.getElementById('play-overlay-text').innerText = d.playOverlay;
+                document.getElementById('voice-text').innerText = this.voiceEnabled ? d.voiceBtn : d.voiceMute;
+                document.getElementById('play-text').innerText = this.isPlaying ? d.pauseBtn : d.playBtn;
+                document.getElementById('btn-restart-text').innerText = d.restartBtn;
+                document.getElementById('btn-quick-scan').innerText = d.quickScan;
+                document.getElementById('nav-btn-home').innerText = d.homeBtn;
+
+                document.getElementById('act1-label').innerText = d.act1.label;
+                document.getElementById('act1-title').innerHTML = d.act1.title;
+                document.getElementById('act1-desc').innerHTML = d.act1.desc;
+
+                document.getElementById('act2-label').innerText = d.act2.label;
+                document.getElementById('act2-title').innerHTML = d.act2.title;
+                document.getElementById('act2-desc').innerHTML = d.act2.desc;
+
+                document.getElementById('act3-label').innerText = d.act3.label;
+                document.getElementById('act3-title').innerHTML = d.act3.title;
+                document.getElementById('act3-desc').innerHTML = d.act3.desc;
+
+                document.getElementById('act4-label').innerText = d.act4.label;
+                document.getElementById('act4-title').innerHTML = d.act4.title;
+                document.getElementById('act4-desc').innerHTML = d.act4.desc;
+                document.getElementById('act4-btn-cta').innerText = d.act4.cta;
+
+                d.actBtns.forEach((name, idx) => {
+                    const btn = document.getElementById(`btn-act-${idx + 1}`);
+                    if (btn) btn.innerText = name;
+                });
+
+                d.cards.forEach((c, idx) => {
+                    const t = document.getElementById(`card${idx + 1}-title`);
+                    const desc = document.getElementById(`card${idx + 1}-desc`);
+                    if (t) t.innerText = c.title;
+                    if (desc) desc.innerText = c.desc;
+                });
+
+                ['es', 'en', 'de'].forEach(l => {
+                    const b = document.getElementById(`lang-btn-${l}`);
+                    if (l === lang) {
+                        b.className = 'px-2.5 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all';
+                    } else {
+                        b.className = 'px-2.5 py-1 rounded-lg text-gray-300 hover:text-white transition-all';
+                    }
+                });
+            },
+
+            getFemaleVoice(langCode) {
+                if (!window.speechSynthesis) return null;
+                const voices = this.cachedVoices.length ? this.cachedVoices : window.speechSynthesis.getVoices();
+                let matching = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(langCode.substring(0, 2)));
+                const femaleKeywords = ['sabina', 'helena', 'monica', 'paulina', 'lucia', 'elvira', 'victoria', 'samantha', 'zira', 'karen', 'hedda', 'marlene', 'katja', 'vicki', 'female', 'natural', 'google', 'microsoft'];
+                for (const kw of femaleKeywords) {
+                    const found = matching.find(v => v.name.toLowerCase().includes(kw));
+                    if (found) return found;
+                }
+                return matching[0] || null;
             },
 
             toggleVoice() {
                 this.voiceEnabled = !this.voiceEnabled;
+                const d = i18nData[this.currentLang];
                 if (!this.voiceEnabled) {
                     if (window.speechSynthesis) window.speechSynthesis.cancel();
-                    this.elements.voiceIcon.innerText = '🔇';
-                    this.elements.voiceText.innerText = 'Mudo';
+                    document.getElementById('voice-icon').innerText = '🔇';
+                    document.getElementById('voice-text').innerText = d.voiceMute;
                 } else {
-                    this.elements.voiceIcon.innerText = '🔊';
-                    this.elements.voiceText.innerText = 'Voz IA';
+                    document.getElementById('voice-icon').innerText = '🎙️';
+                    document.getElementById('voice-text').innerText = d.voiceBtn;
                 }
             },
 
@@ -320,17 +546,36 @@
                 this.lastActSpoken = actIndex;
 
                 window.speechSynthesis.cancel();
-                const utter = new SpeechSynthesisUtterance(this.narrations[actIndex]);
-                utter.lang = 'es-ES';
-                utter.rate = 1.05;
+                const d = i18nData[this.currentLang];
+                const text = d.narrations[actIndex];
+                if (!text) return;
+
+                const utter = new SpeechSynthesisUtterance(text);
+                utter.lang = d.voiceLang;
+                utter.pitch = 1.15; // Tono suave y femenino
+                utter.rate = 0.98;  // Ritmo pausado y ejecutivo
+                utter.volume = 1.0;
+
+                const femaleVoice = this.getFemaleVoice(d.voiceLang);
+                if (femaleVoice) {
+                    utter.voice = femaleVoice;
+                }
+
                 window.speechSynthesis.speak(utter);
+            },
+
+            getActIndex(time) {
+                if (time < 8) return 0;
+                if (time < 16) return 1;
+                if (time < 24) return 2;
+                return 3;
             },
 
             play() {
                 this.isPlaying = true;
-                this.elements.playOverlay.classList.add('hidden');
-                this.elements.playIcon.innerText = '⏸';
-                this.elements.playText.innerText = 'Pausar';
+                document.getElementById('play-overlay').classList.add('hidden');
+                document.getElementById('play-icon').innerText = '⏸';
+                document.getElementById('play-text').innerText = i18nData[this.currentLang].pauseBtn;
 
                 if (this.currentTime >= this.duration) {
                     this.currentTime = 0;
@@ -352,8 +597,8 @@
                 this.isPlaying = false;
                 clearInterval(this.timer);
                 if (window.speechSynthesis) window.speechSynthesis.cancel();
-                this.elements.playIcon.innerText = '▶';
-                this.elements.playText.innerText = 'Reproducir';
+                document.getElementById('play-icon').innerText = '▶';
+                document.getElementById('play-text').innerText = i18nData[this.currentLang].playBtn;
             },
 
             togglePlay() {
@@ -392,37 +637,37 @@
             render() {
                 const currentSec = Math.floor(this.currentTime);
                 const displaySec = currentSec < 10 ? `0${currentSec}` : `${currentSec}`;
-                this.elements.timestamp.innerText = `00:${displaySec} / 00:30`;
+                document.getElementById('timestamp-display').innerText = `00:${displaySec} / 00:32`;
 
                 const progressPct = (this.currentTime / this.duration) * 100;
-                this.elements.progressFill.style.width = `${progressPct}%`;
+                document.getElementById('progress-fill').style.width = `${progressPct}%`;
 
-                // Determinar el Acto Activo en 30s
-                let activeActIndex = 0;
-                if (this.currentTime < 8) {
-                    activeActIndex = 0; // 0s - 7.9s
-                    this.elements.actTag.innerText = 'ACTO 1: ¿QUÉ ES?';
-                    this.elements.actTag.className = 'text-accent-blue font-bold ml-1';
-                } else if (this.currentTime < 15) {
-                    activeActIndex = 1; // 8s - 14.9s
-                    this.elements.actTag.innerText = 'ACTO 2: ¿PARA QUÉ SIRVE?';
-                    this.elements.actTag.className = 'text-amber-400 font-bold ml-1';
-                } else if (this.currentTime < 23) {
-                    activeActIndex = 2; // 15s - 22.9s
-                    this.elements.actTag.innerText = 'ACTO 3: CONSECUENCIAS';
-                    this.elements.actTag.className = 'text-red-400 font-bold ml-1';
-                } else {
-                    activeActIndex = 3; // 23s - 30s
-                    this.elements.actTag.innerText = 'ACTO 4: BENEFICIOS';
-                    this.elements.actTag.className = 'text-emerald-400 font-bold ml-1';
-                }
+                const activeActIndex = this.getActIndex(this.currentTime);
+                const d = i18nData[this.currentLang];
+
+                const tagColors = [
+                    'text-accent-blue font-bold ml-1',
+                    'text-amber-400 font-bold ml-1',
+                    'text-red-400 font-bold ml-1',
+                    'text-emerald-400 font-bold ml-1'
+                ];
+
+                const actTagEl = document.getElementById('act-tag');
+                actTagEl.innerText = d.actNames[activeActIndex];
+                actTagEl.className = tagColors[activeActIndex];
 
                 if (this.isPlaying) {
                     this.speakAct(activeActIndex);
                 }
 
-                // Renderizar visibilidad de Frames
-                this.elements.acts.forEach((frame, idx) => {
+                const acts = [
+                    document.getElementById('frame-act-1'),
+                    document.getElementById('frame-act-2'),
+                    document.getElementById('frame-act-3'),
+                    document.getElementById('frame-act-4')
+                ];
+
+                acts.forEach((frame, idx) => {
                     if (idx === activeActIndex) {
                         frame.style.opacity = '1';
                         frame.style.pointerEvents = 'auto';
@@ -434,19 +679,19 @@
                     }
                 });
 
-                // Renderizar botones de Actos
-                this.elements.btnActs.forEach((btn, idx) => {
-                    if (idx === activeActIndex) {
+                for (let i = 1; i <= 4; i++) {
+                    const btn = document.getElementById(`btn-act-${i}`);
+                    if ((i - 1) === activeActIndex) {
                         btn.className = 'p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all';
                     } else {
                         btn.className = 'p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all';
                     }
-                });
+                }
             }
         };
 
         document.addEventListener('DOMContentLoaded', () => {
-            VideoPlayer.render();
+            VideoPlayer.init();
         });
     </script>
 </body>
