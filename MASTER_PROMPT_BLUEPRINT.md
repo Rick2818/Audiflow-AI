@@ -370,5 +370,19 @@ Siempre que el módulo de administración (`/admin`), los crons de recuperación
 3. **Persistencia Híbrida y Auto-Acceso Seguro:**
    - Soporte transparente para autenticación por token en cabeceras `Authorization` y `X-Admin-Password`, sincronizando almacenamiento en `sessionStorage` y `localStorage`, con soporte de acceso rápido por parámetro seguro de URL (`?pass=...`).
 
+---
+
+## 👑 26. ESTRATEGIA PARETO 80/20 VIP, CAMPAÑA DE 3 BENEFICIOS & CONSECUENCIAS, Y BASE DE 2,000 EJECUTIVOS
+
+1. **Prioridad Absoluta Ley de Pareto (80/20):**
+   - El Top 20% de la base (400 ejecutivos de 2,000 en 14 países: CFOs, General Counsels, VPs de Compras y Contralores) concentra el 80% del valor de suscripción (\$590 USD/año). Se clasifica con etiqueta `🏆 TOP_20_PARETO`, Lead Score `90-99` y prioridad crítica.
+2. **Campaña de Alto Impacto Fiduciario (3 Beneficios vs. Consecuencias):**
+   - **Tono:** Ejecutivo, prudente, de alta cortesía y consecuencia financiera ineludible (Cero spam).
+   - **3 Consecuencias de No Auditar:** Fugas acumuladas de \$3,500 a \$18,500 USD por contrato; Ataduras de 36 meses sin salida anticipada; Exposición de secretos corporativos en servidores vulnerables.
+   - **3 Beneficios Inmediatos:** Diagnóstico en &lt;10s; Memoria RAM 100% efímera (cero almacenamiento); Contra-cláusulas listas para firmar (topes IPC +3%).
+   - **Soporte Cuatrilingüe Nativo:** 🇪🇸 Español, 🇺🇸 English, 🇩🇪 Deutsch, 🇫🇷 Français según el país.
+3. **Cron Job Programado (Lunes 7:00 AM El Salvador / 13:00 UTC):**
+   - Registrado en `vercel.json` con expresión `"0 13 * * 1"` hacia `/api/outreach?campaign=pareto_top20`. Despacha automáticamente cada lunes al Top 20% con copia a `rick28191@gmail.com`. Próximo disparo programado: **Lunes 24 de Agosto a las 7:00 AM**.
+
 
 

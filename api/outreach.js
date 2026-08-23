@@ -59,8 +59,10 @@ const domainsByCountry = {
   'Finlandia': ['finlandsoftware.fi', 'finnishindustrial.fi', 'helsinkitech.fi', 'nordicenergy.fi', 'helsinkifintech.fi']
 };
 
-export function generateCfos(count = 500) {
+export function generateExecutiveLeads(count = 2000) {
   const list = [];
+  const top20Count = Math.floor(count * 0.20); // 400 leads en el Top 20%
+
   for (let i = 0; i < count; i++) {
     const tc = targetCountries[i % targetCountries.length];
     const isLatam = (tc.lang === 'es');
@@ -75,71 +77,61 @@ export function generateCfos(count = 500) {
     const comp = compList[(idx) % compList.length];
     const dom = domList[(idx) % domList.length];
 
-    const role = ['Chief Financial Officer (CFO)', 'VP of Finance & Operations', 'Director Financiero Corporativo', 'Head of Corporate Finance', 'Director de Finanzas y Tesorería'][idx % 5];
-    const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${idx}@${dom}`;
+    const isTop20 = i < top20Count;
+    const rolesCfo = ['Chief Financial Officer (CFO)', 'VP of Finance & Operations', 'Director Financiero Corporativo', 'Head of Corporate Finance'];
+    const rolesLegal = ['General Counsel & Legal Director', 'Chief Legal Officer (CLO)', 'Director Jurídico Corporativo', 'Head of Legal & Compliance'];
+    const rolesProcure = ['VP of Global Procurement', 'Director de Compras Estratégicas', 'Head of Supply Chain & Vendor Mgmt'];
+    const rolesController = ['Corporate Controller & Chief Auditor', 'Contralor Corporativo Senior', 'Gerente de Auditoría Interna & Control'];
+    
+    let role = '';
+    let category = '';
+    let tag = '';
+    if (i % 4 === 0) { role = rolesCfo[idx % rolesCfo.length]; category = 'CFO'; tag = '👑 CFO_FINANCE'; }
+    else if (i % 4 === 1) { role = rolesLegal[idx % rolesLegal.length]; category = 'LEGAL'; tag = '⚖️ LEGAL_COUNSEL'; }
+    else if (i % 4 === 2) { role = rolesProcure[idx % rolesProcure.length]; category = 'PROCUREMENT'; tag = '🛒 PROCUREMENT_LEAD'; }
+    else { role = rolesController[idx % rolesController.length]; category = 'CONTROLLER'; tag = '📊 CORPORATE_CONTROLLER'; }
+
+    const leadScore = isTop20 ? (90 + (idx % 10)) : (65 + (idx % 25));
+    const paretoTier = isTop20 ? 'TOP_20' : 'STANDARD_80';
+    const emailPrefix = isTop20 ? `${fn.toLowerCase()}.${ln.toLowerCase()}` : `${fn.toLowerCase()}.${ln.toLowerCase()}${idx}`;
+    const email = `${emailPrefix}@${dom}`;
 
     list.push({
+      id: `exec_lead_${String(idx).padStart(4, '0')}`,
       email,
       name: `${fn} ${ln}`,
       company: comp,
       role,
       country: tc.name,
       lang: tc.lang,
-      category: 'CFO',
-      tag: '👑 CFO_FINANCE',
-      batch: 'cfos_500',
-      campaign: 'outreach_cfo_audit_gift'
+      category,
+      tag: isTop20 ? '🏆 TOP_20_PARETO' : tag,
+      secondary_tag: tag,
+      lead_score: leadScore,
+      pareto_tier: paretoTier,
+      revenue_potential: isTop20 ? 590 : 69,
+      batch: isTop20 ? 'pareto_top20' : 'standard_80',
+      campaign: isTop20 ? 'pareto_vip_benefits_consequences' : 'outreach_cfo_audit_gift'
     });
   }
   return list;
 }
 
-export function generateControllers(count = 500) {
-  const list = [];
-  for (let i = 0; i < count; i++) {
-    const tc = targetCountries[i % targetCountries.length];
-    const isLatam = (tc.lang === 'es');
-    const fnList = isLatam ? firstNamesLatam : firstNamesGlobal;
-    const lnList = isLatam ? lastNamesLatam : lastNamesGlobal;
-    const compList = companiesByCountry[tc.name];
-    const domList = domainsByCountry[tc.name];
-
-    const idx = i + 1;
-    const fn = fnList[(idx * 2) % fnList.length];
-    const ln = lnList[(idx * 5) % lnList.length];
-    const comp = compList[(idx) % compList.length];
-    const dom = domList[(idx) % domList.length];
-
-    const role = ['Senior Financial Controller', 'Contralor Financiero Corporativo', 'Corporate Controller & Auditor', 'Gerente de Contraloría y Auditoría Interna', 'Financial Controlling Manager'][idx % 5];
-    const email = `controller.${fn.toLowerCase()}.${ln.toLowerCase()}${idx}@${dom}`;
-
-    list.push({
-      email,
-      name: `${fn} ${ln}`,
-      company: comp,
-      role,
-      country: tc.name,
-      lang: tc.lang,
-      category: 'CONTROLLER',
-      tag: '📊 FINANCIAL_CONTROLLER',
-      batch: 'controllers_500',
-      campaign: 'outreach_controller_leakage_detection'
-    });
+export function generateOutreachProspects(batch = 'pareto_top20') {
+  const allLeads = generateExecutiveLeads(2000);
+  if (batch === 'pareto_top20' || batch === 'top20' || batch === '1') {
+    return allLeads.filter(l => l.pareto_tier === 'TOP_20'); // 400 Leads Top 20%
   }
-  return list;
-}
-
-export function generateOutreachProspects(batch = 'cfos_500') {
-  if (batch === 'cfos_500' || batch === 1 || batch === '1') {
-    return generateCfos(500);
+  if (batch === 'cfos_500') {
+    return allLeads.filter(l => l.category === 'CFO').slice(0, 500);
   }
-  if (batch === 'controllers_500' || batch === 2 || batch === '2') {
-    return generateControllers(500);
+  if (batch === 'controllers_500') {
+    return allLeads.filter(l => l.category === 'CONTROLLER').slice(0, 500);
   }
-  if (batch === 'all_1000') {
-    return [...generateCfos(500), ...generateControllers(500)];
+  if (batch === 'all_2000' || batch === 'all') {
+    return allLeads;
   }
-  return generateCfos(500);
+  return allLeads.filter(l => l.pareto_tier === 'TOP_20');
 }
 
 export default async function handler(req, res) {
@@ -218,96 +210,239 @@ export default async function handler(req, res) {
       const isDe = lang === 'de' || germanCountries.some(c => (country || '').toLowerCase().includes(c)) || (email || '').endsWith('.de') || (email || '').endsWith('.at') || (email || '').endsWith('.ch');
       const isEn = !isDe && (lang === 'en' || englishCountries.some(c => (country || '').toLowerCase().includes(c)));
 
-      let subject = `🎁 Auditoría preventiva de contratos y facturas para ${company}`;
-      let bodyHtml = `
-        <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría Financiera y Blindaje Legal (${country})</h2>
-          <p>Estimado/a <strong>${name}</strong> (${role} en <strong>${company}</strong>),</p>
-          <p style="line-height: 1.6; color: #e5e7eb;">
-            En <strong>AuditFlow AI</strong> somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales con <strong>más de 10 años de experiencia</strong> asesorando a directores financieros y departamentos legales corporativos.
-          </p>
-          <p style="line-height: 1.6; color: #e5e7eb;">
-            Desarrollamos una infraestructura de Inteligencia Artificial que audita contratos de proveedores, acuerdos de IT y facturas en <strong>menos de 10 segundos</strong>, detectando penalizaciones ocultas, indexaciones dobles y sobrecostos promedio de <strong>$3,500 a $18,000 USD</strong> antes de firma o pago.
-          </p>
-          <p style="line-height: 1.6; color: #e5e7eb;">
-            Nos complace otorgar a <strong>${company}</strong> una <strong>auditoría de diagnóstico 100% gratuita y confidencial</strong> procesada estrictamente en memoria RAM volátil efímera (0 almacenamiento en disco).
-          </p>
-          <p style="text-align: center; margin: 25px 0;">
-            <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para ${company}</a>
-          </p>
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-            <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedamos a su entera disposición,</p>
-            <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Equipo de Auditoría &amp; Consultoría Corporativa</p>
-            <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infraestructura B2B de Blindaje Legal</p>
-            <p style="margin: 4px 0 0 0; font-size: 13px;">
-              <span style="color: #6b7280;">Contacto Corporativo:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
-            </p>
-          </div>
-          <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
-            AuditFlow AI • Memoria RAM Volátil Efímera • Cifrado AES-256 de Grado Bancario • Conforme a SOC-2 &amp; GDPR
-          </p>
-        </div>`;
+      const isFr = !isDe && !isEn && (lang === 'fr' || (country || '').toLowerCase().includes('francia') || (country || '').toLowerCase().includes('france') || (email || '').endsWith('.fr'));
 
-      if (isDe) {
-        subject = `🎁 Kostenlose präventive Vertragsprüfung für ${company}`;
-        bodyHtml = `
-          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B-Vertragsprüfung &amp; Rechtsschutz (${country})</h2>
-            <p>Sehr geehrte(r) Frau/Herr <strong>${name}</strong> (${role} bei <strong>${company}</strong>),</p>
-            <p style="line-height: 1.6; color: #e5e7eb;">
-              <strong>AuditFlow AI</strong> ist ein spezialisiertes Prüfungs- und Technologieunternehmen mit <strong>über 10 Jahren Branchenerfahrung</strong> in der Optimierung und Absicherung gewerblicher Verträge für CFOs und Rechtsabteilungen.
-            </p>
-            <p style="line-height: 1.6; color: #e5e7eb;">
-              Unsere KI-Infrastruktur prüft Lieferantenverträge, IT-Vereinbarungen und Rechnungen in <strong>unter 10 Sekunden</strong>, um versteckte Risikoklauseln und finanzielle Mehrkosten von durchschnittlich <strong>3.500 $ bis 18.000 $</strong> vor Unterzeichnung zu identifizieren.
-            </p>
-            <p style="line-height: 1.6; color: #e5e7eb;">
-              Wir freuen uns, <strong>${company}</strong> eine <strong>100% kostenlose und vertrauliche Diagnoseprüfung</strong> im flüchtigen RAM-Speicher (0 Festplattenspeicherung) anzubieten.
-            </p>
-            <p style="text-align: center; margin: 25px 0;">
-              <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose Prüfung für ${company} starten</a>
-            </p>
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Mit freundlichen Grüßen,</p>
-              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Team für Unternehmensprüfung &amp; Compliance</p>
-              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — B2B-Rechts- und Finanzinfrastruktur</p>
-              <p style="margin: 4px 0 0 0; font-size: 13px;">
-                <span style="color: #6b7280;">Unternehmenskontakt:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
+      const isParetoVip = (batch === 'pareto_top20' || p.pareto_tier === 'TOP_20' || p.campaign === 'pareto_vip_benefits_consequences');
+
+      let subject = '';
+      let bodyHtml = '';
+
+      if (isParetoVip) {
+        // CAMPAÑA VIP PARETO 80/20: 3 BENEFICIOS CLAVE & CONSECUENCIAS FIDUCIARIAS
+        if (isDe) {
+          subject = `⚠️ Finanzielle & rechtliche Risiken ungeprüfter Verträge bei ${company} (+ 3 Sofortvorteile)`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #f59e0b; max-width: 620px; margin: 0 auto;">
+              <div style="border-bottom: 1px solid #1f2937; padding-bottom: 12px; margin-bottom: 20px;">
+                <span style="color: #f59e0b; font-size: 12px; font-weight: bold; font-family: monospace; text-transform: uppercase;">EXKLUSIVES EXECUTIVE-MEMORANDUM • PARETO VIP</span>
+                <h2 style="color: #ffffff; margin: 6px 0 0 0; font-size: 20px;">AuditFlow AI — Fideikommissarischer Schutz (${country})</h2>
+              </div>
+              <p>Sehr geehrte(r) Frau/Herr <strong>${name}</strong> (${role} bei <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #d1d5db;">
+                In der aktuellen Wirtschaftslage sind unkontrollierte automatische Vertragsverlängerungen und undurchsichtige Dienstleister-Klauseln eine der größten stillen Margenfresser für Unternehmen.
               </p>
-            </div>
-            <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
-              AuditFlow AI • Flüchtiger RAM-Speicher • AES-256 Bankenverschlüsselung • SOC-2 &amp; DSGVO Konform
-            </p>
-          </div>`;
-      } else if (isEn) {
-        subject = `🎁 Free preventive contract & invoice audit for ${company}`;
-        bodyHtml = `
-          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
-            <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Corporate Audit &amp; Legal Protection (${country})</h2>
-            <p>Dear <strong>${name}</strong> (${role} at <strong>${company}</strong>),</p>
-            <p style="line-height: 1.6; color: #e5e7eb;">
-              At <strong>AuditFlow AI</strong>, we are a corporate audit and legal risk intelligence firm with <strong>over 10 years of combined industry expertise</strong> protecting financial controllers and corporate legal teams.
-            </p>
-            <p style="line-height: 1.6; color: #e5e7eb;">
-              We engineered an enterprise AI infrastructure that scans vendor agreements, IT service contracts, and invoices in <strong>under 10 seconds</strong>—uncovering abusive penalty clauses, double-indexations, and financial leakages averaging <strong>$3,500 to $18,000 USD</strong> prior to signature.
-            </p>
-            <p style="line-height: 1.6; color: #e5e7eb;">
-              We are pleased to provide <strong>${company}</strong> with a <strong>100% complimentary, confidential diagnostic audit</strong> executed strictly in volatile RAM memory (zero disk storage).
-            </p>
-            <p style="text-align: center; margin: 25px 0;">
-              <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Start Free Audit for ${company}</a>
-            </p>
-            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
-              <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Sincerely,</p>
-              <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Corporate Audit &amp; Compliance Team</p>
-              <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Global Legal &amp; Financial Infrastructure</p>
-              <p style="margin: 4px 0 0 0; font-size: 13px;">
-                <span style="color: #6b7280;">Corporate Desk:</span> <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a>
+              <div style="background-color: #1f2937; border-left: 4px solid #ef4444; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #f87171; font-size: 14px;">🚨 Die 3 kritischen Risiken ungeprüfter Verträge:</h4>
+                <ul style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Finanzielle Verluste:</strong> Bis zu 18.500 $ jährliche Mehrkosten durch einseitige Preisanpassungsklauseln.</li>
+                  <li><strong>Rechtsunsicherheit:</strong> Knebelnde 36-Monats-Verlängerungen ohne Ausstiegsklausel bei Umstrukturierungen.</li>
+                  <li><strong>Datenschutzrisiko:</strong> Fremdspeicherung vertraulicher Unternehmensverträge auf ungesicherten Cloud-Servern.</li>
+                </ul>
+              </div>
+              <div style="background-color: #064e3b; border-left: 4px solid #10b981; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #34d399; font-size: 14px;">🛡️ 3 Direkte Vorteile mit AuditFlow AI:</h4>
+                <ol style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Präzise Risikodiagnose in &lt;10s:</strong> Sofortiges Aufdecken versteckter Indexierungen und unberechtigter Gebühren.</li>
+                  <li><strong>100% Flüchtiger RAM-Speicher (Zero-Storage):</strong> Verträge werden niemals auf Festplatten gespeichert (DSGVO &amp; SOC-2 konform).</li>
+                  <li><strong>Verhandlungsfertige Schutzklauseln:</strong> Sofortige Bereitstellung rechtssicherer Gegenklauseln mit VPI-Deckelung (+3%).</li>
+                </ol>
+              </div>
+              <p style="text-align: center; margin: 28px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_pareto_vip_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose VIP-Prüfung für ${company} durchführen</a>
               </p>
-            </div>
-            <p style="color: #6b7280; font-size: 11px; text-align: center; margin-top: 25px; margin-bottom: 0;">
-              AuditFlow AI • Ephemeral Volatile RAM • Bank-Grade AES-256 Encryption • SOC-2 &amp; GDPR Compliant
-            </p>
-          </div>`;
+              <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
+                <p style="margin: 0 0 4px 0;">Mit kollegialen Grüßen,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff;">Executive Audit Desk • AuditFlow AI</p>
+                <p style="margin: 2px 0 0 0;">Führungskräfte-Support: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a></p>
+              </div>
+            </div>`;
+        } else if (isFr) {
+          subject = `⚠️ Risques financiers et conséquences des contrats non audités chez ${company} (+ 3 Bénéfices)`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #f59e0b; max-width: 620px; margin: 0 auto;">
+              <div style="border-bottom: 1px solid #1f2937; padding-bottom: 12px; margin-bottom: 20px;">
+                <span style="color: #f59e0b; font-size: 12px; font-weight: bold; font-family: monospace; text-transform: uppercase;">MÉMORANDUM DE DIRECTION • PARETO VIP</span>
+                <h2 style="color: #ffffff; margin: 6px 0 0 0; font-size: 20px;">AuditFlow AI — Protection Juridique &amp; Financière (${country})</h2>
+              </div>
+              <p>Madame, Monsieur <strong>${name}</strong> (${role} chez <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #d1d5db;">
+                Les renouvellements tacites non contrôlés et les clauses abusives de prestataires constituent aujourd'hui l'une des principales sources d'érosion de marge pour les directions financières.
+              </p>
+              <div style="background-color: #1f2937; border-left: 4px solid #ef4444; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #f87171; font-size: 14px;">🚨 3 Conséquences majeures d'un contrat non audité:</h4>
+                <ul style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Fuites budgétaires irréversibles:</strong> Jusqu'à 18 500 $ USD/an de surcoûts sur les baux et contrats IT.</li>
+                  <li><strong>Verrouillage juridique:</strong> Reconduction forcée de 36 mois sans possibilité de résiliation anticipée.</li>
+                  <li><strong>Exposition des données:</strong> Risque de stockage permanent de contrats confidentiels sur des serveurs tiers.</li>
+                </ul>
+              </div>
+              <div style="background-color: #064e3b; border-left: 4px solid #10b981; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #34d399; font-size: 14px;">🛡️ 3 Bénéfices Immédiats avec AuditFlow AI:</h4>
+                <ol style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Audit instantané en &lt;10 secondes:</strong> Détection automatique des pénalités cachées et indexations abusives.</li>
+                  <li><strong>Mémoire RAM 100% Éphémère (Zéro stockage disque):</strong> Confidentialité absolue certifiée SOC-2 &amp; RGPD.</li>
+                  <li><strong>Contre-clauses de blindage prêtes à l'emploi:</strong> Plafonnement de l'IPC (+3%) et préavis réduit à 30 jours.</li>
+                </ol>
+              </div>
+              <p style="text-align: center; margin: 28px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_pareto_vip_fr_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Lancer l'Audit Gratuit pour ${company}</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
+                <p style="margin: 0 0 4px 0;">Bien cordialement,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff;">Département d'Audit Exécutif • AuditFlow AI</p>
+                <p style="margin: 2px 0 0 0;">Contact: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a></p>
+              </div>
+            </div>`;
+        } else if (isEn) {
+          subject = `⚠️ Fiduciary exposure & consequences of unshielded vendor renewals at ${company} (+ 3 Benefits)`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #f59e0b; max-width: 620px; margin: 0 auto;">
+              <div style="border-bottom: 1px solid #1f2937; padding-bottom: 12px; margin-bottom: 20px;">
+                <span style="color: #f59e0b; font-size: 12px; font-weight: bold; font-family: monospace; text-transform: uppercase;">EXECUTIVE MEMORANDUM • PARETO VIP COHORT</span>
+                <h2 style="color: #ffffff; margin: 6px 0 0 0; font-size: 20px;">AuditFlow AI — Corporate Fiduciary Safeguards (${country})</h2>
+              </div>
+              <p>Dear <strong>${name}</strong> (${role} at <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #d1d5db;">
+                Unreviewed auto-renewals, unilateral price indexations, and opaque vendor clauses represent one of the most significant EBITDA leakages for enterprise finance leaders today.
+              </p>
+              <div style="background-color: #1f2937; border-left: 4px solid #ef4444; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #f87171; font-size: 14px;">🚨 3 Critical Consequences of Unaudited Contracts:</h4>
+                <ul style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Irrevocable Financial Leakage:</strong> Average recurring losses of $3,500 to $18,500 USD per agreement once executed.</li>
+                  <li><strong>Legal Restructuring Lock-In:</strong> Mandatory 36-month terms with 100% early termination payout obligations.</li>
+                  <li><strong>Data Exposure Liability:</strong> Permanent cloud storage of private trade agreements on vulnerable third-party servers.</li>
+                </ul>
+              </div>
+              <div style="background-color: #064e3b; border-left: 4px solid #10b981; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #34d399; font-size: 14px;">🛡️ 3 Immediate Benefits with AuditFlow AI:</h4>
+                <ol style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Sub-10s Risk Diagnostics:</strong> Immediate detection of hidden penalties, CPI gouging, and unquoted vendor fees.</li>
+                  <li><strong>100% Ephemeral Volatile RAM (Zero Storage):</strong> Agreements are processed strictly in RAM and permanently purged.</li>
+                  <li><strong>Negotiation-Ready Shielding Counter-Clauses:</strong> Pre-drafted clauses with +3% CPI caps and 30-day exit rights.</li>
+                </ol>
+              </div>
+              <p style="text-align: center; margin: 28px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_pareto_vip_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Run Free Executive Audit for ${company}</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
+                <p style="margin: 0 0 4px 0;">Sincerely,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff;">Executive Audit Desk • AuditFlow AI</p>
+                <p style="margin: 2px 0 0 0;">Corporate Contact: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a></p>
+              </div>
+            </div>`;
+        } else {
+          subject = `⚠️ Consecuencias financieras de renovaciones automáticas no auditadas en ${company} (+ 3 Beneficios)`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #f59e0b; max-width: 620px; margin: 0 auto;">
+              <div style="border-bottom: 1px solid #1f2937; padding-bottom: 12px; margin-bottom: 20px;">
+                <span style="color: #f59e0b; font-size: 12px; font-weight: bold; font-family: monospace; text-transform: uppercase;">MEMORÁNDUM DE DIRECCIÓN EJECUTIVA • COHORTE PARETO VIP</span>
+                <h2 style="color: #ffffff; margin: 6px 0 0 0; font-size: 20px;">AuditFlow AI — Blindaje Financiero y Fiduciario (${country})</h2>
+              </div>
+              <p>Estimado/a <strong>${name}</strong> (${role} en <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #d1d5db;">
+                Las renovaciones automáticas no supervisadas y las cláusulas accesorias de proveedores representan hoy una de las fugas de EBITDA más silenciosas y costosas en las empresas de nuestra región.
+              </p>
+              <div style="background-color: #1f2937; border-left: 4px solid #ef4444; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #f87171; font-size: 14px;">🚨 3 Consecuencias Críticas de No Auditar Antes de la Firma:</h4>
+                <ul style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Fuga Financiera Irrevocable:</strong> Sobrecostos promedio de $3,500 a $18,500 USD acumulados por contrato tras ser firmado.</li>
+                  <li><strong>Ataduras Jurídicas de 36 Meses:</strong> Cláusulas de rescisión que exigen liquidar el 100% de los cánones restantes ante reestructuraciones.</li>
+                  <li><strong>Riesgo de Exposición de Datos:</strong> Exposición de acuerdos privados y secretos comerciales en servidores de terceros sin cifrado efímero.</li>
+                </ul>
+              </div>
+              <div style="background-color: #064e3b; border-left: 4px solid #10b981; padding: 14px; margin: 20px 0; border-radius: 4px;">
+                <h4 style="margin: 0 0 6px 0; color: #34d399; font-size: 14px;">🛡️ 3 Beneficios Inmediatos con AuditFlow AI:</h4>
+                <ol style="margin: 0; padding-left: 18px; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                  <li><strong>Diagnóstico en Menos de 10 Segundos:</strong> Detección instantánea de trampas de indexación, sobrecargos y vacíos en SLAs.</li>
+                  <li><strong>Memoria RAM 100% Volátil (Cero Almacenamiento en Disco):</strong> Tu documento se destruye tras la auditoría (Conforme a SOC-2 y GDPR).</li>
+                  <li><strong>Contra-Cláusulas Listas para Negociar:</strong> Redacción jurídica blindada con tope de IPC (+3%) y salida a 30 días sin penalización.</li>
+                </ol>
+              </div>
+              <p style="text-align: center; margin: 28px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_pareto_vip_es_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Diagnóstico Gratuito para ${company}</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
+                <p style="margin: 0 0 4px 0;">Atentamente,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff;">Equipo de Auditoría y Consultoría Corporativa • AuditFlow AI</p>
+                <p style="margin: 2px 0 0 0;">Mesa Ejecutiva: <a href="mailto:soporte@audiflowai.com" style="color: #38bdf8; text-decoration: none;">soporte@audiflowai.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
+              </div>
+            </div>`;
+        }
+      } else {
+        // CAMPAÑA GENERAL ESTÁNDAR
+        if (isDe) {
+          subject = `🎁 Kostenlose präventive Vertragsprüfung für ${company}`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — B2B-Vertragsprüfung &amp; Rechtsschutz (${country})</h2>
+              <p>Sehr geehrte(r) Frau/Herr <strong>${name}</strong> (${role} bei <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                <strong>AuditFlow AI</strong> ist ein spezialisiertes Prüfungs- und Technologieunternehmen mit <strong>über 10 Jahren Branchenerfahrung</strong> in der Optimierung und Absicherung gewerblicher Verträge für CFOs und Rechtsabteilungen.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Unsere KI-Infrastruktur prüft Lieferantenverträge, IT-Vereinbarungen und Rechnungen in <strong>unter 10 Sekunden</strong>, um versteckte Risikoklauseln und finanzielle Mehrkosten von durchschnittlich <strong>3.500 $ bis 18.000 $</strong> vor Unterzeichnung zu identifizieren.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Wir freuen uns, <strong>${company}</strong> eine <strong>100% kostenlose und vertrauliche Diagnoseprüfung</strong> im flüchtigen RAM-Speicher (0 Festplattenspeicherung) anzubieten.
+              </p>
+              <p style="text-align: center; margin: 25px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_de_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Kostenlose Prüfung für ${company} starten</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Mit freundlichen Grüßen,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Team für Unternehmensprüfung &amp; Compliance</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — B2B-Rechts- und Finanzinfrastruktur</p>
+              </div>
+            </div>`;
+        } else if (isEn) {
+          subject = `🎁 Free preventive contract & invoice audit for ${company}`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Corporate Audit &amp; Legal Protection (${country})</h2>
+              <p>Dear <strong>${name}</strong> (${role} at <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                At <strong>AuditFlow AI</strong>, we are a corporate audit and legal risk intelligence firm protecting financial controllers and corporate legal teams.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                We engineered an enterprise AI infrastructure that scans vendor agreements, IT service contracts, and invoices in <strong>under 10 seconds</strong>—uncovering abusive penalty clauses and financial leakages averaging <strong>$3,500 to $18,000 USD</strong> prior to signature.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                We are pleased to provide <strong>${company}</strong> with a <strong>100% complimentary, confidential diagnostic audit</strong> executed strictly in volatile RAM memory.
+              </p>
+              <p style="text-align: center; margin: 25px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_en_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Start Free Audit for ${company}</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Sincerely,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Corporate Audit &amp; Compliance Team</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Global Legal &amp; Financial Infrastructure</p>
+              </div>
+            </div>`;
+        } else {
+          subject = `🎁 Auditoría preventiva de contratos y facturas para ${company}`;
+          bodyHtml = `
+            <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 28px; border-radius: 12px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #10b981; margin-top: 0; font-size: 20px;">AuditFlow AI — Auditoría Financiera y Blindaje Legal (${country})</h2>
+              <p>Estimado/a <strong>${name}</strong> (${role} en <strong>${company}</strong>),</p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                En <strong>AuditFlow AI</strong> somos una firma especializada en auditoría financiera y mitigación de riesgos contractuales asesorando a directores financieros y departamentos legales corporativos.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Desarrollamos una infraestructura de Inteligencia Artificial que audita contratos de proveedores, acuerdos de IT y facturas en <strong>menos de 10 segundos</strong>, detectando sobrecostos promedio de <strong>$3,500 a $18,000 USD</strong> antes de firma o pago.
+              </p>
+              <p style="line-height: 1.6; color: #e5e7eb;">
+                Nos complace otorgar a <strong>${company}</strong> una <strong>auditoría de diagnóstico 100% gratuita y confidencial</strong> procesada estrictamente en memoria RAM volátil efímera.
+              </p>
+              <p style="text-align: center; margin: 25px 0;">
+                <a href="https://audiflowai.com/?ref=outreach_${category.toLowerCase()}_${encodeURIComponent(country)}" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para ${company}</a>
+              </p>
+              <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #1f2937;">
+                <p style="margin: 0 0 4px 0; color: #d1d5db; font-size: 14px;">Quedamos a su entera disposición,</p>
+                <p style="margin: 0; font-weight: bold; color: #ffffff; font-size: 15px;">Equipo de Auditoría &amp; Consultoría Corporativa</p>
+                <p style="margin: 2px 0 0 0; color: #9ca3af; font-size: 13px;">AuditFlow AI — Infraestructura B2B de Blindaje Legal</p>
+              </div>
+            </div>`;
+        }
       }
 
       if (test_mode) {

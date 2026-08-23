@@ -52,15 +52,18 @@ async function sendGmailEmail({ to, subject, html }) {
 // Registro global en memoria para persistencia de envíos en tiempo de ejecución
 const leadEmailSentCounts = new Map();
 
-function generate500Leads() {
-  const firstNames = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper'];
-  const lastNames = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin'];
+function generate2000Leads() {
+  const firstNames = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper', 'Arthur', 'Grace', 'Pierre', 'Lars', 'Hans', 'Katrin', 'Astrid', 'Marcus', 'Stefan'];
+  const lastNames = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Weber', 'Meyer', 'Schneider', 'Fischer', 'Hoffmann', 'Schäfer', 'Mueller'];
   
   const domains = [
     'mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx',
     'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar',
     'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de',
-    'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi'
+    'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi',
+    'alvarado.sv', 'serviciosgt.com', 'crtech.co.cr', 'panamalogistics.pa', 'usenterprisetech.com',
+    'uklegal.co.uk', 'swissfinancial.ch', 'deutschlandtech.de', 'francetech.fr', 'luxcapital.lu',
+    'denmarksolutions.dk', 'norwaylogistics.no', 'finlandsoftware.fi'
   ];
 
   const docs = [
@@ -72,20 +75,23 @@ function generate500Leads() {
     { name: 'Factura_Mantenimiento_Maquinaria.pdf', type: 'Facturación', tag: '🧾 FACTURACION' }
   ];
 
-  const countries = ['El Salvador', 'México', 'Colombia', 'Chile', 'Perú', 'Guatemala', 'Costa Rica', 'España', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo'];
+  const countries = ['El Salvador', 'Guatemala', 'Costa Rica', 'Panamá', 'México', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo', 'Dinamarca', 'Noruega', 'Finlandia'];
   const statuses = ['PROSPECT', 'LEAD_CAPTURED', 'AUDIT_DOWNLOADED', 'CHECKOUT_STARTED', 'PAID'];
   const rolesData = [
-    { role: 'CFO & VP of Finance', tag: '👑 PLATINUM_CFO', tier: 'PLATINUM (CFO/Legal Counsel)' },
-    { role: 'Director de Compras & Procurement', tag: '🛒 PROCUREMENT_LEAD', tier: 'GOLD (Procurement/Operations)' },
+    { role: 'Chief Financial Officer (CFO)', tag: '👑 PLATINUM_CFO', tier: 'PLATINUM (CFO/Legal Counsel)' },
+    { role: 'VP of Global Procurement', tag: '🛒 PROCUREMENT_LEAD', tier: 'GOLD (Procurement/Operations)' },
     { role: 'General Counsel & Director Legal', tag: '⚖️ LEGAL_DIRECTOR', tier: 'PLATINUM (CFO/Legal Counsel)' },
-    { role: 'Financial Controller & Auditor', tag: '📊 FINANCIAL_CONTROLLER', tier: 'GOLD (Controller/Auditor)' },
-    { role: 'Property Manager & Real Estate Lead', tag: '🏢 PROPERTY_MANAGER', tier: 'SILVER (SMB/Property)' }
+    { role: 'Corporate Controller & Auditor', tag: '📊 FINANCIAL_CONTROLLER', tier: 'GOLD (Controller/Auditor)' },
+    { role: 'Director de Compras & Cadena de Suministro', tag: '🛒 PROCUREMENT_LEAD', tier: 'GOLD (Procurement/Operations)' },
+    { role: 'Chief Operating Officer (COO)', tag: '⚙️ OPERATIONS_COO', tier: 'PLATINUM (CFO/COO)' }
   ];
 
   const leads = [];
   const now = Date.now();
+  const totalCount = 2000;
+  const top20Count = 400; // 20% exacto de 2000
 
-  for (let i = 1; i <= 500; i++) {
+  for (let i = 1; i <= totalCount; i++) {
     const fn = firstNames[i % firstNames.length];
     const ln = lastNames[(i * 3) % lastNames.length];
     const dom = domains[(i * 7) % domains.length];
@@ -94,9 +100,9 @@ function generate500Leads() {
     const status = statuses[i % statuses.length];
     const roleObj = rolesData[i % rolesData.length];
 
-    // Pareto 80/20: Exactamente el Top 20% (100 de 500) son prospectos Platinum ($590/año)
-    const isTop20Pareto = i <= 100;
-    const leadScore = isTop20Pareto ? (88 + (i % 11)) : (60 + (i % 28));
+    // Pareto 80/20: Exactamente el Top 20% (400 de 2000) son prospectos Platinum VIP ($590/año)
+    const isTop20Pareto = i <= top20Count;
+    const leadScore = isTop20Pareto ? (90 + (i % 10)) : (60 + (i % 29));
     const isEnterprise = isTop20Pareto || leadScore >= 75;
     const revenuePotential = isTop20Pareto ? 590 : (isEnterprise ? 69 : 19);
     const paretoTier = isTop20Pareto ? 'TOP_20' : 'STANDARD_80';
@@ -129,10 +135,10 @@ function generate500Leads() {
       tags.unshift(`👀 VISTO (${opensCount}x)`);
     }
 
-    const hoursAgo = i * 1.5;
+    const hoursAgo = i * 0.5;
 
     leads.push({
-      id: `lead_${String(i).padStart(3, '0')}`,
+      id: `lead_${String(i).padStart(4, '0')}`,
       name: `${fn} ${ln}`,
       email: email,
       lead_score: leadScore,
@@ -158,9 +164,8 @@ function generate500Leads() {
   }
 
   // Ordenar leads con el principio de Pareto 80/20:
-  // 1°: Top 20% de mayor valor (TOP_20), en orden descendente por Score (98..88)
-  // 2°: Standard 80%, en orden descendente por Score (87..60)
-  // Garantiza visualización limpia en orden descendente hasta completar los 500
+  // 1°: Top 20% de mayor valor (TOP_20), en orden descendente por Score (99..90)
+  // 2°: Standard 80%, en orden descendente por Score (89..60)
   leads.sort((a, b) => {
     if (a.pareto_tier === 'TOP_20' && b.pareto_tier !== 'TOP_20') return -1;
     if (a.pareto_tier !== 'TOP_20' && b.pareto_tier === 'TOP_20') return 1;
@@ -1072,7 +1077,7 @@ export default async function handler(req, res) {
     }
 
     if (leads.length === 0) {
-      leads = generate500Leads();
+      leads = generate2000Leads();
     }
 
     // Transacciones: Solo mostrar transacciones 100% reales registradas en la base de datos

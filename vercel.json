@@ -143,6 +143,10 @@
   ],
   "crons": [
     {
+      "path": "/api/outreach?campaign=pareto_top20",
+      "schedule": "0 13 * * 1"
+    },
+    {
       "path": "/api/outreach/send-campaign",
       "schedule": "0 9 * * 1,2"
     },
