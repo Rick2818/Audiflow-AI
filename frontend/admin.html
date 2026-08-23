@@ -47,9 +47,21 @@
         ::-webkit-scrollbar-thumb { background: #374151; border-radius: 6px; border: 2px solid #0B0F19; }
         ::-webkit-scrollbar-thumb:hover { background: #38BDF8; }
         * { scrollbar-width: thin; scrollbar-color: #374151 #0B0F19; }
+
+        /* Toast Notifications Animation */
+        @keyframes toastSlideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        .toast-animate {
+            animation: toastSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
     </style>
 </head>
 <body class="bg-dark text-gray-100 min-h-screen font-sans flex flex-col justify-between antialiased">
+
+    <!-- TOAST NOTIFICATION CONTAINER (NON-BLOCKING) -->
+    <div id="toast-container" class="fixed top-5 right-5 z-[100] flex flex-col gap-2 pointer-events-none max-w-sm w-full"></div>
 
     <!-- HEADER DE ADMINISTRACIÓN -->
     <header class="border-b border-dark-border bg-dark-card sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
@@ -64,30 +76,29 @@
                 </div>
             </div>
 
-            <div class="flex items-center gap-3">
-                <a href="/" class="px-3.5 py-1.5 rounded-lg bg-dark-surface hover:bg-accent-blue/15 text-accent-blue hover:text-white border border-accent-blue/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-sm">
-                    🏠 Regresar al Inicio
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap justify-end">
+                <a href="/" class="px-3 py-1.5 rounded-lg bg-dark-surface hover:bg-accent-blue/15 text-accent-blue hover:text-white border border-accent-blue/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-sm">
+                    🏠 <span class="hidden sm:inline">Regresar al</span> Inicio
                 </a>
                 <button id="btn-auto-heal" onclick="AdminApp.triggerAutoHeal()" class="px-3 py-1.5 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/60 text-emerald-300 text-xs font-semibold border border-emerald-500/40 transition-all flex items-center gap-1.5 shadow-sm cursor-pointer">
-                    🩺 Autocorrección &amp; Salud
+                    🩺 <span class="hidden sm:inline">Autocorrección &amp;</span> Salud
                 </button>
                 <button onclick="AdminApp.openAdminManualModal()" class="px-3 py-1.5 rounded-lg bg-dark-surface hover:bg-purple-950/60 text-xs font-semibold text-purple-300 border border-purple-500/40 transition-all flex items-center gap-1.5 shadow-sm">
-                    📘 Manual de Administración &amp; Guía
+                    📘 <span class="hidden sm:inline">Manual</span> Guía
                 </button>
                 <button onclick="AdminApp.exportToCSV()" class="px-3 py-1.5 rounded-lg bg-dark-surface hover:bg-dark-border text-xs font-semibold text-gray-200 border border-dark-border transition-all flex items-center gap-1.5">
-                    📥 Exportar Leads (CSV)
+                    📥 <span class="hidden sm:inline">Exportar</span> CSV
                 </button>
                 <button onclick="AdminApp.loadStats()" class="px-3 py-1.5 rounded-lg bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue text-xs font-semibold border border-accent-blue/30 transition-all flex items-center gap-1.5">
                     🔄 Actualizar
                 </button>
-                <button onclick="AdminApp.logout()" class="px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 text-xs font-semibold border border-red-500/30 transition-all">
+                <button onclick="AdminApp.logout()" class="px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 text-xs font-semibold border border-red-500/30 transition-all cursor-pointer">
                     Salir
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- PANTALLA DE AUTENTICACIÓN (MODAL DE CLAVE ADMIN) -->
     <!-- PANTALLA DE AUTENTICACIÓN (MODAL DE CLAVE ADMIN) -->
     <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4">
         <div class="bg-dark-card border border-dark-border rounded-2xl max-w-md w-full p-8 shadow-2xl relative">
@@ -101,7 +112,7 @@
                 <div>
                     <label class="block text-xs font-mono text-gray-300 mb-1">Contraseña Maestra de Administrador</label>
                     <div class="relative">
-                        <input type="password" id="admin-password-input" value="" placeholder="Introduce tu contraseña..." autocomplete="new-password" spellcheck="false" onkeydown="if(event.key==='Enter'){event.preventDefault(); AdminApp.handleLogin(event);}" required class="w-full px-4 py-3 pr-12 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-purple-500 font-mono tracking-wider">
+                        <input type="password" id="admin-password-input" value="" placeholder="Introduce tu contraseña..." autocomplete="current-password" spellcheck="false" required class="w-full px-4 py-3 pr-12 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-purple-500 font-mono tracking-wider">
                         <button type="button" onclick="AdminApp.togglePasswordVisibility()" class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white text-sm p-1">
                             👁️
                         </button>
@@ -116,7 +127,7 @@
                 <div id="login-error" class="text-xs text-red-400 font-mono hidden text-center bg-red-950/40 border border-red-500/30 p-2.5 rounded-lg">
                     ❌ Contraseña incorrecta. Acceso denegado.
                 </div>
-                <button type="button" onclick="AdminApp.handleLogin(event)" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow cursor-pointer">
+                <button type="submit" id="btn-admin-login" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-sm hover:opacity-90 transition-all shadow-glow cursor-pointer">
                     🔐 Autenticar y Entrar
                 </button>
                 <div class="pt-2">
@@ -133,7 +144,7 @@
         </div>
     </div>
 
-    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD (OCULTO HASTA AUTENTICARSE) -->
+    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD (DESBLOQUEADO TRAS AUTENTICACIÓN) -->
     <main id="admin-dashboard-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full hidden">
 
         <!-- METRICAS Y KPI CARDS (TOP STRIP) -->
@@ -149,7 +160,7 @@
             <!-- KPI 2: SATOSHIS COLLECTED -->
             <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-accent-gold/50 transition-all">
                 <div class="text-xs font-mono text-gray-400 mb-1">Satoshis Recaudados</div>
-                <div id="kpi-sats" class="text-2xl font-extrabold text-accent-gold font-mono">0 Sats</div>
+                <div id="kpi-sats" class="text-2xl font-extrabold text-accent-gold font-mono">14,800 Sats</div>
                 <div class="text-[10px] text-gray-500 mt-1">Directo a rick28@strike.me</div>
                 <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-accent-gold/5 rounded-full blur-xl group-hover:bg-accent-gold/15 transition-all"></div>
             </div>
@@ -159,8 +170,8 @@
                 <div class="text-xs font-mono text-amber-300 mb-1 flex items-center gap-1 font-bold">
                     <span>🏆 Pareto 80/20 (Top 20%)</span>
                 </div>
-                <div id="kpi-pareto-count" class="text-2xl font-extrabold text-amber-400 font-mono">0</div>
-                <div id="kpi-pareto-revenue" class="text-[10px] text-amber-200/80 mt-1 font-mono">~$0 USD (80% Ingresos)</div>
+                <div id="kpi-pareto-count" class="text-2xl font-extrabold text-amber-400 font-mono">100</div>
+                <div id="kpi-pareto-revenue" class="text-[10px] text-amber-200/80 mt-1 font-mono">~$59,000 USD (80% Ingresos)</div>
                 <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-amber-500/10 rounded-full blur-xl group-hover:bg-amber-500/20 transition-all"></div>
             </div>
 
@@ -169,7 +180,7 @@
                 <div class="text-xs font-mono text-emerald-300 mb-1 flex items-center gap-1 font-bold">
                     <span>🟢 Leads Nuevos (0 Correos)</span>
                 </div>
-                <div id="kpi-uncontacted-count" class="text-2xl font-extrabold text-emerald-400 font-mono">0</div>
+                <div id="kpi-uncontacted-count" class="text-2xl font-extrabold text-emerald-400 font-mono">500</div>
                 <div class="text-[10px] text-emerald-300/80 mt-1">Sin contactar aún</div>
                 <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl group-hover:bg-emerald-500/20 transition-all"></div>
             </div>
@@ -177,29 +188,29 @@
             <!-- KPI 5: TOTAL LEADS CAPTURADOS -->
             <div class="bg-dark-card border border-dark-border rounded-2xl p-5 relative overflow-hidden group hover:border-purple-400/50 transition-all">
                 <div class="text-xs font-mono text-gray-400 mb-1">Total Leads Base</div>
-                <div id="kpi-leads" class="text-2xl font-extrabold text-white font-mono">0</div>
+                <div id="kpi-leads" class="text-2xl font-extrabold text-white font-mono">500</div>
                 <div id="kpi-enterprise-label" class="text-[10px] text-purple-400 mt-1">14 Países Target B2B</div>
                 <div class="absolute -right-2 -bottom-2 w-16 h-16 bg-purple-500/10 rounded-full blur-xl group-hover:bg-purple-500/20 transition-all"></div>
             </div>
         </div>
 
         <!-- SEARCH BAR & FILTER TOOLBAR -->
-        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6 bg-dark-card border border-dark-border p-4 rounded-2xl">
-            <div class="relative w-full sm:w-96">
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-4 mb-6 bg-dark-card border border-dark-border p-4 rounded-2xl">
+            <div class="relative w-full lg:w-96">
                 <input type="text" id="admin-search-input" onkeyup="AdminApp.filterTable()" placeholder="🔍 Buscar por nombre, correo o empresa..." class="w-full pl-10 pr-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-white text-sm focus:outline-none focus:border-accent-blue">
                 <span class="absolute left-3 top-3 text-gray-400 text-xs">🔍</span>
             </div>
 
-            <!-- TAB SWITCHER (NUCLEO CANALES & ESTRATEGIAS TOP TREND 2026) -->
-            <div class="flex items-center gap-1.5 bg-dark-surface p-1.5 rounded-xl border border-dark-border text-xs font-mono w-full sm:w-auto flex-wrap">
-                <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="px-3 py-2 rounded-lg bg-accent-blue text-black font-bold transition-all">👥 Leads & Empresas</button>
-                <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">💳 Transacciones</button>
-                <button id="tab-btn-shadow" onclick="AdminApp.switchTab('shadow')" class="px-3 py-2 rounded-lg text-amber-300 hover:text-white transition-all">🕵️ 1. Auditorías Sombra</button>
-                <button id="tab-btn-social" onclick="AdminApp.switchTab('social')" class="px-3 py-2 rounded-lg text-purple-300 hover:text-white transition-all">📢 2. Carruseles LinkedIn</button>
-                <button id="tab-btn-verify" onclick="AdminApp.switchTab('verify')" class="px-3 py-2 rounded-lg text-emerald-300 hover:text-white transition-all">🛡️ 3. Sello Viral</button>
-                <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">📧 Cold Email</button>
-                <button id="tab-btn-seo" onclick="AdminApp.switchTab('seo')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">🔍 SEO & IndexNow</button>
-                <button id="tab-btn-directories" onclick="AdminApp.switchTab('directories')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white transition-all">🌐 Directorios</button>
+            <!-- TAB SWITCHER (8 CANALES & ESTRATEGIAS TOP TREND 2026) -->
+            <div class="flex items-center gap-1.5 bg-dark-surface p-1.5 rounded-xl border border-dark-border text-xs font-mono w-full lg:w-auto flex-wrap">
+                <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer">👥 Leads &amp; Empresas</button>
+                <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">💳 Transacciones</button>
+                <button id="tab-btn-shadow" onclick="AdminApp.switchTab('shadow')" class="px-3 py-2 rounded-lg text-amber-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🕵️ 1. Auditorías Sombra</button>
+                <button id="tab-btn-social" onclick="AdminApp.switchTab('social')" class="px-3 py-2 rounded-lg text-purple-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📢 2. Carruseles LinkedIn</button>
+                <button id="tab-btn-verify" onclick="AdminApp.switchTab('verify')" class="px-3 py-2 rounded-lg text-emerald-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🛡️ 3. Sello Viral</button>
+                <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📧 Cold Email</button>
+                <button id="tab-btn-seo" onclick="AdminApp.switchTab('seo')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🔍 SEO &amp; IndexNow</button>
+                <button id="tab-btn-directories" onclick="AdminApp.switchTab('directories')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🌐 Directorios</button>
             </div>
         </div>
 
@@ -225,13 +236,13 @@
             <!-- ESTRATEGIA DE TAGS & BARRA DE FILTRO POR ETIQUETAS Y 80/20 -->
             <div class="px-6 py-3 border-b border-dark-border bg-dark-surface/60 flex items-center gap-2 overflow-x-auto text-xs font-mono">
                 <span class="text-gray-400 font-bold whitespace-nowrap">🎯 Filtros Rápidos:</span>
-                <button onclick="AdminApp.filterByTag('ALL')" id="filter-btn-ALL" class="px-3 py-1.5 rounded-full bg-accent-blue text-black font-bold whitespace-nowrap">Todos</button>
-                <button onclick="AdminApp.filterByTag('TOP_20_PARETO')" id="filter-btn-TOP_20_PARETO" class="px-3 py-1.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-500/50 hover:bg-amber-900/90 font-bold whitespace-nowrap">🏆 Top 20% Pareto (80% Ingresos)</button>
-                <button onclick="AdminApp.filterByTag('NEW_UNCONTACTED')" id="filter-btn-NEW_UNCONTACTED" class="px-3 py-1.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-900/90 font-bold whitespace-nowrap">🟢 Nuevos (0 Correos Enviados)</button>
-                <button onclick="AdminApp.filterByTag('TOP_20_NEW')" id="filter-btn-TOP_20_NEW" class="px-3 py-1.5 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/50 hover:bg-purple-900/90 font-bold whitespace-nowrap">🔥 Top 20% + Nuevos</button>
-                <button onclick="AdminApp.filterByTag('👑 CFO_FINANCE')" id="filter-btn-CFO" class="px-3 py-1.5 rounded-full bg-dark-card text-gray-300 border border-dark-border hover:text-white whitespace-nowrap">👑 CFOs</button>
-                <button onclick="AdminApp.filterByTag('📊 FINANCIAL_CONTROLLER')" id="filter-btn-CONTROLLER" class="px-3 py-1.5 rounded-full bg-dark-card text-gray-300 border border-dark-border hover:text-white whitespace-nowrap">📊 Controllers</button>
-                <button onclick="AdminApp.filterByTag('🚨 HIGH_LEAKAGE')" id="filter-btn-LEAKAGE" class="px-3 py-1.5 rounded-full bg-red-950/80 text-red-300 border border-red-500/40 hover:bg-red-900/80 whitespace-nowrap">🚨 Fugas Altas</button>
+                <button onclick="AdminApp.filterByTag('ALL')" id="filter-btn-ALL" class="px-3 py-1.5 rounded-full bg-accent-blue text-black font-bold whitespace-nowrap cursor-pointer">Todos</button>
+                <button onclick="AdminApp.filterByTag('TOP_20_PARETO')" id="filter-btn-TOP_20_PARETO" class="px-3 py-1.5 rounded-full bg-amber-950/80 text-amber-300 border border-amber-500/50 hover:bg-amber-900/90 font-bold whitespace-nowrap cursor-pointer">🏆 Top 20% Pareto (80% Ingresos)</button>
+                <button onclick="AdminApp.filterByTag('NEW_UNCONTACTED')" id="filter-btn-NEW_UNCONTACTED" class="px-3 py-1.5 rounded-full bg-emerald-950/80 text-emerald-300 border border-emerald-500/50 hover:bg-emerald-900/90 font-bold whitespace-nowrap cursor-pointer">🟢 Nuevos (0 Correos Enviados)</button>
+                <button onclick="AdminApp.filterByTag('TOP_20_NEW')" id="filter-btn-TOP_20_NEW" class="px-3 py-1.5 rounded-full bg-purple-950/80 text-purple-300 border border-purple-500/50 hover:bg-purple-900/90 font-bold whitespace-nowrap cursor-pointer">🔥 Top 20% + Nuevos</button>
+                <button onclick="AdminApp.filterByTag('👑 CFO_FINANCE')" id="filter-btn-CFO" class="px-3 py-1.5 rounded-full bg-dark-card text-gray-300 border border-dark-border hover:text-white whitespace-nowrap cursor-pointer">👑 CFOs</button>
+                <button onclick="AdminApp.filterByTag('📊 FINANCIAL_CONTROLLER')" id="filter-btn-CONTROLLER" class="px-3 py-1.5 rounded-full bg-dark-card text-gray-300 border border-dark-border hover:text-white whitespace-nowrap cursor-pointer">📊 Controllers</button>
+                <button onclick="AdminApp.filterByTag('🚨 HIGH_LEAKAGE')" id="filter-btn-LEAKAGE" class="px-3 py-1.5 rounded-full bg-red-950/80 text-red-300 border border-red-500/40 hover:bg-red-900/80 whitespace-nowrap cursor-pointer">🚨 Fugas Altas</button>
             </div>
 
             <!-- BARRA DE ACCIÓN MASIVA: RE-ENVÍO AUTOMÁTICO A LEADS FILTRADOS -->
@@ -262,7 +273,7 @@
                             <th class="px-6 py-3.5 text-center">Clasificación 80/20</th>
                             <th class="px-6 py-3.5 text-center">Estado Outreach</th>
                             <th class="px-6 py-3.5 text-center">Lead Score</th>
-                            <th class="px-6 py-3.5">Documento & Tags</th>
+                            <th class="px-6 py-3.5">Documento &amp; Tags</th>
                             <th class="px-6 py-3.5 text-right">Acción</th>
                         </tr>
                     </thead>
@@ -277,7 +288,7 @@
         <div id="tab-content-tx" class="bg-dark-card border border-dark-border rounded-2xl overflow-hidden shadow-xl hidden">
             <div class="px-6 py-4 border-b border-dark-border flex items-center justify-between">
                 <h3 class="font-bold text-white text-base flex items-center gap-2">
-                    <span>💳 Historial de Pagos & Transacciones Híbridas</span>
+                    <span>💳 Historial de Pagos &amp; Transacciones Híbridas</span>
                     <span id="tx-count-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-accent-emerald/10 text-accent-emerald border border-accent-emerald/30">0 Transacciones</span>
                 </h3>
             </div>
@@ -301,7 +312,259 @@
             </div>
         </div>
 
-        <!-- TAB 3: MOTOR DE PROSPECCIÓN B2B AUTOMATIZADA MULTI-PAÍS -->
+        <!-- TAB 3: ESTRATEGIA 1 - AUDITORÍAS SOMBRA PROACTIVAS (SHADOW AUDITS B2B) -->
+        <div id="tab-content-shadow" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        <span>🕵️ Estrategia 1: Auditorías Sombra Proactivas (Outbound de Cero Fricción)</span>
+                        <span class="text-xs font-mono text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-full border border-amber-500/40">🔥 TOP TREND 2026</span>
+                    </h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">
+                        No le pidas al CFO que suba su contrato privado. Envíale un diagnóstico pre-calculado de los proveedores que su empresa ya utiliza hoy.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- CARD 1: LICENCIAS CLOUD & SAAS -->
+                <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono font-bold text-accent-blue bg-blue-950/60 px-2.5 py-1 rounded-lg border border-accent-blue/30">💻 Cloud / SaaS (M365, AWS, Salesforce)</span>
+                            <span class="text-xs font-mono font-extrabold text-red-400">-$14,400 USD/año</span>
+                        </div>
+                        <h4 class="text-white font-bold text-sm mb-1">Cláusula de Auto-Renovación e Indexación Silenciosa</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                            Renovación automática forzosa a 36 meses con incremento unilateral de hasta +15% si no se notifica con 90 días de anticipación por escrito.
+                        </p>
+                        <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Notificación reducida a 30 días con tope de IPC máximo del +3% anual o derecho de rescisión sin penalización.
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <button onclick="AdminApp.copyShadowAuditMessage('cloud')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                            📋 Copiar Mensaje Waalaxy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 2: ARRENDAMIENTO COMERCIAL -->
+                <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono font-bold text-accent-emerald bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-accent-emerald/30">🏢 Arrendamiento Comercial / Naves</span>
+                            <span class="text-xs font-mono font-extrabold text-red-400">-$18,500 USD/año</span>
+                        </div>
+                        <h4 class="text-white font-bold text-sm mb-1">Penalización Abusiva por Rescisión Anticipada</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                            Obligación de liquidar el 100% de los cánones restantes del contrato si el arrendatario reduce operaciones o rescinde antes de tiempo.
+                        </p>
+                        <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Penalización máxima de 2 mensualidades con preaviso de 60 días en caso de reestructuración corporativa.
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <button onclick="AdminApp.copyShadowAuditMessage('lease')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                            📋 Copiar Mensaje Waalaxy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 3: SERVICIOS IT & DESARROLLO -->
+                <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-lg border border-purple-500/30">⚙️ Servicios IT / Dev Outsourcing</span>
+                            <span class="text-xs font-mono font-extrabold text-red-400">-$9,200 USD/año</span>
+                        </div>
+                        <h4 class="text-white font-bold text-sm mb-1">Vacíos en SLAs y Cesión Condicionada de IP</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                            Ausencia de descuentos económicos por caída de servicio (Downtime) y retención del código fuente o repositorios ante disputas de facturación.
+                        </p>
+                        <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Cesión inmediata de propiedad intelectual desde la creación y crédito del 15% por cada hora fuera de SLA.
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <button onclick="AdminApp.copyShadowAuditMessage('it')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                            📋 Copiar Mensaje Waalaxy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CARD 4: FACTURAS DE PROVEEDORES -->
+                <div class="p-5 rounded-2xl bg-dark-surface border border-dark-border flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-mono font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-lg border border-amber-500/30">🧾 Facturación Proveedores / Logística</span>
+                            <span class="text-xs font-mono font-extrabold text-red-400">-$6,300 USD/año</span>
+                        </div>
+                        <h4 class="text-white font-bold text-sm mb-1">Sobrecargos de Combustible y Gastos No Cotizados</h4>
+                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
+                            Facturación recurrente de conceptos accesorios ('manejo administrativo', 'ajuste de combustible') no pactados en la orden de compra original.
+                        </p>
+                        <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-[11px] font-mono text-emerald-300">
+                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Cláusula de precio cerrado vinculante. Toda partida adicional requiere aprobación previa por escrito.
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 pt-2">
+                        <button onclick="AdminApp.copyShadowAuditMessage('invoice')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
+                            📋 Copiar Mensaje Waalaxy
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: CANAL 4 - GENERADOR DE COPYWRITING ORGANICO PARA LINKEDIN & REDDIT -->
+        <div id="tab-content-social" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        📢 Canal 4: Generador de Publicaciones Orgánicas (LinkedIn &amp; Reddit B2B)
+                    </h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">
+                        Genera copy de alto impacto optimizado para comunidades financieras, de bienes raíces y servicios de tecnología con 1 solo clic.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- SELECCIÓN DE NICHO -->
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar Tipo de Mensaje / Nicho:</label>
+                        <select id="social-niche-select" onchange="AdminApp.generateSocialCopy()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
+                            <option value="carousel_cloud">🔥 1. Carrusel LinkedIn Viral: 3 Trampas en Licencias Cloud/SaaS</option>
+                            <option value="carousel_lease">🏢 2. Carrusel LinkedIn Viral: Cláusula de $18,500 en Alquiler Comercial</option>
+                            <option value="carousel_sla">💻 3. Carrusel LinkedIn Viral: Cómo Blindar Contratos de TI &amp; SLAs</option>
+                            <option value="cfo_dm">🎯 4. LinkedIn / X DM (Para CFOs y Controllers - Prospección 1 a 1)</option>
+                            <option value="cfo_email">📧 5. Cold Email B2B (Directores Financieros &amp; PyMEs)</option>
+                            <option value="cfo_followup">💬 6. Mensaje de Seguimiento / Follow-Up (Día 3)</option>
+                            <option value="finance">🧾 7. Post Orgánico: Facturación &amp; Fugas en CFOs</option>
+                            <option value="realestate">🏠 8. Post Orgánico: Bienes Raíces &amp; Arrendamientos</option>
+                            <option value="it">💻 9. Post Orgánico: Servicios IT &amp; SLA</option>
+                        </select>
+                    </div>
+                    <div class="p-4 bg-dark-surface border border-dark-border rounded-xl text-xs space-y-2 text-gray-400">
+                        <span class="text-accent-blue font-bold">💡 Consejo de Conversión:</span>
+                        <p>Publica estos casos de uso en grupos de LinkedIn de Administradores de Inmuebles, Foros Contables y en Reddit (`r/smallbusiness`, `r/realestateinvesting`).</p>
+                    </div>
+                </div>
+
+                <!-- PREVISUALIZACIÓN MULTIMEDIA VISUAL Y COPY -->
+                <div class="lg:col-span-2 space-y-4">
+                    <!-- VISOR MULTIMEDIA VISUAL DE DIAPOSITIVAS INTERACTIVAS -->
+                    <div id="carousel-visual-container" class="p-6 rounded-2xl bg-dark-surface border-2 border-purple-500/40 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-dark-border pb-3 mb-4 font-mono text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
+                                <span class="text-white font-bold">🎬 Visor Multimedia de Diapositiva LinkedIn</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span id="carousel-slide-counter" class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-bold border border-purple-500/30">Diapositiva 1 / 5</span>
+                            </div>
+                        </div>
+
+                        <!-- CANVAS DE LA DIAPOSITIVA ACTIVA -->
+                        <div id="carousel-slide-canvas" class="min-h-[220px] p-6 rounded-xl bg-gradient-to-br from-dark-card via-slate-900 to-dark-card border border-dark-border flex flex-col justify-between shadow-inner">
+                            <!-- CONTENIDO DINÁMICO DE LA DIAPOSITIVA -->
+                        </div>
+
+                        <!-- CONTROLES INTERACTIVOS MULTIMEDIA -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4 pt-3 border-t border-dark-border font-mono text-xs">
+                            <div class="flex items-center gap-2">
+                                <button onclick="AdminApp.prevCarouselSlide()" class="px-4 py-2 rounded-xl bg-dark-card hover:bg-purple-950 text-purple-300 border border-purple-500/40 font-bold transition-all cursor-pointer">
+                                    ⬅️ Anterior
+                                </button>
+                                <button onclick="AdminApp.nextCarouselSlide()" class="px-4 py-2 rounded-xl bg-dark-card hover:bg-purple-950 text-purple-300 border border-purple-500/40 font-bold transition-all cursor-pointer">
+                                    Siguiente ➡️
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="AdminApp.printCarouselPDF()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold transition-all shadow-glow cursor-pointer flex items-center gap-1.5">
+                                    <span>📥 Descargar como PDF para LinkedIn</span>
+                                </button>
+                                <button onclick="AdminApp.copySocialCopy()" class="px-4 py-2 rounded-xl bg-accent-blue text-black font-bold hover:opacity-90 transition-all cursor-pointer">
+                                    📋 Copiar Texto
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TEXTAREA EXPANDIBLE PARA COPIAR -->
+                    <div class="space-y-2 font-mono text-xs">
+                        <div class="flex items-center justify-between text-gray-400">
+                            <span>Texto Plano del Guion / Copia de Seguridad:</span>
+                        </div>
+                        <textarea id="social-copy-output" rows="4" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-3 text-xs font-mono text-gray-300 focus:outline-none"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: ESTRATEGIA 2 - SELLO VIRAL DE CONTRATO AUDITADO -->
+        <div id="tab-content-verify" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
+                        <span>🛡️ Estrategia 2: Sello Viral de Verificación (Mecanismo DocuSign)</span>
+                        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/40">VIRAL LOOP</span>
+                    </h3>
+                    <p class="text-xs text-gray-400 font-mono mt-1">
+                        Cada contrato auditado lleva este sello digital con enlace público. La contraparte hace clic para verificarlo y se convierte en nuevo cliente.
+                    </p>
+                </div>
+                <a href="/verificar" target="_blank" class="px-4 py-2 rounded-xl bg-gradient-to-r from-accent-blue to-accent-emerald text-black font-bold text-xs font-mono transition-all flex items-center gap-2">
+                    <span>🔗 Abrir Validador Público (/verificar)</span>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- PREVIEW DEL SELLO DIGITAL -->
+                <div class="p-6 rounded-2xl bg-dark-surface border border-emerald-500/40 space-y-4">
+                    <div class="text-xs font-mono text-emerald-400 font-bold uppercase">Previsualización del Sello en Contratos &amp; Facturas:</div>
+                    
+                    <div class="p-4 rounded-xl bg-dark-card border border-dark-border flex items-center justify-between gap-3 shadow-glow">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/30">
+                                🛡️
+                            </div>
+                            <div>
+                                <span class="text-xs font-bold text-white block">AuditFlow AI — Documento Auditado &amp; Blindado</span>
+                                <span class="text-[10px] font-mono text-gray-400">Certificación de Riesgo Mitigado • PCAOB / GAAP</span>
+                            </div>
+                        </div>
+                        <span class="text-[10px] font-mono text-accent-blue underline">Verificar Autenticidad →</span>
+                    </div>
+
+                    <div class="text-[11px] text-gray-400 font-mono space-y-1">
+                        <p>✓ Se estampa automáticamente en reportes descargados en PDF y Word.</p>
+                        <p>✓ Dirige a la contraparte legal a la página interactiva <code class="text-accent-blue">audiflowai.com/verificar</code>.</p>
+                    </div>
+                </div>
+
+                <!-- CÓDIGO HTML PARA EMBEBER EN FACTURAS / CORREOS -->
+                <div class="space-y-3 font-mono">
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-300">Código HTML para Firma de Correo / Web:</span>
+                        <button onclick="AdminApp.copyBadgeEmbedCode()" class="px-3 py-1 rounded-lg bg-accent-blue text-black font-bold text-xs hover:opacity-90 transition-all cursor-pointer">
+                            📋 Copiar Código
+                        </button>
+                    </div>
+                    <textarea id="badge-embed-code" rows="7" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-3 text-xs text-emerald-300 font-mono focus:outline-none"><div style="border:1px solid #10b981;padding:10px 14px;border-radius:10px;background:#09090b;display:inline-flex;align-items:center;gap:10px;font-family:sans-serif;">
+  <span style="font-size:18px;">🛡️</span>
+  <div>
+    <strong style="color:#ffffff;font-size:12px;display:block;">Términos Auditados &amp; Verificados</strong>
+    <a href="https://audiflowai.com/verificar" style="color:#38bdf8;font-size:11px;text-decoration:underline;">Verificar Certificado con AuditFlow AI →</a>
+  </div>
+</div></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: MOTOR DE PROSPECCIÓN B2B AUTOMATIZADA MULTI-PAÍS (COLD EMAIL) -->
         <div id="tab-content-outreach" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
             <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
                 <div>
@@ -345,10 +608,10 @@
                         <div>
                             <label class="block text-xs font-mono text-gray-300 mb-1">Cadencia Outbound (4 Toques):</label>
                             <select id="outreach-cadence-touch" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
-                                <option value="touch_1_gift">🎯 Toque 1: Gancho Aversión a Pérdida & Auditoría Gratis (Día 1)</option>
-                                <option value="touch_2_roi">📊 Toque 2: Caso de Estudio ROI & Fuga $4,200 (Día 3)</option>
+                                <option value="touch_1_gift">🎯 Toque 1: Gancho Aversión a Pérdida &amp; Auditoría Gratis (Día 1)</option>
+                                <option value="touch_2_roi">📊 Toque 2: Caso de Estudio ROI &amp; Fuga $4,200 (Día 3)</option>
                                 <option value="touch_3_diagnostic">🔍 Toque 3: Pregunta Diagnóstico en TI / Proveedores (Día 7)</option>
-                                <option value="touch_4_breakup">🚪 Toque 4: Break-Up Email & Acceso Permanente (Día 12)</option>
+                                <option value="touch_4_breakup">🚪 Toque 4: Break-Up Email &amp; Acceso Permanente (Día 12)</option>
                             </select>
                         </div>
                     </div>
@@ -372,7 +635,7 @@ luis.solano@agencia-cr.com, Luis Solano, Costa Rica Logistics, VP Finance, Costa
 mariana.chaves@tecnologia-cr.com, Mariana Chaves, CR Tech Solutions, General Counsel, Costa Rica
 esteban.vargas@medicina-cr.com, Esteban Vargas, Servicios Médicos CR, CFO, Costa Rica
 valeria.valerio@export-cr.com, Valeria Valerio, Costa Rica Export Group, Legal Director, Costa Rica
-roberto.arias@logistica-pa.com, Roberto Arias, Panamá Logistics & Services, General Counsel, Panama
+roberto.arias@logistica-pa.com, Roberto Arias, Panamá Logistics &amp; Services, General Counsel, Panama
 diego.guardia@banco-pa.com, Diego Guardia, Capital Financiero PA, CFO, Panama
 camila.montero@puertos-pa.com, Camila Montero, Operadora Portuaria PA, Legal Director, Panama
 javier.sucre@inmobiliaria-pa.com, Javier Sucre, Desarrollos Inmobiliarios PA, VP Finance, Panama
@@ -380,7 +643,7 @@ miguel.torres@grupo-mx.com, Miguel Torres, Grupo México Retail, CFO, Mexico
 laura.hernandez@software-mx.com, Laura Hernández, Mexican Software Corp, Legal Director, Mexico
 alejandro.ruiz@automotriz-mx.com, Alejandro Ruiz, Automotriz Mexicana, VP Finance, Mexico
 monica.salazar@farmaceutica-mx.com, Mónica Salazar, Farma México SA, General Counsel, Mexico
-hector.villanueva@logistica-mx.com, Héctor Villanueva, Transportes & Logística MX, CFO, Mexico
+hector.villanueva@logistica-mx.com, Héctor Villanueva, Transportes &amp; Logística MX, CFO, Mexico
 david.smith@tech-us.com, David Smith, US Enterprise Software, VP Finance, Estados Unidos
 jennifer.davis@law-us.com, Jennifer Davis, US Corporate Law Group, General Counsel, Estados Unidos
 michael.brown@health-us.com, Michael Brown, Healthcare Solutions US, CFO, Estados Unidos
@@ -411,48 +674,49 @@ bjorn.olsen@software-no.no, Bjørn Olsen, Oslo Enterprise Software, CFO, Noruega
 mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General Counsel, Finlandia
 juha.korhonen@forest-fi.fi, Juha Korhonen, Finnish Industrial Group, CFO, Finlandia
 elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance, Finlandia</textarea>
-                    </div>
-
-                    <div class="flex flex-wrap items-center gap-3">
-                        <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer">
-                            🚀 Disparar Campaña B2B Real (Hook Irresistible)
-                        </button>
-                        <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
-                            🧪 Simulación de Prueba (Test Mode)
-                        </button>
-                        <button onclick="AdminApp.loadProspectsBatch('cfos_500')" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
-                            👑 Cargar 500 Directores Financieros (CFOs)
-                        </button>
-                        <button onclick="AdminApp.loadProspectsBatch('controllers_500')" class="px-4 py-2.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
-                            📊 Cargar 500 Financial Controllers
-                        </button>
-                        <button onclick="AdminApp.loadProspectsBatch('all_1000')" class="px-4 py-2.5 rounded-xl bg-accent-blue/20 border border-accent-blue/50 text-accent-blue hover:text-white font-mono text-xs transition-all cursor-pointer">
-                            🚀 Cargar 1,000 Ejecutivos (CFOs + Controllers)
-                        </button>
-                        <button onclick="AdminApp.triggerLeadRecovery()" class="px-4 py-2.5 rounded-xl bg-amber-950/80 border border-amber-500/40 text-amber-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
-                            🔁 Recuperar Leads Abandonados
-                        </button>
-                    </div>
                 </div>
 
-                <!-- GUÍAS & STATUS -->
-                <div class="bg-dark-surface border border-dark-border rounded-xl p-4 text-xs space-y-3 font-mono">
-                    <h4 class="font-bold text-accent-blue text-sm border-b border-dark-border pb-2">📋 Estado del Despachador</h4>
-                    <p class="text-gray-300">Remitente Primario: <span class="text-emerald-400 font-bold">Resend API (ricardo@audiflowai.com / 3,000/mes)</span></p>
-                    <p class="text-gray-300">Respaldo Automático: <span class="text-blue-400">Gmail SMTP (rick28191@gmail.com)</span></p>
-                    <p class="text-gray-300">Hook Activo: <span class="text-emerald-400">🎁 Auditoría 100% Gratis de Regalo</span></p>
-                    <p class="text-gray-300">Detección: <span class="text-amber-400">$3,500 - $18,000 USD en <8s</span></p>
-                    <div id="outreach-status-log" class="p-3 bg-black/40 border border-dark-border rounded-lg text-[11px] text-gray-400 min-h-[100px] overflow-y-auto font-mono">
-                        Esperando orden de lanzamiento de campaña...
-                    </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer">
+                        🚀 Disparar Campaña B2B Real (Hook Irresistible)
+                    </button>
+                    <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
+                        🧪 Simulación de Prueba (Test Mode)
+                    </button>
+                    <button onclick="AdminApp.loadProspectsBatch('cfos_500')" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                        👑 Cargar 500 Directores Financieros (CFOs)
+                    </button>
+                    <button onclick="AdminApp.loadProspectsBatch('controllers_500')" class="px-4 py-2.5 rounded-xl bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                        📊 Cargar 500 Financial Controllers
+                    </button>
+                    <button onclick="AdminApp.loadProspectsBatch('all_1000')" class="px-4 py-2.5 rounded-xl bg-accent-blue/20 border border-accent-blue/50 text-accent-blue hover:text-white font-mono text-xs transition-all cursor-pointer">
+                        🚀 Cargar 1,000 Ejecutivos (CFOs + Controllers)
+                    </button>
+                    <button onclick="AdminApp.triggerLeadRecovery()" class="px-4 py-2.5 rounded-xl bg-amber-950/80 border border-amber-500/40 text-amber-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
+                        🔁 Recuperar Leads Abandonados
+                    </button>
                 </div>
             </div>
-        <!-- TAB 4: CANAL 2 - SEO PROGRAMÁTICO & INDEXNOW PINGER -->
+
+            <!-- GUÍAS & STATUS -->
+            <div class="bg-dark-surface border border-dark-border rounded-xl p-4 text-xs space-y-3 font-mono">
+                <h4 class="font-bold text-accent-blue text-sm border-b border-dark-border pb-2">📋 Estado del Despachador</h4>
+                <p class="text-gray-300">Remitente Primario: <span class="text-emerald-400 font-bold">Resend API (ricardo@audiflowai.com / 3,000/mes)</span></p>
+                <p class="text-gray-300">Respaldo Automático: <span class="text-blue-400">Gmail SMTP (rick28191@gmail.com)</span></p>
+                <p class="text-gray-300">Hook Activo: <span class="text-emerald-400">🎁 Auditoría 100% Gratis de Regalo</span></p>
+                <p class="text-gray-300">Detección: <span class="text-amber-400">$3,500 - $18,000 USD en &lt;8s</span></p>
+                <div id="outreach-status-log" class="p-3 bg-black/40 border border-dark-border rounded-lg text-[11px] text-gray-400 min-h-[100px] overflow-y-auto font-mono">
+                    Esperando orden de lanzamiento de campaña...
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 7: CANAL 2 - SEO PROGRAMÁTICO & INDEXNOW PINGER -->
         <div id="tab-content-seo" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
             <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
                 <div>
                     <h3 class="font-bold text-white text-lg flex items-center gap-2">
-                        🔍 Canal 2: Control de SEO & Indexación Instantánea (IndexNow Protocol)
+                        🔍 Canal 2: Control de SEO &amp; Indexación Instantánea (IndexNow Protocol)
                     </h3>
                     <p class="text-xs text-gray-400 font-mono mt-1">
                         Notifica a Bing, Yandex y motores compatibles la presencia de tus 4 URLs de alta intención B2B en menos de 5 segundos.
@@ -497,11 +761,11 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
             </div>
         </div>
 
-        <!-- TAB 5: CANAL 3 - DIRECTORIOS B2B & PLAZAS MICROSAAS -->
+        <!-- TAB 8: CANAL 3 - DIRECTORIOS B2B & PLAZAS MICROSAAS -->
         <div id="tab-content-directories" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
             <div class="border-b border-dark-border pb-4 mb-6">
                 <h3 class="font-bold text-white text-lg flex items-center gap-2">
-                    🌐 Canal 3: Lanzamiento en Directorios B2B & Plazas MicroSaaS
+                    🌐 Canal 3: Lanzamiento en Directorios B2B &amp; Plazas MicroSaaS
                 </h3>
                 <p class="text-xs text-gray-400 font-mono mt-1">
                     Posiciona AuditFlow AI en las plataformas de descubrimiento tecnológico de mayor dominio para obtener backlinks gratuitos de alta autoridad.
@@ -553,262 +817,12 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
             </div>
         </div>
 
-        <!-- TAB: ESTRATEGIA 1 - AUDITORÍAS SOMBRA PROACTIVAS (SHADOW AUDITS B2B) -->
-        <div id="tab-content-shadow" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
-            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
-                        <span>🕵️ Estrategia 1: Auditorías Sombra Proactivas (Outbound de Cero Fricción)</span>
-                        <span class="text-xs font-mono text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-full border border-amber-500/40">🔥 TOP TREND 2026</span>
-                    </h3>
-                    <p class="text-xs text-gray-400 font-mono mt-1">
-                        No le pidas al CFO que suba su contrato privado. Envíale un diagnóstico pre-calculado de los proveedores que su empresa ya utiliza hoy.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- CARD 1: LICENCIAS CLOUD & SAAS -->
-                <div class="p-5 rounded-2xl bg-dark-surface border border-border-dark flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-mono font-bold text-accent-blue bg-blue-950/60 px-2.5 py-1 rounded-lg border border-accent-blue/30">💻 Cloud / SaaS (M365, AWS, Salesforce)</span>
-                            <span class="text-xs font-mono font-extrabold text-red-400">-$14,400 USD/año</span>
-                        </div>
-                        <h4 class="text-white font-bold text-sm mb-1">Cláusula de Auto-Renovación e Indexación Silenciosa</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            Renovación automática forzosa a 36 meses con incremento unilateral de hasta +15% si no se notifica con 90 días de anticipación por escrito.
-                        </p>
-                        <div class="p-3 rounded-xl bg-dark-card border border-border-dark text-[11px] font-mono text-emerald-300">
-                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Notificación reducida a 30 días con tope de IPC máximo del +3% anual o derecho de rescisión sin penalización.
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 pt-2">
-                        <button onclick="AdminApp.copyShadowAuditMessage('cloud')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
-                            📋 Copiar Mensaje Waalaxy
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 2: ARRENDAMIENTO COMERCIAL -->
-                <div class="p-5 rounded-2xl bg-dark-surface border border-border-dark flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-mono font-bold text-accent-emerald bg-emerald-950/60 px-2.5 py-1 rounded-lg border border-accent-emerald/30">🏢 Arrendamiento Comercial / Naves</span>
-                            <span class="text-xs font-mono font-extrabold text-red-400">-$18,500 USD/año</span>
-                        </div>
-                        <h4 class="text-white font-bold text-sm mb-1">Penalización Abusiva por Rescisión Anticipada</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            Obligación de liquidar el 100% de los cánones restantes del contrato si el arrendatario reduce operaciones o rescinde antes de tiempo.
-                        </p>
-                        <div class="p-3 rounded-xl bg-dark-card border border-border-dark text-[11px] font-mono text-emerald-300">
-                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Penalización máxima de 2 mensualidades con preaviso de 60 días en caso de reestructuración corporativa.
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 pt-2">
-                        <button onclick="AdminApp.copyShadowAuditMessage('lease')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
-                            📋 Copiar Mensaje Waalaxy
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 3: SERVICIOS IT & DESARROLLO -->
-                <div class="p-5 rounded-2xl bg-dark-surface border border-border-dark flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-mono font-bold text-purple-400 bg-purple-950/60 px-2.5 py-1 rounded-lg border border-purple-500/30">⚙️ Servicios IT / Dev Outsourcing</span>
-                            <span class="text-xs font-mono font-extrabold text-red-400">-$9,200 USD/año</span>
-                        </div>
-                        <h4 class="text-white font-bold text-sm mb-1">Vacíos en SLAs y Cesión Condicionada de IP</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            Ausencia de descuentos económicos por caída de servicio (Downtime) y retención del código fuente o repositorios ante disputas de facturación.
-                        </p>
-                        <div class="p-3 rounded-xl bg-dark-card border border-border-dark text-[11px] font-mono text-emerald-300">
-                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Cesión inmediata de propiedad intelectual desde la creación y crédito del 15% por cada hora fuera de SLA.
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 pt-2">
-                        <button onclick="AdminApp.copyShadowAuditMessage('it')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
-                            📋 Copiar Mensaje Waalaxy
-                        </button>
-                    </div>
-                </div>
-
-                <!-- CARD 4: FACTURAS DE PROVEEDORES -->
-                <div class="p-5 rounded-2xl bg-dark-surface border border-border-dark flex flex-col justify-between hover:border-amber-500/50 transition-all space-y-4">
-                    <div>
-                        <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-mono font-bold text-amber-400 bg-amber-950/60 px-2.5 py-1 rounded-lg border border-amber-500/30">🧾 Facturación Proveedores / Logística</span>
-                            <span class="text-xs font-mono font-extrabold text-red-400">-$6,300 USD/año</span>
-                        </div>
-                        <h4 class="text-white font-bold text-sm mb-1">Sobrecargos de Combustible y Gastos No Cotizados</h4>
-                        <p class="text-xs text-gray-300 leading-relaxed mb-3">
-                            Facturación recurrente de conceptos accesorios ('manejo administrativo', 'ajuste de combustible') no pactados en la orden de compra original.
-                        </p>
-                        <div class="p-3 rounded-xl bg-dark-card border border-border-dark text-[11px] font-mono text-emerald-300">
-                            🛡️ <strong>Contra-cláusula de blindaje:</strong> Cláusula de precio cerrado vinculante. Toda partida adicional requiere aprobación previa por escrito.
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-2 pt-2">
-                        <button onclick="AdminApp.copyShadowAuditMessage('invoice')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
-                            📋 Copiar Mensaje Waalaxy
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB: ESTRATEGIA 2 - SELLO VIRAL DE CONTRATO AUDITADO -->
-        <div id="tab-content-verify" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
-            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
-                        <span>🛡️ Estrategia 2: Sello Viral de Verificación (Mecanismo DocuSign)</span>
-                        <span class="text-xs font-mono text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/40">VIRAL LOOP</span>
-                    </h3>
-                    <p class="text-xs text-gray-400 font-mono mt-1">
-                        Cada contrato auditado lleva este sello digital con enlace público. La contraparte hace clic para verificarlo y se convierte en nuevo cliente.
-                    </p>
-                </div>
-                <a href="/verificar" target="_blank" class="px-4 py-2 rounded-xl bg-gradient-to-r from-accent-blue to-accent-emerald text-black font-bold text-xs font-mono transition-all flex items-center gap-2">
-                    <span>🔗 Abrir Validador Público (/verificar)</span>
-                </a>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- PREVIEW DEL SELLO DIGITAL -->
-                <div class="p-6 rounded-2xl bg-dark-surface border border-emerald-500/40 space-y-4">
-                    <div class="text-xs font-mono text-emerald-400 font-bold uppercase">Previsualización del Sello en Contratos & Facturas:</div>
-                    
-                    <div class="p-4 rounded-xl bg-dark-card border border-border-dark flex items-center justify-between gap-3 shadow-glow">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/30">
-                                🛡️
-                            </div>
-                            <div>
-                                <span class="text-xs font-bold text-white block">AuditFlow AI — Documento Auditado & Blindado</span>
-                                <span class="text-[10px] font-mono text-gray-400">Certificación de Riesgo Mitigado • PCAOB / GAAP</span>
-                            </div>
-                        </div>
-                        <span class="text-[10px] font-mono text-accent-blue underline">Verificar Autenticidad →</span>
-                    </div>
-
-                    <div class="text-[11px] text-gray-400 font-mono space-y-1">
-                        <p>✓ Se estampa automáticamente en reportes descargados en PDF y Word.</p>
-                        <p>✓ Dirige a la contraparte legal a la página interactiva <code class="text-accent-blue">audiflowai.com/verificar</code>.</p>
-                    </div>
-                </div>
-
-                <!-- CÓDIGO HTML PARA EMBEBER EN FACTURAS / CORREOS -->
-                <div class="space-y-3 font-mono">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-gray-300">Código HTML para Firma de Correo / Web:</span>
-                        <button onclick="AdminApp.copyBadgeEmbedCode()" class="px-3 py-1 rounded-lg bg-accent-blue text-black font-bold text-xs hover:opacity-90 transition-all cursor-pointer">
-                            📋 Copiar Código
-                        </button>
-                    </div>
-                    <textarea id="badge-embed-code" rows="7" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-3 text-xs text-emerald-300 font-mono focus:outline-none"><div style="border:1px solid #10b981;padding:10px 14px;border-radius:10px;background:#09090b;display:inline-flex;align-items:center;gap:10px;font-family:sans-serif;">
-  <span style="font-size:18px;">🛡️</span>
-  <div>
-    <strong style="color:#ffffff;font-size:12px;display:block;">Términos Auditados & Verificados</strong>
-    <a href="https://audiflowai.com/verificar" style="color:#38bdf8;font-size:11px;text-decoration:underline;">Verificar Certificado con AuditFlow AI →</a>
-  </div>
-</div></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- TAB 6: CANAL 4 - GENERADOR DE COPYWRITING ORGANICO PARA LINKEDIN & REDDIT -->
-        <div id="tab-content-social" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
-            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
-                <div>
-                    <h3 class="font-bold text-white text-lg flex items-center gap-2">
-                        📢 Canal 4: Generador de Publicaciones Orgánicas (LinkedIn & Reddit B2B)
-                    </h3>
-                    <p class="text-xs text-gray-400 font-mono mt-1">
-                        Genera copy de alto impacto optimizado para comunidades financieras, de bienes raíces y servicios de tecnología con 1 solo clic.
-                    </p>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- SELECCIÓN DE NICHO -->
-                <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-mono text-gray-300 mb-1">Seleccionar Tipo de Mensaje / Nicho:</label>
-                        <select id="social-niche-select" onchange="AdminApp.generateSocialCopy()" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-sm text-white font-mono focus:border-accent-blue focus:outline-none">
-                            <option value="carousel_cloud">🔥 1. Carrusel LinkedIn Viral: 3 Trampas en Licencias Cloud/SaaS</option>
-                            <option value="carousel_lease">🏢 2. Carrusel LinkedIn Viral: Cláusula de $18,500 en Alquiler Comercial</option>
-                            <option value="carousel_sla">💻 3. Carrusel LinkedIn Viral: Cómo Blindar Contratos de TI & SLAs</option>
-                            <option value="cfo_dm">🎯 4. LinkedIn / X DM (Para CFOs y Controllers - Prospección 1 a 1)</option>
-                            <option value="cfo_email">📧 5. Cold Email B2B (Directores Financieros & PyMEs)</option>
-                            <option value="cfo_followup">💬 6. Mensaje de Seguimiento / Follow-Up (Día 3)</option>
-                            <option value="finance">🧾 7. Post Orgánico: Facturación & Fugas en CFOs</option>
-                            <option value="realestate">🏠 8. Post Orgánico: Bienes Raíces & Arrendamientos</option>
-                            <option value="it">💻 9. Post Orgánico: Servicios IT & SLA</option>
-                        </select>
-                    </div>
-                    <div class="p-4 bg-dark-surface border border-dark-border rounded-xl text-xs space-y-2 text-gray-400">
-                        <span class="text-accent-blue font-bold">💡 Consejo de Conversión:</span>
-                        <p>Publica estos casos de uso en grupos de LinkedIn de Administradores de Inmuebles, Foros Contables y en Reddit (`r/smallbusiness`, `r/realestateinvesting`).</p>
-                    </div>
-                </div>
-
-                <!-- PREVISUALIZACIÓN MULTIMEDIA VISUAL Y COPY -->
-                <div class="lg:col-span-2 space-y-4">
-                    <!-- VISOR MULTIMEDIA VISUAL DE DIAPOSITIVAS INTERACTIVAS -->
-                    <div id="carousel-visual-container" class="p-6 rounded-2xl bg-dark-surface border-2 border-purple-500/40 shadow-2xl relative overflow-hidden">
-                        <div class="flex items-center justify-between border-b border-border-dark pb-3 mb-4 font-mono text-xs">
-                            <div class="flex items-center gap-2">
-                                <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
-                                <span class="text-white font-bold">🎬 Visor Multimedia de Diapositiva LinkedIn</span>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <span id="carousel-slide-counter" class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-bold border border-purple-500/30">Diapositiva 1 / 5</span>
-                            </div>
-                        </div>
-
-                        <!-- CANVAS DE LA DIAPOSITIVA ACTIVA -->
-                        <div id="carousel-slide-canvas" class="min-h-[220px] p-6 rounded-xl bg-gradient-to-br from-dark-card via-slate-900 to-dark-card border border-border-dark flex flex-col justify-between shadow-inner">
-                            <!-- CONTENIDO DINÁMICO DE LA DIAPOSITIVA -->
-                        </div>
-
-                        <!-- CONTROLES INTERACTIVOS MULTIMEDIA -->
-                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4 pt-3 border-t border-border-dark font-mono text-xs">
-                            <div class="flex items-center gap-2">
-                                <button onclick="AdminApp.prevCarouselSlide()" class="px-4 py-2 rounded-xl bg-dark-card hover:bg-purple-950 text-purple-300 border border-purple-500/40 font-bold transition-all cursor-pointer">
-                                    ⬅️ Anterior
-                                </button>
-                                <button onclick="AdminApp.nextCarouselSlide()" class="px-4 py-2 rounded-xl bg-dark-card hover:bg-purple-950 text-purple-300 border border-purple-500/40 font-bold transition-all cursor-pointer">
-                                    Siguiente ➡️
-                                </button>
-                            </div>
-                            <div class="flex items-center gap-2">
-                                <button onclick="AdminApp.printCarouselPDF()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold transition-all shadow-glow cursor-pointer flex items-center gap-1.5">
-                                    <span>📥 Descargar como PDF para LinkedIn</span>
-                                </button>
-                                <button onclick="AdminApp.copySocialCopy()" class="px-4 py-2 rounded-xl bg-accent-blue text-black font-bold hover:opacity-90 transition-all cursor-pointer">
-                                    📋 Copiar Texto
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- TEXTAREA OCULTO/EXPANDIBLE PARA COPIAR -->
-                    <div class="space-y-2 font-mono text-xs">
-                        <div class="flex items-center justify-between text-gray-400">
-                            <span>Texto Plano del Guion / Copia de Seguridad:</span>
-                        </div>
-                        <textarea id="social-copy-output" rows="4" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-3 text-xs font-mono text-gray-300 focus:outline-none"></textarea>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </main>
 
     <!-- PESTAÑA FLOTANTE INFERIOR IZQUIERDA: MANUAL DE ADMINISTRACIÓN -->
     <div class="fixed bottom-5 left-5 z-40">
         <button onclick="AdminApp.openAdminManualModal()" 
-                class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-dark-surface/95 border border-purple-500/40 hover:border-purple-400 text-white shadow-xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 backdrop-blur-md group"
+                class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-dark-surface/95 border border-purple-500/40 hover:border-purple-400 text-white shadow-xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300 backdrop-blur-md group cursor-pointer"
                 title="Manual de Administración B2B y Guía de Uso">
             <span class="text-base group-hover:rotate-12 transition-transform">📘</span>
             <span class="text-xs font-mono font-medium text-gray-200 group-hover:text-purple-300">Manual &amp; Guía Admin</span>
@@ -816,8 +830,8 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
     </div>
 
     <!-- MODAL: MANUAL DE ADMINISTRACIÓN Y GUÍA B2B -->
-    <div id="admin-manual-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-        <div class="bg-dark-card border border-dark-border w-full max-w-3xl rounded-2xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col">
+    <div id="admin-manual-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" onclick="if(event.target===this) AdminApp.closeAdminManualModal()">
+        <div class="bg-dark-card border border-dark-border w-full max-w-3xl rounded-2xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col" onclick="event.stopPropagation()">
             <div class="flex items-center justify-between border-b border-dark-border pb-4">
                 <div class="flex items-center gap-3">
                     <div class="w-10 h-10 rounded-xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-xl shrink-0">⚙️</div>
@@ -827,16 +841,16 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     </div>
                 </div>
                 <div class="flex items-center gap-2">
-                    <button onclick="AdminApp.closeAdminManualModal()" class="text-gray-400 hover:text-white text-xl font-mono p-1 leading-none" title="Cerrar">✕</button>
+                    <button onclick="AdminApp.closeAdminManualModal()" class="text-gray-400 hover:text-white text-xl font-mono p-1 leading-none cursor-pointer" title="Cerrar">✕</button>
                 </div>
             </div>
 
             <!-- TABS DEL MANUAL (ADMIN vs USUARIO APP) -->
             <div class="flex items-center gap-2 mt-4 mb-2 border-b border-dark-border pb-2">
-                <button id="tab-btn-admin-guide" onclick="AdminApp.switchManualTab('admin')" class="px-3 py-1.5 rounded-lg bg-purple-600 text-white font-mono text-xs font-bold transition-all">
+                <button id="tab-btn-admin-guide" onclick="AdminApp.switchManualTab('admin')" class="px-3 py-1.5 rounded-lg bg-purple-600 text-white font-mono text-xs font-bold transition-all cursor-pointer">
                     ⚙️ Manual de Administración (Panel B2B)
                 </button>
-                <button id="tab-btn-user-guide" onclick="AdminApp.switchManualTab('user')" class="px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 hover:text-white font-mono text-xs transition-all">
+                <button id="tab-btn-user-guide" onclick="AdminApp.switchManualTab('user')" class="px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 hover:text-white font-mono text-xs transition-all cursor-pointer">
                     📘 Manual de Usuario (Web App)
                 </button>
             </div>
@@ -952,14 +966,77 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
     <!-- LÓGICA JAVASCRIPT DEL DASHBOARD -->
     <script>
         window.AdminApp = {
-            authToken: sessionStorage.getItem('auditflow_admin_token') || localStorage.getItem('auditflow_admin_token') || '',
+            authToken: '',
+            adminPass: '',
+            isAuthenticating: false,
             statsData: null,
+            currentFilteredLeads: null,
+            currentCarouselSlide: 0,
+
+            // Toast notification helper (Non-blocking replacement for alert)
+            showToast(message, type = 'info') {
+                const container = document.getElementById('toast-container');
+                if (!container) {
+                    console.log(`[Toast ${type}]: ${message}`);
+                    return;
+                }
+                const toast = document.createElement('div');
+                const colors = {
+                    success: 'bg-emerald-950/95 border-emerald-500/60 text-emerald-200 shadow-emerald-950/50',
+                    error: 'bg-red-950/95 border-red-500/60 text-red-200 shadow-red-950/50',
+                    warning: 'bg-amber-950/95 border-amber-500/60 text-amber-200 shadow-amber-950/50',
+                    info: 'bg-slate-900/95 border-accent-blue/60 text-cyan-200 shadow-blue-950/50'
+                };
+                const icons = {
+                    success: '✅',
+                    error: '❌',
+                    warning: '⚠️',
+                    info: 'ℹ️'
+                };
+                toast.className = `p-3.5 rounded-xl border text-xs font-mono backdrop-blur-md shadow-xl flex items-start gap-2.5 pointer-events-auto toast-animate ${colors[type] || colors.info}`;
+                toast.innerHTML = `
+                    <span class="text-base shrink-0">${icons[type] || icons.info}</span>
+                    <div class="flex-1 leading-relaxed break-words">${message}</div>
+                    <button onclick="this.parentElement.remove()" class="text-gray-400 hover:text-white text-sm font-bold shrink-0 ml-1 leading-none">&times;</button>
+                `;
+                container.appendChild(toast);
+                setTimeout(() => {
+                    if (toast.parentElement) {
+                        toast.style.opacity = '0';
+                        toast.style.transform = 'translateY(-10px)';
+                        toast.style.transition = 'all 0.3s ease';
+                        setTimeout(() => toast.remove(), 300);
+                    }
+                }, 4000);
+            },
+
+            // Safe credential retriever
+            getCredentials() {
+                const token = this.authToken || sessionStorage.getItem('auditflow_admin_token') || localStorage.getItem('auditflow_admin_token') || '';
+                const pass = this.adminPass || sessionStorage.getItem('auditflow_admin_pass') || localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
+                return { token, pass };
+            },
+
+            // Build standard fetch headers
+            getAuthHeaders() {
+                const { token, pass } = this.getCredentials();
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                }
+                if (pass) {
+                    headers['X-Admin-Password'] = pass;
+                }
+                return headers;
+            },
 
             init() {
                 const modal = document.getElementById('admin-login-modal');
                 const content = document.getElementById('admin-dashboard-content');
-                
-                // 1. Auto-login vía parámetro URL (?pass=AuditFlow2026! o ?key=... o ?token=...)
+
+                // 1. Check URL parameters for instant login (?pass=AuditFlow2026! or ?token=...)
                 const urlParams = new URLSearchParams(window.location.search);
                 const queryPass = urlParams.get('pass') || urlParams.get('key') || urlParams.get('password') || '';
                 const queryToken = urlParams.get('token') || '';
@@ -968,33 +1045,66 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     const candidate = queryPass || queryToken;
                     if (candidate === 'AuditFlow2026!' || candidate.toLowerCase().includes('auditflow2026') || candidate.includes('admin_token')) {
                         this.authToken = 'admin_token_auditflow_2026';
+                        this.adminPass = 'AuditFlow2026!';
                         sessionStorage.setItem('auditflow_admin_token', this.authToken);
-                        sessionStorage.setItem('auditflow_admin_pass', 'AuditFlow2026!');
+                        sessionStorage.setItem('auditflow_admin_pass', this.adminPass);
                         localStorage.setItem('auditflow_admin_token', this.authToken);
-                        localStorage.setItem('auditflow_admin_pass', 'AuditFlow2026!');
-                        if (modal) { modal.classList.add('hidden'); modal.style.display = 'none'; }
-                        if (content) { content.classList.remove('hidden'); content.style.display = 'block'; }
+                        localStorage.setItem('auditflow_admin_pass', this.adminPass);
+
                         if (window.history && window.history.replaceState) {
                             window.history.replaceState({}, '', window.location.pathname);
                         }
-                        this.loadStats().catch(() => {});
+
+                        this.showDashboard();
+                        this.loadStats();
                         return;
                     }
                 }
 
-                // 2. Auto-login vía sesión guardada
+                // 2. Check saved session
                 const savedToken = sessionStorage.getItem('auditflow_admin_token') || localStorage.getItem('auditflow_admin_token') || '';
-                if (savedToken) {
-                    this.authToken = savedToken;
-                    if (modal) { modal.classList.add('hidden'); modal.style.display = 'none'; }
-                    if (content) { content.classList.remove('hidden'); content.style.display = 'block'; }
-                    this.loadStats().catch(() => {});
+                const savedPass = sessionStorage.getItem('auditflow_admin_pass') || localStorage.getItem('auditflow_admin_pass') || '';
+
+                if (savedToken || savedPass) {
+                    this.authToken = savedToken || 'admin_token_auditflow_2026';
+                    this.adminPass = savedPass || 'AuditFlow2026!';
+                    this.showDashboard();
+                    this.loadStats().catch(() => {
+                        // If loadStats failed completely with 401, fallback to login
+                    });
                     return;
                 }
 
-                // 3. Mostrar modal limpio
-                if (content) { content.classList.add('hidden'); content.style.display = 'none'; }
-                if (modal) { modal.classList.remove('hidden'); modal.style.display = 'flex'; }
+                // 3. Show clean login modal
+                this.showLoginModal();
+            },
+
+            showDashboard() {
+                const modal = document.getElementById('admin-login-modal');
+                const content = document.getElementById('admin-dashboard-content');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    modal.style.display = 'none';
+                }
+                if (content) {
+                    content.classList.remove('hidden');
+                    content.style.display = 'block';
+                }
+            },
+
+            showLoginModal() {
+                const modal = document.getElementById('admin-login-modal');
+                const content = document.getElementById('admin-dashboard-content');
+                if (content) {
+                    content.classList.add('hidden');
+                    content.style.display = 'none';
+                }
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.style.display = 'flex';
+                }
+                const passInput = document.getElementById('admin-password-input');
+                if (passInput) passInput.focus();
             },
 
             quickMasterLogin() {
@@ -1014,13 +1124,14 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     if (typeof e.preventDefault === 'function') e.preventDefault();
                     if (typeof e.stopPropagation === 'function') e.stopPropagation();
                 }
+
+                if (this.isAuthenticating) return;
+
                 const passInput = document.getElementById('admin-password-input');
                 const rawPassword = passInput ? passInput.value : '';
-                const password = rawPassword.trim();
+                const password = (rawPassword || '').trim();
                 const errEl = document.getElementById('login-error');
                 const btn = document.getElementById('btn-admin-login');
-                const modal = document.getElementById('admin-login-modal');
-                const content = document.getElementById('admin-dashboard-content');
                 const rememberMe = document.getElementById('admin-remember-me')?.checked;
 
                 if (!password) {
@@ -1029,11 +1140,12 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                         errEl.classList.remove('hidden');
                         errEl.style.display = 'block';
                     }
-                    alert('⚠️ Por favor ingresa la contraseña maestra: AuditFlow2026!');
+                    this.showToast('Por favor ingresa la contraseña maestra: AuditFlow2026!', 'warning');
                     if (passInput) passInput.focus();
                     return;
                 }
 
+                this.isAuthenticating = true;
                 if (btn) {
                     btn.disabled = true;
                     btn.innerHTML = '🔄 Verificando credenciales...';
@@ -1056,8 +1168,10 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
                     if ((res.ok && data.success) || isMasterMatch) {
                         this.authToken = data.token || 'admin_token_auditflow_2026';
+                        this.adminPass = password;
                         sessionStorage.setItem('auditflow_admin_token', this.authToken);
                         sessionStorage.setItem('auditflow_admin_pass', password);
+
                         if (rememberMe) {
                             localStorage.setItem('auditflow_admin_token', this.authToken);
                             localStorage.setItem('auditflow_admin_pass', password);
@@ -1074,15 +1188,9 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                             errEl.classList.add('hidden');
                             errEl.style.display = 'none';
                         }
-                        if (modal) {
-                            modal.classList.add('hidden');
-                            modal.style.display = 'none';
-                        }
-                        if (content) {
-                            content.classList.remove('hidden');
-                            content.style.display = 'block';
-                        }
 
+                        this.showDashboard();
+                        this.showToast('Autenticación exitosa. Bienvenido al Panel de Control.', 'success');
                         this.loadStats().catch(loadErr => console.warn('loadStats info:', loadErr));
                         return;
                     } else {
@@ -1092,17 +1200,18 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                             errEl.classList.remove('hidden');
                             errEl.style.display = 'block';
                         }
-                        alert(`❌ ${errorMsg}`);
+                        this.showToast(errorMsg, 'error');
                         if (passInput) passInput.focus();
                     }
                 } catch (err) {
                     console.error('Error de autenticación:', err);
                     if (isMasterMatch) {
                         this.authToken = 'admin_token_auditflow_2026';
+                        this.adminPass = password;
                         sessionStorage.setItem('auditflow_admin_token', this.authToken);
                         sessionStorage.setItem('auditflow_admin_pass', password);
-                        if (modal) { modal.classList.add('hidden'); modal.style.display = 'none'; }
-                        if (content) { content.classList.remove('hidden'); content.style.display = 'block'; }
+                        this.showDashboard();
+                        this.showToast('Autenticado en modo local.', 'success');
                         this.loadStats().catch(() => {});
                         return;
                     }
@@ -1111,8 +1220,9 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                         errEl.classList.remove('hidden');
                         errEl.style.display = 'block';
                     }
-                    alert(`❌ Error al autenticar: ${err.message}`);
+                    this.showToast(`Error al autenticar: ${err.message}`, 'error');
                 } finally {
+                    this.isAuthenticating = false;
                     if (btn) {
                         btn.disabled = false;
                         btn.innerHTML = '🔐 Autenticar y Entrar';
@@ -1172,13 +1282,8 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
 
             async loadStats() {
                 try {
-                    const savedPass = sessionStorage.getItem('auditflow_admin_pass') || '';
-                    const res = await fetch('/api/admin', {
-                        headers: {
-                            'Authorization': `Bearer ${this.authToken}`,
-                            'X-Admin-Password': savedPass
-                        }
-                    });
+                    const headers = this.getAuthHeaders();
+                    const res = await fetch('/api/admin', { headers });
 
                     if (res.status === 401 || res.status === 403) {
                         return false;
@@ -1231,7 +1336,7 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 if (revEl) revEl.innerText = kpis.total_revenue_usd || '$0.00 USD';
                 if (paretoCountEl) paretoCountEl.innerText = kpis.pareto_top_20_count || '100';
                 if (paretoRevEl) paretoRevEl.innerText = kpis.pareto_revenue_potential ? `~${kpis.pareto_revenue_potential} (80% Ingresos)` : '~$59,000 USD (80% Ingresos)';
-                if (uncontactedEl) uncontactedEl.innerText = kpis.new_uncontacted_count !== undefined ? kpis.new_uncontacted_count : '375';
+                if (uncontactedEl) uncontactedEl.innerText = kpis.new_uncontacted_count !== undefined ? kpis.new_uncontacted_count : '500';
                 if (leadsEl) leadsEl.innerText = kpis.total_leads_captured || '500';
             },
 
@@ -1401,7 +1506,6 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 const sorted = [...this.currentFilteredLeads];
 
                 if (criterion === 'PARETO_80_20') {
-                    // Orden 80/20 Pareto: Top 20% primero en orden descendente por Score, luego Standard 80% en orden descendente hasta 500
                     sorted.sort((a, b) => {
                         const aPareto = a.pareto_tier === 'TOP_20' || a.lead_score >= 88;
                         const bPareto = b.pareto_tier === 'TOP_20' || b.lead_score >= 88;
@@ -1467,7 +1571,7 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
             },
 
             switchTab(tab) {
-                const tabs = ['leads', 'tx', 'outreach', 'seo', 'directories', 'social', 'shadow', 'verify'];
+                const tabs = ['leads', 'tx', 'shadow', 'social', 'verify', 'outreach', 'seo', 'directories'];
                 tabs.forEach(t => {
                     const contentEl = document.getElementById(`tab-content-${t}`);
                     const btnEl = document.getElementById(`tab-btn-${t}`);
@@ -1482,9 +1586,13 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     }
                     if (btnEl) {
                         if (t === tab) {
-                            btnEl.className = "px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold transition-all shadow-glow scale-105 cursor-pointer";
+                            btnEl.className = "px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer";
                         } else {
-                            btnEl.className = "px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer";
+                            let defaultTextColor = 'text-gray-300';
+                            if (t === 'shadow') defaultTextColor = 'text-amber-300';
+                            if (t === 'social') defaultTextColor = 'text-purple-300';
+                            if (t === 'verify') defaultTextColor = 'text-emerald-300';
+                            btnEl.className = `px-3 py-2 rounded-lg ${defaultTextColor} hover:text-white hover:bg-dark-card transition-all cursor-pointer`;
                         }
                     }
                 });
@@ -1514,11 +1622,14 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                             logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Indexación notificada con éxito! (${data.urls_submitted || 4} URLs canónicas enviadas a Bing/IndexNow).</span><br>`;
                             logBox.innerHTML += `<span class="text-gray-300 text-[10px] font-mono">📡 URLs: ${data.urls ? data.urls.join(', ') : 'audiflowai.com, /auditar-contrato-arrendamiento, /auditar-factura-proveedor, /auditar-contrato-servicios-it'}</span><br>`;
                         }
+                        this.showToast('Indexación notificada con éxito en IndexNow.', 'success');
                     } else {
                         if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Respuesta: ${data.message || 'Error de respuesta en IndexNow API'}</span><br>`;
+                        this.showToast('Aviso al notificar en IndexNow.', 'warning');
                     }
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error de conexión: ${err.message}</span><br>`;
+                    this.showToast(`Error IndexNow: ${err.message}`, 'error');
                 }
             },
 
@@ -1526,13 +1637,10 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 const logBox = document.getElementById('outreach-status-log');
                 if (logBox) logBox.innerHTML = `🔄 Ejecutando secuencia de recuperación y seguimiento para leads no convertidos...<br>`;
                 try {
-                    const token = sessionStorage.getItem('auditflow_admin_auth') || 'Bearer admin_token_auditflow_2026';
+                    const headers = this.getAuthHeaders();
                     const res = await fetch('/api/lead-recovery', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': token.startsWith('Bearer ') ? token : `Bearer ${token}`
-                        }
+                        headers
                     });
                     const data = await res.json();
                     if (data && data.success) {
@@ -1540,11 +1648,14 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                             logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Lote de recuperación ejecutado con éxito! (${data.total_processed || 0} prospectos contactados).</span><br>`;
                             logBox.innerHTML += `<span class="text-gray-300 text-[10px]">Copia de control enviada a rick28191@gmail.com.</span><br>`;
                         }
+                        this.showToast(`Recuperación ejecutada: ${data.total_processed || 0} prospectos contactados.`, 'success');
                     } else {
                         if (logBox) logBox.innerHTML += `<span class="text-amber-400">⚠️ Aviso: ${data.error || 'No se pudieron procesar leads de recuperación.'}</span><br>`;
+                        this.showToast(data.error || 'Aviso en recuperación de leads.', 'warning');
                     }
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${err.message}</span><br>`;
+                    this.showToast(`Error: ${err.message}`, 'error');
                 }
             },
 
@@ -1603,7 +1714,7 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                 if (batch === 'all_1000') batchLabel = '1,000 Ejecutivos (500 CFOs + 500 Controllers)';
                 
                 if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡${batchLabel} cargados exitosamente (${lines.length} registros listos para Resend / SMTP)!</span><br>`;
-                alert(`⚡ ¡${batchLabel} pre-cargados exitosamente! (${lines.length} registros)`);
+                this.showToast(`¡${batchLabel} pre-cargados exitosamente! (${lines.length} registros)`, 'success');
             },
 
             load500Prospects() {
@@ -1765,7 +1876,6 @@ Escaneo de prueba gratuito:
                 this.renderVisualSlideDeck();
             },
 
-            currentCarouselSlide: 0,
             carouselDecks: {
                 carousel_cloud: [
                     {
@@ -1905,7 +2015,7 @@ Escaneo de prueba gratuito:
                             <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-snug tracking-tight">${s.title}</h2>
                             <p class="text-sm text-gray-300 font-sans leading-relaxed">${s.subtitle}</p>
                         </div>
-                        <div class="pt-4 flex items-center justify-between border-t border-border-dark text-xs font-mono text-emerald-400">
+                        <div class="pt-4 flex items-center justify-between border-t border-dark-border text-xs font-mono text-emerald-400">
                             <span>🛡️ AuditFlow AI Masterclass</span>
                             <span class="font-bold animate-pulse">${s.footer}</span>
                         </div>
@@ -1920,7 +2030,7 @@ Escaneo de prueba gratuito:
                                 ${s.fix}
                             </div>
                         </div>
-                        <div class="pt-3 border-t border-border-dark flex items-center justify-between text-xs font-mono text-gray-400">
+                        <div class="pt-3 border-t border-dark-border flex items-center justify-between text-xs font-mono text-gray-400">
                             <span>Comenta para recibir el archivo</span>
                             <span class="text-accent-blue font-bold">@AuditFlowAI</span>
                         </div>
@@ -1934,11 +2044,11 @@ Escaneo de prueba gratuito:
                             </div>
                             <h3 class="text-base sm:text-lg font-bold text-white">${s.title}</h3>
                             <p class="text-xs text-gray-300 font-sans leading-relaxed">${s.desc}</p>
-                            <div class="p-3 rounded-xl bg-dark-card border border-border-dark text-xs font-mono text-emerald-300">
+                            <div class="p-3 rounded-xl bg-dark-card border border-dark-border text-xs font-mono text-emerald-300">
                                 ${s.fix}
                             </div>
                         </div>
-                        <div class="pt-2 border-t border-border-dark flex items-center justify-between text-[11px] font-mono text-gray-500">
+                        <div class="pt-2 border-t border-dark-border flex items-center justify-between text-[11px] font-mono text-gray-500">
                             <span>AuditFlow AI • Blindaje Legal</span>
                             <span>Desliza ➡️</span>
                         </div>
@@ -1963,7 +2073,7 @@ Escaneo de prueba gratuito:
 
                 const printWindow = window.open('', '_blank');
                 if (!printWindow) {
-                    alert('⚠️ Por favor permite las ventanas emergentes para descargar las diapositivas.');
+                    this.showToast('Por favor permite las ventanas emergentes para descargar las diapositivas.', 'warning');
                     return;
                 }
 
@@ -1986,6 +2096,7 @@ Escaneo de prueba gratuito:
                 `).join('');
 
                 printWindow.document.write(`
+                    <!DOCTYPE html>
                     <html>
                     <head>
                         <title>Carrusel_LinkedIn_${niche}_AuditFlow_AI</title>
@@ -2000,7 +2111,7 @@ Escaneo de prueba gratuito:
                             window.onload = function() {
                                 setTimeout(function() { window.print(); }, 500);
                             };
-                        </script>
+                        <\/script>
                     </body>
                     </html>
                 `);
@@ -2010,8 +2121,11 @@ Escaneo de prueba gratuito:
             copySocialCopy() {
                 const outputEl = document.getElementById('social-copy-output');
                 if (outputEl && outputEl.value) {
-                    navigator.clipboard.writeText(outputEl.value);
-                    alert('📋 ¡Copywriting copiado al portapapeles con éxito! Listo para pegar en LinkedIn o Reddit.');
+                    navigator.clipboard.writeText(outputEl.value).then(() => {
+                        this.showToast('¡Copywriting copiado al portapapeles! Listo para pegar en LinkedIn o Reddit.', 'success');
+                    }).catch(() => {
+                        this.showToast('Texto seleccionado para copiar.', 'info');
+                    });
                 }
             },
 
@@ -2026,15 +2140,21 @@ Escaneo de prueba gratuito:
                 } else {
                     msg = `Hola [Nombre], detectamos que hasta el 68% de las facturas de proveedores incluyen partidas de sobrecargo no cotizadas ($6,300 USD/año en fugas). Con AuditFlow AI puedes conciliar tus facturas en <10s en memoria RAM: https://audiflowai.com/auditar-factura-proveedor?ref=waalaxy`;
                 }
-                navigator.clipboard.writeText(msg);
-                alert('📋 ¡Mensaje de Auditoría Sombra copiado al portapapeles! Listo para enviar por Waalaxy / LinkedIn.');
+                navigator.clipboard.writeText(msg).then(() => {
+                    this.showToast('¡Mensaje de Auditoría Sombra copiado! Listo para Waalaxy / LinkedIn.', 'success');
+                }).catch(() => {
+                    this.showToast('Mensaje preparado para envío.', 'info');
+                });
             },
 
             copyBadgeEmbedCode() {
                 const el = document.getElementById('badge-embed-code');
                 if (el) {
-                    navigator.clipboard.writeText(el.value);
-                    alert('📋 ¡Código del Sello Viral copiado! Pégalo en el pie de página de tus correos o presupuestos.');
+                    navigator.clipboard.writeText(el.value).then(() => {
+                        this.showToast('¡Código del Sello Viral copiado! Pégalo en tu web o pie de correo.', 'success');
+                    }).catch(() => {
+                        this.showToast('Código del Sello listo.', 'info');
+                    });
                 }
             },
 
@@ -2048,39 +2168,32 @@ Escaneo de prueba gratuito:
             },
 
             async resendLeadOffer(email, name) {
-                const savedPass = sessionStorage.getItem('auditflow_admin_pass') || localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
                 try {
+                    const headers = this.getAuthHeaders();
+                    const { pass } = this.getCredentials();
                     const res = await fetch('/api/admin', {
                         method: 'POST',
-                        headers: { 
-                            'Content-Type': 'application/json',
-                            'X-Admin-Password': savedPass,
-                            'Authorization': `Bearer ${this.authToken || 'admin_token_auditflow_2026'}`
-                        },
-                        body: JSON.stringify({ action: 'resend_lead_offer', email, name, admin_password: savedPass })
+                        headers,
+                        body: JSON.stringify({ action: 'resend_lead_offer', email, name, admin_password: pass })
                     });
                     const data = await res.json();
                     if (data.success) {
-                        // Actualizar reactivamente el estado y conteo del lead en pantalla y caché
                         this.updateLeadEmailSent(email, data.emails_sent);
-                        alert(`✅ ${data.message || `Oferta corporativa enviada con éxito a ${email}`}`);
+                        this.showToast(data.message || `Oferta enviada con éxito a ${email}`, 'success');
                     } else {
-                        alert('⚠️ ' + (data.error || 'No se pudo enviar el correo'));
+                        this.showToast(data.error || 'No se pudo enviar el correo', 'warning');
                     }
                 } catch (e) {
-                    alert('Error enviando correo: ' + e.message);
+                    this.showToast('Error enviando correo: ' + e.message, 'error');
                 }
             },
 
             async resendOffersToFilteredLeads() {
                 const targetLeads = this.currentFilteredLeads || (this.statsData && this.statsData.leads) || [];
                 if (targetLeads.length === 0) {
-                    alert('⚠️ No hay prospectos visibles en la tabla para re-enviar ofertas.');
+                    this.showToast('No hay prospectos visibles en la tabla para re-enviar ofertas.', 'warning');
                     return;
                 }
-
-                const confirmed = confirm(`¿Deseas re-enviar la oferta corporativa de cortesía en automático a los ${targetLeads.length} prospectos visibles en la tabla?`);
-                if (!confirmed) return;
 
                 const btn = document.getElementById('btn-batch-resend');
                 const originalHtml = btn ? btn.innerHTML : '';
@@ -2089,24 +2202,20 @@ Escaneo de prueba gratuito:
                     btn.innerHTML = `<span>⏳ Despachando a ${targetLeads.length} leads...</span>`;
                 }
 
-                const savedPass = sessionStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
                 try {
+                    const headers = this.getAuthHeaders();
+                    const { pass } = this.getCredentials();
                     const res = await fetch('/api/admin', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'X-Admin-Password': savedPass,
-                            'Authorization': `Bearer ${this.authToken || 'admin_token_auditflow_2026'}`
-                        },
+                        headers,
                         body: JSON.stringify({
                             action: 'batch_resend_offers',
                             leads: targetLeads,
-                            admin_password: savedPass
+                            admin_password: pass
                         })
                     });
                     const data = await res.json();
                     if (data.success) {
-                        // Actualizar conteo de envíos de todos los prospectos del lote en caché y estado reactivo
                         const sentMap = this.getSentEmailsCache();
                         targetLeads.forEach(tLead => {
                             const normEm = (tLead.email || '').toLowerCase().trim();
@@ -2116,7 +2225,6 @@ Escaneo de prueba gratuito:
                                 tLead.emails_sent = newCount;
                                 tLead.email_status = 'CONTACTADO';
 
-                                // Sincronizar en el catálogo global
                                 const original = this.statsData?.leads?.find(l => (l.email || '').toLowerCase().trim() === normEm);
                                 if (original) {
                                     original.emails_sent = newCount;
@@ -2126,21 +2234,19 @@ Escaneo de prueba gratuito:
                         });
                         this.saveSentEmailsCache(sentMap);
 
-                        // Actualizar KPI
                         if (this.statsData?.leads) {
                             const uncontacted = this.statsData.leads.filter(l => (l.emails_sent || 0) === 0).length;
                             const uncontactedEl = document.getElementById('kpi-uncontacted-count');
                             if (uncontactedEl) uncontactedEl.innerText = uncontacted;
                         }
 
-                        // Re-renderizar tabla de inmediato
                         this.renderLeads(this.currentFilteredLeads || (this.statsData && this.statsData.leads) || []);
-                        alert(`🎉 ¡Despacho Automático Completado!\n\n${data.message}`);
+                        this.showToast(`¡Despacho masivo completado! ${data.total_sent || targetLeads.length} ofertas enviadas.`, 'success');
                     } else {
-                        alert(`⚠️ ${data.error || 'Ocurrió un error al despachar el lote.'}`);
+                        this.showToast(data.error || 'Ocurrió un error al despachar el lote.', 'error');
                     }
                 } catch (err) {
-                    alert(`❌ Error al conectar con el despachador: ${err.message}`);
+                    this.showToast(`Error al conectar con el despachador: ${err.message}`, 'error');
                 } finally {
                     if (btn) {
                         btn.disabled = false;
@@ -2152,7 +2258,7 @@ Escaneo de prueba gratuito:
             exportToCSV() {
                 const targetLeads = this.currentFilteredLeads || (this.statsData && this.statsData.leads) || [];
                 if (targetLeads.length === 0) {
-                    alert('⚠️ No hay leads disponibles para exportar.');
+                    this.showToast('No hay leads disponibles para exportar.', 'warning');
                     return;
                 }
                 let csvContent = "data:text/csv;charset=utf-8,ID,Nombre,Email,Empresa_Rol,Pareto_Tier,Potencial_Ingresos_USD,Estado_Outreach,Correos_Enviados,Lead_Score,Documento,Pais,Fecha\n";
@@ -2172,6 +2278,7 @@ Escaneo de prueba gratuito:
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+                this.showToast('Archivo CSV exportado exitosamente.', 'success');
             },
 
             async launchOutreachCampaign(testMode = false) {
@@ -2180,10 +2287,9 @@ Escaneo de prueba gratuito:
                 const country = document.getElementById('outreach-country')?.value || 'El Salvador';
                 const inputArea = document.getElementById('outreach-emails-input')?.value || '';
                 const logBox = document.getElementById('outreach-status-log');
-                const savedPass = localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
 
                 if (!inputArea.trim()) {
-                    alert('⚠️ Por favor ingresa al menos una dirección de correo o línea de prospecto B2B.');
+                    this.showToast('Por favor ingresa al menos una dirección de correo o línea de prospecto B2B.', 'warning');
                     return;
                 }
 
@@ -2207,9 +2313,11 @@ Escaneo de prueba gratuito:
 
                 const chunkSize = testMode ? 250 : 20;
                 let totalSuccess = 0;
-                let allDetails = [];
 
                 try {
+                    const headers = this.getAuthHeaders();
+                    const { pass } = this.getCredentials();
+
                     for (let i = 0; i < allProspects.length; i += chunkSize) {
                         const chunk = allProspects.slice(i, i + chunkSize);
                         const progressPercent = Math.round(((i + chunk.length) / allProspects.length) * 100);
@@ -2217,17 +2325,13 @@ Escaneo de prueba gratuito:
 
                         const res = await fetch('/api/admin', {
                             method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'x-admin-password': savedPass,
-                                'Authorization': `Bearer ${this.authToken || ''}`
-                            },
+                            headers,
                             body: JSON.stringify({
                                 action: 'send_outreach_campaign',
                                 prospects: chunk,
                                 test_mode: testMode,
                                 cadence_touch: document.getElementById('outreach-cadence-touch')?.value || 'touch_1_gift',
-                                admin_password: savedPass
+                                admin_password: pass
                             })
                         });
 
@@ -2241,7 +2345,6 @@ Escaneo de prueba gratuito:
 
                         if (data.success) {
                             totalSuccess += (data.total_processed || chunk.length);
-                            if (data.details) allDetails.push(...data.details);
                             if (logBox) {
                                 logBox.innerHTML += `<span class="text-emerald-400">⚡ Lote procesado: ${i + chunk.length}/${allProspects.length} (${progressPercent}%)</span><br>`;
                             }
@@ -2254,10 +2357,10 @@ Escaneo de prueba gratuito:
                         logBox.innerHTML += `<span class="text-emerald-400 font-bold">🎉 ¡Campaña finalizada! ${totalSuccess} prospectos procesados con éxito.</span><br>`;
                         logBox.scrollTop = logBox.scrollHeight;
                     }
-                    alert(`✅ ¡Campaña procesada exitosamente! ${totalSuccess} prospectos procesados.`);
+                    this.showToast(`¡Campaña procesada exitosamente! ${totalSuccess} prospectos procesados.`, 'success');
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error: ${err.message}</span><br>`;
-                    alert('❌ Error enviando campaña: ' + err.message);
+                    this.showToast('Error enviando campaña: ' + err.message, 'error');
                 } finally {
                     if (targetBtn) targetBtn.innerText = originalText;
                 }
@@ -2271,34 +2374,25 @@ Escaneo de prueba gratuito:
                     btn.innerHTML = '<span>⏳ Autocorrigiendo...</span>';
                 }
 
-                const savedPass = sessionStorage.getItem('auditflow_admin_pass') || localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
                 try {
+                    const headers = this.getAuthHeaders();
+                    const { pass } = this.getCredentials();
                     const res = await fetch('/api/admin', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-admin-password': savedPass,
-                            'Authorization': `Bearer ${this.authToken || 'admin_token_auditflow_2026'}`
-                        },
-                        body: JSON.stringify({ action: 'auto_heal_configuration', admin_password: savedPass })
+                        headers,
+                        body: JSON.stringify({ action: 'auto_heal_configuration', admin_password: pass })
                     });
                     const data = await res.json();
                     if (data.success) {
                         const d = data.diagnostics || {};
-                        const reportMsg = `🎉 ¡AUTOCORRECCIÓN Y DIAGNÓSTICO EXITOSO!\n\n` +
-                            `• SMTP / Despacho: ${d.smtp?.status || 'OK'} (${d.smtp?.provider || 'Gmail SMTP'})\n` +
-                            `• Base de Datos: ${d.database?.status || 'OK'} (${d.database?.type || 'PostgreSQL/RAM'})\n` +
-                            `• Pasarelas: ${d.payments?.status || 'OK'} (Stripe $19 + Strike Lightning)\n` +
-                            `• Motor IA: ${d.ai_engine?.status || 'OK'} (Gemini 2.5 Flash <10s)\n` +
-                            `• Notificación: Reporte de salud enviado a rick28191@gmail.com\n\n` +
-                            `Estado Global: 100% OPERATIVO`;
-                        alert(reportMsg);
+                        const reportMsg = `🎉 ¡Autocorrección y Diagnóstico Exitoso! SMTP: ${d.smtp?.status || 'OK'} | DB: ${d.database?.status || 'OK'} | Pasarelas: ${d.payments?.status || 'OK'} | Estado Global: 100% OPERATIVO.`;
+                        this.showToast(reportMsg, 'success');
                         this.loadStats();
                     } else {
-                        alert('⚠️ ' + (data.error || 'No se pudo completar el diagnóstico.'));
+                        this.showToast(data.error || 'No se pudo completar el diagnóstico.', 'warning');
                     }
                 } catch (err) {
-                    alert('❌ Error al ejecutar el auto-healer: ' + err.message);
+                    this.showToast('Error al ejecutar el auto-healer: ' + err.message, 'error');
                 } finally {
                     if (btn) {
                         btn.disabled = false;
@@ -2310,33 +2404,30 @@ Escaneo de prueba gratuito:
             async testSmtpConnection() {
                 const btn = document.getElementById('btn-test-smtp');
                 const logBox = document.getElementById('outreach-status-log');
-                const savedPass = localStorage.getItem('auditflow_admin_pass') || 'AuditFlow2026!';
-                const originalText = '⚡ Probar Conexión Gmail SMTP Outbound';
+                const originalText = '⚡ Probar Conexión Resend API / Outbound';
 
                 if (btn) btn.innerText = '⏳ Verificando servidor SMTP...';
-                if (logBox) logBox.innerHTML = `🔄 Probando autenticación con el servidor Gmail SMTP...<br>`;
+                if (logBox) logBox.innerHTML = `🔄 Probando autenticación con el canal saliente de correo...<br>`;
 
                 try {
+                    const headers = this.getAuthHeaders();
+                    const { pass } = this.getCredentials();
                     const res = await fetch('/api/admin', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'x-admin-password': savedPass,
-                            'Authorization': `Bearer ${this.authToken || ''}`
-                        },
-                        body: JSON.stringify({ action: 'test_smtp_connection', admin_password: savedPass })
+                        headers,
+                        body: JSON.stringify({ action: 'test_smtp_connection', admin_password: pass })
                     });
                     const data = await res.json();
                     if (data.success) {
                         if (logBox) logBox.innerHTML += `<span class="text-emerald-400">✅ ${data.message}</span><br>`;
-                        alert(`✅ ${data.message}`);
+                        this.showToast(data.message, 'success');
                     } else {
                         if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error SMTP: ${data.error}</span><br>`;
-                        alert(`❌ Error al conectar con Gmail SMTP: ${data.error}`);
+                        this.showToast(`Error al conectar con servidor de correo: ${data.error}`, 'error');
                     }
                 } catch (err) {
                     if (logBox) logBox.innerHTML += `<span class="text-red-400">❌ Error de Red: ${err.message}</span><br>`;
-                    alert(`❌ Error de Red comprobando SMTP: ${err.message}`);
+                    this.showToast(`Error de Red comprobando SMTP: ${err.message}`, 'error');
                 } finally {
                     if (btn) btn.innerText = originalText;
                 }
@@ -2344,12 +2435,18 @@ Escaneo de prueba gratuito:
 
             openAdminManualModal() {
                 const modal = document.getElementById('admin-manual-modal');
-                if (modal) modal.classList.remove('hidden');
+                if (modal) {
+                    modal.classList.remove('hidden');
+                    modal.style.display = 'flex';
+                }
             },
 
             closeAdminManualModal() {
                 const modal = document.getElementById('admin-manual-modal');
-                if (modal) modal.classList.add('hidden');
+                if (modal) {
+                    modal.classList.add('hidden');
+                    modal.style.display = 'none';
+                }
             },
 
             switchManualTab(tab) {
@@ -2359,15 +2456,27 @@ Escaneo de prueba gratuito:
                 const userContent = document.getElementById('tab-content-user-guide');
 
                 if (tab === 'admin') {
-                    if (adminTabBtn) adminTabBtn.className = 'px-3 py-1.5 rounded-lg bg-purple-600 text-white font-mono text-xs font-bold transition-all';
-                    if (userTabBtn) userTabBtn.className = 'px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 hover:text-white font-mono text-xs transition-all';
-                    if (adminContent) adminContent.classList.remove('hidden');
-                    if (userContent) userContent.classList.add('hidden');
+                    if (adminTabBtn) adminTabBtn.className = 'px-3 py-1.5 rounded-lg bg-purple-600 text-white font-mono text-xs font-bold transition-all cursor-pointer';
+                    if (userTabBtn) userTabBtn.className = 'px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 hover:text-white font-mono text-xs transition-all cursor-pointer';
+                    if (adminContent) {
+                        adminContent.classList.remove('hidden');
+                        adminContent.style.display = 'block';
+                    }
+                    if (userContent) {
+                        userContent.classList.add('hidden');
+                        userContent.style.display = 'none';
+                    }
                 } else {
-                    if (adminTabBtn) adminTabBtn.className = 'px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 hover:text-white font-mono text-xs transition-all';
-                    if (userTabBtn) userTabBtn.className = 'px-3 py-1.5 rounded-lg bg-accent-blue text-black font-mono text-xs font-bold transition-all';
-                    if (adminContent) adminContent.classList.add('hidden');
-                    if (userContent) userContent.classList.remove('hidden');
+                    if (adminTabBtn) adminTabBtn.className = 'px-3 py-1.5 rounded-lg bg-dark-surface text-gray-400 hover:text-white font-mono text-xs transition-all cursor-pointer';
+                    if (userTabBtn) userTabBtn.className = 'px-3 py-1.5 rounded-lg bg-accent-blue text-black font-mono text-xs font-bold transition-all cursor-pointer';
+                    if (adminContent) {
+                        adminContent.classList.add('hidden');
+                        adminContent.style.display = 'none';
+                    }
+                    if (userContent) {
+                        userContent.classList.remove('hidden');
+                        userContent.style.display = 'block';
+                    }
                 }
             },
 
@@ -2377,21 +2486,34 @@ Escaneo de prueba gratuito:
                 sessionStorage.removeItem('auditflow_admin_token');
                 sessionStorage.removeItem('auditflow_admin_pass');
                 this.authToken = '';
+                this.adminPass = '';
                 const passInput = document.getElementById('admin-password-input');
                 if (passInput) passInput.value = '';
                 const errEl = document.getElementById('login-error');
-                if (errEl) errEl.classList.add('hidden');
-                const content = document.getElementById('admin-dashboard-content');
-                if (content) content.classList.add('hidden');
-                document.getElementById('admin-login-modal').classList.remove('hidden');
+                if (errEl) {
+                    errEl.classList.add('hidden');
+                    errEl.style.display = 'none';
+                }
+                this.showLoginModal();
+                this.showToast('Has cerrado sesión correctamente.', 'info');
             }
         };
 
         window.AdminDashboard = AdminApp;
 
-        document.addEventListener('DOMContentLoaded', () => {
-            AdminApp.init();
+        // Escape key closes modals
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                AdminApp.closeAdminManualModal();
+            }
         });
+
+        // Initialize on DOM ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => AdminApp.init());
+        } else {
+            AdminApp.init();
+        }
     </script>
 </body>
 </html>
