@@ -157,7 +157,11 @@ export default async function handler(req, res) {
       return res.status(401).json({ success: false, error: 'No autorizado. Contraseña de administración incorrecta.' });
     }
 
-    let { prospects, test_mode = false, batch = 'cfos_500' } = body;
+    const queryBatch = req.query?.batch || req.query?.campaign;
+    let { prospects, test_mode = false, batch = queryBatch || 'pareto_top20' } = body;
+    if (queryBatch && !body.batch) {
+      batch = queryBatch;
+    }
 
     if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
       prospects = generateOutreachProspects(batch);
