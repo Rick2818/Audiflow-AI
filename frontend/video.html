@@ -197,19 +197,19 @@
                     <div id="progress-fill" class="h-full bg-gradient-to-r from-accent-blue via-amber-400 via-red-500 to-emerald-400 w-0 transition-all duration-100"></div>
                 </div>
 
-                <!-- CONTROLES Y SEGMENTOS DE LOS 4 ACTOS (32s) -->
+                <!-- CONTROLES Y SEGMENTOS DE LOS 4 ACTOS -->
                 <div class="grid grid-cols-4 gap-2 mt-3 text-center text-[10px] sm:text-xs font-mono">
-                    <button onclick="VideoPlayer.jumpTo(0)" id="btn-act-1" class="p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all">
-                        01. ¿Qué es? (0-7s)
+                    <button onclick="VideoPlayer.jumpToAct(0)" id="btn-act-1" class="p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all">
+                        01. ¿Qué es?
                     </button>
-                    <button onclick="VideoPlayer.jumpTo(8)" id="btn-act-2" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        02. ¿Para qué sirve? (8-15s)
+                    <button onclick="VideoPlayer.jumpToAct(1)" id="btn-act-2" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
+                        02. ¿Para qué sirve?
                     </button>
-                    <button onclick="VideoPlayer.jumpTo(16)" id="btn-act-3" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        03. Consecuencias (16-23s)
+                    <button onclick="VideoPlayer.jumpToAct(2)" id="btn-act-3" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
+                        03. Consecuencias
                     </button>
-                    <button onclick="VideoPlayer.jumpTo(24)" id="btn-act-4" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        04. Beneficios (24-32s)
+                    <button onclick="VideoPlayer.jumpToAct(3)" id="btn-act-4" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
+                        04. Beneficios
                     </button>
                 </div>
 
@@ -425,14 +425,21 @@
         };
 
         const VideoPlayer = {
-            duration: 34, // 34 Segundos Totales con 1s de espacio de respiración entre frames
-            currentTime: 0,
+            currentAct: 0,
             isPlaying: false,
             voiceEnabled: true,
             currentLang: 'es',
-            timer: null,
-            lastActSpoken: -1,
-            cachedVoices: [],
+            audioPlayer: null,
+            transitionTimeout: null,
+            progressInterval: null,
+            totalDuration: 34,
+            elapsedTime: 0,
+
+            audioFiles: {
+                es: ['/audio/es_act1.mp3', '/audio/es_act2.mp3', '/audio/es_act3.mp3', '/audio/es_act4.mp3'],
+                en: ['/audio/en_act1.mp3', '/audio/en_act2.mp3', '/audio/en_act3.mp3', '/audio/en_act4.mp3'],
+                de: ['/audio/de_act1.mp3', '/audio/de_act2.mp3', '/audio/de_act3.mp3', '/audio/de_act4.mp3']
+            },
 
             init() {
                 const params = new URLSearchParams(window.location.search);
@@ -441,25 +448,24 @@
                     this.currentLang = urlLang;
                 }
 
-                if (window.speechSynthesis) {
-                    window.speechSynthesis.onvoiceschanged = () => {
-                        this.cachedVoices = window.speechSynthesis.getVoices();
-                    };
-                    this.cachedVoices = window.speechSynthesis.getVoices();
-                }
+                this.audioPlayer = new Audio();
+                this.audioPlayer.preload = 'auto';
+
+                // Evento cuando termina de hablar la voz femenina en el recuadro actual:
+                this.audioPlayer.addEventListener('ended', () => {
+                    this.onActAudioEnded();
+                });
 
                 this.applyLanguage(this.currentLang);
-                this.render();
+                this.showFrame(0);
             },
 
             setLanguage(lang) {
                 if (!i18nData[lang]) return;
                 this.currentLang = lang;
-                this.lastActSpoken = -1;
                 this.applyLanguage(lang);
                 if (this.isPlaying) {
-                    const currentActIdx = this.getActIndex(this.currentTime);
-                    if (currentActIdx >= 0) this.speakAct(currentActIdx);
+                    this.playAct(this.currentAct);
                 }
             },
 
@@ -515,89 +521,20 @@
                 });
             },
 
-            getFemaleVoice(langCode) {
-                if (!window.speechSynthesis) return null;
-                const voices = this.cachedVoices.length ? this.cachedVoices : window.speechSynthesis.getVoices();
-                if (!voices || voices.length === 0) return null;
-
-                const langPrefix = langCode.substring(0, 2).toLowerCase();
-                
-                // Voces que coinciden con el idioma seleccionado
-                let matching = voices.filter(v => v.lang && v.lang.toLowerCase().startsWith(langPrefix));
-                if (matching.length === 0) matching = voices;
-
-                // Lista de nombres o identificadores estrictamente masculinos a excluir
-                const maleBanned = ['david', 'raul', 'george', 'mark', 'stefan', 'pablo', 'manuel', 'jorge', 'carlos', 'male', 'man', 'guy', 'alvaro', 'enrique'];
-                const femalePreferred = ['sabina', 'helena', 'monica', 'paulina', 'lucia', 'elvira', 'victoria', 'samantha', 'zira', 'karen', 'hedda', 'marlene', 'katja', 'vicki', 'clara', 'eva', 'laura', 'female', 'natural', 'google'];
-
-                // 1. Filtrar voces del idioma excluyendo hombres
-                const cleanMatching = matching.filter(v => {
-                    const n = v.name.toLowerCase();
-                    return !maleBanned.some(m => n.includes(m));
-                });
-
-                // 2. Buscar por nombre femenino prioritario
-                for (const kw of femalePreferred) {
-                    const found = cleanMatching.find(v => v.name.toLowerCase().includes(kw));
-                    if (found) return found;
-                }
-
-                // 3. Retornar cualquier voz no masculina del idioma
-                if (cleanMatching.length > 0) return cleanMatching[0];
-
-                return matching[0] || null;
-            },
-
             toggleVoice() {
                 this.voiceEnabled = !this.voiceEnabled;
                 const d = i18nData[this.currentLang];
                 if (!this.voiceEnabled) {
-                    if (window.speechSynthesis) window.speechSynthesis.cancel();
+                    if (this.audioPlayer) this.audioPlayer.pause();
                     document.getElementById('voice-icon').innerText = '🔇';
                     document.getElementById('voice-text').innerText = d.voiceMute;
                 } else {
                     document.getElementById('voice-icon').innerText = '🎙️';
                     document.getElementById('voice-text').innerText = d.voiceBtn;
+                    if (this.isPlaying) {
+                        this.playAct(this.currentAct);
+                    }
                 }
-            },
-
-            speakAct(actIndex) {
-                if (!this.voiceEnabled || !window.speechSynthesis || actIndex < 0) return;
-                if (this.lastActSpoken === actIndex) return;
-                this.lastActSpoken = actIndex;
-
-                window.speechSynthesis.cancel();
-                const d = i18nData[this.currentLang];
-                const text = d.narrations[actIndex];
-                if (!text) return;
-
-                const utter = new SpeechSynthesisUtterance(text);
-                utter.lang = d.voiceLang;
-                utter.pitch = 1.25; // Tono femenino suave, bonito y agudo
-                utter.rate = 0.92;  // Ritmo pausado, claro y ejecutivo
-                utter.volume = 1.0;
-
-                const femaleVoice = this.getFemaleVoice(d.voiceLang);
-                if (femaleVoice) {
-                    utter.voice = femaleVoice;
-                }
-
-                window.speechSynthesis.speak(utter);
-            },
-
-            // Pacing con 1 segundo de separación/pausa entre cada acto:
-            // Acto 0 (0s - 7.0s), Transición (7.0s - 8.0s)
-            // Acto 1 (8.0s - 15.0s), Transición (15.0s - 16.0s)
-            // Acto 2 (16.0s - 23.0s), Transición (23.0s - 24.0s)
-            // Acto 3 (24.0s - 34.0s)
-            getActIndex(time) {
-                if (time <= 7.0) return 0;
-                if (time > 7.0 && time < 8.0) return -1; // Transición / Pausa de 1s
-                if (time >= 8.0 && time <= 15.0) return 1;
-                if (time > 15.0 && time < 16.0) return -1; // Transición / Pausa de 1s
-                if (time >= 16.0 && time <= 23.0) return 2;
-                if (time > 23.0 && time < 24.0) return -1; // Transición / Pausa de 1s
-                return 3;
             },
 
             play() {
@@ -606,26 +543,16 @@
                 document.getElementById('play-icon').innerText = '⏸';
                 document.getElementById('play-text').innerText = i18nData[this.currentLang].pauseBtn;
 
-                if (this.currentTime >= this.duration) {
-                    this.currentTime = 0;
-                    this.lastActSpoken = -1;
-                }
-
-                clearInterval(this.timer);
-                this.timer = setInterval(() => {
-                    this.currentTime += 0.1;
-                    if (this.currentTime >= this.duration) {
-                        this.currentTime = this.duration;
-                        this.pause();
-                    }
-                    this.render();
-                }, 100);
+                this.startProgressTicker();
+                this.playAct(this.currentAct);
             },
 
             pause() {
                 this.isPlaying = false;
-                clearInterval(this.timer);
-                if (window.speechSynthesis) window.speechSynthesis.cancel();
+                if (this.audioPlayer) this.audioPlayer.pause();
+                if (this.transitionTimeout) clearTimeout(this.transitionTimeout);
+                clearInterval(this.progressInterval);
+
                 document.getElementById('play-icon').innerText = '▶';
                 document.getElementById('play-text').innerText = i18nData[this.currentLang].playBtn;
             },
@@ -639,41 +566,67 @@
             },
 
             restart() {
-                this.currentTime = 0;
-                this.lastActSpoken = -1;
-                this.render();
+                this.pause();
+                this.currentAct = 0;
+                this.elapsedTime = 0;
+                this.showFrame(0);
                 this.play();
             },
 
-            jumpTo(second) {
-                this.currentTime = second;
-                this.lastActSpoken = -1;
-                this.render();
-                if (!this.isPlaying) {
-                    this.play();
+            jumpToAct(actIdx) {
+                if (this.transitionTimeout) clearTimeout(this.transitionTimeout);
+                this.currentAct = actIdx;
+                this.elapsedTime = actIdx * 8;
+                this.showFrame(actIdx);
+                if (this.isPlaying) {
+                    this.playAct(actIdx);
                 }
             },
 
-            seek(event) {
-                const rect = event.currentTarget.getBoundingClientRect();
-                const clickX = event.clientX - rect.left;
-                const ratio = Math.max(0, Math.min(1, clickX / rect.width));
-                this.currentTime = ratio * this.duration;
-                this.lastActSpoken = -1;
-                this.render();
+            playAct(actIdx) {
+                if (actIdx < 0 || actIdx > 3) return;
+                this.currentAct = actIdx;
+                this.showFrame(actIdx);
+
+                if (this.voiceEnabled) {
+                    const audioSrc = this.audioFiles[this.currentLang][actIdx];
+                    this.audioPlayer.src = audioSrc;
+                    this.audioPlayer.currentTime = 0;
+                    this.audioPlayer.play().catch(e => {
+                        console.log('Autoplay audio fallback:', e);
+                    });
+                }
             },
 
-            render() {
-                const currentSec = Math.floor(this.currentTime);
-                const displaySec = currentSec < 10 ? `0${currentSec}` : `${currentSec}`;
-                document.getElementById('timestamp-display').innerText = `00:${displaySec} / 00:34`;
+            onActAudioEnded() {
+                if (!this.isPlaying) return;
 
-                const progressPct = (this.currentTime / this.duration) * 100;
-                document.getElementById('progress-fill').style.width = `${progressPct}%`;
+                // Si terminó el Acto 1, 2 o 3:
+                if (this.currentAct < 3) {
+                    // Indicar sutilmente transición de 1 segundo (respiración)
+                    const actTagEl = document.getElementById('act-tag');
+                    actTagEl.innerText = '⏳ ...';
+                    actTagEl.className = 'text-gray-400 font-bold ml-1 animate-pulse';
 
-                const activeActIndex = this.getActIndex(this.currentTime);
+                    this.transitionTimeout = setTimeout(() => {
+                        if (this.isPlaying) {
+                            this.playAct(this.currentAct + 1);
+                        }
+                    }, 1000); // 1 segundo exacto de pausa antes del siguiente recuadro
+                } else {
+                    // Acto 4 finalizado: mantener pantalla activa para el CTA
+                    this.audioPlayer.pause();
+                    document.getElementById('play-icon').innerText = '▶';
+                    document.getElementById('play-text').innerText = i18nData[this.currentLang].playBtn;
+                    this.isPlaying = false;
+                    clearInterval(this.progressInterval);
+                    this.elapsedTime = this.totalDuration;
+                    this.updateProgressUI();
+                }
+            },
+
+            showFrame(actIdx) {
                 const d = i18nData[this.currentLang];
-
                 const tagColors = [
                     'text-accent-blue font-bold ml-1',
                     'text-amber-400 font-bold ml-1',
@@ -682,16 +635,8 @@
                 ];
 
                 const actTagEl = document.getElementById('act-tag');
-                if (activeActIndex >= 0) {
-                    actTagEl.innerText = d.actNames[activeActIndex];
-                    actTagEl.className = tagColors[activeActIndex];
-                    if (this.isPlaying) {
-                        this.speakAct(activeActIndex);
-                    }
-                } else {
-                    actTagEl.innerText = '⚡ ...';
-                    actTagEl.className = 'text-gray-400 font-bold ml-1';
-                }
+                actTagEl.innerText = d.actNames[actIdx];
+                actTagEl.className = tagColors[actIdx];
 
                 const acts = [
                     document.getElementById('frame-act-1'),
@@ -701,7 +646,7 @@
                 ];
 
                 acts.forEach((frame, idx) => {
-                    if (idx === activeActIndex) {
+                    if (idx === actIdx) {
                         frame.style.opacity = '1';
                         frame.style.pointerEvents = 'auto';
                         frame.style.transform = 'scale(1)';
@@ -714,12 +659,31 @@
 
                 for (let i = 1; i <= 4; i++) {
                     const btn = document.getElementById(`btn-act-${i}`);
-                    if ((i - 1) === activeActIndex) {
+                    if ((i - 1) === actIdx) {
                         btn.className = 'p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all';
                     } else {
                         btn.className = 'p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all';
                     }
                 }
+            },
+
+            startProgressTicker() {
+                clearInterval(this.progressInterval);
+                this.progressInterval = setInterval(() => {
+                    if (this.isPlaying && this.elapsedTime < this.totalDuration) {
+                        this.elapsedTime += 0.2;
+                        this.updateProgressUI();
+                    }
+                }, 200);
+            },
+
+            updateProgressUI() {
+                const currentSec = Math.min(this.totalDuration, Math.floor(this.elapsedTime));
+                const displaySec = currentSec < 10 ? `0${currentSec}` : `${currentSec}`;
+                document.getElementById('timestamp-display').innerText = `00:${displaySec} / 00:34`;
+
+                const progressPct = Math.min(100, (this.elapsedTime / this.totalDuration) * 100);
+                document.getElementById('progress-fill').style.width = `${progressPct}%`;
             }
         };
 
