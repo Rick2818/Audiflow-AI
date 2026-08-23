@@ -743,15 +743,53 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                     </div>
                 </div>
 
-                <!-- PREVISUALIZACIÓN DE COPY Y BOTÓN DE COPIAR -->
-                <div class="lg:col-span-2 space-y-3 font-mono">
-                    <div class="flex items-center justify-between">
-                        <span class="text-xs text-gray-300">Copy Generado Listo para Copiar:</span>
-                        <button onclick="AdminApp.copySocialCopy()" class="px-4 py-1.5 rounded-lg bg-accent-blue text-black font-bold text-xs hover:opacity-90 transition-all cursor-pointer">
-                            📋 Copiar Texto al Portapapeles
-                        </button>
+                <!-- PREVISUALIZACIÓN MULTIMEDIA VISUAL Y COPY -->
+                <div class="lg:col-span-2 space-y-4">
+                    <!-- VISOR MULTIMEDIA VISUAL DE DIAPOSITIVAS INTERACTIVAS -->
+                    <div id="carousel-visual-container" class="p-6 rounded-2xl bg-dark-surface border-2 border-purple-500/40 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center justify-between border-b border-border-dark pb-3 mb-4 font-mono text-xs">
+                            <div class="flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse"></span>
+                                <span class="text-white font-bold">🎬 Visor Multimedia de Diapositiva LinkedIn</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span id="carousel-slide-counter" class="px-2.5 py-1 rounded bg-purple-950 text-purple-300 font-bold border border-purple-500/30">Diapositiva 1 / 5</span>
+                            </div>
+                        </div>
+
+                        <!-- CANVAS DE LA DIAPOSITIVA ACTIVA -->
+                        <div id="carousel-slide-canvas" class="min-h-[220px] p-6 rounded-xl bg-gradient-to-br from-dark-card via-slate-900 to-dark-card border border-border-dark flex flex-col justify-between shadow-inner">
+                            <!-- CONTENIDO DINÁMICO DE LA DIAPOSITIVA -->
+                        </div>
+
+                        <!-- CONTROLES INTERACTIVOS MULTIMEDIA -->
+                        <div class="flex flex-wrap items-center justify-between gap-3 mt-4 pt-3 border-t border-border-dark font-mono text-xs">
+                            <div class="flex items-center gap-2">
+                                <button onclick="AdminApp.prevCarouselSlide()" class="px-4 py-2 rounded-xl bg-dark-card hover:bg-purple-950 text-purple-300 border border-purple-500/40 font-bold transition-all cursor-pointer">
+                                    ⬅️ Anterior
+                                </button>
+                                <button onclick="AdminApp.nextCarouselSlide()" class="px-4 py-2 rounded-xl bg-dark-card hover:bg-purple-950 text-purple-300 border border-purple-500/40 font-bold transition-all cursor-pointer">
+                                    Siguiente ➡️
+                                </button>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <button onclick="AdminApp.printCarouselPDF()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold transition-all shadow-glow cursor-pointer flex items-center gap-1.5">
+                                    <span>📥 Descargar como PDF para LinkedIn</span>
+                                </button>
+                                <button onclick="AdminApp.copySocialCopy()" class="px-4 py-2 rounded-xl bg-accent-blue text-black font-bold hover:opacity-90 transition-all cursor-pointer">
+                                    📋 Copiar Texto
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <textarea id="social-copy-output" rows="9" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-4 text-xs font-mono text-white focus:outline-none"></textarea>
+
+                    <!-- TEXTAREA OCULTO/EXPANDIBLE PARA COPIAR -->
+                    <div class="space-y-2 font-mono text-xs">
+                        <div class="flex items-center justify-between text-gray-400">
+                            <span>Texto Plano del Guion / Copia de Seguridad:</span>
+                        </div>
+                        <textarea id="social-copy-output" rows="4" readonly class="w-full bg-dark-surface border border-dark-border rounded-xl p-3 text-xs font-mono text-gray-300 focus:outline-none"></textarea>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1641,6 +1679,249 @@ Escaneo de prueba gratuito:
                 }
 
                 outputEl.value = copyText;
+                this.renderVisualSlideDeck();
+            },
+
+            currentCarouselSlide: 0,
+            carouselDecks: {
+                carousel_cloud: [
+                    {
+                        tag: "🔥 AUDITORÍA B2B • CLOUD & SAAS",
+                        title: "Las 3 trampas en contratos Cloud & SaaS",
+                        subtitle: "Que le costaron $14,400 USD a un CFO el mes pasado.",
+                        loss: "-$14,400 USD/año",
+                        footer: "Desliza para ver el desglose y blindaje ➡️"
+                    },
+                    {
+                        tag: "⚠️ TRAMPA #1 / 3",
+                        title: "Auto-Renovación Forzosa a 36 Meses",
+                        desc: "Si no notificas con 90 días de anticipación por carta física, el contrato se renueva por 3 años con un incremento unilateral de tarifa de hasta +15%.",
+                        fix: "💡 Blindaje: Notificación reducida a 30 días con tope de IPC máximo del +3% anual o rescisión libre de penalización.",
+                        badge: "🚨 RIESGO ALTO"
+                    },
+                    {
+                        tag: "⚠️ TRAMPA #2 / 3",
+                        title: "Costos Ocultos de Salida (Data Egress)",
+                        desc: "Tarifas desmedidas y plazos de 60 días cuando la empresa decide migrar sus bases de datos a otro proveedor al terminar el acuerdo.",
+                        fix: "💡 Blindaje: Entrega obligatoria y sin costo de backups completos en formato estándar (.sql / .csv) en <15 días.",
+                        badge: "🚨 SOBREPRECIO OCULTO"
+                    },
+                    {
+                        tag: "⚠️ TRAMPA #3 / 3",
+                        title: "Vacíos en SLAs y Downtime sin Compensación",
+                        desc: "Si el sistema cae 4 horas en horario laboral, el cliente asume el 100% de la pérdida económica sin ningún crédito automático en factura.",
+                        fix: "💡 Blindaje: Crédito automático del 15% del canon mensual por cada hora fuera de SLA pactado.",
+                        badge: "🚨 VACÍO LEGAL"
+                    },
+                    {
+                        tag: "🎁 LEAD MAGNET • PLANTILLA WORD GRATIS",
+                        title: "¿Quieres blindar tus contratos antes de firmar?",
+                        desc: "Comenta «AUDITAR» en esta publicación y te enviamos por privado el archivo Word con las 3 contra-cláusulas de blindaje listas para copiar y pegar.",
+                        fix: "👉 O audita tu contrato en <10s en: audiflowai.com",
+                        badge: "✅ DESCARGA DISPONIBLE"
+                    }
+                ],
+                carousel_lease: [
+                    {
+                        tag: "🏢 BIENES RAÍCES B2B • ARRENDAMIENTO",
+                        title: "Auditamos un contrato de alquiler comercial",
+                        subtitle: "Esta cláusula leonina le costaba $18,500 USD a una PyME.",
+                        loss: "-$18,500 USD",
+                        footer: "Lo que ningún arrendador te advierte ➡️"
+                    },
+                    {
+                        tag: "⚠️ RIESGO CRÍTICO #1",
+                        title: "Penalización por Rescisión del 100%",
+                        desc: "Exigencia de liquidar el 100% de las rentas futuras si la empresa necesita reestructurarse o cambiar de sede antes del vencimiento.",
+                        fix: "💡 Blindaje: Penalización máxima de 2 mensualidades con preaviso por escrito de 60 días.",
+                        badge: "🚨 CLÁUSULA LEONINA"
+                    },
+                    {
+                        tag: "⚠️ RIESGO CRÍTICO #2",
+                        title: "Indexación Doble (IPC + Ajuste Fijo)",
+                        desc: "Contratos que suman la inflación oficial MÁS un 5% fijo anual, encareciendo el canon un 32% por encima del mercado en 3 años.",
+                        fix: "💡 Blindaje: Ajuste anual topado estrictamente a la variación del IPC oficial.",
+                        badge: "🚨 SOBRECOSTO ACUMULADO"
+                    },
+                    {
+                        tag: "⚠️ RIESGO CRÍTICO #3",
+                        title: "Mantenimiento Extraordinario no Auditable",
+                        desc: "Cobros discrecionales por mejoras estructurales del edificio que corresponden por ley al arrendador.",
+                        fix: "💡 Blindaje: El arrendatario asume únicamente el mantenimiento ordinario interno del inmueble.",
+                        badge: "🚨 COBRO INDEBIDO"
+                    },
+                    {
+                        tag: "🎁 CHECKLIST EN WORD DE REGALO",
+                        title: "¿Vas a firmar contrato de oficina o local?",
+                        desc: "Comenta «LOCAL» y te comparto el checklist preventivo y las contra-cláusulas blindadas en Word.",
+                        fix: "👉 Auditoría en 8s en memoria RAM: audiflowai.com/auditar-contrato-arrendamiento",
+                        badge: "✅ CHECKLIST LISTO"
+                    }
+                ],
+                carousel_sla: [
+                    {
+                        tag: "💻 TECNOLOGÍA & DEV OUTSOURCING",
+                        title: "Contratación de Servicios de TI & Desarrollo",
+                        subtitle: "Los 3 errores que dejan tu código y dinero como rehenes.",
+                        loss: "-$9,200 USD",
+                        footer: "Guía de blindaje para Directores de TI y Finanzas ➡️"
+                    },
+                    {
+                        tag: "⚠️ ERROR CRÍTICO #1",
+                        title: "Cesión Condicionada de Propiedad Intelectual",
+                        desc: "Cláusulas que retienen los derechos del código fuente hasta la 'liquidación final de cualquier controversia o factura pendiente'.",
+                        fix: "💡 Blindaje: Transferencia irrevocable de IP de todo entregable desde la fecha de pago de cada hito.",
+                        badge: "🚨 CÓDIGO RETENIDO"
+                    },
+                    {
+                        tag: "⚠️ ERROR CRÍTICO #2",
+                        title: "Ambigüedad en 'Bug vs Nuevo Requerimiento'",
+                        desc: "Sin matriz técnica de severidad, generando sobrecostos del 40% en 'bolsas de horas de soporte'.",
+                        fix: "💡 Blindaje: Garantía post-entrega de 90 días con resolución sin costo de cualquier defecto reportado.",
+                        badge: "🚨 FACTURAS INFLADAS"
+                    },
+                    {
+                        tag: "⚠️ ERROR CRÍTICO #3",
+                        title: "Plazos de Aceptación Tácita en 5 Días",
+                        desc: "Si el cliente no responde en 5 días laborables, el entregable se da por aceptado y pagadero automáticamente.",
+                        fix: "💡 Blindaje: Plazo mínimo de 15 días hábiles para pruebas de control de calidad (QA).",
+                        badge: "🚨 ACEPTACIÓN FORZOSA"
+                    },
+                    {
+                        tag: "🎁 MODELO DE CONTRATO IT EN WORD",
+                        title: "¿Quieres blindar tu próximo proyecto de TI?",
+                        desc: "Comenta «SLA» y te comparto el modelo de contrato blindado con matriz de severidad en Word editable.",
+                        fix: "👉 Escaneo gratis de SLAs: audiflowai.com/auditar-contrato-servicios-it",
+                        badge: "✅ PLANTILLA EDITABLE"
+                    }
+                ]
+            },
+
+            renderVisualSlideDeck() {
+                const selectEl = document.getElementById('social-niche-select');
+                const canvas = document.getElementById('carousel-slide-canvas');
+                const counter = document.getElementById('carousel-slide-counter');
+                if (!selectEl || !canvas || !counter) return;
+
+                const niche = selectEl.value;
+                const deck = this.carouselDecks[niche] || this.carouselDecks['carousel_cloud'];
+                
+                if (this.currentCarouselSlide >= deck.length) this.currentCarouselSlide = 0;
+                if (this.currentCarouselSlide < 0) this.currentCarouselSlide = deck.length - 1;
+
+                const s = deck[this.currentCarouselSlide];
+                counter.innerText = `Diapositiva ${this.currentCarouselSlide + 1} / ${deck.length}`;
+
+                if (this.currentCarouselSlide === 0) {
+                    canvas.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-mono font-bold text-accent-blue bg-blue-950/80 px-2.5 py-1 rounded-lg border border-accent-blue/30">${s.tag}</span>
+                                <span class="text-xs font-mono font-extrabold text-red-400 bg-red-950/60 px-2.5 py-1 rounded-lg border border-red-500/30">${s.loss}</span>
+                            </div>
+                            <h2 class="text-xl sm:text-2xl font-extrabold text-white leading-snug tracking-tight">${s.title}</h2>
+                            <p class="text-sm text-gray-300 font-sans leading-relaxed">${s.subtitle}</p>
+                        </div>
+                        <div class="pt-4 flex items-center justify-between border-t border-border-dark text-xs font-mono text-emerald-400">
+                            <span>🛡️ AuditFlow AI Masterclass</span>
+                            <span class="font-bold animate-pulse">${s.footer}</span>
+                        </div>
+                    `;
+                } else if (this.currentCarouselSlide === deck.length - 1) {
+                    canvas.innerHTML = `
+                        <div class="space-y-3">
+                            <span class="text-[11px] font-mono font-bold text-accent-emerald bg-emerald-950/80 px-2.5 py-1 rounded-lg border border-emerald-500/30">${s.tag}</span>
+                            <h2 class="text-lg sm:text-xl font-extrabold text-white leading-snug">${s.title}</h2>
+                            <p class="text-xs text-gray-200 leading-relaxed font-sans">${s.desc}</p>
+                            <div class="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 text-xs font-mono text-purple-200">
+                                ${s.fix}
+                            </div>
+                        </div>
+                        <div class="pt-3 border-t border-border-dark flex items-center justify-between text-xs font-mono text-gray-400">
+                            <span>Comenta para recibir el archivo</span>
+                            <span class="text-accent-blue font-bold">@AuditFlowAI</span>
+                        </div>
+                    `;
+                } else {
+                    canvas.innerHTML = `
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-[11px] font-mono font-bold text-amber-400 bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-500/30">${s.tag}</span>
+                                <span class="text-[10px] font-mono font-bold text-red-400 bg-red-950 px-2 py-0.5 rounded border border-red-500/30">${s.badge}</span>
+                            </div>
+                            <h3 class="text-base sm:text-lg font-bold text-white">${s.title}</h3>
+                            <p class="text-xs text-gray-300 font-sans leading-relaxed">${s.desc}</p>
+                            <div class="p-3 rounded-xl bg-dark-card border border-border-dark text-xs font-mono text-emerald-300">
+                                ${s.fix}
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-border-dark flex items-center justify-between text-[11px] font-mono text-gray-500">
+                            <span>AuditFlow AI • Blindaje Legal</span>
+                            <span>Desliza ➡️</span>
+                        </div>
+                    `;
+                }
+            },
+
+            prevCarouselSlide() {
+                this.currentCarouselSlide--;
+                this.renderVisualSlideDeck();
+            },
+
+            nextCarouselSlide() {
+                this.currentCarouselSlide++;
+                this.renderVisualSlideDeck();
+            },
+
+            printCarouselPDF() {
+                const selectEl = document.getElementById('social-niche-select');
+                const niche = selectEl ? selectEl.value : 'carousel_cloud';
+                const deck = this.carouselDecks[niche] || this.carouselDecks['carousel_cloud'];
+
+                const printWindow = window.open('', '_blank');
+                if (!printWindow) {
+                    alert('⚠️ Por favor permite las ventanas emergentes para descargar las diapositivas.');
+                    return;
+                }
+
+                const slidesHtml = deck.map((s, idx) => `
+                    <div style="page-break-after: always; width: 800px; height: 500px; background: #09090b; color: #ffffff; padding: 40px; border-radius: 16px; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; display: flex; flex-direction: column; justify-content: space-between; margin-bottom: 20px; border: 2px solid #334155;">
+                        <div>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                                <span style="font-family: monospace; font-size: 13px; font-weight: bold; color: #38bdf8; background: #0c4a6e; padding: 6px 12px; border-radius: 8px;">${s.tag}</span>
+                                <span style="font-family: monospace; font-size: 12px; color: #94a3b8;">Diapositiva ${idx + 1} / ${deck.length}</span>
+                            </div>
+                            <h1 style="font-size: 26px; font-weight: 800; color: #ffffff; margin: 0 0 14px 0; line-height: 1.3;">${s.title}</h1>
+                            <p style="font-size: 15px; color: #cbd5e1; line-height: 1.6; margin: 0 0 16px 0;">${s.desc || s.subtitle || ''}</p>
+                            ${s.fix ? `<div style="background: #022c22; border: 1px solid #10b981; padding: 14px; border-radius: 10px; font-size: 13px; font-family: monospace; color: #6ee7b7; line-height: 1.5;">${s.fix}</div>` : ''}
+                        </div>
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #1e293b; padding-top: 14px; font-size: 12px; color: #64748b; font-family: monospace;">
+                            <span>🛡️ AuditFlow AI • Infraestructura de Blindaje Contractual</span>
+                            <span style="color: #38bdf8;">audiflowai.com</span>
+                        </div>
+                    </div>
+                `).join('');
+
+                printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Carrusel_LinkedIn_${niche}_AuditFlow_AI</title>
+                        <style>
+                            body { margin: 0; padding: 20px; background: #1e293b; display: flex; flex-direction: column; align-items: center; }
+                            @media print { body { background: none; padding: 0; } }
+                        </style>
+                    </head>
+                    <body>
+                        ${slidesHtml}
+                        <script>
+                            window.onload = function() {
+                                setTimeout(function() { window.print(); }, 500);
+                            };
+                        </script>
+                    </body>
+                    </html>
+                `);
+                printWindow.document.close();
             },
 
             copySocialCopy() {
