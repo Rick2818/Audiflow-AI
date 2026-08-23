@@ -1016,11 +1016,15 @@ elena.koskinen@clean-fi.fi, Elena Koskinen, Helsinki Tech Solutions, VP Finance,
                         if (errEl) errEl.classList.add('hidden');
                         if (modal) modal.classList.add('hidden');
                         if (content) content.classList.remove('hidden');
-                        await this.loadStats();
+                        try {
+                            await this.loadStats();
+                        } catch (loadErr) {
+                            console.warn('Advertencia al cargar estadísticas:', loadErr);
+                        }
                         return;
                     } else {
                         if (errEl) {
-                            errEl.innerText = '❌ Contraseña incorrecta. Acceso no autorizado.';
+                            errEl.innerText = `❌ ${data.error || 'Contraseña incorrecta. Acceso no autorizado.'}`;
                             errEl.classList.remove('hidden');
                         }
                         if (passInput) passInput.focus();

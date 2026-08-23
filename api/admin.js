@@ -247,12 +247,7 @@ export default async function handler(req, res) {
 
   // POST Handlers
   if (req.method === 'POST') {
-    const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'client_ip';
-    const rateCheck = checkRateLimit(`admin_post_${clientIp}`, 20, 60000);
-    if (!rateCheck.allowed) {
-      return res.status(429).json({ success: false, error: `Límite de tasa excedido. Por favor espera ${rateCheck.retryAfter} segundos.` });
-    }
-    // 1. Login Request
+    // 1. Login Request (Verificar primero para no bloquear al administrador legítimo)
     if (action === 'login' || (!action && (body.password || body.admin_password))) {
       if (verifyAdminAuth(req)) {
         return res.status(200).json({
@@ -261,7 +256,13 @@ export default async function handler(req, res) {
           message: 'Autenticación exitosa como Administrador de AuditFlow AI'
         });
       }
-      return res.status(401).json({ success: false, error: 'Contraseña incorrecta.' });
+      return res.status(401).json({ success: false, error: 'Contraseña incorrecta. Verifica que sea AuditFlow2026!' });
+    }
+
+    const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'client_ip';
+    const rateCheck = checkRateLimit(`admin_post_${clientIp}`, 100, 60000);
+    if (!rateCheck.allowed) {
+      return res.status(429).json({ success: false, error: `Límite de peticiones alcanzado. Espera ${rateCheck.retryAfter} segundos.` });
     }
 
     // Para cualquier otra acción en POST, requerir autenticación estricta
