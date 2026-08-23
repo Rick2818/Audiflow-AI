@@ -58,7 +58,7 @@ La página de aterrizaje SEM está 100% activa en producción con:
   1. Protege tu EBITDA de cláusulas abusivas y sobrecargos en contratos. Análisis en <8s.
   2. Cero almacenamiento en disco. Procesa contratos en RAM volátil y recibe Word .docx.
 * **Sitelinks / Enlaces de Sitio:**
-  - Ver Video de 34s: https://audiflowai.com/video
+  - Ver Video de 40s: https://audiflowai.com/video
   - Probar Scanner Gratis: https://audiflowai.com/#scanner-section
 
 ---
@@ -74,7 +74,7 @@ La página de aterrizaje SEM está 100% activa en producción con:
   1. Forensic AI audits vendor contracts in 8 seconds. Zero disk retention in volatile RAM.
   2. Uncover hidden renewal penalties and get negotiation-ready Word docx counter-clauses.
 * **Sitelinks:**
-  - Watch 34s Video Demo: https://audiflowai.com/video?lang=en
+  - Watch 40s Video Demo: https://audiflowai.com/video?lang=en
   - Start Free Diagnostic: https://audiflowai.com/?lang=en#scanner-section
 
 ---

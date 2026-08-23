@@ -416,7 +416,7 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
 
 ---
 
-## 🎬 29. MOTOR DE VIDEO HYPERFRAMES (34s), AUDIO NEURONAL FEMENINO Y ESTRATEGIA SEM ORGÁNICA MULTILINGÜE
+## 🎬 29. MOTOR DE VIDEO HYPERFRAMES (40s), AUDIO NEURONAL FEMENINO Y ESTRATEGIA SEM ORGÁNICA MULTILINGÜE
 
 1. **Reproductor HyperFrames Ejecutivo de 34 Segundos (`frontend/video.html` - `/video`):**
    - Estructurado en 4 actos fiduciarios: 01. ¿Qué es?, 02. ¿Para qué sirve?, 03. Consecuencias/Contras, 04. Beneficios & CTA Final.

@@ -280,9 +280,9 @@ export default async function handler(req, res) {
                   <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Verhandlungsbereite Gegenklauseln mit VPI-Deckel (+3%) und IFRS/NIIF-Konformität.</p>
                 </div>
                 <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
-                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Offizielles HyperFrames Video (34s • Professionelle Sprecherin)</p>
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Offizielles HyperFrames Video (40s • Professionelle Sprecherin)</p>
                   <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Prägnante visuelle Demonstration: Was AuditFlow AI tut, Risiken ungeprüfter Verträge und sofortige Vorteile.</p>
-                  <a href="https://audiflowai.com/video?lang=de&ref=outreach_pareto_de" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ HyperFrames Video Ansehen (34s) →</a>
+                  <a href="https://audiflowai.com/video?lang=de&ref=outreach_pareto_de" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ HyperFrames Video Ansehen (40s) →</a>
                 </div>
               </div>
 
@@ -333,9 +333,9 @@ export default async function handler(req, res) {
                   <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Clauses protectrices prêtes à l'emploi avec plafonnement de l'IPC (+3%).</p>
                 </div>
                 <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
-                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Vidéo Officielle HyperFrames (34s • Voix Féminine Studio)</p>
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Vidéo Officielle HyperFrames (40s • Voix Féminine Studio)</p>
                   <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Démonstration visuelle claire : ce que fait AuditFlow AI, risques financiers évités et bénéfices immédiats.</p>
-                  <a href="https://audiflowai.com/video?lang=fr&ref=outreach_pareto_fr" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Voir la Vidéo HyperFrames (34s) →</a>
+                  <a href="https://audiflowai.com/video?lang=fr&ref=outreach_pareto_fr" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Voir la Vidéo HyperFrames (40s) →</a>
                 </div>
               </div>
 
@@ -386,9 +386,9 @@ export default async function handler(req, res) {
                   <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Turnkey fiduciary counter-clauses with CPI caps ready to sign.</p>
                 </div>
                 <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
-                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Official HyperFrames Video (34s • Neural Female Voice)</p>
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Official HyperFrames Video (40s • Neural Female Voice)</p>
                   <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Visual executive walkthrough demonstrating what AuditFlow AI does, unshielded agreement pitfalls, and instant EBITDA savings.</p>
-                  <a href="https://audiflowai.com/video?lang=en&ref=outreach_pareto_en" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Play 34s HyperFrames Video →</a>
+                  <a href="https://audiflowai.com/video?lang=en&ref=outreach_pareto_en" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Play 40s HyperFrames Video →</a>
                 </div>
               </div>
 
@@ -439,9 +439,9 @@ export default async function handler(req, res) {
                   <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Redlines blindados con límites de IPC (+3%) y exenciones de penalización listos para firmar.</p>
                 </div>
                 <div style="padding: 10px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
-                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Video Demostrativo HyperFrames (34s • Voz Neuronal Femenina)</p>
-                  <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Demostración visual clara de qué hace AuditFlow AI, riesgos evitados y beneficios inmediatos en 34 segundos.</p>
-                  <a href="https://audiflowai.com/video?lang=es&ref=outreach_pareto_es" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Ver Video HyperFrames (34s) →</a>
+                  <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Video Demostrativo HyperFrames (40s • Voz Neuronal Femenina)</p>
+                  <p style="margin: 3px 0 8px 0; font-size: 12px; color: #94a3b8;">Demostración visual clara de qué hace AuditFlow AI, riesgos evitados y beneficios inmediatos en 40 segundos.</p>
+                  <a href="https://audiflowai.com/video?lang=es&ref=outreach_pareto_es" style="color: #000000; background-color: #10b981; padding: 7px 14px; border-radius: 5px; text-decoration: none; font-size: 12px; font-weight: bold; display: inline-block;">▶️ Ver Video HyperFrames (40s) →</a>
                 </div>
               </div>
 
