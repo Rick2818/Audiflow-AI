@@ -80,6 +80,58 @@ async function runForensicAudit() {
     }
   }
 
+  // 0. AUDITORÍA DE CONFIGURACIÓN SSOT & ANTI-TYPO LINTER
+  console.log('[FASE 0] Integridad SSOT & Linter Anti-Typo:');
+  {
+    const { CONFIG, validateSystemConfig } = await import('../lib/config.js');
+    let ssotValid = false;
+    try {
+      ssotValid = validateSystemConfig();
+    } catch (e) {
+      ssotValid = false;
+    }
+    recordTest('Validación de Esquema Fail-Fast (lib/config.js)', ssotValid);
+    recordTest('SSOT: Correo de Control Universal verificado estrictamente', CONFIG.EMAIL.OWNER_CONTROL === 'tendenciaiatufuturo@gmail.com');
+    recordTest('SSOT: Correo Financiero de Ventas verificado estrictamente', CONFIG.EMAIL.OWNER_SALES === 'rick28191@gmail.com');
+
+    // Escaneo Anti-Typo en el código fuente
+    const fs = await import('fs');
+    const path = await import('path');
+    const forbidden = ['tendenciaaitufuturo@gmail.com', 'tendenciaaitufuturo', 'user@stacker.news'];
+    let typosFound = 0;
+
+    function scanDir(dir) {
+      const entries = fs.readdirSync(dir, { withFileTypes: true });
+      for (const entry of entries) {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+          if (entry.name !== 'node_modules' && entry.name !== '.git' && entry.name !== '.gemini' && entry.name !== '.vercel') {
+            scanDir(fullPath);
+          }
+        } else if (entry.isFile() && (entry.name.endsWith('.js') || entry.name.endsWith('.html') || entry.name.endsWith('.md'))) {
+          const content = fs.readFileSync(fullPath, 'utf8');
+          for (const word of forbidden) {
+            if (content.includes(word)) {
+              console.error(`    ❌ [TYPO DETECTED in ${fullPath}]: Contiene la cadena prohibida "${word}"`);
+              typosFound++;
+            }
+          }
+        }
+      }
+    }
+
+    try {
+      scanDir('./api');
+      scanDir('./lib');
+      scanDir('./frontend');
+    } catch (scanErr) {
+      console.warn('Scan warning:', scanErr.message);
+    }
+
+    recordTest('Escaneo Forense Anti-Typo: 0 cadenas prohibidas en api/, lib/ y frontend/', typosFound === 0);
+  }
+  console.log('');
+
   // 1. AUDITORÍA DE ADMINISTRACIÓN Y AUTENTICACIÓN
   console.log('[FASE 1] Módulo api/admin.js & Seguridad:');
   {

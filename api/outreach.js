@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { verifyAdminAuth } from '../lib/security.js';
+import { CONFIG } from '../lib/config.js';
 
 dotenv.config();
 
@@ -193,17 +194,17 @@ export default async function handler(req, res) {
       prospects = generateOutreachProspects(batch);
     }
 
-    const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+    const resendApiKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
     const resendClient = resendApiKey ? new Resend(resendApiKey) : null;
 
     const smtpHost = (process.env.SMTP_HOST || '').trim();
     const smtpPort = Number(process.env.SMTP_PORT) || 587;
     const smtpUser = (process.env.SMTP_USER || '').trim();
     const smtpPass = (process.env.SMTP_PASS || '').trim();
-    const emailFrom = (process.env.EMAIL_FROM || '"AuditFlow AI | Auditoría Corporativa" <ricardo@audiflowai.com>').trim();
+    const emailFrom = (process.env.EMAIL_FROM || CONFIG.EMAIL.FROM_OUTREACH).trim();
 
-    const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
-    const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+    const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+    const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
 
     let transporter;
     if (!resendClient) {
@@ -571,7 +572,7 @@ export default async function handler(req, res) {
             await resendClient.emails.send({
               from: emailFrom,
               to: email,
-              reply_to: 'tendenciaiatufuturo@gmail.com',
+              reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL,
               subject,
               html: bodyHtml,
               headers: {
@@ -583,7 +584,7 @@ export default async function handler(req, res) {
             await transporter.sendMail({
               from: senderFrom,
               to: email,
-              replyTo: 'tendenciaiatufuturo@gmail.com',
+              replyTo: CONFIG.EMAIL.REPLY_TO_CONTROL,
               subject,
               html: bodyHtml
             });
@@ -595,7 +596,7 @@ export default async function handler(req, res) {
       }
     }
 
-    // Mandato Universal: Despachar reporte de control a tendenciaiatufuturo@gmail.com
+    // Mandato Universal: Despachar reporte de control al propietario
     if (results.length > 0 && !test_mode) {
       try {
         const successCount = results.filter(r => r.status === 'sent_resend').length;
@@ -610,22 +611,22 @@ export default async function handler(req, res) {
               <li>Hora de ejecución: <strong>${new Date().toLocaleString()}</strong></li>
               <li>Destinatarios de muestra: <strong>${results.slice(0, 3).map(r => r.email).join(', ')}</strong></li>
             </ul>
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada a la bandeja oficial: tendenciaiatufuturo@gmail.com</p>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada a la bandeja oficial: ${CONFIG.EMAIL.OWNER_CONTROL}</p>
           </div>
         `;
         if (resendClient) {
           await resendClient.emails.send({
             from: emailFrom,
-            to: ['tendenciaiatufuturo@gmail.com'],
-            reply_to: 'tendenciaiatufuturo@gmail.com',
+            to: [CONFIG.EMAIL.OWNER_CONTROL],
+            reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL,
             subject: ownerSubject,
             html: ownerHtml
           }).catch(() => {});
         } else if (transporter) {
           await transporter.sendMail({
             from: senderFrom,
-            to: 'tendenciaiatufuturo@gmail.com',
-            replyTo: 'tendenciaiatufuturo@gmail.com',
+            to: CONFIG.EMAIL.OWNER_CONTROL,
+            replyTo: CONFIG.EMAIL.REPLY_TO_CONTROL,
             subject: ownerSubject,
             html: ownerHtml
           }).catch(() => {});

@@ -1,13 +1,14 @@
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 import { isSafePublicUrl } from '../lib/security.js';
+import { CONFIG } from '../lib/config.js';
 
-const stripeSecret = (process.env.STRIPE_SECRET_KEY || '').trim();
+const stripeSecret = (process.env.STRIPE_SECRET_KEY || CONFIG.PAYMENTS.STRIPE_SECRET_KEY || '').trim();
 const webhookSecret = (process.env.STRIPE_WEBHOOK_SECRET || '').trim();
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 
-const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
-const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE.URL || '').trim();
+const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || CONFIG.SUPABASE.KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 export default async function handler(req, res) {
@@ -112,26 +113,26 @@ export default async function handler(req, res) {
             try {
               const { Resend } = await import('resend');
               const resend = new Resend(resendKey);
-              await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: 'tendenciaiatufuturo@gmail.com', subject: clientSubject, html: clientHtml });
+              await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject: clientSubject, html: clientHtml });
               // Notificación de Venta al Correo Personal del Propietario (rick28191@gmail.com) y al Operativo
-              await resend.emails.send({ from: emailFrom, to: ['rick28191@gmail.com', 'tendenciaiatufuturo@gmail.com'], reply_to: 'tendenciaiatufuturo@gmail.com', subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
+              await resend.emails.send({ from: emailFrom, to: [CONFIG.EMAIL.OWNER_SALES, CONFIG.EMAIL.OWNER_CONTROL], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
             } catch (rErr) {
               console.warn('Resend webhook notice error:', rErr.message);
             }
           }
 
           // Fallback a Gmail SMTP para garantizar la llegada al correo personal
-          const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+          const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
           if (gmailPass) {
             try {
               const nodemailer = (await import('nodemailer')).default;
               const transporter = nodemailer.createTransport({
                 service: 'gmail',
-                auth: { user: 'rick28191@gmail.com', pass: gmailPass }
+                auth: { user: CONFIG.EMAIL.SMTP_USER, pass: gmailPass }
               });
               await transporter.sendMail({
-                from: '"AuditFlow AI | Sistema de Ventas" <rick28191@gmail.com>',
-                to: 'rick28191@gmail.com, tendenciaiatufuturo@gmail.com',
+                from: CONFIG.EMAIL.FROM_SALES,
+                to: `${CONFIG.EMAIL.OWNER_SALES}, ${CONFIG.EMAIL.OWNER_CONTROL}`,
                 subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`,
                 html: ownerNotificationHtml
               });

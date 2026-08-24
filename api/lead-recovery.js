@@ -2,20 +2,21 @@ import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
 import { verifyAdminAuth } from '../lib/security.js';
+import { CONFIG } from '../lib/config.js';
 
-const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
-const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE.URL || '').trim();
+const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || CONFIG.SUPABASE.KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
-const resendKey = (process.env.RESEND_API_KEY || '').trim();
-const emailFrom = process.env.EMAIL_FROM || 'AuditFlow AI | Consultoria <ricardo@audiflowai.com>';
+const resendKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
+const emailFrom = process.env.EMAIL_FROM || CONFIG.EMAIL.FROM_TRANSACTIONAL;
 
 async function sendRecoveryEmail({ to, subject, html }) {
   // 1. Resend API
   if (resendKey) {
     try {
       const resend = new Resend(resendKey);
-      const r = await resend.emails.send({ from: emailFrom, to: [to], reply_to: 'tendenciaiatufuturo@gmail.com', subject, html });
+      const r = await resend.emails.send({ from: emailFrom, to: [to], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject, html });
       if (r && (r.id || r.data?.id)) return { success: true, provider: 'resend', id: r.id || r.data?.id };
     } catch (e) {
       console.warn('Resend fallback in lead-recovery:', e.message);
@@ -24,10 +25,10 @@ async function sendRecoveryEmail({ to, subject, html }) {
 
   // 2. Gmail SMTP
   try {
-    const user = process.env.GMAIL_USER || 'rick28191@gmail.com';
-    const pass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '');
+    const user = process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER;
+    const pass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '');
     const transporter = nodemailer.createTransport({ service: 'gmail', auth: { user, pass } });
-    const info = await transporter.sendMail({ from: `"AuditFlow AI" <${user}>`, to, subject, html });
+    const info = await transporter.sendMail({ from: `"AuditFlow AI" <${user}>`, to, replyTo: CONFIG.EMAIL.REPLY_TO_CONTROL, subject, html });
     return { success: true, provider: 'gmail_smtp', id: info.messageId };
   } catch (err) {
     console.error('Gmail SMTP error in lead-recovery:', err.message);
@@ -116,17 +117,17 @@ export default async function handler(req, res) {
       results.push({ email: lEmail, status: sendRes.success ? 'sent' : 'error', provider: sendRes.provider });
     }
 
-    // Mandato Universal: Copia al Propietario (tendenciaiatufuturo@gmail.com)
+    // Mandato Universal: Copia al Propietario
     const ownerSubject = `[Recuperación de Leads] AuditFlow AI — Lote de Seguimiento Ejecutado (${results.length} Leads)`;
     const ownerHtml = `
       <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #38bdf8;">
         <h3 style="color: #38bdf8; margin-top: 0;">AuditFlow AI — Reporte de Recuperación de Leads</h3>
         <p>Se ha ejecutado la secuencia automatizada de recuperación para leads no convertidos.</p>
         <p>Total procesados: <strong>${results.length}</strong></p>
-        <p style="font-size: 12px; color: #94a3b8;">Copia de control enviada a la bandeja del propietario.</p>
+        <p style="font-size: 12px; color: #94a3b8;">Copia de control enviada a la bandeja del propietario: ${CONFIG.EMAIL.OWNER_CONTROL}.</p>
       </div>
     `;
-    await sendRecoveryEmail({ to: 'tendenciaiatufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
+    await sendRecoveryEmail({ to: CONFIG.EMAIL.OWNER_CONTROL, subject: ownerSubject, html: ownerHtml });
 
     return res.status(200).json({
       success: true,

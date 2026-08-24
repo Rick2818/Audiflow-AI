@@ -1,13 +1,14 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
+import { CONFIG } from '../lib/config.js';
 
-const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
-const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE.URL || '').trim();
+const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || CONFIG.SUPABASE.KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 async function sendAdminIssueAlert({ email, issueType, description, userAgent, lang }) {
-  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
 
   const isEn = (lang === 'en');
   const subject = isEn 

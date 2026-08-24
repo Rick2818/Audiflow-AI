@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
+import { CONFIG } from '../lib/config.js';
 
 export const openedLeadsMap = new Map();
 const TRANSPARENT_GIF_BUFFER = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
@@ -12,8 +13,8 @@ const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supaba
 
 // Helper de Envío de Correo por Gmail SMTP / Resend
 async function sendGmailEmail({ to, subject, html }) {
-  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
 
   if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
     try {
@@ -24,7 +25,7 @@ async function sendGmailEmail({ to, subject, html }) {
       return await transporter.sendMail({
         from: `"AuditFlow AI" <${gmailUser}>`,
         to,
-        replyTo: 'tendenciaiatufuturo@gmail.com',
+        replyTo: CONFIG.EMAIL.REPLY_TO_CONTROL,
         subject,
         html
       });
