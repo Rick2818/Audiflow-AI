@@ -242,9 +242,9 @@
             <!-- TAB SWITCHER (8 CANALES & ESTRATEGIAS TOP TREND 2026) -->
             <div class="flex items-center gap-1.5 bg-dark-surface p-1.5 rounded-xl border border-dark-border text-xs font-mono w-full lg:w-auto flex-wrap">
                 <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer">👥 Leads &amp; Empresas</button>
+                <button id="tab-btn-fasttrack" onclick="AdminApp.switchTab('fasttrack')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow hover:scale-105 transition-all cursor-pointer flex items-center gap-1">⚡ 10 Clientes Hoy</button>
                 <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">💳 Transacciones</button>
                 <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-emerald-300 font-bold border border-emerald-500/40 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📧 Cold Email</button>
-                <button onclick="AdminApp.launchFastTrackBlast()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow hover:scale-105 transition-all cursor-pointer animate-pulse flex items-center gap-1">⚡ 10 Clientes Hoy</button>
                 <button id="tab-btn-shadow" onclick="AdminApp.switchTab('shadow')" class="px-3 py-2 rounded-lg text-amber-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🕵️ 1. Auditorías Sombra</button>
                 <button id="tab-btn-social" onclick="AdminApp.switchTab('social')" class="px-3 py-2 rounded-lg text-purple-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📢 2. Carruseles LinkedIn</button>
                 <button id="tab-btn-verify" onclick="AdminApp.switchTab('verify')" class="px-3 py-2 rounded-lg text-emerald-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🛡️ 3. Sello Viral</button>
@@ -608,6 +608,92 @@
     <a href="https://audiflowai.com/verificar" style="color:#38bdf8;font-size:11px;text-decoration:underline;">Verificar Certificado con AuditFlow AI →</a>
   </div>
 </div></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB ESPECIAL: OPERACIÓN 10 CLIENTES HOY (FAST-TRACK 24H) -->
+        <div id="tab-content-fasttrack" class="bg-dark-card border-2 border-emerald-500/60 rounded-2xl p-6 shadow-2xl mb-8 hidden">
+            <div class="border-b border-dark-border pb-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-400 text-black animate-pulse">ALTA PRIORIDAD 24 HORAS</span>
+                        <h3 class="font-bold text-white text-xl flex items-center gap-2">
+                            ⚡ Operación 10 Clientes Hoy (Fast-Track)
+                        </h3>
+                    </div>
+                    <p class="text-xs text-gray-300 font-mono mt-1 leading-relaxed">
+                        Campaña de choque de alta velocidad dirigida a los 50 decisores con mayor probabilidad fiduciaria (Score 98-99) con la oferta irresistible de $19 USD / Acceso VIP y copia universal a <code>tendenciaiatufuturo@gmail.com</code>.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="AdminApp.launchFastTrackBlast(false)" id="btn-fasttrack-main" class="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold text-sm shadow-glow hover:scale-105 transition-all cursor-pointer flex items-center gap-2">
+                        <span>🚀 Disparar Campaña (50 Decisores VIP)</span>
+                    </button>
+                    <button onclick="AdminApp.launchFastTrackBlast(true)" class="px-4 py-3 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
+                        🧪 Simulación
+                    </button>
+                </div>
+            </div>
+
+            <!-- CONSOLA EN VIVO & GUIONES DE CIERRE -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <!-- CONSOLA DE ESTADO EN VIVO -->
+                <div class="bg-dark-surface border border-emerald-500/30 rounded-xl p-4 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-emerald-400 text-sm border-b border-dark-border pb-2 mb-3 flex items-center gap-2">
+                            <span>📡 Consola de Despacho en Vivo</span>
+                            <span class="text-[10px] font-mono text-gray-400">(Resend API + Gmail SMTP)</span>
+                        </h4>
+                        <div id="fasttrack-status-log" class="p-3 bg-black/60 border border-dark-border rounded-lg text-xs text-gray-300 min-h-[140px] max-h-[220px] overflow-y-auto font-mono leading-relaxed">
+                            ⚡ Presiona el botón verde superior <strong>«🚀 Disparar Campaña (50 Decisores VIP)»</strong> para iniciar la campaña de choque.<br>
+                            Todos los envíos se notificarán en tiempo real con copia fiduciaria a <code>tendenciaiatufuturo@gmail.com</code>.
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-dark-border flex items-center justify-between text-[11px] font-mono text-gray-400">
+                        <span>Hook: Auditoría $19 USD / Regalo RAM</span>
+                        <span>Destino: 50 CFOs Top 20%</span>
+                    </div>
+                </div>
+
+                <!-- KIT DE CIERRE DIRECTO EN 1 TOQUE (WHATSAPP / LINKEDIN) -->
+                <div class="bg-dark-surface border border-dark-border rounded-xl p-4">
+                    <h4 class="font-bold text-accent-blue text-sm border-b border-dark-border pb-2 mb-3 flex items-center justify-between">
+                        <span>📲 Kit de Cierre Relámpago (1 Clic)</span>
+                        <span class="text-[10px] font-mono text-emerald-400 font-normal">Copia y pega en WhatsApp/LinkedIn</span>
+                    </h4>
+                    
+                    <div class="space-y-3">
+                        <div class="p-3 rounded-lg bg-dark-card border border-dark-border flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-white">1. WhatsApp Directo (Empresarios / Socios)</div>
+                                <div class="text-[10px] text-gray-400 font-mono">Oferta de 1 auditoría gratis en RAM para contratos de esta semana.</div>
+                            </div>
+                            <button onclick="AdminApp.copyFastTrackScript('whatsapp')" class="px-3 py-1.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 text-xs font-bold font-mono whitespace-nowrap cursor-pointer">
+                                📋 Copiar
+                            </button>
+                        </div>
+
+                        <div class="p-3 rounded-lg bg-dark-card border border-dark-border flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-white">2. LinkedIn InMail / DM (CFOs &amp; Controllers)</div>
+                                <div class="text-[10px] text-gray-400 font-mono">Enfoque en fugas de EBITDA de $3.5k a $18.5k USD.</div>
+                            </div>
+                            <button onclick="AdminApp.copyFastTrackScript('linkedin')" class="px-3 py-1.5 rounded-lg bg-blue-500/20 text-blue-300 border border-blue-500/40 hover:bg-blue-500/30 text-xs font-bold font-mono whitespace-nowrap cursor-pointer">
+                                📋 Copiar
+                            </button>
+                        </div>
+
+                        <div class="p-3 rounded-lg bg-dark-card border border-dark-border flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-white">3. Despachos Legales &amp; Firmas Contables</div>
+                                <div class="text-[10px] text-gray-400 font-mono">Propuesta de copiloto en marca blanca para agilizar revisiones.</div>
+                            </div>
+                            <button onclick="AdminApp.copyFastTrackScript('legal')" class="px-3 py-1.5 rounded-lg bg-purple-500/20 text-purple-300 border border-purple-500/40 hover:bg-purple-500/30 text-xs font-bold font-mono whitespace-nowrap cursor-pointer">
+                                📋 Copiar
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1631,7 +1717,7 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
             },
 
             switchTab(tab) {
-                const tabs = ['leads', 'tx', 'shadow', 'social', 'verify', 'outreach', 'seo', 'directories'];
+                const tabs = ['leads', 'tx', 'fasttrack', 'outreach', 'shadow', 'social', 'verify', 'seo', 'directories'];
                 tabs.forEach(t => {
                     const contentEl = document.getElementById(`tab-content-${t}`);
                     const btnEl = document.getElementById(`tab-btn-${t}`);
@@ -1646,9 +1732,14 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                     }
                     if (btnEl) {
                         if (t === tab) {
-                            btnEl.className = "px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer";
+                            if (t === 'fasttrack') {
+                                btnEl.className = "px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer flex items-center gap-1";
+                            } else {
+                                btnEl.className = "px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer";
+                            }
                         } else {
                             let defaultTextColor = 'text-gray-300';
+                            if (t === 'fasttrack') defaultTextColor = 'text-emerald-300 font-bold border border-emerald-500/40';
                             if (t === 'shadow') defaultTextColor = 'text-amber-300';
                             if (t === 'social') defaultTextColor = 'text-purple-300';
                             if (t === 'verify') defaultTextColor = 'text-emerald-300';
@@ -1659,6 +1750,24 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
 
                 if (tab === 'social') {
                     this.generateSocialCopy();
+                }
+            },
+
+            copyFastTrackScript(type) {
+                const scripts = {
+                    whatsapp: `Hola, ¿cómo estás? Te escribo rápido porque acabamos de lanzar AuditFlow AI (https://audiflowai.com), una plataforma de IA desarrollada aquí que audita contratos corporativos, acuerdos de proveedores y facturas en menos de 10 segundos.\n\nDetecta cláusulas abusivas, penalizaciones ocultas y sobrecostos (en promedio encontramos entre $3,500 y $15,000 USD de fuga por contrato antes de la firma).\n\nComo estamos abriendo el programa piloto hoy para 10 empresas líderes, te habilité 1 auditoría completa de prueba sin costo para el contrato o factura que estés por firmar esta semana.\n\nPuedes probarlo aquí en 10 segundos (en memoria RAM privada sin guardar ningún archivo): 👉 https://audiflowai.com\n\nSi te sirve, me encantaría tu feedback directo.`,
+                    linkedin: `Estimado/a colega,\n\nVeo tu liderazgo financiero en el sector corporativo. En el entorno actual, las renovaciones automáticas con penalizaciones del 30-40% y la duplicación de indexación por inflación son fugas silenciosas que impactan el EBITDA.\n\nDesarrollamos AuditFlow AI (https://audiflowai.com), una tecnología de IA que revisa contratos y facturas en memoria RAM volátil (0 retención en disco, SOC-2 & GDPR compliant) y entrega un reporte forense con contra-propuestas en Word (.docx) en 8 segundos.\n\nHoy estamos liberando 10 accesos prioritarios con garantía de ahorro para CFOs. Puedes subir un contrato de prueba sin costo aquí:\n👉 https://audiflowai.com\n\n¿Te gustaría que te prepare un diagnóstico comparativo de su plantilla estándar de proveedores?`,
+                    legal: `Estimado colega,\n\nLe contacto brevemente: estamos implementando AuditFlow AI con firmas contables y legales como copiloto de primera línea para acelerar la revisión de contratos de sus clientes en un 85%.\n\nLa plataforma genera en 10 segundos el borrador de Redline en Word (.docx con control de cambios) listo para negociación, protegiendo la confidencialidad en RAM.\n\nQueremos invitar a su despacho a evaluar una licencia piloto de marca blanca. Puede ver una demostración interactiva de 40 segundos aquí:\n👉 https://audiflowai.com/video?lang=es\n\nQuedo a su disposición para coordinar una breve llamada de 10 minutos.`
+                };
+                const text = scripts[type] || scripts.whatsapp;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.showToast('📋 ¡Guión copiado al portapapeles! Listo para pegar en WhatsApp o LinkedIn.', 'success');
+                    }).catch(() => {
+                        prompt('Copia el siguiente mensaje:', text);
+                    });
+                } else {
+                    prompt('Copia el siguiente mensaje:', text);
                 }
             },
 
@@ -2626,23 +2735,27 @@ Escaneo de prueba gratuito:
                 this.showToast('Archivo CSV exportado exitosamente.', 'success');
             },
 
-            async launchFastTrackBlast() {
-                const btn = document.getElementById('btn-fast-track-blast');
-                const logBox = document.getElementById('outreach-status-log');
+            async launchFastTrackBlast(testMode = false) {
+                const btnMain = document.getElementById('btn-fasttrack-main');
+                const btnOld = document.getElementById('btn-fast-track-blast');
+                const logFastTrack = document.getElementById('fasttrack-status-log');
+                const logOutreach = document.getElementById('outreach-status-log');
 
-                if (!confirm('⚡ ¿Confirmas disparar la Operación 10 Clientes Hoy (Fast-Track 24h) hacia los 50 decisores de más alta puntuación (Score 98-99)?')) {
+                const modeLabel = testMode ? 'SIMULACIÓN (Prueba)' : 'ENVÍO REAL';
+                if (!confirm(`⚡ ¿Confirmas ejecutar la Operación 10 Clientes Hoy hacia los 50 decisores VIP (Modo: ${modeLabel})?`)) {
                     return;
                 }
 
-                const originalHtml = btn ? btn.innerHTML : '';
-                if (btn) {
-                    btn.disabled = true;
-                    btn.innerHTML = '<span>⏳ Despachando Operación 10 Clientes...</span>';
+                const targetBtn = btnMain || btnOld;
+                const originalHtml = targetBtn ? targetBtn.innerHTML : '';
+                if (targetBtn) {
+                    targetBtn.disabled = true;
+                    targetBtn.innerHTML = '<span>⏳ Despachando Operación 10 Clientes...</span>';
                 }
 
-                if (logBox) {
-                    logBox.innerHTML = `🚀 <strong>[Operación 10 Clientes]</strong> Disparando campaña de alta velocidad hacia los 50 decisores Top 20% Pareto...<br>`;
-                }
+                const startMsg = `🚀 <strong>[Operación 10 Clientes]</strong> Disparando campaña hacia 50 decisores Top 20% (Modo: ${modeLabel})...<br>`;
+                if (logFastTrack) logFastTrack.innerHTML = startMsg;
+                if (logOutreach) logOutreach.innerHTML = startMsg;
 
                 try {
                     const headers = this.getAuthHeaders();
@@ -2651,29 +2764,37 @@ Escaneo de prueba gratuito:
                     const response = await fetch('/api/admin', {
                         method: 'POST',
                         headers: headers,
-                        body: JSON.stringify({ action: 'fast_track_blast', limit: 50, test_mode: false })
+                        body: JSON.stringify({ action: 'fast_track_blast', limit: 50, test_mode: testMode })
                     });
 
                     const data = await response.json();
 
                     if (response.ok && data.success) {
-                        if (logBox) {
-                            logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Campaña Fast-Track despachada con éxito!</span> (${data.count} correos enviados con copia de control a tendenciaiatufuturo@gmail.com).<br>`;
+                        const successMsg = `<span class="text-emerald-400 font-bold">✅ ¡Campaña Fast-Track despachada con éxito!</span> (${data.count} correos procesados con copia de control a tendenciaiatufuturo@gmail.com).<br>`;
+                        if (logFastTrack) {
+                            logFastTrack.innerHTML += successMsg;
+                            if (data.dispatched && data.dispatched.length > 0) {
+                                logFastTrack.innerHTML += `<div class="mt-2 text-[10px] text-gray-400 max-h-32 overflow-y-auto">` +
+                                    data.dispatched.slice(0, 10).map(d => `• ${d.name} (${d.company}) -> ${d.email} [${d.status}]`).join('<br>') +
+                                    (data.dispatched.length > 10 ? `<br>... y ${data.dispatched.length - 10} más.` : '') +
+                                `</div>`;
+                            }
                         }
+                        if (logOutreach) logOutreach.innerHTML += successMsg;
                         this.showToast(`¡Operación 10 Clientes ejecutada! ${data.count} correos despachados.`, 'success');
                     } else {
                         throw new Error(data.error || 'Error al ejecutar la campaña Fast-Track.');
                     }
                 } catch (err) {
                     console.error('Error en Fast-Track blast:', err);
-                    if (logBox) {
-                        logBox.innerHTML += `<span class="text-rose-400">❌ Error: ${err.message}</span><br>`;
-                    }
+                    const errorMsg = `<span class="text-rose-400 font-bold">❌ Error: ${err.message}</span><br>`;
+                    if (logFastTrack) logFastTrack.innerHTML += errorMsg;
+                    if (logOutreach) logOutreach.innerHTML += errorMsg;
                     this.showToast(`Error: ${err.message}`, 'error');
                 } finally {
-                    if (btn) {
-                        btn.disabled = false;
-                        btn.innerHTML = originalHtml;
+                    if (targetBtn) {
+                        targetBtn.disabled = false;
+                        targetBtn.innerHTML = originalHtml;
                     }
                 }
             },
