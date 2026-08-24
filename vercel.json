@@ -176,16 +176,16 @@
   ],
   "crons": [
     {
-      "path": "/api/outreach?campaign=pareto_top20",
-      "schedule": "0 13 * * 1"
+      "path": "/api/outreach?campaign=pareto_tuesday_risk&batch=pareto_top20",
+      "schedule": "0 13 * * 2"
     },
     {
-      "path": "/api/outreach/send-campaign",
-      "schedule": "0 9 * * 1,2"
+      "path": "/api/outreach?campaign=pareto_wednesday_case_study&batch=pareto_top20",
+      "schedule": "0 13 * * 3"
     },
     {
       "path": "/api/lead-recovery",
-      "schedule": "0 10 * * 3,5"
+      "schedule": "0 14 * * 2,3,5"
     },
     {
       "path": "/api/outreach?cadence=touch_2_roi",
