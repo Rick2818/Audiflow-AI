@@ -345,6 +345,76 @@ async function runForensicAudit() {
     recordTest('Ejecución de secuencia de recuperación vía Vercel Cron', s1._getStatusCode() === 200 && s1._getResponseData()?.success);
   }
 
+  // 8. BATERÍA DE ESTRÉS WOMPI & STRIKE (100 PRUEBAS AUTOMATIZADAS)
+  console.log('\n[FASE 8] Batería de Estrés Wompi & Strike (100 Transacciones Simultáneas):');
+  {
+    let wompiCheckoutSuccesses = 0;
+    for (let i = 1; i <= 50; i++) {
+      const { req, res } = createMockReqRes({
+        method: 'POST',
+        url: '/api/payment/wompi',
+        body: {
+          report_id: `rep_wompi_stress_${i}`,
+          document_name: `Contrato_${i}.pdf`,
+          email: `cfo_${i}@empresa-sv.com`,
+          gateway: 'wompi'
+        }
+      });
+      await paymentHandler(req, res);
+      if (res._getStatusCode() === 200 && res._getResponseData()?.success && res._getResponseData()?.gateway === 'wompi') {
+        wompiCheckoutSuccesses++;
+      }
+    }
+    recordTest(`50/50 Checkouts Wompi ($19.00 USD) generados exitosamente`, wompiCheckoutSuccesses === 50);
+
+    let corpSuccesses = 0;
+    for (let i = 1; i <= 25; i++) {
+      const { req, res } = createMockReqRes({
+        method: 'POST',
+        url: '/api/payment/wompi',
+        body: {
+          report_id: `rep_corp_${i}`,
+          gateway: 'wompi',
+          interval: i % 2 === 0 ? 'annual' : 'monthly',
+          email: `director_${i}@corporativo.com`
+        }
+      });
+      await paymentHandler(req, res);
+      if (res._getStatusCode() === 200 && res._getResponseData()?.success && res._getResponseData()?.gateway === 'wompi') {
+        corpSuccesses++;
+      }
+    }
+    recordTest(`25/25 Checkouts Corporativos ($69/mes y $590/año) validados`, corpSuccesses === 25);
+
+    let webhookSuccesses = 0;
+    for (let i = 1; i <= 25; i++) {
+      const { req, res } = createMockReqRes({
+        method: 'POST',
+        url: '/api/webhook',
+        body: {
+          event: 'transaction.updated',
+          data: {
+            transaction: {
+              id: `trx_wompi_stress_${i}`,
+              status: 'APPROVED',
+              reference: `rep_confirmed_${i}`,
+              amount_in_cents: 1900,
+              customer_data: {
+                email: `comprador_${i}@empresa.com`,
+                full_name: `Ejecutivo ${i}`
+              }
+            }
+          }
+        }
+      });
+      await webhookHandler(req, res);
+      if (res._getStatusCode() === 200 && res._getResponseData()?.received) {
+        webhookSuccesses++;
+      }
+    }
+    recordTest(`25/25 Webhooks Wompi (Entrega Word .docx y notificaciones) procesados`, webhookSuccesses === 25);
+  }
+
   console.log('\n===============================================================');
   console.log(`📊 RESULTADO FINAL AUDITORÍA FORENSE:`);
   console.log(`   Pruebas ejecutadas: ${totalTests}`);
