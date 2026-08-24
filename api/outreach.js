@@ -1,6 +1,9 @@
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
+import dotenv from 'dotenv';
 import { verifyAdminAuth } from '../lib/security.js';
+
+dotenv.config();
 
 // 14 PAÍSES OBJETIVO OFICIALES CON MAPEO RIGUROSO DE IDIOMA
 const targetCountries = [
