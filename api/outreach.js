@@ -133,8 +133,19 @@ export function generateOutreachProspects(batch = 'pareto_top20') {
   if (batch === 'controllers_500') {
     return allLeads.filter(l => l.category === 'CONTROLLER').slice(0, 500);
   }
-  if (batch === 'all_2000' || batch === 'all') {
-    return allLeads;
+  if (batch === 'strategic_investors' || batch === 'investors' || batch === 'advisory_board') {
+    return [
+      { id: 'inv_01', name: 'Socio Director & Venture Lead', company: 'Innogen Capital Ventures', role: 'Managing Partner', email: 'deals@innogencapital.com', country: 'El Salvador', lang: 'es', category: 'VC', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_02', name: 'Partner de Inversión Semilla', company: 'Caricaco Ventures', role: 'General Partner', email: 'invest@caricaco.com', country: 'Costa Rica', lang: 'es', category: 'VC', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_03', name: 'Director de Práctica Corporativa', company: 'Torres Legal & Fintech Desk', role: 'Managing Partner', email: 'contacto@torres.legal', country: 'El Salvador', lang: 'es', category: 'LEGAL', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_04', name: 'Socio Senior Corporativo B2B', company: 'Consortium Legal', role: 'Senior Partner', email: 'elsalvador@consortiumlegal.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_05', name: 'Director de Innovación Financiera', company: 'CAMARASAL (Cámara de Comercio)', role: 'Director de Servicios Empresariales', email: 'camarasal@camarasal.com', country: 'El Salvador', lang: 'es', category: 'CHAMBER', campaign: 'institutional_partnership_convenio' },
+      { id: 'inv_06', name: 'Líder de Alianzas Corporativas', company: 'ASI (Asociación Salvadoreña de Industriales)', role: 'Director de Competitividad', email: 'asi@asi.com.sv', country: 'El Salvador', lang: 'es', category: 'CHAMBER', campaign: 'institutional_partnership_convenio' },
+      { id: 'inv_07', name: 'Oficial de Inversión e Innovación', company: 'BID Lab (Banco Interamericano)', role: 'Innovation Specialist', email: 'bidlab@iadb.org', country: 'El Salvador', lang: 'es', category: 'INSTITUTIONAL', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_08', name: 'Head of Business Development', company: 'Strike El Salvador Ecosystem', role: 'Director of Merchant Operations', email: 'partnerships@strike.me', country: 'El Salvador', lang: 'es', category: 'LIGHTNING', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_09', name: 'Managing Partner', company: 'Endeavor Central America & Angels', role: 'Managing Director', email: 'centralamerica@endeavor.org', country: 'El Salvador', lang: 'es', category: 'ANGEL', campaign: 'strategic_investor_advisory' },
+      { id: 'inv_10', name: 'Director de Fusiones y Contratos', company: 'Arias Law Firm', role: 'Partner Corporate & M&A', email: 'contact.elsalvador@ariaslaw.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', campaign: 'strategic_investor_advisory' }
+    ];
   }
   return allLeads.filter(l => l.pareto_tier === 'TOP_20');
 }
@@ -241,12 +252,65 @@ export default async function handler(req, res) {
       const isEn = (targetLang === 'en');
       const isEs = (targetLang === 'es');
 
+      const isStrategicInvestor = (batch === 'strategic_investors' || batch === 'investors' || p.campaign === 'strategic_investor_advisory' || p.campaign === 'institutional_partnership_convenio');
       const isParetoVip = (batch === 'pareto_top20' || p.pareto_tier === 'TOP_20' || p.campaign === 'pareto_vip_benefits_consequences');
 
       let subject = '';
       let bodyHtml = '';
 
-      if (isParetoVip) {
+      if (isStrategicInvestor) {
+        // CAMPAÑA EXCLUSIVA: INVERSIONISTAS ESTRATÉGICOS, ADVISORY BOARD & CONVENIOS INSTITUCIONALES
+        subject = `🏛️ Invitación Advisory Board / Inversor Estratégico — AuditFlow AI & ${company}`;
+        bodyHtml = `
+          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 30px; border-radius: 12px; border: 1px solid #38bdf8; max-width: 620px; margin: 0 auto;">
+            <div style="border-bottom: 1px solid #1f2937; padding-bottom: 12px; margin-bottom: 20px;">
+              <span style="color: #38bdf8; font-size: 12px; font-weight: bold; font-family: monospace; text-transform: uppercase;">MEMORÁNDUM DE ALIANZA ESTRATÉGICA &amp; INVERSIÓN B2B</span>
+              <h2 style="color: #ffffff; margin: 6px 0 0 0; font-size: 20px;">AuditFlow AI — Inteligencia de Riesgo Contractual &amp; Lightning</h2>
+            </div>
+            <p>Estimado/a <strong>${name}</strong> (${role} en <strong>${company}</strong>),</p>
+            <p style="line-height: 1.6; color: #d1d5db;">
+              Le contacto directamente debido a su trayectoria e influencia en el ecosistema empresarial, legal y de inversión de nuestra región.
+            </p>
+            <p style="line-height: 1.6; color: #d1d5db;">
+              Desarrollamos <strong>AuditFlow AI</strong> (Micro-SaaS B2B operativo en El Salvador y globalmente), una infraestructura de IA que audita contratos corporativos, acuerdos IT y facturas en <strong>menos de 10 segundos</strong>, identificando fugas de EBITDA de <strong>$3,500 a $18,500 USD</strong> por contrato antes de la firma.
+            </p>
+            
+            <div style="background-color: #111827; border: 1px solid #38bdf8; padding: 16px; border-radius: 8px; margin: 20px 0;">
+              <h4 style="margin: 0 0 8px 0; color: #38bdf8; font-size: 14px;">⚡ Diferenciadores Clave &amp; Tracción Tecnológica:</h4>
+              <ul style="margin: 0; padding-left: 18px; color: #cbd5e1; font-size: 13px; line-height: 1.6;">
+                <li><strong>Procesamiento en RAM Volátil (0 Almacenamiento):</strong> Privacidad estricta para secretos comerciales (SOC-2 &amp; GDPR compliant).</li>
+                <li><strong>Pasarela de Pago Híbrida:</strong> Cobros tradicionales (Stripe) y liquidación instantánea en Satoshis vía <strong>Bitcoin Lightning Network</strong>.</li>
+                <li><strong>Multi-Idioma Nativo:</strong> Operativo en Español, Inglés, Alemán y Francés para 14 países.</li>
+              </ul>
+            </div>
+
+            <div style="background-color: #1f2937; border-left: 4px solid #10b981; padding: 14px; margin: 20px 0; border-radius: 4px;">
+              <h4 style="margin: 0 0 6px 0; color: #34d399; font-size: 14px;">🤝 Propuesta de Alianza / Inversión Estratégica:</h4>
+              <p style="margin: 0; color: #e5e7eb; font-size: 13px; line-height: 1.5;">
+                Estamos sumando a <strong>3 figuras influyentes / entidades líderes</strong> a nuestro <strong>Consejo Asesor (Advisory Board) / Ronda Semilla</strong>, o mediante un <strong>Convenio de Licenciamiento Corporativo</strong> para blindar a las empresas de su portafolio o red gremial.
+              </p>
+            </div>
+
+            <!-- VIDEO Y DEMOSTRACIÓN -->
+            <div style="background-color: #111827; border: 1px solid #f59e0b; border-radius: 10px; padding: 16px; margin: 24px 0; text-align: center;">
+              <h4 style="margin: 0 0 8px 0; color: #fbbf24; font-size: 14px; font-weight: bold;">🎬 Demostración HyperFrames en 40 Segundos:</h4>
+              <p style="margin: 0 0 12px 0; font-size: 12px; color: #94a3b8;">Vea exactamente cómo funciona la auditoría en tiempo real y el modelo de negocio Micro-SaaS.</p>
+              <a href="https://audiflowai.com/video?lang=es&ref=investor_advisory_sv" style="color: #000000; background-color: #10b981; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">▶️ Ver Demostración (40s) &amp; Pitch →</a>
+            </div>
+
+            <p style="text-align: center; margin: 28px 0 16px 0;">
+              <a href="https://audiflowai.com/?ref=investor_demo_vip" style="background-color: #38bdf8; color: #000000; font-weight: bold; font-size: 14px; padding: 12px 24px; border-radius: 8px; text-decoration: none; display: inline-block;">🔍 Probar la Plataforma en Vivo</a>
+            </p>
+
+            <div style="margin-top: 30px; padding-top: 15px; border-top: 1px solid #1f2937; font-size: 12px; color: #9ca3af;">
+              <p style="margin: 0 0 4px 0;">Quedo a su entera disposición para coordinar una breve llamada de 10 minutos,</p>
+              <p style="margin: 0; font-weight: bold; color: #ffffff;">Ricardo • Fundador &amp; Director de Tecnología</p>
+              <p style="margin: 2px 0 0 0;">AuditFlow AI Corp. • Inteligencia Contractual B2B &amp; Lightning Rails</p>
+              <p style="margin: 2px 0 0 0;">Contacto Directo: <a href="mailto:tendenciaiatufuturo@gmail.com" style="color: #38bdf8; text-decoration: none;">tendenciaiatufuturo@gmail.com</a> • <a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a></p>
+            </div>
+          </div>
+        `;
+      } else if (isParetoVip) {
         // CAMPAÑA VIP PARETO 80/20: 3 BENEFICIOS CLAVE & CONSECUENCIAS FIDUCIARIAS
         if (isDe) {
           subject = `⚠️ Finanzielle & rechtliche Risiken ungeprüfter Verträge bei ${company} (+ 3 Sofortvorteile)`;

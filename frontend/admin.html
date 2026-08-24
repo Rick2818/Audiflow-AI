@@ -708,6 +708,9 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                     <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-400 text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center gap-1.5">
                         👑 Disparar Campaña Pareto VIP (Top 20%)
                     </button>
+                    <button onclick="AdminApp.loadProspectsBatch('strategic_investors')" class="px-4 py-2.5 rounded-xl bg-sky-950/90 border border-sky-400/60 text-sky-300 hover:text-white font-mono text-xs font-bold transition-all cursor-pointer shadow-glow flex items-center gap-1">
+                        🏛️ Cargar Inversores &amp; Advisory (Innogen, Caricaco, Firmas)
+                    </button>
                     <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
                         🧪 Simulación de Prueba (Test Mode)
                     </button>
@@ -1705,7 +1708,23 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
 
                 const lines = [];
 
-                if (batch === 'pareto_top20' || batch === 'top20' || batch === 1) {
+                if (batch === 'strategic_investors' || batch === 'investors') {
+                    const strategicList = [
+                        { email: 'deals@innogencapital.com', name: 'Socio Director & Venture Lead', comp: 'Innogen Capital Ventures', role: 'Managing Partner', country: 'El Salvador', tag: '🏛️ STRATEGIC_INVESTOR' },
+                        { email: 'invest@caricaco.com', name: 'Partner de Inversión Semilla', comp: 'Caricaco Ventures', role: 'General Partner', country: 'Costa Rica', tag: '🏛️ STRATEGIC_INVESTOR' },
+                        { email: 'contacto@torres.legal', name: 'Director de Práctica Corporativa', comp: 'Torres Legal & Fintech Desk', role: 'Managing Partner', country: 'El Salvador', tag: '⚖️ LEGAL_PARTNER' },
+                        { email: 'elsalvador@consortiumlegal.com', name: 'Socio Senior Corporativo B2B', comp: 'Consortium Legal', role: 'Senior Partner', country: 'El Salvador', tag: '⚖️ LEGAL_PARTNER' },
+                        { email: 'camarasal@camarasal.com', name: 'Director de Innovación Financiera', comp: 'CAMARASAL (Cámara de Comercio)', role: 'Director de Servicios Empresariales', country: 'El Salvador', tag: '🏢 CHAMBER_PARTNERSHIP' },
+                        { email: 'asi@asi.com.sv', name: 'Líder de Alianzas Corporativas', comp: 'ASI (Asociación Salvadoreña de Industriales)', role: 'Director de Competitividad', country: 'El Salvador', tag: '🏢 CHAMBER_PARTNERSHIP' },
+                        { email: 'bidlab@iadb.org', name: 'Oficial de Inversión e Innovación', comp: 'BID Lab (Banco Interamericano)', role: 'Innovation Specialist', country: 'El Salvador', tag: '🏛️ INSTITUTIONAL_GRANT' },
+                        { email: 'partnerships@strike.me', name: 'Head of Business Development', comp: 'Strike El Salvador Ecosystem', role: 'Director of Merchant Operations', country: 'El Salvador', tag: '⚡ LIGHTNING_ECOSYSTEM' },
+                        { email: 'centralamerica@endeavor.org', name: 'Managing Partner', comp: 'Endeavor Central America & Angels', role: 'Managing Director', country: 'El Salvador', tag: '🚀 ANGEL_NETWORK' },
+                        { email: 'contact.elsalvador@ariaslaw.com', name: 'Director de Fusiones y Contratos', comp: 'Arias Law Firm', role: 'Partner Corporate & M&A', country: 'El Salvador', tag: '⚖️ LEGAL_PARTNER' }
+                    ];
+                    strategicList.forEach(s => {
+                        lines.push(`${s.email}, ${s.name}, ${s.comp}, ${s.role}, ${s.country}, ${s.tag}`);
+                    });
+                } else if (batch === 'pareto_top20' || batch === 'top20' || batch === 1) {
                     for (let i = 1; i <= 400; i++) {
                         const isLatam = (i % 2 === 1);
                         const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 3) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
