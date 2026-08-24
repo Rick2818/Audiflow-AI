@@ -111,40 +111,45 @@ export default async function handler(req, res) {
               <p style="font-size: 12px; color: #94a3b8;">El cliente ha recibido su archivo Word (.docx) automáticamente.</p>
             </div>
           `;
+          try {
+            if (!body.test_mode) {
+              if (resendKey) {
+                try {
+                  const { Resend } = await import('resend');
+                  const resend = new Resend(resendKey);
+                  await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject: clientSubject, html: clientHtml });
+                  // Notificación de Venta al Correo Personal del Propietario (rick28191@gmail.com) y al Operativo
+                  await resend.emails.send({ from: emailFrom, to: [CONFIG.EMAIL.OWNER_SALES, CONFIG.EMAIL.OWNER_CONTROL], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
+                } catch (rErr) {
+                  console.warn('Resend webhook notice error:', rErr.message);
+                }
+              }
 
-          if (resendKey) {
-            try {
-              const { Resend } = await import('resend');
-              const resend = new Resend(resendKey);
-              await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject: clientSubject, html: clientHtml });
-              // Notificación de Venta al Correo Personal del Propietario (rick28191@gmail.com) y al Operativo
-              await resend.emails.send({ from: emailFrom, to: [CONFIG.EMAIL.OWNER_SALES, CONFIG.EMAIL.OWNER_CONTROL], reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL, subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
-            } catch (rErr) {
-              console.warn('Resend webhook notice error:', rErr.message);
+              // Fallback a Gmail SMTP para garantizar la llegada al correo personal
+              const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
+              if (gmailPass) {
+                try {
+                  const nodemailer = (await import('nodemailer')).default;
+                  const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: { user: CONFIG.EMAIL.SMTP_USER, pass: gmailPass }
+                  });
+                  await transporter.sendMail({
+                    from: CONFIG.EMAIL.FROM_SALES,
+                    to: `${CONFIG.EMAIL.OWNER_SALES}, ${CONFIG.EMAIL.OWNER_CONTROL}`,
+                    subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`,
+                    html: ownerNotificationHtml
+                  });
+                } catch (smtpErr) {
+                  console.warn('SMTP purchase notice error:', smtpErr.message);
+                }
+              }
             }
-          }
-
-          // Fallback a Gmail SMTP para garantizar la llegada al correo personal
-          const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
-          if (gmailPass) {
-            try {
-              const nodemailer = (await import('nodemailer')).default;
-              const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: { user: CONFIG.EMAIL.SMTP_USER, pass: gmailPass }
-              });
-              await transporter.sendMail({
-                from: CONFIG.EMAIL.FROM_SALES,
-                to: `${CONFIG.EMAIL.OWNER_SALES}, ${CONFIG.EMAIL.OWNER_CONTROL}`,
-                subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`,
-                html: ownerNotificationHtml
-              });
-            } catch (smtpErr) {
-              console.warn('SMTP purchase notice error:', smtpErr.message);
-            }
+          } catch (eErr) {
+            console.warn('Aviso en envío de correo post-pago:', eErr.message);
           }
         } catch (eErr) {
-          console.warn('Aviso en envío de correo post-pago:', eErr.message);
+          console.warn('Aviso en estructura de envío de correo:', eErr.message);
         }
       }
     }

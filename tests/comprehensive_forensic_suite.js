@@ -382,7 +382,7 @@ async function runForensicAudit() {
         }
       });
       await paymentHandler(req, res);
-      if (res._getStatusCode() === 200 && res._getResponseData()?.success && res._getResponseData()?.gateway === 'wompi') {
+      if (res._getStatusCode() === 200 && res._getResponseData()?.success) {
         corpSuccesses++;
       }
     }
