@@ -1355,19 +1355,11 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
 
             async refreshDashboard() {
                 const btn = document.getElementById('btn-refresh-admin');
-                if (btn) btn.innerHTML = '<span class="inline-block animate-spin">🔄</span> <span class="hidden sm:inline">Actualizando...</span>';
-                try {
-                    const ok = await this.loadStats();
-                    if (ok) {
-                        this.showToast('✅ Panel y estadísticas actualizadas en tiempo real', 'success');
-                    } else {
-                        window.location.reload();
-                    }
-                } catch (e) {
-                    window.location.reload();
-                } finally {
-                    if (btn) btn.innerHTML = '🔄 Actualizar';
-                }
+                if (btn) btn.innerHTML = '<span class="inline-block animate-spin">🔄</span> Recargando...';
+                this.showToast('🔄 Recargando última versión de la plataforma...', 'info');
+                setTimeout(() => {
+                    window.location.href = '/admin?v=' + Date.now();
+                }, 400);
             },
 
             renderKPIs(kpis) {
