@@ -122,19 +122,32 @@ CREATE TRIGGER update_audit_leads_updated_at
 BEFORE UPDATE ON public.audit_leads
 FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
--- 10. POLÍTICAS RLS (Row Level Security)
-ALTER TABLE public.audit_leads ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.audit_reports ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.transactions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.subscriptions ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.demo_bookings ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.webhooks_log ENABLE ROW LEVEL SECURITY;
-ALTER TABLE public.customer_tokens ENABLE ROW LEVEL SECURITY;
+-- 11. Tabla: COLLEAGUE_INVITES (Bucle Viral PLG / Invitación a Asesor Legal o Colega)
+CREATE TABLE IF NOT EXISTS public.colleague_invites (
+    id VARCHAR(100) PRIMARY KEY,
+    inviter_email VARCHAR(255) NOT NULL,
+    inviter_name VARCHAR(255),
+    colleague_email VARCHAR(255) NOT NULL,
+    colleague_role VARCHAR(100),
+    custom_note TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
 
--- Políticas de lectura anónima / servicio autenticado
-CREATE POLICY "Permitir inserción anónima de leads" ON public.audit_leads FOR INSERT WITH CHECK (true);
-CREATE POLICY "Permitir inserción anónima de reportes" ON public.audit_reports FOR INSERT WITH CHECK (true);
-CREATE POLICY "Permitir inserción de reservas de demo" ON public.demo_bookings FOR INSERT WITH CHECK (true);
-CREATE POLICY "Service Role Full Access on Transactions" ON public.transactions FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Service Role Full Access on Subscriptions" ON public.subscriptions FOR ALL USING (true) WITH CHECK (true);
-CREATE POLICY "Service Role Full Access on Tokens" ON public.customer_tokens FOR ALL USING (true) WITH CHECK (true);
+CREATE INDEX IF NOT EXISTS idx_colleague_invites_inviter ON public.colleague_invites(inviter_email);
+CREATE INDEX IF NOT EXISTS idx_colleague_invites_colleague ON public.colleague_invites(colleague_email);
+
+-- 12. Tabla: ERROR_REPORTS (Diagnóstico y Auto-Healing Fiduciario)
+CREATE TABLE IF NOT EXISTS public.error_reports (
+    id VARCHAR(100) PRIMARY KEY,
+    type VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    stack TEXT,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Políticas RLS
+ALTER TABLE public.colleague_invites ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.error_reports ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Service Role Full Access on Invites" ON public.colleague_invites FOR ALL USING (true) WITH CHECK (true);
+CREATE POLICY "Service Role Full Access on Error Reports" ON public.error_reports FOR ALL USING (true) WITH CHECK (true);
