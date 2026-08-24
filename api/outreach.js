@@ -229,7 +229,7 @@ export default async function handler(req, res) {
       return res.status(401).json({ success: false, error: 'No autorizado. Contraseña o token de administración incorrecto.' });
     }
 
-    const queryBatch = req.query?.batch || req.query?.campaign;
+    const queryBatch = req.query?.batch || req.query?.campaign || req.query?.cadence;
     let { prospects, test_mode = false, batch = queryBatch || 'pareto_top20' } = body;
     if (queryBatch && !body.batch) {
       batch = queryBatch;
