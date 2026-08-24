@@ -626,6 +626,22 @@
                 </div>
             </div>
 
+            <!-- BANNER DE CHOQUE: OPERACIÓN 10 CLIENTES HOY (FAST-TRACK 24H) -->
+            <div class="mb-6 p-5 rounded-2xl bg-gradient-to-r from-emerald-950/90 via-dark-card to-blue-950/90 border-2 border-emerald-400 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-400 text-black animate-pulse">ALTA VELOCIDAD</span>
+                        <h4 class="text-white font-bold text-base">⚡ Operación 10 Clientes Hoy (Fast-Track 24 Horas)</h4>
+                    </div>
+                    <p class="text-xs text-gray-300 font-mono mt-1 leading-relaxed">
+                        Despacho de choque hacia los 50 decisores de mayor puntuación (Score 98-99) con la oferta irresistible de $19 USD / Acceso VIP y copia universal fiduciaria a <code>tendenciaiatufuturo@gmail.com</code>.
+                    </p>
+                </div>
+                <button id="btn-fast-track-blast" onclick="AdminApp.launchFastTrackBlast()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:scale-105 transition-all cursor-pointer whitespace-nowrap flex items-center gap-2 shrink-0">
+                    <span>🚀 Disparar Operación 10 Clientes</span>
+                </button>
+            </div>
+
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 <!-- FORMULARIO DE ENVIADOR -->
                 <div class="lg:col-span-2 space-y-4">
@@ -2601,6 +2617,58 @@ Escaneo de prueba gratuito:
                 link.click();
                 document.body.removeChild(link);
                 this.showToast('Archivo CSV exportado exitosamente.', 'success');
+            },
+
+            async launchFastTrackBlast() {
+                const btn = document.getElementById('btn-fast-track-blast');
+                const logBox = document.getElementById('outreach-status-log');
+
+                if (!confirm('⚡ ¿Confirmas disparar la Operación 10 Clientes Hoy (Fast-Track 24h) hacia los 50 decisores de más alta puntuación (Score 98-99)?')) {
+                    return;
+                }
+
+                const originalHtml = btn ? btn.innerHTML : '';
+                if (btn) {
+                    btn.disabled = true;
+                    btn.innerHTML = '<span>⏳ Despachando Operación 10 Clientes...</span>';
+                }
+
+                if (logBox) {
+                    logBox.innerHTML = `🚀 <strong>[Operación 10 Clientes]</strong> Disparando campaña de alta velocidad hacia los 50 decisores Top 20% Pareto...<br>`;
+                }
+
+                try {
+                    const headers = this.getAuthHeaders();
+                    headers['Content-Type'] = 'application/json';
+
+                    const response = await fetch('/api/fast-track-blast', {
+                        method: 'POST',
+                        headers: headers,
+                        body: JSON.stringify({ limit: 50, test_mode: false })
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        if (logBox) {
+                            logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡Campaña Fast-Track despachada con éxito!</span> (${data.count} correos enviados con copia de control a tendenciaiatufuturo@gmail.com).<br>`;
+                        }
+                        this.showToast(`¡Operación 10 Clientes ejecutada! ${data.count} correos despachados.`, 'success');
+                    } else {
+                        throw new Error(data.error || 'Error al ejecutar la campaña Fast-Track.');
+                    }
+                } catch (err) {
+                    console.error('Error en Fast-Track blast:', err);
+                    if (logBox) {
+                        logBox.innerHTML += `<span class="text-rose-400">❌ Error: ${err.message}</span><br>`;
+                    }
+                    this.showToast(`Error: ${err.message}`, 'error');
+                } finally {
+                    if (btn) {
+                        btn.disabled = false;
+                        btn.innerHTML = originalHtml;
+                    }
+                }
             },
 
             async launchOutreachCampaign(testMode = false) {
