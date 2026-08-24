@@ -960,32 +960,15 @@
                 <h3 data-i18n="pay_title" class="text-xl font-bold text-white mb-1">Selecciona Método de Pago</h3>
                 <p data-i18n="pay_sub" class="text-xs text-gray-400 mb-6 font-mono">Tarifa plana de $19.00 USD • Liquidación inmediata</p>
 
-                <!-- PESTAÑAS SELECCIONADORAS: STRIPE ($ USD) VS LIGHTNING (SATS) -->
-                <div class="grid grid-cols-2 gap-2 p-1.5 bg-dark-surface rounded-xl mb-6 border border-border-dark">
-                    <button id="tab-stripe" data-i18n="tab_stripe" class="py-2.5 px-3 rounded-lg text-xs font-bold text-white bg-dark-card border border-accent-blue transition-all flex items-center justify-center gap-1.5">
-                        💳 Stripe ($19.00 USD)
-                    </button>
-                    <button id="tab-lightning" data-i18n="tab_lightning" class="py-2.5 px-3 rounded-lg text-xs font-bold text-gray-400 hover:text-white transition-all flex items-center justify-center gap-1.5">
-                        ⚡ Lightning (Satoshis)
+                <!-- PESTAÑAS SELECCIONADORAS: STRIKE / LIGHTNING (PRINCIPAL) -->
+                <div class="p-1.5 bg-dark-surface rounded-xl mb-6 border border-amber-500/40">
+                    <button id="tab-lightning" class="w-full py-2.5 px-3 rounded-lg text-xs font-extrabold text-black bg-gradient-to-r from-amber-400 to-amber-500 transition-all flex items-center justify-center gap-1.5 shadow-glow">
+                        ⚡ Pagar con Strike / Lightning ($19 USD o Satoshis)
                     </button>
                 </div>
 
-                <!-- CONTENIDO PESTAÑA STRIPE -->
-                <div id="payment-content-stripe" class="space-y-4">
-                    <div class="p-4 rounded-xl bg-dark-surface border border-border-dark text-left">
-                        <div class="flex justify-between items-center mb-2">
-                            <span data-i18n="pay_total_label" class="text-xs font-medium text-gray-400">Total a Pagar</span>
-                            <span class="text-xl font-extrabold text-white">$19.00 USD</span>
-                        </div>
-                        <p data-i18n="pay_stripe_desc" class="text-xs text-gray-300 leading-relaxed">Liquidación segura a través de tarjeta de crédito/débito. Recibes el reporte desenfocado al instante + copia Word y PDF en tu correo.</p>
-                    </div>
-                    <button id="btn-pay-stripe" class="btn-primary w-full py-3.5 text-center flex justify-center items-center gap-2">
-                        <span data-i18n="pay_btn_stripe">Pagar con Tarjeta ($19 USD)</span>
-                    </button>
-                </div>
-
-                <!-- CONTENIDO PESTAÑA LIGHTNING (SATS) -->
-                <div id="payment-content-lightning" class="hidden space-y-4 text-center">
+                <!-- CONTENIDO PESTAÑA STRIKE / LIGHTNING -->
+                <div id="payment-content-lightning" class="space-y-4 text-center">
                     <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
                         <div class="flex justify-between items-center mb-3 text-xs font-mono">
                             <span data-i18n="pay_ln_expiry" class="text-gray-400">Expiración Factura</span>
@@ -996,10 +979,16 @@
                         <div id="qrcode-container" class="bg-white p-3 rounded-xl inline-flex items-center justify-center my-2 min-w-[164px] min-h-[164px]"></div>
 
                         <div class="mt-3">
-                            <span data-i18n="pay_ln_sats_label" class="text-xs text-gray-400 block font-mono">Monto en Satoshis:</span>
-                            <span id="ln-sats-amount" class="text-lg font-extrabold text-accent-emerald font-mono">10,769 Sats</span>
+                            <span data-i18n="pay_ln_sats_label" class="text-xs text-gray-400 block font-mono">Monto en Dólares / Satoshis:</span>
+                            <span class="text-lg font-extrabold text-amber-400 font-mono">$19.00 USD</span>
+                            <span id="ln-sats-amount" class="text-xs text-gray-400 block font-mono mt-0.5">~10,769 Sats</span>
                         </div>
                     </div>
+
+                    <!-- BOTÓN DIRECTO A STRIKE APP -->
+                    <a href="https://strike.me/rick28" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold text-xs shadow-glow hover:opacity-95 transition-all flex items-center justify-center gap-2 cursor-pointer">
+                        ⚡ Abrir y Pagar en App de Strike (rick28@strike.me) →
+                    </a>
 
                     <div class="text-left">
                         <label data-i18n="pay_ln_input_label" class="block text-xs font-mono text-gray-400 mb-1">Factura Lightning BOLT11</label>
@@ -1010,7 +999,7 @@
                     </div>
 
                     <div class="text-xs text-gray-400 font-mono">
-                        <span data-i18n="pay_ln_node_label">Directo a nodo Lightning:</span> <span id="ln-address-display" class="text-accent-blue">rick28@strike.me</span>
+                        <span data-i18n="pay_ln_node_label">Dirección oficial Strike:</span> <span id="ln-address-display" class="text-amber-400 font-bold">rick28@strike.me</span>
                     </div>
                 </div>
 
