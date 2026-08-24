@@ -803,12 +803,12 @@
                     </div>
 
                     <div class="flex items-center justify-between flex-wrap gap-2">
-                        <label class="block text-xs font-mono text-gray-300">Base Ejecutiva Directores B2B (2,000 Ejecutivos - 14 Países):</label>
-                        <span class="text-[11px] font-mono text-amber-400 font-bold bg-amber-950/80 border border-amber-500/40 px-2.5 py-0.5 rounded-full">
-                            ⚡ CRON PARETO VIP: Lunes 7:00 AM El Salvador (13:00 UTC) • Próximo: 24 Ago
+                        <label class="block text-xs font-mono text-gray-300">Base Cargada para Envío (Editor de Prospectos):</label>
+                        <span id="outreach-loaded-batch-label" class="text-[11px] font-mono text-amber-400 font-bold bg-amber-950/80 border border-amber-500/40 px-2.5 py-0.5 rounded-full">
+                            🏆 Base Actual: Top 20% Pareto VIP (80/20)
                         </span>
                     </div>
-                    <textarea id="outreach-emails-input" rows="10" class="w-full bg-dark-surface border border-dark-border rounded-lg p-3 text-xs font-mono text-white focus:border-accent-blue focus:outline-none">tendenciaiatufuturo@gmail.com, Ricardo, Audiflow AI, Gerente General, El Salvador
+                    <textarea id="outreach-emails-input" rows="11" class="w-full bg-dark-surface border border-dark-border rounded-lg p-3 text-xs font-mono text-white focus:border-accent-blue focus:outline-none leading-relaxed">tendenciaiatufuturo@gmail.com, Ricardo, Audiflow AI, Gerente General, El Salvador
 carlos.mendoza@empresa-sv.com, Carlos Mendoza, El Salvador Retail Group, Chief Financial Officer (CFO), El Salvador, 🏆 TOP_20_PARETO
 sofia.martinez@constructora-sv.com, Sofía Martínez, Constructora América SV, General Counsel & Legal Director, El Salvador, 🏆 TOP_20_PARETO
 mauricio.alfaro@distribuidora-sv.com, Mauricio Alfaro, Distribuidora Central SV, VP of Global Procurement, El Salvador, 🏆 TOP_20_PARETO
@@ -845,28 +845,87 @@ olav.nelson@nordic-no.no, Olav Nelson, Norway Logistics AS, VP of Global Procure
 mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General Counsel & Legal Director, Finlandia, 🏆 TOP_20_PARETO</textarea>
                 </div>
 
-                <div class="flex flex-wrap items-center gap-3">
-                    <button id="btn-fast-track-action" onclick="AdminApp.launchFastTrackBlast()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center gap-1.5 animate-pulse">
-                        ⚡ Disparar Operación 10 Clientes (Fast-Track)
-                    </button>
-                    <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-400 text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center gap-1.5">
-                        👑 Disparar Campaña Pareto VIP (Top 20%)
-                    </button>
-                    <button onclick="AdminApp.loadProspectsBatch('strategic_investors')" class="px-4 py-2.5 rounded-xl bg-sky-950/90 border border-sky-400/60 text-sky-300 hover:text-white font-mono text-xs font-bold transition-all cursor-pointer shadow-glow flex items-center gap-1">
-                        🏛️ Cargar Lote 100 Inversores &amp; CFOs (Advisory Board)
-                    </button>
-                    <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
-                        🧪 Simulación de Prueba (Test Mode)
-                    </button>
-                    <button onclick="AdminApp.loadProspectsBatch('pareto_top20')" class="px-4 py-2.5 rounded-xl bg-amber-950/80 border border-amber-500/50 text-amber-300 hover:text-white font-mono text-xs font-bold transition-all cursor-pointer shadow-glow">
-                        👑 Cargar Top 20% Pareto VIP (400 Leads)
-                    </button>
-                    <button onclick="AdminApp.loadProspectsBatch('all_2000')" class="px-4 py-2.5 rounded-xl bg-accent-blue/20 border border-accent-blue/50 text-accent-blue hover:text-white font-mono text-xs transition-all cursor-pointer">
-                        🚀 Cargar 2,000 Ejecutivos (14 Países)
-                    </button>
-                    <button onclick="AdminApp.triggerLeadRecovery()" class="px-4 py-2.5 rounded-xl bg-purple-950/80 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs transition-all cursor-pointer shadow-glow">
-                        🔁 Recuperar Leads Abandonados
-                    </button>
+                <!-- SELECTOR ORDENADO DE BASES DE DATOS POR JERARQUÍA FIDUCIARIA -->
+                <div class="space-y-4">
+                    <div class="bg-dark-surface border border-dark-border rounded-xl p-4 space-y-3">
+                        <h4 class="font-bold text-white text-xs border-b border-dark-border pb-2 flex items-center justify-between">
+                            <span>📚 Bases de Datos B2B (Por Prioridad)</span>
+                            <span class="text-[10px] font-mono text-emerald-400">Jerarquía 80/20</span>
+                        </h4>
+
+                        <!-- 1. BASE 80/20 PARETO VIP -->
+                        <div class="p-2.5 rounded-lg bg-amber-950/40 border border-amber-500/50 hover:bg-amber-950/70 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-amber-300 flex items-center gap-1">
+                                    <span>🥇 1. Base 80/20 Pareto VIP</span>
+                                    <span class="text-[9px] px-1.5 py-0.2 bg-amber-400 text-black font-bold rounded">TOP</span>
+                                </div>
+                                <div class="text-[10px] text-gray-300 font-mono">400 CFOs de Mayor Ingreso (Score 90-99)</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('pareto_top20')" class="px-2.5 py-1.5 rounded-md bg-amber-500 text-black font-bold font-mono text-[11px] hover:scale-105 transition-all cursor-pointer whitespace-nowrap">
+                                Cargar
+                            </button>
+                        </div>
+
+                        <!-- 2. INVERSORES & ADVISORY BOARD -->
+                        <div class="p-2.5 rounded-lg bg-sky-950/40 border border-sky-500/40 hover:bg-sky-950/60 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-sky-300">🥈 2. Inversores &amp; Advisory Board</div>
+                                <div class="text-[10px] text-gray-300 font-mono">100 Socios VCs, Fondos &amp; Firmas Legales</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('strategic_investors')" class="px-2.5 py-1.5 rounded-md bg-sky-500/30 text-sky-300 border border-sky-500/50 font-bold font-mono text-[11px] hover:bg-sky-500/50 transition-all cursor-pointer whitespace-nowrap">
+                                Cargar
+                            </button>
+                        </div>
+
+                        <!-- 3. CFOS & DIRECTORES FINANCIEROS -->
+                        <div class="p-2.5 rounded-lg bg-dark-card border border-dark-border hover:border-accent-blue/50 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-white">🥉 3. 500 CFOs &amp; Directores Finanzas</div>
+                                <div class="text-[10px] text-gray-400 font-mono">Decisores directos de presupuesto</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('cfos_500')" class="px-2.5 py-1.5 rounded-md bg-dark-surface text-gray-300 border border-dark-border font-bold font-mono text-[11px] hover:text-white hover:border-accent-blue transition-all cursor-pointer whitespace-nowrap">
+                                Cargar
+                            </button>
+                        </div>
+
+                        <!-- 4. CONTROLLERS & AUDITORES -->
+                        <div class="p-2.5 rounded-lg bg-dark-card border border-dark-border hover:border-purple-500/50 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-white">4. 500 Contralores &amp; Auditoría</div>
+                                <div class="text-[10px] text-gray-400 font-mono">Control de riesgos y fugas en compras</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('controllers_500')" class="px-2.5 py-1.5 rounded-md bg-dark-surface text-gray-300 border border-dark-border font-bold font-mono text-[11px] hover:text-white hover:border-purple-500 transition-all cursor-pointer whitespace-nowrap">
+                                Cargar
+                            </button>
+                        </div>
+
+                        <!-- 5. BASE GLOBAL 2000 EJECUTIVOS -->
+                        <div class="p-2.5 rounded-lg bg-dark-card border border-dark-border hover:border-accent-blue/50 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-white">5. 2,000 Ejecutivos (14 Países)</div>
+                                <div class="text-[10px] text-gray-400 font-mono">Cobertura completa Latam, USA y Europa</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('all_2000')" class="px-2.5 py-1.5 rounded-md bg-dark-surface text-gray-300 border border-dark-border font-bold font-mono text-[11px] hover:text-white hover:border-accent-blue transition-all cursor-pointer whitespace-nowrap">
+                                Cargar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- BOTONERA DE ACCIÓN Y LANZAMIENTO -->
+                    <div class="space-y-2">
+                        <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-400 text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center justify-center gap-1.5">
+                            🚀 Disparar Campaña a Base Cargada
+                        </button>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="py-2.5 px-2 rounded-lg bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs text-center transition-all cursor-pointer">
+                                🧪 Simulación (Test)
+                            </button>
+                            <button onclick="AdminApp.triggerLeadRecovery()" class="py-2.5 px-2 rounded-lg bg-purple-950/60 border border-purple-500/40 text-purple-300 hover:text-white font-mono text-xs text-center transition-all cursor-pointer">
+                                🔁 Recuperar Abandonos
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -2816,7 +2875,55 @@ Escaneo de prueba gratuito:
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                this.showToast('Archivo CSV exportado exitosamente.', 'success');
+            loadProspectsBatch(batchType) {
+                const textarea = document.getElementById('outreach-emails-input');
+                const label = document.getElementById('outreach-loaded-batch-label');
+                if (!textarea) return;
+
+                const leads = (this.statsData && this.statsData.leads) || [];
+                let filtered = [];
+                let batchName = '';
+
+                if (batchType === 'pareto_top20') {
+                    batchName = '🥇 Base 80/20 Pareto VIP (Top 20%)';
+                    filtered = leads.filter(l => l.pareto_tier === 'TOP_20' || (l.lead_score && l.lead_score >= 90)).slice(0, 400);
+                } else if (batchType === 'strategic_investors') {
+                    batchName = '🥈 Inversores & Advisory Board (100 Leads)';
+                    filtered = [
+                        { email: 'deals@innogencapital.com', name: 'Socio Director & Venture Lead', company: 'Innogen Capital Ventures', role: 'Managing Partner', country: 'El Salvador' },
+                        { email: 'invest@caricaco.com', name: 'Partner de Inversión Semilla', company: 'Caricaco Ventures', role: 'General Partner', country: 'Costa Rica' },
+                        { email: 'contacto@torres.legal', name: 'Director de Práctica Corporativa', company: 'Torres Legal & Fintech Desk', role: 'Managing Partner', country: 'El Salvador' },
+                        { email: 'corporativo@ariaslaw.com', name: 'Socio de Fusiones & Adquisiciones', company: 'Arias Law Central America', role: 'Senior Partner', country: 'El Salvador' },
+                        { email: 'venture@latamfintech.vc', name: 'Investment Director', company: 'Latam Fintech Fund', role: 'Principal', country: 'Mexico' },
+                        { email: 'deals@centramerica.vc', name: 'Partner de Aceleración', company: 'Centroamérica Ventures', role: 'Managing Partner', country: 'Guatemala' },
+                        { email: 'inversiones@pomaventures.com', name: 'Family Office Director', company: 'Poma Strategic Investments', role: 'CIO', country: 'El Salvador' },
+                        { email: 'fintech@consortiumlegal.com', name: 'Director de Práctica Legal Tech', company: 'Consortium Legal', role: 'Partner', country: 'Costa Rica' },
+                        { email: 'seed@panamatechventures.com', name: 'General Partner', company: 'Panamá Tech Ventures', role: 'Managing Partner', country: 'Panama' },
+                        { email: 'angel@miamivalley.vc', name: 'Cross-Border Lead', company: 'Miami Valley Angels', role: 'Partner', country: 'Estados Unidos' }
+                    ];
+                } else if (batchType === 'cfos_500') {
+                    batchName = '🥉 500 CFOs & Directores Financieros';
+                    filtered = leads.filter(l => (l.category === 'CFO' || (l.role && l.role.toLowerCase().includes('cfo')))).slice(0, 500);
+                } else if (batchType === 'controllers_500') {
+                    batchName = '4. 500 Contralores Corporativos & Auditoría';
+                    filtered = leads.filter(l => (l.category === 'CONTROLLER' || (l.role && l.role.toLowerCase().includes('controller')) || (l.role && l.role.toLowerCase().includes('auditor')))).slice(0, 500);
+                } else {
+                    batchName = '5. Base Global (2,000 Ejecutivos)';
+                    filtered = leads.slice(0, 2000);
+                }
+
+                if (filtered.length === 0 && leads.length > 0) {
+                    filtered = leads.slice(0, 100);
+                }
+
+                const lines = filtered.map(l => `${l.email}, ${l.name || 'Ejecutivo'}, ${l.company || 'Empresa'}, ${l.role || 'Director'}, ${l.country || 'Global'}`);
+                textarea.value = lines.join('\n');
+
+                if (label) {
+                    label.innerText = `🏆 Base Actual: ${batchName} (${filtered.length} Leads)`;
+                }
+
+                this.showToast(`✅ ${batchName} cargada con éxito (${filtered.length} prospectos listos).`, 'success');
             },
 
             async launchFastTrackBlast(testMode = false) {
