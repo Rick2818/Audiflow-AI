@@ -26,8 +26,8 @@ import adminHandler from './api/admin.js';
 import outreachHandler from './api/outreach.js';
 import reportHandler from './api/report.js';
 import subscribeHandler from './lib/subscribe.js';
-import inviteColleagueHandler from './api/invite-colleague.js';
-import fastTrackHandler from './api/fast-track-blast.js';
+import inviteColleagueHandler from './lib/invite-colleague.js';
+import fastTrackHandler from './lib/fast-track-blast.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

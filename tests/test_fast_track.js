@@ -1,5 +1,5 @@
 import assert from 'assert';
-import handler from '../api/fast-track-blast.js';
+import handler from '../lib/fast-track-blast.js';
 import { CONFIG } from '../lib/config.js';
 
 console.log('🧪 Iniciando Test Suite: Operación 10 Clientes Hoy (Fast-Track 24h)...');

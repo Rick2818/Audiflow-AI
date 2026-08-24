@@ -138,6 +138,14 @@
       "destination": "/api/outreach"
     },
     {
+      "source": "/api/fast-track-blast",
+      "destination": "/api/admin"
+    },
+    {
+      "source": "/api/invite-colleague",
+      "destination": "/api/admin"
+    },
+    {
       "source": "/api/lead-recovery",
       "destination": "/api/lead-recovery"
     },

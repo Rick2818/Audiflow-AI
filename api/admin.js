@@ -276,6 +276,18 @@ export default async function handler(req, res) {
       return res.status(401).json({ success: false, error: 'No autorizado. Se requieren credenciales de administrador válidas.' });
     }
 
+    // Acción: Operación 10 Clientes Hoy (Fast-Track Blast)
+    if (action === 'fast_track_blast') {
+      const fastTrackModule = await import('../lib/fast-track-blast.js');
+      return await fastTrackModule.default(req, res);
+    }
+
+    // Acción: Invitación a Colega (PLG)
+    if (action === 'invite_colleague') {
+      const inviteModule = await import('../lib/invite-colleague.js');
+      return await inviteModule.default(req, res);
+    }
+
     // Acción: Probar Conexión SMTP / Resend
     if (action === 'test_smtp_connection') {
       try {

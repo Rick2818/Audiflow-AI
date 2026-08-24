@@ -1,5 +1,5 @@
 import assert from 'assert';
-import handler, { colleagueInvitesMap } from '../api/invite-colleague.js';
+import handler, { colleagueInvitesMap } from '../lib/invite-colleague.js';
 import { CONFIG } from '../lib/config.js';
 
 console.log('🧪 Iniciando Test Suite: Bucle Viral de Product-Led Growth (Invitación de Colegas / Asesor Legal)...');
