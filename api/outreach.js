@@ -147,6 +147,9 @@ export function generateOutreachProspects(batch = 'pareto_top20') {
       { id: 'inv_10', name: 'Director de Fusiones y Contratos', company: 'Arias Law Firm', role: 'Partner Corporate & M&A', email: 'contact.elsalvador@ariaslaw.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', campaign: 'strategic_investor_advisory' }
     ];
   }
+  if (batch === 'all_2000' || batch === 'all') {
+    return allLeads;
+  }
   return allLeads.filter(l => l.pareto_tier === 'TOP_20');
 }
 
