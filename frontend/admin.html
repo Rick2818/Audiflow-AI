@@ -243,10 +243,11 @@
             <div class="flex items-center gap-1.5 bg-dark-surface p-1.5 rounded-xl border border-dark-border text-xs font-mono w-full lg:w-auto flex-wrap">
                 <button id="tab-btn-leads" onclick="AdminApp.switchTab('leads')" class="px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer">👥 Leads &amp; Empresas</button>
                 <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">💳 Transacciones</button>
+                <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-emerald-300 font-bold border border-emerald-500/40 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📧 Cold Email</button>
+                <button onclick="AdminApp.launchFastTrackBlast()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow hover:scale-105 transition-all cursor-pointer animate-pulse flex items-center gap-1">⚡ 10 Clientes Hoy</button>
                 <button id="tab-btn-shadow" onclick="AdminApp.switchTab('shadow')" class="px-3 py-2 rounded-lg text-amber-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🕵️ 1. Auditorías Sombra</button>
                 <button id="tab-btn-social" onclick="AdminApp.switchTab('social')" class="px-3 py-2 rounded-lg text-purple-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📢 2. Carruseles LinkedIn</button>
                 <button id="tab-btn-verify" onclick="AdminApp.switchTab('verify')" class="px-3 py-2 rounded-lg text-emerald-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🛡️ 3. Sello Viral</button>
-                <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📧 Cold Email</button>
                 <button id="tab-btn-seo" onclick="AdminApp.switchTab('seo')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🔍 SEO &amp; IndexNow</button>
                 <button id="tab-btn-directories" onclick="AdminApp.switchTab('directories')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🌐 Directorios</button>
             </div>
@@ -260,6 +261,9 @@
                     <span id="leads-count-badge" class="text-xs font-mono px-2 py-0.5 rounded bg-accent-blue/10 text-accent-blue border border-accent-blue/30">0 Registros</span>
                 </h3>
                 <div class="flex items-center gap-2 text-xs font-mono">
+                    <button onclick="AdminApp.launchFastTrackBlast()" class="px-3.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow hover:scale-105 transition-all cursor-pointer flex items-center gap-1">
+                        ⚡ 10 Clientes Hoy
+                    </button>
                     <span class="text-gray-400">Ordenar por:</span>
                     <select id="leads-sort-select" onchange="AdminApp.sortLeadsBy(this.value)" class="bg-dark-surface border border-dark-border text-white text-xs rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-accent-blue cursor-pointer">
                         <option value="PARETO_80_20">🏆 80/20 Pareto (Mayor Ingreso Primero)</option>
@@ -721,6 +725,9 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                 </div>
 
                 <div class="flex flex-wrap items-center gap-3">
+                    <button id="btn-fast-track-action" onclick="AdminApp.launchFastTrackBlast()" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center gap-1.5 animate-pulse">
+                        ⚡ Disparar Operación 10 Clientes (Fast-Track)
+                    </button>
                     <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-400 text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center gap-1.5">
                         👑 Disparar Campaña Pareto VIP (Top 20%)
                     </button>
