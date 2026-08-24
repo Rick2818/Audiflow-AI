@@ -32,6 +32,35 @@ window.PaymentHandler = {
         this.clearPollingAndTimers();
     },
 
+    switchTab(tab) {
+        const tabLightning = document.getElementById('tab-lightning');
+        const tabWompi = document.getElementById('tab-wompi');
+        const contentLightning = document.getElementById('payment-content-lightning');
+        const contentWompi = document.getElementById('payment-content-wompi');
+
+        if (tab === 'wompi') {
+            if (tabWompi) {
+                tabWompi.className = 'py-2.5 px-2 rounded-lg text-xs font-extrabold text-white bg-blue-600 transition-all flex items-center justify-center gap-1 shadow-glow cursor-pointer';
+            }
+            if (tabLightning) {
+                tabLightning.className = 'py-2.5 px-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white bg-dark-card border border-border-dark transition-all flex items-center justify-center gap-1 cursor-pointer';
+            }
+            if (contentWompi) contentWompi.classList.remove('hidden');
+            if (contentLightning) contentLightning.classList.add('hidden');
+            this.clearPollingAndTimers();
+        } else {
+            if (tabLightning) {
+                tabLightning.className = 'py-2.5 px-2 rounded-lg text-xs font-extrabold text-black bg-gradient-to-r from-amber-400 to-amber-500 transition-all flex items-center justify-center gap-1 shadow-glow cursor-pointer';
+            }
+            if (tabWompi) {
+                tabWompi.className = 'py-2.5 px-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white bg-dark-card border border-border-dark transition-all flex items-center justify-center gap-1 cursor-pointer';
+            }
+            if (contentLightning) contentLightning.classList.remove('hidden');
+            if (contentWompi) contentWompi.classList.add('hidden');
+            this.generateLightningInvoice();
+        }
+    },
+
     setupEventListeners() {
         const tabStripe = document.getElementById('tab-stripe');
         const tabLightning = document.getElementById('tab-lightning');

@@ -41,12 +41,15 @@ export default async function handler(req, res) {
       event = body;
     }
 
-    // Manejar Evento de Pago Exitoso
-    if (event && (event.type === 'checkout.session.completed' || event.type === 'payment_intent.succeeded')) {
-      const session = event.data?.object || {};
-      const reportId = session.metadata?.report_id || 'rep_custom';
-      const customerEmail = session.customer_details?.email || session.customer_email || session.email;
-      const amountTotal = (session.amount_total ? session.amount_total / 100 : 19.00).toFixed(2);
+    // Manejar Evento de Pago Exitoso (Stripe / Wompi El Salvador)
+    const isWompi = body.event === 'transaction.updated' || body.data?.transaction?.status === 'APPROVED';
+    const isStripe = event && (event.type === 'checkout.session.completed' || event.type === 'payment_intent.succeeded');
+
+    if (isStripe || isWompi) {
+      const session = event.data?.object || body.data?.transaction || {};
+      const reportId = session.metadata?.report_id || session.reference || 'rep_custom';
+      const customerEmail = session.customer_details?.email || session.customer_email || session.email || session.customer_data?.email || 'cliente@empresa.com';
+      const amountTotal = (session.amount_total ? session.amount_total / 100 : (session.amount_in_cents ? session.amount_in_cents / 100 : 19.00)).toFixed(2);
 
       if (supabase) {
         try {

@@ -1,7 +1,8 @@
 import Stripe from 'stripe';
 import subscribeHandler from '../lib/subscribe.js';
+import { CONFIG } from '../lib/config.js';
 
-const stripeSecret = process.env.STRIPE_SECRET_KEY || '';
+const stripeSecret = process.env.STRIPE_SECRET_KEY || CONFIG.PAYMENTS.STRIPE_SECRET_KEY || '';
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 
 export default async function handler(req, res) {
@@ -28,6 +29,17 @@ export default async function handler(req, res) {
 
     if (!report_id && !path.includes('subscribe')) {
       return res.status(400).json({ error: 'El ID del reporte es requerido.' });
+    }
+
+    // Flujo Wompi El Salvador (Tarjetas de Crédito / Débito Visa & Mastercard)
+    if (path.includes('wompi') || body.gateway === 'wompi') {
+      const wompiLink = CONFIG.PAYMENTS.WOMPI_LINK_19 || 'https://wompi.sv';
+      return res.json({
+        success: true,
+        gateway: 'wompi',
+        checkoutUrl: wompiLink,
+        report_id
+      });
     }
 
     // Flujo Lightning / OpenNode
