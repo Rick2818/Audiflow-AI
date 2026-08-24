@@ -696,6 +696,41 @@
                     </div>
                 </div>
             </div>
+
+            <!-- TABLA DE LOS 50 DECISORES VIP CON PUNTUACIÓN FIDUCIARIA MÁS ALTA (SCORE 99-98) -->
+            <div class="mt-6 border border-dark-border rounded-xl overflow-hidden bg-dark-surface/50">
+                <div class="px-5 py-3.5 bg-dark-surface border-b border-dark-border flex flex-wrap items-center justify-between gap-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-base">👑</span>
+                        <h4 class="font-bold text-white text-sm">50 Decisores con Mayor Puntuación Fiduciaria (Score 99-98 • Top Pareto VIP)</h4>
+                        <span class="text-xs font-mono px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">50 Contactos Listos</span>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-mono">
+                        <button onclick="AdminApp.launchFastTrackBlast(false)" class="px-4 py-1.5 rounded-lg bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow hover:opacity-90 transition-all cursor-pointer">
+                            🚀 Despachar Todos Ahora (50 Decisores)
+                        </button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto max-h-[380px] overflow-y-auto">
+                    <table class="w-full text-left text-xs font-mono">
+                        <thead class="bg-black/60 text-gray-400 border-b border-dark-border sticky top-0">
+                            <tr>
+                                <th class="px-4 py-3">#</th>
+                                <th class="px-4 py-3">Decisor &amp; Cargo</th>
+                                <th class="px-4 py-3">Empresa</th>
+                                <th class="px-4 py-3">País</th>
+                                <th class="px-4 py-3">Correo Oficial</th>
+                                <th class="px-4 py-3 text-center">Score Fiduciario</th>
+                                <th class="px-4 py-3 text-center">Oferta / Ticket</th>
+                                <th class="px-4 py-3 text-right">Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="fasttrack-leads-tbody" class="divide-y divide-dark-border/40 text-gray-300">
+                            <tr><td colspan="8" class="text-center py-6 text-gray-500">Cargando 50 decisores con la puntuación fiduciaria más alta...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
         <!-- TAB 6: MOTOR DE PROSPECCIÓN B2B AUTOMATIZADA MULTI-PAÍS (COLD EMAIL) -->
@@ -1453,6 +1488,7 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                         this.renderKPIs(data.kpis || data.stats);
                         this.renderLeads(data.leads);
                         this.renderTransactions(data.transactions);
+                        this.renderFastTrackLeads(data.leads);
                         return true;
                     }
                     return false;
@@ -1751,6 +1787,54 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                 if (tab === 'social') {
                     this.generateSocialCopy();
                 }
+                if (tab === 'fasttrack') {
+                    this.renderFastTrackLeads();
+                }
+            },
+
+            renderFastTrackLeads(leads) {
+                const tbody = document.getElementById('fasttrack-leads-tbody');
+                if (!tbody) return;
+
+                const list = (leads || (this.statsData && this.statsData.leads) || []);
+                const top50 = list.filter(l => l.pareto_tier === 'TOP_20' || (l.lead_score && l.lead_score >= 90))
+                                  .sort((a, b) => (b.lead_score || 0) - (a.lead_score || 0))
+                                  .slice(0, 50);
+
+                if (top50.length === 0) {
+                    tbody.innerHTML = `<tr><td colspan="8" class="text-center py-6 text-gray-500 font-mono">Cargando los 50 decisores con mayor puntuación fiduciaria...</td></tr>`;
+                    return;
+                }
+
+                tbody.innerHTML = top50.map((lead, idx) => {
+                    const statusBadge = (lead.emails_sent && lead.emails_sent > 0)
+                        ? `<span class="px-2 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-500/40 text-[10px]">ENVIADO (${lead.emails_sent})</span>`
+                        : `<span class="px-2 py-0.5 rounded bg-amber-950/60 text-amber-300 border border-amber-500/30 text-[10px]">LISTO PARA ENVÍO</span>`;
+
+                    return `
+                        <tr class="hover:bg-dark-surface/80 transition-all font-mono text-xs">
+                            <td class="px-4 py-3 text-gray-400 font-bold">${idx + 1}</td>
+                            <td class="px-4 py-3">
+                                <div class="font-bold text-white">${lead.name || 'Decisor'}</div>
+                                <div class="text-[11px] text-gray-400 font-sans">${lead.role || 'CFO / Director Financiero'}</div>
+                            </td>
+                            <td class="px-4 py-3 text-gray-300">${lead.company || 'Empresa Corporativa'}</td>
+                            <td class="px-4 py-3 text-gray-300">${lead.country || 'Global'}</td>
+                            <td class="px-4 py-3 text-accent-blue">${lead.email}</td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-2.5 py-1 rounded-full bg-amber-500/10 text-amber-300 border border-amber-500/40 font-bold">
+                                    ⭐ ${lead.lead_score || 99}/100
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                <span class="px-2 py-0.5 rounded bg-emerald-950/80 text-emerald-400 border border-emerald-500/30 text-[11px] font-bold">$19 USD / VIP</span>
+                            </td>
+                            <td class="px-4 py-3 text-right">
+                                ${statusBadge}
+                            </td>
+                        </tr>
+                    `;
+                }).join('');
             },
 
             copyFastTrackScript(type) {
