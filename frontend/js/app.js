@@ -1430,6 +1430,112 @@ window.AppHandler = {
     closeManualModal() {
         const modal = document.getElementById('manual-modal');
         if (modal) modal.classList.add('hidden');
+    },
+
+    // 6. BUCLE VIRAL PRODUCT-LED GROWTH (INVITACIÓN DE ASESOR LEGAL / COLEGA)
+    openInviteModal() {
+        const modal = document.getElementById('invite-colleague-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            const feedback = document.getElementById('invite-feedback');
+            if (feedback) { feedback.classList.add('hidden'); feedback.innerHTML = ''; }
+        }
+        if (typeof window.clarity === 'function') {
+            window.clarity('event', 'colleague_invite_modal_opened');
+        }
+        if (typeof window.gtag === 'function') {
+            window.gtag('event', 'open_invite_modal', { event_category: 'PLG_Viral_Loop' });
+        }
+    },
+
+    closeInviteModal() {
+        const modal = document.getElementById('invite-colleague-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    async submitColleagueInvite(event) {
+        if (event) event.preventDefault();
+        const btn = document.getElementById('btn-submit-colleague-invite');
+        const feedback = document.getElementById('invite-feedback');
+
+        const senderName = (document.getElementById('invite-sender-name')?.value || '').trim();
+        const senderEmail = (document.getElementById('invite-sender-email')?.value || '').trim();
+        const colleagueName = (document.getElementById('invite-colleague-name')?.value || '').trim();
+        const colleagueEmail = (document.getElementById('invite-colleague-email')?.value || '').trim();
+        const colleagueRole = document.getElementById('invite-colleague-role')?.value || 'Asesor Legal / CFO';
+        const customNote = (document.getElementById('invite-custom-note')?.value || '').trim();
+
+        if (!colleagueEmail || !colleagueEmail.includes('@')) {
+            alert('Por favor introduce un correo válido para el invitado.');
+            return;
+        }
+
+        const originalBtnHtml = btn ? btn.innerHTML : '';
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<span class="animate-spin">🔄</span> Despachando Invitación Oficial...';
+        }
+
+        try {
+            const docName = this.selectedFile ? this.selectedFile.name : (this.currentReportId ? 'Contrato_Auditado.pdf' : 'Contrato Comercial');
+            const payload = {
+                sender_name: senderName,
+                sender_email: senderEmail,
+                sender_company: 'Empresa Corporativa',
+                colleague_name: colleagueName,
+                colleague_email: colleagueEmail,
+                colleague_role: colleagueRole,
+                document_name: docName,
+                document_type: 'Contrato Corporativo',
+                leakage_found: this.currentAuditData?.total_financial_leakage ? `$${this.currentAuditData.total_financial_leakage.toLocaleString()} USD` : '$3,500 - $18,500 USD',
+                custom_note: customNote
+            };
+
+            const response = await fetch('/api/invite-colleague', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                if (feedback) {
+                    feedback.className = 'mt-4 p-3 rounded-lg text-xs font-mono text-center bg-emerald-950/80 border border-emerald-500/40 text-emerald-300';
+                    feedback.innerHTML = `✅ ¡Invitación enviada con éxito a <strong>${colleagueEmail}</strong>! Le llegará el acceso oficial y copia fiduciaria de control.`;
+                    feedback.classList.remove('hidden');
+                }
+
+                if (typeof window.gtag === 'function') {
+                    window.gtag('event', 'colleague_referral_sent', {
+                        event_category: 'PLG_Growth',
+                        colleague_role: colleagueRole
+                    });
+                }
+                if (typeof window.clarity === 'function') {
+                    window.clarity('event', 'colleague_referral_sent');
+                }
+
+                setTimeout(() => {
+                    this.closeInviteModal();
+                    alert(`✅ Invitación enviada exitosamente a ${colleagueName} (${colleagueEmail}).`);
+                }, 2000);
+            } else {
+                throw new Error(data.error || 'No se pudo enviar la invitación.');
+            }
+        } catch (err) {
+            console.error('Error enviando invitación:', err);
+            if (feedback) {
+                feedback.className = 'mt-4 p-3 rounded-lg text-xs font-mono text-center bg-rose-950/80 border border-rose-500/40 text-rose-300';
+                feedback.innerHTML = `❌ Error: ${err.message || 'Fallo de conexión al enviar invitación.'}`;
+                feedback.classList.remove('hidden');
+            }
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = originalBtnHtml;
+            }
+        }
     }
 };
 

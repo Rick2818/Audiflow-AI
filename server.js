@@ -26,6 +26,7 @@ import adminHandler from './api/admin.js';
 import outreachHandler from './api/outreach.js';
 import reportHandler from './api/report.js';
 import subscribeHandler from './lib/subscribe.js';
+import inviteColleagueHandler from './api/invite-colleague.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -167,6 +168,7 @@ app.all('/api/payment/subscribe', subscribeHandler);
 app.all('/api/admin', adminHandler);
 app.all('/api/outreach', outreachHandler);
 app.all('/api/outreach/send-campaign', outreachHandler);
+app.all('/api/invite-colleague', inviteColleagueHandler);
 
 // Middleware global de cabeceras de seguridad HTTP
 app.use((req, res, next) => {

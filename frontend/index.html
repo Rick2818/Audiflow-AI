@@ -898,6 +898,9 @@
                         <button id="btn-open-payment-modal" onclick="window.PaymentHandler.openPaymentModal()" class="btn-secondary text-xs sm:text-sm px-5 py-3.5 w-full sm:w-auto text-gray-300 hover:text-white flex items-center justify-center gap-1.5">
                             <span data-i18n="btn_unlock_report">🔓 O Comprar Reporte Oficial Firmado ($19 USD)</span>
                         </button>
+                        <button id="btn-open-invite-modal" onclick="window.AppHandler.openInviteModal()" class="btn-secondary border border-accent-blue/40 text-xs sm:text-sm px-5 py-3.5 w-full sm:w-auto text-blue-300 hover:text-white flex items-center justify-center gap-1.5 hover:bg-blue-950/40 transition-all">
+                            <span>👥 Invitar a mi Asesor Legal / Colega</span>
+                        </button>
                     </div>
 
                     <!-- BOTÓN DISCRETO: COPIAR ENLACE PARA ENVIAR AL JEFE / SOCIO -->
@@ -1444,6 +1447,67 @@
                 <span class="text-base group-hover:-translate-y-0.5 transition-transform">🏠</span>
                 <span data-i18n="tab_return_home" class="text-xs font-mono font-medium text-gray-200 group-hover:text-emerald-400">Regresar al Inicio</span>
             </button>
+        </div>
+
+        <!-- MODAL: INVITAR A ASESOR LEGAL / COLEGA (BUCLE VIRAL PLG) -->
+        <div id="invite-colleague-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border border-accent-blue/40 rounded-2xl max-w-lg w-full p-6 sm:p-8 relative shadow-2xl">
+                <button onclick="window.AppHandler.closeInviteModal()" aria-label="Cerrar modal invitación" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+                
+                <div class="text-center mb-6">
+                    <div class="w-12 h-12 rounded-xl bg-accent-blue/20 border border-accent-blue/40 flex items-center justify-center text-2xl mx-auto mb-3">👥</div>
+                    <h3 class="text-xl sm:text-2xl font-bold text-white mb-1">Invitar Asesor Legal o Colega</h3>
+                    <p class="text-xs text-gray-300 font-mono">Comparte este informe para validar cláusulas de riesgo y obtener una segunda opinión legal/financiera.</p>
+                </div>
+
+                <form id="invite-colleague-form" onsubmit="window.AppHandler.submitColleagueInvite(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-mono text-gray-300 uppercase tracking-wider mb-1">Tu Nombre</label>
+                            <input type="text" id="invite-sender-name" required placeholder="Ej. Carlos Mendoza" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:border-accent-blue focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-mono text-gray-300 uppercase tracking-wider mb-1">Tu Correo Corporativo</label>
+                            <input type="email" id="invite-sender-email" required placeholder="carlos@empresa.com" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:border-accent-blue focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-[11px] font-mono text-gray-300 uppercase tracking-wider mb-1">Nombre del Invitado</label>
+                            <input type="text" id="invite-colleague-name" required placeholder="Ej. Lic. Roberto Silva" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:border-accent-blue focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-[11px] font-mono text-gray-300 uppercase tracking-wider mb-1">Correo del Invitado</label>
+                            <input type="email" id="invite-colleague-email" required placeholder="rsilva@despacho.com" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white placeholder-gray-500 focus:border-accent-blue focus:outline-none">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-mono text-gray-300 uppercase tracking-wider mb-1">Cargo / Rol del Invitado</label>
+                        <select id="invite-colleague-role" class="w-full bg-dark-surface border border-dark-border rounded-lg px-3 py-2 text-xs text-white focus:border-accent-blue focus:outline-none">
+                            <option value="General Counsel & Director Legal">⚖️ General Counsel & Director Legal / Abogado Externo</option>
+                            <option value="Chief Financial Officer (CFO)">👑 Chief Financial Officer (CFO)</option>
+                            <option value="Corporate Controller & Auditor">📊 Corporate Controller & Auditor</option>
+                            <option value="Director de Compras & Procurement">🛒 Director de Compras / Procurement</option>
+                            <option value="Socio Director / CEO">🏛️ Socio Director / CEO</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-[11px] font-mono text-gray-300 uppercase tracking-wider mb-1">Nota Personalizada (Opcional)</label>
+                        <textarea id="invite-custom-note" rows="2" placeholder="Ej. Estimado Roberto, te comparto la auditoría preventiva de este contrato para que revisemos la cláusula de indexación antes del viernes." class="w-full bg-dark-surface border border-dark-border rounded-lg p-2.5 text-xs text-white placeholder-gray-500 focus:border-accent-blue focus:outline-none resize-none"></textarea>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" id="btn-submit-colleague-invite" class="btn-primary w-full py-3 bg-gradient-to-r from-blue-600 to-accent-emerald text-black font-extrabold text-xs sm:text-sm rounded-xl shadow-glow hover:opacity-95 transition-all flex items-center justify-center gap-2">
+                            <span>🚀 Enviar Invitación Oficial &amp; Acceso a la Auditoría</span>
+                        </button>
+                    </div>
+                </form>
+
+                <div id="invite-feedback" class="hidden mt-4 p-3 rounded-lg text-xs font-mono text-center"></div>
+            </div>
         </div>
 
         <!-- MODAL: GUÍA Y MANUAL DE USUARIO -->
