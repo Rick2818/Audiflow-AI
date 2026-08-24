@@ -184,12 +184,16 @@
       "schedule": "0 13 * * 3"
     },
     {
-      "path": "/api/lead-recovery",
-      "schedule": "0 14 * * 2,3,5"
+      "path": "/api/outreach?campaign=strategic_investor_advisory&batch=strategic_investors",
+      "schedule": "0 13 * * 4"
     },
     {
-      "path": "/api/outreach?cadence=touch_2_roi",
-      "schedule": "0 13 * * 4"
+      "path": "/api/outreach?campaign=touch_4_breakup&batch=pareto_top20",
+      "schedule": "0 13 * * 5"
+    },
+    {
+      "path": "/api/lead-recovery",
+      "schedule": "0 14 * * 2,3,5"
     }
   ]
 }
