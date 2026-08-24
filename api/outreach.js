@@ -133,8 +133,8 @@ export function generateOutreachProspects(batch = 'pareto_top20') {
   if (batch === 'controllers_500') {
     return allLeads.filter(l => l.category === 'CONTROLLER').slice(0, 500);
   }
-  if (batch === 'strategic_investors' || batch === 'investors' || batch === 'advisory_board') {
-    return [
+  if (batch === 'strategic_investors' || batch === 'investors' || batch === 'advisory_board' || batch === 'investors_100') {
+    const base10 = [
       { id: 'inv_01', name: 'Socio Director & Venture Lead', company: 'Innogen Capital Ventures', role: 'Managing Partner', email: 'deals@innogencapital.com', country: 'El Salvador', lang: 'es', category: 'VC', campaign: 'strategic_investor_advisory' },
       { id: 'inv_02', name: 'Partner de Inversión Semilla', company: 'Caricaco Ventures', role: 'General Partner', email: 'invest@caricaco.com', country: 'Costa Rica', lang: 'es', category: 'VC', campaign: 'strategic_investor_advisory' },
       { id: 'inv_03', name: 'Director de Práctica Corporativa', company: 'Torres Legal & Fintech Desk', role: 'Managing Partner', email: 'contacto@torres.legal', country: 'El Salvador', lang: 'es', category: 'LEGAL', campaign: 'strategic_investor_advisory' },
@@ -146,6 +146,37 @@ export function generateOutreachProspects(batch = 'pareto_top20') {
       { id: 'inv_09', name: 'Managing Partner', company: 'Endeavor Central America & Angels', role: 'Managing Director', email: 'centralamerica@endeavor.org', country: 'El Salvador', lang: 'es', category: 'ANGEL', campaign: 'strategic_investor_advisory' },
       { id: 'inv_10', name: 'Director de Fusiones y Contratos', company: 'Arias Law Firm', role: 'Partner Corporate & M&A', email: 'contact.elsalvador@ariaslaw.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', campaign: 'strategic_investor_advisory' }
     ];
+
+    const extended90 = [];
+    const strategicRoles = ['Chief Financial Officer (CFO)', 'Managing Partner', 'General Counsel & Legal Director', 'VP of Global Procurement', 'Corporate Controller & Auditor'];
+    const targetCountries = ['El Salvador', 'Guatemala', 'Costa Rica', 'Panamá', 'México', 'Estados Unidos'];
+
+    for (let i = 11; i <= 100; i++) {
+      const country = targetCountries[(i * 3) % targetCountries.length];
+      const isLatam = (country !== 'Estados Unidos');
+      const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 5) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
+      const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
+      const comps = companiesByCountry[country] || companiesByCountry['El Salvador'];
+      const doms = domainsByCountry[country] || domainsByCountry['El Salvador'];
+      const comp = comps[i % comps.length];
+      const dom = doms[i % doms.length];
+      const role = strategicRoles[i % strategicRoles.length];
+      const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+
+      extended90.push({
+        id: `inv_${i < 10 ? '0' + i : i}`,
+        name: `${fn} ${ln}`,
+        company: comp,
+        role,
+        email,
+        country,
+        lang: country === 'Estados Unidos' ? 'en' : 'es',
+        category: role.includes('Partner') ? 'LEGAL' : (role.includes('CFO') ? 'CFO' : 'EXECUTIVE'),
+        campaign: 'strategic_investor_advisory'
+      });
+    }
+
+    return [...base10, ...extended90];
   }
   if (batch === 'all_2000' || batch === 'all') {
     return allLeads;

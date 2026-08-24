@@ -709,7 +709,7 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                         👑 Disparar Campaña Pareto VIP (Top 20%)
                     </button>
                     <button onclick="AdminApp.loadProspectsBatch('strategic_investors')" class="px-4 py-2.5 rounded-xl bg-sky-950/90 border border-sky-400/60 text-sky-300 hover:text-white font-mono text-xs font-bold transition-all cursor-pointer shadow-glow flex items-center gap-1">
-                        🏛️ Cargar Inversores &amp; Advisory (Innogen, Caricaco, Firmas)
+                        🏛️ Cargar Lote 100 Inversores &amp; CFOs (Advisory Board)
                     </button>
                     <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="px-4 py-2.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs transition-all cursor-pointer">
                         🧪 Simulación de Prueba (Test Mode)
@@ -1708,7 +1708,7 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
 
                 const lines = [];
 
-                if (batch === 'strategic_investors' || batch === 'investors') {
+                if (batch === 'strategic_investors' || batch === 'investors' || batch === 'investors_100') {
                     const strategicList = [
                         { email: 'deals@innogencapital.com', name: 'Socio Director & Venture Lead', comp: 'Innogen Capital Ventures', role: 'Managing Partner', country: 'El Salvador', tag: '🏛️ STRATEGIC_INVESTOR' },
                         { email: 'invest@caricaco.com', name: 'Partner de Inversión Semilla', comp: 'Caricaco Ventures', role: 'General Partner', country: 'Costa Rica', tag: '🏛️ STRATEGIC_INVESTOR' },
@@ -1724,6 +1724,22 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                     strategicList.forEach(s => {
                         lines.push(`${s.email}, ${s.name}, ${s.comp}, ${s.role}, ${s.country}, ${s.tag}`);
                     });
+
+                    const targetCountries = ['El Salvador', 'Guatemala', 'Costa Rica', 'Panamá', 'México', 'Estados Unidos'];
+                    const strategicRoles = ['Chief Financial Officer (CFO)', 'Managing Partner', 'General Counsel & Legal Director', 'VP of Global Procurement', 'Corporate Controller & Auditor'];
+
+                    for (let i = 11; i <= 100; i++) {
+                        const country = targetCountries[(i * 3) % targetCountries.length];
+                        const isLatam = (country !== 'Estados Unidos');
+                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 5) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
+                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
+                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 5) % (isLatam ? companiesLatam : companiesGlobal).length];
+                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 11) % (isLatam ? domainsLatam : domainsGlobal).length];
+                        const role = strategicRoles[i % strategicRoles.length];
+                        const tag = role.includes('Partner') ? '⚖️ LEGAL_PARTNER' : (role.includes('CFO') ? '💰 CFO_EXECUTIVE' : '🏛️ ADVISORY_BOARD');
+                        const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
+                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, ${tag}`);
+                    }
                 } else if (batch === 'pareto_top20' || batch === 'top20' || batch === 1) {
                     for (let i = 1; i <= 400; i++) {
                         const isLatam = (i % 2 === 1);
