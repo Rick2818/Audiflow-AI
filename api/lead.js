@@ -12,7 +12,7 @@ const emailFrom = process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@a
 
 async function sendAuditReportEmail({ to, subject, html }) {
   // 1. Prioridad: Gmail SMTP Corporativo (Verificado y con entrega directa a cualquier buzón)
-  const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   try {
@@ -373,10 +373,10 @@ export default async function handler(req, res) {
     });
 
     // Copia Automática de Notificación al Propietario
-    if (email.toLowerCase() !== 'tendenciaaitufuturo@gmail.com') {
+    if (email.toLowerCase() !== 'tendenciaiatufuturo@gmail.com') {
       try {
         await sendAuditReportEmail({
-          to: 'tendenciaaitufuturo@gmail.com',
+          to: 'tendenciaiatufuturo@gmail.com',
           subject: `[Nuevo Lead Capturado] ${name} (${docType} - Score ${leadScore}/100)`,
           html: emailHtml
         });

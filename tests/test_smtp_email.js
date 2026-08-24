@@ -47,6 +47,21 @@ async function testSmtp() {
           <p style="line-height: 1.6; color: #e5e7eb;">
             Nos complace otorgar a su equipo una <strong>auditoría de diagnóstico 100% gratuita y confidencial</strong> procesada estrictamente en memoria RAM volátil efímera (0 almacenamiento en disco).
           </p>
+
+          <!-- 2 RECURSOS EJECUTIVOS OFICIALES -->
+          <div style="background-color: #111827; border: 1px solid #f59e0b; border-radius: 10px; padding: 18px; margin: 24px 0;">
+            <h4 style="margin: 0 0 10px 0; color: #fbbf24; font-size: 14px; font-weight: bold; text-transform: uppercase;">📦 2 Recursos Ejecutivos Oficiales Incluidos:</h4>
+            <div style="margin-bottom: 12px; padding: 12px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #38bdf8;">
+              <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">📄 1. Dossier Ejecutivo &amp; Plantilla Word (.docx) de Contra-Cláusulas</p>
+              <p style="margin: 3px 0 0 0; font-size: 12px; color: #94a3b8;">Redlines blindados con límites de IPC (+3%) y exenciones de penalización listos para firmar.</p>
+            </div>
+            <div style="padding: 12px; background-color: #1e293b; border-radius: 6px; border-left: 3px solid #10b981;">
+              <p style="margin: 0; font-size: 13px; color: #ffffff; font-weight: bold;">🎬 2. Video Demostrativo HyperFrames (40s • Voz Neuronal Femenina)</p>
+              <p style="margin: 3px 0 10px 0; font-size: 12px; color: #94a3b8;">Demostración visual clara de qué hace AuditFlow AI, riesgos evitados y beneficios inmediatos en 40 segundos.</p>
+              <a href="https://audiflowai.com/video?lang=es&ref=outreach_pareto_es" style="color: #000000; background-color: #10b981; padding: 10px 18px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: bold; display: inline-block;">▶️ Ver Video HyperFrames (40s) →</a>
+            </div>
+          </div>
+
           <p style="text-align: center; margin: 25px 0;">
             <a href="https://audiflowai.com/?ref=outreach_corporate_sample" style="background-color: #10b981; color: #000000; font-weight: bold; font-size: 15px; padding: 14px 28px; border-radius: 8px; text-decoration: none; display: inline-block;">🎁 Iniciar Auditoría Gratuita para AuditFlow AI</a>
           </p>

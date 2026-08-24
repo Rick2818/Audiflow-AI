@@ -12,7 +12,7 @@ const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supaba
 
 // Helper de Envío de Correo por Gmail SMTP / Resend
 async function sendGmailEmail({ to, subject, html }) {
-  const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
@@ -24,7 +24,7 @@ async function sendGmailEmail({ to, subject, html }) {
       return await transporter.sendMail({
         from: `"AuditFlow AI" <${gmailUser}>`,
         to,
-        replyTo: 'tendenciaaitufuturo@gmail.com',
+        replyTo: 'tendenciaiatufuturo@gmail.com',
         subject,
         html
       });
@@ -228,7 +228,7 @@ export default async function handler(req, res) {
             : `👀 [Correo Abierto / Visto] ${trackEmail} abrió el correo #${newCount}`;
           
           sendGmailEmail({
-            to: 'tendenciaaitufuturo@gmail.com',
+            to: 'tendenciaiatufuturo@gmail.com',
             subject: alertSubject,
             html: `<div style="font-family:sans-serif;background:#0f172a;color:#fff;padding:20px;border-radius:10px;"><h3 style="color:#38bdf8;">${alertSubject}</h3><p>Prospecto: <strong>${trackEmail}</strong> (${companyParam})</p><p>Origen: <strong>${source}</strong> | Visto: <strong>${newCount} veces</strong></p></div>`
           }).catch(() => {});
@@ -292,7 +292,7 @@ export default async function handler(req, res) {
         const smtpPort = Number(process.env.SMTP_PORT) || 587;
         const smtpUser = (process.env.SMTP_USER || '').trim();
         const smtpPass = (process.env.SMTP_PASS || '').trim();
-        const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
+        const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
         const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
         let transporter;
@@ -320,7 +320,7 @@ export default async function handler(req, res) {
         try {
           await transporter.sendMail({
             from: `"AuditFlow AI | Ricardo" <${gmailUser}>`,
-            to: 'tendenciaaitufuturo@gmail.com',
+            to: 'tendenciaiatufuturo@gmail.com',
             subject: '✅ [Verificación SMTP] Conexión Activa y Operativa en AuditFlow AI',
             html: `
               <div style="font-family: Arial, sans-serif; background: #0f172a; color: #fff; padding: 24px; border-radius: 12px; border: 1px solid #38bdf8; max-width: 600px;">
@@ -355,7 +355,7 @@ export default async function handler(req, res) {
 
       // 1. Diagnóstico y Autocorrección de SMTP / Despacho
       try {
-        const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
+        const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
         const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
         
         const testTransporter = nodemailer.createTransport({
@@ -367,7 +367,7 @@ export default async function handler(req, res) {
           status: 'HEALED_OK',
           provider: 'Gmail SMTP Oficial (Autenticado)',
           sender: gmailUser,
-          message: 'Canal de despacho activo y verificado. Regla de copia universal a tendenciaaitufuturo@gmail.com activada.'
+          message: 'Canal de despacho activo y verificado. Regla de copia universal a tendenciaiatufuturo@gmail.com activada.'
         };
         healLog.push('✅ SMTP / Despacho: Gmail SMTP verificado exitosamente.');
       } catch (smtpErr) {
@@ -450,11 +450,11 @@ export default async function handler(req, res) {
           </div>
         `;
         await sendGmailEmail({
-          to: 'tendenciaaitufuturo@gmail.com',
+          to: 'tendenciaiatufuturo@gmail.com',
           subject: '🩺 [Autocorrección Ejecutada] AuditFlow AI — Diagnóstico y Salud del Sistema',
           html: reportHtml
         });
-        healLog.push('📬 Notificación: Reporte de salud despachado a tendenciaaitufuturo@gmail.com.');
+        healLog.push('📬 Notificación: Reporte de salud despachado a tendenciaiatufuturo@gmail.com.');
       } catch (notifErr) {
         console.warn('Aviso notificando al propietario:', notifErr.message);
       }
@@ -481,7 +481,7 @@ export default async function handler(req, res) {
       const smtpUser = (process.env.SMTP_USER || '').trim();
       const smtpPass = (process.env.SMTP_PASS || '').trim();
       const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
-      const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
+      const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
       const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
       let transporter;
@@ -593,7 +593,7 @@ export default async function handler(req, res) {
               const { data, error } = await resendClient.emails.send({
                 from: senderFrom,
                 to: [pEmail],
-                reply_to: 'tendenciaaitufuturo@gmail.com',
+                reply_to: 'tendenciaiatufuturo@gmail.com',
                 subject,
                 html: bodyHtml,
                 headers: {
@@ -612,7 +612,7 @@ export default async function handler(req, res) {
               await transporter.sendMail({
                 from: senderFrom,
                 to: pEmail,
-                replyTo: 'tendenciaaitufuturo@gmail.com',
+                replyTo: 'tendenciaiatufuturo@gmail.com',
                 subject,
                 html: bodyHtml
               });
@@ -634,7 +634,7 @@ export default async function handler(req, res) {
         }
       }
 
-      // Mandato Universal: Notificar y enviar reporte de campaña al propietario (tendenciaaitufuturo@gmail.com)
+      // Mandato Universal: Notificar y enviar reporte de campaña al propietario (tendenciaiatufuturo@gmail.com)
       if (results.length > 0) {
         try {
           const successResults = results.filter(r => r.status === 'sent' || r.status === 'simulated_success');
@@ -650,10 +650,10 @@ export default async function handler(req, res) {
                 <li>Etapa Cadencia: <strong>${escapeHtml(touch)}</strong></li>
                 <li>Fecha: <strong>${new Date().toLocaleString()}</strong></li>
               </ul>
-              <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada directamente a la bandeja del propietario (tendenciaaitufuturo@gmail.com).</p>
+              <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada directamente a la bandeja del propietario (tendenciaiatufuturo@gmail.com).</p>
             </div>
           `;
-          await sendGmailEmail({ to: 'tendenciaaitufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
+          await sendGmailEmail({ to: 'tendenciaiatufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
         } catch (oErr) {
           console.warn('Aviso copia campaña propietario:', oErr.message);
         }
@@ -737,7 +737,7 @@ export default async function handler(req, res) {
             const rResp = await resend.emails.send({
               from: emailFrom,
               to: [email],
-              reply_to: 'tendenciaaitufuturo@gmail.com',
+              reply_to: 'tendenciaiatufuturo@gmail.com',
               subject,
               html: htmlBody
             });
@@ -765,8 +765,8 @@ export default async function handler(req, res) {
           } catch (dbErr) {}
         }
 
-        // Mandato Universal: Copiar SIEMPRE al propietario (tendenciaaitufuturo@gmail.com)
-        if (targetEmail !== 'tendenciaaitufuturo@gmail.com') {
+        // Mandato Universal: Copiar SIEMPRE al propietario (tendenciaiatufuturo@gmail.com)
+        if (targetEmail !== 'tendenciaiatufuturo@gmail.com') {
           try {
             const ownerSubject = `[Copia de Control] Oferta Corporativa Enviada a ${email} (${name || 'Director'} - ${company || 'Empresa'})`;
             const ownerHtml = `
@@ -780,10 +780,10 @@ export default async function handler(req, res) {
                   <li>Canal utilizado: <strong>${providerUsed}</strong></li>
                   <li>Fecha: <strong>${new Date().toLocaleString()}</strong></li>
                 </ul>
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada a la bandeja del propietario (tendenciaaitufuturo@gmail.com).</p>
+                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada a la bandeja del propietario (tendenciaiatufuturo@gmail.com).</p>
               </div>
             `;
-            await sendGmailEmail({ to: 'tendenciaaitufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
+            await sendGmailEmail({ to: 'tendenciaiatufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
           } catch (oErr) {
             console.warn('Aviso copia individual propietario:', oErr.message);
           }
@@ -812,10 +812,10 @@ export default async function handler(req, res) {
             } catch (dbErr) {}
           }
 
-          if (targetEmail !== 'tendenciaaitufuturo@gmail.com') {
+          if (targetEmail !== 'tendenciaiatufuturo@gmail.com') {
             try {
               await sendGmailEmail({
-                to: 'tendenciaaitufuturo@gmail.com',
+                to: 'tendenciaiatufuturo@gmail.com',
                 subject: `[Copia de Control] Oferta Enviada a ${email}`,
                 html: `<p>Oferta enviada a <strong>${escapeHtml(email)}</strong> vía Gmail SMTP Fallback.</p>`
               });
@@ -906,7 +906,7 @@ export default async function handler(req, res) {
               const resendResp = await resend.emails.send({
                 from: emailFrom,
                 to: [leadEmail],
-                reply_to: 'tendenciaaitufuturo@gmail.com',
+                reply_to: 'tendenciaiatufuturo@gmail.com',
                 subject,
                 html: htmlBody
               });
@@ -942,7 +942,7 @@ export default async function handler(req, res) {
         }
       }
 
-      // Mandato Universal: Copiar siempre al propietario (tendenciaaitufuturo@gmail.com) vía Gmail SMTP directo
+      // Mandato Universal: Copiar siempre al propietario (tendenciaiatufuturo@gmail.com) vía Gmail SMTP directo
       if (successCount > 0) {
         try {
           const ownerSubject = `[Copia de Control] AuditFlow AI — Despacho Masivo Ejecutado (${successCount} Envíos)`;
@@ -955,10 +955,10 @@ export default async function handler(req, res) {
                 <li>Total de envíos exitosos: <strong>${successCount}</strong></li>
                 <li>Fecha y hora: <strong>${new Date().toLocaleString()}</strong></li>
               </ul>
-              <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada directamente a la bandeja del propietario (tendenciaaitufuturo@gmail.com).</p>
+              <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Copia automática de control enviada directamente a la bandeja del propietario (tendenciaiatufuturo@gmail.com).</p>
             </div>
           `;
-          await sendGmailEmail({ to: 'tendenciaaitufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
+          await sendGmailEmail({ to: 'tendenciaiatufuturo@gmail.com', subject: ownerSubject, html: ownerHtml });
         } catch (oErr) {
           console.warn('Aviso al enviar copia al propietario:', oErr.message);
         }

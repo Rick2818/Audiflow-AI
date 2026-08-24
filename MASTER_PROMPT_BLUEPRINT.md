@@ -335,7 +335,7 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 ## 📬 21. MANDATO UNIVERSAL: ENRUTAMIENTO DUAL DE NOTIFICACIONES Y VENTAS
 
 **Regla Inviolable:**
-1. **Canal Administrativo y Operativo General (`tendenciaaitufuturo@gmail.com`):**
+1. **Canal Administrativo y Operativo General (`tendenciaiatufuturo@gmail.com`):**
    - Recibe **todas las notificaciones de interacción de usuarios con la app**: captura de leads, auditorías de contratos/facturas, solicitudes de soporte, reportes de salud del sistema, alertas del radar de tráfico/píxeles de apertura y copias de despacho de campañas outbound (Cold Email / Pareto VIP).
 2. **Canal Personal Exclusivo del Propietario (`rick28191@gmail.com`):**
    - **ÚNICA Y EXCLUSIVAMENTE cuando un usuario realice una COMPRA / PAGO ($9, $29, $69, $590 USD).**
@@ -386,7 +386,7 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
    - **3 Beneficios Inmediatos:** Diagnóstico en &lt;10s; Memoria RAM 100% efímera (cero almacenamiento); Contra-cláusulas listas para firmar (topes IPC +3%).
    - **Soporte Cuatrilingüe Nativo:** 🇪🇸 Español, 🇺🇸 English, 🇩🇪 Deutsch, 🇫🇷 Français según el país.
 3. **Cron Job Programado (Lunes 7:00 AM El Salvador / 13:00 UTC):**
-   - Registrado en `vercel.json` con expresión `"0 13 * * 1"` hacia `/api/outreach?campaign=pareto_top20`. Despacha automáticamente cada lunes al Top 20% con copia a `tendenciaaitufuturo@gmail.com`. Próximo disparo programado: **Lunes 24 de Agosto a las 7:00 AM**.
+   - Registrado en `vercel.json` con expresión `"0 13 * * 1"` hacia `/api/outreach?campaign=pareto_top20`. Despacha automáticamente cada lunes al Top 20% con copia a `tendenciaiatufuturo@gmail.com`. Próximo disparo programado: **Lunes 24 de Agosto a las 7:00 AM**.
 
 ---
 
@@ -449,11 +449,11 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
    - Soporte multilingüe completo en 4 idiomas (`[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]`) con marcado estructurado `Schema.org/FAQPage` e indexación instantánea con protocolo IndexNow.
 
 3. **Protocolo Inviolable de Enrutamiento Dual de Correos:**
-   - **`tendenciaaitufuturo@gmail.com`:** Receptor exclusivo de interacciones de usuarios, aperturas de emails, capturas de leads, auditorías shadow y reportes de crons.
+   - **`tendenciaiatufuturo@gmail.com`:** Receptor exclusivo de interacciones de usuarios, aperturas de emails, capturas de leads, auditorías shadow y reportes de crons.
    - **`rick28191@gmail.com`:** Única y exclusivamente reservado para notificaciones de **PAGOS Y COMPRAS CONFIRMADAS ($19, $69, $590 USD)**. Cero spam o logs operativos en esta bandeja.
 
 4. **Campaña Outreach Pareto VIP Programada (Lunes 7:00 AM El Salvador / 13:00 UTC):**
    - Disparo automático en Vercel Cron (`0 13 * * 1`) a 400 directores financieros con los 2 entregables ejecutivos oficiales:
      - 📄 1. Dossier Ejecutivo & Plantilla Word (.docx) de Contra-Cláusulas Blindadas.
      - 🎬 2. Video Demostrativo HyperFrames de 40s con Voz Femenina de Estudio.
-   - Copia de control y reporte de despacho enviado a `tendenciaaitufuturo@gmail.com`.
+   - Copia de control y reporte de despacho enviado a `tendenciaiatufuturo@gmail.com`.

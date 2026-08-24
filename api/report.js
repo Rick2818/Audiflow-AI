@@ -6,7 +6,7 @@ const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 async function sendAdminIssueAlert({ email, issueType, description, userAgent, lang }) {
-  const gmailUser = (process.env.GMAIL_USER || 'tendenciaaitufuturo@gmail.com').trim();
+  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   const isEn = (lang === 'en');

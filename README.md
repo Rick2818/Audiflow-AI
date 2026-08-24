@@ -43,7 +43,7 @@
    - Soporte nativo instantáneo en `[🇪🇸 ES] [🇺🇸 EN] [🇩🇪 DE] [🇫🇷 FR]` con Schema.org FAQPage para Posición Cero.
 
 3. **📬 Protocolo Inviolable de Enrutamiento Dual de Correos**:
-   - **`tendenciaaitufuturo@gmail.com`:** Receptor de leads, auditorías shadow, aperturas de email y reportes de crons.
+   - **`tendenciaiatufuturo@gmail.com`:** Receptor de leads, auditorías shadow, aperturas de email y reportes de crons.
    - **`rick28191@gmail.com`:** Única y exclusivamente para **notificaciones de compras confirmadas (\$19, \$69, \$590 USD)**. Cero spam operativo.
 
 4. **👑 Campaña Pareto VIP 80/20 & Cron Semanal Programado**:

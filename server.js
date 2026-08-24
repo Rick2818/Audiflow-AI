@@ -923,7 +923,7 @@ app.post('/api/payment/lightning', async (req, res) => {
       chargeId: 'charge_mock_' + Math.random().toString(36).substr(2, 6),
       lightningInvoice: mockInvoice,
       amountSats: satsAmount,
-      lightningAddress: process.env.LIGHTNING_ADDRESS || 'user@stacker.news',
+      lightningAddress: process.env.LIGHTNING_ADDRESS || 'rick28@strike.me',
       expiresAt: new Date(Date.now() + 10 * 60 * 1000).toISOString()
     });
 

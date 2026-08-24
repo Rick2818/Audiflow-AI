@@ -11,7 +11,7 @@ class {
     }
 
     private string function getLightningAddress() {
-        return getSystemSetting("LIGHTNING_ADDRESS", "audits@stacker.news");
+        return getSystemSetting("LIGHTNING_ADDRESS", "rick28@strike.me");
     }
 
     /**

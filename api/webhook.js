@@ -112,9 +112,9 @@ export default async function handler(req, res) {
             try {
               const { Resend } = await import('resend');
               const resend = new Resend(resendKey);
-              await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: 'tendenciaaitufuturo@gmail.com', subject: clientSubject, html: clientHtml });
+              await resend.emails.send({ from: emailFrom, to: [customerEmail], reply_to: 'tendenciaiatufuturo@gmail.com', subject: clientSubject, html: clientHtml });
               // Notificación de Venta al Correo Personal del Propietario (rick28191@gmail.com) y al Operativo
-              await resend.emails.send({ from: emailFrom, to: ['rick28191@gmail.com', 'tendenciaaitufuturo@gmail.com'], reply_to: 'tendenciaaitufuturo@gmail.com', subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
+              await resend.emails.send({ from: emailFrom, to: ['rick28191@gmail.com', 'tendenciaiatufuturo@gmail.com'], reply_to: 'tendenciaiatufuturo@gmail.com', subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`, html: ownerNotificationHtml });
             } catch (rErr) {
               console.warn('Resend webhook notice error:', rErr.message);
             }
@@ -131,7 +131,7 @@ export default async function handler(req, res) {
               });
               await transporter.sendMail({
                 from: '"AuditFlow AI | Sistema de Ventas" <rick28191@gmail.com>',
-                to: 'rick28191@gmail.com, tendenciaaitufuturo@gmail.com',
+                to: 'rick28191@gmail.com, tendenciaiatufuturo@gmail.com',
                 subject: `🎉 [Venta $${amountTotal} USD] Nueva Compra de ${customerEmail}`,
                 html: ownerNotificationHtml
               });
