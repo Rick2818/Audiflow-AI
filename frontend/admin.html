@@ -2648,10 +2648,10 @@ Escaneo de prueba gratuito:
                     const headers = this.getAuthHeaders();
                     headers['Content-Type'] = 'application/json';
 
-                    const response = await fetch('/api/fast-track-blast', {
+                    const response = await fetch('/api/admin', {
                         method: 'POST',
                         headers: headers,
-                        body: JSON.stringify({ limit: 50, test_mode: false })
+                        body: JSON.stringify({ action: 'fast_track_blast', limit: 50, test_mode: false })
                     });
 
                     const data = await response.json();

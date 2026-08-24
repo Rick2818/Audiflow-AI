@@ -277,13 +277,13 @@ export default async function handler(req, res) {
     }
 
     // Acción: Operación 10 Clientes Hoy (Fast-Track Blast)
-    if (action === 'fast_track_blast') {
+    if (action === 'fast_track_blast' || (req.url && req.url.includes('fast-track-blast'))) {
       const fastTrackModule = await import('../lib/fast-track-blast.js');
       return await fastTrackModule.default(req, res);
     }
 
     // Acción: Invitación a Colega (PLG)
-    if (action === 'invite_colleague') {
+    if (action === 'invite_colleague' || (req.url && req.url.includes('invite-colleague'))) {
       const inviteModule = await import('../lib/invite-colleague.js');
       return await inviteModule.default(req, res);
     }
