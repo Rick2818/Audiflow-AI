@@ -357,7 +357,8 @@ async function runForensicAudit() {
           report_id: `rep_wompi_stress_${i}`,
           document_name: `Contrato_${i}.pdf`,
           email: `cfo_${i}@empresa-sv.com`,
-          gateway: 'wompi'
+          gateway: 'wompi',
+          test_mode: true
         }
       });
       await paymentHandler(req, res);
@@ -376,7 +377,8 @@ async function runForensicAudit() {
           report_id: `rep_corp_${i}`,
           gateway: 'wompi',
           interval: i % 2 === 0 ? 'annual' : 'monthly',
-          email: `director_${i}@corporativo.com`
+          email: `director_${i}@corporativo.com`,
+          test_mode: true
         }
       });
       await paymentHandler(req, res);
@@ -393,6 +395,7 @@ async function runForensicAudit() {
         url: '/api/webhook',
         body: {
           event: 'transaction.updated',
+          test_mode: true,
           data: {
             transaction: {
               id: `trx_wompi_stress_${i}`,
