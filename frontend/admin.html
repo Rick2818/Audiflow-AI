@@ -89,7 +89,7 @@
                 <button onclick="AdminApp.exportToCSV()" class="px-3 py-1.5 rounded-lg bg-dark-surface hover:bg-dark-border text-xs font-semibold text-gray-200 border border-dark-border transition-all flex items-center gap-1.5">
                     📥 <span class="hidden sm:inline">Exportar</span> CSV
                 </button>
-                <button onclick="AdminApp.loadStats()" class="px-3 py-1.5 rounded-lg bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue text-xs font-semibold border border-accent-blue/30 transition-all flex items-center gap-1.5">
+                <button id="btn-refresh-admin" onclick="AdminApp.refreshDashboard()" class="px-3 py-1.5 rounded-lg bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue text-xs font-semibold border border-accent-blue/30 transition-all flex items-center gap-1.5 cursor-pointer shadow-sm">
                     🔄 Actualizar
                 </button>
                 <button onclick="AdminApp.logout()" class="px-3 py-1.5 rounded-lg bg-red-950/40 hover:bg-red-900/60 text-red-300 text-xs font-semibold border border-red-500/30 transition-all cursor-pointer">
@@ -1350,6 +1350,23 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                 } catch (err) {
                     console.error('Error cargando estadísticas:', err);
                     return false;
+                }
+            },
+
+            async refreshDashboard() {
+                const btn = document.getElementById('btn-refresh-admin');
+                if (btn) btn.innerHTML = '<span class="inline-block animate-spin">🔄</span> <span class="hidden sm:inline">Actualizando...</span>';
+                try {
+                    const ok = await this.loadStats();
+                    if (ok) {
+                        this.showToast('✅ Panel y estadísticas actualizadas en tiempo real', 'success');
+                    } else {
+                        window.location.reload();
+                    }
+                } catch (e) {
+                    window.location.reload();
+                } finally {
+                    if (btn) btn.innerHTML = '🔄 Actualizar';
                 }
             },
 
