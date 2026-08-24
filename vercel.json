@@ -178,6 +178,10 @@
     {
       "path": "/api/lead-recovery",
       "schedule": "0 10 * * 3,5"
+    },
+    {
+      "path": "/api/outreach?cadence=touch_2_roi",
+      "schedule": "0 13 * * 4"
     }
   ]
 }
