@@ -196,7 +196,7 @@ export default async function handler(req, res) {
             <p>Le contacto directamente por su liderazgo en el ecosistema corporativo y de inversión con <strong>${company}</strong>.</p>
             <p>Desarrollamos <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), una infraestructura de IA que audita contratos y facturas en 10 segundos, identificando fugas de EBITDA de $3,500 a $18,500 USD por contrato antes de la firma.</p>
             <p>Estamos sumando a 3 figuras clave a nuestro <strong>Consejo Asesor (Advisory Board)</strong> y explorando convenios corporativos para proteger a las empresas de su portafolio o red.</p>
-            <p>¿Le hace sentido que le comparta un resumen de 1 página o coordinemos una llamada breve de 10 minutos, o le tomo en un mal momento?</p>
+            <p>¿Le hace sentido que le comparta un resumen de 1 página o coordinemos una llamada breve de 10 minutos?</p>
             <p style="margin-top: 24px;">Atentamente,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fundador • AuditFlow AI Corp. (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
           </div>
         `;
@@ -209,7 +209,7 @@ export default async function handler(req, res) {
               <p>Hallo ${cleanName},</p>
               <p>ich habe gesehen, dass Sie den Finanz- bzw. Rechtsbereich bei <strong>${company}</strong> leiten.</p>
               <p>Wir haben <strong>AuditFlow AI</strong> entwickelt – eine Plattform, die Lieferantenverträge und Rechnungen in 10 Sekunden vor Unterzeichnung prüft und versteckte Preisanpassungsklauseln sowie automatische Verlängerungen aufdeckt (durchschnittlich 3.500 bis 12.000 USD Einsparpotenzial pro Vertrag).</p>
-              <p>Macht es Sinn, Ihnen eine kurze 1-seitige Übersicht der häufigsten Vertragslücken im Unternehmensbereich zukommen zu lassen, oder passt es zeitlich gerade schlecht?</p>
+              <p>Macht es Sinn, Ihnen eine kurze 1-seitige Übersicht der häufigsten Vertragslücken im Unternehmensbereich zukommen zu lassen?</p>
               <p style="margin-top: 24px;">Beste Grüße<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Gründer • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
             </div>
           `;
@@ -220,7 +220,7 @@ export default async function handler(req, res) {
               <p>Bonjour ${cleanName},</p>
               <p>J'ai remarqué votre responsabilité au sein de la direction financière chez <strong>${company}</strong>.</p>
               <p>Nous avons développé <strong>AuditFlow AI</strong>, un outil qui audite les contrats fournisseurs et factures en 10 secondes avant signature pour détecter les pénalités cachées et reconductions tacites (économies moyennes de 3 500 à 12 000 USD par accord).</p>
-              <p>Seriez-vous ouvert à ce que je vous transmette une synthèse d'une page sur les clauses de fuite les plus fréquentes, ou le moment est mal choisi ?</p>
+              <p>Seriez-vous ouvert à ce que je vous transmette une synthèse d'une page sur les clauses de fuite les plus fréquentes ?</p>
               <p style="margin-top: 24px;">Bien cordialement,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fondateur • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
             </div>
           `;
@@ -231,7 +231,7 @@ export default async function handler(req, res) {
               <p>Hi ${cleanName},</p>
               <p>I noticed you lead the finance / legal operations team at <strong>${company}</strong>.</p>
               <p>We built <strong>AuditFlow AI</strong>, a tool that audits vendor contracts and invoices in 10 seconds before signature—detecting hidden auto-renewals, CPI traps, and unquoted fees (averaging $3,500 to $12,000 USD in avoided leakage per agreement).</p>
-              <p>Would it make sense to send you a 1-page breakdown of the most common vendor contract loopholes we're seeing right now, or is this bad timing?</p>
+              <p>Would it make sense to send you a 1-page breakdown of the most common vendor contract loopholes we're seeing right now?</p>
               <p style="margin-top: 24px;">Best regards,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Founder • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
             </div>
           `;
@@ -243,7 +243,7 @@ export default async function handler(req, res) {
               <p>Hola ${cleanName},</p>
               <p>Veo que lideras el área de finanzas / legal en <strong>${company}</strong>.</p>
               <p>Desarrollamos <strong>AuditFlow AI</strong>, una plataforma que audita contratos de proveedores y facturas en 10 segundos antes de la firma, detectando penalizaciones ocultas y sobrecostos por indexación (en promedio encontramos entre $3,500 y $12,000 USD de fuga por contrato).</p>
-              <p>¿Te hace sentido que te envíe un resumen de 1 página con las cláusulas de fuga más frecuentes que estamos encontrando en el sector, o te pillo en mal momento?</p>
+              <p>¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes que estamos detectando en el sector?</p>
               <p style="margin-top: 24px;">Saludos,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fundador • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
             </div>
           `;
