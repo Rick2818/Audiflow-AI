@@ -79,7 +79,7 @@ export default async function handler(req, res) {
         const parts = l.name.split(' ');
         const fn = parts[0] || 'Colega';
         const ln = parts.slice(1).join(' ') || 'Legal';
-        const customMsg = `Hola ${fn}, veo que lideras el área legal en ${l.company}. Desarrollamos AuditFlow AI (https://audiflowai.com/?ref=waalaxy), herramienta que audita contratos y genera Redlines en Word (.docx con control de cambios) en 10s. ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes?`;
+        const customMsg = `Hola ${fn}, veo que lideras el área legal en ${l.company}. Desarrollamos AuditFlow AI (https://audiflowai.com/?ref=waalaxy), herramienta que audita contratos y genera Redlines en Word (.docx con control de cambios) en menos de 10s. Puedes probar tu 1er análisis 100% gratis en RAM o aprovechar la auditoría individual por $19 USD. ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes?`;
         
         return `"${fn}","${ln}","${l.email}","${l.role}","${l.company}","${l.country}","LEGAL_DIRECTOR","Waalaxy Import 2026","${customMsg.replace(/"/g, '""')}"`;
       }).join('\n');

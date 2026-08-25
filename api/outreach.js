@@ -170,10 +170,13 @@ export function generateOutreachProspects(batch = 'pareto_top20') {
   if (batch === 'legal_25' || batch === 'legal_50' || batch === 'all_50' || batch === '50_reals') {
     return REAL_LEGAL_DIRECTORS;
   }
-  if (batch === 'general_counsel') {
+  if (batch === 'offer_19_flash' || batch === 'flash_19') {
+    return all.filter(l => l.lead_score < 90).slice(0, 500); // 500 Despachos para Oferta $19
+  }
+  if (batch === 'general_counsel' || batch === 'inhouse') {
     return all.filter(l => (l.role || '').toLowerCase().includes('general counsel') || (l.role || '').toLowerCase().includes('jurídico')).slice(0, 500);
   }
-  if (batch === 'ma_contracts') {
+  if (batch === 'annual_599_firms' || batch === 'ma_contracts') {
     return all.filter(l => (l.role || '').toLowerCase().includes('contrato') || (l.role || '').toLowerCase().includes('m&a') || (l.role || '').toLowerCase().includes('socio')).slice(0, 500);
   }
   if (batch === 'pareto_top20' || batch === 'top20') {
@@ -285,55 +288,77 @@ export default async function handler(req, res) {
 
       const cleanName = name ? name.split(' ')[0] : 'colega';
 
-      // PLANTILLAS CON MÚLTIPLES CTAS DE BAJA FRICCIÓN ADAPTADAS A DIRECTORES LEGALES
+      // PLANTILLAS CON HOOK GRATIS EN 10S, OFERTA $19 USD Y PLANES $69 / $599
       if (isDe) {
-        subject = `vertragsprüfung & redlines / ${company}`;
+        subject = `kostenlose vertragsprüfung (10s) & redlines / ${company}`;
         bodyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
             <p>Hallo ${cleanName},</p>
             <p>ich kontaktiere Sie bezüglich Ihrer juristischen Leitung bei <strong>${company}</strong>.</p>
-            <p>Wir haben <strong>AuditFlow AI</strong> entwickelt – einen KI-Copiloten für Rechtsabteilungen und Kanzleien, der Lieferanten- und Gewerbeverträge in 10 Sekunden prüft und Redlines in Word (.docx mit Änderungsnachverfolgung) erstellt (durchschnittlich 3.500 bis 12.000 USD Einsparpotenzial pro Vertrag).</p>
-            <p><strong>Option 1 (CTA):</strong> Macht es Sinn, Ihnen eine 1-seitige Übersicht der häufigsten Vertragslücken im Unternehmensbereich zukommen zu lassen?</p>
-            <p><strong>Option 2 (CTA):</strong> Oder falls Sie diese Woche einen Entwurf prüfen, können Sie ihn vertraulich in volatilem RAM testen (0 Speicherung): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a></p>
+            <p>Wir haben <strong>AuditFlow AI</strong> entwickelt – einen KI-Copiloten, der Lieferanten- und Gewerbeverträge in <strong>unter 10 Sekunden</strong> prüft und Redlines in Word (.docx mit Änderungsnachverfolgung) erstellt.</p>
+            
+            <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
+              <p style="margin: 0 0 8px 0;"><strong>🎁 Erste Prüfung: 100% Gratis</strong> in 10s (im flüchtigen RAM, 0 Speicherung): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Einzelprüfung &amp; Word-Redline:</strong> Einmalig nur <strong>$19 USD</strong>.</p>
+              <p style="margin: 0;"><strong>💼 Monatlich:</strong> $69 USD/Monat (unbegrenzt) | <strong>🏛️ Jahreslizenz:</strong> $599 USD/Jahr (inkl. White-Label für Mandanten).</p>
+            </div>
+
+            <p>Macht es Sinn, Ihnen eine kurze 1-seitige Übersicht der häufigsten Vertragslücken im Unternehmensbereich zuzusenden?</p>
             <p style="margin-top: 24px;">Beste Grüße<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Gründer • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
           </div>
         `;
       } else if (isFr) {
-        subject = `audit juridique & redlines / ${company}`;
+        subject = `audit juridique gratuit (10s) & redlines / ${company}`;
         bodyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
             <p>Bonjour ${cleanName},</p>
             <p>Je vous contacte concernant votre direction juridique chez <strong>${company}</strong>.</p>
-            <p>Nous avons développé <strong>AuditFlow AI</strong>, un copilote pour cabinets et juristes d'entreprise qui audite les contrats fournisseurs en 10 secondes et génère le Redline en Word (.docx avec suivi des modifications), évitant 3 500 à 12 000 USD de fuites contractuelles.</p>
-            <p><strong>Option 1 (CTA) :</strong> Seriez-vous ouvert à recevoir une synthèse d'une page sur les clauses de fuite les plus fréquentes ?</p>
-            <p><strong>Option 2 (CTA) :</strong> Ou si vous révisez un accord cette semaine, vous pouvez tester l'audit instantané en mémoire RAM confidentielle : <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a></p>
+            <p>Nous avons développé <strong>AuditFlow AI</strong>, un copilote qui audite les contrats fournisseurs en <strong>moins de 10 secondes</strong> et génère le Redline en Word (.docx avec suivi des modifications).</p>
+            
+            <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
+              <p style="margin: 0 0 8px 0;"><strong>🎁 Premier audit : 100% Gratuit</strong> en 10s (en mémoire RAM volatile, zéro stockage) : <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Audit complet + Redline Word :</strong> Seulement <strong>$19 USD</strong> (sans engagement).</p>
+              <p style="margin: 0;"><strong>💼 Mensuel :</strong> $69 USD/mois (illimité) | <strong>🏛️ Annuel Cabinet :</strong> $599 USD/an (Marque Blanche incluse).</p>
+            </div>
+
+            <p>Seriez-vous ouvert à ce que je vous transmette une synthèse d'une page sur les clauses de fuite les plus fréquentes ?</p>
             <p style="margin-top: 24px;">Bien cordialement,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fondateur • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
           </div>
         `;
       } else if (isEn) {
-        subject = `contract redline review / ${company}`;
+        subject = `free contract audit (10s) & redlines / ${company}`;
         bodyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
             <p>Hi ${cleanName},</p>
-            <p>I noticed you lead the legal / corporate counsel team at <strong>${company}</strong>.</p>
-            <p>We built <strong>AuditFlow AI</strong>, a contract review copilot for legal teams that audits vendor agreements in 10 seconds and generates Word Redlines (.docx with track changes) to protect against auto-renewals, uncapped liabilities, and hidden CPI traps ($3,500 - $12,000 USD average risk avoided per agreement).</p>
-            <p><strong>Option 1 (CTA):</strong> Would it make sense to send you a 1-page breakdown of the most common contract loopholes we are seeing across the sector?</p>
-            <p><strong>Option 2 (CTA):</strong> Or if you're reviewing a draft this week, feel free to run a zero-storage confidential test in volatile RAM: <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a></p>
+            <p>I noticed you lead the legal counsel / corporate practice at <strong>${company}</strong>.</p>
+            <p>We built <strong>AuditFlow AI</strong>, a copilot for legal teams that audits vendor agreements in <strong>under 10 seconds</strong> and generates Word Redlines (.docx with track changes) to protect against unquoted penalties and liability traps.</p>
+            
+            <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
+              <p style="margin: 0 0 8px 0;"><strong>🎁 1st Audit: 100% Free</strong> in 10s (runs in volatile RAM with zero file storage): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Single Agreement Redline (.docx):</strong> Just <strong>$19 USD</strong> trial offer.</p>
+              <p style="margin: 0;"><strong>💼 Unlimited Monthly:</strong> $69 USD/mo | <strong>🏛️ Corporate Law Firm Annual:</strong> $599 USD/yr (includes white-label for your clients).</p>
+            </div>
+
+            <p>Would it make sense to send you a 1-page breakdown of the most common vendor contract loopholes we are seeing across the sector?</p>
             <p style="margin-top: 24px;">Best regards,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Founder • AuditFlow AI (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
           </div>
         `;
       } else {
-        // ESPAÑOL (CENTROAMÉRICA, LATAM Y ESPAÑA) CON MÚLTIPLES CTAS SIN FRICCIÓN
-        subject = `revisión contratos y redlines / ${company}`;
+        // ESPAÑOL: HOOK 1er ANÁLISIS GRATIS EN 10S + OFERTA $19 USD + PLANES $69/MES Y $599/AÑO
+        subject = `análisis gratis de contratos (10s) y redlines / ${company}`;
         bodyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
             <p>Hola ${cleanName},</p>
-            <p>Veo que lideras el área legal / práctica corporativa en <strong>${company}</strong>.</p>
-            <p>Desarrollamos <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), una herramienta copiloto para departamentos legales y despachos corporativos que audita contratos de proveedores en 10 segundos y genera el <strong>Redline en Word (.docx con control de cambios)</strong> detectando penalizaciones ocultas y sobrecostos ($3,500 a $12,000 USD de ahorro promedio por contrato).</p>
-            <p style="background-color: #f8fafc; padding: 12px; border-left: 3px solid #2563eb; margin: 16px 0; font-size: 14px; border-radius: 4px;">
-              <strong>• Opción 1:</strong> ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes que estamos detectando en el sector?<br>
-              <strong>• Opción 2:</strong> O si estás revisando algún borrador esta semana, puedes probarlo directamente en memoria RAM (sin guardar archivos) aquí: <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none; font-weight: bold;">audiflowai.com →</a>
-            </p>
+            <p>Veo que lideras la práctica legal / corporativa en <strong>${company}</strong>.</p>
+            <p>Desarrollamos <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), un copiloto para departamentos legales y despachos que audita contratos de proveedores en <strong>menos de 10 segundos</strong> y genera el <strong>Redline en Word (.docx con control de cambios)</strong> detectando penalizaciones ocultas y sobrecostos.</p>
+            
+            <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 6px; font-size: 14px;">
+              <p style="margin: 0 0 8px 0;"><strong>🎁 Tu 1er Análisis: 100% Gratis</strong> en 10s (en memoria RAM volátil, sin guardar archivos): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold; text-decoration: underline;">Probar gratis aquí →</a></p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Oferta Redline Individual:</strong> Solo <strong>$19 USD</strong> por contrato completo con exportación en Word.</p>
+              <p style="margin: 0;"><strong>💼 Planes:</strong> <strong>$69 USD/mes</strong> (auditorías ilimitadas) o <strong>$599 USD/año</strong> (licencia corporativa anual con marca blanca para clientes de la firma).</p>
+            </div>
+
+            <p>¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes que estamos detectando en el sector?</p>
             <p style="margin-top: 24px;">Saludos,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fundador • AuditFlow AI (<a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
           </div>
         `;
