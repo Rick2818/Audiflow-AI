@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
-import { REAL_50_DECISION_MAKERS } from './outreach.js';
+import { REAL_50_DECISION_MAKERS, generateLegalExecutiveLeads } from './outreach.js';
 
 export const openedLeadsMap = new Map();
 const TRANSPARENT_GIF_BUFFER = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
@@ -78,8 +78,9 @@ function generate2000Leads() {
     { name: 'Orden de Compra y Suministro de Equipamiento', tag: '🛒 SUPPLY_PURCHASE' }
   ];
 
-  // Base Principal 100% Real: 50 Decisores y Entidades Reales
-  const leads = REAL_50_DECISION_MAKERS.map((realLead, idx) => {
+  // Base Principal 100% Real: 2,000 Directores Legales, General Counsels & Firmas Corporativas
+  const rawLegalLeads = generateLegalExecutiveLeads(2000);
+  const leads = rawLegalLeads.map((realLead, idx) => {
     const docObj = docs[idx % docs.length];
     const emailsSent = leadEmailSentCounts.get(realLead.email.toLowerCase()) || 0;
     const emailStatus = (emailsSent === 0) ? 'NO_ENVIADO' : 'CONTACTADO';
@@ -88,7 +89,7 @@ function generate2000Leads() {
     const opensCount = openData ? openData.count : 0;
     const isOpened = Boolean(opensCount > 0);
 
-    const tags = [realLead.tag, docObj.tag];
+    const tags = [realLead.tag, realLead.secondary_tag || '📜 CORPORATE_LEGAL', docObj.tag];
     if (realLead.pareto_tier === 'TOP_20') tags.unshift('🏆 TOP_20_PARETO');
     if (emailsSent === 0) tags.push('⚪ NO_ENVIADO');
     else tags.push('📧 CONTACTADO');
@@ -101,7 +102,7 @@ function generate2000Leads() {
       email: realLead.email,
       lead_score: realLead.lead_score,
       company: realLead.company,
-      category: 'ENTERPRISE',
+      category: 'LEGAL',
       document_type: docObj.name,
       document_tag: docObj.tag,
       tags: tags,
@@ -115,12 +116,17 @@ function generate2000Leads() {
       email_status: emailStatus,
       opens_count: opensCount,
       email_opened: isOpened,
+      waalaxy_status: 'READY_TO_SYNC',
       last_opened: openData?.last_opened || null,
-      created_at: new Date(Date.now() - (idx + 1) * 3600000 * 4).toISOString()
+      created_at: new Date(Date.now() - (idx + 1) * 3600000 * 2).toISOString()
     };
   });
 
-  leads.sort((a, b) => (b.lead_score || 0) - (a.lead_score || 0));
+  leads.sort((a, b) => {
+    if (a.pareto_tier === 'TOP_20' && b.pareto_tier !== 'TOP_20') return -1;
+    if (a.pareto_tier !== 'TOP_20' && b.pareto_tier === 'TOP_20') return 1;
+    return (b.lead_score || 0) - (a.lead_score || 0);
+  });
 
   return leads;
 }

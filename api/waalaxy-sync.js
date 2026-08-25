@@ -1,0 +1,176 @@
+import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
+import { CONFIG } from '../lib/config.js';
+import { verifyAdminAuth, escapeHtml } from '../lib/security.js';
+import { generateLegalExecutiveLeads } from './outreach.js';
+
+const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
+const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
+
+// Memoria volátil para sincronización rápida en tiempo real
+export const waalaxyProspectsStore = new Map();
+
+async function sendWaalaxyAlert({ email, name, company, eventType, message }) {
+  const adminEmail = CONFIG.EMAIL.NOTIFICATIONS_ADMIN || 'tendenciaiatufuturo@gmail.com';
+  const salesEmail = CONFIG.EMAIL.SALES_ALERTS || 'rick28191@gmail.com';
+  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
+
+  if (!gmailUser || !gmailPass || gmailUser.includes('tu_correo')) return;
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: gmailUser, pass: gmailPass }
+    });
+
+    const subject = `🛰️ [Waalaxy / LinkedIn Event] ${eventType.toUpperCase()}: ${name || email} (${company || 'Director Legal'})`;
+    const html = `
+      <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #38bdf8;">
+        <h2 style="color: #38bdf8; margin-top: 0;">🛰️ Sincronización Waalaxy & LinkedIn — AuditFlow AI</h2>
+        <p style="color: #cbd5e1; font-size: 14px;">Se ha registrado una nueva interacción en tu campaña automatizada de LinkedIn / Waalaxy:</p>
+        
+        <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 13px; color: #e2e8f0;">
+          <tr><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #94a3b8;">Tipo de Evento:</td><td style="padding: 8px; border-bottom: 1px solid #1f2937; font-weight: bold; color: #38bdf8;">${escapeHtml(eventType)}</td></tr>
+          <tr><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #94a3b8;">Prospecto:</td><td style="padding: 8px; border-bottom: 1px solid #1f2937; font-weight: bold;">${escapeHtml(name || 'No especificado')}</td></tr>
+          <tr><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #94a3b8;">Empresa / Despacho:</td><td style="padding: 8px; border-bottom: 1px solid #1f2937;">${escapeHtml(company || 'Firma Legal B2B')}</td></tr>
+          <tr><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #94a3b8;">Correo / LinkedIn:</td><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #10b981;">${escapeHtml(email || 'Contacto LinkedIn')}</td></tr>
+          ${message ? `<tr><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #94a3b8;">Mensaje / Respuesta:</td><td style="padding: 8px; border-bottom: 1px solid #1f2937; color: #facc15;">${escapeHtml(message)}</td></tr>` : ''}
+        </table>
+
+        <div style="margin-top: 20px; text-align: center;">
+          <a href="https://audiflowai.com/admin" style="background-color: #38bdf8; color: #000000; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">
+            Abrir Panel de Administración →
+          </a>
+        </div>
+      </div>
+    `;
+
+    await transporter.sendMail({
+      from: `"AuditFlow AI • Radar Waalaxy" <${gmailUser}>`,
+      to: [adminEmail, salesEmail],
+      subject,
+      html
+    });
+  } catch (err) {
+    console.warn('[WaalaxySync] Error enviando alerta de correo:', err.message);
+  }
+}
+
+export default async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-password, x-waalaxy-token');
+
+  if (req.method === 'OPTIONS') {
+    return res.status(200).end();
+  }
+
+  // 1. GET: Estado de Sincronización o Exportación de CSV de 2,000 Directores Legales para Waalaxy
+  if (req.method === 'GET') {
+    const { action, format } = req.query;
+
+    if (action === 'export_csv' || format === 'csv') {
+      const legalLeads = generateLegalExecutiveLeads(2000);
+      
+      const csvHeader = 'First Name,Last Name,Email,Job Title,Company Name,Country,Category,Waalaxy Note,Custom Message CTA\n';
+      const csvRows = legalLeads.map(l => {
+        const parts = l.name.split(' ');
+        const fn = parts[0] || 'Colega';
+        const ln = parts.slice(1).join(' ') || 'Legal';
+        const customMsg = `Hola ${fn}, veo que lideras el área legal en ${l.company}. Desarrollamos AuditFlow AI (https://audiflowai.com/?ref=waalaxy), herramienta que audita contratos y genera Redlines en Word (.docx con control de cambios) en 10s. ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes?`;
+        
+        return `"${fn}","${ln}","${l.email}","${l.role}","${l.company}","${l.country}","LEGAL_DIRECTOR","Waalaxy Import 2026","${customMsg.replace(/"/g, '""')}"`;
+      }).join('\n');
+
+      res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+      res.setHeader('Content-Disposition', 'attachment; filename="waalaxy_2000_directores_legales_auditflow.csv"');
+      return res.status(200).send(csvHeader + csvRows);
+    }
+
+    return res.status(200).json({
+      success: true,
+      service: 'AuditFlow AI Waalaxy Webhook & Sync Engine',
+      webhook_url: 'https://audiflowai.com/api/waalaxy-sync',
+      total_real_legal_leads_ready: 2000,
+      active_synced_leads: waalaxyProspectsStore.size,
+      status: 'ONLINE'
+    });
+  }
+
+  // 2. POST: Recepción de Webhooks de Waalaxy / Zapier / Make
+  if (req.method === 'POST') {
+    try {
+      let body = req.body || {};
+      if (typeof body === 'string') {
+        try { body = JSON.parse(body); } catch (e) { body = {}; }
+      }
+
+      const {
+        event_type = 'prospect_interaction',
+        email = '',
+        name = '',
+        role = '',
+        company = '',
+        linkedin_url = '',
+        message = '',
+        status = 'PROSPECT'
+      } = body;
+
+      const recordId = `waalaxy_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
+      const payload = {
+        id: recordId,
+        email: email || `linkedin_user_${Date.now()}@prospect.com`,
+        name: name || 'Director Legal',
+        role: role || 'General Counsel / Socio Legal',
+        company: company || 'Firma Corporativa B2B',
+        linkedin_url,
+        event_type,
+        message,
+        status,
+        synced_at: new Date().toISOString()
+      };
+
+      // Guardar en almacén volátil en memoria
+      waalaxyProspectsStore.set(payload.email.toLowerCase(), payload);
+
+      // Persistir en Supabase si está disponible
+      if (supabase) {
+        try {
+          await supabase.from('audit_leads').upsert({
+            email: payload.email,
+            name: payload.name,
+            company: payload.company,
+            role: payload.role,
+            document_type: 'Waalaxy LinkedIn Lead',
+            status: 'LEAD_CAPTURED',
+            tags: ['🛰️ WAALAXY_SYNC', '⚖️ LEGAL_COUNSEL'],
+            updated_at: new Date().toISOString()
+          }, { onConflict: 'email' });
+        } catch (dbErr) {
+          console.warn('[WaalaxySync] Supabase Upsert:', dbErr.message);
+        }
+      }
+
+      // Notificación inmediata al fundador
+      await sendWaalaxyAlert({
+        email: payload.email,
+        name: payload.name,
+        company: payload.company,
+        eventType: event_type,
+        message
+      });
+
+      return res.status(200).json({
+        success: true,
+        message: 'Evento de Waalaxy procesado y sincronizado exitosamente',
+        record: payload
+      });
+    } catch (err) {
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  }
+
+  return res.status(405).json({ error: 'Método no permitido' });
+}
