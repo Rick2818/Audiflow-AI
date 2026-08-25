@@ -99,35 +99,8 @@
         </div>
     </header>
 
-    <!-- PANTALLA DE AUTENTICACIÓN Y ACCESO AL PANEL (NUEVA DESDE CERO) -->
-    <div id="admin-login-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/90 backdrop-blur-lg p-4">
-        <div class="bg-dark-card border border-dark-border rounded-3xl max-w-md w-full p-8 shadow-2xl relative text-center space-y-6">
-            <div class="inline-flex p-4 rounded-2xl bg-gradient-to-tr from-purple-600/30 via-accent-blue/20 to-emerald-500/20 border border-purple-500/30 mx-auto">
-                <span class="text-3xl">🛡️</span>
-            </div>
-            
-            <div>
-                <h2 class="text-2xl font-black text-white tracking-tight">AuditFlow AI Admin</h2>
-                <p class="text-xs text-gray-400 font-mono mt-1">Centro de Control &amp; Despacho Comercial 2026</p>
-            </div>
-
-            <div class="space-y-3 pt-2">
-                <button type="button" id="btn-enter-dashboard" onclick="AdminApp.enterDashboard()" class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-purple-600 via-accent-blue to-emerald-400 text-white font-extrabold text-sm shadow-glow hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer flex items-center justify-center gap-2">
-                    <span>🚀 Entrar al Panel de Control</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                </button>
-            </div>
-
-            <div class="border-t border-dark-border/60 pt-4 text-center">
-                <a href="/" class="text-xs font-mono text-gray-400 hover:text-white transition-colors">
-                    ← Volver a la Web Principal
-                </a>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD (DESBLOQUEADO TRAS AUTENTICACIÓN) -->
-    <main id="admin-dashboard-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full hidden">
+    <!-- CONTENIDO PRINCIPAL DEL DASHBOARD (ABIERTO DIRECTO Y 100% ACCESIBLE) -->
+    <main id="admin-dashboard-content" class="max-w-7xl mx-auto px-4 sm:px-6 py-8 flex-1 w-full" style="display: block;">
 
         <!-- METRICAS Y KPI CARDS (TOP STRIP) -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
@@ -1246,22 +1219,6 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
             },
 
             init() {
-                const modal = document.getElementById('admin-login-modal');
-                const content = document.getElementById('admin-dashboard-content');
-
-                // Si ya tiene sesión previa o viene con parámetro, entra directo
-                const savedToken = sessionStorage.getItem('auditflow_admin_token') || localStorage.getItem('auditflow_admin_token');
-                const urlParams = new URLSearchParams(window.location.search);
-                if (savedToken || urlParams.has('pass') || urlParams.has('token') || urlParams.has('key') || urlParams.has('login')) {
-                    this.enterDashboard();
-                    return;
-                }
-
-                // Mostrar pantalla de acceso limpia
-                this.showLoginModal();
-            },
-
-            enterDashboard() {
                 this.authToken = 'admin_token_auditflow_2026';
                 this.adminPass = 'AuditFlow2026!';
                 sessionStorage.setItem('auditflow_admin_token', this.authToken);
@@ -1269,22 +1226,22 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
                 localStorage.setItem('auditflow_admin_token', this.authToken);
                 localStorage.setItem('auditflow_admin_pass', this.adminPass);
 
-                if (window.history && window.history.replaceState) {
-                    window.history.replaceState({}, '', window.location.pathname);
+                const content = document.getElementById('admin-dashboard-content');
+                if (content) {
+                    content.classList.remove('hidden');
+                    content.style.display = 'block';
                 }
 
-                this.showDashboard();
-                this.showToast('🚀 ¡Bienvenido al Centro de Control de AuditFlow AI!', 'success');
                 this.loadStats().catch(e => console.warn('loadStats info:', e));
             },
 
+            enterDashboard() {
+                this.init();
+                this.showToast('🚀 ¡Bienvenido al Centro de Control de AuditFlow AI!', 'success');
+            },
+
             showDashboard() {
-                const modal = document.getElementById('admin-login-modal');
                 const content = document.getElementById('admin-dashboard-content');
-                if (modal) {
-                    modal.classList.add('hidden');
-                    modal.style.display = 'none';
-                }
                 if (content) {
                     content.classList.remove('hidden');
                     content.style.display = 'block';
@@ -1292,16 +1249,7 @@ mikko.virtanen@tech-fi.fi, Mikko Virtanen, Finland Enterprise Software, General 
             },
 
             showLoginModal() {
-                const modal = document.getElementById('admin-login-modal');
-                const content = document.getElementById('admin-dashboard-content');
-                if (content) {
-                    content.classList.add('hidden');
-                    content.style.display = 'none';
-                }
-                if (modal) {
-                    modal.classList.remove('hidden');
-                    modal.style.display = 'flex';
-                }
+                this.showDashboard();
             },
 
             getSentEmailsCache() {
