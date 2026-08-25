@@ -58,6 +58,62 @@ async function sendWaalaxyAlert({ email, name, company, eventType, message }) {
   }
 }
 
+async function sendAutomatedRedlineDeliveryToProspect({ email, name, company }) {
+  if (!email || !email.includes('@') || email.includes('linkedin_user_')) return;
+
+  const appUrl = (process.env.APP_URL || CONFIG.URLS.APP_URL || 'https://audiflowai.com').replace(/\/+$/, '');
+  const cleanFirstName = name ? name.split(' ')[0] : 'colega';
+  const targetCompany = company || 'su firma legal';
+
+  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
+
+  if (!gmailUser || !gmailPass || gmailUser.includes('tu_correo')) return;
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: gmailUser, pass: gmailPass }
+    });
+
+    const subject = `Borrador de Redline en Word (.docx) y Acceso Inmediato / ${targetCompany}`;
+    const emailHtml = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
+        <p>Hola ${escapeHtml(cleanFirstName)},</p>
+        <p>Gracias por tu interés en <strong>AuditFlow AI</strong> (<a href="${appUrl}/?ref=instant-redline" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>).</p>
+        <p>Tal como solicitaste, aquí tienes el acceso para probar la generación del <strong>Redline Forense en Word (.docx con Control de Cambios)</strong> de forma 100% gratuita y confidencial:</p>
+
+        <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #2563eb; margin: 18px 0; border-radius: 6px; font-size: 14px;">
+          <p style="margin: 0 0 10px 0;"><strong>🎁 Tu 1er Análisis 100% Gratis:</strong> Pruébalo directamente en memoria RAM volátil (sin guardar archivos ni solicitar tarjeta):</p>
+          <p style="margin: 0 0 10px 0; text-align: center;">
+            <a href="${appUrl}/?ref=instant-redline" style="background-color: #2563eb; color: #ffffff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">
+              Subir Contrato y Obtener Redline en 10s →
+            </a>
+          </p>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 12px 0;">
+          <p style="margin: 0 0 6px 0;"><strong>⚡ Oferta Redline Individual:</strong> Solo <strong>$19 USD</strong> por contrato completo con exportación en Word (.docx).</p>
+          <p style="margin: 0;"><strong>💼 Planes:</strong> <strong>$69 USD/mes</strong> (ilimitado) o <strong>$599 USD/año</strong> (licencia anual con marca blanca para clientes de la firma).</p>
+        </div>
+
+        <p>También puedes responderme directamente a este correo adjuntando el borrador que estás revisando esta semana y te devuelvo el diagnóstico forense preliminar en minutos.</p>
+        <p style="margin-top: 24px;">Saludos cordiales,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fundador • AuditFlow AI Corp. (<a href="${appUrl}" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
+      </div>
+    `;
+
+    await transporter.sendMail({
+      from: `"Ricardo • AuditFlow AI" <${gmailUser}>`,
+      to: email,
+      bcc: 'tendenciaiatufuturo@gmail.com',
+      replyTo: 'tendenciaiatufuturo@gmail.com',
+      subject,
+      html: emailHtml
+    });
+    console.log(`[WaalaxySync] Auto-Responder de Redline despachado automáticamente a ${email}`);
+  } catch (autoErr) {
+    console.warn('[WaalaxySync] Error despachando auto-responder a prospecto:', autoErr.message);
+  }
+}
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -153,7 +209,7 @@ export default async function handler(req, res) {
         }
       }
 
-      // Notificación inmediata al fundador
+      // 1. Notificación inmediata al fundador y copia de control
       await sendWaalaxyAlert({
         email: payload.email,
         name: payload.name,
@@ -162,9 +218,16 @@ export default async function handler(req, res) {
         message
       });
 
+      // 2. Despacho AUTOMÁTICO e instantáneo del Redline y acceso al prospecto
+      await sendAutomatedRedlineDeliveryToProspect({
+        email: payload.email,
+        name: payload.name,
+        company: payload.company
+      });
+
       return res.status(200).json({
         success: true,
-        message: 'Evento de Waalaxy procesado y sincronizado exitosamente',
+        message: 'Evento de Waalaxy procesado, sincronizado y Auto-Responder de Redline enviado',
         record: payload
       });
     } catch (err) {
