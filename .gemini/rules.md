@@ -9,4 +9,9 @@
 
 ## 2. Enrutamiento Fiduciario de Correos
 - **Control y Notificaciones del Sistema**: tendenciaiatufuturo@gmail.com
-- **Ventas y Transacciones Financieras (, , )**: rick28191@gmail.com
+- **Ventas y Transacciones Financieras ($19, $69, $590 USD)**: rick28191@gmail.com
+
+## 3. Regla Inmutable de Prospección y Bases de Datos Reales
+- **PROHIBIDO EL USO DE CLIENTES, NOMBRES O CORREOS FICTICIOS EN PRODUCCIÓN**: Toda la prospección, envíos y campañas deben ejecutarse exclusivamente contra empresas, despachos corporativos, cámaras empresariales, firmas legales y decisores financieros y legales reales y verificados.
+- **Formato de Cold Email Obligatorio**: Texto plano / HTML limpio humano, máximo 5 a 6 líneas (65-75 palabras), asunto en minúsculas estilo colega (`revisión contratos / {{empresa}}`), firma personal de Ricardo y CTA de micro-compromiso de baja fricción.
+

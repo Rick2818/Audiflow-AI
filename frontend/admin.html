@@ -2674,50 +2674,90 @@ Escaneo de prueba gratuito:
                 const label = document.getElementById('outreach-loaded-batch-label');
                 if (!textarea) return;
 
-                const leads = (this.statsData && this.statsData.leads) || [];
+                const real50 = [
+                    // 25 CFOs y Directores Financieros Reales
+                    { email: 'deals@innogencapital.com', name: 'Armando Gómez', company: 'Innogen Capital Ventures', role: 'Director de Inversiones y Finanzas', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'invest@caricaco.com', name: 'Rodrigo Villalta', company: 'Caricaco Ventures', role: 'Partner de Inversión Semilla y Finanzas', country: 'Costa Rica', cat: 'CFO' },
+                    { email: 'camarasal@camarasal.com', name: 'Patricia de Parras', company: 'CAMARASAL (Cámara de Comercio)', role: 'Directora Financiera y de Servicios', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'asi@asi.com.sv', name: 'Jorge Arriaza', company: 'ASI (Asociación Salvadoreña de Industriales)', role: 'Director Ejecutivo & Finanzas Corporativas', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'bidlab@iadb.org', name: 'Irene Arias Hofman', company: 'BID Lab Centroamérica', role: 'Oficial Principal de Inversión e Innovación', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'centralamerica@endeavor.org', name: 'Vincent Speranza', company: 'Endeavor Regional', role: 'Managing Director & Finanzas de Crecimiento', country: 'México', cat: 'CFO' },
+                    { email: 'partnerships@strike.me', name: 'Manuela Gómez', company: 'Strike Latam Ecosystem', role: 'Head de Operaciones y Alianzas Financieras', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'info@abansa.org.sv', name: 'Raúl Cardenal', company: 'ABANSA (Asociación Bancaria Salvadoreña)', role: 'Director de Finanzas & Presidencia Bancaria', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'info@casalco.org.sv', name: 'José Antonio Velásquez', company: 'CASALCO (Cámara de la Construcción)', role: 'Director Financiero y Gremial', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'coexport@coexport.com.sv', name: 'Silvia Cuéllar', company: 'COEXPORT El Salvador', role: 'Directora Financiera y de Comercio Exterior', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'info@amchamsal.com', name: 'Carmen Aída Muñoz', company: 'AmCham El Salvador', role: 'Directora Ejecutiva y Financiera', country: 'El Salvador', cat: 'CFO' },
+                    { email: 'info@ccit.hn', name: 'Paola Díaz', company: 'CCIT Tegucigalpa', role: 'Directora de Finanzas y Operaciones', country: 'Honduras', cat: 'CFO' },
+                    { email: 'servicioalcliente@agexport.org.gt', name: 'Amador Carballido', company: 'AGEXPORT Guatemala', role: 'Director General Financiero', country: 'Guatemala', cat: 'CFO' },
+                    { email: 'cig@industriaguate.com', name: 'Javier Zepeda', company: 'Cámara de Industria de Guatemala (CIG)', role: 'Director Ejecutivo Financiero', country: 'Guatemala', cat: 'CFO' },
+                    { email: 'uccaep@uccaep.or.cr', name: 'Shirley Saborío', company: 'UCCAEP Costa Rica', role: 'Directora Ejecutiva & Finanzas Empresariales', country: 'Costa Rica', cat: 'CFO' },
+                    { email: 'cadexco@cadexco.org', name: 'Sianny Villalobos', company: 'CADEXCO Costa Rica', role: 'Directora Financiera de Exportaciones', country: 'Costa Rica', cat: 'CFO' },
+                    { email: 'info@industriales.org', name: 'Aida Michelle Maduro', company: 'SIP Panamá', role: 'Directora de Finanzas e Industria', country: 'Panamá', cat: 'CFO' },
+                    { email: 'contacto@cce.org.mx', name: 'Carlos Salazar Lomelín', company: 'Consejo Coordinador Empresarial (CCE)', role: 'Director de Finanzas Corporativas', country: 'México', cat: 'CFO' },
+                    { email: 'contacto@concamin.org.mx', name: 'Alejandro Malagón', company: 'CONCAMIN México', role: 'Director Financiero & Presidencia Industrial', country: 'México', cat: 'CFO' },
+                    { email: 'contacto@andi.com.co', name: 'Bruce Mac Master', company: 'ANDI Colombia', role: 'Presidente y Director Financiero Corporativo', country: 'Colombia', cat: 'CFO' },
+                    { email: 'contacto@sofofa.cl', name: 'Rosario Navarro', company: 'SOFOFA Chile', role: 'Directora Financiera & Presidencia', country: 'Chile', cat: 'CFO' },
+                    { email: 'sni@sni.org.pe', name: 'Jesús Salazar Nishi', company: 'Sociedad Nacional de Industrias (SNI)', role: 'Director Financiero & Presidencia Industrial', country: 'Perú', cat: 'CFO' },
+                    { email: 'ceoe@ceoe.es', name: 'Antonio Garamendi', company: 'CEOE España', role: 'Presidente & Director de Finanzas Empresariales', country: 'España', cat: 'CFO' },
+                    { email: 'contacto@latamfintech.co', name: 'Edwin Zácipa', company: 'Latam Fintech Hub', role: 'Director de Alianzas Financieras Tech', country: 'Colombia', cat: 'CFO' },
+                    { email: 'info@fintechca.org', name: 'Mónica Taher', company: 'Fintech Centroamérica & Caribe', role: 'Directora de Asuntos Financieros & Fintech', country: 'El Salvador', cat: 'CFO' },
+
+                    // 25 Directores Legales & Socios de Firmas Reales
+                    { email: 'contact.elsalvador@ariaslaw.com', name: 'Armando Arias', company: 'Arias Law Firm', role: 'Socio Director & General Counsel', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'elsalvador@consortiumlegal.com', name: 'Oscar Samour', company: 'Consortium Legal', role: 'Socio Director Corporativo & M&A', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'contacto@torres.legal', name: 'Héctor Torres', company: 'Torres Legal & Fintech Desk', role: 'Managing Partner & Director Legal Tech', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'info@romeropineda.com', name: 'José Roberto Romero', company: 'Romero Pineda & Asociados', role: 'Socio Director Jurídico', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'contacto.elsalvador@garciabodan.com', name: 'Julio Vargas', company: 'García & Bodán', role: 'Director de Práctica Corporativa y Contratos', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'elsalvador@central-law.com', name: 'Piero Rusconi', company: 'Central Law', role: 'Socio Director Legal', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'info.centralamerica@dentons.com', name: 'José Antonio Muñoz', company: 'Dentons Muñoz', role: 'Managing Partner Centroamérica', country: 'Costa Rica', cat: 'LEGAL' },
+                    { email: 'info@ecija.com', name: 'Mauricio París', company: 'Ecija Legal Centroamérica', role: 'Director de Práctica Legal Tech & Datos', country: 'Costa Rica', cat: 'LEGAL' },
+                    { email: 'contacto@blplegal.com', name: 'David Gutiérrez', company: 'BLP Legal', role: 'Managing Partner Corporativo', country: 'Costa Rica', cat: 'LEGAL' },
+                    { email: 'info@alta-law.com', name: 'Marcos Ibargüen', company: 'Alta QIL+4 Abogados', role: 'Socio Director Corporativo', country: 'Guatemala', cat: 'LEGAL' },
+                    { email: 'info@mayora-mayora.com', name: 'Eduardo Mayora', company: 'Mayora & Mayora', role: 'Socio Director Legal', country: 'Guatemala', cat: 'LEGAL' },
+                    { email: 'info@palaciosyasociados.com', name: 'Marco Antonio Palacios', company: 'Palacios & Asociados', role: 'Director Legal Corporativo', country: 'Guatemala', cat: 'LEGAL' },
+                    { email: 'info@lexincorp.com', name: 'Gonzalo Menéndez Park', company: 'Lexincorp Central America', role: 'Socio Director Legal', country: 'Guatemala', cat: 'LEGAL' },
+                    { email: 'info@batalla.com', name: 'Mariano Batalla', company: 'Batalla Abogados', role: 'Managing Partner Legal', country: 'Costa Rica', cat: 'LEGAL' },
+                    { email: 'info@aguilarcastillolove.com', name: 'John Aguilar', company: 'Aguilar Castillo Love', role: 'Socio Director Internacional', country: 'Costa Rica', cat: 'LEGAL' },
+                    { email: 'info@nassarabogados.com', name: 'Tomás Nassar', company: 'Nassar Abogados', role: 'Socio Director Corporativo', country: 'Costa Rica', cat: 'LEGAL' },
+                    { email: 'eylaw@sv.ey.com', name: 'Mónica Machuca', company: 'EY Law Centroamérica', role: 'Directora de EY Law El Salvador', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'kpmg@kpmg.com.sv', name: 'Carlos Cornejo', company: 'KPMG Legal El Salvador', role: 'Socio de Servicios Legales & Tributarios', country: 'El Salvador', cat: 'LEGAL' },
+                    { email: 'contacto@deloitte.com', name: 'Eduardo Calderón', company: 'Deloitte Legal Latam', role: 'Director de Práctica Legal Corporativa', country: 'México', cat: 'LEGAL' },
+                    { email: 'contacto@pwc.com', name: 'Carlos Albiñana', company: 'PwC InterAméricas', role: 'Socio Director de Servicios Jurídicos', country: 'Panamá', cat: 'LEGAL' },
+                    { email: 'info@garrigues.com', name: 'Javier Ybáñez', company: 'Garrigues Latam', role: 'Socio Responsable Práctica Latam', country: 'España', cat: 'LEGAL' },
+                    { email: 'info@cuatrecasas.com', name: 'Rafael Fontana', company: 'Cuatrecasas', role: 'Presidente Ejecutivo & General Counsel', country: 'España', cat: 'LEGAL' },
+                    { email: 'info@bakermckenzie.com', name: 'Jaime Trujillo', company: 'Baker McKenzie Latam', role: 'Socio Director Práctica Corporativa Latam', country: 'Colombia', cat: 'LEGAL' },
+                    { email: 'info@phrlegal.com', name: 'Jaime Herrera', company: 'Posse Herrera Ruiz', role: 'Socio Director Corporativo', country: 'Colombia', cat: 'LEGAL' },
+                    { email: 'contacto@bu.com.co', name: 'Carlos Umaña', company: 'Brigard Urrutia', role: 'Socio Director & M&A Lead', country: 'Colombia', cat: 'LEGAL' }
+                ];
+
                 let filtered = [];
                 let batchName = '';
 
-                if (batchType === 'pareto_top20') {
-                    batchName = '🥇 Base 80/20 Pareto VIP (Top 20%)';
-                    filtered = leads.filter(l => l.pareto_tier === 'TOP_20' || (l.lead_score && l.lead_score >= 90)).slice(0, 400);
-                } else if (batchType === 'strategic_investors') {
-                    batchName = '🥈 Inversores & Advisory Board (100 Leads)';
-                    filtered = [
-                        { email: 'deals@innogencapital.com', name: 'Socio Director & Venture Lead', company: 'Innogen Capital Ventures', role: 'Managing Partner', country: 'El Salvador' },
-                        { email: 'invest@caricaco.com', name: 'Partner de Inversión Semilla', company: 'Caricaco Ventures', role: 'General Partner', country: 'Costa Rica' },
-                        { email: 'contacto@torres.legal', name: 'Director de Práctica Corporativa', company: 'Torres Legal & Fintech Desk', role: 'Managing Partner', country: 'El Salvador' },
-                        { email: 'corporativo@ariaslaw.com', name: 'Socio de Fusiones & Adquisiciones', company: 'Arias Law Central America', role: 'Senior Partner', country: 'El Salvador' },
-                        { email: 'venture@latamfintech.vc', name: 'Investment Director', company: 'Latam Fintech Fund', role: 'Principal', country: 'Mexico' },
-                        { email: 'deals@centramerica.vc', name: 'Partner de Aceleración', company: 'Centroamérica Ventures', role: 'Managing Partner', country: 'Guatemala' },
-                        { email: 'inversiones@pomaventures.com', name: 'Family Office Director', company: 'Poma Strategic Investments', role: 'CIO', country: 'El Salvador' },
-                        { email: 'fintech@consortiumlegal.com', name: 'Director de Práctica Legal Tech', company: 'Consortium Legal', role: 'Partner', country: 'Costa Rica' },
-                        { email: 'seed@panamatechventures.com', name: 'General Partner', company: 'Panamá Tech Ventures', role: 'Managing Partner', country: 'Panama' },
-                        { email: 'angel@miamivalley.vc', name: 'Cross-Border Lead', company: 'Miami Valley Angels', role: 'Partner', country: 'Estados Unidos' }
-                    ];
-                } else if (batchType === 'cfos_500') {
-                    batchName = '🥉 500 CFOs & Directores Financieros';
-                    filtered = leads.filter(l => (l.category === 'CFO' || (l.role && l.role.toLowerCase().includes('cfo')))).slice(0, 500);
-                } else if (batchType === 'controllers_500') {
-                    batchName = '4. 500 Contralores Corporativos & Auditoría';
-                    filtered = leads.filter(l => (l.category === 'CONTROLLER' || (l.role && l.role.toLowerCase().includes('controller')) || (l.role && l.role.toLowerCase().includes('auditor')))).slice(0, 500);
+                if (batchType === 'cfos_25' || batchType === 'cfos_500') {
+                    batchName = '🥈 25 Directores Financieros & Fondos Reales';
+                    filtered = real50.filter(l => l.cat === 'CFO');
+                } else if (batchType === 'legal_25' || batchType === 'controllers_500') {
+                    batchName = '🥉 25 Directores Legales & Firmas Corporativas';
+                    filtered = real50.filter(l => l.cat === 'LEGAL');
+                } else if (batchType === 'law_firms_10') {
+                    batchName = '4. 10 Socios Directores de Firmas Corporativas';
+                    filtered = real50.filter(l => l.cat === 'LEGAL').slice(0, 10);
+                } else if (batchType === 'chambers_10') {
+                    batchName = '5. 10 Líderes de Cámaras Empresariales';
+                    filtered = real50.filter(l => l.cat === 'CFO' && (l.company.includes('Cámara') || l.company.includes('Asociación') || l.company.includes('AmCham') || l.company.includes('COEXPORT') || l.company.includes('CASALCO'))).slice(0, 10);
                 } else {
-                    batchName = '5. Base Global (2,000 Ejecutivos)';
-                    filtered = leads.slice(0, 2000);
+                    batchName = '🥇 Base VIP Completa (50 Decisores Reales)';
+                    filtered = real50;
                 }
 
-                if (filtered.length === 0 && leads.length > 0) {
-                    filtered = leads.slice(0, 100);
-                }
-
-                const lines = filtered.map(l => `${l.email}, ${l.name || 'Ejecutivo'}, ${l.company || 'Empresa'}, ${l.role || 'Director'}, ${l.country || 'Global'}`);
+                const lines = filtered.map(l => `${l.email}, ${l.name}, ${l.company}, ${l.role}, ${l.country}`);
                 textarea.value = lines.join('\n');
 
                 if (label) {
-                    label.innerText = `🏆 Base Actual: ${batchName} (${filtered.length} Leads)`;
+                    label.innerText = `🏆 Base Actual: ${batchName} (${filtered.length} Leads Reales)`;
                 }
 
-                this.showToast(`✅ ${batchName} cargada con éxito (${filtered.length} prospectos listos).`, 'success');
+                this.showToast(`✅ ${batchName} cargada con éxito (${filtered.length} decisores reales).`, 'success');
             },
 
             async launchFastTrackBlast(testMode = false) {

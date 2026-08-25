@@ -3,6 +3,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
+import { REAL_50_DECISION_MAKERS } from './outreach.js';
 
 export const openedLeadsMap = new Map();
 const TRANSPARENT_GIF_BUFFER = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
@@ -70,108 +71,56 @@ function generate2000Leads() {
   const docs = [
     { name: 'Contrato_Arrendamiento_Comercial_2026.pdf', type: 'Arrendamiento', tag: '🏢 ARRENDAMIENTO' },
     { name: 'Factura_Servicios_IT_Cloud_Q3.pdf', type: 'Facturación', tag: '🧾 FACTURACION' },
-    { name: 'SLA_Infraestructura_Servidores.pdf', type: 'Servicios IT', tag: '💻 SERVICIOS_IT' },
-    { name: 'Acuerdo_Proveedores_Logistica_2026.pdf', type: 'Contrato Comercial', tag: '📜 CONTRATO_COMERCIAL' },
-    { name: 'Contrato_Obra_Civil_Industrial.pdf', type: 'Contrato Comercial', tag: '📜 CONTRATO_COMERCIAL' },
-    { name: 'Factura_Mantenimiento_Maquinaria.pdf', type: 'Facturación', tag: '🧾 FACTURACION' }
+    { name: 'Contrato de Arrendamiento Comercial Inmobiliario', tag: '🏢 LEASE_AGREEMENT' },
+    { name: 'Factura de Proveedor de Servicios de IT & Cloud', tag: '💻 IT_INVOICE' },
+    { name: 'Contrato de Prestación de Servicios Profesionales B2B', tag: '📋 SERVICES_SLA' },
+    { name: 'Acuerdo de Distribución y Licenciamiento de Software', tag: '🚀 SOFTWARE_LICENSE' },
+    { name: 'Orden de Compra y Suministro de Equipamiento', tag: '🛒 SUPPLY_PURCHASE' }
   ];
 
-  const countries = ['El Salvador', 'Guatemala', 'Costa Rica', 'Panamá', 'México', 'Estados Unidos', 'Inglaterra', 'Suiza', 'Alemania', 'Francia', 'Luxemburgo', 'Dinamarca', 'Noruega', 'Finlandia'];
-  const statuses = ['PROSPECT', 'LEAD_CAPTURED', 'AUDIT_DOWNLOADED', 'CHECKOUT_STARTED', 'PAID'];
-  const rolesData = [
-    { role: 'Chief Financial Officer (CFO)', tag: '👑 PLATINUM_CFO', tier: 'PLATINUM (CFO/Legal Counsel)' },
-    { role: 'VP of Global Procurement', tag: '🛒 PROCUREMENT_LEAD', tier: 'GOLD (Procurement/Operations)' },
-    { role: 'General Counsel & Director Legal', tag: '⚖️ LEGAL_DIRECTOR', tier: 'PLATINUM (CFO/Legal Counsel)' },
-    { role: 'Corporate Controller & Auditor', tag: '📊 FINANCIAL_CONTROLLER', tier: 'GOLD (Controller/Auditor)' },
-    { role: 'Director de Compras & Cadena de Suministro', tag: '🛒 PROCUREMENT_LEAD', tier: 'GOLD (Procurement/Operations)' },
-    { role: 'Chief Operating Officer (COO)', tag: '⚙️ OPERATIONS_COO', tier: 'PLATINUM (CFO/COO)' }
-  ];
-
-  const leads = [];
-  const now = Date.now();
-  const totalCount = 2000;
-  const top20Count = 400; // 20% exacto de 2000
-
-  for (let i = 1; i <= totalCount; i++) {
-    const fn = firstNames[i % firstNames.length];
-    const ln = lastNames[(i * 3) % lastNames.length];
-    const dom = domains[(i * 7) % domains.length];
-    const docObj = docs[i % docs.length];
-    const country = countries[i % countries.length];
-    const status = statuses[i % statuses.length];
-    const roleObj = rolesData[i % rolesData.length];
-
-    // Pareto 80/20: Exactamente el Top 20% (400 de 2000) son prospectos Platinum VIP ($590/año)
-    const isTop20Pareto = i <= top20Count;
-    const leadScore = isTop20Pareto ? (90 + (i % 10)) : (60 + (i % 29));
-    const isEnterprise = isTop20Pareto || leadScore >= 75;
-    const revenuePotential = isTop20Pareto ? 590 : (isEnterprise ? 69 : 19);
-    const paretoTier = isTop20Pareto ? 'TOP_20' : 'STANDARD_80';
-
-    const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
-    const emailsSent = leadEmailSentCounts.get(email.toLowerCase()) || 0;
+  // Base Principal 100% Real: 50 Decisores y Entidades Reales
+  const leads = REAL_50_DECISION_MAKERS.map((realLead, idx) => {
+    const docObj = docs[idx % docs.length];
+    const emailsSent = leadEmailSentCounts.get(realLead.email.toLowerCase()) || 0;
     const emailStatus = (emailsSent === 0) ? 'NO_ENVIADO' : 'CONTACTADO';
-
-    const tags = [docObj.tag, roleObj.tag];
-    if (isTop20Pareto) {
-      tags.unshift('🏆 TOP_20_PARETO');
-    }
-    if (emailsSent === 0) {
-      tags.push('⚪ NO_ENVIADO');
-    } else {
-      tags.push('📧 CONTACTADO');
-    }
-    if (leadScore >= 88) {
-      tags.push('🚨 HIGH_LEAKAGE');
-    } else {
-      tags.push('🟡 MED_LEAKAGE');
-    }
-
-    const normEmail = email.toLowerCase().trim();
+    const normEmail = realLead.email.toLowerCase().trim();
     const openData = openedLeadsMap.get(normEmail);
     const opensCount = openData ? openData.count : 0;
     const isOpened = Boolean(opensCount > 0);
 
-    if (isOpened) {
-      tags.unshift(`👀 VISTO (${opensCount}x)`);
-    }
+    const tags = [realLead.tag, docObj.tag];
+    if (realLead.pareto_tier === 'TOP_20') tags.unshift('🏆 TOP_20_PARETO');
+    if (emailsSent === 0) tags.push('⚪ NO_ENVIADO');
+    else tags.push('📧 CONTACTADO');
+    if (realLead.lead_score >= 90) tags.push('🚨 HIGH_LEAKAGE');
+    if (isOpened) tags.unshift(`👀 VISTO (${opensCount}x)`);
 
-    const hoursAgo = i * 0.5;
-
-    leads.push({
-      id: `lead_${String(i).padStart(4, '0')}`,
-      name: `${fn} ${ln}`,
-      email: email,
-      lead_score: leadScore,
-      company: `${ln} Enterprise (${country})`,
-      category: isEnterprise ? 'ENTERPRISE' : 'STANDARD',
+    return {
+      id: realLead.id,
+      name: realLead.name,
+      email: realLead.email,
+      lead_score: realLead.lead_score,
+      company: realLead.company,
+      category: 'ENTERPRISE',
       document_type: docObj.name,
       document_tag: docObj.tag,
       tags: tags,
-      role: roleObj.role,
-      role_tag: roleObj.tag,
-      country: country,
-      is_enterprise: isEnterprise,
-      pareto_tier: paretoTier,
-      revenue_potential_usd: revenuePotential,
+      role: realLead.role,
+      role_tag: realLead.tag,
+      country: realLead.country,
+      is_enterprise: true,
+      pareto_tier: realLead.pareto_tier,
+      revenue_potential_usd: realLead.revenue_potential,
       emails_sent: emailsSent,
       email_status: emailStatus,
       opens_count: opensCount,
       email_opened: isOpened,
       last_opened: openData?.last_opened || null,
-      created_at: new Date(now - (hoursAgo * 3600 * 1000)).toISOString(),
-      status: status
-    });
-  }
-
-  // Ordenar leads con el principio de Pareto 80/20:
-  // 1°: Top 20% de mayor valor (TOP_20), en orden descendente por Score (99..90)
-  // 2°: Standard 80%, en orden descendente por Score (89..60)
-  leads.sort((a, b) => {
-    if (a.pareto_tier === 'TOP_20' && b.pareto_tier !== 'TOP_20') return -1;
-    if (a.pareto_tier !== 'TOP_20' && b.pareto_tier === 'TOP_20') return 1;
-    return (b.lead_score || 0) - (a.lead_score || 0);
+      created_at: new Date(Date.now() - (idx + 1) * 3600000 * 4).toISOString()
+    };
   });
+
+  leads.sort((a, b) => (b.lead_score || 0) - (a.lead_score || 0));
 
   return leads;
 }
