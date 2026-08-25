@@ -2666,6 +2666,9 @@ Escaneo de prueba gratuito:
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
+                this.showToast('Archivo CSV exportado exitosamente.', 'success');
+            },
+
             loadProspectsBatch(batchType) {
                 const textarea = document.getElementById('outreach-emails-input');
                 const label = document.getElementById('outreach-loaded-batch-label');
@@ -2999,7 +3002,9 @@ Escaneo de prueba gratuito:
             }
         };
 
+        window.AdminApp = AdminApp;
         window.AdminDashboard = AdminApp;
+        window.switchTab = (t) => AdminApp.switchTab(t);
 
         // Escape key closes modals
         document.addEventListener('keydown', (e) => {
