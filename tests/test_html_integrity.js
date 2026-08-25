@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const frontendDir = path.resolve(__dirname, '../frontend');
 
-console.log('🔍 Iniciando Auditoria de Integridad HTML y Diseno Dark Mode...\n');
+console.log('🔍 Iniciando Auditoría de Integridad HTML, Sintaxis JS y Diseño Dark Mode...\n');
 
 const htmlFiles = fs.readdirSync(frontendDir).filter(f => f.endsWith('.html') && !f.startsWith('google'));
 let hasErrors = false;
@@ -35,14 +35,29 @@ for (const file of htmlFiles) {
   console.log(`   - Dark Scheme Config: ${hasDarkClass && hasDarkBg ? '✅' : '❌'}`);
 
   if (scriptOpens !== scriptCloses || styleOpens !== styleCloses || htmlOpens !== htmlCloses || bodyOpens !== bodyCloses) {
-    console.error(`   🚨 ERROR CRITICO: Desbalance de etiquetas en ${file}`);
+    console.error(`   🚨 ERROR CRÍTICO: Desbalance de etiquetas en ${file}`);
     hasErrors = true;
   }
+
+  // Validación de Sintaxis JavaScript (omitiendo JSON-LD / schemas de SEO)
+  const scriptMatches = [...content.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)];
+  scriptMatches.forEach((m, idx) => {
+    const attrs = m[1].toLowerCase();
+    const scriptCode = m[2].trim();
+    if (!scriptCode || attrs.includes('src=') || attrs.includes('application/ld+json') || attrs.includes('type="application/json"')) return;
+    try {
+      new Function(scriptCode);
+      console.log(`   - Script JS #${idx + 1}: Sintaxis Válida ✅`);
+    } catch (jsErr) {
+      console.error(`   🚨 ERROR DE SINTAXIS JS en ${file} (Script #${idx + 1}):`, jsErr.message);
+      hasErrors = true;
+    }
+  });
 }
 
 if (hasErrors) {
-  console.error('\n❌ La auditoria de integridad HTML fallo.');
+  console.error('\n❌ La auditoría de integridad HTML y Sintaxis JS falló.');
   process.exit(1);
 } else {
-  console.log('\n🎉 100% DE LOS ARCHIVOS HTML TIENEN ESTRUCTURA Y MODO OSCURO BLINDADOS.');
+  console.log('\n🎉 100% DE LOS ARCHIVOS HTML Y SCRIPTS TIENEN ESTRUCTURA Y SINTAXIS BLINDADAS.');
 }
