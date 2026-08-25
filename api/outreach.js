@@ -271,7 +271,8 @@ export default async function handler(req, res) {
     const senderFrom = (resendClient || (smtpHost && smtpUser)) ? emailFrom : `"AuditFlow AI | Auditoría Legal" <${gmailUser}>`;
     const results = [];
 
-    const sendLimit = test_mode ? Math.min(5, prospects.length) : Math.min(50, prospects.length);
+    const requestedLimit = Number(body.limit) || (body.drip_mode ? 25 : 50);
+    const sendLimit = test_mode ? Math.min(5, prospects.length) : Math.min(requestedLimit, prospects.length);
     const executionProspects = prospects.slice(0, sendLimit);
 
     for (const p of executionProspects) {

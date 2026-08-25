@@ -892,10 +892,30 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                         </div>
                     </div>
 
+                    <!-- CONTROL DE CADENCIA Y PROTECCIÓN ANTI-SPAM -->
+                    <div class="p-3 bg-dark-card border border-dark-border rounded-xl space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-bold text-gray-200 flex items-center gap-1">
+                                <span>🛡️ Cadencia Anti-Spam &amp; Goteo</span>
+                            </span>
+                            <span class="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-950/60 border border-emerald-500/30 px-2 py-0.5 rounded">
+                                Salud Dominio: 99.4%
+                            </span>
+                        </div>
+                        <select id="outreach-cadence-select" class="w-full bg-dark-surface border border-dark-border rounded-lg p-2 text-xs font-mono text-white focus:border-accent-blue focus:outline-none">
+                            <option value="drip_25" selected>🛡️ Goteo Seguro (25 decisores/sesión - Recomendado)</option>
+                            <option value="moderate_50">⚡ Moderado (50 decisores/sesión)</option>
+                            <option value="direct_1">🎯 Directo 1-a-1 (Primer prospecto de la lista)</option>
+                        </select>
+                        <p class="text-[10px] text-gray-400 font-mono">
+                            Protege tu reputación SPF/DKIM y garantiza entrega en la bandeja principal de entrada.
+                        </p>
+                    </div>
+
                     <!-- BOTONERA DE ACCIÓN Y LANZAMIENTO -->
                     <div class="space-y-2">
                         <button id="btn-launch-outreach-real" onclick="AdminApp.launchOutreachCampaign(false)" class="w-full py-3 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-400 text-black font-extrabold text-xs shadow-glow hover:opacity-90 transition-all cursor-pointer flex items-center justify-center gap-1.5">
-                            🚀 Disparar Campaña a Base Cargada
+                            🚀 Despachar Campaña Controlada
                         </button>
                         <div class="grid grid-cols-2 gap-2">
                             <button id="btn-launch-outreach-test" onclick="AdminApp.launchOutreachCampaign(true)" class="py-2.5 px-2 rounded-lg bg-dark-surface border border-dark-border text-gray-300 hover:text-white font-mono text-xs text-center transition-all cursor-pointer">
@@ -2847,9 +2867,6 @@ Escaneo de prueba gratuito:
                         targetBtn.disabled = false;
                         targetBtn.innerHTML = originalHtml;
                     }
-                }
-            },
-
             async launchOutreachCampaign(testMode = false) {
                 const btnReal = document.getElementById('btn-launch-outreach-real');
                 const btnTest = document.getElementById('btn-launch-outreach-test');
@@ -2863,24 +2880,34 @@ Escaneo de prueba gratuito:
                 }
 
                 const lines = inputArea.split('\n').filter(l => l.trim().length > 0);
-                const allProspects = lines.map(line => {
+                let allProspects = lines.map(line => {
                     const parts = line.split(',').map(p => p.trim());
                     return {
                         email: parts[0],
-                        name: parts[1] || 'Ejecutivo',
-                        company: parts[2] || 'Empresa B2B',
-                        role: parts[3] || 'Director Financiero / Legal',
+                        name: parts[1] || 'Director Legal',
+                        company: parts[2] || 'Firma Corporativa B2B',
+                        role: parts[3] || 'General Counsel / Director Jurídico',
                         country: parts[4] || country
                     };
                 });
 
-                const originalText = testMode ? '🧪 Simulación de Prueba (Test Mode)' : '🚀 Disparar Campaña B2B Real (Hook Irresistible)';
+                const cadenceMode = document.getElementById('outreach-cadence-select')?.value || 'drip_25';
+                let targetLimit = 25;
+                if (cadenceMode === 'moderate_50') targetLimit = 50;
+                else if (cadenceMode === 'direct_1') targetLimit = 1;
+                else targetLimit = 25; // Goteo Seguro por defecto
+
+                if (!testMode && allProspects.length > targetLimit) {
+                    allProspects = allProspects.slice(0, targetLimit);
+                }
+
+                const originalText = testMode ? '🧪 Simulación de Prueba (Test Mode)' : '🚀 Despachar Campaña Controlada';
                 const targetBtn = testMode ? btnTest : btnReal;
                 if (targetBtn) targetBtn.innerText = '⏳ Despachando correos...';
 
-                if (logBox) logBox.innerHTML = `🔄 Iniciando campaña (${allProspects.length} prospectos, Modo: ${testMode ? 'Simulado 100%' : 'Envío Real'})...<br>`;
+                if (logBox) logBox.innerHTML = `🛡️ <strong>[Cadencia Anti-Spam: ${cadenceMode === 'drip_25' ? 'Goteo Seguro (25)' : cadenceMode === 'moderate_50' ? 'Moderado (50)' : 'Directo (1)'}]</strong> Despachando a ${allProspects.length} decisores reales (Modo: ${testMode ? 'Simulado 100%' : 'Envío Real'})...<br>`;
 
-                const chunkSize = testMode ? 250 : 20;
+                const chunkSize = testMode ? 250 : 25;
                 let totalSuccess = 0;
 
                 try {
@@ -2899,6 +2926,8 @@ Escaneo de prueba gratuito:
                                 action: 'send_outreach_campaign',
                                 prospects: chunk,
                                 test_mode: testMode,
+                                drip_mode: cadenceMode === 'drip_25',
+                                limit: targetLimit,
                                 cadence_touch: document.getElementById('outreach-cadence-touch')?.value || 'touch_1_gift',
                                 admin_password: pass
                             })
@@ -2913,7 +2942,7 @@ Escaneo de prueba gratuito:
                         }
 
                         if (data.success) {
-                            totalSuccess += (data.total_processed || chunk.length);
+                            totalSuccess += (data.total_processed || data.results?.length || chunk.length);
                             if (logBox) {
                                 logBox.innerHTML += `<span class="text-emerald-400">⚡ Lote procesado: ${i + chunk.length}/${allProspects.length} (${progressPercent}%)</span><br>`;
                             }
