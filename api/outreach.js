@@ -7,34 +7,7 @@ import { CONFIG } from '../lib/config.js';
 dotenv.config();
 
 // 14 PAÍSES OBJETIVO OFICIALES CON MAPEO RIGUROSO DE IDIOMA
-export const REAL_50_DECISION_MAKERS = [
-  // --- 25 DIRECTORES FINANCIEROS, FONDOS & ENTIDADES GREMIALES REALES ---
-  { id: 'cfo_01', name: 'Armando Gómez', role: 'Director de Inversiones y Finanzas', company: 'Innogen Capital Ventures', email: 'deals@innogencapital.com', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_02', name: 'Rodrigo Villalta', role: 'Partner de Inversión Semilla y Finanzas', company: 'Caricaco Ventures', email: 'invest@caricaco.com', country: 'Costa Rica', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_03', name: 'Patricia de Parras', role: 'Directora Financiera y de Servicios', company: 'CAMARASAL (Cámara de Comercio)', email: 'camarasal@camarasal.com', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_04', name: 'Jorge Arriaza', role: 'Director Ejecutivo & Finanzas Corporativas', company: 'ASI (Asociación Salvadoreña de Industriales)', email: 'asi@asi.com.sv', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_05', name: 'Irene Arias Hofman', role: 'Oficial Principal de Inversión e Innovación', company: 'BID Lab Centroamérica', email: 'bidlab@iadb.org', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_06', name: 'Vincent Speranza', role: 'Managing Director & Finanzas de Crecimiento', company: 'Endeavor Regional', email: 'centralamerica@endeavor.org', country: 'México', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_07', name: 'Manuela Gómez', role: 'Head de Operaciones y Alianzas Financieras', company: 'Strike Latam Ecosystem', email: 'partnerships@strike.me', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_08', name: 'Raúl Cardenal', role: 'Director de Finanzas & Presidencia Bancaria', company: 'ABANSA (Asociación Bancaria Salvadoreña)', email: 'info@abansa.org.sv', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_09', name: 'José Antonio Velásquez', role: 'Director Financiero y Gremial', company: 'CASALCO (Cámara de la Construcción)', email: 'info@casalco.org.sv', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_10', name: 'Silvia Cuéllar', role: 'Directora Financiera y de Comercio Exterior', company: 'COEXPORT El Salvador', email: 'coexport@coexport.com.sv', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 96, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_11', name: 'Carmen Aída Muñoz', role: 'Directora Ejecutiva y Financiera', company: 'AmCham El Salvador', email: 'info@amchamsal.com', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_12', name: 'Paola Díaz', role: 'Directora de Finanzas y Operaciones', company: 'CCIT Tegucigalpa', email: 'info@ccit.hn', country: 'Honduras', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 95, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_13', name: 'Amador Carballido', role: 'Director General Financiero', company: 'AGEXPORT Guatemala', email: 'servicioalcliente@agexport.org.gt', country: 'Guatemala', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_14', name: 'Javier Zepeda', role: 'Director Ejecutivo Financiero', company: 'Cámara de Industria de Guatemala (CIG)', email: 'cig@industriaguate.com', country: 'Guatemala', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 96, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_15', name: 'Shirley Saborío', role: 'Directora Ejecutiva & Finanzas Empresariales', company: 'UCCAEP Costa Rica', email: 'uccaep@uccaep.or.cr', country: 'Costa Rica', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 96, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_16', name: 'Sianny Villalobos', role: 'Directora Financiera de Exportaciones', company: 'CADEXCO Costa Rica', email: 'cadexco@cadexco.org', country: 'Costa Rica', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 95, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_17', name: 'Aida Michelle Maduro', role: 'Directora de Finanzas e Industria', company: 'SIP Panamá', email: 'info@industriales.org', country: 'Panamá', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 96, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_18', name: 'Carlos Salazar Lomelín', role: 'Director de Finanzas Corporativas', company: 'Consejo Coordinador Empresarial (CCE)', email: 'contacto@cce.org.mx', country: 'México', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_19', name: 'Alejandro Malagón', role: 'Director Financiero & Presidencia Industrial', company: 'CONCAMIN México', email: 'contacto@concamin.org.mx', country: 'México', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_20', name: 'Bruce Mac Master', role: 'Presidente y Director Financiero Corporativo', company: 'ANDI Colombia', email: 'contacto@andi.com.co', country: 'Colombia', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_21', name: 'Rosario Navarro', role: 'Directora Financiera & Presidencia', company: 'SOFOFA Chile', email: 'contacto@sofofa.cl', country: 'Chile', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_22', name: 'Jesús Salazar Nishi', role: 'Director Financiero & Presidencia Industrial', company: 'Sociedad Nacional de Industrias (SNI)', email: 'sni@sni.org.pe', country: 'Perú', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 96, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_23', name: 'Antonio Garamendi', role: 'Presidente & Director de Finanzas Empresariales', company: 'CEOE España', email: 'ceoe@ceoe.es', country: 'España', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_24', name: 'Edwin Zácipa', role: 'Director de Alianzas Financieras Tech', company: 'Latam Fintech Hub', email: 'contacto@latamfintech.co', country: 'Colombia', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'cfo_25', name: 'Mónica Taher', role: 'Directora de Asuntos Financieros & Fintech', company: 'Fintech Centroamérica & Caribe', email: 'info@fintechca.org', country: 'El Salvador', lang: 'es', category: 'CFO', tag: '👑 CFO_FINANCE', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
-
+export const REAL_LEGAL_DIRECTORS = [
   // --- 25 DIRECTORES LEGALES & SOCIOS DE FIRMAS CORPORATIVAS REALES ---
   { id: 'legal_01', name: 'Armando Arias', role: 'Socio Director & General Counsel', company: 'Arias Law Firm', email: 'contact.elsalvador@ariaslaw.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_02', name: 'Oscar Samour', role: 'Socio Director Corporativo & M&A', company: 'Consortium Legal', email: 'elsalvador@consortiumlegal.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
@@ -62,6 +35,8 @@ export const REAL_50_DECISION_MAKERS = [
   { id: 'legal_24', name: 'Jaime Herrera', role: 'Socio Director Corporativo', company: 'Posse Herrera Ruiz', email: 'info@phrlegal.com', country: 'Colombia', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_25', name: 'Carlos Umaña', role: 'Socio Director & M&A Lead', company: 'Brigard Urrutia', email: 'contacto@bu.com.co', country: 'Colombia', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 }
 ];
+
+export const REAL_50_DECISION_MAKERS = REAL_LEGAL_DIRECTORS;
 
 // LISTA DE FIRMAS LEGALES CORPORATIVAS Y DESPACHOS DE REFERENCIA
 const realLawFirmsByCountry = {
@@ -192,14 +167,14 @@ export function generateExecutiveLeads(count = 2000) {
 
 export function generateOutreachProspects(batch = 'pareto_top20') {
   const all = generateLegalExecutiveLeads(2000);
-  if (batch === 'cfos_25' || batch === 'cfos_500' || batch === 'cfos') {
-    return REAL_50_DECISION_MAKERS.filter(l => l.category === 'CFO');
+  if (batch === 'legal_25' || batch === 'legal_50' || batch === 'all_50' || batch === '50_reals') {
+    return REAL_LEGAL_DIRECTORS;
   }
-  if (batch === 'legal_25' || batch === 'legal_50') {
-    return REAL_50_DECISION_MAKERS.filter(l => l.category === 'LEGAL');
+  if (batch === 'general_counsel') {
+    return all.filter(l => (l.role || '').toLowerCase().includes('general counsel') || (l.role || '').toLowerCase().includes('jurídico')).slice(0, 500);
   }
-  if (batch === 'all_50' || batch === '50_reals') {
-    return REAL_50_DECISION_MAKERS;
+  if (batch === 'ma_contracts') {
+    return all.filter(l => (l.role || '').toLowerCase().includes('contrato') || (l.role || '').toLowerCase().includes('m&a') || (l.role || '').toLowerCase().includes('socio')).slice(0, 500);
   }
   if (batch === 'pareto_top20' || batch === 'top20') {
     return all.filter(l => l.pareto_tier === 'TOP_20'); // 400 Directores Legales Top 20%
