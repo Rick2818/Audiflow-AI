@@ -12,6 +12,11 @@
 - **Ventas y Transacciones Financieras ($19, $69, $590 USD)**: rick28191@gmail.com
 
 ## 3. Regla Inmutable de Prospección y Bases de Datos Reales
-- **PROHIBIDO EL USO DE CLIENTES, NOMBRES O CORREOS FICTICIOS EN PRODUCCIÓN**: Toda la prospección, envíos y campañas deben ejecutarse exclusivamente contra empresas, despachos corporativos, cámaras empresariales, firmas legales y decisores financieros y legales reales y verificados.
-- **Formato de Cold Email Obligatorio**: Texto plano / HTML limpio humano, máximo 5 a 6 líneas (65-75 palabras), asunto en minúsculas estilo colega (`revisión contratos / {{empresa}}`), firma personal de Ricardo y CTA de micro-compromiso de baja fricción.
+- **PROHIBIDO TERMINANTEMENTE EL USO DE CLIENTES, NOMBRES O CORREOS FICTICIOS EN PRODUCCIÓN**: Toda la prospección, envíos, exportaciones (Waalaxy / CSV) y campañas deben ejecutarse exclusivamente contra empresas, despachos corporativos, firmas legales y decisores reales (Directores Legales, General Counsels, Socios Directores y Directores Generales / CEOs verificados con dominios institucionales oficiales).
+- **Estrategia Comercial de Fricción Cero**:
+  - **Hook Irresistible:** 1er análisis 100% gratis en menos de 10 segundos en memoria RAM volátil (sin almacenar archivos).
+  - **Oferta de Entrada:** $19 USD por auditoría completa con Redline en Word (.docx con control de cambios).
+  - **Planes Transparentes:** $69 USD/mes (ilimitado) y $599 USD/año (licencia corporativa anual con marca blanca para firmas).
+- **Cadencia Anti-Spam (Deliverability > 98%):** Lotes controlados por goteo (Drip Mode de 25 decisores/sesión) para proteger la reputación SPF/DKIM del dominio.
+- **Formato de Cold Email Obligatorio**: Texto plano / HTML limpio humano, máximo 5 a 6 líneas (65-75 palabras), asunto en minúsculas estilo colega (`análisis gratis de contratos (10s) y redlines / {{empresa}}`), firma personal de Ricardo y CTA de micro-compromiso de baja fricción.
 
