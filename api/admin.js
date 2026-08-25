@@ -310,6 +310,62 @@ export default async function handler(req, res) {
       }
     }
 
+    // Acción: Respuesta Rápida Oficial 1-a-1 desde Ricardo / AuditFlow AI
+    if (action === 'send_custom_reply') {
+      const { to_email, to_name = '', subject: customSubject, message: customMessage } = body;
+      if (!to_email || !to_email.includes('@')) {
+        return res.status(400).json({ success: false, error: 'Dirección de correo de destinatario inválida.' });
+      }
+
+      const emailSubject = customSubject || 'Borrador de Redline en Word (.docx) y Acceso Inmediato / AuditFlow AI';
+      const formattedHtml = `
+        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 600px;">
+          ${(customMessage || '').replace(/\n/g, '<br>')}
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 24px 0;">
+          <p style="font-size: 13px; color: #4b5563; margin: 0;">
+            <strong>Ricardo</strong><br>
+            Fundador • AuditFlow AI Corp. (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)<br>
+            <span style="font-size: 11px; color: #9ca3af;">Auditoría Forense de Contratos en Memoria RAM Volátil • SOC-2 &amp; GDPR Compliant</span>
+          </p>
+        </div>
+      `;
+
+      try {
+        const resendApiKey = (process.env.RESEND_API_KEY || '').trim();
+        let providerUsed = 'Gmail SMTP';
+
+        if (resendApiKey) {
+          try {
+            const resend = new Resend(resendApiKey);
+            const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
+            const rResp = await resend.emails.send({
+              from: emailFrom,
+              to: [to_email],
+              reply_to: 'tendenciaiatufuturo@gmail.com',
+              bcc: 'tendenciaiatufuturo@gmail.com',
+              subject: emailSubject,
+              html: formattedHtml
+            });
+            if (rResp.error) throw new Error(rResp.error.message);
+            providerUsed = 'Resend API (ricardo@audiflowai.com)';
+          } catch (rErr) {
+            await sendGmailEmail({ to: to_email, subject: emailSubject, html: formattedHtml });
+            providerUsed = 'Gmail SMTP';
+          }
+        } else {
+          await sendGmailEmail({ to: to_email, subject: emailSubject, html: formattedHtml });
+        }
+
+        return res.status(200).json({
+          success: true,
+          message: `Respuesta oficial enviada exitosamente a ${to_email} vía ${providerUsed}`,
+          recipient: to_email
+        });
+      } catch (err) {
+        return res.status(500).json({ success: false, error: 'Error enviando respuesta oficial: ' + err.message });
+      }
+    }
+
     // Acción: Disparador de Autocorrección y Diagnóstico de Configuración (Auto-Healer)
     if (action === 'auto_heal_configuration') {
       const healLog = [];
