@@ -20,3 +20,9 @@
 - **Cadencia Anti-Spam (Deliverability > 98%):** Lotes controlados por goteo (Drip Mode de 25 decisores/sesión) para proteger la reputación SPF/DKIM del dominio.
 - **Formato de Cold Email Obligatorio**: Texto plano / HTML limpio humano, máximo 5 a 6 líneas (65-75 palabras), asunto en minúsculas estilo colega (`análisis gratis de contratos (10s) y redlines / {{empresa}}`), firma personal de Ricardo y CTA de micro-compromiso de baja fricción.
 
+## 4. Regla Inmutable de Especificidad de Cambios y Navegación UI
+- **OBLIGATORIO INDICAR UBICACIÓN EXACTA EN CADA RESPUESTA**: Cada vez que se implemente una función, botón, módulo o ajuste, se debe detallar con máxima precisión al usuario:
+  1. **Ubicación en Pantalla / Pestaña**: En qué pestaña (Tab) está, en qué sección, y su posición exacta respecto a elementos vecinos (ej: *debajo del recuadro X, arriba del bloque Y*).
+  2. **Guía Visual y de Clics**: Nombre exacto del botón, color distintivo, icono y texto que muestra.
+  3. **Archivos y Líneas de Código Modificadas**: Ruta del archivo y número de líneas exactas donde reside la implementación.
+
