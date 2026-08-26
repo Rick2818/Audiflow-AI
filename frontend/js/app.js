@@ -1034,6 +1034,20 @@ window.AppHandler = {
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+
+            // Auto-despacho de copia de respaldo si hay correo en sesión o capturado
+            const userEmail = this.userEmail || localStorage.getItem('auditflow_user_email') || '';
+            if (userEmail && userEmail.includes('@')) {
+                fetch('/api/auto-redline', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: userEmail,
+                        document_title: title,
+                        source: 'docx_download_button'
+                    })
+                }).catch(() => {});
+            }
         })
         .catch(err => {
             alert('Error descargando Word: ' + err.message);
