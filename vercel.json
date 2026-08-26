@@ -178,6 +178,22 @@
       "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
     },
     {
+      "source": "/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/resultados-hoy",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/reporte-hoy",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/resultados-2pm",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },
