@@ -1107,6 +1107,40 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                         </div>
                     </div>
 
+                    <!-- ASISTENTE DE 1-CLIC: PÁGINA DE SERVICIOS LINKEDIN -->
+                    <div class="bg-gradient-to-br from-indigo-950/60 to-dark-surface border border-indigo-500/40 rounded-xl p-4 space-y-3">
+                        <div class="flex items-center justify-between border-b border-indigo-900/50 pb-2">
+                            <span class="text-xs font-bold text-indigo-300 flex items-center gap-1.5">
+                                <span>💼 1-Clic: Tu Página de Servicios en LinkedIn</span>
+                            </span>
+                            <span class="text-[9px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono font-bold">CONFIGURACIÓN RÁPIDA</span>
+                        </div>
+                        <p class="text-[11px] text-gray-300 leading-relaxed font-mono">
+                            Copia cada campo optimizado en 1 clic y pégalo en tu perfil para recibir solicitudes directas de directores legales:
+                        </p>
+                        <div class="space-y-1.5">
+                            <button onclick="AdminApp.copyServiceField('title')" class="w-full py-1.5 px-2.5 bg-dark-surface hover:bg-dark-card text-indigo-200 border border-indigo-500/30 text-[11px] font-mono rounded-lg flex items-center justify-between transition-all cursor-pointer">
+                                <span>1. Titular del Servicio</span>
+                                <span class="text-[9px] bg-indigo-500/30 text-indigo-300 px-1.5 py-0.5 rounded">📋 Copiar</span>
+                            </button>
+                            <button onclick="AdminApp.copyServiceField('about')" class="w-full py-1.5 px-2.5 bg-dark-surface hover:bg-dark-card text-indigo-200 border border-indigo-500/30 text-[11px] font-mono rounded-lg flex items-center justify-between transition-all cursor-pointer">
+                                <span>2. Descripción (490 chars)</span>
+                                <span class="text-[9px] bg-indigo-500/30 text-indigo-300 px-1.5 py-0.5 rounded">📋 Copiar</span>
+                            </button>
+                            <button onclick="AdminApp.copyServiceField('categories')" class="w-full py-1.5 px-2.5 bg-dark-surface hover:bg-dark-card text-indigo-200 border border-indigo-500/30 text-[11px] font-mono rounded-lg flex items-center justify-between transition-all cursor-pointer">
+                                <span>3. Categorías de Servicio</span>
+                                <span class="text-[9px] bg-indigo-500/30 text-indigo-300 px-1.5 py-0.5 rounded">📋 Copiar</span>
+                            </button>
+                            <button onclick="AdminApp.copyServiceField('response')" class="w-full py-1.5 px-2.5 bg-dark-surface hover:bg-dark-card text-emerald-300 border border-emerald-500/30 text-[11px] font-mono rounded-lg flex items-center justify-between transition-all cursor-pointer">
+                                <span>4. Plantilla de Respuesta</span>
+                                <span class="text-[9px] bg-emerald-500/30 text-emerald-300 px-1.5 py-0.5 rounded">📋 Copiar</span>
+                            </button>
+                            <a href="https://www.linkedin.com/in/me/services/create/" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 text-white font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-glow">
+                                <span>🔗 Abrir mi Página de Servicios en LinkedIn →</span>
+                            </a>
+                        </div>
+                    </div>
+
                     <!-- CONTROL DE CADENCIA Y PROTECCIÓN ANTI-SPAM -->
                     <div class="p-3 bg-dark-card border border-dark-border rounded-xl space-y-2">
                         <div class="flex items-center justify-between">
@@ -3320,6 +3354,30 @@ Escaneo de prueba gratuito:
                 } else {
                     prompt('Copia tu Webhook de Waalaxy:', webhookUrl);
                 }
+            },
+
+            copyServiceField(field) {
+                let text = '';
+                let label = '';
+                if (field === 'title') {
+                    text = 'Auditoría Forense de Contratos B2B & Redlines en Word (.docx) con IA en Memoria RAM Volátil (<10s)';
+                    label = 'Titular del Servicio';
+                } else if (field === 'about') {
+                    text = 'Ayudamos a Despachos Jurídicos, CFOs y Directores Legales a detectar cláusulas abusivas, renovaciones forzosas y fugas financieras ($3,500 - $18,500 USD) en contratos comerciales y facturas en menos de 10 segundos.\n\nEntregamos el Redline forense directamente en Word (.docx con Control de Cambios) con las contra-cláusulas listas para negociar. Procesamiento 100% en memoria RAM efímera (cero almacenamiento en disco, estricto EU GDPR Art. 28).\n\nPrueba tu 1er análisis gratis en: audiflowai.com';
+                    label = 'Descripción del Servicio';
+                } else if (field === 'categories') {
+                    text = 'Asesoramiento en contratos • Auditoría y cumplimiento normativo • Consultoría empresarial • Tecnología de la información • Optimización de operaciones • Gestión de riesgos';
+                    label = 'Categorías de Servicio';
+                } else if (field === 'response') {
+                    text = 'Hola [Nombre], un gusto saludarte.\n\nCon gusto revisamos tu contrato o facturación. Con AuditFlow AI procesamos el documento en menos de 10 segundos en memoria RAM volátil (sin almacenar tus archivos ni exponer secretos comerciales bajo estándar EU GDPR Art. 28).\n\nTe comparto el acceso directo para realizar tu primera auditoría 100% gratuita y obtener el diagnóstico preliminar con el Redline en Word (.docx):\n👉 https://audiflowai.com/?ref=linkedin-services\n\nSi prefieres que lo revise personalmente con nuestro equipo legal, puedes adjuntarme el borrador por aquí o agendar una llamada ejecutiva de 10 minutos.\n\nQuedo a tu disposición,\nRicardo\nFundador • AuditFlow AI (audiflowai.com)';
+                    label = 'Plantilla de Respuesta Rápida';
+                }
+
+                navigator.clipboard.writeText(text).then(() => {
+                    this.showToast(`¡${label} copiado al portapapeles! Listo para pegar en LinkedIn.`, 'success');
+                }).catch(() => {
+                    prompt(`Copia el texto para ${label}:`, text);
+                });
             },
 
             async dispatchNordicWaalaxyCampaign() {
