@@ -33,3 +33,16 @@
   3. No usar `bcc` individual en envíos masivos o transaccionales hacia correos personales; usar exclusivamente `reply_to` para respuestas genuinas de personas reales.
   4. La bandeja de `rick28191@gmail.com` queda reservada ÚNICA Y EXCLUSIVAMENTE para VENTAS Y TRANSACCIONES FINANCIERAS CONFIRMADAS ($19, $69, $590 USD).
 
+## 6. Regla Inmutable de los 3 Idiomas Obligatoria (ES / EN / FR)
+- **TODAS LAS PRESENTACIONES, COPIES, AUTO-RESPONDERS Y ENTREGABLES DEBEN CUMPLIR LA REGLA DE 3 IDIOMAS**:
+  1. 🇪🇸 **Español (ES)**: Palabra clave "AUDITORIA" (audiencias Latam, España y Centroamérica).
+  2. 🇺🇸 **Inglés (EN)**: Palabra clave "AUDIT" (audiencias USA Hispanic, North America y Global).
+  3. 🇫🇷 **Francés (FR)**: Mot-clé "AUDIT" (audiencias Europa francófona, Canadá y multinacionales).
+  - Los auto-responders y webhooks deben detectar automáticamente el idioma del prospecto y responder en su idioma nativo en menos de 3 segundos.
+
+## 7. Regla de Oro Anti-Quiebra & Operación 100% Autónoma
+- **PROHIBIDO DEPENDER DE PUBLICIDAD PAGADA (PAID ADS) O TRÁFICO PASIVO**:
+  1. Toda la ingeniería debe generar flujo de caja diario inmediato ($19, $69, $599 USD) mediante automatización serverless 24/7.
+  2. SLA de auto-respuesta en menos de 3 segundos ante interacciones de LinkedIn/Waalaxy.
+  3. Activación constante de bucles virales de producto (PLG) y SEO programático instantáneo (IndexNow).
+
