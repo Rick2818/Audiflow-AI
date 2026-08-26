@@ -103,7 +103,6 @@ async function sendAutomatedRedlineDeliveryToProspect({ email, name, company }) 
     await transporter.sendMail({
       from: `"Ricardo • AuditFlow AI" <${gmailUser}>`,
       to: email,
-      bcc: 'tendenciaiatufuturo@gmail.com',
       replyTo: 'tendenciaiatufuturo@gmail.com',
       subject,
       html: emailHtml

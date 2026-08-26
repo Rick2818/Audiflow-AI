@@ -26,3 +26,10 @@
   2. **Guía Visual y de Clics**: Nombre exacto del botón, color distintivo, icono y texto que muestra.
   3. **Archivos y Líneas de Código Modificadas**: Ruta del archivo y número de líneas exactas donde reside la implementación.
 
+## 5. Regla Inmutable de Aislamiento de Rebotes (Zero Bounce Spam a Correos Personales)
+- **PROHIBIDO REENVIAR REBOTES AL CORREO PERSONAL**: Si un correo despachado por el sistema rebota (NDR / Mailer-Daemon / Hard Bounce / Soft Bounce / Mailbox Full), el sistema debe:
+  1. Filtrar y descartar el evento en silencio sin emitir correos de alerta a `rick28191@gmail.com` ni a `tendenciaiatufuturo@gmail.com`.
+  2. Registrar el fallo únicamente en los logs internos / base de datos Supabase para métricas.
+  3. No usar `bcc` individual en envíos masivos o transaccionales hacia correos personales; usar exclusivamente `reply_to` para respuestas genuinas de personas reales.
+  4. La bandeja de `rick28191@gmail.com` queda reservada ÚNICA Y EXCLUSIVAMENTE para VENTAS Y TRANSACCIONES FINANCIERAS CONFIRMADAS ($19, $69, $590 USD).
+

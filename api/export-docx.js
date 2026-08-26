@@ -84,7 +84,6 @@ export default async function handler(req, res) {
             from: emailFrom,
             to: [cleanEmail],
             reply_to: 'tendenciaiatufuturo@gmail.com',
-            bcc: 'tendenciaiatufuturo@gmail.com',
             subject,
             html: emailHtml
           });
@@ -106,7 +105,6 @@ export default async function handler(req, res) {
           await transporter.sendMail({
             from: `"Ricardo • AuditFlow AI" <${gmailUser}>`,
             to: cleanEmail,
-            bcc: 'tendenciaiatufuturo@gmail.com',
             replyTo: 'tendenciaiatufuturo@gmail.com',
             subject,
             html: emailHtml

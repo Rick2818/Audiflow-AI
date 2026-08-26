@@ -41,6 +41,14 @@ export default async function handler(req, res) {
       event = body;
     }
 
+    // Filtro y Protección Anti-Spam: Descartar eventos de rebote (Bounces / NDR) sin notificar al correo personal
+    const isBounce = event && (event.type === 'email.bounced' || event.type === 'email.complained' || event.type === 'email.delivery_delayed' || body.event === 'email.bounced');
+    if (isBounce) {
+      const bouncedEmail = event.data?.to?.[0] || body.data?.to || 'desconocido';
+      console.log(`🛡️ [Bounce Filter] Rebote detectado y aislado para ${bouncedEmail}. Cero notificaciones enviadas a la bandeja personal.`);
+      return res.status(200).json({ received: true, status: 'bounce_isolated_silently' });
+    }
+
     // Manejar Evento de Pago Exitoso (Stripe / Wompi El Salvador)
     const isWompi = body.event === 'transaction.updated' || body.data?.transaction?.status === 'APPROVED';
     const isStripe = event && (event.type === 'checkout.session.completed' || event.type === 'payment_intent.succeeded');
