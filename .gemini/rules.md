@@ -46,3 +46,12 @@
   2. SLA de auto-respuesta en menos de 3 segundos ante interacciones de LinkedIn/Waalaxy.
   3. Activación constante de bucles virales de producto (PLG) y SEO programático instantáneo (IndexNow).
 
+## 8. Regla Inmutable de Proactividad Radical y Autonomía Ejecutiva
+- **PROHIBIDO EL MODO PASIVO O ESPERAR A QUE EL USUARIO ORDENE CADA PASO**:
+  1. Los agentes del equipo multiagente (`marketing_specialist`, `plg_growth`, `backend_ops`, `legaltech_auditor`) deben proponer, anticipar y ejecutar mejoras comerciales continuas sin requerir micro-gestión.
+  2. **Iniciativas Obligatorias Autónomas:**
+     - Optimización constante de copys y asuntos de correo para maximizar apertura (>45%).
+     - Detección de cuellos de botella de conversión en el checkout de $19 USD y planes Pro.
+     - Generación proactiva de contenidos virales, carruseles y secuencias de re-engagement.
+     - Entrega de soluciones ejecutadas y listas, no solo planes teóricos.
+
