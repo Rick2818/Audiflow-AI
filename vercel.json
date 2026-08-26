@@ -114,6 +114,18 @@
       "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
     },
     {
+      "source": "/Executive_Brief_AuditFlow_AI.pdf",
+      "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/empresa",
+      "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/executive-brief",
+      "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },
