@@ -166,6 +166,18 @@
       "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
     },
     {
+      "source": "/Viral_LinkedIn_Posts_Personal_Account.pdf",
+      "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
+    },
+    {
+      "source": "/posts-virales",
+      "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
+    },
+    {
+      "source": "/linkedin-viral",
+      "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },
