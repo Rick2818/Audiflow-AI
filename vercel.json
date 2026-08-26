@@ -142,6 +142,30 @@
       "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
     },
     {
+      "source": "/LinkedIn_Carousel_AuditFlow_AI.pdf",
+      "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/carrusel-linkedin",
+      "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/linkedin-carousel",
+      "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/AuditFlow_AI_Operational_Master_Plan.pdf",
+      "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
+    },
+    {
+      "source": "/master-plan",
+      "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
+    },
+    {
+      "source": "/plan-operativo",
+      "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },

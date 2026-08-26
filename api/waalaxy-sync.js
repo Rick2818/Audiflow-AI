@@ -58,7 +58,7 @@ async function sendWaalaxyAlert({ email, name, company, eventType, message }) {
   }
 }
 
-async function sendAutomatedRedlineDeliveryToProspect({ email, name, company }) {
+async function sendAutomatedRedlineDeliveryToProspect({ email, name, company, message = '' }) {
   if (!email || !email.includes('@') || email.includes('linkedin_user_')) return;
 
   const appUrl = (process.env.APP_URL || CONFIG.URLS.APP_URL || 'https://audiflowai.com').replace(/\/+$/, '');
@@ -70,19 +70,69 @@ async function sendAutomatedRedlineDeliveryToProspect({ email, name, company }) 
 
   if (!gmailUser || !gmailPass || gmailUser.includes('tu_correo')) return;
 
-  try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: gmailUser, pass: gmailPass }
-    });
+  // Detección inteligente de idioma (ES / EN / FR)
+  const msgLower = (message || '').toLowerCase();
+  let lang = 'es';
+  if (msgLower.includes('audit') && !msgLower.includes('auditoria')) {
+    lang = (msgLower.includes('bonjour') || msgLower.includes('merci') || msgLower.includes('oui')) ? 'fr' : 'en';
+  } else if (msgLower.includes('hello') || msgLower.includes('please') || msgLower.includes('interested')) {
+    lang = 'en';
+  } else if (msgLower.includes('bonjour') || msgLower.includes('contrat') || msgLower.includes('merci')) {
+    lang = 'fr';
+  }
 
-    const subject = `Borrador de Redline en Word (.docx) y Acceso Inmediato / ${targetCompany}`;
-    const emailHtml = `
+  let subject = `Borrador de Redline en Word (.docx) y Acceso Inmediato / ${targetCompany}`;
+  let emailHtml = '';
+
+  if (lang === 'en') {
+    subject = `Word (.docx Track Changes) Redline Draft & Instant Access / ${targetCompany}`;
+    emailHtml = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
+        <p>Hello ${escapeHtml(cleanFirstName)},</p>
+        <p>Thank you for your interest in <strong>AuditFlow AI</strong> (<a href="${appUrl}/?ref=linkedin-audit" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>).</p>
+        <p>As requested on LinkedIn, here is your direct access to test our <strong>Forensic Redline in Word (.docx with Track Changes)</strong> 100% free and confidential:</p>
+        <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #2563eb; margin: 18px 0; border-radius: 6px; font-size: 14px;">
+          <p style="margin: 0 0 10px 0;"><strong>🎁 Your 1st Audit: 100% Free:</strong> Processed in volatile RAM (<10s, no disk storage, no credit card required):</p>
+          <p style="margin: 0 0 10px 0; text-align: center;">
+            <a href="${appUrl}/?ref=linkedin-audit" style="background-color: #2563eb; color: #ffffff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">
+              Upload Contract & Get Word Redline in 10s →
+            </a>
+          </p>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 12px 0;">
+          <p style="margin: 0 0 6px 0;"><strong>⚡ Flash Single Redline:</strong> Only <strong>$19 USD</strong> per full contract with Word (.docx) export.</p>
+          <p style="margin: 0;"><strong>💼 Plans:</strong> <strong>$69 USD/mo</strong> (unlimited) or <strong>$599 USD/yr</strong> (White-Label corporate license).</p>
+        </div>
+        <p>Best regards,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Founder • AuditFlow AI Corp. (<a href="${appUrl}" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
+      </div>
+    `;
+  } else if (lang === 'fr') {
+    subject = `Projet de Redline Word (.docx) et Accès Immédiat / ${targetCompany}`;
+    emailHtml = `
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
+        <p>Bonjour ${escapeHtml(cleanFirstName)},</p>
+        <p>Merci pour votre intérêt pour <strong>AuditFlow AI</strong> (<a href="${appUrl}/?ref=linkedin-audit" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>).</p>
+        <p>Voici votre accès immédiat pour tester la génération du <strong>Redline Word (.docx avec suivi des modifications)</strong> 100% gratuit et confidentiel:</p>
+        <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #2563eb; margin: 18px 0; border-radius: 6px; font-size: 14px;">
+          <p style="margin: 0 0 10px 0;"><strong>🎁 1ère Analyse 100% Gratuite:</strong> Traitement en mémoire RAM volatile (<10s, sans stockage, sans carte bancaire):</p>
+          <p style="margin: 0 0 10px 0; text-align: center;">
+            <a href="${appUrl}/?ref=linkedin-audit" style="background-color: #2563eb; color: #ffffff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 13px; display: inline-block;">
+              Déposer le Contrat et Obtenir le Redline en 10s →
+            </a>
+          </p>
+          <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 12px 0;">
+          <p style="margin: 0 0 6px 0;"><strong>⚡ Offre Redline Unique:</strong> <strong>$19 USD</strong> par contrat complet avec export Word (.docx).</p>
+          <p style="margin: 0;"><strong>💼 Forfaits:</strong> <strong>$69 USD/mois</strong> (illimité) ou <strong>$599 USD/an</strong> (licence marque blanche).</p>
+        </div>
+        <p>Cordialement,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fondateur • AuditFlow AI Corp. (<a href="${appUrl}" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
+      </div>
+    `;
+  } else {
+    // Español (default)
+    emailHtml = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
         <p>Hola ${escapeHtml(cleanFirstName)},</p>
         <p>Gracias por tu interés en <strong>AuditFlow AI</strong> (<a href="${appUrl}/?ref=instant-redline" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>).</p>
         <p>Tal como solicitaste, aquí tienes el acceso para probar la generación del <strong>Redline Forense en Word (.docx con Control de Cambios)</strong> de forma 100% gratuita y confidencial:</p>
-
         <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #2563eb; margin: 18px 0; border-radius: 6px; font-size: 14px;">
           <p style="margin: 0 0 10px 0;"><strong>🎁 Tu 1er Análisis 100% Gratis:</strong> Pruébalo directamente en memoria RAM volátil (sin guardar archivos ni solicitar tarjeta):</p>
           <p style="margin: 0 0 10px 0; text-align: center;">
@@ -94,11 +144,17 @@ async function sendAutomatedRedlineDeliveryToProspect({ email, name, company }) 
           <p style="margin: 0 0 6px 0;"><strong>⚡ Oferta Redline Individual:</strong> Solo <strong>$19 USD</strong> por contrato completo con exportación en Word (.docx).</p>
           <p style="margin: 0;"><strong>💼 Planes:</strong> <strong>$69 USD/mes</strong> (ilimitado) o <strong>$599 USD/año</strong> (licencia anual con marca blanca para clientes de la firma).</p>
         </div>
-
         <p>También puedes responderme directamente a este correo adjuntando el borrador que estás revisando esta semana y te devuelvo el diagnóstico forense preliminar en minutos.</p>
         <p style="margin-top: 24px;">Saludos cordiales,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Fundador • AuditFlow AI Corp. (<a href="${appUrl}" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
       </div>
     `;
+  }
+
+  try {
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: { user: gmailUser, pass: gmailPass }
+    });
 
     await transporter.sendMail({
       from: `"Ricardo • AuditFlow AI" <${gmailUser}>`,
@@ -107,7 +163,7 @@ async function sendAutomatedRedlineDeliveryToProspect({ email, name, company }) 
       subject,
       html: emailHtml
     });
-    console.log(`[WaalaxySync] Auto-Responder de Redline despachado automáticamente a ${email}`);
+    console.log(`[WaalaxySync] Auto-Responder de Redline despachado (${lang.toUpperCase()}) automáticamente a ${email}`);
   } catch (autoErr) {
     console.warn('[WaalaxySync] Error despachando auto-responder a prospecto:', autoErr.message);
   }
