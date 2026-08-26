@@ -126,6 +126,22 @@
       "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
     },
     {
+      "source": "/Marketing_Plan_AuditFlow_AI.pdf",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/marketing-plan",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/plan-marketing",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/marketing",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },
