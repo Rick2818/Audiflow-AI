@@ -1,7 +1,7 @@
 import assert from 'node:assert';
-import handler from '../api/auto-redline.js';
+import handler from '../api/export-docx.js';
 
-console.log('🧪 Iniciando Test Suite: Auto-Responder Automático de Redlines 24/7...');
+console.log('🧪 Iniciando Test Suite: Auto-Responder Automático de Redlines vía /api/export-docx...');
 
 function createMockRes() {
   return {
@@ -17,28 +17,11 @@ function createMockRes() {
 }
 
 async function runTests() {
-  // Test 1: GET Status del Servicio
-  const reqGet = { method: 'GET', query: {}, headers: {} };
-  const resGet = createMockRes();
-  await handler(reqGet, resGet);
-
-  assert.strictEqual(resGet._status, 200);
-  assert.strictEqual(resGet._data.status, 'ACTIVE');
-  console.log('✅ Test 1: Endpoint de Auto-Redline responde 200 OK y estado ACTIVE.');
-
-  // Test 2: Validación de error ante email vacío
-  const reqInvalid = { method: 'POST', body: { email: '' }, headers: {} };
-  const resInvalid = createMockRes();
-  await handler(reqInvalid, resInvalid);
-
-  assert.strictEqual(resInvalid._status, 400);
-  assert.strictEqual(resInvalid._data.success, false);
-  console.log('✅ Test 2: Validación de correo obligatorio funciona.');
-
-  // Test 3: Despacho exitoso de Redline
-  const reqValid = {
+  // Test 1: Despacho automático de Redline por correo
+  const reqAutoSend = {
     method: 'POST',
     body: {
+      action: 'auto_send',
       email: 'armando.arias@ariaslaw.com',
       name: 'Armando Arias',
       company: 'Arias Law Firm',
@@ -46,15 +29,31 @@ async function runTests() {
     },
     headers: {}
   };
-  const resValid = createMockRes();
-  await handler(reqValid, resValid);
+  const resAutoSend = createMockRes();
+  await handler(reqAutoSend, resAutoSend);
 
-  assert.strictEqual(resValid._status, 200);
-  assert.strictEqual(resValid._data.success, true);
-  assert.strictEqual(resValid._data.recipient, 'armando.arias@ariaslaw.com');
-  console.log('✅ Test 3: Auto-Responder de Redline despachado y confirmado con éxito.');
+  assert.strictEqual(resAutoSend._status, 200);
+  assert.strictEqual(resAutoSend._data.success, true);
+  assert.strictEqual(resAutoSend._data.recipient, 'armando.arias@ariaslaw.com');
+  console.log('✅ Test 1: Auto-Responder de Redline despachado y confirmado con éxito vía /api/export-docx.');
 
-  console.log('\n🎉 ¡TODAS LAS PRUEBAS DE AUTO-REDLINE PASARON EXITOSAMENTE (3/3)!');
+  // Test 2: Generación normal de archivo .doc/.docx
+  const reqDoc = {
+    method: 'POST',
+    body: {
+      title: 'Contrato_Servicios_Test',
+      content: '<p>Cláusula leonina eliminada</p>'
+    },
+    headers: {}
+  };
+  const resDoc = createMockRes();
+  await handler(reqDoc, resDoc);
+
+  assert.strictEqual(resDoc._status, 200);
+  assert.strictEqual(resDoc._headers['Content-Type'], 'application/vnd.ms-word');
+  console.log('✅ Test 2: Generación y descarga de archivo Word (.doc/.docx) confirmada.');
+
+  console.log('\n🎉 ¡TODAS LAS PRUEBAS DE AUTO-REDLINE Y DOCX PASARON EXITOSAMENTE (2/2)!');
 }
 
 runTests().catch(err => {

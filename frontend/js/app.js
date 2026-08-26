@@ -1038,10 +1038,11 @@ window.AppHandler = {
             // Auto-despacho de copia de respaldo si hay correo en sesión o capturado
             const userEmail = this.userEmail || localStorage.getItem('auditflow_user_email') || '';
             if (userEmail && userEmail.includes('@')) {
-                fetch('/api/auto-redline', {
+                fetch('/api/export-docx', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
+                        action: 'auto_send',
                         email: userEmail,
                         document_title: title,
                         source: 'docx_download_button'
