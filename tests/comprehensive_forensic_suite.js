@@ -11,6 +11,7 @@ import outreachHandler, { generateExecutiveLeads, generateOutreachProspects, res
 import paymentHandler from '../api/payment.js';
 import reportHandler from '../api/report.js';
 import webhookHandler from '../api/webhook.js';
+import waalaxySyncHandler from '../api/waalaxy-sync.js';
 
 function createMockReqRes(options = {}) {
   const {
@@ -157,7 +158,7 @@ async function runForensicAudit() {
     });
     await adminHandler(r3, s3);
     const d3 = s3._getResponseData();
-    recordTest('Carga de 2,000 leads con jerarquía Pareto 80/20', s3._getStatusCode() === 200 && d3.leads?.length === 2000 && d3.stats?.pareto_top_20_count === 400);
+    recordTest('Carga de leads reales verificados con directiva ejecutiva', s3._getStatusCode() === 200 && d3.leads?.length >= 20);
 
     // Auto-Healer diagnostic
     const { req: r4, res: s4 } = createMockReqRes({
@@ -256,17 +257,22 @@ async function runForensicAudit() {
     const deLang = resolveLeadLanguage('de', 'Alemania', 'hans@tech.de');
     const frLang = resolveLeadLanguage('fr', 'Francia', 'pierre@corp.fr');
     const enLang = resolveLeadLanguage('en', 'Estados Unidos', 'alex@uscorp.com');
+    const nordicLang = resolveLeadLanguage('nordic', 'Suecia', 'lars@advokat.se');
 
-    recordTest('Resolución de idioma contextual (ES, DE, FR, EN)', esLang === 'es' && deLang === 'de' && frLang === 'fr' && enLang === 'en');
+    recordTest('Resolución de idioma contextual (ES, DE, FR, EN, NORDIC)', esLang === 'es' && deLang === 'de' && frLang === 'fr' && enLang === 'en' && nordicLang === 'nordic');
 
-    // Prospect generation
-    const top20Leads = generateOutreachProspects('pareto_top20');
-    const cfosLeads = generateOutreachProspects('cfos_500');
-    const all2000 = generateOutreachProspects('all_2000');
+    // Prospect validation (Cero sintéticos)
+    const verifiedProspects = generateOutreachProspects('pareto_top20');
+    let blockedSynthetic = false;
+    try {
+      assertRealLead({ email: 'fake.user99@empresa-sv.com', name: 'Fake User' });
+    } catch (e) {
+      blockedSynthetic = true;
+    }
 
-    recordTest('Generador de prospectos Pareto Top 20% (400 leads)', top20Leads.length === 400);
-    recordTest('Generador de prospectos CFOs (500 leads)', cfosLeads.length === 500);
-    recordTest('Base de datos completa de 2,000 ejecutivos', all2000.length === 2000);
+    recordTest('Directorio de decisores legales reales verificado', verifiedProspects.length >= 20);
+    recordTest('Guardián Fail-Fast Anti-Sintéticos activo y bloqueante', blockedSynthetic === true);
+    recordTest('Validación de autenticidad en todos los prospectos', verifiedProspects.every(p => p.name && p.company));
 
     // Outreach handler test mode
     const { req: r1, res: s1 } = createMockReqRes({
@@ -275,7 +281,7 @@ async function runForensicAudit() {
       body: {
         test_mode: true,
         batch: 'pareto_top20',
-        prospects: top20Leads.slice(0, 5)
+        prospects: verifiedProspects.slice(0, 5)
       }
     });
     await outreachHandler(r1, s1);
@@ -334,8 +340,8 @@ async function runForensicAudit() {
     recordTest('Procesamiento de webhook de venta con entrega inmediata de Word (.docx)', s4._getStatusCode() === 200 && s4._getResponseData()?.received);
   }
 
-  // 7. RECUPERACIÓN DE LEADS CON CRON O ADMIN
-  console.log('\n[FASE 7] Módulo api/lead-recovery.js:');
+  // 7. RECUPERACIÓN DE LEADS & INTEGRACIÓN WAALAXY (ZONA NÓRDICA)
+  console.log('\n[FASE 7] Módulo api/lead-recovery.js & api/waalaxy-sync.js (Campaña Zona Nórdica):');
   {
     const { req: r1, res: s1 } = createMockReqRes({
       method: 'POST',
@@ -343,6 +349,24 @@ async function runForensicAudit() {
     });
     await leadRecoveryHandler(r1, s1);
     recordTest('Ejecución de secuencia de recuperación vía Vercel Cron', s1._getStatusCode() === 200 && s1._getResponseData()?.success);
+
+    // Waalaxy CSV Export (leads_zona_nordica)
+    const { req: r2, res: s2 } = createMockReqRes({
+      method: 'GET',
+      query: { action: 'export_csv', campaign: 'leads_zona_nordica' }
+    });
+    await waalaxySyncHandler(r2, s2);
+    const csvContent = s2._getResponseData() || '';
+    recordTest('Exportación CSV para Waalaxy (20 leads Zona Nórdica reales)', s2._getStatusCode() === 200 && String(csvContent).includes('Henrik') && String(csvContent).includes('Dock') && String(csvContent).includes('leads Zona Nordica'));
+
+    // Waalaxy Dispatch Trigger (leads_zona_nordica)
+    const { req: r3, res: s3 } = createMockReqRes({
+      method: 'POST',
+      body: { action: 'dispatch_nordic_campaign', campaign: 'leads_zona_nordica' }
+    });
+    await waalaxySyncHandler(r3, s3);
+    const d3 = s3._getResponseData();
+    recordTest('Disparo y sincronización de campaña "leads Zona Nordica" vía Waalaxy', s3._getStatusCode() === 200 && d3.dispatched_count === 20 && d3.status === 'DISPATCHED_AND_ACTIVE');
   }
 
   // 8. BATERÍA DE ESTRÉS WOMPI & STRIKE (100 PRUEBAS AUTOMATIZADAS)

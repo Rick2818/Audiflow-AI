@@ -252,7 +252,7 @@ Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y as
    - **Presentación Oficial:** *«En AuditFlow AI somos una firma especializada en auditoría financiera e infraestructura legal con más de 10 años de experiencia acumulada asesorando a directores financieros, contralores y departamentos corporativos...»*
    - **Remitente Oficial:** `AuditFlow AI | Auditoría Corporativa <ricardo@audiflowai.com>` / `<soporte@audiflowai.com>`.
    - **Firma Oficial:** `Equipo de Auditoría & Consultoría Corporativa — AuditFlow AI`.
-   - **Enrutamiento Oculto (`reply-to`):** Las respuestas de los prospectos siempre se dirigen automáticamente a la bandeja personal del dueño (`rick28191@gmail.com`) en segundo plano sin exponer correos personales en el texto público.
+   - **Enrutamiento Oculto (`reply-to`):** Las respuestas de los prospectos siempre se dirigen automáticamente a la bandeja operativa de control (`tendenciaiatufuturo@gmail.com`) en segundo plano sin exponer correos personales en el texto público.
 
 ### C. Mandato de Navegabilidad Omnipresente y UX Sin Fricciones
 1. **Regla de Retorno a Inicio:** Ninguna sección, modal, visor de reporte o panel de administración puede quedar aislado sin un botón explícito de **«🏠 Regresar al Inicio»**.
@@ -260,9 +260,9 @@ Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y as
 3. **Pestañas Flotantes de Soporte:** Pestañas fijas de acceso rápido (`fixed bottom-5 left-5 z-40`) disponibles en todas las páginas para abrir guías y manuales interactivos en cualquier momento.
 4. **Barra Lateral de Desplazamiento Siempre Visible (Always-On Scrollbar):** Toda página web, landing, panel `/admin` o visor documental DEBE forzar la barra de desplazamiento vertical visible (`html { overflow-y: scroll !important; scrollbar-gutter: stable; }`) con estilos contrastantes (`width: 10px; background: #374151; hover: #38BDF8;`), garantizando que el usuario siempre pueda subir o bajar cómodamente sin que la barra desaparezca o se oculte.
 
-### D. Protocolo de Copia Obligatoria al Propietario & Validación en Tiempo Real
-1. **Mandato Universal de Copia al Propietario:** En **CUALQUIER campaña** que se diseñe o ejecute (campañas de frío B2B, secuencias de LinkedIn, re-envíos masivos de ofertas a leads, transacciones o actualizaciones comerciales), es una **regla innegociable enviar SIEMPRE una copia íntegra y resumen ejecutivo a la bandeja personal del propietario (`rick28191@gmail.com`)**.
-2. **Validación de Entregabilidad:** Antes de iniciar cualquier lote de envíos, el sistema despachará automáticamente un correo de verificación a `rick28191@gmail.com` para comprobar renderizado visual, tipografías, enlaces activos y respuesta en servidor.
+### D. Protocolo de Control & Regla de Oro Inviolable
+1. **Regla de Oro Inviolable:** La bandeja personal (`rick28191@gmail.com`) está reservada **ÚNICA Y EXCLUSIVAMENTE para VENTAS Y TRANSACCIONES CONFIRMADAS ($19, $69, $590 USD)**. Queda prohibido enviarle prospección, copias de campañas, logs, alertas técnicas o rebotes.
+2. **Copia de Control Operativo:** En cualquier campaña que se diseñe o ejecute, los resúmenes ejecutivos y copias de control se envían a la bandeja operativa `tendenciaiatufuturo@gmail.com`.
 
 ---
 
@@ -319,7 +319,7 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 2. **Secuencia de Re-enganche:**
    - Disparo automatizado mediante Vercel Crons los **miércoles y viernes a las 10:00 AM** (`0 10 * * 3,5`) con un recordatorio formal de mitigación de contingencias legales y oferta de cortesía.
 3. **Mandato de Notificación al Propietario:**
-   - Cada lote de recuperación despachado genera automáticamente un informe consolidado con copia a **`rick28191@gmail.com`**.
+   - Cada lote de recuperación despachado genera automáticamente un informe consolidado con copia a **`tendenciaiatufuturo@gmail.com`**.
 
 ---
 

@@ -282,6 +282,10 @@
     {
       "path": "/api/lead-recovery",
       "schedule": "0 14 * * 2,3,5"
+    },
+    {
+      "path": "/api/outreach?campaign=daily_omnichannel_social_8am&batch=omnichannel_8am",
+      "schedule": "0 14 * * *"
     }
   ]
 }

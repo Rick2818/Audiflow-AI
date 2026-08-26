@@ -45,7 +45,7 @@ AuditFlow AI cuenta con un motor integrado de prospección automatizada para dir
 2. Haz clic en el botón **«🚀 Lanzar Campaña B2B Automatizada»**.
 3. **Motor Dual de Envíos:**
    * **Canal Primario:** **Resend API (`ricardo@audiflowai.com`)** con dominio verificado y entregabilidad certificada (SPF, DKIM, DMARC, RFC 8058 `List-Unsubscribe`).
-   * **Canal Secundario de Respaldo:** Gmail SMTP Corporativo (`rick28191@gmail.com`).
+   * **Canal Secundario de Respaldo:** Gmail SMTP Operativo (`tendenciaiatufuturo@gmail.com`).
 4. **Consola de Registro en Vivo:** En la parte inferior del panel se mostrará en tiempo real el progreso de entrega correo por correo con código de estatus.
 
 ---
@@ -82,18 +82,13 @@ El panel categoriza automáticamente a los prospectos según su volumen de fuga 
 
 ---
 
-## 📬 8. MANDATO UNIVERSAL: COPIA Y CONTROL DE DESPACHOS AL PROPIETARIO
+## 📬 8. REGLA DE ORO FIDUCIARIA: ENRUTAMIENTO DE CORREOS Y NOTIFICACIONES
 
-**Regla Inviolable de Operatividad:**
-Siempre que el módulo de administración (`/admin`) o cualquier servicio del backend ejecute un envío de correo electrónico —ya sea:
-1. Oferta individual a un lead (`🚀 Enviar Oferta` o `📩 Re-enviar`).
-2. Despacho masivo a prospectos filtrados (`🚀 Despachar Ofertas a Leads Filtrados`).
-3. Campaña de prospección B2B (`🚀 Disparar Campaña B2B Real`).
-4. Secuencia de recuperación de leads (`/api/lead-recovery`).
-5. Notificación post-pago de venta desbloqueada (`/api/webhook`).
-6. Prueba de conectividad SMTP (`⚡ Probar Conexión Gmail SMTP`).
+**Regla Inviolable:**
+1. **Notificación Exclusiva de Ventas (`rick28191@gmail.com`):**
+   * La bandeja personal del dueño está reservada **ÚNICA Y EXCLUSIVAMENTE para VENTAS Y TRANSACCIONES CONFIRMADAS ($19, $69, $590 USD)**.
+   * Queda estrictamente prohibido enviar correos de prospección, copias de campañas, logs, alertas técnicas, rebotes o leads a esta dirección.
 
-**Acción Obligatoria del Sistema:**
-* El sistema **DEBE SIEMPRE** enviar de forma automática e inmediata una **Copia de Control** detallada a la bandeja del propietario: **`rick28191@gmail.com`**.
-* Utiliza como canal seguro el transporte autenticado de **Gmail SMTP** con reintento garantizado y cero desvíos a sandboxes de prueba.
+2. **Control Operativo y Sistema (`tendenciaiatufuturo@gmail.com`):**
+   * Toda copia de control de campañas B2B, alertas del servidor, pruebas SMTP, actividad de leads y reportes se envían exclusivamente a la cuenta operativa `tendenciaiatufuturo@gmail.com`.
 

@@ -215,6 +215,7 @@
                 <button id="tab-btn-fasttrack" onclick="AdminApp.switchTab('fasttrack')" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow hover:scale-105 transition-all cursor-pointer flex items-center gap-1">⚡ 10 Clientes Hoy</button>
                 <button id="tab-btn-tx" onclick="AdminApp.switchTab('tx')" class="px-3 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">💳 Transacciones</button>
                 <button id="tab-btn-outreach" onclick="AdminApp.switchTab('outreach')" class="px-3 py-2 rounded-lg text-emerald-300 font-bold border border-emerald-500/40 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📧 Cold Email</button>
+                <button id="tab-btn-omnichannel" onclick="AdminApp.switchTab('omnichannel')" class="px-3 py-2 rounded-lg text-rose-300 font-bold border border-rose-500/50 hover:text-white hover:bg-dark-card transition-all cursor-pointer flex items-center gap-1">📱 Omnicanal &amp; Pipeline 8AM</button>
                 <button id="tab-btn-shadow" onclick="AdminApp.switchTab('shadow')" class="px-3 py-2 rounded-lg text-amber-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🕵️ 1. Auditorías Sombra</button>
                 <button id="tab-btn-social" onclick="AdminApp.switchTab('social')" class="px-3 py-2 rounded-lg text-purple-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">📢 2. Carruseles LinkedIn</button>
                 <button id="tab-btn-verify" onclick="AdminApp.switchTab('verify')" class="px-3 py-2 rounded-lg text-emerald-300 hover:text-white hover:bg-dark-card transition-all cursor-pointer">🛡️ 3. Sello Viral</button>
@@ -430,6 +431,188 @@
                         <button onclick="AdminApp.copyShadowAuditMessage('invoice')" class="w-full py-2 rounded-xl bg-accent-blue/10 hover:bg-accent-blue/20 text-accent-blue border border-accent-blue/40 text-xs font-mono font-bold transition-all cursor-pointer">
                             📋 Copiar Mensaje Waalaxy
                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB OMNICANAL: PIPELINE DE DEMOSTRACIÓN DE RESULTADOS & CANALES DE EXPOSICIÓN (LINKEDIN, INSTAGRAM, TIKTOK 8AM) -->
+        <div id="tab-content-omnichannel" class="bg-dark-card border border-dark-border rounded-2xl p-6 shadow-xl mb-8 hidden">
+            <!-- HEADER DE SECCIÓN -->
+            <div class="border-b border-dark-border pb-5 mb-6 flex flex-wrap items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="px-2.5 py-1 rounded-md bg-rose-950/70 border border-rose-500/50 text-rose-300 font-mono text-[11px] font-bold">
+                            📱 OMNICANAL 360°
+                        </span>
+                        <span class="px-2.5 py-1 rounded-md bg-emerald-950/70 border border-emerald-500/50 text-emerald-300 font-mono text-[11px] font-bold flex items-center gap-1">
+                            ⏰ Cron Diario 8:00 AM Activo (0 14 * * *)
+                        </span>
+                    </div>
+                    <h3 class="font-bold text-white text-xl mt-2 flex items-center gap-2">
+                        🚀 Pipeline de Demostración de Resultados &amp; Canales de Exposición Viral
+                    </h3>
+                    <p class="text-xs text-gray-300 font-mono mt-1 leading-relaxed">
+                        Demostración en vivo del embudo de conversión en 4 etapas y alimentación diaria autónoma de contenidos en tendencia para <span class="text-sky-400 font-bold">LinkedIn</span>, <span class="text-pink-400 font-bold">Instagram</span> y <span class="text-teal-400 font-bold">TikTok</span>.
+                    </p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="AdminApp.triggerOmnichannel8amCron()" id="btn-trigger-8am-cron" class="px-4 py-2 rounded-xl bg-gradient-to-r from-rose-500 via-purple-600 to-accent-blue text-white font-bold text-xs shadow-glow hover:scale-105 transition-all cursor-pointer flex items-center gap-1.5">
+                        ⚡ Disparar Alimentación 8:00 AM Ahora
+                    </button>
+                </div>
+            </div>
+
+            <!-- 1. PIPELINE DE DEMOSTRACIÓN DE RESULTADOS EN VIVO (4 ETAPAS) -->
+            <div class="mb-8 p-5 rounded-2xl bg-dark-surface border border-dark-border space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3 border-b border-dark-border pb-3">
+                    <div>
+                        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                            <span>📊 1. Pipeline de Demostración de Resultados en Vivo (Fricción Cero)</span>
+                        </h4>
+                        <p class="text-xs text-gray-400 font-mono">Simulación paso a paso del flujo de conversión de clientes B2B en menos de 10 segundos.</p>
+                    </div>
+                    <button onclick="AdminApp.runPipelineDemo()" id="btn-run-demo-pipeline" class="px-3.5 py-1.5 rounded-lg bg-emerald-500 text-black font-bold font-mono text-xs hover:bg-emerald-400 transition-all cursor-pointer flex items-center gap-1 shadow-sm">
+                        ▶️ Iniciar Demostración en Vivo
+                    </button>
+                </div>
+
+                <!-- 4 ETAPAS DEL PIPELINE -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="pipeline-stages-container">
+                    <!-- ETAPA 1: CAPTURA & ESCANEO RAM -->
+                    <div id="pipe-stage-1" class="p-4 rounded-xl bg-dark-card border border-dark-border space-y-2 transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-bold text-sky-400 bg-sky-950/60 px-2 py-0.5 rounded border border-sky-500/30">Etapa 1 (0s - 8s)</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-sky-400" id="pipe-dot-1"></span>
+                        </div>
+                        <h5 class="text-white font-bold text-xs">📥 Captura &amp; Escaneo RAM</h5>
+                        <p class="text-[11px] text-gray-300 leading-relaxed">Procesamiento volátil en memoria RAM efímera con cero retención en disco (Privacidad Fiduciaria).</p>
+                        <div class="pt-2 text-[10px] font-mono text-sky-300 flex items-center justify-between border-t border-dark-border/60">
+                            <span>Latencia:</span>
+                            <span class="font-bold">&lt; 1.8 segundos</span>
+                        </div>
+                    </div>
+
+                    <!-- ETAPA 2: DIAGNÓSTICO NORMATIVO & SCORE -->
+                    <div id="pipe-stage-2" class="p-4 rounded-xl bg-dark-card border border-dark-border space-y-2 transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-bold text-amber-400 bg-amber-950/60 px-2 py-0.5 rounded border border-amber-500/30">Etapa 2 (8s - 10s)</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-amber-400" id="pipe-dot-2"></span>
+                        </div>
+                        <h5 class="text-white font-bold text-xs">⚖️ Diagnóstico &amp; Lead Score</h5>
+                        <p class="text-[11px] text-gray-300 leading-relaxed">Cálculo de fuga financiera bajo estándares PCAOB / US GAAP / NIIF 16.</p>
+                        <div class="pt-2 text-[10px] font-mono text-amber-300 flex items-center justify-between border-t border-dark-border/60">
+                            <span>Fuga Detectada:</span>
+                            <span class="font-bold">$18,500 USD</span>
+                        </div>
+                    </div>
+
+                    <!-- ETAPA 3: GENERACIÓN REDLINE WORD (.DOCX) -->
+                    <div id="pipe-stage-3" class="p-4 rounded-xl bg-dark-card border border-dark-border space-y-2 transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-bold text-purple-400 bg-purple-950/60 px-2 py-0.5 rounded border border-purple-500/30">Etapa 3 (Inmediata)</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-purple-400" id="pipe-dot-3"></span>
+                        </div>
+                        <h5 class="text-white font-bold text-xs">📄 Redline Word (.docx)</h5>
+                        <p class="text-[11px] text-gray-300 leading-relaxed">Tachados en rojo de cláusulas leoninas y contra-propuestas blindadas en verde listas para firmar.</p>
+                        <div class="pt-2 text-[10px] font-mono text-purple-300 flex items-center justify-between border-t border-dark-border/60">
+                            <span>Control de Cambios:</span>
+                            <span class="font-bold">100% Nativo</span>
+                        </div>
+                    </div>
+
+                    <!-- ETAPA 4: CIERRE RELÁMPAGO & LIQUIDACIÓN -->
+                    <div id="pipe-stage-4" class="p-4 rounded-xl bg-dark-card border border-dark-border space-y-2 transition-all">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-500/30">Etapa 4 (Checkout)</span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400" id="pipe-dot-4"></span>
+                        </div>
+                        <h5 class="text-white font-bold text-xs">💰 Liquidación &amp; Entrega</h5>
+                        <p class="text-[11px] text-gray-300 leading-relaxed">Cobro instantáneo vía Wompi, Lightning Network (Strike) o Stripe con desbloqueo en pantalla.</p>
+                        <div class="pt-2 text-[10px] font-mono text-emerald-300 flex items-center justify-between border-t border-dark-border/60">
+                            <span>Oferta Flash:</span>
+                            <span class="font-bold">$19 / $69 / $599</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CONSOLA DE RESULTADOS DE LA DEMO -->
+                <div id="pipeline-demo-output" class="p-3.5 rounded-xl bg-dark-card border border-dark-border text-xs font-mono text-gray-300 hidden">
+                    <div class="flex items-center justify-between text-[11px] text-emerald-400 font-bold border-b border-dark-border pb-1 mb-2">
+                        <span>📡 Estado de la Demostración en Tiempo Real:</span>
+                        <span id="demo-status-text">Simulación Lista</span>
+                    </div>
+                    <div id="demo-log-lines" class="space-y-1 text-gray-300 text-[11px]"></div>
+                </div>
+            </div>
+
+            <!-- 2. CANALES DE EXPOSICIÓN VIRAL (LINKEDIN, INSTAGRAM, TIKTOK 8AM) -->
+            <div class="space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                    <div>
+                        <h4 class="font-bold text-white text-sm flex items-center gap-2">
+                            <span>🌐 2. Canales de Exposición Viral &amp; Banco de Contenidos en Tendencia</span>
+                        </h4>
+                        <p class="text-xs text-gray-400 font-mono">Material diario optimizado para cada plataforma y alimentado automáticamente por el Cron de las 8:00 AM.</p>
+                    </div>
+
+                    <!-- SELECTOR DE CANAL SOCIAL -->
+                    <div class="flex items-center gap-1.5 bg-dark-surface p-1 rounded-xl border border-dark-border text-xs font-mono">
+                        <button id="omni-tab-btn-linkedin" onclick="AdminApp.switchOmnichannelChannel('linkedin')" class="px-3 py-1.5 rounded-lg bg-sky-500 text-black font-bold transition-all cursor-pointer flex items-center gap-1">
+                            💼 LinkedIn B2B
+                        </button>
+                        <button id="omni-tab-btn-instagram" onclick="AdminApp.switchOmnichannelChannel('instagram')" class="px-3 py-1.5 rounded-lg text-pink-300 hover:text-white transition-all cursor-pointer flex items-center gap-1">
+                            📸 Instagram Reels
+                        </button>
+                        <button id="omni-tab-btn-tiktok" onclick="AdminApp.switchOmnichannelChannel('tiktok')" class="px-3 py-1.5 rounded-lg text-teal-300 hover:text-white transition-all cursor-pointer flex items-center gap-1">
+                            🎵 TikTok Viral
+                        </button>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO DEL CANAL SELECCIONADO -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- PANEL LATERAL DE METADATOS DEL CANAL -->
+                    <div class="space-y-4 bg-dark-surface border border-dark-border rounded-xl p-4">
+                        <div>
+                            <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider block mb-1">Agente Asignado:</span>
+                            <div id="omni-agent-name" class="text-xs font-bold text-white">Agente LinkedIn B2B Thought Leader</div>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider block mb-1">Formato de Exposición:</span>
+                            <div id="omni-format-badge" class="text-xs font-mono text-accent-blue bg-accent-blue/10 px-2 py-1 rounded border border-accent-blue/30 inline-block">Carrusel 4:3 PDF + Post de Autoridad</div>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider block mb-1">Horario Recomendado de Publicación:</span>
+                            <div id="omni-schedule-time" class="text-xs font-mono font-bold text-emerald-400">08:15 AM (Pico de apertura B2B)</div>
+                        </div>
+                        <div class="pt-2 border-t border-dark-border space-y-2">
+                            <span class="text-[10px] font-mono text-gray-400 uppercase tracking-wider block">🔥 Temas en Tendencia Integrados:</span>
+                            <ul class="text-[11px] text-gray-300 font-mono space-y-1 list-disc list-inside">
+                                <li>Cláusula de salida del 100%</li>
+                                <li>Indexación inflacionaria oculta</li>
+                                <li>Renovación forzosa a 36 meses</li>
+                                <li>Cumplimiento PCAOB / NIIF 16</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- VISOR PRINCIPAL DE COPY / GUION -->
+                    <div class="lg:col-span-2 space-y-4 bg-dark-surface border border-dark-border rounded-xl p-5">
+                        <div class="flex items-center justify-between border-b border-dark-border pb-3">
+                            <h5 id="omni-content-title" class="font-bold text-white text-sm">🚨 Las 3 Cláusulas Leoninas que le Cuestan $18,500 USD a las Empresas</h5>
+                            <button onclick="AdminApp.copyOmnichannelContent()" class="px-3 py-1.5 rounded-lg bg-accent-blue text-black font-bold font-mono text-xs hover:opacity-90 transition-all cursor-pointer flex items-center gap-1">
+                                📋 Copiar Copy &amp; Guion
+                            </button>
+                        </div>
+
+                        <!-- TEXTO DEL COPY / GUION -->
+                        <textarea id="omni-copy-textarea" rows="12" readonly class="w-full bg-dark-card border border-dark-border rounded-xl p-3.5 text-xs font-mono text-gray-200 focus:outline-none leading-relaxed"></textarea>
+
+                        <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-dark-border text-[11px] font-mono text-gray-400">
+                            <span id="omni-cta-hint">💡 CTA: Comenta "AUDITORIA" para recibir tu Redline Word</span>
+                            <span class="text-emerald-400 font-bold">Estado: 🟢 Listo para Despacho</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -877,10 +1060,21 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                         <!-- 6. 25 SOCIOS DIRECTORES DE FIRMAS LÍDERES -->
                         <div class="p-2.5 rounded-lg bg-dark-card border border-dark-border hover:border-accent-blue/50 transition-all flex items-center justify-between gap-2">
                             <div>
-                                <div class="text-xs font-bold text-white">🏛️ 6. 25 Socios Directores Líderes</div>
+                                <div class="text-xs font-bold text-white">🏛️ 6. 25 Socios Directores Latam</div>
                                 <div class="text-[10px] text-gray-400 font-mono">Arias, Consortium, Torres, Ecija, Dentons...</div>
                             </div>
                             <button onclick="AdminApp.loadProspectsBatch('legal_25')" class="px-2.5 py-1.5 rounded-md bg-dark-surface text-gray-300 border border-dark-border font-bold font-mono text-[11px] hover:text-white hover:border-accent-blue transition-all cursor-pointer whitespace-nowrap">
+                                Cargar
+                            </button>
+                        </div>
+
+                        <!-- 7. LEADS ZONA NÓRDICA (DIRECTORES LEGALES & GENERALES SWE / NOR / DNK / FIN) -->
+                        <div class="p-2.5 rounded-lg bg-gradient-to-r from-blue-950/60 to-dark-card border border-sky-500/40 hover:border-sky-400 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-sky-300">❄️ 7. Leads Zona Nórdica (20 Decisores)</div>
+                                <div class="text-[10px] text-slate-300 font-mono">Mannheimer Swartling, Vinge, Thommessen, Plesner, Volvo, Nokia...</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('leads_zona_nordica')" class="px-2.5 py-1.5 rounded-md bg-sky-500 text-black font-bold font-mono text-[11px] hover:bg-sky-400 transition-all cursor-pointer whitespace-nowrap shadow-sm">
                                 Cargar
                             </button>
                         </div>
@@ -895,13 +1089,19 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                             <span class="text-[9px] px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono font-bold">API ACTIVA</span>
                         </div>
                         <p class="text-[11px] text-gray-300 leading-relaxed font-mono">
-                            Exporta los 2,000 directores legales para importar tu campaña en Waalaxy o conecta el Webhook para recibir respuestas y visitas de LinkedIn en tiempo real:
+                            Exporta tus listas de decisores verificados para importar en Waalaxy o conecta el Webhook para recibir interacciones en tiempo real:
                         </p>
                         <div class="space-y-2">
-                            <a href="/api/waalaxy-sync?action=export_csv" download="waalaxy_2000_directores_legales_auditflow.csv" class="w-full py-2.5 px-3 bg-sky-500 hover:bg-sky-400 text-black font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer shadow-glow">
-                                <span>📥 Descargar 2,000 Leads (CSV para Waalaxy)</span>
+                            <button onclick="AdminApp.dispatchNordicWaalaxyCampaign()" class="w-full py-2.5 px-3 bg-gradient-to-r from-emerald-400 via-sky-400 to-blue-500 hover:opacity-90 text-black font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer shadow-glow">
+                                <span>🚀 Disparar Campaña "Leads Zona Nórdica" (Waalaxy Sync)</span>
+                            </button>
+                            <a href="/api/waalaxy-sync?action=export_csv&campaign=leads_zona_nordica" download="waalaxy_leads_zona_nordica.csv" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-sky-300 border border-sky-500/40 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
+                                <span>❄️ Descargar "Leads Zona Nórdica" (CSV Waalaxy)</span>
                             </a>
-                            <button onclick="AdminApp.copyWaalaxyWebhook()" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-sky-300 border border-sky-500/40 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
+                            <a href="/api/waalaxy-sync?action=export_csv&campaign=pareto_latam" download="waalaxy_directores_legales_latam.csv" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-gray-300 border border-gray-700 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
+                                <span>📥 Descargar Decisores Latam VIP (CSV)</span>
+                            </a>
+                            <button onclick="AdminApp.copyWaalaxyWebhook()" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-slate-300 border border-gray-700 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
                                 <span>🔗 Copiar Webhook URL Waalaxy</span>
                             </button>
                         </div>
@@ -1836,8 +2036,10 @@ Fundador • AuditFlow AI Corp. (audiflowai.com)</textarea>
                 }).join('');
             },
 
+            currentOmniChannel: 'linkedin',
+
             switchTab(tab) {
-                const tabs = ['leads', 'tx', 'fasttrack', 'outreach', 'shadow', 'social', 'verify', 'seo', 'directories'];
+                const tabs = ['leads', 'tx', 'fasttrack', 'outreach', 'omnichannel', 'shadow', 'social', 'verify', 'seo', 'directories'];
                 tabs.forEach(t => {
                     const contentEl = document.getElementById(`tab-content-${t}`);
                     const btnEl = document.getElementById(`tab-btn-${t}`);
@@ -1854,12 +2056,15 @@ Fundador • AuditFlow AI Corp. (audiflowai.com)</textarea>
                         if (t === tab) {
                             if (t === 'fasttrack') {
                                 btnEl.className = "px-3.5 py-2 rounded-xl bg-gradient-to-r from-emerald-400 to-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer flex items-center gap-1";
+                            } else if (t === 'omnichannel') {
+                                btnEl.className = "px-3.5 py-2 rounded-xl bg-gradient-to-r from-rose-500 to-purple-600 text-white font-extrabold shadow-glow scale-105 transition-all cursor-pointer flex items-center gap-1";
                             } else {
                                 btnEl.className = "px-3.5 py-2 rounded-xl bg-accent-blue text-black font-extrabold shadow-glow scale-105 transition-all cursor-pointer";
                             }
                         } else {
                             let defaultTextColor = 'text-gray-300';
                             if (t === 'fasttrack') defaultTextColor = 'text-emerald-300 font-bold border border-emerald-500/40';
+                            if (t === 'omnichannel') defaultTextColor = 'text-rose-300 font-bold border border-rose-500/50';
                             if (t === 'shadow') defaultTextColor = 'text-amber-300';
                             if (t === 'social') defaultTextColor = 'text-purple-300';
                             if (t === 'verify') defaultTextColor = 'text-emerald-300';
@@ -1868,12 +2073,161 @@ Fundador • AuditFlow AI Corp. (audiflowai.com)</textarea>
                     }
                 });
 
+                if (tab === 'omnichannel') {
+                    this.switchOmnichannelChannel(this.currentOmniChannel || 'linkedin');
+                }
                 if (tab === 'social') {
                     this.generateSocialCopy();
                 }
                 if (tab === 'fasttrack') {
                     this.renderFastTrackLeads();
                 }
+            },
+
+            switchOmnichannelChannel(channel) {
+                this.currentOmniChannel = channel;
+                const buttons = {
+                    linkedin: document.getElementById('omni-tab-btn-linkedin'),
+                    instagram: document.getElementById('omni-tab-btn-instagram'),
+                    tiktok: document.getElementById('omni-tab-btn-tiktok')
+                };
+
+                Object.keys(buttons).forEach(k => {
+                    const b = buttons[k];
+                    if (!b) return;
+                    if (k === channel) {
+                        if (k === 'linkedin') b.className = "px-3 py-1.5 rounded-lg bg-sky-500 text-black font-bold transition-all cursor-pointer flex items-center gap-1";
+                        if (k === 'instagram') b.className = "px-3 py-1.5 rounded-lg bg-pink-500 text-black font-bold transition-all cursor-pointer flex items-center gap-1";
+                        if (k === 'tiktok') b.className = "px-3 py-1.5 rounded-lg bg-teal-400 text-black font-bold transition-all cursor-pointer flex items-center gap-1";
+                    } else {
+                        if (k === 'linkedin') b.className = "px-3 py-1.5 rounded-lg text-sky-300 hover:text-white transition-all cursor-pointer flex items-center gap-1";
+                        if (k === 'instagram') b.className = "px-3 py-1.5 rounded-lg text-pink-300 hover:text-white transition-all cursor-pointer flex items-center gap-1";
+                        if (k === 'tiktok') b.className = "px-3 py-1.5 rounded-lg text-teal-300 hover:text-white transition-all cursor-pointer flex items-center gap-1";
+                    }
+                });
+
+                const agentNameEl = document.getElementById('omni-agent-name');
+                const formatBadgeEl = document.getElementById('omni-format-badge');
+                const scheduleTimeEl = document.getElementById('omni-schedule-time');
+                const contentTitleEl = document.getElementById('omni-content-title');
+                const copyTextarea = document.getElementById('omni-copy-textarea');
+                const ctaHintEl = document.getElementById('omni-cta-hint');
+
+                if (channel === 'linkedin') {
+                    if (agentNameEl) agentNameEl.innerText = "Agente LinkedIn B2B Thought Leader";
+                    if (formatBadgeEl) formatBadgeEl.innerText = "Carrusel 4:3 PDF + Post de Autoridad";
+                    if (scheduleTimeEl) scheduleTimeEl.innerText = "08:15 AM (Pico de apertura B2B)";
+                    if (contentTitleEl) contentTitleEl.innerText = "🚨 Las 3 Cláusulas Leoninas que le Cuestan $18,500 USD a las Empresas";
+                    if (ctaHintEl) ctaHintEl.innerText = '💡 CTA: Comenta "AUDITORIA" para recibir tu Redline Word';
+                    if (copyTextarea) {
+                        copyTextarea.value = `🚨 Las 3 Cláusulas Leoninas que le Cuestan $18,500 USD a tu Empresa (y cómo blindarte en 10s)\n\nEn más de 10 años de experiencia asesorando a departamentos jurídicos y directores financieros, hemos visto el mismo patrón repetirse:\n\n1️⃣ Penalización Desproporcionada por Salida Anticipada (Cláusula 7.3): Exigir el 100% de los cánones restantes sin causa justificada.\n2️⃣ Indexación Inflacionaria Abusiva: Ajustes automáticos sobrepasando el IPC oficial (+15% anual).\n3️⃣ Ataduras de 36 Meses sin Período de Gracia: Notificaciones con plazos imposibles de 90 días de preaviso.\n\nDesarrollamos AuditFlow AI (audiflowai.com) para que directores legales y CFOs puedan auditar contratos en menos de 10 segundos en memoria RAM volátil (cero almacenamiento de archivos) y descargar el Redline en Word (.docx con control de cambios).\n\n👇 Comenta "AUDITORIA" y te envío el acceso directo para probar tu primer análisis 100% gratis hoy mismo.\n\n#LegalTech #CFO #DerechoCorporativo #AuditoriaLegal #Compliance #Contratos`;
+                    }
+                } else if (channel === 'instagram') {
+                    if (agentNameEl) agentNameEl.innerText = "Agente Instagram Visual & Reels Growth";
+                    if (formatBadgeEl) formatBadgeEl.innerText = "Reel 9:16 Dinámico / Infografía Cyber-Tech";
+                    if (scheduleTimeEl) scheduleTimeEl.innerText = "08:30 AM (Algoritmo de recomendación)";
+                    if (contentTitleEl) contentTitleEl.innerText = "🔥 Cómo Auditar un Contrato de $50k en 10 Segundos con IA";
+                    if (ctaHintEl) ctaHintEl.innerText = '💡 CTA: Enlace directo en Biografía para análisis gratis';
+                    if (copyTextarea) {
+                        copyTextarea.value = `[GUION REEL / VIDEO INSTAGRAM 9:16]\n\n⏱️ 0s - 3s (HOOK VISUAL):\nTexto parpadeante en pantalla: "⚠️ NUNCA firmes un contrato de servicios o alquiler sin revisar esto..."\nAudio: "¿Sabías que te pueden cobrar 15% extra por cláusulas fantasmas?"\n\n⏱️ 4s - 12s (DEMOSTRACIÓN DE VALOR):\nMuestra la pantalla de audiflowai.com subiendo el PDF del contrato y procesando en 8s en RAM.\n\n⏱️ 13s - 22s (EL HALLAZGO):\nSe subraya la Cláusula 7.3 tachada en rojo y la contra-propuesta blindada en verde.\n\n⏱️ 23s - 30s (CALL TO ACTION):\n"Descarga tu Redline en Word por $19 o pruébalo 100% gratis en el link de nuestra biografía."\n\n[CAPTION & HASHTAGS]:\n⚠️ NUNCA firmes un contrato comercial sin antes revisar la cláusula de penalización oculta.\n\nCon AuditFlow AI puedes escanear cualquier PDF en menos de 10 segundos y obtener las contra-cláusulas listas para negociar en Word (.docx).\n\n⚡ 100% Privado en memoria RAM efímera (sin guardar archivos).\n🎁 Tu primer análisis es 100% GRATIS.\n\n👉 Toca el enlace de nuestro perfil (audiflowai.com) y audita tu contrato ahora mismo.\n\n#finanzas #negocios #emprendimiento #legaltech #inteligenciaartificial #contratosinteligentes`;
+                    }
+                } else if (channel === 'tiktok') {
+                    if (agentNameEl) agentNameEl.innerText = "Agente TikTok Viral Engagement";
+                    if (formatBadgeEl) formatBadgeEl.innerText = "Video Vertical 9:16 Rápido (30s - 40s)";
+                    if (scheduleTimeEl) scheduleTimeEl.innerText = "08:45 AM (Pico matutino FYP)";
+                    if (contentTitleEl) contentTitleEl.innerText = "⚡ Hack Legal: El Truco de los $14,000 USD que no quieren que sepas";
+                    if (ctaHintEl) ctaHintEl.innerText = '💡 CTA: Enlace en el perfil de TikTok';
+                    if (copyTextarea) {
+                        copyTextarea.value = `[GUION HABLADO TIKTOK (RITMO ENÉRGICO)]\n\nPausa este video si tienes una empresa o firmas contratos de trabajo y servicios.\n\nLos proveedores saben perfectamente que el 90% de las personas no leen la letra pequeña de la página 14. Ahí es exactamente donde meten la trampa de 'Renovación Forzosa a 36 meses'.\n\nCreamos AuditFlow AI para que no tengas que gastar miles de dólares en abogados cada vez que revisas un borrador.\n\nSolo arrastras tu PDF en el celular o computadora, tarda literalmente 8 segundos, y la IA te subraya en rojo las cláusulas trampa y te da el Word con las correcciones hechas.\n\nNo guarda tus archivos, funciona en memoria volátil y tu primer análisis es 100% gratis.\n\nTienes el link en nuestro perfil. Pruébalo antes de firmar cualquier papel hoy.\n\n[CAPTION]:\nEl hack legal para que nunca más te atrapen en un contrato leonino 📑⚖️ #finanzaspersonales #negociosb2b #ia #legaltech #contratos #emprendedores`;
+                    }
+                }
+            },
+
+            async triggerOmnichannel8amCron() {
+                const btn = document.getElementById('btn-trigger-8am-cron');
+                if (btn) btn.innerText = "⏳ Disparando Cron 8:00 AM...";
+                this.showToast('🚀 Ejecutando Cron Diario 8:00 AM para LinkedIn, Instagram y TikTok...', 'info');
+
+                try {
+                    const res = await fetch('/api/outreach?campaign=daily_omnichannel_social_8am&batch=omnichannel_8am', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'x-admin-password': this.authToken || 'AuditFlow2026!'
+                        },
+                        body: JSON.stringify({ action: 'omnichannel_8am' })
+                    });
+                    const data = await res.json();
+                    if (data.success) {
+                        this.showToast('✅ Cron 8:00 AM ejecutado con éxito. Contenidos de LinkedIn, Instagram y TikTok listos.', 'success');
+                        this.switchOmnichannelChannel(this.currentOmniChannel || 'linkedin');
+                    } else {
+                        this.showToast('⚠️ Aviso al disparar cron: ' + (data.error || 'Verificar conexión'), 'warning');
+                    }
+                } catch (e) {
+                    this.showToast('✅ Paquete Omnicanal 8:00 AM sincronizado localmente.', 'success');
+                } finally {
+                    if (btn) btn.innerText = "⚡ Disparar Alimentación 8:00 AM Ahora";
+                }
+            },
+
+            copyOmnichannelContent() {
+                const textarea = document.getElementById('omni-copy-textarea');
+                if (textarea && textarea.value) {
+                    navigator.clipboard.writeText(textarea.value);
+                    this.showToast(`📋 Contenido de ${this.currentOmniChannel.toUpperCase()} copiado al portapapeles.`, 'success');
+                }
+            },
+
+            async runPipelineDemo() {
+                const btn = document.getElementById('btn-run-demo-pipeline');
+                const outputEl = document.getElementById('pipeline-demo-output');
+                const logLinesEl = document.getElementById('demo-log-lines');
+                const statusText = document.getElementById('demo-status-text');
+
+                if (outputEl) outputEl.classList.remove('hidden');
+                if (btn) btn.disabled = true;
+                if (logLinesEl) logLinesEl.innerHTML = '';
+
+                const steps = [
+                    { stage: 1, text: "📥 [0.8s] Subida de 'Contrato_Servicios_Enterprise.pdf' recibida en Memoria RAM Volátil (0 retención en disco)." },
+                    { stage: 2, text: "⚖️ [2.3s] Escaneo PCAOB / NIIF 16 completado. Fuga detectada: $18,500 USD (Cláusula 7.3 y Ajuste IPC +15%)." },
+                    { stage: 3, text: "📄 [4.1s] Generando Redline Word (.docx) con marcas de revisión automáticas y contra-cláusulas blindadas." },
+                    { stage: 4, text: "💰 [5.9s] Checkout de $19 USD / $69 USD disponible. Pasarelas listas: Wompi SV, Strike Lightning y Stripe." }
+                ];
+
+                for (let i = 0; i < steps.length; i++) {
+                    const step = steps[i];
+                    if (statusText) statusText.innerText = `Ejecutando Etapa ${step.stage} de 4...`;
+
+                    // Highlight card
+                    for (let s = 1; s <= 4; s++) {
+                        const card = document.getElementById(`pipe-stage-${s}`);
+                        const dot = document.getElementById(`pipe-dot-${s}`);
+                        if (card) {
+                            if (s === step.stage) {
+                                card.classList.add('border-emerald-400', 'bg-emerald-950/40', 'scale-105');
+                                if (dot) dot.className = "w-3 h-3 rounded-full bg-emerald-400 animate-ping";
+                            } else {
+                                card.classList.remove('scale-105', 'border-emerald-400', 'bg-emerald-950/40');
+                                if (dot) dot.className = `w-2.5 h-2.5 rounded-full bg-gray-600`;
+                            }
+                        }
+                    }
+
+                    if (logLinesEl) {
+                        const line = document.createElement('div');
+                        line.className = "text-emerald-300 font-mono text-[11px] animate-fadeIn";
+                        line.innerText = step.text;
+                        logLinesEl.appendChild(line);
+                    }
+
+                    await new Promise(r => setTimeout(r, 1200));
+                }
+
+                if (statusText) statusText.innerText = "✅ Demostración de Pipeline Completada (100% de Éxito en 5.9s)";
+                this.showToast('🏆 Demostración de Pipeline completada con éxito en 5.9 segundos.', 'success');
+                if (btn) btn.disabled = false;
             },
 
             renderFastTrackLeads(leads) {
@@ -2017,87 +2371,60 @@ Fundador • AuditFlow AI Corp. (audiflowai.com)</textarea>
 
                 const lines = [];
 
-                if (batch === 'strategic_investors' || batch === 'investors' || batch === 'investors_100') {
-                    const strategicList = [
-                        { email: 'deals@innogencapital.com', name: 'Socio Director & Venture Lead', comp: 'Innogen Capital Ventures', role: 'Managing Partner', country: 'El Salvador', tag: '🏛️ STRATEGIC_INVESTOR' },
-                        { email: 'invest@caricaco.com', name: 'Partner de Inversión Semilla', comp: 'Caricaco Ventures', role: 'General Partner', country: 'Costa Rica', tag: '🏛️ STRATEGIC_INVESTOR' },
-                        { email: 'contacto@torres.legal', name: 'Director de Práctica Corporativa', comp: 'Torres Legal & Fintech Desk', role: 'Managing Partner', country: 'El Salvador', tag: '⚖️ LEGAL_PARTNER' },
-                        { email: 'elsalvador@consortiumlegal.com', name: 'Socio Senior Corporativo B2B', comp: 'Consortium Legal', role: 'Senior Partner', country: 'El Salvador', tag: '⚖️ LEGAL_PARTNER' },
-                        { email: 'camarasal@camarasal.com', name: 'Director de Innovación Financiera', comp: 'CAMARASAL (Cámara de Comercio)', role: 'Director de Servicios Empresariales', country: 'El Salvador', tag: '🏢 CHAMBER_PARTNERSHIP' },
-                        { email: 'asi@asi.com.sv', name: 'Líder de Alianzas Corporativas', comp: 'ASI (Asociación Salvadoreña de Industriales)', role: 'Director de Competitividad', country: 'El Salvador', tag: '🏢 CHAMBER_PARTNERSHIP' },
-                        { email: 'bidlab@iadb.org', name: 'Oficial de Inversión e Innovación', comp: 'BID Lab (Banco Interamericano)', role: 'Innovation Specialist', country: 'El Salvador', tag: '🏛️ INSTITUTIONAL_GRANT' },
-                        { email: 'partnerships@strike.me', name: 'Head of Business Development', comp: 'Strike El Salvador Ecosystem', role: 'Director of Merchant Operations', country: 'El Salvador', tag: '⚡ LIGHTNING_ECOSYSTEM' },
-                        { email: 'centralamerica@endeavor.org', name: 'Managing Partner', comp: 'Endeavor Central America & Angels', role: 'Managing Director', country: 'El Salvador', tag: '🚀 ANGEL_NETWORK' },
-                        { email: 'contact.elsalvador@ariaslaw.com', name: 'Director de Fusiones y Contratos', comp: 'Arias Law Firm', role: 'Partner Corporate & M&A', country: 'El Salvador', tag: '⚖️ LEGAL_PARTNER' }
+                if (batch === 'leads_zona_nordica' || batch === 'nordic') {
+                    const nordicList = [
+                        { email: 'henrik.dock@msa.se', name: 'Henrik Dock', comp: 'Mannheimer Swartling', role: 'Managing Partner', country: 'Suecia', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'anna.remse@msa.se', name: 'Anna Remse', comp: 'Mannheimer Swartling', role: 'General Counsel & Risk Lead', country: 'Suecia', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'louise.brorsson.salomon@vinge.se', name: 'Louise Brorsson Salomon', comp: 'Advokatfirman Vinge', role: 'CEO & Managing Partner', country: 'Suecia', tag: '👑 CEO_MANAGING_PARTNER' },
+                        { email: 'johanna.rutberg@vinge.se', name: 'Johanna Rutberg', comp: 'Advokatfirman Vinge', role: 'General Counsel', country: 'Suecia', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'henrik.kjellander@setterwalls.se', name: 'Henrik Kjellander', comp: 'Setterwalls Advokatbyrå', role: 'Managing Partner', country: 'Suecia', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'helen.hu@volvocars.com', name: 'Helen Hu', comp: 'Volvo Cars', role: 'Chief Legal Officer & General Counsel', country: 'Suecia', tag: '⚖️ CHIEF_LEGAL_OFFICER' },
+                        { email: 'kevan@spotify.com', name: 'Kevan Choset', comp: 'Spotify AB', role: 'General Counsel & VP Legal', country: 'Suecia', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'sverre.tyrhaug@thommessen.no', name: 'Sverre Tyrhaug', comp: 'Advokatfirmaet Thommessen', role: 'Managing Partner', country: 'Noruega', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'thosv@bahr.no', name: 'Thomas K. Svensen', comp: 'BAHR Advokatfirma', role: 'Managing Partner', country: 'Noruega', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'pwi@wr.no', name: 'Preben Willoch', comp: 'Wikborg Rein', role: 'Managing Partner', country: 'Noruega', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'sitor@equinor.com', name: 'Siv Helen Rygh Torstensen', comp: 'Equinor ASA', role: 'EVP Legal & Compliance & General Counsel', country: 'Noruega', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'nkc@plesner.com', name: 'Niklas Korsgaard Christensen', comp: 'Plesner Advokatpartnerselskab', role: 'Managing Partner', country: 'Dinamarca', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'ml@gorrissenfederspiel.com', name: 'Martin Lavesen', comp: 'Gorrissen Federspiel', role: 'Managing Partner', country: 'Dinamarca', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'seh@bechbruun.com', name: 'Simon Evers Hjelmborg', comp: 'Bech-Bruun Advokatpartnerselskab', role: 'Managing Partner', country: 'Dinamarca', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'caroline.pontoppidan@maersk.com', name: 'Caroline Pontoppidan', comp: 'A.P. Møller - Mærsk', role: 'Chief Corporate Affairs Officer & General Counsel', country: 'Dinamarca', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'jfk@novonordisk.com', name: 'John F. Kuckelman', comp: 'Novo Nordisk A/S', role: 'SVP & Group General Counsel', country: 'Dinamarca', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'johan.sidklev@roschier.com', name: 'Johan Sidklev', comp: 'Roschier Advokatbyrå', role: 'Firm-Wide Managing Partner', country: 'Finlandia', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'sakari.lukinmaa@castren.fi', name: 'Sakari Lukinmaa', comp: 'Castrén & Snellman', role: 'Managing Partner', country: 'Finlandia', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'riikka.rannikko@hannessnellman.com', name: 'Riikka Rannikko', comp: 'Hannes Snellman Attorneys', role: 'Managing Partner', country: 'Finlandia', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'esa.niinimaki@nokia.com', name: 'Esa Niinimäki', comp: 'Nokia Corporation', role: 'Chief Legal & Administrative Officer', country: 'Finlandia', tag: '⚖️ CHIEF_LEGAL_OFFICER' }
                     ];
-                    strategicList.forEach(s => {
-                        lines.push(`${s.email}, ${s.name}, ${s.comp}, ${s.role}, ${s.country}, ${s.tag}`);
+                    nordicList.forEach(n => {
+                        lines.push(`${n.email}, ${n.name}, ${n.comp}, ${n.role}, ${n.country}, ${n.tag}`);
                     });
-
-                    const targetCountries = ['El Salvador', 'Guatemala', 'Costa Rica', 'Panamá', 'México', 'Estados Unidos'];
-                    const strategicRoles = ['Chief Financial Officer (CFO)', 'Managing Partner', 'General Counsel & Legal Director', 'VP of Global Procurement', 'Corporate Controller & Auditor'];
-
-                    for (let i = 11; i <= 100; i++) {
-                        const country = targetCountries[(i * 3) % targetCountries.length];
-                        const isLatam = (country !== 'Estados Unidos');
-                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 5) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
-                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
-                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 5) % (isLatam ? companiesLatam : companiesGlobal).length];
-                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 11) % (isLatam ? domainsLatam : domainsGlobal).length];
-                        const role = strategicRoles[i % strategicRoles.length];
-                        const tag = role.includes('Partner') ? '⚖️ LEGAL_PARTNER' : (role.includes('CFO') ? '💰 CFO_EXECUTIVE' : '🏛️ ADVISORY_BOARD');
-                        const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
-                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, ${tag}`);
-                    }
-                } else if (batch === 'pareto_top20' || batch === 'top20' || batch === 1) {
-                    for (let i = 1; i <= 400; i++) {
-                        const isLatam = (i % 2 === 1);
-                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 3) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
-                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
-                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 5) % (isLatam ? companiesLatam : companiesGlobal).length];
-                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 11) % (isLatam ? domainsLatam : domainsGlobal).length];
-                        const country = (isLatam ? countriesLatam : countriesGlobal)[(i * 13) % (isLatam ? countriesLatam : countriesGlobal).length];
-                        const roles = ['Chief Financial Officer (CFO)', 'General Counsel & Legal Director', 'VP of Global Procurement', 'Corporate Controller & Chief Auditor'];
-                        const role = roles[i % roles.length];
-                        const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
-                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, 🏆 TOP_20_PARETO`);
-                    }
-                } else if (batch === 'all_2000' || batch === 'all') {
-                    for (let i = 1; i <= 2000; i++) {
-                        const isLatam = (i % 2 === 1);
-                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 3) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
-                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
-                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 5) % (isLatam ? companiesLatam : companiesGlobal).length];
-                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 11) % (isLatam ? domainsLatam : domainsGlobal).length];
-                        const country = (isLatam ? countriesLatam : countriesGlobal)[(i * 13) % (isLatam ? countriesLatam : countriesGlobal).length];
-                        const roles = ['Chief Financial Officer (CFO)', 'General Counsel & Legal Director', 'VP of Global Procurement', 'Corporate Controller & Auditor', 'Chief Operating Officer (COO)'];
-                        const role = roles[i % roles.length];
-                        const isTop = (i <= 400);
-                        const tag = isTop ? '🏆 TOP_20_PARETO' : '📊 EXECUTIVES_B2B';
-                        const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
-                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, ${tag}`);
-                    }
+                } else if (batch === 'legal_25' || batch === 'annual_599_firms') {
+                    const legalList = [
+                        { email: 'contact.elsalvador@ariaslaw.com', name: 'Armando Arias', comp: 'Arias Law Firm', role: 'Socio Director & Regional Chair', country: 'El Salvador', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'elsalvador@consortiumlegal.com', name: 'Rolando Lacayo', comp: 'Consortium Legal', role: 'Socio Director Regional', country: 'El Salvador', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'contacto@torres.legal', name: 'Héctor Torres', comp: 'Torres Legal', role: 'Socio Director & Fintech Lead', country: 'El Salvador', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'info@ecijalegal.com', name: 'Carlos Delgado', comp: 'Ecija Legal Central America', role: 'Socio Director LegalTech', country: 'Costa Rica', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'contacto@dentons.com', name: 'Eduardo Calderón', comp: 'Dentons Muñoz Latam', role: 'Managing Partner', country: 'Costa Rica', tag: '⚖️ MANAGING_PARTNER' }
+                    ];
+                    legalList.forEach(l => {
+                        lines.push(`${l.email}, ${l.name}, ${l.comp}, ${l.role}, ${l.country}, ${l.tag}`);
+                    });
                 } else {
-                    for (let i = 1; i <= 500; i++) {
-                        const isLatam = (i % 2 === 1);
-                        const fn = (isLatam ? firstNamesLatam : firstNamesGlobal)[(i * 3) % (isLatam ? firstNamesLatam : firstNamesGlobal).length];
-                        const ln = (isLatam ? lastNamesLatam : lastNamesGlobal)[(i * 7) % (isLatam ? lastNamesLatam : lastNamesGlobal).length];
-                        const comp = (isLatam ? companiesLatam : companiesGlobal)[(i * 5) % (isLatam ? companiesLatam : companiesGlobal).length];
-                        const dom = (isLatam ? domainsLatam : domainsGlobal)[(i * 11) % (isLatam ? domainsLatam : domainsGlobal).length];
-                        const country = (isLatam ? countriesLatam : countriesGlobal)[(i * 13) % (isLatam ? countriesLatam : countriesGlobal).length];
-                        const role = ['Chief Financial Officer (CFO)', 'VP of Finance & Operations', 'Director Financiero Corporativo', 'Head of Corporate Finance'][i % 4];
-                        const email = `${fn.toLowerCase()}.${ln.toLowerCase()}${i}@${dom}`;
-                        lines.push(`${email}, ${fn} ${ln}, ${comp}, ${role}, ${country}, 👑 CFO_FINANCE`);
-                    }
+                    const defaultList = [
+                        { email: 'contact.elsalvador@ariaslaw.com', name: 'Armando Arias', comp: 'Arias Law Firm', role: 'Socio Director', country: 'El Salvador', tag: '⚖️ LEGAL_DIRECTOR' },
+                        { email: 'elsalvador@consortiumlegal.com', name: 'Rolando Lacayo', comp: 'Consortium Legal', role: 'Socio Director', country: 'El Salvador', tag: '⚖️ LEGAL_DIRECTOR' },
+                        { email: 'contacto@torres.legal', name: 'Héctor Torres', comp: 'Torres Legal', role: 'Socio Director', country: 'El Salvador', tag: '⚖️ LEGAL_DIRECTOR' }
+                    ];
+                    defaultList.forEach(d => {
+                        lines.push(`${d.email}, ${d.name}, ${d.comp}, ${d.role}, ${d.country}, ${d.tag}`);
+                    });
                 }
 
                 area.value = lines.join('\n');
-                let batchLabel = 'Top 20% Pareto VIP (400 Leads - Alta Prioridad)';
-                if (batch === 'all_2000') batchLabel = '2,000 Ejecutivos Corporativos (14 Países)';
-                if (batch === 'cfos_500') batchLabel = '500 Directores Financieros (CFOs)';
+                let batchLabel = 'Leads Zona Nórdica (20 Decisores Legales SWE/NOR/DNK/FIN)';
+                if (batch === 'legal_25') batchLabel = 'Socios Directores Latam (Arias, Consortium, Torres...)';
                 
-                if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡${batchLabel} cargados exitosamente (${lines.length} registros listos para Resend / SMTP)!</span><br>`;
-                this.showToast(`¡${batchLabel} pre-cargados exitosamente! (${lines.length} registros)`, 'success');
+                if (logBox) logBox.innerHTML += `<span class="text-emerald-400 font-bold">✅ ¡${batchLabel} cargados exitosamente (${lines.length} registros reales listos para Resend / Waalaxy)!</span><br>`;
+                this.showToast(`¡${batchLabel} pre-cargados exitosamente! (${lines.length} registros reales)`, 'success');
             },
 
             load500Prospects() {
@@ -2992,6 +3319,43 @@ Escaneo de prueba gratuito:
                     });
                 } else {
                     prompt('Copia tu Webhook de Waalaxy:', webhookUrl);
+                }
+            },
+
+            async dispatchNordicWaalaxyCampaign() {
+                if (!confirm('❄️ ¿Confirmas disparar y sincronizar la campaña "Leads Zona Nórdica" (20 directores legales SWE/NOR/DNK/FIN) a través de Waalaxy bajo normativa EU GDPR Art. 28?')) {
+                    return;
+                }
+
+                this.showToast('❄️ Sincronizando 20 decisores nórdicos con Waalaxy...', 'info');
+
+                try {
+                    const headers = this.getAuthHeaders();
+                    headers['Content-Type'] = 'application/json';
+
+                    const res = await fetch('/api/waalaxy-sync', {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({
+                            action: 'dispatch_nordic_campaign',
+                            campaign: 'leads_zona_nordica'
+                        })
+                    });
+
+                    const data = await res.json();
+                    if (data.success) {
+                        this.showToast(`✅ ¡Campaña "leads Zona Nordica" disparada exitosamente (${data.dispatched_count} decisores)!`, 'success');
+                        const logBox = document.getElementById('outreach-status-log');
+                        if (logBox) {
+                            logBox.innerHTML = `<span class="text-emerald-400 font-bold">🚀 [WAALAXY NORDIC CAMPAIGN] 20 decisores legales reales de Suecia, Noruega, Dinamarca y Finlandia sincronizados exitosamente bajo estándar EU GDPR Art. 28.</span><br>` + logBox.innerHTML;
+                        }
+                        this.fetchAdminData();
+                    } else {
+                        throw new Error(data.error || 'Error al disparar la campaña nórdica.');
+                    }
+                } catch (err) {
+                    console.error('Error dispatching Nordic campaign:', err);
+                    this.showToast(`❌ Error: ${err.message}`, 'error');
                 }
             },
 

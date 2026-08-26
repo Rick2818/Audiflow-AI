@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
-import { REAL_50_DECISION_MAKERS, generateLegalExecutiveLeads } from './outreach.js';
+import { REAL_50_DECISION_MAKERS, NORDIC_LEGAL_EXECUTIVE_LEADS, generateLegalExecutiveLeads } from './outreach.js';
 
 export const openedLeadsMap = new Map();
 const TRANSPARENT_GIF_BUFFER = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
@@ -54,32 +54,16 @@ async function sendGmailEmail({ to, subject, html }) {
 // Registro global en memoria para persistencia de envíos en tiempo de ejecución
 const leadEmailSentCounts = new Map();
 
-function generate2000Leads() {
-  const firstNames = ['Carlos', 'Elena', 'Roberto', 'Mariana', 'Javier', 'Sofia', 'Mateo', 'Lucia', 'Alejandro', 'Valentina', 'Diego', 'Camila', 'Fernando', 'Isabella', 'Gabriel', 'Victoria', 'Alexander', 'Charlotte', 'William', 'Amelia', 'Oliver', 'Emma', 'Lucas', 'Sophia', 'Benjamin', 'Mia', 'Henry', 'Evelyn', 'Sebastian', 'Harper', 'Arthur', 'Grace', 'Pierre', 'Lars', 'Hans', 'Katrin', 'Astrid', 'Marcus', 'Stefan'];
-  const lastNames = ['Mendoza', 'Rostova', 'Gómez', 'Silva', 'Peralta', 'Vargas', 'Morales', 'Castillo', 'Navarro', 'Ríos', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzales', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Weber', 'Meyer', 'Schneider', 'Fischer', 'Hoffmann', 'Schäfer', 'Mueller'];
-  
-  const domains = [
-    'mendozalaw.com', 'constructora.sv', 'gomezlogistics.com', 'vargasretail.co', 'castillocorp.mx',
-    'navarrotrade.cl', 'riosbanking.pe', 'peraltabuilders.gt', 'moralesinvestments.cr', 'silvaparami.ar',
-    'techconsulting.io', 'innovatech.es', 'lombardcapital.ch', 'apexglobal.co.uk', 'vertextrading.de',
-    'nordiclogistics.se', 'finanzeprova.it', 'cloudscale.fr', 'beneluxventures.nl', 'helsinkisystems.fi',
-    'alvarado.sv', 'serviciosgt.com', 'crtech.co.cr', 'panamalogistics.pa', 'usenterprisetech.com',
-    'uklegal.co.uk', 'swissfinancial.ch', 'deutschlandtech.de', 'francetech.fr', 'luxcapital.lu',
-    'denmarksolutions.dk', 'norwaylogistics.no', 'finlandsoftware.fi'
-  ];
-
+function getRealVerifiedLeads() {
   const docs = [
     { name: 'Contrato_Arrendamiento_Comercial_2026.pdf', type: 'Arrendamiento', tag: '🏢 ARRENDAMIENTO' },
     { name: 'Factura_Servicios_IT_Cloud_Q3.pdf', type: 'Facturación', tag: '🧾 FACTURACION' },
-    { name: 'Contrato de Arrendamiento Comercial Inmobiliario', tag: '🏢 LEASE_AGREEMENT' },
-    { name: 'Factura de Proveedor de Servicios de IT & Cloud', tag: '💻 IT_INVOICE' },
     { name: 'Contrato de Prestación de Servicios Profesionales B2B', tag: '📋 SERVICES_SLA' },
-    { name: 'Acuerdo de Distribución y Licenciamiento de Software', tag: '🚀 SOFTWARE_LICENSE' },
-    { name: 'Orden de Compra y Suministro de Equipamiento', tag: '🛒 SUPPLY_PURCHASE' }
+    { name: 'Acuerdo de Distribución y Licenciamiento de Software', tag: '🚀 SOFTWARE_LICENSE' }
   ];
 
-  // Base Principal 100% Real: 2,000 Directores Legales, General Counsels & Firmas Corporativas
-  const rawLegalLeads = generateLegalExecutiveLeads(2000);
+  // Base Principal 100% Real: Socios Directores Reales Verificados (Latam + Zona Nórdica)
+  const rawLegalLeads = [...REAL_50_DECISION_MAKERS, ...NORDIC_LEGAL_EXECUTIVE_LEADS];
   const leads = rawLegalLeads.map((realLead, idx) => {
     const docObj = docs[idx % docs.length];
     const emailsSent = leadEmailSentCounts.get(realLead.email.toLowerCase()) || 0;
@@ -89,11 +73,11 @@ function generate2000Leads() {
     const opensCount = openData ? openData.count : 0;
     const isOpened = Boolean(opensCount > 0);
 
-    const tags = [realLead.tag, realLead.secondary_tag || '📜 CORPORATE_LEGAL', docObj.tag];
+    const tags = [realLead.tag, '👑 DIRECTIVA_REAL', docObj.tag];
     if (realLead.pareto_tier === 'TOP_20') tags.unshift('🏆 TOP_20_PARETO');
     if (emailsSent === 0) tags.push('⚪ NO_ENVIADO');
     else tags.push('📧 CONTACTADO');
-    if (realLead.lead_score >= 90) tags.push('🚨 HIGH_LEAKAGE');
+    if (realLead.lead_score >= 90) tags.push('🚨 ALTA_PRIORIDAD');
     if (isOpened) tags.unshift(`👀 VISTO (${opensCount}x)`);
 
     return {
@@ -122,12 +106,7 @@ function generate2000Leads() {
     };
   });
 
-  leads.sort((a, b) => {
-    if (a.pareto_tier === 'TOP_20' && b.pareto_tier !== 'TOP_20') return -1;
-    if (a.pareto_tier !== 'TOP_20' && b.pareto_tier === 'TOP_20') return 1;
-    return (b.lead_score || 0) - (a.lead_score || 0);
-  });
-
+  leads.sort((a, b) => (b.lead_score || 0) - (a.lead_score || 0));
   return leads;
 }
 
@@ -260,7 +239,7 @@ export default async function handler(req, res) {
         const smtpPort = Number(process.env.SMTP_PORT) || 587;
         const smtpUser = (process.env.SMTP_USER || '').trim();
         const smtpPass = (process.env.SMTP_PASS || '').trim();
-        const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+        const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.OWNER_CONTROL).trim();
         const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
         let transporter;
@@ -379,7 +358,7 @@ export default async function handler(req, res) {
 
       // 1. Diagnóstico y Autocorrección de SMTP / Despacho
       try {
-        const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+        const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.OWNER_CONTROL).trim();
         const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
         
         const testTransporter = nodemailer.createTransport({
@@ -505,7 +484,7 @@ export default async function handler(req, res) {
       const smtpUser = (process.env.SMTP_USER || '').trim();
       const smtpPass = (process.env.SMTP_PASS || '').trim();
       const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
-      const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+      const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.OWNER_CONTROL).trim();
       const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
       let transporter;
@@ -626,32 +605,16 @@ export default async function handler(req, res) {
                 }
               });
               if (error) {
-                // Fallback directo a Gmail SMTP si Resend tiene aviso
-                await sendGmailEmail({ to: pEmail, subject, html: bodyHtml });
-                results.push({ email: pEmail, name: pName, company: pComp, status: 'sent', provider: 'Gmail SMTP' });
+                console.warn('[Admin Outreach] Resend aviso:', error.message);
+                results.push({ email: pEmail, name: pName, company: pComp, status: 'simulated_protection', reason: 'Resend API no disponible. Modo seguro activado.' });
               } else {
                 results.push({ email: pEmail, name: pName, company: pComp, status: 'sent', id: data?.id, provider: 'Resend API' });
               }
-            } else if (transporter) {
-              await transporter.sendMail({
-                from: senderFrom,
-                to: pEmail,
-                replyTo: 'tendenciaiatufuturo@gmail.com',
-                subject,
-                html: bodyHtml
-              });
-              results.push({ email: pEmail, name: pName, company: pComp, status: 'sent', provider: 'SMTP' });
             } else {
-              await sendGmailEmail({ to: pEmail, subject, html: bodyHtml });
-              results.push({ email: pEmail, name: pName, company: pComp, status: 'sent', provider: 'Gmail SMTP Direct' });
+              results.push({ email: pEmail, name: pName, company: pComp, status: 'simulated_protection', reason: 'Protegido: Prospección masiva solo permitida vía Resend para blindar bandejas personales.' });
             }
           } catch (err) {
-            try {
-              await sendGmailEmail({ to: pEmail, subject, html: bodyHtml });
-              results.push({ email: pEmail, name: pName, company: pComp, status: 'sent', provider: 'Gmail SMTP Fallback' });
-            } catch (fErr) {
-              results.push({ email: pEmail, name: pName, company: pComp, status: 'error', error: fErr.message });
-            }
+            results.push({ email: pEmail, name: pName, company: pComp, status: 'error', error: err.message });
           }
         } else {
           results.push({ email: pEmail, name: pName, company: pComp, status: 'simulated_success', reason: 'Test Mode: No real email was dispatched.' });
@@ -1101,7 +1064,7 @@ export default async function handler(req, res) {
     }
 
     if (leads.length === 0) {
-      leads = generate2000Leads();
+      leads = getRealVerifiedLeads();
     }
 
     // Transacciones: Solo mostrar transacciones 100% reales registradas en la base de datos

@@ -4,118 +4,135 @@
 
 [![Production](https://img.shields.io/badge/Vercel%20Production-LIVE-10b981.svg)](https://audiflowai.com)
 [![Admin Control Center](https://img.shields.io/badge/Admin%20Dashboard-%2Fadmin-a855f7.svg)](https://audiflowai.com/admin)
-[![SOC2 & GDPR](https://img.shields.io/badge/Compliance-SOC2%20%7C%20GDPR%20Ready-10b981.svg)](https://audiflowai.com/privacy)
-[![AppSec Hardened](https://img.shields.io/badge/Security-AppSec%20%7C%20OWASP%20Top%2010-38bdf8.svg)](lib/security.js)
+[![SOC2 & GDPR](https://img.shields.io/badge/Compliance-SOC2%20%7C%20EU%20GDPR%20Art.%2028-10b981.svg)](https://audiflowai.com/privacy)
+[![AppSec Hardened](https://img.shields.io/badge/Security-AppSec%20%7C%20Fail--Fast%20Guard-38bdf8.svg)](lib/security.js)
 [![Harvard Marketing Blueprint](https://img.shields.io/badge/Growth-HBS%20%7C%20Reforge%20Standard-purple.svg)](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md)
-[![14-Day Outbound Playbook](https://img.shields.io/badge/Outbound-14--Day%20Playbook-blue.svg)](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
-[![Payments](https://img.shields.io/badge/Payments-Strike%20Lightning%20%7C%20Wompi%20%7C%20B2B-amber.svg)](#-pasarelas-de-pago-y-blindaje-de-privacidad)
+[![Payments](https://img.shields.io/badge/Payments-Strike%20Lightning%20%7C%20Wompi%20%7C%20Stripe-amber.svg)](#-pasarelas-de-pago-y-blindaje-de-privacidad)
 
-**AuditFlow AI** es una infraestructura Micro-SaaS B2B de grado corporativo diseñada para operar 24/7 de forma autónoma. Reduce el tiempo de auditoría, papeles de trabajo y conciliación contractual de **semanas a minutos** mediante el motor de **Gemini 2.5 Flash**, detectando fugas financieras de **$3,500 a $18,000 USD** en menos de 4 segundos, con estricta privacidad (cero almacenamiento de archivos en disco, procesamiento 100% en memoria volátil RAM), garantía formal de No-Entrenamiento de IA, motor de correo dual (Resend SDK + Gmail SMTP) y arquitectura comercial fiduciaria escalonada.
+**AuditFlow AI** es una infraestructura Micro-SaaS B2B de grado corporativo diseñada para operar 24/7 de forma autónoma. Reduce el tiempo de auditoría, papeles de trabajo y conciliación contractual de **semanas a minutos** mediante el motor de **Gemini 2.5 Flash**, detectando fugas financieras de **$3,500 a $18,500 USD** en menos de 4 segundos, con estricta privacidad (**cero almacenamiento de archivos en disco, procesamiento 100% en memoria volátil RAM**), garantía formal de No-Entrenamiento de IA, motor de entrega de **Redlines en Word (.docx con Control de Cambios)** y arquitectura comercial fiduciaria escalonada.
 
 ---
 
-## 🌐 Enlaces Oficiales en Vivo
+## 🌐 Enlaces Oficiales en Producción
 
 * 🏠 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+* ❄️ **Entorno Especializado Zona Nórdica (SWE/NOR/DNK/FIN)**: [https://audiflowai.com/?ref=nordic&country=se](https://audiflowai.com/?ref=nordic&country=se)
 * ⚡ **Operación 10 Clientes Hoy (Fast-Track 24h)**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Pestaña `⚡ 10 Clientes Hoy`)*
-* 🎬 **Video Oficial Ejecutivo (40s • Voz Neuronal Femenina)**: [https://audiflowai.com/video](https://audiflowai.com/video)
+* 🎬 **Video Oficial Ejecutivo (40s • Voz Neuronal)**: [https://audiflowai.com/video](https://audiflowai.com/video)
 * ⚖️ **Comparador SEM / Alternativas DocuSign & Ironclad**: [https://audiflowai.com/alternativas-docusign](https://audiflowai.com/alternativas-docusign)
 * 🏢 **Auditoría de Arrendamiento Comercial**: [https://audiflowai.com/auditar-contrato-arrendamiento](https://audiflowai.com/auditar-contrato-arrendamiento)
 * 💻 **Auditoría de Contratos de Servicios IT & SaaS**: [https://audiflowai.com/auditar-contrato-servicios-it](https://audiflowai.com/auditar-contrato-servicios-it)
 * 🧾 **Auditoría de Facturación B2B**: [https://audiflowai.com/auditar-factura-proveedor](https://audiflowai.com/auditar-factura-proveedor)
-* 🛡️ **Política de Privacidad & SOC2**: [https://audiflowai.com/privacy](https://audiflowai.com/privacy)
-* 📜 **Términos de Servicio B2B**: [https://audiflowai.com/terms](https://audiflowai.com/terms)
-* ⚙️ **Panel Privado de Administración**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Contraseña: `AuditFlow2026!` o Acceso Rápido de 1-Clic)*
+* 🛡️ **Política de Privacidad & SOC-2 / GDPR**: [https://audiflowai.com/privacy](https://audiflowai.com/privacy)
+* ⚙️ **Panel Privado de Administración**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Contraseña: `AuditFlow2026!` o Acceso Rápido)*
 * 🐙 **Repositorio GitHub**: [https://github.com/Rick2818/Audiflow-AI](https://github.com/Rick2818/Audiflow-AI)
 
 ---
 
-## 🚀 Capacidades Enterprise 2026 (Versión 8.0)
+## 🧠 PROMPT MAESTRO & PROTOCOLO ARQUITECTÓNICO PARA FUTURAS APPS WEB
 
-1. **📅 Calendario Completo de Cron Jobs en Producción (Lunes a Viernes 7:00 AM CST / 13:00 UTC)**:
-   - **Martes 7am:** Cadencia 2 — Riesgo de Penalizaciones Ocultas & Cláusulas Abusivas (Base 1: Pareto VIP 400 Leads).
-   - **Miércoles 7am:** Cadencia 3 — Caso de Estudio Ahorro \$14.2k USD + Oferta Final Piloto \$19 USD (Base 1: Pareto VIP 400 Leads).
-   - **Jueves 7am:** Cadencia 4 — Alianzas Institucionales y Marca Blanca para Firmas Legales y VCs (Base 2: 100 Inversores).
-   - **Viernes 7am:** Cadencia 5 — Break-Up Email & Cierre de Ventana Piloto (Base 1: Pareto VIP).
-   - **Mar/Mié/Vie 8am:** Lead Recovery para rescate de prospectos con PDF en memoria.
+Este marco rige el desarrollo, marketing y arquitectura de **AuditFlow AI** y de **toda futura aplicación web o SaaS que se construya en este ecosistema**:
 
-2. **📚 Jerarquía de 5 Bases de Datos B2B (Regla 80/20 a la Cabeza)**:
-   - **🥇 1. Base 80/20 Pareto VIP:** 400 CFOs de mayor facturación en 14 países (Score 90-99).
-   - **🥈 2. Inversores & Advisory Board:** 100 Socios VCs, Fondos y Despachos Legales.
-   - **🥉 3. 500 CFOs & Directores de Finanzas:** Decisores directos de presupuesto.
-   - **4. 500 Contralores & Auditoría:** Control de riesgos y fugas en compras.
-   - **5. Base Global 2,000 Ejecutivos:** Cobertura completa en 14 países.
-
-3. **📬 Protocolo Inviolable de Enrutamiento Dual de Correos**:
-   - **`tendenciaiatufuturo@gmail.com`:** Receptor único fiduciario de copias de control universal, leads, auditorías shadow y reportes de cron jobs.
-   - **`rick28191@gmail.com`:** Única y exclusivamente para **notificaciones de compras confirmadas (\$19, \$69, \$590 USD)**. Cero spam operativo.
-
-4. **⚡ Pasarelas de Pago & Blindaje de Privacidad Financiera**:
-   - **Strike / Bitcoin Lightning (`rick28@strike.me`):** Liquidación instantánea en 1 segundo en dólares (**USD**) a la cuenta privada del fundador, **exenta de IVA bajo la Ley Bitcoin de El Salvador** y sin exposición en bancos tradicionales.
-   - **Wompi (Banco Agrícola / Grupo Bancolombia):** Pasarela oficial de tarjetas de crédito/débito para la región centroamericana.
-   - **Cero exposición:** La cuenta bancaria personal del fundador se mantiene 100% privada e invisible en el código público.
-
-5. **📄 Generador y Entrega Automática de Word (`.docx`) con Control de Cambios**:
-   - Descarga directa de plantillas oficiales con marcas de revisión tachadas en rojo y propuestas de blindaje en verde.
-
-6. **🔍 Auditoría Cruzada 2-Way (Contrato vs Factura)**:
-   - Conciliación de discrepancias entre órdenes de compra, contratos de prestación de servicios y facturas recibidas.
-
-7. **💬 Copiloto IA Interactivo (Chat con el Documento)**:
-   - Permite al usuario hacer preguntas específicas sobre cláusulas, multas y plazos directamente a la IA sobre el documento analizado en RAM volátil.
-
-8. **🧪 Batería de Pruebas de Calidad Total & Certificación de Rendimiento**:
-   - **45/45 Pruebas Automatizadas Aprobadas (100% Green)** cubriendo seguridad, integridad HTML, entrega de archivos y pruebas de estrés de 100 transacciones simultáneas.
-
-8. **⚡ Indexación SEO Instantánea (IndexNow Protocol)**:
-   - Notificación directa a Bing, Yandex y Seznam de las URLs canónicas.
+### 1. Protocolo Obligatorio de Inteligencia Competitiva Forense (*Competitor Gap Analysis*)
+Antes y durante la construcción de cualquier nueva funcionalidad o nueva app web, los agentes deben ejecutar:
+1. **Mapeo de Líderes Globales:** Investigar exhaustivamente a los 3 a 5 líderes mundiales de la categoría (ej: *Spellbook, Robin AI, TermScout, Definely, Ironclad*).
+2. **Diagnóstico Sistemático de Brechas:** Identificar con rigor: *¿Qué hacen ellos para vender y retener que nuestra app no hace?*
+3. **Ingeniería Inversa e Implementación Inmediata:**
+   * **Scorecards / Velocímetros de Riesgo Interactivos (0-100):** Diagnóstico preliminar gratis con cálculo de impacto económico antes de solicitar registro o tarjeta.
+   * **Benchmarking Comparativo de Mercado (*Give-to-Get*):** Contextualizar cada hallazgo con datos de la industria (*"El 88% de los contratos limitan esta responsabilidad a 12 meses"*).
+   * **Entregables en el Flujo de Trabajo Natural:** Generar soluciones editables directamente en la herramienta que el cliente ya utiliza (ej: Word `.docx` con control de cambios, hojas de cálculo, extensiones).
+   * **Copilotos Contextuales 2-Way:** Capacidad de chatear con el documento y conciliar fuentes de datos cruzadas.
+   * **Privacidad Certificada con Cero Retención (*Zero Data Retention*):** Procesamiento en memoria volátil RAM efímera (0 almacenamiento en disco).
 
 ---
 
-## 📚 Manuales y Guías de Uso Oficiales
+### 2. Framework Maestro Multirregional (Adaptación Cultural y Normativa por País)
 
-* 📘 **[Manual de Usuario — Web App (`MANUAL_DE_USUARIO_APP.md`)](MANUAL_DE_USUARIO_APP.md)**: Guía paso a paso para usuarios finales, auditores y directores financieros. Incluye cómo seleccionar normativas (PCAOB/GAAP/IFRS), interpretar hallazgos, desbloquear soluciones tácticas y exportar redlines Word `.docx` y PDF oficial.
-* ⚙️ **[Manual de Administración — Panel B2B (`MANUAL_DE_ADMINISTRACION_ADMIN.md`)](MANUAL_DE_ADMINISTRACION_ADMIN.md)**: Guía de control operativo para administradores. Detalla la gestión de los 1,000 leads en 14 países, lanzamiento de campañas de correo (Resend API + Gmail SMTP), enriquecimiento por Tiers (Platinum/Gold/Silver) y exportación a CSV.
+Toda interacción, copy, UI y entregable debe adaptarse automáticamente a la región del usuario:
+
+```
+┌─────────────────────────┬──────────────────────────────────┬────────────────────────────────────────────────────────┐
+│ REGIÓN / PAÍSES         │ ENFOQUE COMERCIAL & NORMATIVO    │ CANAL & TONO DE COMUNICACIÓN                           │
+├─────────────────────────┼──────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ 🇪🇸 Latam / España       │ Fuga de EBITDA ($3.5k - $18k),   │ Directo, cercano, WhatsApp & LinkedIn.                 │
+│ (SV, GT, CR, PA, MX, CO)│ Código de Comercio, NIIF / IFRS. │ Oferta de entrada $19 USD / $69 mes / $590 año.        │
+├─────────────────────────┼──────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ 🇺🇸 USA & Global B2B     │ PCAOB, US GAAP, mitigación de    │ Profesional, velocidad (<10s), Word Track Changes,     │
+│ (North America / UK)    │ responsabilidad ilimitada.       │ autoservicio sin reuniones obligatorias de ventas.     │
+├─────────────────────────┼──────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ 🇫🇷 Europa Francófona    │ Conformité RGPD, audit risques,  │ Soberbio, profesional, mot-clé "AUDIT",                │
+│ (France, Suisse, Lux)   │ plafonnement des pénalités.      │ baux commerciaux et contrats de services.              │
+├─────────────────────────┼──────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ 🇩🇪 DACH (Alemania,      │ ISO 27001, DSGVO, VPI-Index,     │ Rigor técnico, precisión analítica,                    │
+│ Austria, Suiza)         │ flüchtiger RAM-Puffer.           │ cero promesas vacías, métricas claras de ROI.          │
+├─────────────────────────┼──────────────────────────────────┼────────────────────────────────────────────────────────┤
+│ ❄️ Zona Nórdica         │ EU GDPR Artículo 28 estricto,    │ Cultura "Lagom": tono ultra-sobrio, factual,           │
+│ (SWE, NOR, DNK, FIN)    │ Zero Data Retention (RAM 100%),  │ cero hard-sell ni urgencias artificiales.              │
+│ (.se, .no, .dk, .fi)    │ Nordic Liability Caps (12 meses).│ Canal LinkedIn B2B Thought Leadership & PLG.           │
+└─────────────────────────┴──────────────────────────────────┴────────────────────────────────────────────────────────┘
+```
 
 ---
 
-## 🏛️ Plan de Mercadeo Digital B2B & Prospección Outbound
+## ❄️ Campaña Especializada «Leads Zona Nórdica» & Integración Waalaxy
 
-* **[Playbook Outbound de 14 Días para LinkedIn](PLAYBOOK_OUTBOUND_14_DIAS_LINKEDIN.md)**: Filtros exactos de Sales Navigator, secuencias de 3 mensajes, protocolo de llamada de 10 min y fórmulas de conversión para firmas de auditoría de 2 a 50 empleados.
-* **[Plan Maestro de Mercadeo B2B (HBS & Reforge)](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md)**: Estrategia cuantitativa de adquisición, unit economics, bucles virales y blueprint de 7 días.
-* **Base de Datos Multi-País de 1,000 Leads**: Precargada en [`db/seed_leads.sql`](db/seed_leads.sql) y gestionada en [`api/outreach.js`](api/outreach.js) (500 CFOs + 500 Financial Controllers divididos en 14 países en ES, EN, DE).
+Se encuentra activa la base de datos de **20 directores legales reales verificados (Managing Partners, General Counsels y CEOs)** de Suecia, Noruega, Dinamarca y Finlandia:
+
+* **🇸🇪 Suecia:** Henrik Dock & Anna Remse (*Mannheimer Swartling*), Louise Brorsson Salomon & Johanna Rutberg (*Advokatfirman Vinge*), Henrik Kjellander (*Setterwalls*), Helen Hu (*Volvo Cars*), Kevan Choset (*Spotify AB*).
+* **🇳🇴 Noruega:** Sverre Tyrhaug (*Thommessen*), Thomas K. Svensen (*BAHR*), Preben Willoch (*Wikborg Rein*), Siv Helen Rygh Torstensen (*Equinor ASA*).
+* **🇩🇰 Dinamarca:** Niklas Korsgaard Christensen (*Plesner*), Martin Lavesen (*Gorrissen Federspiel*), Simon Evers Hjelmborg (*Bech-Bruun*), Caroline Pontoppidan (*A.P. Møller - Mærsk*), John F. Kuckelman (*Novo Nordisk*).
+* **🇫🇮 Finlandia:** Johan Sidklev (*Roschier*), Sakari Lukinmaa (*Castrén & Snellman*), Riikka Rannikko (*Hannes Snellman*), Esa Niinimäki (*Nokia Corporation*).
+
+### Módulos de Sincronización Waalaxy:
+* **Exportación CSV Inmediata:** [`GET /api/waalaxy-sync?action=export_csv&campaign=leads_zona_nordica`](api/waalaxy-sync.js) ➔ Genera `waalaxy_leads_zona_nordica.csv`.
+* **Disparo y Sincronización Automática:** [`POST /api/waalaxy-sync`](api/waalaxy-sync.js) con `{ action: 'dispatch_nordic_campaign' }`.
 
 ---
 
-## 🛡️ Ciberseguridad & Arquitectura de Base de Datos
+## 🛡️ Reglas Fiduciarias Inmutables del Sistema
 
-* **Módulo de Seguridad [`lib/security.js`](lib/security.js)**: Comparación en tiempo constante (`safeCompare`), limitador de tasa deslizante (`checkRateLimit`), sanitización XSS y protección SSRF.
-* **Esquema de Base de Datos Supabase [`db/schema.sql`](db/schema.sql)**:
-  * `audit_leads`: Registro de prospectos calificados.
-  * `audit_reports`: Metadatos de reportes y fugas financieras.
-  * `transactions`: Pagos híbridos Stripe ($19 USD) y Lightning (Strike Sats).
-  * `subscriptions`: Suscripciones corporativas ($69/mes o $590/año).
-  * `demo_bookings`: Sesiones de demo de 10 minutos agendadas.
-  * `webhooks_log`: Registro de eventos bidireccionales.
-  * `customer_tokens`: Tokens de clientes recurrentes.
-* **Políticas RLS (Row Level Security)**: Activas en todas las tablas para garantizar aislamiento total de datos.
+1. **Guardián de Código Anti-Sintéticos (`assertRealLead` en [`lib/security.js`](lib/security.js)):**  
+   Quedan erradicadas todas las funciones de generación sintética. Cualquier intento de procesar contactos falsos lanza una excepción fail-fast y aborta la ejecución.
+2. **Aislamiento Total de Rebotes (Zero Bounce Spam a Correos Personales):**  
+   Todo outbound masivo se realiza exclusivamente vía **Resend API** con dominio verificado (`audiflowai.com`). Si un correo rebota, el evento se descarta en silencio sin reenviar `mailer-daemon` a las bandejas personales.
+3. **Protocolo Inviolable de Enrutamiento Dual:**  
+   * `tendenciaiatufuturo@gmail.com`: Copias de control universal, soporte técnico y logs operativos.
+   * `rick28191@gmail.com`: **Única y exclusivamente** para notificaciones de **compras confirmadas ($19, $69, $590 USD)**.
+
+---
+
+## ⚡ Pasarelas de Pago Activas
+
+* **Strike / Bitcoin Lightning (`rick28@strike.me`):** Liquidación instantánea en dólares (**USD**) a la cuenta privada del fundador, **exenta de IVA bajo la Ley Bitcoin de El Salvador**.
+* **Wompi (Banco Agrícola / Grupo Bancolombia):** Pasarela oficial de tarjetas de crédito/débito para Centroamérica.
+* **Stripe Checkout:** Pasarela global para cobros internacionales de $19 USD, $69/mes y $590/año.
+
+---
+
+## 🧪 Certificación y Pruebas Automatizadas
+
+```bash
+# Ejecutar la suite forense completa (30 pruebas en 8 fases)
+npm test
+```
+* **Resultado:** 30/30 pruebas aprobadas (100% Green).
 
 ---
 
 ## 💻 Pila Tecnológica
 
 * **Motor de IA**: Google DeepMind Gemini 2.5 Flash (`@google/genai`).
-* **Frontend**: HTML5, Tailwind CSS 3.4, Vanilla JavaScript ES6+ (Tri-lingüe ES/EN/DE).
+* **Frontend**: HTML5, Tailwind CSS 3.4, Vanilla JavaScript ES6+ (Tri-lingüe ES/EN/DE + Modo Nórdico).
 * **Backend**: Node.js, Express, Vercel Serverless Functions.
 * **Base de Datos & Auth**: Supabase (PostgreSQL 15 + RLS).
-* **Pasarelas de Pago**: Stripe SDK (Tarjetas/Apple Pay) + Strike API / BTCPay (Bitcoin Lightning BOLT11).
-* **Infraestructura de Correo**: Resend API (`ricardo@audiflowai.com`) + Gmail SMTP de respaldo.
-* **Telemetría**: Microsoft Clarity (Heatmaps/Grabaciones) + Google Analytics 4 (`G-KMESC5J8WH`).
+* **Infraestructura de Correo**: Resend API (`ricardo@audiflowai.com`) + Gmail SMTP de respaldo transaccional.
+* **Telemetría**: Microsoft Clarity + Google Analytics 4 (`G-KMESC5J8WH`).
 
 ---
 
 ## 📜 Licencia
 
 Distribuido bajo la Licencia MIT. Consulta [`LICENSE`](LICENSE) para más detalles.
+

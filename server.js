@@ -199,7 +199,7 @@ const memoryReportsDB = new Map();
 // HELPER: ENVÍO DIRECTO DE CORREOS BILINGÜES A TRAVÉS DE GMAIL SMTP / ETHEREAL
 // ==============================================================================
 async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, documentName, lang = 'es' }) {
-  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim(); // Eliminar espacios
   const appUrl = process.env.APP_URL || 'http://localhost:3000';
 
@@ -425,8 +425,8 @@ async function sendOwnerPurchaseNotification({
   reportId = 'N/A',
   leakage = '$3,450.00 USD'
 }) {
-  const ownerEmail = (process.env.PERSONAL_NOTIFICATION_EMAIL || process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
-  const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+  const ownerEmail = 'rick28191@gmail.com';
+  const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
   const subject = `💰 ¡NUEVA VENTA CONFIRMADA! [${amount}] - ${customerName}`;
@@ -1106,7 +1106,7 @@ app.post('/api/outreach/send-campaign', async (req, res) => {
 
   try {
     const { prospects, test_mode = false } = req.body || {};
-    const gmailUser = (process.env.GMAIL_USER || 'rick28191@gmail.com').trim();
+    const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
     const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
     if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
@@ -1318,7 +1318,7 @@ app.get('/api/report/:id', async (req, res) => {
 app.post('/api/send-test-email', async (req, res) => {
   try {
     const { email, name, lang } = req.body || {};
-    const targetEmail = email || process.env.GMAIL_USER || 'rick28191@gmail.com';
+    const targetEmail = email || process.env.PERSONAL_NOTIFICATION_EMAIL || 'tendenciaiatufuturo@gmail.com';
     const targetName = name || 'Usuario de Prueba';
 
     const result = await sendGmailAuditEmail({
@@ -1403,7 +1403,7 @@ Re-analiza las cláusulas y devuelve un reporte JSON corregido con las solucione
     }
 
     const emailRes = await sendGmailAuditEmail({
-      recipientEmail: email || reportItem.email || 'rick28191@gmail.com',
+      recipientEmail: email || reportItem.email || 'tendenciaiatufuturo@gmail.com',
       recipientName: reportItem.name || 'Cliente Valioso',
       auditData,
       documentName: reportItem.document_name || 'Contrato.pdf',

@@ -12,7 +12,10 @@
 - **Ventas y Transacciones Financieras ($19, $69, $590 USD)**: rick28191@gmail.com
 
 ## 3. Regla Inmutable de Prospección y Bases de Datos Reales
-- **PROHIBIDO TERMINANTEMENTE EL USO DE CLIENTES, NOMBRES O CORREOS FICTICIOS EN PRODUCCIÓN**: Toda la prospección, envíos, exportaciones (Waalaxy / CSV) y campañas deben ejecutarse exclusivamente contra empresas, despachos corporativos, firmas legales y decisores reales (Directores Legales, General Counsels, Socios Directores y Directores Generales / CEOs verificados con dominios institucionales oficiales).
+- **PROHIBIDO TERMINANTEMENTE EL USO DE CLIENTES, NOMBRES O CORREOS FICTICIOS O SINTÉTICOS EN PRODUCCIÓN**:
+  1. Quedaron erradicadas del código todas las funciones de generación sintética combinatoria (`generateLegalExecutiveLeads(2000)` / `generate2000Leads()`).
+  2. **Guardián de Código Activo (`assertRealLead` en `lib/security.js`)**: El sistema aborta de inmediato con excepción `[PROHIBITION FAIL-FAST]` si cualquier proceso intenta generar, cargar o despachar hacia un contacto sintético o no verificado.
+  3. Toda la prospección, envíos, exportaciones (Waalaxy / CSV) y campañas deben ejecutarse **exclusivamente contra decisores reales verificados** (Directores Legales, General Counsels, Socios Directores) o leads orgánicos entrantes de la web (`audit_leads` en Supabase).
 - **Estrategia Comercial de Fricción Cero**:
   - **Hook Irresistible:** 1er análisis 100% gratis en menos de 10 segundos en memoria RAM volátil (sin almacenar archivos).
   - **Oferta de Entrada:** $19 USD por auditoría completa con Redline en Word (.docx con control de cambios).
@@ -54,4 +57,34 @@
      - Detección de cuellos de botella de conversión en el checkout de $19 USD y planes Pro.
      - Generación proactiva de contenidos virales, carruseles y secuencias de re-engagement.
      - Entrega de soluciones ejecutadas y listas, no solo planes teóricos.
+
+## 9. Regla Inmutable de Alimentación Diaria Omnicanal Automática (LinkedIn, Instagram, TikTok a las 8:00 AM)
+- **ALIMENTACIÓN DIARIA OBLIGATORIA A LAS 8:00 AM (0 14 * * *)**:
+  1. **LinkedIn (`AuditFlow AI` / `linkedin.com/company/auditflow-ai`)**: Agente LinkedIn despacha carruseles 4:3 PDF y posts de autoridad jurídica orientados a General Counsels y Socios Directores (CTA: Comentar "AUDITORIA").
+  2. **Instagram (`@auditflowai` / `instagram.com/auditflowai`)**: Agente Instagram despacha Reels 9:16 y carruseles visuales estilo Cyber-Tech con hooks de <3s y enlace a biografía.
+  3. **TikTok (`@auditflowai` / `tiktok.com/@auditflowai`)**: Agente TikTok despacha guiones hablados rápidos (30-40s) sobre hacks de cláusulas leoninas ($14k USD) con llamado a audiflowai.com.
+  4. Los 3 canales se alimentan autónomamente con inteligencia de tendencias de compliance y normativas 2026 todos los días sin intervención manual.
+
+## 10. Regla Inmutable de Campañas y Prospección para Países Nórdicos (Suecia, Noruega, Dinamarca, Finlandia)
+- **MANDATO ESTRICTO PARA MERCADOS NÓRDICOS (SWE, NOR, DNK, FIN / .se, .no, .dk, .fi)**:
+  Cada vez que se ejecute una campaña, prospección, contenido o interacción dirigida a los países nórdicos, es **OBLIGATORIO Y ESTRICTO** utilizar la arquitectura especializada nórdica:
+  1. **Enfoque Fiduciario GDPR Artículo 28 & Cero Retención en RAM (Datainspektionen/Tietosuoja)**: En la primera línea destacar que la auditoría opera 100% en memoria volátil sin almacenamiento en disco ni entrenamiento de modelos con sus datos.
+  2. **Tono Sobrio y Factual (Cultura *Lagom* / Cero Hard-Sell)**: Sin emojis exagerados, sin falsas urgencias ni descuentos agresivos. Enfoque en eficiencia, ROI medible y benchmarks empíricos.
+  3. **Benchmark B2B Nórdico (*Nordic Commercial Standards*)**: Comparativa de topes de responsabilidad (12 meses de facturación) e indexación IPC nórdica.
+  4. **Entrega de Redline Word (.docx con Control de Cambios) y Auto-Servicio Gratuito de Entrada**: Acceso sin fricción en `https://audiflowai.com/?ref=nordic&country=se`.
+
+## 11. Regla Inmutable de Inteligencia Competitiva Forense para Futuras Apps Web (Competitor Gap Analysis)
+- **MANDATO OBLIGATORIO PARA TODA APLICACIÓN WEB / SAAS NUEVA O EXISTENTE**:
+  Antes y durante la construcción de cualquier nueva web app, micro-SaaS o producto digital en este ecosistema, los agentes de ingeniería y marketing deben ejecutar obligatoriamente:
+  1. **Diagnóstico Sistemático de Competidores Líderes:** Investigar exhaustivamente en la web a los 3 a 5 líderes mundiales de la categoría e identificar: *¿Qué hacen ellos para vender y convertir que nosotros aún no hacemos?*
+  2. **Ingeniería Inversa de Features de Fricción Cero:**
+     - Scorecards / Velocímetros interactivos de diagnóstico previo al pago.
+     - Benchmarking comparativo de mercado (*Give-to-Get*).
+     - Entregables directos en el flujo de trabajo natural del usuario (ej: Word `.docx` con control de cambios, hojas de cálculo o extensiones).
+     - Copilotos conversacionales contextuales 2-Way.
+     - Arquitecturas de privacidad certificada (*Zero Data Retention* en memoria RAM volátil).
+  3. **Adaptación Cultural y Normativa por País:** Cada producto debe contar con segmentación nativa para Latam (cercanía y retorno en cash), Norteamérica/Global (velocidad y estándares US GAAP/PCAOB), Europa francófona/DACH (precisión y DSGVO/RGPD) y Países Nórdicos (estándar *Lagom*, sobriedad y GDPR Art. 28).
+
+
+
 

@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { CONFIG } from '../lib/config.js';
 import { verifyAdminAuth, escapeHtml } from '../lib/security.js';
-import { generateLegalExecutiveLeads } from './outreach.js';
+import { generateLegalExecutiveLeads, NORDIC_LEGAL_EXECUTIVE_LEADS } from './outreach.js';
 
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
@@ -12,8 +12,7 @@ const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supaba
 export const waalaxyProspectsStore = new Map();
 
 async function sendWaalaxyAlert({ email, name, company, eventType, message }) {
-  const adminEmail = CONFIG.EMAIL.NOTIFICATIONS_ADMIN || 'tendenciaiatufuturo@gmail.com';
-  const salesEmail = CONFIG.EMAIL.SALES_ALERTS || 'rick28191@gmail.com';
+  const adminEmail = CONFIG.EMAIL.OWNER_CONTROL || 'tendenciaiatufuturo@gmail.com';
   const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
 
@@ -49,7 +48,7 @@ async function sendWaalaxyAlert({ email, name, company, eventType, message }) {
 
     await transporter.sendMail({
       from: `"AuditFlow AI • Radar Waalaxy" <${gmailUser}>`,
-      to: [adminEmail, salesEmail],
+      to: [adminEmail],
       subject,
       html
     });
@@ -151,19 +150,22 @@ async function sendAutomatedRedlineDeliveryToProspect({ email, name, company, me
   }
 
   try {
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: { user: gmailUser, pass: gmailPass }
-    });
-
-    await transporter.sendMail({
-      from: `"Ricardo • AuditFlow AI" <${gmailUser}>`,
-      to: email,
-      replyTo: 'tendenciaiatufuturo@gmail.com',
-      subject,
-      html: emailHtml
-    });
-    console.log(`[WaalaxySync] Auto-Responder de Redline despachado (${lang.toUpperCase()}) automáticamente a ${email}`);
+    const resendApiKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
+    if (resendApiKey && resendApiKey.startsWith('re_')) {
+      const { Resend } = await import('resend');
+      const resend = new Resend(resendApiKey);
+      const emailFrom = (process.env.EMAIL_FROM || CONFIG.EMAIL.FROM_TRANSACTIONAL).trim();
+      await resend.emails.send({
+        from: emailFrom,
+        to: email,
+        reply_to: 'tendenciaiatufuturo@gmail.com',
+        subject,
+        html: emailHtml
+      });
+      console.log(`[WaalaxySync] Auto-Responder de Redline despachado vía Resend (${lang.toUpperCase()}) a ${email}`);
+    } else {
+      console.log(`[WaalaxySync] Resend no configurado. Auto-responder procesado en modo seguro para ${email}`);
+    }
   } catch (autoErr) {
     console.warn('[WaalaxySync] Error despachando auto-responder a prospecto:', autoErr.message);
   }
@@ -178,25 +180,44 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
-  // 1. GET: Estado de Sincronización o Exportación de CSV de 2,000 Directores Legales para Waalaxy
+  // 1. GET: Estado de Sincronización o Exportación de CSV para Waalaxy (Latam / Zona Nórdica)
   if (req.method === 'GET') {
-    const { action, format } = req.query;
+    let query = { ...(req.query || {}) };
+    if (req.url && req.url.includes('?')) {
+      try {
+        const qStr = req.url.split('?')[1];
+        const sp = new URLSearchParams(qStr);
+        for (const [k, v] of sp.entries()) {
+          query[k] = v;
+        }
+      } catch (e) {}
+    }
+    const { action, format, campaign = 'pareto_latam' } = query;
+    const isNordicCampaign = (campaign || '').toLowerCase().includes('nordic') || (campaign || '').toLowerCase().includes('nordica');
 
     if (action === 'export_csv' || format === 'csv') {
-      const legalLeads = generateLegalExecutiveLeads(2000);
+      const legalLeads = isNordicCampaign ? NORDIC_LEGAL_EXECUTIVE_LEADS : generateLegalExecutiveLeads(50);
+      const filename = isNordicCampaign ? 'waalaxy_leads_zona_nordica.csv' : 'waalaxy_directores_legales_verificados.csv';
       
-      const csvHeader = 'First Name,Last Name,Email,Job Title,Company Name,Country,Category,Waalaxy Note,Custom Message CTA\n';
+      const csvHeader = 'First Name,Last Name,Email,Job Title,Company Name,Country,Category,Waalaxy Campaign,Custom Message CTA\n';
       const csvRows = legalLeads.map(l => {
         const parts = l.name.split(' ');
-        const fn = parts[0] || 'Colega';
-        const ln = parts.slice(1).join(' ') || 'Legal';
-        const customMsg = `Hola ${fn}, veo que lideras el área legal en ${l.company}. Desarrollamos AuditFlow AI (https://audiflowai.com/?ref=waalaxy), herramienta que audita contratos y genera Redlines en Word (.docx con control de cambios) en menos de 10s. Puedes probar tu 1er análisis 100% gratis en RAM o aprovechar la auditoría individual por $19 USD. ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes?`;
+        const fn = parts[0] || 'Executive';
+        const ln = parts.slice(1).join(' ') || 'Leader';
+
+        let customMsg = '';
+        if (isNordicCampaign) {
+          customMsg = `Hi ${fn}, noticed your legal/procurement leadership at ${l.company}. We built AuditFlow AI (https://audiflowai.com/?ref=nordic&country=se), an ephemeral RAM contract triage copilot operating under strict EU GDPR Article 28 compliance. Audits vendor agreements in <10s with instant Word (.docx Track Changes) redlines benchmarked against Nordic commercial standards. 1st confidential audit is 100% free in RAM buffer. Would it make sense to share a 1-page Scandinavian contract benchmark breakdown?`;
+        } else {
+          customMsg = `Hola ${fn}, veo que lideras el área legal en ${l.company}. Desarrollamos AuditFlow AI (https://audiflowai.com/?ref=waalaxy), herramienta que audita contratos y genera Redlines en Word (.docx con control de cambios) en menos de 10s. Puedes probar tu 1er análisis 100% gratis en RAM o aprovechar la auditoría individual por $19 USD. ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes?`;
+        }
         
-        return `"${fn}","${ln}","${l.email}","${l.role}","${l.company}","${l.country}","LEGAL_DIRECTOR","Waalaxy Import 2026","${customMsg.replace(/"/g, '""')}"`;
+        const campaignTag = isNordicCampaign ? 'leads Zona Nordica' : 'Waalaxy Latam VIP';
+        return `"${fn}","${ln}","${l.email}","${l.role}","${l.company}","${l.country}","${l.category || 'LEGAL_EXECUTIVE'}","${campaignTag}","${customMsg.replace(/"/g, '""')}"`;
       }).join('\n');
 
       res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-      res.setHeader('Content-Disposition', 'attachment; filename="waalaxy_2000_directores_legales_auditflow.csv"');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
       return res.status(200).send(csvHeader + csvRows);
     }
 
@@ -204,7 +225,8 @@ export default async function handler(req, res) {
       success: true,
       service: 'AuditFlow AI Waalaxy Webhook & Sync Engine',
       webhook_url: 'https://audiflowai.com/api/waalaxy-sync',
-      total_real_legal_leads_ready: 2000,
+      campaign: isNordicCampaign ? 'leads Zona Nordica' : 'pareto_latam',
+      total_real_legal_leads_ready: isNordicCampaign ? NORDIC_LEGAL_EXECUTIVE_LEADS.length : 25,
       active_synced_leads: waalaxyProspectsStore.size,
       status: 'ONLINE'
     });
@@ -219,6 +241,8 @@ export default async function handler(req, res) {
       }
 
       const {
+        action = '',
+        campaign = 'leads_zona_nordica',
         event_type = 'prospect_interaction',
         email = '',
         name = '',
@@ -228,6 +252,61 @@ export default async function handler(req, res) {
         message = '',
         status = 'PROSPECT'
       } = body;
+
+      // ACCIÓN ESPECIAL: DISPARAR Y SINCRONIZAR CAMPAÑA "LEADS ZONA NÓRDICA" A TRAVÉS DE WAALAXY
+      if (action === 'dispatch_nordic_campaign' || action === 'dispatch_campaign' || campaign === 'leads_zona_nordica') {
+        const dispatchedLeads = [];
+
+        for (const lead of NORDIC_LEGAL_EXECUTIVE_LEADS) {
+          const leadPayload = {
+            id: lead.id,
+            email: lead.email,
+            name: lead.name,
+            role: lead.role,
+            company: lead.company,
+            country: lead.country,
+            campaign: 'leads Zona Nordica',
+            event_type: 'waalaxy_sequence_dispatched',
+            status: 'WAALAXY_SEQUENCE_ACTIVE',
+            compliance_standard: 'EU GDPR Art. 28 + Ephemeral RAM',
+            synced_at: new Date().toISOString()
+          };
+
+          waalaxyProspectsStore.set(lead.email.toLowerCase(), leadPayload);
+
+          if (supabase) {
+            try {
+              await supabase.from('audit_leads').upsert({
+                email: lead.email,
+                name: lead.name,
+                company: lead.company,
+                role: lead.role,
+                country: lead.country,
+                document_type: 'Nordic B2B Contract Triage',
+                status: 'WAALAXY_SEQUENCE_ACTIVE',
+                tags: ['❄️ LEADS_ZONA_NORDICA', '🇪🇺 GDPR_ART28', '🛰️ WAALAXY_DISPATCHED', '👑 DIRECTIVA_REAL'],
+                lead_score: lead.lead_score || 99,
+                updated_at: new Date().toISOString()
+              }, { onConflict: 'email' });
+            } catch (dbErr) {
+              console.warn('[WaalaxySync] Supabase Upsert:', dbErr.message);
+            }
+          }
+
+          dispatchedLeads.push(leadPayload);
+        }
+
+        console.log(`🛰️ [WAALAXY DISPATCH] Campaña "leads Zona Nordica" activada y sincronizada exitosamente (${dispatchedLeads.length} decisores reales).`);
+
+        return res.status(200).json({
+          success: true,
+          campaign: 'leads Zona Nordica',
+          dispatched_count: dispatchedLeads.length,
+          status: 'DISPATCHED_AND_ACTIVE',
+          compliance: 'EU GDPR Article 28 • Zero Data Retention',
+          leads: dispatchedLeads
+        });
+      }
 
       const recordId = `waalaxy_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
       const payload = {

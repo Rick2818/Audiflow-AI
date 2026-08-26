@@ -23,8 +23,20 @@ Esta skill proporciona las directrices para implementar el motor de crecimiento 
 ### 4. Social Organic Copywriting Generator
 - **Generador**: Herramienta integrada en `/admin` con plantillas formateadas de alto gancho conversacional para publicar en LinkedIn y Reddit (`r/smallbusiness`, `r/realestateinvesting`).
 
+### 5. Omnichannel Daily 8:00 AM Viral Social Engine (LinkedIn • Instagram • TikTok)
+- **Endpoint**: `/api/outreach.js?campaign=daily_omnichannel_social_8am&batch=omnichannel_8am`
+- **Cron Job**: Diario a las 8:00 AM hora local (`0 14 * * *` en `vercel.json`).
+- **Canales Oficiales**:
+  - **LinkedIn** (`AuditFlow AI` / `linkedin.com/company/auditflow-ai`): Carruseles PDF 4:3 + Posts de Autoridad B2B (CTA: Comenta "AUDITORIA").
+  - **Instagram** (`@auditflowai` / `instagram.com/auditflowai`): Reels 9:16 + Storyboards visuales de 30s con hooks de <3s.
+  - **TikTok** (`@auditflowai` / `tiktok.com/@auditflowai`): Videos verticales de ritmo rápido con hacks de cláusulas leoninas ($14k USD).
+- **Alimentación Autónoma**: Sincronización diaria con tendencias regulatorias de compliance (NIIF 16, PCAOB, IA en auditoría legal).
+
+
 ---
 
-## 📬 Protocolo Innegociable de Copia al Propietario
-- En **CUALQUIER campaña de prospección** (Cold Email, secuencias de LinkedIn, disparos masivos o re-envío de ofertas a leads), es un **mandato incondicional enviar una copia íntegra y resumen ejecutivo a la bandeja personal del dueño (`rick28191@gmail.com`)**, asegurando trazabilidad y respaldo inmediato.
+## 📬 Protocolo de Control & Regla de Oro Inviolable
+- **REGLA DE ORO**: La bandeja personal del dueño (`rick28191@gmail.com`) está reservada **ÚNICA Y EXCLUSIVAMENTE para VENTAS Y COMPRAS CONFIRMADAS ($19, $69, $590 USD)**.
+- **PROHIBIDO** enviar copias de prospección, cold emails, reportes técnicos, rebotes o leads a `rick28191@gmail.com`.
+- Todos los resúmenes ejecutivos de campañas, copias de control de prospección, logs de auditoría y alertas operativas deben enrutarse exclusivamente a la bandeja de control: `tendenciaiatufuturo@gmail.com`.
 

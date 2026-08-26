@@ -31,7 +31,7 @@ async function sendRecoveryEmail({ to, subject, html }) {
     const info = await transporter.sendMail({ from: `"AuditFlow AI" <${user}>`, to, replyTo: CONFIG.EMAIL.REPLY_TO_CONTROL, subject, html });
     return { success: true, provider: 'gmail_smtp', id: info.messageId };
   } catch (err) {
-    console.error('Gmail SMTP error in lead-recovery:', err.message);
+    console.warn('[LeadRecovery] SMTP notice:', err.message);
     return { success: false, error: err.message };
   }
 }
@@ -66,10 +66,7 @@ export default async function handler(req, res) {
     }
 
     if (targetLeads.length === 0) {
-      targetLeads = [
-        { name: 'Director Financiero', email: 'carlos.mendoza@empresa-sv.com', document_type: 'Contrato de Arrendamiento Comercial', lead_score: 92 },
-        { name: 'Contralor Corporativo', email: 'sofia.martinez@constructora-sv.com', document_type: 'Acuerdo de Proveedores IT', lead_score: 88 }
-      ];
+      return res.status(200).json({ success: true, total_processed: 0, results: [], message: 'No hay leads pendientes de recuperación.' });
     }
 
     const results = [];

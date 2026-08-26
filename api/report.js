@@ -7,9 +7,6 @@ const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 async function sendAdminIssueAlert({ email, issueType, description, userAgent, lang }) {
-  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
-
   const isEn = (lang === 'en');
   const subject = isEn 
     ? `🚨 TECHNICAL ALERT: Configuration Issue Report [AuditFlow AI]`
@@ -51,30 +48,53 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent, l
     </div>
   `;
 
-  const recipientList = [gmailUser];
-  if (email && email.includes('@') && email.trim().toLowerCase() !== gmailUser.toLowerCase()) {
-    recipientList.push(email.trim());
-  }
-  const toHeader = [...new Set(recipientList)].join(', ');
+  const targetEmail = CONFIG.EMAIL.OWNER_CONTROL || 'tendenciaiatufuturo@gmail.com';
+  const resendApiKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
 
-  try {
-    const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true,
-      auth: { user: gmailUser, pass: gmailPass }
-    });
-    const info = await transporter.sendMail({
-      from: `"AuditFlow AI System" <${gmailUser}>`,
-      to: toHeader,
-      subject,
-      html
-    });
-    return info;
-  } catch (err) {
-    console.error('❌ Error sending issue alert email:', err);
-    throw err;
+  // 1. Resend API
+  if (resendApiKey) {
+    try {
+      const { Resend } = await import('resend');
+      const resend = new Resend(resendApiKey);
+      const emailFrom = (process.env.EMAIL_FROM || CONFIG.EMAIL.FROM_TRANSACTIONAL).trim();
+      const rResp = await resend.emails.send({
+        from: emailFrom,
+        to: [targetEmail],
+        reply_to: CONFIG.EMAIL.REPLY_TO_CONTROL,
+        subject,
+        html
+      });
+      if (!rResp.error) return { provider: 'resend', id: rResp.data?.id };
+    } catch (rErr) {
+      console.warn('[Report] Resend notice error:', rErr.message);
+    }
   }
+
+  // 2. Gmail SMTP Relay
+  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
+
+  if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+    try {
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: { user: gmailUser, pass: gmailPass }
+      });
+      const info = await transporter.sendMail({
+        from: `"AuditFlow AI System" <${gmailUser}>`,
+        to: targetEmail,
+        replyTo: CONFIG.EMAIL.REPLY_TO_CONTROL,
+        subject,
+        html
+      });
+      return info;
+    } catch (err) {
+      console.warn('⚠️ [Report] SMTP alert notice warning:', err.message);
+      return { warning: err.message };
+    }
+  }
+
+  return { status: 'logged_internally' };
 }
 
 export default async function handler(req, res) {
