@@ -106,6 +106,14 @@
       "destination": "/frontend/alternativas-docusign.html"
     },
     {
+      "source": "/Prompt_Maestro_AuditFlow_AI.pdf",
+      "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/prompt-maestro",
+      "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
+    },
+    {
       "source": "/api/audit/download-pdf",
       "destination": "/api/audit"
     },
