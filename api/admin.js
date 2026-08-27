@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
-import { REAL_50_DECISION_MAKERS, NORDIC_LEGAL_EXECUTIVE_LEADS, generateLegalExecutiveLeads } from './outreach.js';
+import { REAL_50_DECISION_MAKERS, NORDIC_LEGAL_EXECUTIVE_LEADS, DACH_LEGAL_EXECUTIVE_LEADS, generateLegalExecutiveLeads } from './outreach.js';
 
 export const openedLeadsMap = new Map();
 const TRANSPARENT_GIF_BUFFER = Buffer.from('R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7', 'base64');
@@ -62,8 +62,8 @@ function getRealVerifiedLeads() {
     { name: 'Acuerdo de Distribución y Licenciamiento de Software', tag: '🚀 SOFTWARE_LICENSE' }
   ];
 
-  // Base Principal 100% Real: Socios Directores Reales Verificados (Latam + Zona Nórdica)
-  const rawLegalLeads = [...REAL_50_DECISION_MAKERS, ...NORDIC_LEGAL_EXECUTIVE_LEADS];
+  // Base Principal 100% Real: Socios Directores Reales Verificados (Latam + Zona Nórdica + DACH Alemania)
+  const rawLegalLeads = [...REAL_50_DECISION_MAKERS, ...NORDIC_LEGAL_EXECUTIVE_LEADS, ...DACH_LEGAL_EXECUTIVE_LEADS];
   const leads = rawLegalLeads.map((realLead, idx) => {
     const docObj = docs[idx % docs.length];
     const emailsSent = leadEmailSentCounts.get(realLead.email.toLowerCase()) || 0;

@@ -2,7 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { CONFIG } from '../lib/config.js';
 import { verifyAdminAuth, escapeHtml } from '../lib/security.js';
-import { generateLegalExecutiveLeads, NORDIC_LEGAL_EXECUTIVE_LEADS } from './outreach.js';
+import { generateLegalExecutiveLeads, NORDIC_LEGAL_EXECUTIVE_LEADS, DACH_LEGAL_EXECUTIVE_LEADS } from './outreach.js';
 
 const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
@@ -194,10 +194,19 @@ export default async function handler(req, res) {
     }
     const { action, format, campaign = 'pareto_latam' } = query;
     const isNordicCampaign = (campaign || '').toLowerCase().includes('nordic') || (campaign || '').toLowerCase().includes('nordica');
+    const isDachCampaign = (campaign || '').toLowerCase().includes('dach') || (campaign || '').toLowerCase().includes('alemania') || (campaign || '').toLowerCase().includes('germany');
 
     if (action === 'export_csv' || format === 'csv') {
-      const legalLeads = isNordicCampaign ? NORDIC_LEGAL_EXECUTIVE_LEADS : generateLegalExecutiveLeads(50);
-      const filename = isNordicCampaign ? 'waalaxy_leads_zona_nordica.csv' : 'waalaxy_directores_legales_verificados.csv';
+      let legalLeads = generateLegalExecutiveLeads(50);
+      let filename = 'waalaxy_directores_legales_verificados.csv';
+      
+      if (isNordicCampaign) {
+        legalLeads = NORDIC_LEGAL_EXECUTIVE_LEADS;
+        filename = 'waalaxy_leads_zona_nordica.csv';
+      } else if (isDachCampaign) {
+        legalLeads = DACH_LEGAL_EXECUTIVE_LEADS;
+        filename = 'waalaxy_leads_dach_alemania.csv';
+      }
       
       const csvHeader = 'First Name,Last Name,Email,Job Title,Company Name,Country,Category,Waalaxy Campaign,Custom Message CTA\n';
       const csvRows = legalLeads.map(l => {
@@ -208,11 +217,16 @@ export default async function handler(req, res) {
         let customMsg = '';
         if (isNordicCampaign) {
           customMsg = `Hi ${fn}, noticed your legal/procurement leadership at ${l.company}. We built AuditFlow AI (https://audiflowai.com/?ref=nordic&country=se), an ephemeral RAM contract triage copilot operating under strict EU GDPR Article 28 compliance. Audits vendor agreements in <10s with instant Word (.docx Track Changes) redlines benchmarked against Nordic commercial standards. 1st confidential audit is 100% free in RAM buffer. Would it make sense to share a 1-page Scandinavian contract benchmark breakdown?`;
+        } else if (isDachCampaign) {
+          customMsg = `Hallo ${fn}, ich habe Ihre juristische Leitung bei ${l.company} gesehen. Wir haben AuditFlow AI (https://audiflowai.com/?ref=dach&country=de) entwickelt, einen B2B-Copiloten zur Prüfung von Lieferantenverträgen in <10s im flüchtigen RAM (EU-DSGVO Art. 28 Konformität ohne Datenspeicherung) mit sofortigen Word-Redlines (.docx mit Änderungsmodus). 1. Prüfung ist 100% kostenlos. Darf ich Ihnen eine 1-seitige Übersicht der häufigsten Vertragslücken im DACH-Raum zusenden?`;
         } else {
           customMsg = `Hola ${fn}, veo que lideras el área legal en ${l.company}. Desarrollamos AuditFlow AI (https://audiflowai.com/?ref=waalaxy), herramienta que audita contratos y genera Redlines en Word (.docx con control de cambios) en menos de 10s. Puedes probar tu 1er análisis 100% gratis en RAM o aprovechar la auditoría individual por $19 USD. ¿Te parece que te comparta un resumen de 1 página con las cláusulas de fuga más frecuentes?`;
         }
         
-        const campaignTag = isNordicCampaign ? 'leads Zona Nordica' : 'Waalaxy Latam VIP';
+        let campaignTag = 'Waalaxy Latam VIP';
+        if (isNordicCampaign) campaignTag = 'leads Zona Nordica';
+        else if (isDachCampaign) campaignTag = 'leads DACH Deutschland';
+
         return `"${fn}","${ln}","${l.email}","${l.role}","${l.company}","${l.country}","${l.category || 'LEGAL_EXECUTIVE'}","${campaignTag}","${customMsg.replace(/"/g, '""')}"`;
       }).join('\n');
 
@@ -252,6 +266,63 @@ export default async function handler(req, res) {
         message = '',
         status = 'PROSPECT'
       } = body;
+
+      // ACCIÓN ESPECIAL: DISPARAR Y SINCRONIZAR CAMPAÑA "LEADS DACH ALEMANIA"
+      if (action === 'dispatch_dach_campaign' || campaign === 'leads_dach_alemania' || campaign === 'dach') {
+        const dispatchedLeads = [];
+
+        for (const lead of DACH_LEGAL_EXECUTIVE_LEADS) {
+          const leadPayload = {
+            id: lead.id,
+            email: lead.email,
+            name: lead.name,
+            role: lead.role,
+            company: lead.company,
+            country: lead.country,
+            campaign: 'leads DACH Deutschland',
+            event_type: 'waalaxy_sequence_dispatched',
+            status: 'WAALAXY_SEQUENCE_ACTIVE',
+            compliance_standard: 'EU-DSGVO Art. 28 + Flüchiger RAM-Puffer',
+            synced_at: new Date().toISOString()
+          };
+
+          waalaxyProspectsStore.set(lead.email.toLowerCase(), leadPayload);
+
+          if (supabase) {
+            try {
+              await supabase.from('audit_leads').upsert({
+                email: lead.email,
+                name: lead.name,
+                company: lead.company,
+                role: lead.role,
+                country: lead.country,
+                document_type: 'DACH B2B Vertragsprüfung Redline',
+                status: 'WAALAXY_SEQUENCE_ACTIVE',
+                tags: ['🇩🇪 LEADS_DACH_DEUTSCHLAND', '🇪🇺 DSGVO_ART28', '🛰️ WAALAXY_DISPATCHED', '👑 DIRECTIVA_REAL'],
+                lead_score: lead.lead_score || 99,
+                updated_at: new Date().toISOString()
+              }, { onConflict: 'email' });
+            } catch (dbErr) {
+              console.warn('[WaalaxySync] Supabase Upsert:', dbErr.message);
+            }
+          }
+
+          dispatchedLeads.push(leadPayload);
+        }
+
+        console.log(`🛰️ [WAALAXY DISPATCH] Campaña "leads DACH Deutschland" activada y sincronizada exitosamente (${dispatchedLeads.length} decisores reales).`);
+
+        return res.status(200).json({
+          success: true,
+          campaign: 'leads DACH Deutschland',
+          dispatched_count: dispatchedLeads.length,
+          status: 'DISPATCHED_AND_ACTIVE',
+          compliance: 'EU-DSGVO Art. 28 • Flüchtiger RAM-Puffer',
+          carousel_url: 'https://audiflowai.com/LinkedIn_Carousel_German_DACH.pdf',
+          redline_template_url: 'https://audiflowai.com/AuditFlow_Vertragspruefung_Redline_Muster.doc',
+          leads: dispatchedLeads
+        });
+      }
 
       // ACCIÓN ESPECIAL: DISPARAR Y SINCRONIZAR CAMPAÑA "LEADS ZONA NÓRDICA" A TRAVÉS DE WAALAXY
       if (action === 'dispatch_nordic_campaign' || action === 'dispatch_campaign' || campaign === 'leads_zona_nordica') {

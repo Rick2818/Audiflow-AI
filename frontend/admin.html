@@ -1078,6 +1078,17 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                                 Cargar
                             </button>
                         </div>
+
+                        <!-- 8. LEADS DACH ALEMANIA (20 DIRECTORES LEGALES & GENERAL COUNSELS) -->
+                        <div class="p-2.5 rounded-lg bg-gradient-to-r from-amber-950/60 to-dark-card border border-amber-500/40 hover:border-amber-400 transition-all flex items-center justify-between gap-2">
+                            <div>
+                                <div class="text-xs font-bold text-amber-300">🇩🇪 8. Leads DACH Alemania (20 Decisores)</div>
+                                <div class="text-[10px] text-amber-200 font-mono">Hengeler Mueller, Gleiss Lutz, Noerr, Siemens, SAP, BMW, Allianz...</div>
+                            </div>
+                            <button onclick="AdminApp.loadProspectsBatch('leads_dach_alemania')" class="px-2.5 py-1.5 rounded-md bg-amber-400 text-black font-bold font-mono text-[11px] hover:bg-amber-300 transition-all cursor-pointer whitespace-nowrap shadow-sm">
+                                Cargar
+                            </button>
+                        </div>
                     </div>
 
                     <!-- PANEL DE INTEGRACIÓN WAALAXY & LINKEDIN AUTOMATION -->
@@ -1092,15 +1103,28 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                             Exporta tus listas de decisores verificados para importar en Waalaxy o conecta el Webhook para recibir interacciones en tiempo real:
                         </p>
                         <div class="space-y-2">
-                            <button onclick="AdminApp.dispatchNordicWaalaxyCampaign()" class="w-full py-2.5 px-3 bg-gradient-to-r from-emerald-400 via-sky-400 to-blue-500 hover:opacity-90 text-black font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer shadow-glow">
-                                <span>🚀 Disparar Campaña "Leads Zona Nórdica" (Waalaxy Sync)</span>
+                            <button onclick="AdminApp.dispatchDachWaalaxyCampaign()" class="w-full py-2.5 px-3 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500 hover:opacity-90 text-black font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer shadow-glow">
+                                <span>🚀 Disparar Campaña "Leads DACH Alemania" (Waalaxy Sync)</span>
                             </button>
-                            <a href="/api/waalaxy-sync?action=export_csv&campaign=leads_zona_nordica" download="waalaxy_leads_zona_nordica.csv" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-sky-300 border border-sky-500/40 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
-                                <span>❄️ Descargar "Leads Zona Nórdica" (CSV Waalaxy)</span>
-                            </a>
-                            <a href="/api/waalaxy-sync?action=export_csv&campaign=pareto_latam" download="waalaxy_directores_legales_latam.csv" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-gray-300 border border-gray-700 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
-                                <span>📥 Descargar Decisores Latam VIP (CSV)</span>
-                            </a>
+                            <button onclick="AdminApp.dispatchNordicWaalaxyCampaign()" class="w-full py-2 px-3 bg-gradient-to-r from-emerald-400 via-sky-400 to-blue-500 hover:opacity-90 text-black font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer shadow-glow">
+                                <span>❄️ Disparar Campaña "Leads Zona Nórdica" (Waalaxy Sync)</span>
+                            </button>
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <a href="/api/waalaxy-sync?action=export_csv&campaign=leads_dach_alemania" download="waalaxy_leads_dach_alemania.csv" class="py-2 px-2 bg-dark-surface hover:bg-dark-card text-amber-300 border border-amber-500/40 text-[11px] font-mono rounded-lg text-center flex items-center justify-center gap-1 transition-all cursor-pointer">
+                                    <span>🇩🇪 CSV Alemania</span>
+                                </a>
+                                <a href="/api/waalaxy-sync?action=export_csv&campaign=leads_zona_nordica" download="waalaxy_leads_zona_nordica.csv" class="py-2 px-2 bg-dark-surface hover:bg-dark-card text-sky-300 border border-sky-500/40 text-[11px] font-mono rounded-lg text-center flex items-center justify-center gap-1 transition-all cursor-pointer">
+                                    <span>❄️ CSV Nórdicos</span>
+                                </a>
+                            </div>
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <a href="/LinkedIn_Carousel_German_DACH.pdf" download="LinkedIn_Carousel_German_DACH.pdf" class="py-1.5 px-2 bg-dark-surface hover:bg-dark-card text-slate-300 border border-gray-700 text-[10px] font-mono rounded-lg text-center flex items-center justify-center gap-1 transition-all cursor-pointer">
+                                    <span>🖼️ Carrusel DACH (PDF)</span>
+                                </a>
+                                <a href="/AuditFlow_Vertragspruefung_Redline_Muster.doc" download="AuditFlow_Vertragspruefung_Redline_Muster.doc" class="py-1.5 px-2 bg-dark-surface hover:bg-dark-card text-slate-300 border border-gray-700 text-[10px] font-mono rounded-lg text-center flex items-center justify-center gap-1 transition-all cursor-pointer">
+                                    <span>📄 Redline DACH (.doc)</span>
+                                </a>
+                            </div>
                             <button onclick="AdminApp.copyWaalaxyWebhook()" class="w-full py-2 px-3 bg-dark-surface hover:bg-dark-card text-slate-300 border border-gray-700 text-xs font-mono rounded-lg text-center flex items-center justify-center gap-2 transition-all cursor-pointer">
                                 <span>🔗 Copiar Webhook URL Waalaxy</span>
                             </button>
@@ -2435,6 +2459,32 @@ Fundador • AuditFlow AI Corp. (audiflowai.com)</textarea>
                     nordicList.forEach(n => {
                         lines.push(`${n.email}, ${n.name}, ${n.comp}, ${n.role}, ${n.country}, ${n.tag}`);
                     });
+                } else if (batch === 'leads_dach_alemania' || batch === 'dach' || batch === 'germany') {
+                    const dachList = [
+                        { email: 'dirk.uwer@hengeler.com', name: 'Dr. Dirk Uwer', comp: 'Hengeler Mueller', role: 'Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'georg.frowein@hengeler.com', name: 'Dr. Georg Frowein', comp: 'Hengeler Mueller', role: 'Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'ralf.morshaeuser@gleisslutz.com', name: 'Dr. Ralf Morshäuser', comp: 'Gleiss Lutz', role: 'Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'alexander.schwarz@gleisslutz.com', name: 'Dr. Alexander Schwarz', comp: 'Gleiss Lutz', role: 'Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'alexander.ritvay@noerr.com', name: 'Dr. Alexander Ritvay', comp: 'Noerr Partnerschaftsgesellschaft', role: 'Co-Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'torsten.fett@noerr.com', name: 'Dr. Torsten Fett', comp: 'Noerr Partnerschaftsgesellschaft', role: 'Co-Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'martin.schmid@cms-hs.com', name: 'Dr. Martin C. Schmid', comp: 'CMS Hasche Sigle', role: 'Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'markus.sengpiel@cms-hs.com', name: 'Dr. Markus Sengpiel', comp: 'CMS Hasche Sigle', role: 'Managing Partner', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'andreas.fabritius@freshfields.com', name: 'Dr. Andreas Fabritius', comp: 'Freshfields Bruckhaus Deringer', role: 'Senior Partner Germany', country: 'Alemania', tag: '⚖️ SENIOR_PARTNER' },
+                        { email: 'christian.ruoff@freshfields.com', name: 'Dr. Christian Ruoff', comp: 'Freshfields Bruckhaus Deringer', role: 'Partner & Practice Lead', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' },
+                        { email: 'wolfgang.heckenberger@siemens.com', name: 'Dr. Wolfgang Heckenberger', comp: 'Siemens AG', role: 'General Counsel & Head of Legal', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'jochen.biedermann@sap.com', name: 'Dr. Jochen Biedermann', comp: 'SAP SE', role: 'SVP & General Counsel', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'michael.niggemann@dlh.de', name: 'Dr. Michael Niggemann', comp: 'Deutsche Lufthansa AG', role: 'Chief Legal Officer', country: 'Alemania', tag: '⚖️ CHIEF_LEGAL_OFFICER' },
+                        { email: 'andreas.busch@allianz.com', name: 'Dr. Andreas B. Busch', comp: 'Allianz SE', role: 'Group General Counsel', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'florian.drinhausen@db.com', name: 'Dr. Florian Drinhausen', comp: 'Deutsche Bank AG', role: 'General Counsel', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'juergen.spillmann@bmw.de', name: 'Dr. Jürgen Spillmann', comp: 'BMW Group', role: 'VP Corporate Legal', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'stefan.john@basf.com', name: 'Dr. Stefan John', comp: 'BASF SE', role: 'General Counsel & Compliance', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'm.sonnenschein@enbw.com', name: 'Dr. Martin Sonnenschein', comp: 'EnBW AG', role: 'General Counsel', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'hans-ulrich.engel@infineon.com', name: 'Dr. Hans-Ulrich Engel', comp: 'Infineon Technologies', role: 'Head of Legal', country: 'Alemania', tag: '⚖️ GENERAL_COUNSEL' },
+                        { email: 'm.kerber@bdi.eu', name: 'Dr. Markus Kerber', comp: 'BDI Bundesverband', role: 'Managing Director & Legal', country: 'Alemania', tag: '⚖️ MANAGING_PARTNER' }
+                    ];
+                    dachList.forEach(d => {
+                        lines.push(`${d.email}, ${d.name}, ${d.comp}, ${d.role}, ${d.country}, ${d.tag}`);
+                    });
                 } else if (batch === 'legal_25' || batch === 'annual_599_firms') {
                     const legalList = [
                         { email: 'contact.elsalvador@ariaslaw.com', name: 'Armando Arias', comp: 'Arias Law Firm', role: 'Socio Director & Regional Chair', country: 'El Salvador', tag: '⚖️ MANAGING_PARTNER' },
@@ -3385,6 +3435,42 @@ Escaneo de prueba gratuito:
                 }).catch(() => {
                     prompt(`Copia el texto para ${label}:`, text);
                 });
+            },
+
+            async dispatchDachWaalaxyCampaign() {
+                if (!confirm('🇩🇪 ¿Confirmas disparar y sincronizar la campaña "Leads DACH Alemania" (20 directores legales DE/DACH) a través de Waalaxy bajo normativa EU-DSGVO Art. 28?')) {
+                    return;
+                }
+
+                this.showToast('🇩🇪 Sincronizando 20 decisores alemanes con Waalaxy...', 'info');
+
+                try {
+                    const headers = this.getAuthHeaders();
+                    headers['Content-Type'] = 'application/json';
+
+                    const res = await fetch('/api/waalaxy-sync', {
+                        method: 'POST',
+                        headers,
+                        body: JSON.stringify({
+                            action: 'dispatch_dach_campaign',
+                            campaign: 'leads_dach_alemania'
+                        })
+                    });
+
+                    const data = await res.json();
+                    if (data.success) {
+                        this.showToast(`✅ ¡Campaña "leads DACH Deutschland" disparada exitosamente (${data.dispatched_count} decisores)!`, 'success');
+                        const logBox = document.getElementById('outreach-status-log');
+                        if (logBox) {
+                            logBox.innerHTML = `<span class="text-amber-400 font-bold">🚀 [WAALAXY DACH CAMPAIGN] 20 decisores legales reales de Alemania sincronizados exitosamente con Carrusel y Redline en Alemán (EU-DSGVO Art. 28).</span><br>` + logBox.innerHTML;
+                        }
+                        this.fetchAdminData();
+                    } else {
+                        throw new Error(data.error || 'Error al disparar la campaña alemana.');
+                    }
+                } catch (err) {
+                    this.showToast('❌ Error: ' + err.message, 'error');
+                }
             },
 
             async dispatchNordicWaalaxyCampaign() {

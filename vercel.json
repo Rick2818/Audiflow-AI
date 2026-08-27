@@ -154,6 +154,18 @@
       "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
     },
     {
+      "source": "/LinkedIn_Carousel_German_DACH.pdf",
+      "destination": "/frontend/LinkedIn_Carousel_German_DACH.pdf"
+    },
+    {
+      "source": "/AuditFlow_Vertragspruefung_Redline_Muster.doc",
+      "destination": "/frontend/AuditFlow_Vertragspruefung_Redline_Muster.doc"
+    },
+    {
+      "source": "/redline-german",
+      "destination": "/frontend/AuditFlow_Vertragspruefung_Redline_Muster.doc"
+    },
+    {
       "source": "/AuditFlow_AI_Operational_Master_Plan.pdf",
       "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
     },
