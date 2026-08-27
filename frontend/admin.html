@@ -1135,6 +1135,10 @@ contacto@bu.com.co, Carlos Umaña, Brigard Urrutia, Socio Director & M&A Lead, C
                                 <span>4. Plantilla de Respuesta</span>
                                 <span class="text-[9px] bg-emerald-500/30 text-emerald-300 px-1.5 py-0.5 rounded">📋 Copiar</span>
                             </button>
+                            <button onclick="AdminApp.copyServiceField('carousel')" class="w-full py-1.5 px-2.5 bg-dark-surface hover:bg-dark-card text-amber-300 border border-amber-500/30 text-[11px] font-mono rounded-lg flex items-center justify-between transition-all cursor-pointer">
+                                <span>5. Carrusel Multimedia (PDF / Enlace)</span>
+                                <span class="text-[9px] bg-amber-500/30 text-amber-300 px-1.5 py-0.5 rounded">📋 Copiar</span>
+                            </button>
                             <a href="https://www.linkedin.com/in/me/services/create/" target="_blank" rel="noopener noreferrer" class="w-full py-2 px-3 bg-gradient-to-r from-indigo-500 to-sky-500 hover:opacity-90 text-white font-extrabold text-xs rounded-lg text-center flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-glow">
                                 <span>🔗 Abrir mi Página de Servicios en LinkedIn →</span>
                             </a>
@@ -3371,6 +3375,9 @@ Escaneo de prueba gratuito:
                 } else if (field === 'response') {
                     text = 'Hola [Nombre], un gusto saludarte.\n\nCon gusto revisamos tu contrato o facturación. Con AuditFlow AI procesamos el documento en menos de 10 segundos en memoria RAM volátil (sin almacenar tus archivos ni exponer secretos comerciales bajo estándar EU GDPR Art. 28).\n\nTe comparto el acceso directo para realizar tu primera auditoría 100% gratuita y obtener el diagnóstico preliminar con el Redline en Word (.docx):\n👉 https://audiflowai.com/?ref=linkedin-services\n\nSi prefieres que lo revise personalmente con nuestro equipo legal, puedes adjuntarme el borrador por aquí o agendar una llamada ejecutiva de 10 minutos.\n\nQuedo a tu disposición,\nRicardo\nFundador • AuditFlow AI (audiflowai.com)';
                     label = 'Plantilla de Respuesta Rápida';
+                } else if (field === 'carousel') {
+                    text = 'https://audiflowai.com/LinkedIn_Carousel_AuditFlow_AI.pdf';
+                    label = 'Enlace del Carrusel Ejecutivo PDF';
                 }
 
                 navigator.clipboard.writeText(text).then(() => {
