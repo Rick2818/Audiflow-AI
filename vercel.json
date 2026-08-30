@@ -284,32 +284,12 @@
   ],
   "crons": [
     {
-      "path": "/api/outreach?campaign=pareto_tuesday_risk&batch=pareto_top20",
-      "schedule": "0 13 * * 2"
-    },
-    {
-      "path": "/api/outreach?campaign=pareto_wednesday_case_study&batch=pareto_top20",
-      "schedule": "0 13 * * 3"
-    },
-    {
-      "path": "/api/outreach?campaign=strategic_investor_advisory&batch=strategic_investors",
-      "schedule": "0 13 * * 4"
-    },
-    {
-      "path": "/api/outreach?campaign=touch_4_breakup&batch=pareto_top20",
-      "schedule": "0 13 * * 5"
+      "path": "/api/outreach?campaign=daily_master_dispatch&batch=pareto_top20",
+      "schedule": "0 13 * * 1-5"
     },
     {
       "path": "/api/lead-recovery",
-      "schedule": "0 14 * * 2,3,5"
-    },
-    {
-      "path": "/api/outreach?campaign=daily_omnichannel_social_8am&batch=omnichannel_8am",
-      "schedule": "0 14 * * *"
-    },
-    {
-      "path": "/api/social-publish?action=daily_cron_dispatch",
-      "schedule": "0 14 * * *"
+      "schedule": "0 14 * * 1-5"
     }
   ]
 }
