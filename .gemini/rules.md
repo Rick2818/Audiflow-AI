@@ -58,12 +58,17 @@
      - Generación proactiva de contenidos virales, carruseles y secuencias de re-engagement.
      - Entrega de soluciones ejecutadas y listas, no solo planes teóricos.
 
-## 9. Regla Inmutable de Alimentación Diaria Omnicanal Automática (LinkedIn, Instagram, TikTok a las 8:00 AM)
-- **ALIMENTACIÓN DIARIA OBLIGATORIA A LAS 8:00 AM (0 14 * * *)**:
-  1. **LinkedIn (`AuditFlow AI` / `linkedin.com/company/auditflow-ai`)**: Agente LinkedIn despacha carruseles 4:3 PDF y posts de autoridad jurídica orientados a General Counsels y Socios Directores (CTA: Comentar "AUDITORIA").
-  2. **Instagram (`@auditflowai` / `instagram.com/auditflowai`)**: Agente Instagram despacha Reels 9:16 y carruseles visuales estilo Cyber-Tech con hooks de <3s y enlace a biografía.
-  3. **TikTok (`@auditflowai` / `tiktok.com/@auditflowai`)**: Agente TikTok despacha guiones hablados rápidos (30-40s) sobre hacks de cláusulas leoninas ($14k USD) con llamado a audiflowai.com.
-  4. Los 3 canales se alimentan autónomamente con inteligencia de tendencias de compliance y normativas 2026 todos los días sin intervención manual.
+## 9. Regla Inmutable de Publicación 7 Días a la Semana de Trending Topics y Seguimiento Multilingüe (Waalaxy, LinkedIn, Instagram, Facebook)
+- **ALIMENTACIÓN DIARIA OBLIGATORIA LOS 7 DÍAS DE LA SEMANA (LUNES A DOMINGO A LAS 8:00 AM)**:
+  1. **LinkedIn (`AuditFlow AI` / `linkedin-specialist`)**: Publica diariamente carruseles PDF 4:3, encuestas y análisis de Trending Topics (compliance 2026, IA fiduciaria, casos de litigio corporativo) orientados a General Counsels y Socios Directores.
+  2. **Waalaxy (`waalaxy-specialist`)**: Prospección y secuencias 24/7 vinculadas a las tendencias semanales con auto-respuesta <3s vía `/api/waalaxy-sync`.
+  3. **Instagram (`@auditflowai` / `instagram-specialist`)**: Publica diariamente Reels 9:16 de <30s y carruseles visuales Cyber-Tech con ganchos de alta retención basados en tendencias virales.
+  4. **Facebook (`AuditFlow AI` / `facebook-specialist`)**: Publica diariamente en Páginas, Grupos de Negocios y Facebook Reels análisis de tendencias y casos forenses.
+  5. **TikTok (`@auditflowai` / `tiktok-specialist`)**: Publica diariamente guiones hablados de hacks contractuales y tendencias de la FYP.
+
+- **MANDATO DE SEGUIMIENTO MULTILINGÜE EN TIEMPO REAL**:
+  - Toda persona que interactúe, comente o envíe un mensaje directo (DM / Messenger / Inbox / Respuesta de Waalaxy) en **CUALQUIERA de las 4 plataformas**, debe recibir atención y seguimiento en su **idioma nativo exacto** (🇪🇸 Español, 🇺🇸 Inglés, 🇫🇷 Francés, 🇧🇷 Portugués, 🇩🇪 Alemán, 🇸🇪 Sueco, etc.).
+  - Enlace oficial entregado: `https://audiflowai.com` con auditoría gratuita de 10s en RAM volátil y generación instantánea de Redlines en Word (.docx).
 
 ## 10. Regla Inmutable de Campañas y Prospección para Países Nórdicos (Suecia, Noruega, Dinamarca, Finlandia)
 - **MANDATO ESTRICTO PARA MERCADOS NÓRDICOS (SWE, NOR, DNK, FIN / .se, .no, .dk, .fi)**:
@@ -84,6 +89,10 @@
      - Copilotos conversacionales contextuales 2-Way.
      - Arquitecturas de privacidad certificada (*Zero Data Retention* en memoria RAM volátil).
   3. **Adaptación Cultural y Normativa por País:** Cada producto debe contar con segmentación nativa para Latam (cercanía y retorno en cash), Norteamérica/Global (velocidad y estándares US GAAP/PCAOB), Europa francófona/DACH (precisión y DSGVO/RGPD) y Países Nórdicos (estándar *Lagom*, sobriedad y GDPR Art. 28).
+
+## 12. Regla Inmutable de Publicación 100% Autónoma en Redes Sociales (Cero Publicación Manual por el Usuario)
+- **MANDATO DE AUTONOMÍA ABSOLUTA:** El contenido de Facebook, Instagram, LinkedIn y Waalaxy debe ser publicado y despachado **exclusivamente por los agentes**. Queda terminantemente prohibido pedirle al usuario que copie, pegue o publique el contenido manualmente.
+- **OBLIGACIÓN DE RESOLUCIÓN TÉCNICA AUTOMATIZADA:** Si una API oficial impone barreras o errores de permisos (como `#200` en Meta Graph API o expiración de tokens), los agentes de ingeniería deben activar y mantener canales automatizados de despacho (motor de navegación automatizado Playwright con sesión persistente, puentes de publicación vía webhooks con n8n/Buffer/Metricool) para garantizar que la publicación se ejecute en producción de forma 100% desatendida.
 
 
 

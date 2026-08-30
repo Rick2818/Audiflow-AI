@@ -28,6 +28,9 @@ import reportHandler from './api/report.js';
 import subscribeHandler from './lib/subscribe.js';
 import inviteColleagueHandler from './lib/invite-colleague.js';
 import fastTrackHandler from './lib/fast-track-blast.js';
+import { LinkedInMcpAgent } from './lib/linkedin-mcp-agent.js';
+import { SalesNavWaalaxyN8nEngine } from './lib/salesnav-waalaxy-n8n-engine.js';
+import { ExecutiveEmailDispatcher } from './lib/executive-email-dispatcher.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -171,6 +174,39 @@ app.all('/api/outreach', outreachHandler);
 app.all('/api/outreach/send-campaign', outreachHandler);
 app.all('/api/invite-colleague', inviteColleagueHandler);
 app.all('/api/fast-track-blast', fastTrackHandler);
+
+// AGENTE MCP LINKEDIN: Auto-Responder & Lead Dispatcher en Segundo Plano
+const linkedInMcp = new LinkedInMcpAgent();
+app.post('/api/mcp/linkedin', async (req, res) => {
+  try {
+    const { prospectName, profileUrl, commentText, companyName, role } = req.body || {};
+    if (!prospectName || !commentText) {
+      return res.status(400).json({ error: 'Faltan parámetros requeridos: prospectName, commentText' });
+    }
+    const result = await linkedInMcp.processIncomingInteraction({
+      prospectName,
+      profileUrl,
+      commentText,
+      companyName,
+      role
+    });
+    return res.json({ success: true, result });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
+
+// MOTOR N8N + WAALAXY + SALES NAVIGATOR: Disparador y Webhook Automatizado
+const salesNavEngine = new SalesNavWaalaxyN8nEngine();
+app.post('/api/n8n/waalaxy-salesnav', async (req, res) => {
+  try {
+    const payload = req.body || {};
+    const result = await salesNavEngine.handleWaalaxyN8nWebhook(payload);
+    return res.json({ success: true, result });
+  } catch (err) {
+    return res.status(500).json({ success: false, error: err.message });
+  }
+});
 
 // Middleware global de cabeceras de seguridad HTTP
 app.use((req, res, next) => {
@@ -425,7 +461,8 @@ async function sendOwnerPurchaseNotification({
   reportId = 'N/A',
   leakage = '$3,450.00 USD'
 }) {
-  const ownerEmail = 'rick28191@gmail.com';
+  const ownerEmail = 'ricardo@audiflowai.com';
+  const ownerBackupEmail = 'rick28191@gmail.com';
   const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
   const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
 
@@ -489,25 +526,19 @@ async function sendOwnerPurchaseNotification({
   </body>
   </html>`;
 
-  if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
-    try {
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: { user: gmailUser, pass: gmailPass }
-      });
-
-      const info = await transporter.sendMail({
-        from: `"AuditFlow AI Sales" <${gmailUser}>`,
-        to: ownerEmail,
-        subject: subject,
-        html: htmlBody
-      });
-
-      console.log(`✅ [NOTIFICACIÓN AL PROPIETARIO] Venta enviada a ${ownerEmail} | Transacción: ${amount}`);
-      return { success: true, ownerEmail, messageId: info.messageId };
-    } catch (err) {
-      console.error(`⚠️ Error enviando notificación de venta al propietario (${ownerEmail}):`, err.message);
-    }
+  const executiveDispatcher = new ExecutiveEmailDispatcher();
+  try {
+    const result = await executiveDispatcher.sendSaleAlert({
+      planName,
+      amount,
+      customerName,
+      customerEmail,
+      reportId
+    });
+    console.log(`✅ [NOTIFICACIÓN AL PROPIETARIO] Venta despachada vía ExecutiveEmailDispatcher a ricardo@audiflowai.com y rick28191@gmail.com | Transacción: ${amount}`);
+    return result;
+  } catch (err) {
+    console.error(`⚠️ Error despachando alerta de venta:`, err.message);
   }
 
   // Fallback Ethereal Mail para pruebas locales

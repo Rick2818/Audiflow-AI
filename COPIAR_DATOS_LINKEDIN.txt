@@ -1,0 +1,58 @@
+================================================================================
+AUDIFLOWAI - KIT DE CONFIGURACIÓN Y LANZAMIENTO PARA LINKEDIN Y REDES SOCIALES
+================================================================================
+
+1. FOTOS Y ARCHIVOS GRÁFICOS (GUARDADOS EN ESTA MISMA CARPETA):
+--------------------------------------------------------------------------------
+- Foto de Perfil / Logo (Isotipo): avatar_audiflowai.svg
+- Foto de Portada / Banner: banner_audiflowai.svg
+
+--------------------------------------------------------------------------------
+2. NOMBRE DE LA EMPRESA / HANDLE:
+--------------------------------------------------------------------------------
+Audiflowai
+(URL: linkedin.com/company/audiflowai)
+
+--------------------------------------------------------------------------------
+3. LEMA / TAGLINE (COPIAR Y PEGAR EN EL CAMPO "LEMA" DE LINKEDIN):
+--------------------------------------------------------------------------------
+IA para Directores Legales y CFOs: Due Diligence y Auditoría de Contratos en Minutos con Cero Alucinaciones.
+
+--------------------------------------------------------------------------------
+4. DESCRIPCIÓN CORTA DEL PERFIL (BIO):
+--------------------------------------------------------------------------------
+Audiflowai es la plataforma de inteligencia artificial especializada en Due Diligence, auditoría de contratos y detección de pasivos contingentes para Directores Legales (General Counsel), Abogados M&A, Oficiales de Cumplimiento y CFOs. Arquitectura híbrida determinista con trazabilidad forense probatoria estricta.
+
+Sitio Web: https://audiflow.ai
+
+--------------------------------------------------------------------------------
+5. POST VIRAL LISTO PARA PUBLICAR (COPIAR Y PEGAR):
+--------------------------------------------------------------------------------
+El 68% de las contingencias millonarias en adquisiciones y auditorías no nacen de fraudes en los números.
+
+Nacen de cláusulas contractuales que nadie tuvo tiempo de leer a fondo. 📄⚠️
+
+Un Director Legal o CFO promedio se enfrenta hoy a:
+❌ Cientos de contratos de proveedores con penalizaciones ocultas.
+❌ Cláusulas de cambio de control (Change of Control) sin conciliar.
+❌ Semanas de revisión manual donde un simple descuido humano deriva en responsabilidad legal del Consejo.
+
+Y las IAs tradicionales no servían para esto porque "alucinan" datos. En el ámbito legal y fiscal, un número inventado es inaceptable.
+
+Por eso creamos Audiflowai ⚖️📊
+
+Desarrollamos una arquitectura híbrida que combina LLMs con un motor determinista:
+1️⃣ Escanea 500 folios contractuales en 40 segundos.
+2️⃣ Cruza las obligaciones legales directamente contra los balances contables.
+3️⃣ Genera un Memorándum en formato Redlines con cita textual exacta y riesgo calificado (Cero alucinaciones).
+
+Lo que a un equipo le tomaba 3 semanas de desvelo, hoy se resuelve antes de que termine tu café matutino. ☕⚡
+
+👇 PRUEBA SIN FRICCIÓN (Sin tarjetas, sin llamadas de ventas):
+¿Quieres ver cómo funciona en un contrato real de tu empresa?
+
+Comenta la palabra "AUDITAR" abajo 👇 y te enviaremos por mensaje privado un acceso de cortesía para escanear 1 contrato completo hoy mismo.
+
+#LegalOps #GeneralCounsel #AbogadosCorporativos #Compliance #DueDiligence #CFO #LegalTech #Audiflowai
+
+================================================================================

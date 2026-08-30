@@ -462,3 +462,22 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
      - 📄 1. Dossier Ejecutivo & Plantilla Word (.docx) de Contra-Cláusulas Blindadas.
      - 🎬 2. Video Demostrativo HyperFrames de 40s con Voz Femenina de Estudio.
    - Copia de control y reporte de despacho enviado a `tendenciaiatufuturo@gmail.com`.
+
+---
+
+## 🏛️ 30. GOBERNANZA EJECUTIVA, CONTROL DE FATIGA PUBLICITARIA, DIAGNÓSTICO DE COMPORTAMIENTO Y ORQUESTACIÓN N8N
+
+### A. Estructura del Comité de Dirección Ejecutiva
+1. **Director General (CEO - Ricardo):** Liderazgo supremo, visión de expansión, alianzas institucionales y destino final de las alertas de compras y reportes estratégicos (`ricardo@audiflowai.com`, `rick28191@gmail.com`).
+2. **Gerente General y Director de Operaciones (GM / COO):** Asesor principal del Director General. Diseña y presenta **Planes de Acción Ejecutivos (Action Plans)**, vigila las métricas operativas y vela celosamente por los resultados en **Dólares Americanos (USD: $)** (MRR, ARR, LTV/CAC > 4.0x, margen operativo).
+3. **Directora de Marketing y Ventas (CMVO):** Lidera la generación de demanda, prospección multicanal y supervisión de canales.
+4. **Director Senior de Meta Ads (Facebook & Instagram) (+20 años):** Configuración técnica (CAPI, Píxel), embudos TOFU-MOFU-BOFU, Advantage+ y cumplimiento estricto de **ROAS >= 4.5x** en USD.
+5. **Especialista Senior en Psicología del Consumidor, Diagnóstico de App y Anti-Fatiga (+20 años):** Analiza por qué los clientes compran o abandonan, audita la fricción de la app y Stripe, e impone el **Escudo Anti-Fatiga Publicitaria** (Frecuencia < 2.8, cooldowns y rotación obligatoria de 4 ángulos psicológicos para evitar el aburrimiento de la audiencia).
+
+### B. Orquestación Desatendida en n8n
+- **Flujo Centralizado (`n8n_workflows_auditflow.json` y `lib/n8n-agent-bridge.js`):**
+  - Webhook `/meta-ads-reporting`: Monitoreo diario de pauta y ROAS.
+  - Webhook `/consumer-behavior-audit`: Alertas automáticas ante caídas de CTR o saturación de creativos.
+  - Webhook `/gm-coo-plan`: Balance financiero consolidado en USD y plan de acción para el CEO.
+  - Webhook `/executive-meeting-sync`: Sincronización y agenda de reuniones ejecutivas (Ricardo + GM + CMVO).
+

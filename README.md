@@ -127,12 +127,29 @@ npm test
 * **Frontend**: HTML5, Tailwind CSS 3.4, Vanilla JavaScript ES6+ (Tri-lingüe ES/EN/DE + Modo Nórdico).
 * **Backend**: Node.js, Express, Vercel Serverless Functions.
 * **Base de Datos & Auth**: Supabase (PostgreSQL 15 + RLS).
-* **Infraestructura de Correo**: Resend API (`ricardo@audiflowai.com`) + Gmail SMTP de respaldo transaccional.
-* **Telemetría**: Microsoft Clarity + Google Analytics 4 (`G-KMESC5J8WH`).
+---
+
+## 🏛️ Gobernanza Ejecutiva, Equipo Multi-Agente & Orquestación n8n
+
+AuditFlow AI cuenta con un sistema de agentes autónomos coordinados mediante **n8n** y **Google Workspace MCP**:
+
+1. **Director General (CEO):** Ricardo (`ricardo@audiflowai.com`, `rick28191@gmail.com`).
+2. **Gerente General / COO (`general-manager-coo`):** Asesoría de planes de acción estratégicos para el CEO, custodia estricta de métricas y resultados financieros en **USD ($)** (MRR, ARR, LTV/CAC > 4.0x) y co-liderazgo del comité directivo.
+3. **Directora de Marketing y Ventas (`marketing-director`):** Orquestación unificada de demanda, prospección multicanal y balance diario.
+4. **Director Senior de Meta Ads (`meta-ads-specialist`):** Experto con +20 años de trayectoria en arquitectura publicitaria de Facebook e Instagram, CAPI, Advantage+, escalado fiduciario y meta de **ROAS >= 4.5x**.
+5. **Especialista Senior en Psicología del Consumidor & Anti-Fatiga (`consumer-behavior-diagnostician`):** Experto con +20 años en diagnóstico de adopción de la app, drivers de compra/no-compra y **Escudo Anti-Fatiga de Anuncios** (frecuencia < 2.8, cooldowns y rotación de ángulos psicológicos para evitar el aburrimiento).
+6. **Especialistas Senior de Ventas (+20 años):** `legal-sales-specialist`, `financial-sales-specialist`, `gov-sales-specialist` y `waalaxy-specialist`.
+
+### 🔄 Flujos Automatizados en n8n ([`n8n_workflows_auditflow.json`](n8n_workflows_auditflow.json)):
+* `meta-ads-reporting`: Monitoreo y auditoría diaria de pauta en USD.
+* `consumer-behavior-audit`: Alertas de fatiga y recomendaciones de rotación creativa.
+* `gm-coo-plan`: Informes consolidados de facturación, rentabilidad y planes de acción para el CEO.
+* `executive-meeting-sync`: Sincronización periódica de la mesa directiva (Ricardo + GM + CMVO).
 
 ---
 
 ## 📜 Licencia
 
 Distribuido bajo la Licencia MIT. Consulta [`LICENSE`](LICENSE) para más detalles.
+
 

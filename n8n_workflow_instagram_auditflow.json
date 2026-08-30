@@ -1,0 +1,496 @@
+{
+  "name": "AuditFlow AI — Instagram Autonomous Publishing & DM Funnel Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 13 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "cron-instagram-daily",
+      "name": "Cron Diario 1:00 PM (Hora Pico Instagram B2B)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [100, 200]
+    },
+    {
+      "parameters": {
+        "path": "instagram-publish",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-instagram-publish",
+      "name": "Webhook: Despacho de Contenido Instagram",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 400],
+      "webhookId": "instagram-publish-auditflow"
+    },
+    {
+      "parameters": {
+        "path": "instagram-lead-webhook",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-instagram-comments",
+      "name": "Webhook: Comentarios Instagram (Funnel Lead Magnet)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 750],
+      "webhookId": "instagram-comments-lead-magnet"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizar payload de entrada para Instagram Publishing\nconst body = items[0].json.body || items[0].json;\n\nconst postType = (body.post_type || 'CAROUSEL').toUpperCase(); // CAROUSEL, REEL, IMAGE\nconst caption = body.caption || 'Protege tus finanzas y audita contratos en segundos con AuditFlow AI. 🚀\\n\\n🔗 Enlace en bio para tu auditoría gratuita.\\n\\n#AuditFlowAI #LegalTech #CFO #DerechoCorporativo #Compliance';\nconst mediaUrls = body.media_urls || [body.image_url || body.media_url || 'https://audiflowai.com/banner_audiflowai.png'];\nconst coverUrl = body.cover_url || '';\nconst igUserId = $env.INSTAGRAM_ACCOUNT_ID || '17841400000000000';\nconst accessToken = $env.INSTAGRAM_ACCESS_TOKEN || 'YOUR_GRAPH_API_LONG_LIVED_TOKEN';\n\nreturn [{\n  json: {\n    postType,\n    caption,\n    mediaUrls: Array.isArray(mediaUrls) ? mediaUrls : [mediaUrls],\n    coverUrl,\n    igUserId,\n    accessToken,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "code-payload-parser",
+      "name": "Parsear & Validar Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [360, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.postType }}",
+              "operation": "equals",
+              "value2": "CAROUSEL"
+            }
+          ]
+        }
+      },
+      "id": "if-is-carousel",
+      "name": "¿Es Carrusel?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [600, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.postType }}",
+              "operation": "equals",
+              "value2": "REEL"
+            }
+          ]
+        }
+      },
+      "id": "if-is-reel",
+      "name": "¿Es Reel?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [840, 420]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Desglosar slides de carrusel para subir cada contenedor hijo\nconst mediaUrls = $node[\"Parsear & Validar Payload\"].json.mediaUrls;\nconst igUserId = $node[\"Parsear & Validar Payload\"].json.igUserId;\nconst accessToken = $node[\"Parsear & Validar Payload\"].json.accessToken;\n\nreturn mediaUrls.map((url, index) => ({\n  json: {\n    igUserId,\n    accessToken,\n    imageUrl: url,\n    isCarouselItem: true,\n    slideIndex: index\n  }\n}));"
+      },
+      "id": "code-split-carousel-slides",
+      "name": "Preparar Slides de Carrusel",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [840, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $json.igUserId }}/media",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "image_url",
+              "value": "={{ $json.imageUrl }}"
+            },
+            {
+              "name": "is_carousel_item",
+              "value": "true"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-create-slide-container",
+      "name": "Crear Contenedor Slide (Instagram API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 180]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Agrupar IDs de contenedores hijos para el contenedor padre de Carrusel\nconst childIds = items.map(item => item.json.id);\nconst parentData = $node[\"Parsear & Validar Payload\"].json;\n\nreturn [{\n  json: {\n    igUserId: parentData.igUserId,\n    accessToken: parentData.accessToken,\n    caption: parentData.caption,\n    children: childIds.join(','),\n    mediaType: 'CAROUSEL'\n  }\n}];"
+      },
+      "id": "code-aggregate-carousel",
+      "name": "Consolidar Contenedor Carrusel",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1320, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $json.igUserId }}/media",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "media_type",
+              "value": "CAROUSEL"
+            },
+            {
+              "name": "children",
+              "value": "={{ $json.children }}"
+            },
+            {
+              "name": "caption",
+              "value": "={{ $json.caption }}"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-create-carousel-parent",
+      "name": "Crear Carrusel Padre (Instagram API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1560, 180]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $node[\"Parsear & Validar Payload\"].json.igUserId }}/media",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "media_type",
+              "value": "REELS"
+            },
+            {
+              "name": "video_url",
+              "value": "={{ $node[\"Parsear & Validar Payload\"].json.mediaUrls[0] }}"
+            },
+            {
+              "name": "caption",
+              "value": "={{ $node[\"Parsear & Validar Payload\"].json.caption }}"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $node[\"Parsear & Validar Payload\"].json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-create-reel-container",
+      "name": "Crear Contenedor Reel (Instagram API)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $node[\"Parsear & Validar Payload\"].json.igUserId }}/media",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "image_url",
+              "value": "={{ $node[\"Parsear & Validar Payload\"].json.mediaUrls[0] }}"
+            },
+            {
+              "name": "caption",
+              "value": "={{ $node[\"Parsear & Validar Payload\"].json.caption }}"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $node[\"Parsear & Validar Payload\"].json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-create-single-image",
+      "name": "Crear Contenedor Imagen Única",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1080, 560]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Extraer el creation_id listo para publicación\nconst containerId = items[0].json.id;\nconst parentData = $node[\"Parsear & Validar Payload\"].json;\n\nreturn [{\n  json: {\n    igUserId: parentData.igUserId,\n    accessToken: parentData.accessToken,\n    creationId: containerId\n  }\n}];"
+      },
+      "id": "code-extract-creation-id",
+      "name": "Obtener Creation ID",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1800, 360]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/{{ $json.igUserId }}/media_publish",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "creation_id",
+              "value": "={{ $json.creationId }}"
+            },
+            {
+              "name": "access_token",
+              "value": "={{ $json.accessToken }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "http-publish-to-instagram",
+      "name": "Publicar en Instagram (Live Post)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [2040, 360]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Procesar comentarios con palabras clave ('REDLINE', 'AUDITORIA', 'PRECIO') para responder en DM\nconst commentData = items[0].json.body?.entry?.[0]?.changes?.[0]?.value || items[0].json;\nconst commentText = (commentData.text || '').toUpperCase();\nconst senderId = commentData.from?.id || commentData.user_id;\nconst commentId = commentData.id;\n\nconst isTargetKeyword = commentText.includes('REDLINE') || commentText.includes('AUDITORIA') || commentText.includes('DEMO') || commentText.includes('INFO');\n\nconst dmMessage = `¡Hola! 👋 Gracias por tu interés en AuditFlow AI.\\n\\nAquí tienes tu acceso directo para auditar contratos y facturas en tiempo real:\\n👉 https://audiflowai.com/demo\\n\\nSi requieres soporte fiduciario o cotización corporativa ($599/año), escríbenos directamente aquí.`;\n\nreturn [{\n  json: {\n    isTargetKeyword,\n    senderId,\n    commentId,\n    dmMessage,\n    accessToken: $env.INSTAGRAM_ACCESS_TOKEN || 'YOUR_GRAPH_API_LONG_LIVED_TOKEN'\n  }\n}];"
+      },
+      "id": "code-filter-comment-trigger",
+      "name": "Filtrar Trigger de Comentario",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [360, 750]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isTargetKeyword }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "if-keyword-matches",
+      "name": "¿Coincide Palabra Clave?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [600, 750]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v19.0/me/messages",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": { \"id\": \"{{ $json.senderId }}\" },\n  \"message\": { \"text\": \"{{ $json.dmMessage }}\" },\n  \"access_token\": \"{{ $json.accessToken }}\"\n}",
+        "options": {}
+      },
+      "id": "http-send-automated-dm",
+      "name": "Enviar DM Automático con Lead Magnet",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [840, 750]
+    }
+  ],
+  "connections": {
+    "Cron Diario 1:00 PM (Hora Pico Instagram B2B)": {
+      "main": [
+        [
+          {
+            "node": "Parsear & Validar Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Despacho de Contenido Instagram": {
+      "main": [
+        [
+          {
+            "node": "Parsear & Validar Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parsear & Validar Payload": {
+      "main": [
+        [
+          {
+            "node": "¿Es Carrusel?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es Carrusel?": {
+      "main": [
+        [
+          {
+            "node": "Preparar Slides de Carrusel",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "¿Es Reel?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar Slides de Carrusel": {
+      "main": [
+        [
+          {
+            "node": "Crear Contenedor Slide (Instagram API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Contenedor Slide (Instagram API)": {
+      "main": [
+        [
+          {
+            "node": "Consolidar Contenedor Carrusel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consolidar Contenedor Carrusel": {
+      "main": [
+        [
+          {
+            "node": "Crear Carrusel Padre (Instagram API)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Carrusel Padre (Instagram API)": {
+      "main": [
+        [
+          {
+            "node": "Obtener Creation ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Es Reel?": {
+      "main": [
+        [
+          {
+            "node": "Crear Contenedor Reel (Instagram API)",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Crear Contenedor Imagen Única",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Contenedor Reel (Instagram API)": {
+      "main": [
+        [
+          {
+            "node": "Obtener Creation ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Crear Contenedor Imagen Única": {
+      "main": [
+        [
+          {
+            "node": "Obtener Creation ID",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obtener Creation ID": {
+      "main": [
+        [
+          {
+            "node": "Publicar en Instagram (Live Post)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Comentarios Instagram (Funnel Lead Magnet)": {
+      "main": [
+        [
+          {
+            "node": "Filtrar Trigger de Comentario",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filtrar Trigger de Comentario": {
+      "main": [
+        [
+          {
+            "node": "¿Coincide Palabra Clave?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "¿Coincide Palabra Clave?": {
+      "main": [
+        [
+          {
+            "node": "Enviar DM Automático con Lead Magnet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
