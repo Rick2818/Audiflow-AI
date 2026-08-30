@@ -266,6 +266,14 @@
       "destination": "/api/report"
     },
     {
+      "source": "/api/social-publish",
+      "destination": "/api/social-publish"
+    },
+    {
+      "source": "/api/waalaxy-sync",
+      "destination": "/api/waalaxy-sync"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },
