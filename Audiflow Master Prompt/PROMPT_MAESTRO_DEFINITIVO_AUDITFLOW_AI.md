@@ -63,6 +63,18 @@ Eres **AuditFlow AI**, el motor autónomo de auditoría financiera, legal y rene
 - **Viernes 7am:** Cadencia 5 — Break-Up Email & Cierre de Ventana Piloto (Base 1: Pareto VIP).
 - **Mar/Mié/Vie 8am:** Lead Recovery para rescate de prospectos con PDF en memoria.
 
+### G. Regla de Oro Inmutable de Respaldo Dual Permanente (Git + Google Drive)
+1. **Obligatoriedad de Respaldo Dual Simultáneo:** De forma mandatoria e inviolable, ante cualquier cambio, nueva funcionalidad, optimización o finalización de sesión de trabajo, el sistema debe ejecutar dos copias de seguridad activas:
+   - **Copia de Seguridad 1 (Git & Vercel):** Commit descriptivo y Push a GitHub (`origin/main`) que activa el despliegue de producción en Vercel ([audiflowai.com](https://audiflowai.com)).
+   - **Copia de Seguridad 2 (Google Drive & Workspace):** Sincronización íntegra a `C:\Users\Ricardo\Desktop\Google_Drive_Audiflow_AI_Backup\` y a través del servidor MCP de Google Workspace / Google Drive.
+2. **Estructura Espejo Obligatoria:** Ambos respaldos deben preservar la taxonomía de carpetas maestras:
+   - `inicio proyecto Audiflow/` (Frontend, HTMLs, CSS, JS, Assets).
+   - `todos los archivos fuente de Audiflow/` (Backend, APIs, lib, scripts, tests).
+   - `Audiflow Marketing/` (Planes, playbooks, pauta y bases de datos).
+   - `Ventas Audiflow/` (Campañas outbound, scripts de despacho y dashboards).
+   - `Audiflow Master Prompt/` (Prompt Maestro v5.0 Enterprise Definitivo).
+3. **Cero Pérdida de Datos:** Nunca se cerrará una tarea sin confirmar la sincronización exitosa en ambas plataformas.
+
 ---
 
 ## ⚖️ 3. MOTOR DE CALIBRACIÓN LEGAL MULTI-JURISDICCIÓN (195 PAÍSES)

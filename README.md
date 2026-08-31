@@ -50,6 +50,25 @@ AuditFlow AI integra en producción las 7 armas de conversión fiduciaria valida
 
 ---
 
+## 🛡️ Regla de Oro Inmutable: Respaldo Dual Permanente (Git + Google Drive)
+
+De forma obligatoria e inviolable, todo cambio en AuditFlow AI mantiene **2 copias de seguridad activas y sincronizadas**:
+
+1. **📦 Respaldo 1: Git & Vercel Production**
+   * **Repositorio:** [https://github.com/Rick2818/Audiflow-AI](https://github.com/Rick2818/Audiflow-AI) (Rama `main`).
+   * **Despliegue Continuo:** [https://audiflowai.com](https://audiflowai.com).
+2. **☁️ Respaldo 2: Google Drive & Workspace Backup**
+   * **Directorio Espejo:** `C:\Users\Ricardo\Desktop\Google_Drive_Audiflow_AI_Backup\`.
+   * **Integración MCP:** `@modelcontextprotocol/server-google-workspace` & `@modelcontextprotocol/server-gdrive`.
+3. **📁 Estructura Espejo Obligatoria:**
+   * `inicio proyecto Audiflow/` (Frontend, HTMLs, CSS, JS, Assets).
+   * `todos los archivos fuente de Audiflow/` (Backend, APIs, lib, scripts, tests).
+   * `Audiflow Marketing/` (Planes, playbooks, pauta y bases de datos).
+   * `Ventas Audiflow/` (Campañas outbound, scripts de despacho y dashboards).
+   * `Audiflow Master Prompt/` (Prompt Maestro v5.0 Enterprise Definitivo).
+
+---
+
 ## 🧠 PROMPT MAESTRO & PROTOCOLO ARQUITECTÓNICO PARA FUTURAS APPS WEB
 
 Este marco rige el desarrollo, marketing y arquitectura de **AuditFlow AI** y de **toda futura aplicación web o SaaS que se construya en este ecosistema**:
