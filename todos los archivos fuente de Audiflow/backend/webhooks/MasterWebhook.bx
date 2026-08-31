@@ -1,0 +1,90 @@
+// ==============================================================================
+// AUDITFLOW AI - MASTER WEBHOOK HANDLER (MasterWebhook.bx)
+// LISTENER UNIFICADO PARA CONFIRMACIONES DE PAGO EN STRIPE Y LIGHTNING NETWORK
+// ==============================================================================
+
+class {
+
+    /**
+     * Procesa peticiones Webhook entrantes de Stripe o Lightning (OpenNode/Strike)
+     */
+    public struct function processWebhook( required string provider, required any payload, required struct headers ) {
+        var supabaseService = new backend.services.SupabaseService();
+        var emailAgent = new backend.services.EmailAgent();
+
+        systemOutput("[MasterWebhook] Webhook recibido de proveedor: " & arguments.provider, true);
+
+        var reportId = "";
+        var externalId = "";
+        var paymentMethod = arguments.provider;
+
+        // 1. PROCESAR STRIPE WEBHOOK
+        if ( arguments.provider == "stripe" ) {
+            var stripeEvent = isStruct(arguments.payload) ? arguments.payload : (isJson(arguments.payload) ? deserializeJSON(arguments.payload) : {});
+            
+            if ( structKeyExists(stripeEvent, "type") AND stripeEvent.type == "checkout.session.completed" ) {
+                if ( structKeyExists(stripeEvent, "data") AND structKeyExists(stripeEvent.data, "object") ) {
+                    var session = stripeEvent.data.object;
+                    externalId = structKeyExists(session, "id") ? session.id : "";
+                    if ( structKeyExists(session, "metadata") AND structKeyExists(session.metadata, "report_id") ) {
+                        reportId = session.metadata.report_id;
+                    }
+                }
+            } else if ( structKeyExists(stripeEvent, "report_id") ) {
+                reportId = stripeEvent.report_id;
+                externalId = structKeyExists(stripeEvent, "external_id") ? stripeEvent.external_id : "cs_" & hash(reportId, "MD5");
+            }
+        }
+        
+        // 2. PROCESAR LIGHTNING NETWORK WEBHOOK (OpenNode / Strike)
+        else if ( arguments.provider == "lightning" ) {
+            var lnEvent = isStruct(arguments.payload) ? arguments.payload : (isJson(arguments.payload) ? deserializeJSON(arguments.payload) : {});
+            
+            if ( structKeyExists(lnEvent, "status") AND lnEvent.status == "paid" ) {
+                externalId = structKeyExists(lnEvent, "id") ? lnEvent.id : "";
+                reportId = structKeyExists(lnEvent, "order_id") ? lnEvent.order_id : "";
+            } else if ( structKeyExists(lnEvent, "report_id") ) {
+                reportId = lnEvent.report_id;
+                externalId = structKeyExists(lnEvent, "external_id") ? lnEvent.external_id : "ln_" & hash(reportId, "MD5");
+            }
+        }
+
+        // 3. DESBLOQUEO E INSTANCIACIÓN DE AGENTE DE CORREO TRAS LIQUIDACIÓN EXITOSA
+        if ( len(trim(reportId)) > 0 ) {
+            if ( len(trim(externalId)) == 0 ) {
+                externalId = "ext_" & hash(reportId & now(), "MD5");
+            }
+
+            systemOutput("[MasterWebhook] Pago confirmado para ReportId: " & reportId & " via " & paymentMethod, true);
+
+            // A) Actualizar estado en Supabase a 'paid'
+            supabaseService.markReportAsPaid(reportId, externalId, paymentMethod);
+
+            // B) Obtener datos del reporte y enviar correo automático
+            try {
+                var reportDetails = supabaseService.getReportById(reportId);
+                if ( structKeyExists(reportDetails, "audit_leads") AND isStruct(reportDetails.audit_leads) ) {
+                    var lead = reportDetails.audit_leads;
+                    emailAgent.sendFullReportEmail(
+                        recipientEmail = structKeyExists(lead, "email") ? lead.email : "cliente@auditflow.ai",
+                        recipientName = structKeyExists(lead, "name") ? lead.name : "Cliente",
+                        reportData = reportDetails
+                    );
+                }
+            } catch(any emailErr) {
+                systemOutput("[MasterWebhook] Error procesando envío de email: " & emailErr.message, true);
+            }
+
+            return {
+                "success": true,
+                "message": "Report unlocked and email dispatched.",
+                "report_id": reportId
+            };
+        }
+
+        return {
+            "success": false,
+            "message": "Ignored or unrecognized webhook payload."
+        };
+    }
+}

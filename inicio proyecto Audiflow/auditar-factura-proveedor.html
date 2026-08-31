@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <!-- Google tag (gtag.js) GA4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KMESC5J8WH"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KMESC5J8WH');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditar Facturas de Proveedores B2B con IA - AuditFlow AI</title>
+    <meta name="description" content="Detecta automáticamente sobrecargos, cargos no autorizados e inconsistencias en facturas de proveedores B2B con IA Gemini 2.5 Flash en <10 segundos.">
+    <meta name="keywords" content="auditar factura proveedor B2B, detectar sobrecargos en facturas, revision de facturas de proveedores, auditoria de facturas con IA">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="google3767930768036b5b">
+    <link rel="canonical" href="https://audiflowai.com/auditar-factura-proveedor">
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+    <link rel="apple-touch-icon" href="/assets/favicon.svg">
+
+    <!-- Open Graph / Facebook / LinkedIn Social Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://audiflowai.com/auditar-factura-proveedor">
+    <meta property="og:title" content="Audita Facturas de Proveedores B2B en <10s | AuditFlow AI">
+    <meta property="og:description" content="Detén fugas financieras por cargos duplicados o conceptos no cotizados. Auditoría en memoria RAM volátil.">
+    <meta property="og:image" content="https://audiflowai.com/assets/demo_hyperframes.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="AuditFlow AI">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Auditoría Instantánea de Facturas de Proveedores">
+    <meta name="twitter:description" content="Detecta sobrecargos en facturas B2B en <10s. Cero almacenamiento en disco. Prueba gratis.">
+    <meta name="twitter:image" content="https://audiflowai.com/assets/demo_hyperframes.jpg">
+
+    <!-- Schema.org SoftwareApplication Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AuditFlow AI - Auditor de Facturas de Proveedores",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "7.00",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "ratingCount": "14820"
+      },
+      "description": "Sistema B2B de auditoría instantánea de facturas de proveedores y detección de sobrecargos con IA Gemini 2.5 Flash."
+    }
+    </script>
+
+    <!-- Schema.org FAQPage Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cómo detectar sobrecargos en facturas de proveedores?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AuditFlow AI escanea el desglose de partidas en la factura, compara precios unitarios e identifica sobrecargos recurrentes o no aprobados en la orden de compra."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#09090b',
+                        'bg-dark-surface': '#121215',
+                        'bg-dark-card': '#18181b',
+                        'border-dark': '#27272a',
+                        'accent-blue': '#38bdf8',
+                        'accent-emerald': '#10b981',
+                        'text-light': '#f4f4f5',
+                        'text-muted': '#a1a1aa',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px rgba(56, 189, 248, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body class="bg-dark text-light antialiased font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="border-b border-border-dark bg-dark-surface sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent-blue to-accent-emerald flex items-center justify-center font-bold text-white shadow-glow">
+                    A
+                </div>
+                <span class="font-bold text-xl tracking-tight text-white">AuditFlow <span class="text-accent-blue">AI</span></span>
+            </a>
+            
+            <div class="flex items-center gap-3 text-sm">
+                <a href="/" class="px-3.5 py-1.5 rounded-lg bg-dark-card hover:bg-accent-blue/15 text-accent-blue hover:text-white border border-accent-blue/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-sm">
+                    🏠 Regresar al Inicio
+                </a>
+                <button onclick="window.AppHandler.subscribeEnterprise()" class="px-3 py-1.5 rounded-lg bg-gradient-to-r from-purple-600 to-accent-blue text-white font-bold text-xs shadow-glow hover:opacity-90 transition-all">
+                    🚀 Plan Corporativo
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HÉROE NAL FACTURAS DE PROVEEDORES -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-grow w-full">
+        <section class="text-center py-4 sm:py-8">
+            <div class="max-w-3xl mx-auto">
+
+                <div class="flex flex-wrap items-center justify-center gap-3 mb-6">
+                    <span class="px-3.5 py-1.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-xs font-mono text-emerald-400 font-bold">
+                        🧾 Auditoría Especializada de Facturas B2B
+                    </span>
+                    <span class="px-3.5 py-1.5 rounded-full bg-dark-card border border-gray-700/70 text-xs font-mono text-accent-blue">
+                        ⚡ Detección de Fugas Financieras
+                    </span>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight mb-4">
+                    Audita Facturas de Proveedores en <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-emerald">&lt;10 Segundos</span>
+                </h1>
+                <p class="text-gray-300 text-base sm:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Identifica sobrecargos no cotizados, partidas infladas y conceptos duplicados en facturas de proveedores antes de autorizar el pago.
+                </p>
+
+                <!-- BANNER DE ENTRADA RÁPIDA / CERO RIESGO CONFIDENCIALIDAD -->
+                <div class="mb-4 p-4 rounded-2xl bg-gradient-to-r from-accent-blue/15 via-purple-950/40 to-emerald-950/40 border-2 border-accent-blue/50 flex flex-col sm:flex-row items-center justify-between gap-3 shadow-glow text-left">
+                    <div class="flex items-center gap-3 text-xs font-mono">
+                        <span class="text-2xl p-2 rounded-xl bg-accent-blue/20 text-accent-blue shrink-0">⚡</span>
+                        <div>
+                            <span class="text-white font-extrabold text-xs sm:text-sm block">¿Prefieres no subir facturas confidenciales todavía?</span>
+                            <span class="text-emerald-300 text-[11px] font-sans">Prueba en vivo con una factura consolidada de ejemplo y detecta sobrecostos en 5s.</span>
+                        </div>
+                    </div>
+                    <button onclick="window.AppHandler.loadSampleContract()" class="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-xs font-mono shadow-lg hover:scale-105 transition-all shrink-0 cursor-pointer flex items-center justify-center gap-2">
+                        <span>🚀 Ver Demo Interactivo en 1 Clic</span>
+                    </button>
+                </div>
+
+                <!-- DRAG & DROP -->
+                <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para subir factura de proveedor" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-6 focus:outline-none focus:ring-2 focus:ring-accent-blue">
+                    <input type="file" id="file-input" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.webp">
+                    
+                    <div class="flex flex-col items-center justify-center gap-4">
+                        <div class="w-16 h-16 rounded-2xl bg-border-dark/80 flex items-center justify-center text-accent-blue group-hover:scale-110 group-hover:bg-accent-blue/10 transition-all duration-300">
+                            🧾
+                        </div>
+                        <div>
+                            <p class="text-base sm:text-lg font-semibold text-white mb-1">Arrastra tu Factura de Proveedor aquí o <span class="text-accent-blue underline">explora tus archivos</span></p>
+                            <p class="text-xs text-emerald-400 font-mono mb-1 font-semibold">Análisis Inicial 100% Gratuito • Memoria Volátil RAM (0 Disco)</p>
+                            <p class="text-xs text-gray-400 font-mono">Soporta PDF o Imágenes (Hasta 15MB)</p>
+                        </div>
+
+                        <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+                            <span class="text-xs font-mono text-gray-400">— O si prefieres —</span>
+                            <button type="button" onclick="event.stopPropagation(); window.AppHandler.loadSampleContract();" class="px-4 py-2 rounded-xl bg-dark-surface border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/20 text-xs font-mono font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
+                                <span>📄 Probar con Factura de Ejemplo (Sin archivo)</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECCIÓN EXPLICATIVA -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 text-left">
+                    <div class="p-5 rounded-xl bg-dark-card border border-border-dark">
+                        <h3 class="text-accent-blue font-bold text-sm mb-1">1. Partidas Infladas</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">Detecta precios unitarios que superan las tarifas acordadas en el presupuesto base.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-dark-card border border-border-dark">
+                        <h3 class="text-accent-emerald font-bold text-sm mb-1">2. Cargos Duplicados</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">Identifica ítems facturados dos veces bajo descripciones ligeramente distintas.</p>
+                    </div>
+                    <div class="p-5 rounded-xl bg-dark-card border border-border-dark">
+                        <h3 class="text-purple-400 font-bold text-sm mb-1">3. Gastos no Aprobados</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">Revisa que no se incluyan viáticos ni soporte extraordinario fuera de la orden de compra.</p>
+                    </div>
+                </div>
+
+                <!-- BOTÓN VOLVER AL INICIO -->
+                <div class="mt-12 text-center">
+                    <a href="/" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-dark-card hover:bg-accent-blue/15 text-accent-blue hover:text-white border border-accent-blue/40 text-sm font-mono font-bold transition-all shadow-glow">
+                        ← Regresar al Inicio / Auditar Otro Documento
+                    </a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-border-dark py-8 text-center text-xs text-gray-400 font-mono bg-dark-surface mt-auto">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div>© 2026 AuditFlow AI. Especialista en Auditoría de Facturación B2B.</div>
+            <div class="flex items-center gap-4">
+                <a href="/" class="hover:text-white underline">Inicio</a>
+                <span>•</span>
+                <a href="/auditar-contrato-arrendamiento" class="hover:text-white underline">Contratos Arrendamiento</a>
+                <span>•</span>
+                <a href="/auditar-contrato-servicios-it" class="hover:text-white underline">Contratos IT</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/i18n.js"></script>
+    <script src="js/payment.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

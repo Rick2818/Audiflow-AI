@@ -1,0 +1,43 @@
+{
+  "name": "auditflow-ai",
+  "version": "1.0.0",
+  "description": "B2B Micro-SaaS for instant AI contract & invoice auditing with volatile memory parsing and hybrid payments",
+  "main": "server.js",
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node tests/comprehensive_forensic_suite.js"
+  },
+  "keywords": [
+    "auditflow",
+    "ai",
+    "boxlang",
+    "micro-saas",
+    "gemini-flash",
+    "stripe",
+    "lightning",
+    "opennode",
+    "supabase"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.8",
+    "cors": "^2.8.5",
+    "docx": "^9.7.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.3.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^9.0.5",
+    "pdf-parse": "^1.1.1",
+    "pdfkit": "^0.19.1",
+    "resend": "^3.5.0",
+    "stripe": "^14.24.0"
+  }
+}

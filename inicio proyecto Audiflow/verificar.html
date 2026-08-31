@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificador Oficial de Blindaje Contractual | AuditFlow AI</title>
+    <meta name="description" content="Portal público de validación y certificación de auditorías contractuales emitidas por AuditFlow AI. Valide el sello de blindaje legal y mitigación de riesgos de su documento.">
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'bg-dark': '#09090b',
+                        'bg-dark-surface': '#121215',
+                        'bg-dark-card': '#18181b',
+                        'border-dark': '#27272a',
+                        'accent-blue': '#38bdf8',
+                        'accent-emerald': '#10b981',
+                        'text-light': '#f4f4f5',
+                        'text-muted': '#a1a1aa',
+                    },
+                    boxShadow: {
+                        'glow': '0 0 25px rgba(56, 189, 248, 0.25)',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-dark text-light antialiased font-sans min-h-screen flex flex-col justify-between">
+
+    <!-- HEADER -->
+    <header class="border-b border-border-dark bg-dark-surface sticky top-0 z-40 backdrop-blur-md bg-opacity-90">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent-blue to-accent-emerald flex items-center justify-center font-bold text-white shadow-glow">
+                    🛡️
+                </div>
+                <div>
+                    <span class="font-bold text-xl tracking-tight text-white">AuditFlow <span class="text-accent-blue">AI</span></span>
+                    <span class="text-[10px] font-mono text-emerald-400 ml-2 px-2 py-0.5 rounded bg-emerald-950/60 border border-emerald-500/30">VALIDADOR OFICIAL</span>
+                </div>
+            </a>
+            
+            <div class="flex items-center gap-3 text-sm">
+                <a href="/" class="px-3.5 py-1.5 rounded-lg bg-dark-card hover:bg-accent-blue/15 text-accent-blue hover:text-white border border-accent-blue/40 text-xs font-mono font-bold transition-all flex items-center gap-1.5 shadow-sm">
+                    🏠 Auditar mi Documento Gratis
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 flex-grow w-full">
+        <section class="text-center py-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-mono mb-4">
+                <span>✓ Protocolo de Verificación Criptográfica B2B</span>
+            </div>
+            
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-3">
+                Portal de Verificación de <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue to-accent-emerald">Auditoría & Blindaje</span>
+            </h1>
+            <p class="text-gray-300 text-sm sm:text-base max-w-xl mx-auto mb-8 font-sans">
+                Compruebe la autenticidad del sello de auditoría de AuditFlow AI emitido para este acuerdo corporativo, contrato de servicios o factura auditada.
+            </p>
+
+            <!-- TARJETA DEL CERTIFICADO VALIDADO -->
+            <div id="certificate-card" class="p-6 sm:p-8 rounded-3xl bg-dark-card border-2 border-emerald-500/40 text-left shadow-2xl relative overflow-hidden mb-8">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl"></div>
+                
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-border-dark gap-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center text-2xl">
+                            ✅
+                        </div>
+                        <div>
+                            <span class="text-xs font-mono text-emerald-400 font-bold uppercase tracking-wider block">Estado de Verificación</span>
+                            <h2 class="text-lg sm:text-xl font-bold text-white">Sello de Blindaje Contractual Certificado</h2>
+                        </div>
+                    </div>
+                    <div class="text-left sm:text-right font-mono">
+                        <span class="text-[11px] text-gray-400 block">ID de Validación Oficial:</span>
+                        <code id="display-cert-id" class="text-xs font-bold text-accent-blue bg-dark-surface px-2.5 py-1 rounded border border-border-dark">AF-CERT-2026-8942A</code>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 my-6 font-mono text-xs">
+                    <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
+                        <span class="text-gray-400 block mb-1 text-[11px]">Nivel de Mitigación de Fuga:</span>
+                        <span class="text-lg font-extrabold text-accent-emerald">94.8% BLINDADO</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
+                        <span class="text-gray-400 block mb-1 text-[11px]">Estándar Contable / Legal:</span>
+                        <span class="text-sm font-bold text-white">PCAOB / US GAAP / NIIF 16</span>
+                    </div>
+                    <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
+                        <span class="text-gray-400 block mb-1 text-[11px]">Garantía de Privacidad:</span>
+                        <span class="text-sm font-bold text-accent-blue">Memoria RAM Volátil (0 Disco)</span>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-emerald-950/30 border border-emerald-500/30 text-xs text-gray-300 space-y-1">
+                    <p class="text-emerald-300 font-bold font-mono">📋 Dictamen de Conformidad:</p>
+                    <p class="leading-relaxed">Este acuerdo cuenta con marcas de revisión estandarizadas y contra-cláusulas de protección legal generadas por la infraestructura de Inteligencia Artificial de AuditFlow AI.</p>
+                </div>
+            </div>
+
+            <!-- VIRAL CTA LOOP: AUDITA TU PROPIO CONTRATO GRATIS -->
+            <div class="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-accent-blue/10 via-purple-950/30 to-emerald-950/30 border border-accent-blue/40 text-center space-y-4 shadow-glow">
+                <span class="text-2xl">⚡</span>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-white">¿Vas a firmar o pagar un contrato comercial?</h3>
+                <p class="text-gray-300 text-xs sm:text-sm max-w-lg mx-auto leading-relaxed">
+                    Evita sobrecostos ocultos de $3,500 a $18,000 USD. Audita tu propio contrato o factura en menos de 10 segundos 100% gratis.
+                </p>
+                <div class="pt-2">
+                    <a href="/#dropzone" class="inline-flex items-center gap-2 px-8 py-3.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-sm font-mono shadow-xl hover:scale-105 transition-all">
+                        <span>🚀 Iniciar Mi Auditoría Gratuita Ahora</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-border-dark py-6 text-center text-xs text-gray-400 font-mono bg-dark-surface mt-auto">
+        <div class="max-w-4xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div>© 2026 AuditFlow AI • Sello de Verificación y Blindaje B2B</div>
+            <div class="flex items-center gap-3">
+                <a href="/" class="text-accent-blue hover:underline">Inicio</a>
+                <span>•</span>
+                <a href="/privacy" class="hover:text-white">Privacidad</a>
+                <span>•</span>
+                <a href="/terms" class="hover:text-white">Términos</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const certId = params.get('id') || params.get('cert') || 'AF-CERT-2026-' + Math.floor(1000 + Math.random() * 9000);
+            const el = document.getElementById('display-cert-id');
+            if (el) el.innerText = certId.toUpperCase();
+        } catch(e){}
+    </script>
+</body>
+</html>

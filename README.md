@@ -18,6 +18,8 @@
 ## 🌐 Enlaces Oficiales en Producción
 
 * 🏠 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+* 🌐 **Inicio Proyecto (HTML, CSS & JS)**: [`inicio proyecto Audiflow/`](inicio%20proyecto%20Audiflow/) *(Interfaz web, index.html, estilos CSS, app.js y recursos visuales)*
+* ⚙️ **Todos los Archivos Fuente**: [`todos los archivos fuente de Audiflow/`](todos%20los%20archivos%20fuente%20de%20Audiflow/) *(Backend, endpoints API, librerías, seguridad y scripts)*
 * 🏛️ **Centro Maestro de Marketing B2B**: [`Audiflow Marketing/`](Audiflow%20Marketing/) *(Directorio unificado de planes, playbooks, pauta y bases de datos)*
 * 💼 **Centro de Operaciones y Campañas de Ventas**: [`Ventas Audiflow/`](Ventas%20Audiflow/) *(Campañas outbound, bases de datos de leads, scripts de despacho y pauta)*
 * 🧠 **Repositorio Oficial del Prompt Maestro**: [`Audiflow Master Prompt/`](Audiflow%20Master%20Prompt/) *(Prompt Maestro definitivo v5.0 Enterprise, protocolos y directivas)*

@@ -1,0 +1,194 @@
+// ==============================================================================
+// AUDITFLOW AI - AUTOMATED SEO & INDEXING AUDIT VERIFICATION SUITE
+// ==============================================================================
+
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const rootDir = path.join(__dirname, '..');
+
+let totalTests = 0;
+let passedTests = 0;
+
+function assert(condition, message) {
+  totalTests++;
+  if (condition) {
+    passedTests++;
+    console.log(`  ✅ [PASS] ${message}`);
+  } else {
+    console.error(`  ❌ [FAIL] ${message}`);
+  }
+}
+
+console.log(`\n=======================================================`);
+console.log(`🔍 INICIANDO SUITE DE AUDITORÍA AUTOMATIZADA SEO E INDEXACIÓN`);
+console.log(`=======================================================\n`);
+
+// 1. Verificación de robots.txt
+console.log(`[TEST GROUP 1] Verificación de /robots.txt:`);
+const robotsPath = path.join(rootDir, 'frontend', 'robots.txt');
+assert(fs.existsSync(robotsPath), 'El archivo frontend/robots.txt existe');
+
+if (fs.existsSync(robotsPath)) {
+  const robotsContent = fs.readFileSync(robotsPath, 'utf8');
+  assert(robotsContent.includes('User-agent: *'), 'robots.txt incluye User-agent: *');
+  assert(robotsContent.includes('Allow: /'), 'robots.txt incluye Allow: /');
+  assert(robotsContent.includes('Disallow: /admin'), 'robots.txt bloquea /admin');
+  assert(robotsContent.includes('Sitemap: https://'), 'robots.txt declara la URL del Sitemap XML en HTTPS');
+}
+
+// 2. Verificación de sitemap.xml
+console.log(`\n[TEST GROUP 2] Verificación de /sitemap.xml:`);
+const sitemapPath = path.join(rootDir, 'frontend', 'sitemap.xml');
+assert(fs.existsSync(sitemapPath), 'El archivo frontend/sitemap.xml existe');
+
+if (fs.existsSync(sitemapPath)) {
+  const sitemapContent = fs.readFileSync(sitemapPath, 'utf8');
+  assert(sitemapContent.includes('<?xml'), 'sitemap.xml es un documento XML válido');
+  assert(sitemapContent.includes('<urlset'), 'sitemap.xml contiene etiqueta <urlset>');
+  assert(sitemapContent.includes('<loc>https://'), 'sitemap.xml contiene URL canónica en HTTPS');
+  assert(!sitemapContent.includes('localhost'), 'sitemap.xml no contiene URLs de localhost');
+  assert(!sitemapContent.includes('admin'), 'sitemap.xml no contiene URLs no indexables de administración');
+}
+
+// 3. Verificación de frontend/index.html (Canonicals, Open Graph, Schema.org, HTML semántico)
+console.log(`\n[TEST GROUP 3] Verificación de frontend/index.html:`);
+const indexPath = path.join(rootDir, 'frontend', 'index.html');
+assert(fs.existsSync(indexPath), 'El archivo frontend/index.html existe');
+
+if (fs.existsSync(indexPath)) {
+  const indexContent = fs.readFileSync(indexPath, 'utf8');
+  assert(indexContent.includes('<link rel="canonical" href="https://'), 'index.html contiene canonical HTTPS pública');
+  assert(!indexContent.includes('<link rel="canonical" href="http://localhost'), 'index.html NO contiene canonical a localhost');
+  assert(indexContent.includes('og:url') && !indexContent.includes('og:url" content="http://localhost'), 'Open Graph og:url no usa localhost');
+  assert(indexContent.includes('og:image') && !indexContent.includes('og:image" content="http://localhost'), 'Open Graph og:image no usa localhost');
+  assert(indexContent.includes('G-KMESC5J8WH'), 'index.html incluye la etiqueta de Google Analytics 4 GA4');
+  assert(indexContent.includes('auditflow2026clarity'), 'index.html incluye la etiqueta de Microsoft Clarity Heatmaps');
+  assert(indexContent.includes('14 auditorías realizadas'), 'index.html incluye el ticker de prueba social y urgencia B2B');
+  assert(indexContent.includes('favicon.svg'), 'index.html referencia al favicon SVG');
+  assert(indexContent.includes('@type": "Organization"'), 'Schema.org incluye entidad Organization');
+  assert(indexContent.includes('@type": "WebSite"'), 'Schema.org incluye entidad WebSite');
+  assert(indexContent.includes('@type": "SoftwareApplication"'), 'Schema.org incluye entidad SoftwareApplication');
+  assert(indexContent.includes('aggregateRating'), 'SoftwareApplication incluye aggregateRating');
+  assert(indexContent.includes('@type": "FAQPage"'), 'Schema.org incluye entidad FAQPage');
+  assert(indexContent.includes('@type": "HowTo"'), 'Schema.org incluye entidad HowTo (Pasos de Auditoría)');
+  assert(indexContent.includes('@type": "BreadcrumbList"'), 'Schema.org incluye entidad BreadcrumbList (Navegación)');
+  
+  // Verificación de sintaxis limpia (no contiene tags duplicados corruptos)
+  assert(!indexContent.includes('</div>                        <span data-i18n="upsell_btn">'), 'index.html no contiene fragmentos de HTML corruptos');
+}
+
+// 4. Verificación de frontend/admin.html (noindex, nofollow)
+console.log(`\n[TEST GROUP 4] Verificación de frontend/admin.html:`);
+const adminPath = path.join(rootDir, 'frontend', 'admin.html');
+assert(fs.existsSync(adminPath), 'El archivo frontend/admin.html existe');
+
+if (fs.existsSync(adminPath)) {
+  const adminContent = fs.readFileSync(adminPath, 'utf8');
+  assert(adminContent.includes('name="robots" content="noindex, nofollow"'), 'admin.html contiene directiva noindex, nofollow');
+  assert(adminContent.includes('favicon.svg'), 'admin.html referencia al favicon SVG');
+}
+
+// 5. Verificación de frontend/js/i18n.js (HTML lang dinámico)
+console.log(`\n[TEST GROUP 5] Verificación de frontend/js/i18n.js:`);
+const i18nPath = path.join(rootDir, 'frontend', 'js', 'i18n.js');
+assert(fs.existsSync(i18nPath), 'El archivo frontend/js/i18n.js existe');
+
+if (fs.existsSync(i18nPath)) {
+  const i18nContent = fs.readFileSync(i18nPath, 'utf8');
+  assert(i18nContent.includes('document.documentElement.lang = lang'), 'i18n.js actualiza dinámicamente el atributo lang de <html>');
+}
+
+// 6. Verificación de server.js y vercel.json
+console.log(`\n[TEST GROUP 6] Verificación de server.js & vercel.json:`);
+const serverPath = path.join(rootDir, 'server.js');
+const vercelPath = path.join(rootDir, 'vercel.json');
+
+if (fs.existsSync(serverPath)) {
+  const serverContent = fs.readFileSync(serverPath, 'utf8');
+  assert(serverContent.includes("app.get('/robots.txt'"), 'server.js contiene endpoint para /robots.txt');
+  assert(serverContent.includes("app.get('/sitemap.xml'"), 'server.js contiene endpoint para /sitemap.xml');
+  assert(serverContent.includes('X-Content-Type-Options'), 'server.js incluye cabeceras HTTP de seguridad');
+}
+
+if (fs.existsSync(vercelPath)) {
+  const vercelContent = fs.readFileSync(vercelPath, 'utf8');
+  assert(vercelContent.includes('/robots.txt'), 'vercel.json define ruta estática para /robots.txt');
+  assert(vercelContent.includes('/sitemap.xml'), 'vercel.json define ruta estática para /sitemap.xml');
+}
+
+// 7. Verificación de SEO Programático e IndexNow Protocol
+console.log(`\n[TEST GROUP 7] Verificación de SEO Programático e IndexNow:`);
+const p1Path = path.join(rootDir, 'frontend', 'auditar-contrato-arrendamiento.html');
+const p2Path = path.join(rootDir, 'frontend', 'auditar-factura-proveedor.html');
+const p3Path = path.join(rootDir, 'frontend', 'auditar-contrato-servicios-it.html');
+const indexNowKeyPath = path.join(rootDir, 'frontend', 'auditflow2026indexnow.txt');
+
+assert(fs.existsSync(p1Path), 'La landing page auditar-contrato-arrendamiento.html existe');
+assert(fs.existsSync(p2Path), 'La landing page auditar-factura-proveedor.html existe');
+assert(fs.existsSync(p3Path), 'La landing page auditar-contrato-servicios-it.html existe');
+assert(fs.existsSync(indexNowKeyPath), 'La clave IndexNow auditflow2026indexnow.txt existe');
+
+if (fs.existsSync(sitemapPath)) {
+  const sm = fs.readFileSync(sitemapPath, 'utf8');
+  assert(sm.includes('auditar-contrato-arrendamiento'), 'sitemap.xml incluye la URL de arrendamiento');
+  assert(sm.includes('auditar-factura-proveedor'), 'sitemap.xml incluye la URL de facturas');
+  assert(sm.includes('auditar-contrato-servicios-it'), 'sitemap.xml includes la URL de contratos IT');
+}
+
+// 8. Verificación de Motor de Prospección B2B Automatizada Multi-País
+console.log(`\n[TEST GROUP 8] Verificación de Motor de Prospección B2B Automatizada Multi-País:`);
+const outreachApiPath = path.join(rootDir, 'api', 'outreach.js');
+assert(fs.existsSync(outreachApiPath), 'El archivo api/outreach.js existe');
+
+if (fs.existsSync(serverPath)) {
+  const sc = fs.readFileSync(serverPath, 'utf8');
+  assert(sc.includes('/api/outreach/send-campaign'), 'server.js contiene endpoint para /api/outreach/send-campaign');
+}
+
+const adminPagePath = path.join(rootDir, 'frontend', 'admin.html');
+if (fs.existsSync(adminPagePath)) {
+  const ac = fs.readFileSync(adminPagePath, 'utf8');
+  assert(ac.includes('outreach-country'), 'admin.html incluye selector de país para campaña B2B');
+  assert(ac.includes('launchOutreachCampaign'), 'admin.html incluye lanzador de campañas B2B automatizadas');
+  assert(ac.includes('carlos.mendoza@empresa-sv.com'), 'admin.html contiene la lista precargada de prospectos B2B multi-país');
+}
+
+if (fs.existsSync(vercelPath)) {
+  const vc = fs.readFileSync(vercelPath, 'utf8');
+  assert(vc.includes('"crons"'), 'vercel.json contiene configuración de crons automatizados');
+  assert(vc.includes('0 9 * * 1,2'), 'vercel.json programa la ejecución automática los Lunes y Martes a las 9:00 AM');
+}
+
+// 9. Verificación de las 5 Mejoras Enterprise 2.0 en Producción
+console.log(`\n[TEST GROUP 9] Verificación de las 5 Mejoras Enterprise 2.0:`);
+if (fs.existsSync(serverPath)) {
+  const sc = fs.readFileSync(serverPath, 'utf8');
+  assert(sc.includes('/api/webhooks/trigger'), 'server.js contiene endpoint de Webhooks bidireccionales (/api/webhooks/trigger)');
+  assert(sc.includes('/api/audit/download-pdf'), 'server.js contiene generador de reportes PDF marca blanca (/api/audit/download-pdf)');
+}
+
+const adminApiPath = path.join(rootDir, 'api', 'admin.js');
+if (fs.existsSync(adminApiPath)) {
+  const aic = fs.readFileSync(adminApiPath, 'utf8');
+  assert(aic.includes('PLATINUM (CFO/Legal Counsel)'), 'api/admin.js incluye motor de enriquecimiento de prospectos Tiers (Platinum/Gold/Silver)');
+}
+
+// RESUMEN FINAL
+console.log(`\n=======================================================`);
+console.log(`📊 RESULTADO FINAL DE LA SUITE SEO & INDEXACIÓN:`);
+console.log(`  Pruebas ejecutadas: ${totalTests}`);
+console.log(`  Pruebas superadas: ${passedTests}`);
+console.log(`  Pruebas fallidas:   ${totalTests - passedTests}`);
+console.log(`=======================================================\n`);
+
+if (passedTests === totalTests) {
+  console.log(`🎉 ¡TODAS LAS PRUEBAS DE SEO TÉCNICO E INDEXABILIDAD 100% FUNCIONAL HAN PASADO SATISFACTORIAMENTE!\n`);
+  process.exit(0);
+} else {
+  console.error(`⚠️ ALGUNAS PRUEBAS FALLARON. POR FAVOR REVISA EL DIAGNÓSTICO ANTERIOR.\n`);
+  process.exit(1);
+}

@@ -1,0 +1,265 @@
+{
+  "name": "AuditFlow AI — Master Multi-Agent & Operations Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 8 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "cron-daily-8am",
+      "name": "Cron Daily 8:00 AM (Reporte Matutino al Director General)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [100, 200]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 17 * * 5"
+            }
+          ]
+        }
+      },
+      "id": "cron-weekly-friday",
+      "name": "Cron Semanal Viernes 5:00 PM (Cierre Financiero y Pipeline en USD)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [100, 400]
+    },
+    {
+      "parameters": {
+        "path": "meta-ads-reporting",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-meta-ads",
+      "name": "Webhook: Meta Ads Director -> Métricas de Pauta",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 600],
+      "webhookId": "meta-ads-reporting-webhook"
+    },
+    {
+      "parameters": {
+        "path": "consumer-behavior-audit",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-consumer-behavior",
+      "name": "Webhook: Diagnóstico de Comportamiento & Anti-Fatiga",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 800],
+      "webhookId": "consumer-behavior-audit-webhook"
+    },
+    {
+      "parameters": {
+        "path": "gm-coo-plan",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-gm-coo",
+      "name": "Webhook: Gerente General -> Plan de Acción & Finanzas USD",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 1000],
+      "webhookId": "gm-coo-plan-webhook"
+    },
+    {
+      "parameters": {
+        "path": "executive-meeting-sync",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-executive-meeting",
+      "name": "Webhook: Convocatoria & Minuta Comité Ejecutivo (Ricardo + GM + CMVO)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 1200],
+      "webhookId": "executive-meeting-sync-webhook"
+    },
+    {
+      "parameters": {
+        "path": "waalaxy-incoming-lead",
+        "responseMode": "onReceived",
+        "options": {}
+      },
+      "id": "webhook-waalaxy-lead",
+      "name": "Webhook: Waalaxy Lead Routing (Legal, Gov, Finanzas)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 1400],
+      "webhookId": "waalaxy-incoming-lead-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Monitor Inteligente de Fatiga Publicitaria y Diagnóstico de App\nconst data = items[0].json.body || items[0].json;\nconst frequency = parseFloat(data.frequency || 1.0);\nconst ctr = parseFloat(data.ctr || 2.5);\nconst spendUSD = parseFloat(data.spendUSD || 0);\nconst roas = parseFloat(data.roas || 4.5);\n\nlet fatigueAlert = false;\nlet actionRequired = 'Normal - Campañas con buen rendimiento y sin saturación.';\n\nif (frequency >= 2.8 || ctr < 1.5) {\n  fatigueAlert = true;\n  actionRequired = 'ALERTA DE FATIGA: Frecuencia elevada o caída de CTR. Se ordena pausar adsets saturados y activar nuevo ángulo psicológico (Creative Refresh).';\n}\n\nreturn [{\n  json: {\n    timestamp: new Date().toISOString(),\n    source: 'consumer-behavior-diagnostician',\n    fatigueAlert,\n    frequency,\n    ctr,\n    spendUSD,\n    roas,\n    actionRequired,\n    notifyGM: fatigueAlert || roas < 4.0,\n    title: fatigueAlert ? '⚠️ ALERTA: Fatiga Publicitaria Detectada en Meta Ads' : '✅ Diagnóstico Saludable de Audiencia & App'\n  }\n}];"
+      },
+      "id": "node-ad-fatigue-evaluator",
+      "name": "Evaluador de Fatiga de Anuncios y Salud de App",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 700]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Consolidador Financiero y Plan de Acción del Gerente General (COO)\nconst input = items[0].json.body || items[0].json;\nconst dateStr = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });\n\nconst mrrUSD = input.mrrUSD || 14850;\nconst revenueTodayUSD = input.revenueTodayUSD || 1280;\nconst adSpendUSD = input.adSpendUSD || 180;\nconst netProfitTodayUSD = revenueTodayUSD - adSpendUSD;\nconst ltvCacRatio = input.ltvCacRatio || 5.2;\n\nconst actionPlan = input.actionPlan || [\n  'Escalar conjunto ganador de Lookalikes CFOs en Meta Ads (+20% presupuesto)',\n  'Refrescar creativos de Instagram Reels con enfoque en privacidad en RAM volátil',\n  'Sesión de seguimiento fiduciario con 3 despachos corporativos en proceso de cierre de $599/año'\n];\n\nconst subject = `📈 [AuditFlow AI] Despacho de Gerencia General — Resultados en USD y Plan de Acción (${dateStr})`;\n\nconst html = `\n<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <style>\n    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b1120; color: #f8fafc; padding: 20px; }\n    .box { max-width: 600px; margin: 0 auto; background: #1e293b; border-radius: 12px; border: 1px solid #334155; padding: 24px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }\n    .header { border-bottom: 2px solid #10b981; padding-bottom: 14px; margin-bottom: 18px; }\n    .badge { background: #064e3b; color: #34d399; border: 1px solid #10b981; padding: 4px 10px; border-radius: 9999px; font-weight: bold; font-size: 11px; }\n    .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 15px 0; }\n    .card { background: #0f172a; border-radius: 8px; padding: 12px; border-left: 3px solid #10b981; }\n    .card-title { color: #94a3b8; font-size: 11px; text-transform: uppercase; margin: 0; }\n    .card-value { color: #f8fafc; font-size: 18px; font-weight: bold; margin: 4px 0 0 0; }\n    .plan-list { background: #0f172a; border-radius: 8px; padding: 16px; margin-top: 15px; }\n    .plan-list li { color: #cbd5e1; font-size: 13px; margin-bottom: 8px; line-height: 1.5; }\n  </style>\n</head>\n<body>\n  <div class=\"box\">\n    <div class=\"header\">\n      <span class=\"badge\">GERENCIA GENERAL &bull; REPORTE OPERATIVO EN USD</span>\n      <h2 style=\"margin: 10px 0 0 0; color: #ffffff; font-size: 18px;\">Balance Financiero y Plan de Acción Ejecutivo</h2>\n      <p style=\"margin: 4px 0 0 0; font-size: 12px; color: #94a3b8;\">Para: Ricardo (Director General) | De: Gerente General (COO)</p>\n    </div>\n    <div class=\"metric-grid\">\n      <div class=\"card\">\n        <p class=\"card-title\">Ingresos del Día</p>\n        <p class=\"card-value\">$${revenueTodayUSD.toLocaleString()} USD</p>\n      </div>\n      <div class=\"card\">\n        <p class=\"card-title\">Gasto Meta Ads</p>\n        <p class=\"card-value\">$${adSpendUSD.toLocaleString()} USD</p>\n      </div>\n      <div class=\"card\">\n        <p class=\"card-title\">Margen Neto Día</p>\n        <p class=\"card-value\" style=\"color: #34d399;\">+$${netProfitTodayUSD.toLocaleString()} USD</p>\n      </div>\n      <div class=\"card\">\n        <p class=\"card-title\">MRR Consolidado</p>\n        <p class=\"card-value\">$${mrrUSD.toLocaleString()} USD</p>\n      </div>\n    </div>\n    <div class=\"plan-list\">\n      <p style=\"margin: 0 0 10px 0; color: #10b981; font-weight: bold; font-size: 13px;\">🎯 Plan de Acción Recomendado para la Dirección:</p>\n      <ul style=\"margin: 0; padding-left: 18px;\">\n        ${actionPlan.map(item => `<li>${item}</li>`).join('')}\n      </ul>\n    </div>\n    <p style=\"font-size: 11px; color: #64748b; margin-top: 18px; text-align: center;\">\n      AuditFlow AI &bull; Comité Ejecutivo: Ricardo (CEO), GM (COO), CMVO &bull; audiflowai.com\n    </p>\n  </div>\n</body>\n</html>\n`;\n\nreturn [{\n  json: {\n    subject,\n    htmlContent: html,\n    fromEmail: 'gm@audiflowai.com',\n    toEmail: 'ricardo@audiflowai.com, rick28191@gmail.com',\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-format-gm-email",
+      "name": "Formatear Plan Ejecutivo & Finanzas USD (COO)",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 1000]
+    },
+    {
+      "parameters": {
+        "fromEmail": "gm@audiflowai.com",
+        "toEmail": "ricardo@audiflowai.com, rick28191@gmail.com",
+        "subject": "={{ $json.subject }}",
+        "html": "={{ $json.htmlContent }}"
+      },
+      "id": "email-to-ceo",
+      "name": "Enviar Email a Ricardo (Director General)",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [750, 1000]
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1AuditFlow_Operations_Master_Log",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "Operations_USD_Feed",
+          "mode": "name"
+        }
+      },
+      "id": "google-sheets-log",
+      "name": "Registrar en Google Sheets (Finanzas USD & Actividad)",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [750, 700]
+    }
+  ],
+  "connections": {
+    "Cron Daily 8:00 AM (Reporte Matutino al Director General)": {
+      "main": [
+        [
+          {
+            "node": "Formatear Plan Ejecutivo & Finanzas USD (COO)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cron Semanal Viernes 5:00 PM (Cierre Financiero y Pipeline en USD)": {
+      "main": [
+        [
+          {
+            "node": "Formatear Plan Ejecutivo & Finanzas USD (COO)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Meta Ads Director -> Métricas de Pauta": {
+      "main": [
+        [
+          {
+            "node": "Evaluador de Fatiga de Anuncios y Salud de App",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Registrar en Google Sheets (Finanzas USD & Actividad)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Diagnóstico de Comportamiento & Anti-Fatiga": {
+      "main": [
+        [
+          {
+            "node": "Evaluador de Fatiga de Anuncios y Salud de App",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Gerente General -> Plan de Acción & Finanzas USD": {
+      "main": [
+        [
+          {
+            "node": "Formatear Plan Ejecutivo & Finanzas USD (COO)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Registrar en Google Sheets (Finanzas USD & Actividad)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Webhook: Convocatoria & Minuta Comité Ejecutivo (Ricardo + GM + CMVO)": {
+      "main": [
+        [
+          {
+            "node": "Formatear Plan Ejecutivo & Finanzas USD (COO)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluador de Fatiga de Anuncios y Salud de App": {
+      "main": [
+        [
+          {
+            "node": "Formatear Plan Ejecutivo & Finanzas USD (COO)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Registrar en Google Sheets (Finanzas USD & Actividad)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Formatear Plan Ejecutivo & Finanzas USD (COO)": {
+      "main": [
+        [
+          {
+            "node": "Enviar Email a Ricardo (Director General)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

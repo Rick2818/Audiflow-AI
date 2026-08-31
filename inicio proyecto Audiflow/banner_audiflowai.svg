@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1128 191" width="100%" height="100%">
+  <defs>
+    <!-- Deep Obsidian Canvas (1128 x 191 Exact Native LinkedIn Ratio) -->
+    <linearGradient id="bgBanner1128Com" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#040507"/>
+      <stop offset="50%" stop-color="#0a0c10"/>
+      <stop offset="100%" stop-color="#14120e"/>
+    </linearGradient>
+
+    <!-- Royal Brushed Gold Gradient -->
+    <linearGradient id="goldBanner1128Com" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#fef5dd"/>
+      <stop offset="35%" stop-color="#d4af37"/>
+      <stop offset="70%" stop-color="#b8932b"/>
+      <stop offset="100%" stop-color="#91721c"/>
+    </linearGradient>
+
+    <!-- Subtle Grid Background -->
+    <pattern id="grid1128Com" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M 24 0 L 0 0 0 24" fill="none" stroke="#ffffff" stroke-width="0.5" opacity="0.03"/>
+    </pattern>
+  </defs>
+
+  <!-- Canvas Base -->
+  <rect width="1128" height="191" fill="url(#bgBanner1128Com)"/>
+  <rect width="1128" height="191" fill="url(#grid1128Com)"/>
+
+  <!-- Subtle Ambient Glows -->
+  <circle cx="980" cy="95" r="120" fill="#d4af37" opacity="0.08" filter="blur(40px)"/>
+  <circle cx="300" cy="95" r="100" fill="#ffffff" opacity="0.02" filter="blur(40px)"/>
+
+  <!-- Safe Zone Content Block (Starting at x=185 to keep lower-left logo area 100% free) -->
+  <g transform="translate(185, 23)">
+    
+    <!-- Top Eyebrow Gold Badge -->
+    <rect x="0" y="0" width="310" height="20" rx="10" fill="#14120c" stroke="#d4af37" stroke-width="1" opacity="0.9"/>
+    <text x="155" y="13.5" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="9" fill="#d4af37" letter-spacing="1.2">
+      ★ LEGALTECH &amp; FINANCIAL DUE DILIGENCE
+    </text>
+
+    <!-- Main Headline -->
+    <text x="0" y="48" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="22" fill="#ffffff" letter-spacing="-0.3">
+      Due Diligence &amp; Auditoría Jurídico-Contable en Minutos.
+    </text>
+
+    <!-- Subtitle / Audience Target -->
+    <text x="0" y="74" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="500" font-size="12" fill="#a3977c">
+      Diseñado para <tspan fill="#ffffff" font-weight="700">Directores Legales</tspan>, <tspan fill="#d4af37" font-weight="700">General Counsel</tspan>, <tspan fill="#ffffff" font-weight="700">Compliance</tspan> y <tspan fill="#d4af37" font-weight="700">CFOs</tspan>
+    </text>
+
+    <!-- Feature Pillars -->
+    <g transform="translate(0, 102)">
+      <text x="0" y="0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="10.5" fill="#d8d0be">
+        <tspan fill="#d4af37">✦</tspan> Pasivos Ocultos &nbsp;&nbsp;&nbsp; 
+        <tspan fill="#d4af37">✦</tspan> Redlines de Contratos &nbsp;&nbsp;&nbsp; 
+        <tspan fill="#d4af37">✦</tspan> Cero Alucinaciones (Motor Determinista)
+      </text>
+    </g>
+
+    <!-- Trust Stamp with audiflowai.com integration -->
+    <text x="0" y="128" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="600" font-size="8.5" fill="#786f5c" letter-spacing="0.8">
+      🔒 PRIVACIDAD DE GRADO BANCARIO • AUDITORÍA EN MEMORIA VOLÁTIL • <tspan fill="#d4af37" font-weight="700">AUDIFLOWAI.COM</tspan>
+    </text>
+  </g>
+
+  <!-- Right Monogram Emblem Card with audiflowai.com -->
+  <g transform="translate(935, 18)">
+    <rect x="0" y="0" width="135" height="154" rx="16" fill="#0c0e14" stroke="#d4af37" stroke-width="1.2" opacity="0.75"/>
+    
+    <!-- Monogram Inside -->
+    <g transform="translate(30, 22)">
+      <!-- Left Leg (White) -->
+      <path d="M 8 72 L 30 11 L 40 11 L 18 72 Z" fill="#ffffff"/>
+      <!-- Right Leg (Gold) -->
+      <path d="M 28 11 L 38 11 L 62 72 L 52 72 Z" fill="url(#goldBanner1128Com)"/>
+      <!-- Crossbar (Gold) -->
+      <rect x="19" y="44" width="31" height="7" rx="1.5" fill="url(#goldBanner1128Com)"/>
+    </g>
+
+    <!-- Brand Name with .COM -->
+    <text x="67.5" y="128" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="900" font-size="9" fill="#ffffff" letter-spacing="1.5">
+      AUDIFLOW<tspan fill="url(#goldBanner1128Com)">AI.COM</tspan>
+    </text>
+  </g>
+</svg>

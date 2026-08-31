@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "google-workspace": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-google-workspace"],
+      "env": {
+        "GOOGLE_WORKSPACE_CREDENTIALS_FILE": "credentials.json",
+        "GOOGLE_WORKSPACE_TOKEN_FILE": "token.json"
+      },
+      "description": "Servidor MCP para Google Workspace: Envío de correos por Gmail, gestión de prospectos en Google Sheets, reportes en Google Drive y agendamiento en Google Calendar."
+    },
+    "n8n-automation-bridge": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-n8n"],
+      "env": {
+        "N8N_API_URL": "http://localhost:5678/api/v1",
+        "N8N_API_KEY": "${N8N_API_KEY}"
+      },
+      "description": "Puente local para orquestar flujos de trabajo, webhooks y cron jobs sin intervención humana."
+    }
+  }
+}

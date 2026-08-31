@@ -1,0 +1,299 @@
+{
+  "version": 2,
+  "headers": [
+    {
+      "source": "/admin",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate, max-age=0"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), payment=(self)"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdnjs.cloudflare.com https://js.stripe.com https://www.googletagmanager.com https://www.google-analytics.com https://scripts.clarity.ms; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' data: blob:; connect-src 'self' https://api.stripe.com https://generativelanguage.googleapis.com https://*.supabase.co https://api.opennode.com https://api.coingecko.com https://www.google-analytics.com https://analytics.google.com https://*.clarity.ms; frame-src https://js.stripe.com https://hooks.stripe.com;"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/audio/(.*)",
+      "destination": "/frontend/audio/$1"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/frontend/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/frontend/sitemap.xml"
+    },
+    {
+      "source": "/google3767930768036b5b.html",
+      "destination": "/frontend/google3767930768036b5b.html"
+    },
+    {
+      "source": "/auditflow2026indexnow.txt",
+      "destination": "/frontend/auditflow2026indexnow.txt"
+    },
+    {
+      "source": "/auditar-contrato-arrendamiento",
+      "destination": "/frontend/auditar-contrato-arrendamiento.html"
+    },
+    {
+      "source": "/auditar-factura-proveedor",
+      "destination": "/frontend/auditar-factura-proveedor.html"
+    },
+    {
+      "source": "/auditar-contrato-servicios-it",
+      "destination": "/frontend/auditar-contrato-servicios-it.html"
+    },
+    {
+      "source": "/admin",
+      "destination": "/frontend/admin.html"
+    },
+    {
+      "source": "/privacy",
+      "destination": "/frontend/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/frontend/terms.html"
+    },
+    {
+      "source": "/verificar",
+      "destination": "/frontend/verificar.html"
+    },
+    {
+      "source": "/video",
+      "destination": "/frontend/video.html"
+    },
+    {
+      "source": "/alternativas-docusign",
+      "destination": "/frontend/alternativas-docusign.html"
+    },
+    {
+      "source": "/Prompt_Maestro_AuditFlow_AI.pdf",
+      "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/prompt-maestro",
+      "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/Executive_Brief_AuditFlow_AI.pdf",
+      "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/empresa",
+      "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/executive-brief",
+      "destination": "/frontend/Executive_Brief_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/Marketing_Plan_AuditFlow_AI.pdf",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/marketing-plan",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/plan-marketing",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/marketing",
+      "destination": "/frontend/Marketing_Plan_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/LinkedIn_Carousel_AuditFlow_AI.pdf",
+      "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/carrusel-linkedin",
+      "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/linkedin-carousel",
+      "destination": "/frontend/LinkedIn_Carousel_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/LinkedIn_Carousel_German_DACH.pdf",
+      "destination": "/frontend/LinkedIn_Carousel_German_DACH.pdf"
+    },
+    {
+      "source": "/AuditFlow_Vertragspruefung_Redline_Muster.doc",
+      "destination": "/frontend/AuditFlow_Vertragspruefung_Redline_Muster.doc"
+    },
+    {
+      "source": "/redline-german",
+      "destination": "/frontend/AuditFlow_Vertragspruefung_Redline_Muster.doc"
+    },
+    {
+      "source": "/AuditFlow_AI_Operational_Master_Plan.pdf",
+      "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
+    },
+    {
+      "source": "/master-plan",
+      "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
+    },
+    {
+      "source": "/plan-operativo",
+      "destination": "/frontend/AuditFlow_AI_Operational_Master_Plan.pdf"
+    },
+    {
+      "source": "/Viral_LinkedIn_Posts_Personal_Account.pdf",
+      "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
+    },
+    {
+      "source": "/posts-virales",
+      "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
+    },
+    {
+      "source": "/linkedin-viral",
+      "destination": "/frontend/Viral_LinkedIn_Posts_Personal_Account.pdf"
+    },
+    {
+      "source": "/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/resultados-hoy",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/reporte-hoy",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/resultados-2pm",
+      "destination": "/frontend/MidDay_Results_Report_Wednesday_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/api/audit/download-pdf",
+      "destination": "/api/audit"
+    },
+    {
+      "source": "/api/payment/subscribe",
+      "destination": "/api/payment"
+    },
+    {
+      "source": "/api/payment/stripe",
+      "destination": "/api/payment"
+    },
+    {
+      "source": "/api/payment/lightning",
+      "destination": "/api/payment"
+    },
+    {
+      "source": "/api/cross-audit",
+      "destination": "/api/cross-audit"
+    },
+    {
+      "source": "/api/export-docx",
+      "destination": "/api/export-docx"
+    },
+    {
+      "source": "/api/chat-document",
+      "destination": "/api/chat-document"
+    },
+    {
+      "source": "/api/outreach/send-campaign",
+      "destination": "/api/outreach"
+    },
+    {
+      "source": "/api/fast-track-blast",
+      "destination": "/api/admin"
+    },
+    {
+      "source": "/api/invite-colleague",
+      "destination": "/api/admin"
+    },
+    {
+      "source": "/api/lead-recovery",
+      "destination": "/api/lead-recovery"
+    },
+    {
+      "source": "/api/track-open",
+      "destination": "/api/admin"
+    },
+    {
+      "source": "/api/admin/(.*)",
+      "destination": "/api/admin"
+    },
+    {
+      "source": "/api/report-issue",
+      "destination": "/api/report"
+    },
+    {
+      "source": "/api/report/(.*)",
+      "destination": "/api/report"
+    },
+    {
+      "source": "/api/social-publish",
+      "destination": "/api/social-publish"
+    },
+    {
+      "source": "/api/waalaxy-sync",
+      "destination": "/api/waalaxy-sync"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/frontend/$1"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/outreach?campaign=daily_master_dispatch&batch=pareto_top20",
+      "schedule": "0 13 * * 1-5"
+    },
+    {
+      "path": "/api/lead-recovery",
+      "schedule": "0 14 * * 1-5"
+    },
+    {
+      "path": "/api/social-publish?action=daily_cron_dispatch",
+      "schedule": "0 14 * * *"
+    }
+  ]
+}
