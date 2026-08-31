@@ -343,6 +343,27 @@
                     </button>
                 </div>
 
+                <!-- SELECTOR DE POSTURA DE NEGOCIACIÓN (PARTY STANCE SELECTOR - BENCHMARKING SPELLBOOK/LEGALON) -->
+                <div class="mb-4 p-3 rounded-2xl bg-dark-card border border-border-dark text-left">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
+                        <span data-i18n="stance_label" class="text-xs font-mono font-bold text-gray-300 flex items-center gap-1.5">
+                            🎯 Postura de Negociación (Party Stance):
+                        </span>
+                        <span class="text-[10px] text-accent-blue font-mono">Personaliza la severidad y el redactado</span>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        <button type="button" id="stance-btn-buyer" onclick="window.AppHandler.setPartyStance('buyer')" class="p-2.5 rounded-xl bg-accent-blue/15 border-2 border-accent-blue text-accent-blue text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm">
+                            <span data-i18n="stance_buyer">🏢 Comprador / Cliente / Inquilino</span>
+                        </button>
+                        <button type="button" id="stance-btn-vendor" onclick="window.AppHandler.setPartyStance('vendor')" class="p-2.5 rounded-xl bg-dark-surface border border-border-dark text-gray-400 hover:text-white text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                            <span data-i18n="stance_vendor">💼 Proveedor / Vendedor / Arrendador</span>
+                        </button>
+                        <button type="button" id="stance-btn-neutral" onclick="window.AppHandler.setPartyStance('neutral')" class="p-2.5 rounded-xl bg-dark-surface border border-border-dark text-gray-400 hover:text-white text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer">
+                            <span data-i18n="stance_neutral">⚖️ Auditor Fiduciario Neutro</span>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- ÁREA DRAG & DROP -->
                 <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-4 focus:outline-none focus:ring-2 focus:ring-accent-blue">
                     <input type="file" id="file-input" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.webp">
@@ -835,22 +856,31 @@
 
         <!-- DASHBOARD DE REPORTE CON BLUR -->
         <section id="report-section" class="hidden py-6 animate-fade-in">
-            <!-- BARRA DE ACCIONES: IMPRIMIR, DESCARGAR Y SOPORTE IA -->
+            <!-- BARRA DE ACCIONES: IMPRIMIR, DESCARGAR, VENTAS B2B Y SOPORTE IA -->
             <div class="flex flex-wrap items-center justify-end gap-2 mb-6 no-print">
+                <button onclick="window.AppHandler.openCfoApprovalModal()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-emerald-500/50 bg-emerald-950/30 text-emerald-400 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5 shadow-sm">
+                    <span data-i18n="btn_cfo_memo">📊 Resumen CFO / Aprobación Rápida</span>
+                </button>
+                <button onclick="window.AppHandler.openProformaModal()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-purple-500/50 bg-purple-950/30 text-purple-300 hover:bg-purple-500/20 transition-all flex items-center gap-1.5 shadow-sm">
+                    <span data-i18n="btn_proforma_invoice">📑 Cotización Proforma B2B</span>
+                </button>
+                <a href="https://wa.me/50379893922?text=Hola%20Ricardo,%20auditamos%20nuestro%20contrato%20en%20AuditFlow%20AI%20y%20deseamos%20informaci%C3%B3n%20para%20activar%20el%20Plan%20Corporativo%20B2B%20($590/a%C3%B1o)." target="_blank" rel="noopener noreferrer" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-green-500/50 bg-green-950/40 text-green-400 hover:bg-green-500/20 transition-all flex items-center gap-1.5 shadow-sm">
+                    <span data-i18n="btn_whatsapp_concierge">💬 WhatsApp VIP Concierge</span>
+                </a>
                 <button onclick="window.AppHandler.openChatCopilotModal()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-sky-500/40 text-sky-400 hover:bg-sky-500/10 transition-all flex items-center gap-1.5 shadow-sm">
-                    <span data-i18n="btn_chat_contract">💬 Chatear con la IA sobre este Contrato</span>
+                    <span data-i18n="btn_chat_contract">💬 Chatear con la IA</span>
                 </button>
                 <button onclick="window.AppHandler.downloadDocxRedlines()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/10 transition-all flex items-center gap-1.5 shadow-sm">
-                    <span data-i18n="btn_download_docx">📄 Descargar Word (.docx) Redlines</span>
+                    <span data-i18n="btn_download_docx">📄 Word (.docx) Redlines</span>
                 </button>
                 <button onclick="window.AppHandler.downloadIcalEvents()" class="btn-secondary text-xs font-mono px-3.5 py-2.5 rounded-xl border border-amber-500/40 text-amber-400 hover:bg-amber-500/10 transition-all flex items-center gap-1.5 shadow-sm">
-                    <span data-i18n="btn_download_ics">📅 Recordatorios Calendario (.ics)</span>
+                    <span data-i18n="btn_download_ics">📅 Calendario (.ics)</span>
                 </button>
                 <button onclick="window.AppHandler.openSupportModal()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-purple-500/40 text-purple-400 hover:bg-purple-500/10 transition-all flex items-center gap-2 shadow-sm">
-                    <span data-i18n="btn_ai_support">🤖 Soporte IA 24/7 (Corregir con IA)</span>
+                    <span data-i18n="btn_ai_support">🤖 Soporte IA 24/7</span>
                 </button>
                 <button onclick="window.AppHandler.downloadPdfReport()" class="btn-secondary text-xs font-mono px-4 py-2.5 rounded-xl border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/10 transition-all flex items-center gap-2 shadow-sm">
-                    <span data-i18n="btn_print_report">🖨️ Imprimir / Guardar en PDF</span>
+                    <span data-i18n="btn_print_report">🖨️ PDF Oficial</span>
                 </button>
             </div>
             <!-- BANNER DE ÉXITO Y BOTÓN REGRESAR AL DASHBOARD TRAS LA COMPRA -->
@@ -875,22 +905,23 @@
                 <div>
                     <div class="flex items-center gap-3 mb-2 flex-wrap">
                         <span id="rep-doc-type" data-i18n="rep_doc_default" class="px-3 py-1 rounded-full bg-border-dark text-accent-blue text-xs font-mono font-medium">Contrato Comercial</span>
+                        <span id="rep-stance-badge" class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-mono font-bold">🏢 POSTURA: COMPRADOR</span>
                         <span id="rep-standard-badge" class="px-3 py-1 rounded-full bg-accent-blue/15 text-accent-blue border border-accent-blue/30 text-xs font-mono font-bold">🇺🇸 PCAOB &amp; US GAAP</span>
                         <span id="rep-risk-badge" data-i18n="rep_risk_high" class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">RIESGO ALTO</span>
                     </div>
                     <h2 id="rep-doc-name" class="text-xl sm:text-2xl font-bold text-white">Auditoría: Contrato_Servicios.pdf</h2>
-                    <p class="text-gray-400 text-xs mt-1 font-mono">ID: <span id="rep-id-display" class="text-white">rep_123456</span> • 0 Disk Storage</p>
+                    <p class="text-gray-400 text-xs mt-1 font-mono">ID: <span id="rep-id-display" class="text-white">rep_123456</span> • 0 Disk Storage • Garantía 10x ROI</p>
                 </div>
 
                 <div class="flex items-center justify-between md:justify-end gap-6 border-t md:border-t-0 md:border-l border-border-dark pt-4 md:pt-0 md:pl-8">
                     <div class="text-left md:text-right">
                         <span data-i18n="rep_leakage_label" class="text-[11px] text-gray-400 block uppercase font-mono tracking-wider mb-0.5">Fuga Financiera Total</span>
-                        <span id="rep-total-leakage" class="text-2xl sm:text-3xl font-extrabold text-red-400">$3,450.00 USD</span>
+                        <span id="rep-total-leakage" class="text-2xl sm:text-3xl font-extrabold text-red-400">$18,500.00 USD</span>
                     </div>
                     <div class="text-right">
                         <span data-i18n="rep_lead_score_label" class="text-[11px] text-gray-400 block uppercase font-mono tracking-wider mb-0.5">Lead Score</span>
                         <div id="rep-lead-score-badge" class="inline-flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-accent-emerald/15 text-accent-emerald font-extrabold text-base sm:text-lg font-mono border border-accent-emerald/30 shadow-glow-emerald">
-                            88
+                            92
                         </div>
                     </div>
                 </div>
@@ -904,6 +935,28 @@
 
                 <div id="findings-container" class="space-y-6">
                     <!-- Inserción dinámica de hallazgos mediante JS -->
+                </div>
+            </div>
+
+            <!-- ESCUDO DE CLÁUSULAS CRÍTICAS OMITIDAS (MISSING PROVISIONS SHIELD - BENCHMARKING LEGALON/SPELLBOOK) -->
+            <div class="mb-8 p-6 sm:p-8 rounded-2xl bg-dark-card border border-border-dark text-left shadow-xl">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-border-dark">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/20 text-accent-blue flex items-center justify-center font-bold text-2xl shrink-0">
+                            🛡️
+                        </div>
+                        <div>
+                            <h3 data-i18n="missing_shield_title" class="text-lg sm:text-xl font-bold text-white">Escudo de Cláusulas Críticas Omitidas (Missing Provisions Shield)</h3>
+                            <p data-i18n="missing_shield_sub" class="text-xs text-gray-400 font-mono">Detección forense de cláusulas obligatorias ausentes en este contrato.</p>
+                        </div>
+                    </div>
+                    <span class="px-3 py-1 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 text-xs font-mono font-bold self-start sm:self-auto">
+                        ⚠️ 3 Omisiones Críticas Detectadas
+                    </span>
+                </div>
+
+                <div id="missing-provisions-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Inserción dinámica de omisiones mediante JS -->
                 </div>
             </div>
 
@@ -1240,6 +1293,132 @@
                     </div>
                     <button onclick="window.PaymentHandler.openPaymentModal(); window.AppHandler.closeSamplePdfModal();" class="btn-primary text-xs py-3 px-6 font-bold shadow-glow">
                         <span data-i18n="sample_pdf_btn_unlock">🔓 Desbloquear Mi Reporte Oficial ($19 USD)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL RESUMEN EJECUTIVO PARA EL CFO (CFO APPROVAL ONE-PAGER PITCH) -->
+        <div id="cfo-approval-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border-2 border-emerald-500/50 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl my-auto text-slate-100 max-h-[92vh] overflow-y-auto">
+                <button onclick="window.AppHandler.closeCfoApprovalModal()" aria-label="Cerrar modal CFO" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="flex items-center gap-3 mb-4 pb-4 border-b border-border-dark">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-2xl shrink-0">
+                        📊
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/40 font-bold uppercase">Acelerador de Decisión Financiera</span>
+                        <h3 class="text-xl font-bold text-white mt-0.5">Memorando Ejecutivo para Aprobación del CFO & Dirección</h3>
+                    </div>
+                </div>
+
+                <div class="p-4 rounded-xl bg-dark-surface border border-border-dark space-y-3 font-mono text-xs mb-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-gray-800">
+                        <div>
+                            <span class="text-gray-400 block text-[11px]">Documento Auditado:</span>
+                            <span id="cfo-doc-name" class="font-bold text-white truncate block">Contrato_Servicios.pdf</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 block text-[11px]">Riesgo Financiero / Fuga Detectada:</span>
+                            <span id="cfo-leakage-val" class="font-extrabold text-red-400 text-base">$18,500.00 USD</span>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-2 text-center py-2 bg-dark-card/60 p-2.5 rounded-lg border border-gray-800">
+                        <div>
+                            <span class="text-gray-400 block text-[10px]">Costo AuditFlow AI</span>
+                            <span class="font-bold text-accent-blue text-sm">$19.00 USD</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 block text-[10px]">Costo Legal Tradicional</span>
+                            <span class="font-bold text-gray-400 text-sm">~$850.00 USD</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-400 block text-[10px]">ROI Proyectado</span>
+                            <span class="font-extrabold text-emerald-400 text-sm">973x (+97,268%)</span>
+                        </div>
+                    </div>
+
+                    <div class="p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/40">
+                        <strong class="text-emerald-300 block mb-1 text-[11px]">🎯 Dictamen Fiduciario:</strong>
+                        <p id="cfo-memo-text" class="text-gray-300 leading-relaxed font-sans text-xs">
+                            Se recomienda la aprobación inmediata de $19.00 USD para desbloquear el informe completo de redlines y las 3 propuestas sustitutivas. La inversión mitiga $18,500 USD en penalizaciones leoninas y sobrecargos contractuales.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-2">
+                    <button onclick="window.AppHandler.copyCfoMemoToClipboard()" class="btn-secondary w-full sm:w-auto text-xs py-2.5 px-4 font-mono flex items-center justify-center gap-1.5 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-950/40">
+                        <span>📋 Copiar Memorando para WhatsApp / Email</span>
+                    </button>
+                    <button onclick="window.PaymentHandler.openPaymentModal(); window.AppHandler.closeCfoApprovalModal();" class="btn-primary w-full sm:w-auto text-xs py-2.5 px-6 font-bold shadow-glow flex items-center justify-center gap-1.5">
+                        <span>🔓 Proceder al Pago ($19 USD)</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL GENERADOR DE COTIZACIÓN PROFORMA B2B (1-CLICK FORMAL PROFORMA QUOTE) -->
+        <div id="proforma-quote-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border-2 border-purple-500/50 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative shadow-2xl my-auto text-slate-100 max-h-[92vh] overflow-y-auto">
+                <button onclick="window.AppHandler.closeProformaModal()" aria-label="Cerrar modal cotización" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
+
+                <div class="flex items-center gap-3 mb-4 pb-4 border-b border-border-dark">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-2xl shrink-0">
+                        📑
+                    </div>
+                    <div>
+                        <span class="text-[10px] font-mono text-purple-300 bg-purple-950 px-2 py-0.5 rounded border border-purple-500/40 font-bold uppercase">Documento Comercial Corporativo</span>
+                        <h3 class="text-xl font-bold text-white mt-0.5">Cotización Proforma B2B / Orden de Compra</h3>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-left font-mono text-xs">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-gray-400 mb-1">Nombre de la Empresa / Razón Social:</label>
+                            <input type="text" id="prof-company-input" placeholder="Ej. Corporación Global S.A." class="input-field text-xs font-mono">
+                        </div>
+                        <div>
+                            <label class="block text-gray-400 mb-1">Identificación Fiscal (NIT / RFC / CIF / Tax ID):</label>
+                            <input type="text" id="prof-taxid-input" placeholder="Ej. 0614-280890-102-1" class="input-field text-xs font-mono">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-gray-400 mb-1">Plan / Servicio a Cotizar:</label>
+                        <select id="prof-plan-select" onchange="window.AppHandler.updateProformaPreview()" class="input-field text-xs font-mono bg-dark-surface">
+                            <option value="single">Reporte de Auditoría Individual & Redlines DOCX — $19.00 USD</option>
+                            <option value="monthly">Plan Corporativo Mensual Ilimitado Multi-Usuario — $69.00 USD / mes</option>
+                            <option value="annual" selected>Licencia Corporativa Anual (~3.5 Meses Gratis) — $590.00 USD / año</option>
+                        </select>
+                    </div>
+
+                    <!-- VISTA PREVIA FORMAL DE COTIZACIÓN IMPRIMIBLE -->
+                    <div id="proforma-preview-box" class="p-4 rounded-xl bg-dark-surface border border-gray-700 space-y-2">
+                        <div class="flex justify-between items-center text-white border-b border-gray-800 pb-2">
+                            <span class="font-bold text-accent-blue">COTIZACIÓN PROFORMA N°: <span id="prof-quote-num">AF-2026-8891</span></span>
+                            <span class="text-gray-400 text-[11px]">Fecha: <span id="prof-date-display">31/08/2026</span></span>
+                        </div>
+                        <div class="text-[11px] text-gray-300 leading-relaxed font-sans">
+                            <strong>Emisor:</strong> AuditFlow AI Corp. (audiflowai.com) • Cero Retención en Disco (RAM 100%)<br>
+                            <strong>Métodos de Pago Aceptados:</strong> Stripe (Tarjetas Corporativas Visa/Mastercard/Amex), Transferencia Bancaria Directa o Bitcoin Lightning Network.<br>
+                            <strong>Garantía Fiduciaria:</strong> 10x ROI (Ahorro potencial 10 veces el valor o reembolso 100%).
+                        </div>
+                        <div class="flex justify-between items-center pt-2 border-t border-gray-800 text-sm font-bold text-emerald-400">
+                            <span>TOTAL NETO A PAGAR:</span>
+                            <span id="prof-total-display">$590.00 USD</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-end gap-3 pt-4 border-t border-border-dark mt-4">
+                    <button onclick="window.AppHandler.printProformaQuote()" class="btn-secondary w-full sm:w-auto text-xs py-2.5 px-4 font-mono flex items-center justify-center gap-1.5 border border-purple-500/40 text-purple-300 hover:bg-purple-950/40">
+                        <span>🖨️ Imprimir / Guardar en PDF</span>
+                    </button>
+                    <button onclick="window.AppHandler.copyProformaText()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue w-full sm:w-auto text-xs py-2.5 px-6 font-bold shadow-glow flex items-center justify-center gap-1.5">
+                        <span>📋 Copiar Datos para Cuentas por Pagar</span>
                     </button>
                 </div>
             </div>

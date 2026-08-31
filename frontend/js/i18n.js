@@ -238,6 +238,30 @@ window.I18n = {
             btn_chat_contract: "💬 Chatear con la IA sobre este Contrato",
             btn_download_docx: "📄 Descargar Word (.docx) Redlines",
             btn_download_ics: "📅 Recordatorios Calendario (.ics)",
+            btn_cfo_memo: "📊 Resumen CFO / Aprobación Rápida",
+            btn_proforma_invoice: "📑 Cotización Proforma B2B",
+            btn_whatsapp_concierge: "💬 WhatsApp VIP Concierge",
+
+            // Stance Selector (Postura de Negociación)
+            stance_label: "Postura de Negociación:",
+            stance_buyer: "🏢 Comprador / Cliente / Inquilino",
+            stance_vendor: "💼 Proveedor / Vendedor / Arrendador",
+            stance_neutral: "⚖️ Auditor Fiduciario Neutro",
+
+            // Missing Provisions Shield (Escudo de Cláusulas Omitidas)
+            missing_shield_title: "🛡️ Escudo de Cláusulas Críticas Omitidas (Missing Provisions Shield)",
+            missing_shield_sub: "Detección forense de cláusulas obligatorias de blindaje ausentes en este contrato.",
+            status_present: "🟢 Presente / Cumple",
+            status_missing: "🔴 Omitida / Riesgo Crítico",
+            btn_insert_clause: "📋 Copiar Cláusula para Insertar",
+
+            // Multi-Tier Fallbacks & Negotiation Pitch
+            tab_fallback_std: "🛡️ Estándar de Mercado",
+            tab_fallback_max: "⚡ Máxima Protección",
+            tab_fallback_fast: "🤝 Fallback Rápido",
+            btn_copy_pitch: "📋 Copiar Argumentario para Negociar",
+            pitch_copied_toast: "¡Argumentario de negociación copiado al portapapeles!",
+            badge_10x_guarantee: "🛡️ Garantía 10x ROI: Ahorras $190+ USD o Reembolso 100% Inmediato",
 
             // Success Purchase Banner
             success_banner_title: "¡Compra Procesada &amp; Reporte Desbloqueado!",
@@ -551,6 +575,30 @@ window.I18n = {
             btn_chat_contract: "💬 Chat with AI about this Contract",
             btn_download_docx: "📄 Download Word (.docx) Redlines",
             btn_download_ics: "📅 Calendar Reminders (.ics)",
+            btn_cfo_memo: "📊 CFO Approval Summary Pitch",
+            btn_proforma_invoice: "📑 B2B Proforma Quote",
+            btn_whatsapp_concierge: "💬 WhatsApp VIP Concierge",
+
+            // Stance Selector
+            stance_label: "Review Stance:",
+            stance_buyer: "🏢 Buyer / Customer / Tenant",
+            stance_vendor: "💼 Vendor / Supplier / Landlord",
+            stance_neutral: "⚖️ Neutral Fiduciary Audit",
+
+            // Missing Provisions Shield
+            missing_shield_title: "🛡️ Missing Critical Provisions Shield",
+            missing_shield_sub: "Foresight audit of mandatory protective clauses missing from this agreement.",
+            status_present: "🟢 Present / Compliant",
+            status_missing: "🔴 Missing / Critical Risk",
+            btn_insert_clause: "📋 Copy Clause to Insert",
+
+            // Multi-Tier Fallbacks & Negotiation Pitch
+            tab_fallback_std: "🛡️ Market Standard",
+            tab_fallback_max: "⚡ Max Protection",
+            tab_fallback_fast: "🤝 Fast-Close Compromise",
+            btn_copy_pitch: "📋 Copy Negotiation Pitch",
+            pitch_copied_toast: "Negotiation pitch copied to clipboard!",
+            badge_10x_guarantee: "🛡️ 10x ROI Guarantee: Save $190+ USD or 100% Instant Refund",
 
             // Success Purchase Banner
             success_banner_title: "Purchase Processed &amp; Report Unlocked!",
@@ -864,6 +912,30 @@ window.I18n = {
             btn_chat_contract: "💬 Mit KI über diesen Vertrag chatten",
             btn_download_docx: "📄 Word (.docx) Redlines herunterladen",
             btn_download_ics: "📅 Kalender-Erinnerungen (.ics)",
+            btn_cfo_memo: "📊 CFO-Freigabe-Zusammenfassung",
+            btn_proforma_invoice: "📑 B2B-Proforma-Angebot",
+            btn_whatsapp_concierge: "💬 WhatsApp VIP-Concierge",
+
+            // Stance Selector (DE)
+            stance_label: "Verhandlungsposition:",
+            stance_buyer: "🏢 Käufer / Kunde / Mieter",
+            stance_vendor: "💼 Dienstleister / Lieferant / Vermieter",
+            stance_neutral: "⚖️ Neutraler Treuhand-Prüfer",
+
+            // Missing Provisions Shield (DE)
+            missing_shield_title: "🛡️ Schutzschild für fehlende kritische Klauseln",
+            missing_shield_sub: "Forensische Prüfung fehlender Schutzklauseln in diesem Vertrag.",
+            status_present: "🟢 Vorhanden / Konform",
+            status_missing: "🔴 Fehlend / Kritisches Risiko",
+            btn_insert_clause: "📋 Klausel zum Einfügen kopieren",
+
+            // Multi-Tier Fallbacks & Negotiation Pitch (DE)
+            tab_fallback_std: "🛡️ Marktstandard",
+            tab_fallback_max: "⚡ Maximaler Schutz",
+            tab_fallback_fast: "🤝 Schneller Kompromiss",
+            btn_copy_pitch: "📋 Verhandlungsargumentation kopieren",
+            pitch_copied_toast: "Verhandlungsargumentation in die Zwischenablage kopiert!",
+            badge_10x_guarantee: "🛡️ 10x ROI-Garantie: Sparen Sie 190+ $ USD oder sofortige 100% Rückerstattung",
 
             // Success Purchase Banner (DE)
             success_banner_title: "Kauf bestätigt &amp; Bericht freigeschaltet!",
@@ -1009,6 +1081,10 @@ window.I18n = {
 
         if (typeof window.updateRoiCalculator === 'function') {
             window.updateRoiCalculator();
+        }
+
+        if (window.AppHandler && window.AppHandler.isNordicMode && typeof window.AppHandler.applyNordicPricingDOM === 'function') {
+            window.AppHandler.applyNordicPricingDOM();
         }
     }
 };

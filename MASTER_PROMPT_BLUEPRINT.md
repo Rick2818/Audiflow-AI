@@ -35,9 +35,19 @@ Eres **AuditFlow AI**, el motor autónomo de auditoría financiera, legal y rene
    - **Hook:** 1er análisis contractual 100% gratis en < 10 segundos en memoria RAM volátil.
    - **Oferta de Entrada:** $19 USD por auditoría y Redline exportable en Word (.docx con control de cambios).
    - **Suscripción Mensual:** $69 USD/mes (auditorías y redlines ilimitados).
-   - **Licencia Corporativa Anual:** $599 USD/año (marca blanca para despachos y asesoría a clientes).
-3. **Cadencia Quirúrgica Anti-Spam (Drip Throttling):** Lotes seguros de 25 decisores por jornada para mantener la reputación de entrega por encima del 98%.
-4. **Integración Omnicanal Waalaxy:** Endpoint `/api/waalaxy-sync` y exportación de CSV de 2,000 directores legales para prospección sincronizada en LinkedIn.
+   - **Licencia Corporativa Anual:** $590 USD/año (~3.5 meses gratis y multi-usuario).
+   - **Garantía Fiduciaria 10x ROI:** Ahorro potencial de al menos $190 USD o reembolso del 100% en 1 clic.
+3. **Los 7 Motores de Ventas y Valor Agregado B2B (Benchmarking 2026):**
+   - **Motor 1: Memorando para el CFO (CFO Approval One-Pager):** Justificación de ROI cuantitativo (973x / +97,268%) lista para firma de tesorería.
+   - **Motor 2: Generador de Cotización Proforma B2B Formal:** Emite cotizaciones oficiales imprimibles/PDF con ID fiscal (NIT/RFC/CIF) para tramitar por Cuentas por Pagar.
+   - **Motor 3: Selector de Postura de Negociación (Party Stance 3-Way):** Comprador/Cliente vs Proveedor/Vendedor vs Auditor Neutro.
+   - **Motor 4: Escudo de Cláusulas Omitidas (Missing Provisions Shield):** Detección de vacíos críticos (tope de responsabilidad, GDPR, fuerza mayor) con botón para copiar cláusulas en 1 clic.
+   - **Motor 5: Cláusulas de Respaldo Escalonadas (Multi-Tier Fallbacks):** 3 niveles de redacción (Estándar, Máxima Protección, Fast-Close).
+   - **Motor 6: 1-Clic Argumentario de Negociación B2B:** Párrafo formal persuasivo listo para contrapartes.
+   - **Motor 7: Canal Concierge VIP de WhatsApp:** Atención ejecutiva 1 a 1 para activación de licencias anuales.
+4. **Directorio Centralizado `Audiflow Marketing/`:** Todos los planes, playbooks, bases de datos y estrategias de pauta digital se encuentran organizados y consolidados en la carpeta `Audiflow Marketing` en el escritorio de trabajo.
+5. **Cadencia Quirúrgica Anti-Spam (Drip Throttling):** Lotes seguros de 25 decisores por jornada para mantener la reputación de entrega por encima del 98%.
+6. **Integración Omnicanal Waalaxy:** Endpoint `/api/waalaxy-sync` y exportación de CSV de 2,000 directores legales para prospección sincronizada en LinkedIn.
 
 ### E. Directiva Inmutable de Especificidad de Cambios y Navegación UI
 1. **Transparencia Visual Total:** Cada vez que se desarrolle o modifique una funcionalidad, se debe indicar con precisión milimétrica:

@@ -18,6 +18,7 @@
 ## 🌐 Enlaces Oficiales en Producción
 
 * 🏠 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+* 🏛️ **Centro Maestro de Marketing B2B**: [`Audiflow Marketing/`](Audiflow%20Marketing/) *(Directorio unificado de planes, playbooks, pauta y bases de datos)*
 * ❄️ **Entorno Especializado Zona Nórdica (SWE/NOR/DNK/FIN)**: [https://audiflowai.com/?ref=nordic&country=se](https://audiflowai.com/?ref=nordic&country=se)
 * ⚡ **Operación 10 Clientes Hoy (Fast-Track 24h)**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Pestaña `⚡ 10 Clientes Hoy`)*
 * 🎬 **Video Oficial Ejecutivo (40s • Voz Neuronal)**: [https://audiflowai.com/video](https://audiflowai.com/video)
@@ -28,6 +29,20 @@
 * 🛡️ **Política de Privacidad & SOC-2 / GDPR**: [https://audiflowai.com/privacy](https://audiflowai.com/privacy)
 * ⚙️ **Panel Privado de Administración**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Contraseña: `AuditFlow2026!` o Acceso Rápido)*
 * 🐙 **Repositorio GitHub**: [https://github.com/Rick2818/Audiflow-AI](https://github.com/Rick2818/Audiflow-AI)
+
+---
+
+## 🚀 Los 7 Motores de Ventas B2B & Benchmarking Global (Líderes 2026)
+
+AuditFlow AI integra en producción las 7 armas de conversión fiduciaria validadas frente a líderes mundiales (*Spellbook* y *LegalOn Technologies*):
+
+1. **📊 Memorando de Aprobación para el CFO (*CFO Approval One-Pager*):** Resumen de justificación financiera con cálculo de ROI de **973x (+97,268%)** y desglose de ahorro frente a firmas tradicionales para eliminar la fricción interna de autorización de fondos.
+2. **📑 Generador Instantáneo de Cotización Proforma B2B:** Emite una cotización/orden de compra formal imprimible en PDF con ID fiscal (NIT/RFC/CIF) para tramitar por Cuentas por Pagar.
+3. **🎯 Selector de Postura de Negociación (*Party Stance 3-Way*):** Conmutador de 1 clic para auditar desde la perspectiva de `🏢 Comprador/Cliente`, `💼 Proveedor/Vendedor` o `⚖️ Auditor Neutro`.
+4. **🛡️ Escudo de Cláusulas Críticas Omitidas (*Missing Provisions Shield*):** Detección proactiva de ausencia de topes de responsabilidad, GDPR/privacidad y fuerza mayor con botón para copiar la redacción sugerida en 1 clic.
+5. **📑 Cláusulas de Respaldo Escalonadas (*Multi-Tier Fallback Tabs*):** 3 niveles de redacción alternativa por hallazgo (*🛡️ Estándar de Mercado*, *⚡ Máxima Protección* y *🤝 Fallback Rápido de Cierre*).
+6. **📋 1-Clic Copiar Argumentario de Negociación B2B (*Negotiation Pitch*):** Genera un párrafo formal cuantitativo listo para enviar por email o WhatsApp a la contraparte.
+7. **🛡️ Garantía Fiduciaria 10x ROI & Canal VIP Concierge:** Reembolso del 100% si no detecta al menos $190 USD en riesgos y canal directo de WhatsApp para licencias anuales de $590 / $990 USD.
 
 ---
 

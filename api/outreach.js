@@ -266,7 +266,7 @@ export function generateExecutiveLeads(count = 25) {
 export function generateOutreachProspects(batch = 'pareto_top20') {
   // Solo decisores reales verificados
   const b = (batch || '').toLowerCase();
-  const isNordicBatch = b.includes('nordic') || b.includes('nordica');
+  const isNordicBatch = b.includes('nordic') || b.includes('nordica') || b.includes('nordicos');
   const isDachBatch = b.includes('dach') || b.includes('alemania') || b.includes('germany');
   
   let realList = REAL_LEGAL_DIRECTORS;
@@ -429,23 +429,23 @@ export default async function handler(req, res) {
 
       // PLANTILLAS CON HOOK GRATIS EN 10S, OFERTA $19 USD Y PLANES $69 / $599
       if (isNordic) {
-        // PLANTILLA ESPECÍFICA NÓRDICA: SOBRIA, FACTUAL, GDPR ART. 28 Y PRIVACIDAD EN RAM
+        // PLANTILLA NÓRDICA CALIBRADA AL PODER ADQUISITIVO REGIONAL CON 20% DESCUENTO EN PRIMERA COMPRA CORPORATIVA
         subject = `vendor contract risk triage & word redlines / gdpr art. 28 / ${company}`;
         bodyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
             <p>Hi ${cleanName},</p>
-            <p>I am reaching out regarding your legal / procurement oversight at <strong>${company}</strong>.</p>
-            <p>We developed <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=nordic&country=se" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), an ephemeral contract review copilot operating under strict <strong>Zero Data Retention (100% Volatile RAM)</strong> and EU GDPR Article 28 compliance.</p>
+            <p>I am reaching out regarding your legal and procurement governance at <strong>${company}</strong>.</p>
+            <p>We developed <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=nordic&country=se" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), an ephemeral contract audit copilot operating under strict <strong>Zero Data Retention (100% Volatile RAM)</strong> and EU GDPR Article 28 compliance.</p>
             
-            <p>The platform audits commercial agreements in <strong>&lt;10 seconds</strong>, compares terms against Nordic market benchmarks (Scandinavian liability caps), and outputs instant <strong>Word (.docx Track Changes) Redlines</strong> with no persistent cloud storage or AI training on your documents.</p>
+            <p>The platform audits commercial agreements in <strong>&lt;10 seconds</strong>, evaluates terms against Scandinavian benchmark standards (liability caps & indexation parity), and generates instant <strong>Word (.docx Track Changes) Redlines</strong> with zero persistent cloud storage or model training.</p>
 
             <div style="background-color: #f0f9ff; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px; font-size: 13px; color: #0f172a;">
-              <p style="margin: 0 0 6px 0;"><strong>🇪🇺 Nordic Privacy Shield:</strong> Pure RAM buffer execution (0 disk storage, automatic purge).</p>
-              <p style="margin: 0 0 6px 0;"><strong>⚡ Self-Serve Benchmark:</strong> 1st confidential audit 100% free with no registration or credit card.</p>
-              <p style="margin: 0;"><strong>📄 Single Redline Export:</strong> $19 USD | <strong>Enterprise Team:</strong> $69/mo or $599/yr.</p>
+              <p style="margin: 0 0 6px 0;"><strong>🇪🇺 Nordic Privacy Shield:</strong> Pure RAM buffer execution (0 disk storage, automatic memory purge).</p>
+              <p style="margin: 0 0 6px 0;"><strong>⚡ Self-Serve Benchmark:</strong> 1st confidential audit 100% free with no credit card required.</p>
+              <p style="margin: 0;"><strong>📄 Single Redline Export:</strong> $49 USD | <strong>🏛️ Corporate Team Annual (20% First Purchase Discount):</strong> <span style="text-decoration: line-through; color: #64748b;">€1,200 / $1,250</span> <strong>€960 / $990 USD/yr</strong> (or €95 / $99/mo).</p>
             </div>
 
-            <p>Would you be open to a 1-page summary of Scandinavian commercial benchmark standards for vendor contracts?</p>
+            <p>Would you be open to a 1-page summary of Scandinavian commercial benchmark standards for vendor agreements?</p>
             <p style="margin-top: 24px;">Best regards,<br><strong>Ricardo</strong><br><span style="color: #4b5563; font-size: 13px;">Founder • AuditFlow AI Corp. (<a href="https://audiflowai.com/?ref=nordic" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)</span></p>
           </div>
         `;

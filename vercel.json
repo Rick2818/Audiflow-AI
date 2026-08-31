@@ -290,6 +290,10 @@
     {
       "path": "/api/lead-recovery",
       "schedule": "0 14 * * 1-5"
+    },
+    {
+      "path": "/api/social-publish?action=daily_cron_dispatch",
+      "schedule": "0 14 * * *"
     }
   ]
 }

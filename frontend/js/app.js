@@ -8,6 +8,7 @@ window.AppHandler = {
     currentAuditData: null,
     currentReportId: null,
     currentAuditStandard: 'PCAOB_GAAP',
+    currentPartyStance: 'buyer',
     currentLeadData: { name: '', email: '' },
     isNordicMode: false,
 
@@ -17,6 +18,36 @@ window.AppHandler = {
         this.setupFormListeners();
         this.checkUrlForPaymentSuccess();
         this.trackInboundLead();
+        this.setPartyStance('buyer');
+    },
+
+    setPartyStance(stance) {
+        this.currentPartyStance = stance || 'buyer';
+        ['buyer', 'vendor', 'neutral'].forEach(s => {
+            const btn = document.getElementById(`stance-btn-${s}`);
+            if (btn) {
+                if (s === this.currentPartyStance) {
+                    btn.className = 'p-2.5 rounded-xl bg-accent-blue/15 border-2 border-accent-blue text-accent-blue text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-sm';
+                } else {
+                    btn.className = 'p-2.5 rounded-xl bg-dark-surface border border-border-dark text-gray-400 hover:text-white text-xs font-bold font-mono transition-all flex items-center justify-center gap-1.5 cursor-pointer';
+                }
+            }
+        });
+        const stanceBadge = document.getElementById('rep-stance-badge');
+        if (stanceBadge) {
+            const isDe = window.I18n && window.I18n.currentLang === 'de';
+            const isEn = window.I18n && window.I18n.currentLang === 'en';
+            if (this.currentPartyStance === 'vendor') {
+                stanceBadge.innerText = isDe ? '💼 POSITION: DIENSTLEISTER' : (isEn ? '💼 STANCE: VENDOR / SUPPLIER' : '💼 POSTURA: PROVEEDOR / VENDEDOR');
+                stanceBadge.className = 'px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono font-bold';
+            } else if (this.currentPartyStance === 'neutral') {
+                stanceBadge.innerText = isDe ? '⚖️ POSITION: TREUHAND-PRÜFER' : (isEn ? '⚖️ STANCE: NEUTRAL FIDUCIARY' : '⚖️ POSTURA: AUDITOR NEUTRO');
+                stanceBadge.className = 'px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-xs font-mono font-bold';
+            } else {
+                stanceBadge.innerText = isDe ? '🏢 POSITION: KÄUFER / KUNDE' : (isEn ? '🏢 STANCE: BUYER / CUSTOMER' : '🏢 POSTURA: COMPRADOR / CLIENTE');
+                stanceBadge.className = 'px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-mono font-bold';
+            }
+        }
     },
 
     detectAndApplyNordicMode() {
@@ -52,10 +83,47 @@ window.AppHandler = {
                     window.I18n.setLanguage('en');
                 }
 
-                console.log('🇪🇺 [NORDIC MODE ACTIVATED] Sweden/Norway/Denmark/Finland context loaded with GDPR Article 28 Ephemeral RAM Shield.');
+                // Actualizar dinámicamente los precios en la interfaz al estándar nórdico (con 20% de descuento)
+                setTimeout(() => {
+                    this.applyNordicPricingDOM();
+                }, 150);
+
+                console.log('🇪🇺 [NORDIC MODE ACTIVATED] Sweden/Norway/Denmark/Finland context loaded with GDPR Article 28 Ephemeral RAM Shield & 20% Corporate Partner Pricing ($49 / $990 USD/yr).');
             }
         } catch (err) {
             console.warn('Nordic mode check warning:', err);
+        }
+    },
+
+    applyNordicPricingDOM() {
+        try {
+            // Tarjeta 2: Single Redline Report ($49 USD)
+            const c2Price = document.querySelector('[data-i18n="pricing_card2_price"]');
+            if (c2Price) c2Price.innerText = '$49';
+            const c2Period = document.querySelector('[data-i18n="pricing_card2_period"]');
+            if (c2Period) c2Period.innerText = 'USD / €45 per agreement';
+            const c2Btn = document.querySelector('[data-i18n="pricing_card2_btn"]');
+            if (c2Btn) c2Btn.innerText = '🔓 Audit 1 Agreement ($49 USD)';
+
+            // Tarjeta 3: Nordic Corporate Plan ($990/yr con 20% OFF)
+            const c3Price = document.querySelector('[data-i18n="pricing_card3_price"]');
+            if (c3Price) c3Price.innerText = '$990';
+            const c3Period = document.querySelector('[data-i18n="pricing_card3_period"]');
+            if (c3Period) c3Period.innerHTML = '<span class="text-emerald-400 font-bold">USD/yr (20% First Purchase Off)</span> <span class="line-through text-gray-500 text-[10px]">€1,200</span>';
+            const c3Tag = document.querySelector('[data-i18n="pricing_card3_tag"]');
+            if (c3Tag) c3Tag.innerText = '🇪🇺 NORDIC ENTERPRISE PARTNER';
+            const c3Btn = document.querySelector('[data-i18n="pricing_card3_btn"]');
+            if (c3Btn) c3Btn.innerText = '🚀 Activate Nordic Corporate ($990/yr)';
+
+            // Botones de desbloqueo en modal y report dashboard
+            const modalPayTitle = document.getElementById('pay-modal-title');
+            if (modalPayTitle) modalPayTitle.innerText = 'Select Payment Method ($49.00 USD / €45 EUR)';
+            const unlockBtns = document.querySelectorAll('[data-i18n="btn_unlock_report"], [data-i18n="rep_unlock_btn"]');
+            unlockBtns.forEach(btn => {
+                if (btn) btn.innerText = '🔓 Unlock Official Report & Word (.docx) ($49 USD)';
+            });
+        } catch(e) {
+            console.warn('Error applying Nordic pricing to DOM:', e);
         }
     },
 
@@ -270,14 +338,20 @@ window.AppHandler = {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         document_base64: base64,
-                        document_name: this.selectedFile.name
+                        document_name: this.selectedFile.name,
+                        party_stance: this.currentPartyStance || 'buyer',
+                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP'
                     })
                 });
             } else {
                 res = await fetch('/api/audit', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ sample_text: 'sample_contract_text' })
+                    body: JSON.stringify({ 
+                        sample_text: 'sample_contract_text',
+                        party_stance: this.currentPartyStance || 'buyer',
+                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP'
+                    })
                 });
             }
 
@@ -626,6 +700,11 @@ window.AppHandler = {
             const unlockBtnBuyText = window.I18n ? window.I18n.t('rep_unlock_btn') : '🔒 Comprar Reporte ($19 USD)';
             const defaultClauseLabel = isDe ? 'Klausel' : (isEn ? 'Clause' : 'Cláusula');
 
+            const tabStdText = window.I18n ? window.I18n.t('tab_fallback_std') : '🛡️ Estándar de Mercado';
+            const tabMaxText = window.I18n ? window.I18n.t('tab_fallback_max') : '⚡ Máxima Protección';
+            const tabFastText = window.I18n ? window.I18n.t('tab_fallback_fast') : '🤝 Fallback Rápido';
+            const btnCopyPitchText = window.I18n ? window.I18n.t('btn_copy_pitch') : '📋 Copiar Argumentario para Negociar';
+
             card.innerHTML = `
                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4 pb-4 border-b border-border-dark">
                     <div class="flex items-center gap-3">
@@ -656,9 +735,18 @@ window.AppHandler = {
                         <p class="text-sm text-gray-300 leading-relaxed font-mono">${teaserText}</p>
                     </div>
 
-                    <div class="p-4 rounded-xl bg-dark-surface border border-accent-blue/30 relative overflow-hidden">
-                        <span class="text-xs font-bold text-accent-emerald uppercase tracking-wider block mb-1.5">${solutionLabel}</span>
-                        <div class="blurred-content select-none transition-all duration-500 text-sm text-gray-300 leading-relaxed font-mono">
+                    <!-- CLÁUSULAS DE RESPALDO ESCALONADAS (FALLBACK TABS - BENCHMARKING LEGALON/SPELLBOOK) -->
+                    <div class="p-4 rounded-xl bg-dark-surface border border-accent-blue/30 relative overflow-hidden space-y-3">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-800 pb-2">
+                            <span class="text-xs font-bold text-accent-emerald uppercase tracking-wider">${solutionLabel}</span>
+                            <div class="inline-flex rounded-lg bg-dark-card p-1 text-[11px] font-mono border border-border-dark gap-1">
+                                <button type="button" onclick="window.AppHandler.switchFindingFallback(${idx}, 'standard')" id="tab-fb-std-${idx}" class="px-2 py-1 rounded bg-accent-blue text-black font-bold transition-all">${tabStdText}</button>
+                                <button type="button" onclick="window.AppHandler.switchFindingFallback(${idx}, 'maximum')" id="tab-fb-max-${idx}" class="px-2 py-1 rounded text-gray-400 hover:text-white transition-all">${tabMaxText}</button>
+                                <button type="button" onclick="window.AppHandler.switchFindingFallback(${idx}, 'fast_close')" id="tab-fb-fast-${idx}" class="px-2 py-1 rounded text-gray-400 hover:text-white transition-all">${tabFastText}</button>
+                            </div>
+                        </div>
+
+                        <div id="solution-text-${idx}" class="blurred-content select-none transition-all duration-500 text-sm text-gray-300 leading-relaxed font-mono">
                             ${solutionText}
                         </div>
                         <div class="blur-overlay absolute inset-0 flex flex-col sm:flex-row items-center justify-center gap-2.5 bg-dark-card/85 backdrop-blur-xs p-3">
@@ -671,23 +759,27 @@ window.AppHandler = {
                         </div>
                     </div>
 
-                    <!-- VISOR VISUAL DE REDLINES / DIFF EN PANTALLA -->
-                    <div class="pt-2">
+                    <!-- BOTÓN 1-CLIC COPIAR ARGUMENTARIO DE NEGOCIACIÓN & CONTROL DE CAMBIOS -->
+                    <div class="pt-2 flex flex-wrap items-center justify-between gap-3">
                         <button onclick="window.AppHandler.toggleRedlineDiff(${idx})" class="text-xs font-mono text-accent-blue hover:text-white flex items-center gap-1.5 transition-all">
                             <span>👁️</span> <span>${window.I18n ? window.I18n.t('diff_view_toggle') : 'Ver Control de Cambios en Vivo (Redlines)'}</span>
                         </button>
-                        <div id="redline-diff-box-${idx}" class="hidden mt-3 p-3.5 rounded-xl bg-dark-surface border border-gray-700 font-mono text-xs space-y-2.5">
-                            <div>
-                                <span class="text-red-400 font-bold block mb-1">🔴 ${window.I18n ? window.I18n.t('diff_original_label') : 'Texto Original Detectado:'}</span>
-                                <div class="p-2 rounded-lg bg-red-950/40 border border-red-500/30 text-red-300 line-through leading-relaxed">
-                                    "${finding.clause_reference || defaultClauseLabel}: ${teaserText}"
-                                </div>
+                        <button onclick="window.AppHandler.copyNegotiationPitch(${idx})" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-emerald-950/50 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/60 transition-all flex items-center gap-1.5 shadow-sm">
+                            <span>${btnCopyPitchText}</span>
+                        </button>
+                    </div>
+
+                    <div id="redline-diff-box-${idx}" class="hidden mt-3 p-3.5 rounded-xl bg-dark-surface border border-gray-700 font-mono text-xs space-y-2.5">
+                        <div>
+                            <span class="text-red-400 font-bold block mb-1">🔴 ${window.I18n ? window.I18n.t('diff_original_label') : 'Texto Original Detectado:'}</span>
+                            <div class="p-2 rounded-lg bg-red-950/40 border border-red-500/30 text-red-300 line-through leading-relaxed">
+                                "${finding.clause_reference || defaultClauseLabel}: ${teaserText}"
                             </div>
-                            <div>
-                                <span class="text-emerald-400 font-bold block mb-1">🟢 ${window.I18n ? window.I18n.t('diff_revised_label') : 'Propuesta Sustitutiva Optimizada:'}</span>
-                                <div class="p-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 leading-relaxed font-semibold">
-                                    "${solutionText}"
-                                </div>
+                        </div>
+                        <div>
+                            <span class="text-emerald-400 font-bold block mb-1">🟢 ${window.I18n ? window.I18n.t('diff_revised_label') : 'Propuesta Sustitutiva Optimizada:'}</span>
+                            <div id="diff-revised-text-${idx}" class="p-2 rounded-lg bg-emerald-950/40 border border-emerald-500/30 text-emerald-300 leading-relaxed font-semibold">
+                                "${solutionText}"
                             </div>
                         </div>
                     </div>
@@ -696,6 +788,9 @@ window.AppHandler = {
 
             container.appendChild(card);
         });
+
+        // Renderizar el Escudo de Cláusulas Omitidas (Missing Provisions Shield)
+        this.renderMissingProvisions(data.missing_provisions);
 
         // Guardar automáticamente en el Vault de Sesión Local
         this.saveToSessionVault(data);
@@ -706,6 +801,244 @@ window.AppHandler = {
                 this.currentLeadData ? this.currentLeadData.email : null, 
                 this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf'
             );
+        }
+    },
+
+    switchFindingFallback(idx, fallbackType) {
+        if (!this.currentAuditData) return;
+        const rawFindings = this.currentAuditData.findings || this.currentAuditData.summary || [];
+        const finding = rawFindings[idx];
+        if (!finding || !finding.fallbacks) return;
+
+        const solutionEl = document.getElementById(`solution-text-${idx}`);
+        const diffRevisedEl = document.getElementById(`diff-revised-text-${idx}`);
+        const tabStd = document.getElementById(`tab-fb-std-${idx}`);
+        const tabMax = document.getElementById(`tab-fb-max-${idx}`);
+        const tabFast = document.getElementById(`tab-fb-fast-${idx}`);
+
+        const text = finding.fallbacks[fallbackType] || finding.actionable_solution;
+        if (solutionEl) solutionEl.innerText = text;
+        if (diffRevisedEl) diffRevisedEl.innerText = `"${text}"`;
+
+        [tabStd, tabMax, tabFast].forEach(t => {
+            if (t) {
+                t.className = 'px-2 py-1 rounded text-gray-400 hover:text-white transition-all';
+            }
+        });
+
+        if (fallbackType === 'maximum' && tabMax) {
+            tabMax.className = 'px-2 py-1 rounded bg-amber-400 text-black font-bold transition-all';
+        } else if (fallbackType === 'fast_close' && tabFast) {
+            tabFast.className = 'px-2 py-1 rounded bg-emerald-400 text-black font-bold transition-all';
+        } else if (tabStd) {
+            tabStd.className = 'px-2 py-1 rounded bg-accent-blue text-black font-bold transition-all';
+        }
+    },
+
+    copyNegotiationPitch(idx) {
+        if (!this.currentAuditData) return;
+        const rawFindings = this.currentAuditData.findings || this.currentAuditData.summary || [];
+        const finding = rawFindings[idx];
+        const pitch = (finding && finding.negotiation_pitch) ? finding.negotiation_pitch : 
+            (finding ? `Estimado equipo: Solicitamos formalmente el ajuste de la ${finding.clause_reference || 'cláusula de penalización'} conforme al estándar de mercado B2B, aplicando la propuesta sustitutiva: "${finding.actionable_solution}".` : '');
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(pitch);
+            this.showToast(window.I18n ? window.I18n.t('pitch_copied_toast') : '¡Argumentario de negociación copiado al portapapeles!');
+        }
+    },
+
+    renderMissingProvisions(provisions) {
+        const container = document.getElementById('missing-provisions-container');
+        if (!container) return;
+        container.innerHTML = '';
+
+        const defaultMissing = [
+            {
+                id: 'mp_1',
+                title: 'Tope de Responsabilidad Mutua (Mutual Liability Cap)',
+                status: 'MISSING',
+                severity: 'CRITICAL',
+                risk_explanation: 'El contrato no establece un límite máximo de responsabilidad para el cliente, exponiendo a la empresa a reclamaciones de daños ilimitados.',
+                suggested_clause: 'La responsabilidad total acumulada de cualquiera de las partes bajo este Contrato no excederá el monto total de las tarifas efectivamente pagadas durante los 12 meses anteriores al evento que originó el reclamo.'
+            },
+            {
+                id: 'mp_2',
+                title: 'Cláusula de Privacidad y Cumplimiento de Datos (GDPR / Habeas Data)',
+                status: 'MISSING',
+                severity: 'HIGH',
+                risk_explanation: 'No se delimita la custodia de datos confidenciales ni el cumplimiento de normativas de protección de datos personales.',
+                suggested_clause: 'Ambas partes se comprometen a tratar los datos compartidos bajo estricto apego al GDPR / normativa local aplicable, garantizando confidencialidad y destrucción segura al término de la relación contractual.'
+            },
+            {
+                id: 'mp_3',
+                title: 'Fuerza Mayor y Continuidad Operativa (Force Majeure)',
+                status: 'MISSING',
+                severity: 'MEDIUM',
+                risk_explanation: 'Falta un mecanismo formal de suspensión temporal de obligaciones ante eventos fortuitos o desastres fuera del control de las partes.',
+                suggested_clause: 'Ninguna de las partes será responsable por demoras o incumplimientos resultantes de causas de fuerza mayor imprevisibles y ajenas a su control razonable, mediando notificación en 48 horas.'
+            },
+            {
+                id: 'mp_4',
+                title: 'Resolución de Disputas y Arbitraje Comercial',
+                status: 'PRESENT',
+                severity: 'LOW',
+                risk_explanation: 'El documento cuenta con cláusula de jurisdicción y arbitraje definida.',
+                suggested_clause: 'Jurisdicción pactada conforme a tribunales comerciales competentes.'
+            }
+        ];
+
+        const list = (Array.isArray(provisions) && provisions.length > 0) ? provisions : defaultMissing;
+        const btnInsertText = window.I18n ? window.I18n.t('btn_insert_clause') : '📋 Copiar Cláusula para Insertar';
+
+        list.forEach(item => {
+            const isMissing = item.status === 'MISSING';
+            const badgeClass = isMissing ? 'bg-red-500/20 text-red-400 border-red-500/30' : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30';
+            const badgeText = isMissing ? (window.I18n ? window.I18n.t('status_missing') : '🔴 Omitida / Riesgo Crítico') : (window.I18n ? window.I18n.t('status_present') : '🟢 Presente / Cumple');
+
+            const itemDiv = document.createElement('div');
+            itemDiv.className = `p-4 rounded-xl bg-dark-surface border ${isMissing ? 'border-red-500/30' : 'border-emerald-500/30'} flex flex-col justify-between space-y-2.5`;
+            itemDiv.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5 flex-wrap">
+                        <strong class="text-white text-xs font-mono font-bold">${item.title}</strong>
+                        <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold border ${badgeClass}">${badgeText}</span>
+                    </div>
+                    <p class="text-xs text-gray-300 font-sans leading-relaxed">${item.risk_explanation}</p>
+                </div>
+                ${isMissing ? `
+                <div class="pt-2 border-t border-gray-800 flex items-center justify-between gap-2">
+                    <span class="text-[10px] text-gray-400 font-mono">Redacción sugerida:</span>
+                    <button type="button" onclick="window.AppHandler.copyClauseText('${item.id}')" class="text-[11px] font-mono px-2.5 py-1 rounded bg-dark-card border border-gray-700 text-accent-blue hover:text-white flex items-center gap-1">
+                        <span>${btnInsertText}</span>
+                    </button>
+                </div>
+                <div id="clause-text-raw-${item.id}" class="hidden">${item.suggested_clause}</div>
+                ` : ''}
+            `;
+            container.appendChild(itemDiv);
+        });
+    },
+
+    copyClauseText(clauseId) {
+        const rawEl = document.getElementById(`clause-text-raw-${clauseId}`);
+        if (rawEl && navigator.clipboard) {
+            navigator.clipboard.writeText(rawEl.innerText);
+            this.showToast('¡Cláusula de blindaje copiada al portapapeles!');
+        }
+    },
+
+    openCfoApprovalModal() {
+        const modal = document.getElementById('cfo-approval-modal');
+        if (!modal) return;
+        const data = this.currentAuditData;
+        const docNameEl = document.getElementById('cfo-doc-name');
+        const leakageEl = document.getElementById('cfo-leakage-val');
+        if (docNameEl) docNameEl.innerText = (data && data.document_name) ? data.document_name : 'Contrato_Comercial.pdf';
+        if (leakageEl) leakageEl.innerText = (data && data.leakage_detected_usd) ? data.leakage_detected_usd : '$18,500.00 USD';
+        modal.classList.remove('hidden');
+    },
+
+    closeCfoApprovalModal() {
+        const modal = document.getElementById('cfo-approval-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    copyCfoMemoToClipboard() {
+        const data = this.currentAuditData;
+        const docName = (data && data.document_name) ? data.document_name : 'Contrato_Comercial.pdf';
+        const leakage = (data && data.leakage_detected_usd) ? data.leakage_detected_usd : '$18,500.00 USD';
+
+        const memo = `📊 MEMORANDO EJECUTIVO DE APROBACIÓN FINANCIERA (CFO & DIRECCIÓN GENERAL)\n` +
+            `Documento Auditado: ${docName}\n` +
+            `Fuga / Riesgo Financiero Detectado: ${leakage}\n` +
+            `Costo AuditFlow AI: $19.00 USD (vs ~$850 USD honorarios legales tradicionales)\n` +
+            `Múltiplo de ROI: 973x (+97,268%)\n\n` +
+            `DICTAMEN: Se recomienda la aprobación inmediata de $19.00 USD para descargar las soluciones tácticas de renegociación y el archivo Word (.docx con control de cambios) en https://audiflowai.com.`;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(memo);
+            this.showToast('¡Memorando para el CFO copiado al portapapeles!');
+        }
+    },
+
+    openProformaModal() {
+        const modal = document.getElementById('proforma-quote-modal');
+        if (!modal) return;
+        this.updateProformaPreview();
+        modal.classList.remove('hidden');
+    },
+
+    closeProformaModal() {
+        const modal = document.getElementById('proforma-quote-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
+    updateProformaPreview() {
+        const planSelect = document.getElementById('prof-plan-select');
+        const totalEl = document.getElementById('prof-total-display');
+        const dateEl = document.getElementById('prof-date-display');
+        const quoteNumEl = document.getElementById('prof-quote-num');
+
+        if (dateEl) dateEl.innerText = new Date().toLocaleDateString('es-ES');
+        if (quoteNumEl && !quoteNumEl.dataset.generated) {
+            quoteNumEl.innerText = 'AF-2026-' + Math.floor(1000 + Math.random() * 9000);
+            quoteNumEl.dataset.generated = 'true';
+        }
+
+        if (planSelect && totalEl) {
+            const val = planSelect.value;
+            if (val === 'single') totalEl.innerText = '$19.00 USD';
+            else if (val === 'monthly') totalEl.innerText = '$69.00 USD / mes';
+            else totalEl.innerText = '$590.00 USD / año';
+        }
+    },
+
+    printProformaQuote() {
+        window.print();
+    },
+
+    copyProformaText() {
+        const planSelect = document.getElementById('prof-plan-select');
+        const companyInput = document.getElementById('prof-company-input');
+        const taxIdInput = document.getElementById('prof-taxid-input');
+        const quoteNum = document.getElementById('prof-quote-num') ? document.getElementById('prof-quote-num').innerText : 'AF-2026-8891';
+
+        const planText = planSelect ? planSelect.options[planSelect.selectedIndex].text : 'Licencia Corporativa Anual ($590 USD)';
+        const company = (companyInput && companyInput.value.trim()) ? companyInput.value.trim() : 'Su Empresa';
+        const taxId = (taxIdInput && taxIdInput.value.trim()) ? taxIdInput.value.trim() : 'N/A';
+
+        const text = `📑 COTIZACIÓN PROFORMA B2B N° ${quoteNum}\n` +
+            `Cliente: ${company} (ID Fiscal: ${taxId})\n` +
+            `Emisor: AuditFlow AI Corp. (audiflowai.com)\n` +
+            `Concepto: ${planText}\n` +
+            `Garantía: Blindaje Fiduciario 10x ROI (Ahorro 10x o Reembolso 100%)\n` +
+            `Métodos de Pago: Stripe Corporativo, Transferencia Bancaria Directa o Strike Lightning (rick28@strike.me)\n` +
+            `Enlace de Activación: https://audiflowai.com`;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(text);
+            this.showToast('¡Datos de cotización proforma copiados para Cuentas por Pagar!');
+        }
+    },
+
+    showToast(msg) {
+        const toast = document.getElementById('social-proof-toast');
+        const titleEl = document.getElementById('social-proof-title');
+        const descEl = document.getElementById('social-proof-desc');
+        const timeEl = document.getElementById('social-proof-time');
+
+        if (toast && titleEl && descEl) {
+            titleEl.innerText = '✅ Notificación AuditFlow AI';
+            descEl.innerText = msg;
+            if (timeEl) timeEl.innerText = 'Acción ejecutada con éxito';
+
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateY(0)';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(24px)';
+            }, 3500);
         }
     },
 

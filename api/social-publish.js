@@ -14,7 +14,7 @@ export default async function handler(req, res) {
   const todayName = daysName[day];
 
   // 1. Manejo del Cron Diario en la Nube (Vercel Cloud Cron)
-  if (req.method === 'GET' || req.query.action === 'daily_cron_dispatch') {
+  if (req.method === 'GET' || req.query?.action === 'daily_cron_dispatch') {
     const dailyPayload = {
       event: 'CLOUD_CRON_SOCIAL_DISPATCH',
       timestamp,

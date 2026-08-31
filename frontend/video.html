@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demostración HyperFrames (40s) | AuditFlow AI</title>
-    <meta name="description" content="Video explicativo oficial de 40 segundos con tecnología HyperFrames y voz neuronal femenina de estudio. Descubra qué es AuditFlow AI, para qué sirve y cómo proteger su EBITDA.">
+    <title>Consola Fiduciaria & Demostración de Auditoría (40s) | AuditFlow AI</title>
+    <meta name="description" content="Demostración ejecutiva de 40 segundos de AuditFlow AI: motor de inteligencia fiduciaria para contratos y facturas en memoria volátil (cero retención de datos). Estándar PCAOB / US GAAP / NIIF 16.">
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -18,13 +18,22 @@
             theme: {
                 extend: {
                     colors: {
-                        'dark-bg': '#09090b',
-                        'dark-surface': '#121215',
-                        'dark-card': '#18181b',
-                        'dark-border': '#27272a',
-                        'accent-blue': '#38bdf8',
-                        'accent-emerald': '#10b981',
-                        'accent-purple': '#a855f7',
+                        'fiduciary-bg': '#07090E',
+                        'fiduciary-surface': '#0E121B',
+                        'fiduciary-card': '#141A26',
+                        'fiduciary-border': '#1E2638',
+                        'fiduciary-border-subtle': '#182030',
+                        'fiduciary-cobalt': '#2563EB',
+                        'fiduciary-cyan': '#38BDF8',
+                        'fiduciary-emerald': '#059669',
+                        'fiduciary-emerald-light': '#10B981',
+                        'fiduciary-amber': '#D97706',
+                        'fiduciary-rose': '#E11D48',
+                        'fiduciary-muted': '#64748B',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
                     }
                 }
             }
@@ -33,574 +42,782 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'JetBrains Mono', monospace; }
-        .glow-blue { box-shadow: 0 0 35px -5px rgba(56, 189, 248, 0.25); }
-        .frame-transition {
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        .glass-panel {
+            background: rgba(14, 18, 27, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(30, 38, 56, 0.8);
         }
-        @keyframes pulse-glow {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.05); }
+        .laser-sweep {
+            background: linear-gradient(180deg, rgba(56, 189, 248, 0) 0%, rgba(56, 189, 248, 0.35) 50%, rgba(56, 189, 248, 0) 100%);
+            animation: sweep 2.8s infinite ease-in-out;
         }
-        .animate-pulse-glow { animation: pulse-glow 3s infinite ease-in-out; }
+        @keyframes sweep {
+            0% { transform: translateY(-100%); opacity: 0; }
+            30% { opacity: 1; }
+            70% { opacity: 1; }
+            100% { transform: translateY(220%); opacity: 0; }
+        }
+        .subtle-pulse {
+            animation: subpulse 3s infinite ease-in-out;
+        }
+        @keyframes subpulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+        .act-screen {
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
     </style>
 </head>
-<body class="bg-dark-bg text-gray-100 font-sans min-h-screen flex flex-col justify-between selection:bg-accent-blue selection:text-black">
+<body class="bg-fiduciary-bg text-slate-100 font-sans min-h-screen flex flex-col justify-between selection:bg-fiduciary-cyan selection:text-black">
 
-    <!-- NAVBAR SUPERIOR -->
-    <header class="border-b border-dark-border/80 bg-dark-bg/80 backdrop-blur-md sticky top-0 z-50">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <!-- NAVBAR INSTITUCIONAL -->
+    <header class="border-b border-fiduciary-border/80 bg-fiduciary-bg/90 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
             <a href="/" class="flex items-center gap-3 group">
-                <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-accent-blue via-indigo-600 to-accent-emerald flex items-center justify-center text-black font-extrabold text-lg shadow-lg">
-                    ⚡
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-fiduciary-cobalt to-fiduciary-cyan flex items-center justify-center text-black font-extrabold text-sm shadow-md">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
                 </div>
                 <div class="flex flex-col">
-                    <span class="font-bold text-white text-base tracking-tight group-hover:text-accent-blue transition-colors">AuditFlow <span class="text-accent-blue">AI</span></span>
-                    <span class="text-[10px] font-mono text-gray-400" id="nav-subtitle">Inteligencia de Riesgo Contractual</span>
+                    <span class="font-bold text-white text-sm tracking-tight group-hover:text-fiduciary-cyan transition-colors flex items-center gap-2">
+                        AuditFlow <span class="text-fiduciary-cyan">AI</span>
+                        <span class="text-[9px] font-mono uppercase px-1.5 py-0.5 rounded bg-fiduciary-card border border-fiduciary-border text-slate-400 font-normal">Fiduciary Intelligence</span>
+                    </span>
+                    <span class="text-[10px] font-mono text-slate-400" id="nav-subtitle">Gobernanza & Riesgo Contractual B2B</span>
                 </div>
             </a>
             
-            <!-- SELECTOR DE 4 IDIOMAS (ES / EN / DE / FR) Y BOTONES DE APP -->
+            <!-- SELECTOR DE 4 IDIOMAS & BOTONES -->
             <div class="flex items-center gap-2 sm:gap-3">
-                <div class="flex items-center bg-dark-surface p-1 rounded-xl border border-dark-border text-xs font-mono">
-                    <button onclick="VideoPlayer.setLanguage('es')" id="lang-btn-es" class="px-2 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all">🇪🇸 ES</button>
-                    <button onclick="VideoPlayer.setLanguage('en')" id="lang-btn-en" class="px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇺🇸 EN</button>
-                    <button onclick="VideoPlayer.setLanguage('de')" id="lang-btn-de" class="px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇩🇪 DE</button>
-                    <button onclick="VideoPlayer.setLanguage('fr')" id="lang-btn-fr" class="px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all">🇫🇷 FR</button>
+                <div class="flex items-center bg-fiduciary-surface p-0.5 rounded-lg border border-fiduciary-border text-[11px] font-mono">
+                    <button onclick="VideoPlayer.setLanguage('es')" id="lang-btn-es" class="px-2 py-1 rounded bg-fiduciary-cyan text-black font-semibold transition-all">ES</button>
+                    <button onclick="VideoPlayer.setLanguage('en')" id="lang-btn-en" class="px-2 py-1 rounded text-slate-400 hover:text-white transition-all">EN</button>
+                    <button onclick="VideoPlayer.setLanguage('de')" id="lang-btn-de" class="px-2 py-1 rounded text-slate-400 hover:text-white transition-all">DE</button>
+                    <button onclick="VideoPlayer.setLanguage('fr')" id="lang-btn-fr" class="px-2 py-1 rounded text-slate-400 hover:text-white transition-all">FR</button>
                 </div>
-                <a href="/admin" class="text-xs font-mono px-3 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-purple-500/50 transition-all hidden md:inline-flex items-center gap-1.5" id="nav-btn-dashboard">
-                    <span>📊</span> <span id="nav-text-dashboard">Dashboard</span>
+                <a href="/admin" class="text-xs font-mono px-3 py-1.5 rounded-lg bg-fiduciary-surface border border-fiduciary-border text-slate-300 hover:text-white hover:border-slate-500 transition-all hidden md:inline-flex items-center gap-1.5" id="nav-btn-dashboard">
+                    <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                    <span id="nav-text-dashboard">Consola</span>
                 </a>
-                <a href="/#scanner-section" class="text-xs font-mono px-3.5 sm:px-4 py-2 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black shadow-lg hover:scale-105 transition-all flex items-center gap-1.5" id="nav-btn-app">
-                    <span>🚀</span> <span id="nav-text-app">Ir a la App Web / Comprar ($19)</span>
+                <a href="/#scanner-section" class="text-xs font-mono px-3.5 py-1.5 rounded-lg bg-fiduciary-cyan text-black font-bold shadow-sm hover:bg-cyan-300 transition-all flex items-center gap-1.5" id="nav-btn-app">
+                    <svg class="w-3.5 h-3.5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    <span id="nav-text-app">Iniciar Diagnóstico</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- CONTENEDOR PRINCIPAL DEL VIDEO -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 py-8 sm:py-12 flex-1 w-full flex flex-col items-center justify-center">
+    <!-- CONTENEDOR PRINCIPAL -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-10 flex-1 w-full flex flex-col items-center">
 
-        <!-- HEADER DEL VIDEO -->
-        <div class="text-center mb-6 max-w-2xl">
-            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue font-mono text-xs font-bold mb-3">
-                <span class="w-2 h-2 rounded-full bg-accent-blue animate-ping"></span>
-                <span id="badge-video-header">DEMOSTRACIÓN EJECUTIVA HYPER-FRAMES • 40 SEGUNDOS</span>
+        <!-- HEADER INSTITUCIONAL -->
+        <div class="text-center mb-6 max-w-3xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-fiduciary-surface border border-fiduciary-border text-slate-300 font-mono text-[11px] font-medium mb-3">
+                <span class="w-1.5 h-1.5 rounded-full bg-fiduciary-cyan"></span>
+                <span id="badge-video-header">DEMOSTRACIÓN FORENSE INTERACTIVA • 40 SEGUNDOS</span>
+                <span class="text-slate-500">|</span>
+                <span class="text-fiduciary-emerald-light font-mono text-[10px]">SOC-2 • RAM (0-DISK RETENTION)</span>
             </div>
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight" id="main-video-title">
-                ¿Qué es AuditFlow AI y cómo protege tu EBITDA?
+            <h1 class="text-2xl sm:text-4xl font-bold text-white tracking-tight leading-tight" id="main-video-title">
+                Gobernanza y Mitigación de Riesgo Contractual en Memoria Volátil
             </h1>
-            <p class="text-gray-400 text-xs sm:text-sm mt-2 font-sans" id="main-video-desc">
-                Explicación ejecutiva de 40 segundos con narración de voz femenina de estudio y 5 actos fiduciarios.
+            <p class="text-slate-400 text-xs sm:text-sm mt-2 max-w-2xl mx-auto leading-relaxed" id="main-video-desc">
+                Demostración técnica de detección actuarial de fugas de EBITDA, cláusulas abusivas de indexación y generación de Redlines en Word (.docx) bajo estándares PCAOB y NIIF 16.
             </p>
         </div>
 
-        <!-- REPRODUCTOR HYPERFRAMES DE 40 SEGUNDOS -->
-        <div class="w-full bg-dark-card border-2 border-dark-border rounded-3xl p-4 sm:p-6 shadow-2xl relative overflow-hidden glow-blue" id="video-container">
+        <!-- CONSOLA / REPRODUCTOR HYPERFRAMES INTERACTIVO -->
+        <div class="w-full bg-fiduciary-surface border border-fiduciary-border rounded-2xl p-3 sm:p-5 shadow-2xl relative overflow-hidden" id="video-container">
             
-            <!-- PANTALLA PRINCIPAL DE VISUALIZACIÓN DE FRAMES -->
-            <div class="relative w-full aspect-[16/9] bg-gradient-to-br from-black via-dark-surface to-black rounded-2xl overflow-hidden border border-dark-border flex items-center justify-center shadow-inner select-none" id="viewport">
-                
-                <!-- WATERMARK TIMESTAMP & ACT -->
-                <div class="absolute top-4 left-4 z-30 flex items-center gap-2 font-mono text-xs px-3 py-1.5 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-gray-300">
-                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
-                    <span id="timestamp-display">00:00 / 00:40</span>
-                    <span class="text-accent-blue font-bold ml-1" id="act-tag">ACTO 1: ¿QUÉ ES?</span>
+            <!-- BARRA SUPERIOR DE TELEMETRÍA DE LA CONSOLA -->
+            <div class="flex items-center justify-between pb-3 mb-3 border-b border-fiduciary-border text-[11px] font-mono text-slate-400">
+                <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <span class="text-slate-300 font-medium">TERMINAL FORENSE V2.5</span>
+                    </div>
+                    <span class="text-slate-600 hidden sm:inline">|</span>
+                    <span class="text-fiduciary-cyan font-semibold" id="act-tag">ACTO 1: INGESTA &amp; PRIVACIDAD EN RAM</span>
                 </div>
-
-                <!-- BADGE SOC-2 & AUDIO CONTROLLER -->
-                <div class="absolute top-4 right-4 z-30 flex items-center gap-2">
-                    <button onclick="VideoPlayer.toggleVoice()" id="btn-voice-toggle" class="font-mono text-xs px-3 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-pink-300 hover:text-white transition-all flex items-center gap-1.5 shadow-sm">
-                        <span id="voice-icon">🎙️</span> <span id="voice-text">Voz Femenina Suave</span>
+                <div class="flex items-center gap-3">
+                    <button onclick="VideoPlayer.toggleVoice()" id="btn-voice-toggle" class="px-2.5 py-0.5 rounded bg-fiduciary-card border border-fiduciary-border text-slate-300 hover:text-white hover:border-slate-500 transition-all flex items-center gap-1 text-[10px]">
+                        <span id="voice-icon">
+                            <svg class="w-3 h-3 text-fiduciary-cyan inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                        </span>
+                        <span id="voice-text">Voz Fiduciaria HD</span>
                     </button>
-                    <span class="font-mono text-[11px] px-2.5 py-1 rounded-lg bg-black/70 backdrop-blur-md border border-dark-border text-emerald-400 hidden sm:inline-block">
-                        🔒 SOC-2 • RAM (0-Disco)
-                    </span>
-                </div>
-
-                <!-- ================= ACTO 1 (0s - 7s): ¿QUÉ ES? ================= -->
-                <div id="frame-act-1" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-100 z-20">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-accent-blue/15 border-2 border-accent-blue text-accent-blue flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-accent-blue/20 animate-pulse-glow">
-                        ⚡
-                    </div>
-                    <span class="text-xs font-mono text-accent-blue font-extrabold uppercase tracking-widest mb-1" id="act1-label">01. ¿Qué es AuditFlow AI?</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act1-title">
-                        El Primer Auditor de Contratos y Facturas B2B con IA Forense
-                    </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act1-desc">
-                        Analiza documentos legales y financieros en memoria RAM efímera en menos de <strong class="text-white">8 segundos</strong> con total confidencialidad.
-                    </p>
-                </div>
-
-                <!-- ================= ACTO 2 (8s - 15s): ¿PARA QUÉ SIRVE? ================= -->
-                <div id="frame-act-2" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500/15 border-2 border-amber-400 text-amber-400 flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-amber-500/20 animate-pulse-glow">
-                        🔍
-                    </div>
-                    <span class="text-xs font-mono text-amber-400 font-extrabold uppercase tracking-widest mb-1" id="act2-label">02. ¿Para qué sirve?</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act2-title">
-                        Detecta Fugas de EBITDA de <span class="text-amber-400 font-mono">$3,500 a $18,500 USD</span>
-                    </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act2-desc">
-                        Identifica trampas de indexación de IPC, sobrecostos ocultos, doble facturación y renovaciones automáticas antes de firmar.
-                    </p>
-                </div>
-
-                <!-- ================= ACTO 3 (16s - 23s): LOS CONTRAS DE NO AUDITAR ================= -->
-                <div id="frame-act-3" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-red-500/15 border-2 border-red-500 text-red-400 flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-red-500/20 animate-pulse-glow">
-                        ⚠️
-                    </div>
-                    <span class="text-xs font-mono text-red-400 font-extrabold uppercase tracking-widest mb-1" id="act3-label">03. Consecuencias de NO Auditar</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act3-title">
-                        Ataduras de 36 Meses y Penalizaciones del 100%
-                    </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act3-desc">
-                        Firmar sin revisión fiduciaria expone a tu empresa a contratos leoninos forzosos, disputas legales y gastos imprevistos.
-                    </p>
-                </div>
-
-                <!-- ================= ACTO 4 (24s - 32s): BENEFICIOS ================= -->
-                <div id="frame-act-4" class="frame-transition absolute inset-0 p-6 sm:p-12 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-emerald-500/15 border-2 border-emerald-400 text-emerald-400 flex items-center justify-center text-3xl sm:text-4xl mb-4 shadow-xl shadow-emerald-500/20 animate-pulse-glow">
-                        🏆
-                    </div>
-                    <span class="text-xs font-mono text-emerald-400 font-extrabold uppercase tracking-widest mb-1" id="act4-label">04. Beneficios Inmediatos</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-xl leading-tight" id="act4-title">
-                        Contra-Cláusulas en Word (.docx) Listas para Negociar
-                    </h2>
-                    <p class="text-xs sm:text-base text-gray-300 max-w-lg mt-3 leading-relaxed" id="act4-desc">
-                        Cumplimiento PCAOB / US GAAP / NIIF 16. Recibe redlines aplicados directamente en Word listos para enviar a tu contraparte.
-                    </p>
-                </div>
-
-                <!-- ================= ACTO 5 (33s - 40s): CONOCE AUDITFLOW & COMPRA INMEDIATA ================= -->
-                <div id="frame-act-5" class="frame-transition absolute inset-0 p-6 sm:p-10 flex flex-col justify-center items-center text-center opacity-0 pointer-events-none z-20">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-blue/15 border border-accent-blue/40 text-accent-blue font-mono text-[10px] sm:text-xs font-bold mb-3 shadow-lg animate-pulse">
-                        <span id="act5-badge">⚡ OFERTA DE LANZAMIENTO • ACCESO INMEDIATO</span>
-                    </div>
-                    <span class="text-xs font-mono text-accent-blue font-extrabold uppercase tracking-widest mb-1" id="act5-label">05. Conoce AuditFlow AI</span>
-                    <h2 class="text-xl sm:text-3xl font-black text-white max-w-2xl leading-tight" id="act5-title">
-                        Te Invitamos a Conocer <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>
-                    </h2>
-                    <p class="text-xs sm:text-sm text-gray-300 max-w-lg mt-2 leading-relaxed" id="act5-desc">
-                        Audita tu contrato gratis hoy mismo y desbloquea el reporte completo con redlines blindados en Word (.docx) por solo <strong>$19 USD</strong> antes de firmar.
-                    </p>
-                    <div class="mt-4 flex flex-col sm:flex-row items-center gap-3">
-                        <a href="/#scanner-section" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black text-xs sm:text-sm shadow-xl hover:scale-105 transition-all flex items-center gap-2" id="act5-btn-cta">
-                            <span>⚡ Auditar Gratis & Desbloquear Redlines ($19 USD) →</span>
-                        </a>
-                    </div>
-                    <div class="mt-3 flex items-center gap-4 text-[10px] sm:text-[11px] font-mono text-gray-400">
-                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> <span id="act5-pill-1">Diagnóstico 0$ Gratis</span></span>
-                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> <span id="act5-pill-2">Word (.docx) en 8s</span></span>
-                        <span class="flex items-center gap-1"><span class="text-emerald-400">✓</span> <span id="act5-pill-3">RAM Efímera SOC-2</span></span>
-                    </div>
-                </div>
-
-                <!-- PLAY OVERLAY AL INICIO -->
-                <div id="play-overlay" class="absolute inset-0 bg-black/70 backdrop-blur-sm z-40 flex flex-col items-center justify-center cursor-pointer group transition-all" onclick="VideoPlayer.play()">
-                    <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-accent-blue text-black flex items-center justify-center text-3xl sm:text-4xl pl-1 shadow-2xl group-hover:scale-110 transition-all">
-                        ▶
-                    </div>
-                    <span class="text-white font-mono text-xs sm:text-sm font-bold mt-4 tracking-wider" id="play-overlay-text">HACER CLIC PARA REPRODUCIR (40s)</span>
+                    <span class="text-slate-300 font-mono text-[11px]" id="timestamp-display">00:00 / 00:40</span>
                 </div>
             </div>
 
-            <!-- BARRA DE TIEMPO Y PROGRESO INTERACTIVA -->
-            <div class="mt-4">
-                <div class="w-full bg-dark-surface h-3 rounded-full overflow-hidden border border-dark-border cursor-pointer relative" id="progress-bar-container" onclick="VideoPlayer.seek(event)">
-                    <div id="progress-fill" class="h-full bg-gradient-to-r from-accent-blue via-amber-400 via-red-500 via-emerald-400 to-accent-blue w-0 transition-all duration-100"></div>
+            <!-- VIEWPORT PRINCIPAL DE SIMULACIÓN (SPLIT SCREEN: DOCUMENT SCANNER + RISK TELEMETRY) -->
+            <div class="relative w-full aspect-[16/9] min-h-[380px] sm:min-h-[460px] bg-fiduciary-bg rounded-xl overflow-hidden border border-fiduciary-border flex items-stretch select-none" id="viewport">
+                
+                <!-- ================= ACTO 1: INGESTA Y CRIPTOGRAFÍA EN MEMORIA RAM ================= -->
+                <div id="frame-act-1" class="act-screen absolute inset-0 p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center opacity-100 z-20">
+                    <!-- Columna Izquierda: Documento en Ingesta -->
+                    <div class="md:col-span-6 h-full bg-fiduciary-card/80 border border-fiduciary-border rounded-xl p-4 flex flex-col justify-between relative overflow-hidden">
+                        <div class="laser-sweep absolute inset-0 pointer-events-none"></div>
+                        <div class="flex items-center justify-between border-b border-fiduciary-border pb-2 text-[10px] font-mono text-slate-400">
+                            <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-fiduciary-cyan"></span> MSA_Vendor_Services_2026.pdf</span>
+                            <span class="text-fiduciary-emerald-light">SHA-256: 8f9a...c34d</span>
+                        </div>
+                        <div class="my-auto space-y-2.5 text-left text-xs font-mono text-slate-300 py-3">
+                            <div class="p-2.5 rounded bg-fiduciary-bg/70 border border-fiduciary-border text-[11px] leading-relaxed">
+                                <span class="text-slate-500 font-semibold block mb-1">CLÁUSULA 3.1 • SERVICIOS Y ALCANCE</span>
+                                "El Proveedor prestará los servicios de infraestructura fiduciaria bajo estándar de disponibilidad 99.9%..."
+                            </div>
+                            <div class="p-2.5 rounded bg-fiduciary-bg/70 border border-fiduciary-border text-[11px] leading-relaxed">
+                                <span class="text-slate-500 font-semibold block mb-1">CLÁUSULA 7.3 • REVISIÓN DE TARIFAS E IPC</span>
+                                "Las tarifas se ajustarán anualmente según IPC más un recargo fijo del 6.5% no acumulativo..."
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-fiduciary-border flex items-center justify-between text-[10px] font-mono text-slate-400">
+                            <span>INGESTA: MEMORIA VOLÁTIL</span>
+                            <span class="text-fiduciary-cyan">0 BYTES EN DISCO</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Explicación y Telemetría -->
+                    <div class="md:col-span-6 h-full flex flex-col justify-center text-left px-2 sm:px-4">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-fiduciary-cyan/10 border border-fiduciary-cyan/30 text-fiduciary-cyan text-[10px] font-mono font-semibold w-fit mb-2">
+                            <span>01. MOTOR DE AUDITORÍA FORENSE</span>
+                        </div>
+                        <h2 class="text-lg sm:text-2xl font-bold text-white leading-tight" id="act1-title">
+                            Auditoría de Contratos y Facturas en Memoria Volátil
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed" id="act1-desc">
+                            AuditFlow AI procesa acuerdos legales y contables complejos en memoria RAM efímera en menos de <strong>8.4 segundos</strong>, garantizando estricto secreto fiduciario y cero retención de datos.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-fiduciary-border text-[11px] font-mono">
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Privacidad Fiduciaria</span>
+                                <span class="text-fiduciary-emerald-light font-semibold">SOC-2 Type II (RAM)</span>
+                            </div>
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Velocidad de Análisis</span>
+                                <span class="text-fiduciary-cyan font-semibold">&lt; 8.4 Segundos</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- CONTROLES Y SEGMENTOS DE LOS 5 ACTOS (PESTAÑAS MULTILINGÜES) -->
-                <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-3 text-center text-[10px] sm:text-xs font-mono">
-                    <button onclick="VideoPlayer.jumpToAct(0)" id="btn-act-1" class="p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all">
-                        01. ¿Qué es?
+                <!-- ================= ACTO 2: DETECCIÓN FORENSE DE FUGAS DE EBITDA ================= -->
+                <div id="frame-act-2" class="act-screen absolute inset-0 p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center opacity-0 pointer-events-none z-20">
+                    <!-- Columna Izquierda: Hallazgo de la Cláusula Leonina -->
+                    <div class="md:col-span-6 h-full bg-fiduciary-card/80 border border-fiduciary-amber/40 rounded-xl p-4 flex flex-col justify-between text-left">
+                        <div class="flex items-center justify-between border-b border-fiduciary-border pb-2 text-[10px] font-mono">
+                            <span class="text-fiduciary-amber font-semibold flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-fiduciary-amber animate-ping"></span>
+                                ANOMALÍA DETECTADA • CLÁUSULA 7.3
+                            </span>
+                            <span class="text-slate-400">IMPACTO EN EBITDA</span>
+                        </div>
+                        <div class="my-auto space-y-3 py-2 font-mono">
+                            <div class="p-3 rounded bg-amber-500/10 border border-amber-500/30 text-amber-200 text-xs leading-relaxed">
+                                <span class="text-amber-400 font-bold block mb-1 text-[10px] uppercase tracking-wider">Trampa de Indexación Detectada:</span>
+                                "...reajuste anual acumulado de IPC + 6.5% automático sin tope máximo ni derecho a objeción previa..."
+                            </div>
+                            <div class="p-2.5 rounded bg-fiduciary-bg border border-fiduciary-border text-[11px] space-y-1">
+                                <div class="flex justify-between text-slate-400">
+                                    <span>Sobrecosto proyectado (36m):</span>
+                                    <span class="text-fiduciary-amber font-bold font-mono">+$14,850 USD</span>
+                                </div>
+                                <div class="flex justify-between text-slate-400">
+                                    <span>Desvío sobre presupuesto:</span>
+                                    <span class="text-rose-400 font-semibold">+18.4% no planificado</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-fiduciary-border text-[10px] font-mono text-slate-400 flex justify-between">
+                            <span>SEVERIDAD: ALTA</span>
+                            <span class="text-fiduciary-amber font-semibold">CÁLCULO ACTUARIAL COMPLETADO</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Explicación Financiera -->
+                    <div class="md:col-span-6 h-full flex flex-col justify-center text-left px-2 sm:px-4">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-amber-500/10 border border-amber-500/30 text-fiduciary-amber text-[10px] font-mono font-semibold w-fit mb-2">
+                            <span>02. PROTECCIÓN DEL MARGEN</span>
+                        </div>
+                        <h2 class="text-lg sm:text-2xl font-bold text-white leading-tight" id="act2-title">
+                            Detección Actuarial de Fugas de EBITDA
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed" id="act2-desc">
+                            Identifica con precisión matemática trampas de indexación de precios, cobros duplicados y sobrecostos que drenan silenciosamente entre <strong>$3,500 y $18,500 USD</strong> por contrato.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-fiduciary-border text-[11px] font-mono">
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Rango de Fuga Típico</span>
+                                <span class="text-fiduciary-amber font-semibold">$3,500 – $18,500 USD</span>
+                            </div>
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Tipo de Hallazgo</span>
+                                <span class="text-slate-200 font-semibold">IPC Asimétrico &amp; Renovación</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= ACTO 3: EXPOSICIÓN Y RIESGOS CONTRACTUALES ================= -->
+                <div id="frame-act-3" class="act-screen absolute inset-0 p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center opacity-0 pointer-events-none z-20">
+                    <!-- Columna Izquierda: Matriz de Riesgo Legal -->
+                    <div class="md:col-span-6 h-full bg-fiduciary-card/80 border border-fiduciary-rose/40 rounded-xl p-4 flex flex-col justify-between text-left">
+                        <div class="flex items-center justify-between border-b border-fiduciary-border pb-2 text-[10px] font-mono">
+                            <span class="text-rose-400 font-semibold flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                                MATRIZ DE RIESGO FIDUCIARIO (PCAOB / NIIF 16)
+                            </span>
+                            <span class="text-slate-400">SCORE: 42/100</span>
+                        </div>
+                        <div class="my-auto space-y-2 py-2 text-xs font-mono">
+                            <div class="p-2.5 rounded bg-rose-500/10 border border-rose-500/30 text-rose-200 leading-relaxed text-[11px]">
+                                <span class="text-rose-400 font-bold block text-[10px]">RIESGO CRÍTICO • CLÁUSULA 14.2:</span>
+                                "Renovación forzosa a 36 meses con penalización del 100% del saldo pendiente por terminación unilateral..."
+                            </div>
+                            <div class="p-2 rounded bg-fiduciary-bg border border-fiduciary-border text-[10px] space-y-1 text-slate-300">
+                                <div class="flex justify-between"><span>Pasivo Contingente:</span> <span class="text-rose-400 font-bold">$48,000 USD</span></div>
+                                <div class="flex justify-between"><span>Jurisdicción Asimétrica:</span> <span class="text-slate-300">Tribunal Foráneo (NY)</span></div>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-fiduciary-border text-[10px] font-mono text-slate-400 flex justify-between">
+                            <span>CLASIFICACIÓN: NO CONFORME</span>
+                            <span class="text-rose-400 font-semibold">BLOQUEO SUGERIDO</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Explicación de Riesgos -->
+                    <div class="md:col-span-6 h-full flex flex-col justify-center text-left px-2 sm:px-4">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-rose-500/10 border border-rose-500/30 text-rose-400 text-[10px] font-mono font-semibold w-fit mb-2">
+                            <span>03. MITIGACIÓN DE CONTINGENCIAS</span>
+                        </div>
+                        <h2 class="text-lg sm:text-2xl font-bold text-white leading-tight" id="act3-title">
+                            Prevención de Ataduras y Penalizaciones
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed" id="act3-desc">
+                            Firmar sin auditoría técnica expone a la compañía a contratos leoninos, pasivos fuera de balance y ataduras obligatorias de 36 meses.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-fiduciary-border text-[11px] font-mono">
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Exposición Típica</span>
+                                <span class="text-rose-400 font-semibold">Ataduras a 36 Meses</span>
+                            </div>
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Penalizaciones Evitadas</span>
+                                <span class="text-slate-200 font-semibold">Hasta 100% de Contrato</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= ACTO 4: REDLINES EN WORD (.DOCX) LISTOS PARA FIRMAR ================= -->
+                <div id="frame-act-4" class="act-screen absolute inset-0 p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center opacity-0 pointer-events-none z-20">
+                    <!-- Columna Izquierda: Redline en Word Real -->
+                    <div class="md:col-span-6 h-full bg-fiduciary-card/80 border border-fiduciary-emerald/40 rounded-xl p-4 flex flex-col justify-between text-left">
+                        <div class="flex items-center justify-between border-b border-fiduciary-border pb-2 text-[10px] font-mono">
+                            <span class="text-fiduciary-emerald-light font-semibold flex items-center gap-1.5">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                REDLINE APLICADO • WORD (.DOCX)
+                            </span>
+                            <span class="text-slate-400">PCAOB / US GAAP READY</span>
+                        </div>
+                        <div class="my-auto space-y-2 py-2 text-xs font-mono">
+                            <div class="p-2 rounded bg-fiduciary-bg border border-fiduciary-border text-[11px]">
+                                <span class="line-through text-rose-400/80 block">"7.3 Reajuste anual acumulado de IPC + 6.5% automático..."</span>
+                                <span class="text-emerald-300 font-medium block mt-1">"7.3 Las tarifas se ajustarán según variación anual del IPC oficial, sujeto a un tope máximo no acumulable del 3.0% anual, previa notificación de 30 días..."</span>
+                            </div>
+                            <div class="flex items-center justify-between p-2 rounded bg-emerald-500/10 border border-emerald-500/30 text-[10px] text-emerald-300">
+                                <span>Blindaje Fiduciario: APLICADO</span>
+                                <span class="font-bold">AHORRO: $14,850 USD</span>
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-fiduciary-border text-[10px] font-mono text-slate-400 flex justify-between">
+                            <span>FORMATO: .DOCX CON CONTROL DE CAMBIOS</span>
+                            <span class="text-fiduciary-emerald-light font-semibold">LISTO PARA NEGOCIAR</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Explicación de Redlines -->
+                    <div class="md:col-span-6 h-full flex flex-col justify-center text-left px-2 sm:px-4">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-emerald-500/10 border border-emerald-500/30 text-fiduciary-emerald-light text-[10px] font-mono font-semibold w-fit mb-2">
+                            <span>04. GENERACIÓN DE CONTRA-CLÁUSULAS</span>
+                        </div>
+                        <h2 class="text-lg sm:text-2xl font-bold text-white leading-tight" id="act4-title">
+                            Contra-Cláusulas Blindadas en Word (.docx)
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed" id="act4-desc">
+                            Reciba el pliego de contra-propuestas redactadas con rigor jurídico internacional, listas para remitir a la contraparte en formato Word con control de cambios fiduciario.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 mt-4 pt-3 border-t border-fiduciary-border text-[11px] font-mono">
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Estándar Normativo</span>
+                                <span class="text-fiduciary-emerald-light font-semibold">PCAOB / NIIF 16 / GAAP</span>
+                            </div>
+                            <div class="p-2 rounded bg-fiduciary-card border border-fiduciary-border">
+                                <span class="text-slate-400 text-[10px] block">Entregable Inmediato</span>
+                                <span class="text-slate-200 font-semibold">Word (.docx) Editable</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ================= ACTO 5: DESPLIEGUE & AUDITORÍA DIAGNÓSTICA ================= -->
+                <div id="frame-act-5" class="act-screen absolute inset-0 p-4 sm:p-6 grid grid-cols-1 md:grid-cols-12 gap-4 items-center opacity-0 pointer-events-none z-20">
+                    <!-- Columna Izquierda: Certificado Ejecutivo de Auditoría -->
+                    <div class="md:col-span-6 h-full bg-fiduciary-card/80 border border-fiduciary-cyan/40 rounded-xl p-4 flex flex-col justify-between text-left">
+                        <div class="flex items-center justify-between border-b border-fiduciary-border pb-2 text-[10px] font-mono text-slate-400">
+                            <span class="text-fiduciary-cyan font-semibold">CERTIFICACIÓN DE DICTAMEN TÉCNICO</span>
+                            <span>ID: AUD-2026-X9</span>
+                        </div>
+                        <div class="my-auto space-y-2 py-2 font-mono text-xs">
+                            <div class="p-2.5 rounded bg-fiduciary-bg border border-fiduciary-border space-y-1 text-[11px]">
+                                <div class="flex justify-between"><span class="text-slate-400">Dictamen General:</span> <span class="text-fiduciary-emerald-light font-bold">APTO CON REDLINES</span></div>
+                                <div class="flex justify-between"><span class="text-slate-400">Ahorro Actuarial Identificado:</span> <span class="text-white font-bold">$18,450 USD</span></div>
+                                <div class="flex justify-between"><span class="text-slate-400">Privacidad de Datos:</span> <span class="text-fiduciary-cyan">RAM Volátil (0-Disk)</span></div>
+                            </div>
+                            <div class="p-2 rounded bg-fiduciary-cyan/10 border border-fiduciary-cyan/30 text-[10px] text-fiduciary-cyan text-center">
+                                Auditoría inicial sin costo para validación técnica de contratos.
+                            </div>
+                        </div>
+                        <div class="pt-2 border-t border-fiduciary-border text-[10px] font-mono text-slate-400 flex justify-between">
+                            <span>COBERTURA: 14 PAÍSES</span>
+                            <span class="text-slate-200">ENTREGA EN 8.4s</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Acciones Institucionales -->
+                    <div class="md:col-span-6 h-full flex flex-col justify-center text-left px-2 sm:px-4">
+                        <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-fiduciary-cyan/10 border border-fiduciary-cyan/30 text-fiduciary-cyan text-[10px] font-mono font-semibold w-fit mb-2">
+                            <span id="act5-badge">05. DESPLIEGUE CORPORATIVO</span>
+                        </div>
+                        <h2 class="text-lg sm:text-2xl font-bold text-white leading-tight" id="act5-title">
+                            Inicie su Primera Auditoría Fiduciaria
+                        </h2>
+                        <p class="text-xs sm:text-sm text-slate-300 mt-2 leading-relaxed" id="act5-desc">
+                            Audite su contrato o factura en memoria RAM confidencial hoy mismo. Obtenga el diagnóstico completo y contra-cláusulas blindadas antes de comprometer su balance.
+                        </p>
+                        <div class="mt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+                            <a href="/#scanner-section" class="px-5 py-2.5 rounded-lg bg-fiduciary-cyan text-black font-bold text-xs font-mono shadow-md hover:bg-cyan-300 transition-all text-center flex items-center justify-center gap-2" id="act5-btn-cta">
+                                <span>Ejecutar Auditoría Diagnóstica →</span>
+                            </a>
+                            <a href="/alternativas-docusign" class="px-4 py-2.5 rounded-lg bg-fiduciary-card border border-fiduciary-border text-slate-300 hover:text-white hover:border-slate-500 font-mono text-xs text-center transition-all">
+                                Ficha Técnica
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- OVERLAY DE REPRODUCCIÓN AL INICIO (DESIGN TIER-1) -->
+                <div id="play-overlay" class="absolute inset-0 bg-fiduciary-bg/85 backdrop-blur-md z-40 flex flex-col items-center justify-center cursor-pointer group transition-all" onclick="VideoPlayer.play()">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-fiduciary-surface border border-fiduciary-border text-fiduciary-cyan flex items-center justify-center shadow-2xl group-hover:scale-105 group-hover:border-fiduciary-cyan/50 transition-all">
+                        <svg class="w-7 h-7 sm:w-9 sm:h-9 pl-0.5 text-fiduciary-cyan" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-white font-mono text-xs sm:text-sm font-semibold mt-4 tracking-wide" id="play-overlay-text">INICIAR DEMOSTRACIÓN EJECUTIVA (40s)</span>
+                    <span class="text-slate-400 font-mono text-[11px] mt-1">Conexión Segura Fiduciaria • Audio Neuronal de Estudio</span>
+                </div>
+            </div>
+
+            <!-- CONTROLES DEL REPRODUCTOR & BARRA DE PROGRESO -->
+            <div class="mt-3">
+                <!-- Barra de Tiempo Continua -->
+                <div class="w-full bg-fiduciary-card h-2 rounded-full overflow-hidden border border-fiduciary-border cursor-pointer relative" id="progress-bar-container" onclick="VideoPlayer.seek(event)">
+                    <div id="progress-fill" class="h-full bg-gradient-to-r from-fiduciary-cobalt via-fiduciary-cyan to-fiduciary-emerald-light w-0 transition-all duration-100"></div>
+                </div>
+
+                <!-- 5 PESTAÑAS DE ACTOS INTERACTIVAS -->
+                <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 mt-2.5 text-center text-[10px] sm:text-[11px] font-mono">
+                    <button onclick="VideoPlayer.jumpToAct(0)" id="btn-act-1" class="p-2 rounded bg-fiduciary-cyan/15 text-fiduciary-cyan border border-fiduciary-cyan/30 font-semibold transition-all">
+                        01. Ingesta en RAM
                     </button>
-                    <button onclick="VideoPlayer.jumpToAct(1)" id="btn-act-2" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        02. ¿Para qué sirve?
+                    <button onclick="VideoPlayer.jumpToAct(1)" id="btn-act-2" class="p-2 rounded bg-fiduciary-card text-slate-400 border border-fiduciary-border hover:text-white transition-all">
+                        02. Fuga de EBITDA
                     </button>
-                    <button onclick="VideoPlayer.jumpToAct(2)" id="btn-act-3" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        03. Consecuencias
+                    <button onclick="VideoPlayer.jumpToAct(2)" id="btn-act-3" class="p-2 rounded bg-fiduciary-card text-slate-400 border border-fiduciary-border hover:text-white transition-all">
+                        03. Riesgo Actuarial
                     </button>
-                    <button onclick="VideoPlayer.jumpToAct(3)" id="btn-act-4" class="p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all">
-                        04. Beneficios
+                    <button onclick="VideoPlayer.jumpToAct(3)" id="btn-act-4" class="p-2 rounded bg-fiduciary-card text-slate-400 border border-fiduciary-border hover:text-white transition-all">
+                        04. Redlines en Word
                     </button>
-                    <button onclick="VideoPlayer.jumpToAct(4)" id="btn-act-5" class="p-2.5 rounded-lg bg-dark-surface text-emerald-400 border border-emerald-500/40 hover:bg-emerald-500/20 font-bold transition-all col-span-2 sm:col-span-1">
-                        05. ¡Pruébalo ($19)!
+                    <button onclick="VideoPlayer.jumpToAct(4)" id="btn-act-5" class="p-2 rounded bg-fiduciary-card text-slate-300 border border-fiduciary-border hover:text-fiduciary-cyan font-semibold transition-all col-span-2 sm:col-span-1">
+                        05. Despliegue
                     </button>
                 </div>
 
-                <!-- BOTONERA DE REPRODUCCIÓN -->
-                <div class="flex items-center justify-between mt-4 pt-3 border-t border-dark-border">
-                    <div class="flex items-center gap-2 sm:gap-3">
-                        <button onclick="VideoPlayer.togglePlay()" id="btn-play-pause" class="px-4 py-2 rounded-xl bg-dark-surface border border-dark-border text-white text-xs font-mono flex items-center gap-2 hover:border-accent-blue transition-all">
+                <!-- BOTONERA INFERIOR DE REPRODUCCIÓN -->
+                <div class="flex items-center justify-between mt-3 pt-2.5 border-t border-fiduciary-border">
+                    <div class="flex items-center gap-2">
+                        <button onclick="VideoPlayer.togglePlay()" id="btn-play-pause" class="px-3.5 py-1.5 rounded-lg bg-fiduciary-card border border-fiduciary-border text-white text-xs font-mono flex items-center gap-1.5 hover:border-slate-500 transition-all">
                             <span id="play-icon">▶</span>
                             <span id="play-text">Reproducir</span>
                         </button>
-                        <button onclick="VideoPlayer.restart()" class="px-3 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-400 hover:text-white text-xs font-mono transition-all" title="Reiniciar" id="btn-restart-text">
-                            🔄 Reiniciar
+                        <button onclick="VideoPlayer.restart()" class="px-3 py-1.5 rounded-lg bg-fiduciary-card border border-fiduciary-border text-slate-400 hover:text-white text-xs font-mono transition-all" title="Reiniciar" id="btn-restart-text">
+                            Reiniciar
                         </button>
                     </div>
 
-                    <div class="flex items-center gap-2 sm:gap-3">
-                        <a href="/admin" class="px-3.5 py-2 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white text-xs font-mono transition-all hidden sm:inline-flex items-center gap-1" id="btn-bar-dashboard">
-                            <span>📊</span> <span id="bar-text-dashboard">Dashboard</span>
-                        </a>
-                        <a href="/#scanner-section" class="px-4 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-black text-xs font-mono shadow-md hover:scale-105 transition-all flex items-center gap-1.5" id="btn-quick-scan">
-                            <span>🚀</span> <span id="btn-quick-scan-text">Ir a la App Web &amp; Comprar ($19 USD) →</span>
+                    <div class="flex items-center gap-2">
+                        <a href="/#scanner-section" class="px-4 py-1.5 rounded-lg bg-fiduciary-cyan text-black font-bold text-xs font-mono shadow hover:bg-cyan-300 transition-all flex items-center gap-1.5" id="btn-quick-scan">
+                            <span id="btn-quick-scan-text">Ejecutar Auditoría Diagnóstica →</span>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- RESUMEN EN TABLA EJECUTIVA PARA DIRECTORES -->
-        <div class="w-full mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-left">
-            <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-accent-blue text-sm font-bold mb-1" id="card1-title">1. ¿Qué es?</div>
-                <p class="text-gray-400 text-xs leading-relaxed" id="card1-desc">
-                    Motor de inteligencia fiduciaria que audita contratos y facturas con IA Gemini 2.5 Flash en memoria volátil (cero almacenamiento en disco).
+        <!-- RESUMEN EJECUTIVO EN MATRIZ CORPORATIVA (5 PILARES) -->
+        <div class="w-full mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3 text-left">
+            <div class="p-3.5 rounded-xl bg-fiduciary-surface border border-fiduciary-border">
+                <div class="text-fiduciary-cyan text-xs font-semibold font-mono mb-1" id="card1-title">1. Ingesta Cero-Riesgo</div>
+                <p class="text-slate-400 text-xs leading-relaxed" id="card1-desc">
+                    Procesamiento en memoria RAM efímera con certificación SOC-2. Cero persistencia o almacenamiento en disco.
                 </p>
             </div>
-            <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-amber-400 text-sm font-bold mb-1" id="card2-title">2. ¿Para qué sirve?</div>
-                <p class="text-gray-400 text-xs leading-relaxed" id="card2-desc">
-                    Evita fugas de EBITDA de $3,500 a $18,500 USD por contrato, detectando sobrecostos e indexaciones abusivas antes de firmar.
+            <div class="p-3.5 rounded-xl bg-fiduciary-surface border border-fiduciary-border">
+                <div class="text-fiduciary-amber text-xs font-semibold font-mono mb-1" id="card2-title">2. Detección de Fugas</div>
+                <p class="text-slate-400 text-xs leading-relaxed" id="card2-desc">
+                    Identificación actuarial de sobrecostos e indexaciones desfasadas de $3,500 a $18,500 USD por contrato.
                 </p>
             </div>
-            <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-red-400 text-sm font-bold mb-1" id="card3-title">3. Los Contras</div>
-                <p class="text-gray-400 text-xs leading-relaxed" id="card3-desc">
-                    No auditar resulta en ataduras forzosas de 36 meses, multas del 100% por terminación anticipada y costos ocultos acumulativos.
+            <div class="p-3.5 rounded-xl bg-fiduciary-surface border border-fiduciary-border">
+                <div class="text-rose-400 text-xs font-semibold font-mono mb-1" id="card3-title">3. Control de Pasivos</div>
+                <p class="text-slate-400 text-xs leading-relaxed" id="card3-desc">
+                    Prevención de renovaciones automáticas forzosas a 36 meses y penalizaciones unilaterales del 100%.
                 </p>
             </div>
-            <div class="p-4 rounded-2xl bg-dark-card border border-dark-border">
-                <div class="text-emerald-400 text-sm font-bold mb-1" id="card4-title">4. Beneficios</div>
-                <p class="text-gray-400 text-xs leading-relaxed" id="card4-desc">
-                    Entrega contra-cláusulas listas para firmar en Word (.docx), topes IPC (+3%) y cumplimiento fiduciario PCAOB / US GAAP / NIIF 16.
+            <div class="p-3.5 rounded-xl bg-fiduciary-surface border border-fiduciary-border">
+                <div class="text-fiduciary-emerald-light text-xs font-semibold font-mono mb-1" id="card4-title">4. Redlines en Word</div>
+                <p class="text-slate-400 text-xs leading-relaxed" id="card4-desc">
+                    Entrega de contra-cláusulas listas para firmar en .docx bajo directrices PCAOB, US GAAP y NIIF 16.
                 </p>
             </div>
-            <div class="p-4 rounded-2xl bg-dark-card border border-accent-blue/40 bg-accent-blue/5">
-                <div class="text-accent-blue text-sm font-bold mb-1" id="card5-title">5. ¡Pruébalo Ahora!</div>
-                <p class="text-gray-300 text-xs leading-relaxed" id="card5-desc">
-                    Prueba tu primer contrato gratis en audiflowai.com y asegura tu redlines Word por solo $19 USD.
+            <div class="p-3.5 rounded-xl bg-fiduciary-surface border border-fiduciary-cyan/30 bg-fiduciary-cyan/5">
+                <div class="text-fiduciary-cyan text-xs font-semibold font-mono mb-1" id="card5-title">5. Despliegue Fiduciario</div>
+                <p class="text-slate-300 text-xs leading-relaxed" id="card5-desc">
+                    Inicie una auditoría diagnóstica confidencial o solicite integración técnica para Comités de Riesgo.
                 </p>
             </div>
         </div>
 
-        <!-- SECCIÓN DE CTA INFERIOR -->
-        <div class="w-full mt-10 p-8 rounded-3xl bg-gradient-to-r from-dark-card via-dark-surface to-dark-card border border-dark-border text-center shadow-xl">
-            <h3 class="text-lg sm:text-2xl font-black text-white" id="cta-bottom-title">
-                ¿Listo para blindar tus contratos y proteger tu EBITDA en 8 segundos?
+        <!-- SECCIÓN DE CTA INFERIOR INSTITUCIONAL -->
+        <div class="w-full mt-8 p-6 sm:p-8 rounded-2xl bg-fiduciary-surface border border-fiduciary-border text-center shadow-xl">
+            <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight" id="cta-bottom-title">
+                ¿Desea auditar sus contratos antes de comprometer el balance corporativo?
             </h3>
-            <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mt-2" id="cta-bottom-desc">
-                Sube tu contrato o factura en PDF de forma confidencial. Sin registro obligatorio, con memoria RAM volátil fiduciaria.
+            <p class="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto mt-2 leading-relaxed" id="cta-bottom-desc">
+                Cargue su contrato o factura en formato PDF de manera estrictamente confidencial en memoria volátil. Sin almacenamiento en disco.
             </p>
-            <div class="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <a href="/#scanner-section" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-sm shadow-xl hover:scale-105 transition-all" id="cta-bottom-btn">
-                    🚀 Iniciar Mi Auditoría Gratuita en audiflowai.com →
+            <div class="mt-5 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <a href="/#scanner-section" class="px-6 py-2.5 rounded-lg bg-fiduciary-cyan text-black font-bold text-xs font-mono shadow-md hover:bg-cyan-300 transition-all" id="cta-bottom-btn">
+                    Ejecutar Auditoría Diagnóstica Confidencial →
                 </a>
-                <a href="/alternativas-docusign" class="px-6 py-3.5 rounded-xl bg-dark-surface border border-dark-border text-gray-300 hover:text-white hover:border-accent-blue text-sm font-mono transition-all" id="cta-bottom-btn-compare">
-                    ⚖️ Comparar con DocuSign CLM
+                <a href="/alternativas-docusign" class="px-5 py-2.5 rounded-lg bg-fiduciary-card border border-fiduciary-border text-slate-300 hover:text-white hover:border-slate-500 text-xs font-mono transition-all" id="cta-bottom-btn-compare">
+                    Comparativa con DocuSign CLM
                 </a>
             </div>
         </div>
     </main>
 
-    <!-- FOOTER -->
-    <footer class="border-t border-dark-border py-6 text-center text-xs text-gray-400 font-mono bg-dark-surface">
+    <!-- FOOTER INSTITUCIONAL -->
+    <footer class="border-t border-fiduciary-border py-5 text-center text-xs text-slate-400 font-mono bg-fiduciary-surface">
         <div class="max-w-6xl mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-3">
-            <div id="footer-copy">© 2026 AuditFlow AI • Plataforma Fiduciaria B2B</div>
-            <div class="flex items-center gap-4">
-                <a href="/" class="hover:text-accent-blue transition-colors" id="footer-link-home">Inicio</a>
+            <div id="footer-copy">© 2026 AuditFlow AI • Plataforma de Inteligencia Fiduciaria B2B</div>
+            <div class="flex items-center gap-4 text-[11px]">
+                <a href="/" class="hover:text-fiduciary-cyan transition-colors" id="footer-link-home">Inicio</a>
                 <span>•</span>
-                <a href="/video" class="text-accent-blue hover:underline" id="footer-link-video">Video HyperFrames (40s)</a>
+                <a href="/video" class="text-fiduciary-cyan hover:underline" id="footer-link-video">Consola Forense (40s)</a>
                 <span>•</span>
-                <a href="/alternativas-docusign" class="hover:text-white transition-colors" id="footer-link-alt">Alternativas SEM</a>
+                <a href="/alternativas-docusign" class="hover:text-white transition-colors" id="footer-link-alt">Ficha Técnica</a>
                 <span>•</span>
-                <a href="/privacy" class="hover:text-white transition-colors" id="footer-link-priv">Privacidad</a>
+                <a href="/privacy" class="hover:text-white transition-colors" id="footer-link-priv">Privacidad &amp; SOC-2</a>
             </div>
         </div>
     </footer>
 
-    <!-- BOTÓN FLOTANTE RÁPIDO PARA REGRESAR A LA APP WEB / COMPRAR -->
-    <div class="fixed bottom-6 right-6 z-50 flex items-center gap-2">
-        <a href="/#scanner-section" class="flex items-center gap-2 px-5 py-3 rounded-2xl bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald text-black font-extrabold text-xs sm:text-sm font-mono shadow-2xl hover:scale-105 hover:shadow-accent-blue/30 transition-all border border-emerald-300/40 animate-bounce group" id="btn-floating-app">
-            <span class="text-base group-hover:rotate-12 transition-transform">🛒</span>
-            <span id="floating-btn-text">Regresar a la App Web / Comprar ($19 USD) →</span>
-        </a>
-    </div>
-
-    <!-- LÓGICA DEL REPRODUCTOR HYPERFRAMES CUATRILINGÜE (40s • 5 ACTOS) -->
+    <!-- LOGICA DEL REPRODUCTOR HYPERFRAMES TIER-1 MULTILINGÜE -->
     <script>
         const i18nData = {
             es: {
-                subtitle: 'Inteligencia de Riesgo Contractual',
-                headerBadge: 'DEMOSTRACIÓN EJECUTIVA HYPER-FRAMES • 40 SEGUNDOS',
-                mainTitle: '¿Qué es AuditFlow AI y cómo protege tu EBITDA?',
-                mainDesc: 'Explicación ejecutiva de 40 segundos con narración de voz femenina de estudio y 5 actos fiduciarios.',
-                playOverlay: 'HACER CLIC PARA REPRODUCIR (40s)',
-                voiceBtn: 'Voz Femenina Suave',
+                subtitle: 'Gobernanza & Riesgo Contractual B2B',
+                headerBadge: 'DEMOSTRACIÓN FORENSE INTERACTIVA • 40 SEGUNDOS',
+                mainTitle: 'Gobernanza y Mitigación de Riesgo Contractual en Memoria Volátil',
+                mainDesc: 'Demostración técnica de detección actuarial de fugas de EBITDA, cláusulas abusivas de indexación y generación de Redlines en Word (.docx) bajo estándares PCAOB y NIIF 16.',
+                playOverlay: 'INICIAR DEMOSTRACIÓN EJECUTIVA (40s)',
+                voiceBtn: 'Voz Fiduciaria HD',
                 voiceMute: 'Silenciar',
                 playBtn: 'Reproducir',
                 pauseBtn: 'Pausar',
-                restartBtn: '🔄 Reiniciar',
-                navDashboard: 'Dashboard',
-                navApp: 'Ir a la App Web / Comprar ($19)',
-                barDashboard: 'Dashboard',
-                quickScan: 'Ir a la App Web & Comprar ($19 USD) →',
-                floatingBtn: 'Regresar a la App Web / Comprar ($19 USD) →',
-                compareBtn: '⚖️ Comparar con DocuSign CLM',
-                footerCopy: '© 2026 AuditFlow AI • Plataforma Fiduciaria B2B',
+                restartBtn: 'Reiniciar',
+                navDashboard: 'Consola',
+                navApp: 'Iniciar Diagnóstico',
+                barDashboard: 'Consola',
+                quickScan: 'Ejecutar Auditoría Diagnóstica →',
+                compareBtn: 'Comparativa con DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • Plataforma de Inteligencia Fiduciaria B2B',
                 footerHome: 'Inicio',
-                footerVideo: 'Video HyperFrames (40s)',
-                footerAlt: 'Alternativas SEM',
-                footerPriv: 'Privacidad',
-                actNames: ['ACTO 1: ¿QUÉ ES?', 'ACTO 2: ¿PARA QUÉ SIRVE?', 'ACTO 3: CONSECUENCIAS', 'ACTO 4: BENEFICIOS', 'ACTO 5: CONOCE AUDITFLOW'],
-                actBtns: ['01. ¿Qué es? (0-7s)', '02. ¿Para qué sirve? (8-14s)', '03. Consecuencias (15-22s)', '04. Beneficios (23-31s)', '05. ¡Pruébalo ($19)!'],
+                footerVideo: 'Consola Forense (40s)',
+                footerAlt: 'Ficha Técnica',
+                footerPriv: 'Privacidad & SOC-2',
+                actNames: [
+                    'ACTO 1: INGESTA & PRIVACIDAD EN RAM',
+                    'ACTO 2: DETECCIÓN FORENSE DE EBITDA',
+                    'ACTO 3: RIESGO ACTUARIAL & PASIVOS',
+                    'ACTO 4: REDLINES EN WORD (.DOCX)',
+                    'ACTO 5: DESPLIEGUE & GOBERNANZA'
+                ],
+                actBtns: [
+                    '01. Ingesta en RAM',
+                    '02. Fuga de EBITDA',
+                    '03. Riesgo Actuarial',
+                    '04. Redlines en Word',
+                    '05. Despliegue'
+                ],
                 act1: {
-                    label: '01. ¿Qué es AuditFlow AI?',
-                    title: 'El Primer Auditor de Contratos y Facturas B2B con IA Forense',
-                    desc: 'Analiza documentos legales y financieros en memoria RAM efímera en menos de <strong class="text-white">8 segundos</strong> con total confidencialidad.'
+                    title: 'Auditoría de Contratos y Facturas en Memoria Volátil',
+                    desc: 'AuditFlow AI procesa acuerdos legales y contables complejos en memoria RAM efímera en menos de <strong>8.4 segundos</strong>, garantizando estricto secreto fiduciario y cero retención de datos.'
                 },
                 act2: {
-                    label: '02. ¿Para qué sirve?',
-                    title: 'Detecta Fugas de EBITDA de <span class="text-amber-400 font-mono">$3,500 a $18,500 USD</span>',
-                    desc: 'Identifica trampas de indexación de IPC, sobrecostos ocultos, doble facturación y renovaciones automáticas antes de firmar.'
+                    title: 'Detección Actuarial de Fugas de EBITDA',
+                    desc: 'Identifica con precisión matemática trampas de indexación de precios, cobros duplicados y sobrecostos que drenan silenciosamente entre <strong>$3,500 y $18,500 USD</strong> por contrato.'
                 },
                 act3: {
-                    label: '03. Consecuencias de NO Auditar',
-                    title: 'Ataduras de 36 Meses y Penalizaciones del 100%',
-                    desc: 'Firmar sin revisión fiduciaria expone a tu empresa a contratos leoninos forzosos, disputas legales y gastos imprevistos.'
+                    title: 'Prevención de Ataduras y Penalizaciones',
+                    desc: 'Firmar sin auditoría técnica expone a la compañía a contratos leoninos, pasivos fuera de balance y ataduras obligatorias de 36 meses.'
                 },
                 act4: {
-                    label: '04. Beneficios Inmediatos',
-                    title: 'Contra-Cláusulas en Word (.docx) Listas para Negociar',
-                    desc: 'Cumplimiento PCAOB / US GAAP / NIIF 16. Recibe redlines aplicados directamente en Word listos para enviar a tu contraparte.'
+                    title: 'Contra-Cláusulas Blindadas en Word (.docx)',
+                    desc: 'Reciba el pliego de contra-propuestas redactadas con rigor jurídico internacional, listas para remitir a la contraparte en formato Word con control de cambios fiduciario.'
                 },
                 act5: {
-                    badge: '⚡ OFERTA DE LANZAMIENTO • ACCESO INMEDIATO',
-                    label: '05. Conoce AuditFlow AI',
-                    title: 'Te Invitamos a Conocer <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
-                    desc: 'Audita tu contrato gratis hoy mismo y desbloquea el reporte completo con redlines blindados en Word (.docx) por solo <strong>$19 USD</strong> antes de firmar.',
-                    cta: '⚡ Auditar Gratis & Desbloquear Redlines ($19 USD) →',
-                    pill1: 'Diagnóstico 0$ Gratis',
-                    pill2: 'Word (.docx) en 8s',
-                    pill3: 'RAM Efímera SOC-2'
+                    badge: '05. DESPLIEGUE CORPORATIVO',
+                    title: 'Inicie su Primera Auditoría Fiduciaria',
+                    desc: 'Audite su contrato o factura en memoria RAM confidencial hoy mismo. Obtenga el diagnóstico completo y contra-cláusulas blindadas antes de comprometer su balance.',
+                    cta: 'Ejecutar Auditoría Diagnóstica →'
                 },
                 cards: [
-                    { title: '1. ¿Qué es?', desc: 'Motor de inteligencia fiduciaria que audita contratos y facturas con IA Gemini 2.5 Flash en memoria volátil (cero almacenamiento en disco).' },
-                    { title: '2. ¿Para qué sirve?', desc: 'Evita fugas de EBITDA de $3,500 a $18,500 USD por contrato, detectando sobrecostos e indexaciones abusivas antes de firmar.' },
-                    { title: '3. Los Contras', desc: 'No auditar resulta en ataduras de 36 meses, multas del 100% por terminación anticipada y costos ocultos acumulativos.' },
-                    { title: '4. Beneficios', desc: 'Entrega contra-cláusulas listas para firmar en Word (.docx), topes IPC (+3%) y cumplimiento fiduciario PCAOB / US GAAP / NIIF 16.' },
-                    { title: '5. ¡Pruébalo Ahora!', desc: 'Prueba tu primer contrato gratis en audiflowai.com y asegura tu redlines Word por solo $19 USD.' }
+                    { title: '1. Ingesta Cero-Riesgo', desc: 'Procesamiento en memoria RAM efímera con certificación SOC-2. Cero persistencia o almacenamiento en disco.' },
+                    { title: '2. Detección de Fugas', desc: 'Identificación actuarial de sobrecostos e indexaciones desfasadas de $3,500 a $18,500 USD por contrato.' },
+                    { title: '3. Control de Pasivos', desc: 'Prevención de renovaciones automáticas forzosas a 36 meses y penalizaciones unilaterales del 100%.' },
+                    { title: '4. Redlines en Word', desc: 'Entrega de contra-cláusulas listas para firmar en .docx bajo directrices PCAOB, US GAAP y NIIF 16.' },
+                    { title: '5. Despliegue Fiduciario', desc: 'Inicie una auditoría diagnóstica confidencial o solicite integración técnica para Comités de Riesgo.' }
                 ],
                 ctaBottom: {
-                    title: '¿Listo para blindar tus contratos y proteger tu EBITDA en 8 segundos?',
-                    desc: 'Sube tu contrato o factura en PDF de forma confidencial. Sin registro obligatorio, con memoria RAM volátil fiduciaria.',
-                    btn: '🚀 Iniciar Mi Auditoría Gratuita en audiflowai.com →'
+                    title: '¿Desea auditar sus contratos antes de comprometer el balance corporativo?',
+                    desc: 'Cargue su contrato o factura en formato PDF de manera estrictamente confidencial en memoria volátil. Sin almacenamiento en disco.',
+                    btn: 'Ejecutar Auditoría Diagnóstica Confidencial →'
                 }
             },
             en: {
-                subtitle: 'Contract & Legal Risk Intelligence',
-                headerBadge: 'EXECUTIVE HYPER-FRAMES DEMO • 40 SECONDS',
-                mainTitle: 'What is AuditFlow AI and how does it safeguard your EBITDA?',
-                mainDesc: '40-second executive walkthrough with gentle AI female narration across 5 fiduciary acts.',
-                playOverlay: 'CLICK TO PLAY (40s)',
-                voiceBtn: 'Soft Female AI Voice',
+                subtitle: 'B2B Contract & Risk Governance',
+                headerBadge: 'EXECUTIVE FORENSIC DEMO • 40 SECONDS',
+                mainTitle: 'Fiduciary Governance and Contractual Risk Mitigation in Volatile RAM',
+                mainDesc: 'Technical demonstration of actuarial EBITDA leak detection, asymmetric indexation traps, and Word (.docx) Redlines generation under PCAOB and IFRS 16 standards.',
+                playOverlay: 'START EXECUTIVE DEMO (40s)',
+                voiceBtn: 'HD Fiduciary Voice',
                 voiceMute: 'Mute',
                 playBtn: 'Play',
                 pauseBtn: 'Pause',
-                restartBtn: '🔄 Restart',
-                navDashboard: 'Dashboard',
-                navApp: 'Go to Web App / Buy ($19)',
-                barDashboard: 'Dashboard',
-                quickScan: 'Go to Web App & Buy ($19 USD) →',
-                floatingBtn: 'Return to Web App / Buy ($19 USD) →',
-                compareBtn: '⚖️ Compare with DocuSign CLM',
-                footerCopy: '© 2026 AuditFlow AI • B2B Fiduciary Platform',
+                restartBtn: 'Restart',
+                navDashboard: 'Console',
+                navApp: 'Start Diagnostic',
+                barDashboard: 'Console',
+                quickScan: 'Run Diagnostic Audit →',
+                compareBtn: 'Comparison with DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • B2B Fiduciary Intelligence Platform',
                 footerHome: 'Home',
-                footerVideo: 'HyperFrames Video (40s)',
-                footerAlt: 'SEM Alternatives',
-                footerPriv: 'Privacy',
-                actNames: ['ACT 1: WHAT IS IT?', 'ACT 2: WHAT DOES IT DO?', 'ACT 3: CONSEQUENCES', 'ACT 4: BENEFITS', 'ACT 5: VISIT AUDITFLOW'],
-                actBtns: ['01. What is it? (0-7s)', '02. What does it do? (8-14s)', '03. Consequences (15-22s)', '04. Benefits (23-31s)', '05. Try It ($19)!'],
+                footerVideo: 'Forensic Console (40s)',
+                footerAlt: 'Fact Sheet',
+                footerPriv: 'Privacy & SOC-2',
+                actNames: [
+                    'ACT 1: INGESTION & RAM PRIVACY',
+                    'ACT 2: EBITDA FORENSIC DETECTION',
+                    'ACT 3: ACTUARIAL RISK & LIABILITIES',
+                    'ACT 4: WORD (.DOCX) REDLINES',
+                    'ACT 5: GOVERNANCE & DEPLOYMENT'
+                ],
+                actBtns: [
+                    '01. RAM Ingestion',
+                    '02. EBITDA Leakage',
+                    '03. Actuarial Risk',
+                    '04. Word Redlines',
+                    '05. Deployment'
+                ],
                 act1: {
-                    label: '01. What is AuditFlow AI?',
-                    title: 'The First B2B Contract & Invoice Auditor Powered by Forensic AI',
-                    desc: 'Analyzes legal and vendor agreements in ephemeral volatile RAM in under <strong class="text-white">8 seconds</strong> with zero disk retention.'
+                    title: 'Contract & Invoice Audit in Ephemeral Memory',
+                    desc: 'AuditFlow AI processes complex legal and financial agreements in volatile RAM in under <strong>8.4 seconds</strong>, ensuring absolute fiduciary secrecy and zero persistent storage.'
                 },
                 act2: {
-                    label: '02. What does it do?',
-                    title: 'Detects EBITDA Leakages of <span class="text-amber-400 font-mono">$3,500 to $18,500 USD</span>',
-                    desc: 'Pinpoints CPI gouging traps, hidden vendor surcharges, double billing, and auto-renewals before you sign.'
+                    title: 'Actuarial Detection of EBITDA Leakages',
+                    desc: 'Pinpoints CPI gouging formulas, hidden vendor surcharges, and duplicate billing draining between <strong>$3,500 and $18,500 USD</strong> per agreement.'
                 },
                 act3: {
-                    label: '03. Consequences of Unshielded Agreements',
-                    title: '36-Month Lock-Ins and 100% Termination Penalties',
-                    desc: 'Signing without fiduciary audit exposes your organization to mandatory lock-ins, legal disputes, and unforecasted costs.'
+                    title: 'Preventing Lock-Ins and Off-Balance Liabilities',
+                    desc: 'Signing without forensic review exposes organizations to predatory 36-month lock-ins, dispute costs, and 100% early termination penalties.'
                 },
                 act4: {
-                    label: '04. Immediate Benefits',
-                    title: 'Shielded Counter-Clauses in Word (.docx) Ready to Sign',
-                    desc: 'Full PCAOB / US GAAP / IFRS 16 compliance. Receive redlines applied directly in Word ready to negotiate.'
+                    title: 'Shielded Counter-Clauses in Word (.docx)',
+                    desc: 'Receive negotiation-ready counter-proposals drafted with international corporate rigor in Word format with tracked changes.'
                 },
                 act5: {
-                    badge: '⚡ LAUNCH SPECIAL • INSTANT ACCESS',
-                    label: '05. Visit AuditFlow AI',
-                    title: 'We Invite You to Visit <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
-                    desc: 'Run your free contract audit today and unlock the full report with shielded Word (.docx) redlines for just <strong>$19 USD</strong> before signing.',
-                    cta: '⚡ Free Audit & Unlock Word Redlines ($19 USD) →',
-                    pill1: '0$ Free Diagnostic',
-                    pill2: 'Word (.docx) in 8s',
-                    pill3: 'SOC-2 Volatile RAM'
+                    badge: '05. ENTERPRISE DEPLOYMENT',
+                    title: 'Initiate Your First Fiduciary Audit',
+                    desc: 'Audit your agreement in confidential volatile RAM today. Obtain full diagnostic telemetry and negotiation-ready redlines before signing.',
+                    cta: 'Run Diagnostic Audit →'
                 },
                 cards: [
-                    { title: '1. What is it?', desc: 'Fiduciary AI intelligence engine auditing contracts & invoices in volatile RAM with zero persistent disk storage.' },
-                    { title: '2. What does it do?', desc: 'Prevents EBITDA leakages of $3,500 to $18,500 USD per contract, uncovering aggressive fee indexations.' },
-                    { title: '3. The Pitfalls', desc: 'Failing to audit causes 36-month lock-ins, 100% termination fees, and recurring vendor overcharges.' },
-                    { title: '4. Key Benefits', desc: 'Delivers negotiation-ready Word .docx redlines, +3% CPI caps, and PCAOB / US GAAP compliance.' },
-                    { title: '5. Try It Now!', desc: 'Test your first agreement 100% free on audiflowai.com and secure your Word redlines for just $19 USD.' }
+                    { title: '1. Zero-Risk Ingestion', desc: 'Ephemeral volatile RAM processing with SOC-2 certification. Zero disk retention or data storage.' },
+                    { title: '2. Leakage Detection', desc: 'Actuarial identification of CPI gouging and hidden fees from $3,500 to $18,500 USD per contract.' },
+                    { title: '3. Liability Control', desc: 'Eliminates 36-month automatic lock-ins and unilateral 100% termination penalties.' },
+                    { title: '4. Word Redlines', desc: 'Shielded counter-clauses in Word (.docx) ready to sign under PCAOB, US GAAP, and IFRS 16.' },
+                    { title: '5. Fiduciary Deployment', desc: 'Run a confidential diagnostic audit or request API integration for Risk Committees.' }
                 ],
                 ctaBottom: {
-                    title: 'Ready to shield your agreements and protect EBITDA in 8 seconds?',
-                    desc: 'Upload your contract or invoice securely in PDF. No mandatory signup, zero disk retention.',
-                    btn: '🚀 Start My Free Audit on audiflowai.com →'
+                    title: 'Ready to audit your agreements before committing balance sheets?',
+                    desc: 'Upload your PDF agreement confidentially into volatile RAM. No disk retention.',
+                    btn: 'Run Confidential Diagnostic Audit →'
                 }
             },
             de: {
-                subtitle: 'Intelligenz für Vertrags- & Finanzrisiken',
-                headerBadge: 'FÜHRUNGSKRÄFTE-DEMO HYPER-FRAMES • 40 SEKUNDEN',
-                mainTitle: 'Was ist AuditFlow AI und wie schützt es Ihr EBITDA?',
-                mainDesc: '40-sekündige Führungskräfte-Erklärung mit sanfter KI-Stimme und 5 Prüfungsakten.',
-                playOverlay: 'ZUM ABSPIELEN KLICKEN (40s)',
-                voiceBtn: 'Sanfte KI-Stimme',
+                subtitle: 'B2B-Vertrags- & Risikosteuerung',
+                headerBadge: 'FORENSISCHE FÜHRUNGSKRÄFTE-DEMO • 40 SEKUNDEN',
+                mainTitle: 'Fiduciäre Risikosteuerung im flüchtigen RAM-Speicher',
+                mainDesc: 'Technische Demonstration der versicherungsmathematischen EBITDA-Verlusterkennung und Word (.docx) Redlines nach PCAOB- und IFRS 16-Standards.',
+                playOverlay: 'FÜHRUNGSKRÄFTE-DEMO STARTEN (40s)',
+                voiceBtn: 'HD-Stimme',
                 voiceMute: 'Stumm',
                 playBtn: 'Abspielen',
                 pauseBtn: 'Pause',
-                restartBtn: '🔄 Neustart',
-                navDashboard: 'Dashboard',
-                navApp: 'Zur Web-App / Kaufen ($19)',
-                barDashboard: 'Dashboard',
-                quickScan: 'Zur Web-App & Kaufen ($19 USD) →',
-                floatingBtn: 'Zurück zur Web-App / Kaufen ($19 USD) →',
-                compareBtn: '⚖️ Mit DocuSign CLM vergleichen',
-                footerCopy: '© 2026 AuditFlow AI • B2B Fiduciäre Plattform',
+                restartBtn: 'Neustart',
+                navDashboard: 'Konsole',
+                navApp: 'Diagnose Starten',
+                barDashboard: 'Konsole',
+                quickScan: 'Diagnoseprüfung Durchführen →',
+                compareBtn: 'Vergleich mit DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • Fiduciäre B2B-Plattform',
                 footerHome: 'Startseite',
-                footerVideo: 'HyperFrames Video (40s)',
-                footerAlt: 'SEM Alternativen',
-                footerPriv: 'Datenschutz',
-                actNames: ['AKT 1: WAS IST ES?', 'AKT 2: WOZU DIENT ES?', 'AKT 3: KONSEQUENZEN', 'AKT 4: VORTEILE', 'AKT 5: AUDITFLOW KENNENLERNEN'],
-                actBtns: ['01. Was ist es? (0-7s)', '02. Wozu dient es? (8-14s)', '03. Konsequenzen (15-22s)', '04. Vorteile (23-31s)', '05. Jetzt Testen ($19)!'],
+                footerVideo: 'Forensische Konsole (40s)',
+                footerAlt: 'Datenblatt',
+                footerPriv: 'Datenschutz & SOC-2',
+                actNames: [
+                    'AKT 1: INGESTION & RAM-SCHUTZ',
+                    'AKT 2: EBITDA-FORENSIK',
+                    'AKT 3: AKTUARIELLES RISIKO',
+                    'AKT 4: WORD-REDLINES (.DOCX)',
+                    'AKT 5: GOVERNANCE & ROLLOUT'
+                ],
+                actBtns: [
+                    '01. RAM-Ingestion',
+                    '02. EBITDA-Verluste',
+                    '03. Aktuarielles Risiko',
+                    '04. Word-Redlines',
+                    '05. Rollout'
+                ],
                 act1: {
-                    label: '01. Was ist AuditFlow AI?',
-                    title: 'Der erste B2B-Vertrags- und Rechnungsprüfer mit Forensischer KI',
-                    desc: 'Analysiert Verträge im flüchtigen RAM-Speicher in unter <strong class="text-white">8 Sekunden</strong> mit absoluter Vertraulichkeit (0-Festplatte).'
+                    title: 'Vertrags- und Rechnungsprüfung im flüchtigen RAM',
+                    desc: 'AuditFlow AI prüft Verträge im flüchtigen RAM-Speicher in unter <strong>8,4 Sekunden</strong> bei absolutem Berufsgeheimnis und 0-Datenspeicherung.'
                 },
                 act2: {
-                    label: '02. Wozu dient es?',
-                    title: 'Erkennt EBITDA-Verluste von <span class="text-amber-400 font-mono">3.500 bis 18.500 USD</span>',
-                    desc: 'Identifiziert VPI-Indexierungsfallen, versteckte Aufpreise, Doppelabrechnungen und automatische Verlängerungen.'
+                    title: 'Mathematische Erkennung von EBITDA-Verlusten',
+                    desc: 'Deckt VPI-Indexierungsfallen und Doppelabrechnungen auf, die pro Vertrag zwischen <strong>3.500 und 18.500 USD</strong> kosten.'
                 },
                 act3: {
-                    label: '03. Risiken ungeprüfter Verträge',
-                    title: '36 Monate Zwangslaufzeit und 100% Kündigungsstrafen',
-                    desc: 'Das Unterzeichnen ohne fiduciäre Prüfung führt zu Knebelverträgen, Rechtsstreitigkeiten und unvorhergesehenen Kosten.'
+                    title: 'Vermeidung von Knebelverträgen und Strafen',
+                    desc: 'Ungeprüfte Verträge führen zu 36 Monaten Zwangslaufzeit und 100% Kündigungsstrafen.'
                 },
                 act4: {
-                    label: '04. Sofortige Vorteile',
-                    title: 'Rechtssichere Gegenklauseln in Word (.docx) Sofort Unterschriftsbereit',
-                    desc: 'Konform mit PCAOB / US GAAP / IFRS 16. Erhalten Sie einsatzbereite Redlines direkt in Word für Verhandlungen.'
+                    title: 'Rechtssichere Gegenklauseln in Word (.docx)',
+                    desc: 'Erhalten Sie verhandlungsbereite Gegenentwürfe im Word-Format mit fiduciärem Änderungsmodus nach IFRS 16.'
                 },
                 act5: {
-                    badge: '⚡ EINFÜHRUNGSANGEBOT • SOFORTIGER ZUGANG',
-                    label: '05. AuditFlow AI Kennenlernen',
-                    title: 'Wir Laden Sie Ein Zu <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
-                    desc: 'Starten Sie Ihre kostenlose Prüfung heute und sichern Sie sich den vollständigen Bericht mit Word-Redlines für nur <strong>19 USD</strong> vor der Unterschrift.',
-                    cta: '⚡ Kostenlos Prüfen & Word-Redlines Freischalten ($19 USD) →',
-                    pill1: '0$ Kostenlose Diagnose',
-                    pill2: 'Word (.docx) in 8s',
-                    pill3: 'Flüchtiger RAM SOC-2'
+                    badge: '05. UNTERNEHMENS-DEPLOYMENT',
+                    title: 'Starten Sie Ihre erste fiduciäre Prüfung',
+                    desc: 'Prüfen Sie Verträge im flüchtigen RAM heute noch vertraulich vor der rechtsverbindlichen Unterschrift.',
+                    cta: 'Diagnoseprüfung Durchführen →'
                 },
                 cards: [
-                    { title: '1. Was ist es?', desc: 'Fiduciäre KI-Engine zur Prüfung von Verträgen und Rechnungen im flüchtigen RAM ohne dauerhafte Speicherung.' },
-                    { title: '2. Wozu dient es?', desc: 'Verhindert EBITDA-Verluste von 3.500 bis 18.500 USD pro Vertrag und deckt unzulässige Preisklauseln auf.' },
-                    { title: '3. Die Risiken', desc: 'Ungeprüfte Verträge führen zu 36 Monaten Zwangslaufzeit und 100% vorzeitigen Kündigungsgebühren.' },
-                    { title: '4. Vorteile', desc: 'Liefert verhandlungsbereite Word .docx Gegenklauseln mit VPI-Deckel (+3%) und IFRS-Konformität.' },
-                    { title: '5. Jetzt Testen!', desc: 'Testen Sie Ihren Vertrag 100% kostenlos auf audiflowai.com und sichern Sie sich Word-Redlines für nur 19 USD.' }
+                    { title: '1. Null-Risiko Ingestion', desc: 'Flüchtiger RAM-Speicher mit SOC-2 Zertifizierung. Keine Festplattenspeicherung.' },
+                    { title: '2. Verlust-Erkennung', desc: 'Aktuarielle Identifikation von Preisfallen von 3.500 bis 18.500 USD pro Vertrag.' },
+                    { title: '3. Haftungskontrolle', desc: 'Verhindert 36 Monate Zwangslaufzeit und 100% vorzeitige Kündigungsstrafen.' },
+                    { title: '4. Word-Redlines', desc: 'Rechtssichere Gegenklauseln in Word (.docx) nach PCAOB, US GAAP und IFRS 16.' },
+                    { title: '5. Fiduciäres Deployment', desc: 'Starten Sie eine vertrauliche Prüfung oder fordern Sie API-Integration an.' }
                 ],
                 ctaBottom: {
-                    title: 'Bereit, Ihre Verträge zu sichern und EBITDA in 8 Sekunden zu schützen?',
-                    desc: 'Laden Sie Ihren Vertrag oder Ihre Rechnung sicher als PDF hoch. Ohne Registrierungspflicht, 100% flüchtiger RAM.',
-                    btn: '🚀 Kostenlose Prüfung auf audiflowai.com Starten →'
+                    title: 'Möchten Sie Ihre Verträge vor der Unterschrift prüfen?',
+                    desc: 'Laden Sie Ihren Vertrag sicher als PDF in den flüchtigen RAM-Speicher hoch.',
+                    btn: 'Vertrauliche Prüfung Starten →'
                 }
             },
             fr: {
-                subtitle: 'Intelligence du Risque Contractuel',
-                headerBadge: 'DÉMONSTRATION DIRIGEANTS HYPER-FRAMES • 40 SECONDES',
-                mainTitle: "Qu'est-ce que AuditFlow AI et comment protège-t-il votre EBITDA ?",
-                mainDesc: 'Explication exécutive de 40 secondes avec narration vocale féminine de studio et 5 actes fiduciaires.',
-                playOverlay: 'CLIQUER POUR LIRE (40s)',
-                voiceBtn: 'Voix Féminine Studio',
+                subtitle: 'Gouvernance des Risques & Contrats B2B',
+                headerBadge: 'DÉMONSTRATION FORENSIQUE DIRIGEANTS • 40 SECONDES',
+                mainTitle: 'Gouvernance Fiduciaire et Atténuation des Risques en Mémoire Volatile',
+                mainDesc: 'Démonstration technique de détection actuarielle des fuites d’EBITDA et génération de Redlines Word (.docx) selon les normes PCAOB et IFRS 16.',
+                playOverlay: 'DÉMARRER LA DÉMO DIRIGEANTS (40s)',
+                voiceBtn: 'Voix Fiduciaire HD',
                 voiceMute: 'Muet',
                 playBtn: 'Lecture',
                 pauseBtn: 'Pause',
-                restartBtn: '🔄 Recommencer',
-                navDashboard: 'Tableau de Bord',
-                navApp: "Accéder à l'App / Acheter (19 $)",
-                barDashboard: 'Tableau de Bord',
-                quickScan: "Accéder à l'App & Acheter (19 $ USD) →",
-                floatingBtn: "Retour à l'App Web / Acheter (19 $ USD) →",
-                compareBtn: '⚖️ Comparer avec DocuSign CLM',
-                footerCopy: '© 2026 AuditFlow AI • Plateforme Fiduciaire B2B',
+                restartBtn: 'Recommencer',
+                navDashboard: 'Console',
+                navApp: 'Lancer le Diagnostic',
+                barDashboard: 'Console',
+                quickScan: 'Exécuter l’Audit Diagnostique →',
+                compareBtn: 'Comparatif avec DocuSign CLM',
+                footerCopy: '© 2026 AuditFlow AI • Plateforme d’Intelligence Fiduciaire B2B',
                 footerHome: 'Accueil',
-                footerVideo: 'Vidéo HyperFrames (40s)',
-                footerAlt: 'Alternatives SEM',
-                footerPriv: 'Confidentialité',
-                actNames: ['ACTE 1 : QU’EST-CE QUE C’EST ?', 'ACTE 2 : À QUOI ÇA SERT ?', 'ACTE 3 : CONSÉQUENCES', 'ACTE 4 : BÉNÉFICES', 'ACTE 5 : DÉCOUVRIR AUDITFLOW'],
-                actBtns: ['01. Qu’est-ce que c’est ? (0-7s)', '02. À quoi ça sert ? (8-14s)', '03. Conséquences (15-22s)', '04. Bénéfices (23-31s)', '05. Essayer (19 $)!'],
+                footerVideo: 'Console Forensique (40s)',
+                footerAlt: 'Fiche Technique',
+                footerPriv: 'Confidentialité & SOC-2',
+                actNames: [
+                    'ACTE 1 : INGESTION & CONFIDENTIALITÉ RAM',
+                    'ACTE 2 : DÉTECTION FORENSIQUE D’EBITDA',
+                    'ACTE 3 : RISQUE ACTUARIEL & PASSIFS',
+                    'ACTE 4 : REDLINES EN WORD (.DOCX)',
+                    'ACTE 5 : DÉPLOIEMENT & GOUVERNANCE'
+                ],
+                actBtns: [
+                    '01. Ingestion RAM',
+                    '02. Fuites EBITDA',
+                    '03. Risque Actuariel',
+                    '04. Redlines Word',
+                    '05. Déploiement'
+                ],
                 act1: {
-                    label: '01. Qu’est-ce que AuditFlow AI ?',
-                    title: 'Le Premier Auditeur B2B de Contrats et Factures par IA Forensique',
-                    desc: 'Analyse les documents légaux en mémoire RAM éphémère en moins de <strong class="text-white">8 secondes</strong> avec confidentialité totale (0-disque).'
+                    title: 'Audit de Contrats et Factures en Mémoire Volatile',
+                    desc: 'AuditFlow AI traite les accords complexes en mémoire RAM éphémère en moins de <strong>8,4 secondes</strong> avec secret fiduciaire absolu et zéro stockage sur disque.'
                 },
                 act2: {
-                    label: '02. À quoi sert-il ?',
-                    title: 'Détecte les Fuites d’EBITDA de <span class="text-amber-400 font-mono">3 500 à 18 500 $ USD</span>',
-                    desc: 'Identifie les pièges d’indexation de l’IPC, les surcoûts cachés, les doubles facturations et renouvellements automatiques avant signature.'
+                    title: 'Détection Actuarielle des Fuites d’EBITDA',
+                    desc: 'Identifie les pièges d’indexation IPC et les surcoûts cachés drainant entre <strong>3 500 et 18 500 $ USD</strong> par contrat.'
                 },
                 act3: {
-                    label: '03. Conséquences de NE PAS Auditer',
-                    title: 'Engagements de 36 Mois et Pénalités de 100%',
-                    desc: 'Signer sans révision fiduciaire expose votre entreprise à des contrats léonins forcés, litiges et coûts imprévus.'
+                    title: 'Prévention des Engagements Forcés et Pénalités',
+                    desc: 'Signer sans audit expose votre entreprise à des engagements de 36 mois et 100% de pénalités de résiliation anticipée.'
                 },
                 act4: {
-                    label: '04. Bénéfices Immédiats',
-                    title: 'Contre-Clauses en Word (.docx) Prêtes à Négocier',
-                    desc: 'Conformité PCAOB / US GAAP / IFRS 16. Recevez des redlines directement applicables en Word prêts à être négociés.'
+                    title: 'Contre-Clauses Blindées en Word (.docx)',
+                    desc: 'Recevez des contre-propositions prêtes à négocier rédigées avec rigueur juridique en format Word avec suivi des modifications.'
                 },
                 act5: {
-                    badge: '⚡ OFFRE DE LANCEMENT • ACCÈS IMMÉDIAT',
-                    label: '05. Découvrir AuditFlow AI',
-                    title: 'Nous Vous Invitons à Découvrir <span class="bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald bg-clip-text text-transparent">audiflowai.com</span>',
-                    desc: 'Auditez votre contrat gratuitement dès aujourd’hui et débloquez le rapport complet avec contre-clauses Word pour seulement <strong>19 $ USD</strong>.',
-                    cta: '⚡ Audit Gratuit & Débloquer Redlines Word (19 $ USD) →',
-                    pill1: 'Diagnostic 0$ Gratuit',
-                    pill2: 'Word (.docx) en 8s',
-                    pill3: 'RAM Éphémère SOC-2'
+                    badge: '05. DÉPLOIEMENT ENTREPRISE',
+                    title: 'Lancez Votre Premier Audit Fiduciaire',
+                    desc: 'Auditez votre contrat en mémoire RAM confidentielle dès aujourd’hui avant de compromettre votre bilan.',
+                    cta: 'Exécuter l’Audit Diagnostique →'
                 },
                 cards: [
-                    { title: '1. Qu’est-ce que c’est ?', desc: 'Moteur d’intelligence fiduciaire analysant contrats et factures en mémoire volatile sans persistance sur disque.' },
-                    { title: '2. À quoi ça sert ?', desc: 'Évite les fuites d’EBITDA de 3 500 à 18 500 $ USD par contrat en détectant les clauses abusives.' },
-                    { title: '3. Les Risques', desc: 'Ne pas auditer entraîne des engagements de 36 mois et 100% de pénalités de résiliation anticipée.' },
-                    { title: '4. Bénéfices', desc: 'Fournit des contre-clauses prêtes à signer en Word .docx avec plafonnement IPC (+3%) et conformité IFRS.' },
-                    { title: '5. Essayer Maintenant !', desc: 'Testez votre premier contrat 100% gratuitement sur audiflowai.com et sécurisez vos redlines pour 19 $.' }
+                    { title: '1. Ingestion Sans Risque', desc: 'Traitement en RAM éphémère avec certification SOC-2. Zéro persistance sur disque.' },
+                    { title: '2. Détection des Fuites', desc: 'Identification des surcoûts cachés de 3 500 à 18 500 $ USD par accord.' },
+                    { title: '3. Contrôle des Passifs', desc: 'Évite les renouvellements forcés de 36 mois et pénalités unilatérales.' },
+                    { title: '4. Redlines Word', desc: 'Contre-clauses en Word (.docx) prêtes à signer selon PCAOB et IFRS 16.' },
+                    { title: '5. Déploiement Fiduciaire', desc: 'Lancez un audit diagnostique ou demandez une intégration technique.' }
                 ],
                 ctaBottom: {
-                    title: 'Prêt à blinder vos contrats et protéger votre EBITDA en 8 secondes ?',
-                    desc: 'Téléversez votre contrat en PDF en toute sécurité. Sans inscription obligatoire, 100% RAM éphémère.',
-                    btn: '🚀 Lancer Mon Audit Gratuit sur audiflowai.com →'
+                    title: 'Souhaitez-vous auditer vos contrats avant signature ?',
+                    desc: 'Téléversez votre PDF en toute sécurité dans notre mémoire RAM volatile.',
+                    btn: 'Lancer l’Audit Diagnostique Confidentiel →'
                 }
             }
         };
@@ -633,7 +850,6 @@
                 this.audioPlayer = new Audio();
                 this.audioPlayer.preload = 'auto';
 
-                // Evento cuando termina de hablar la voz femenina en el recuadro actual:
                 this.audioPlayer.addEventListener('ended', () => {
                     this.onActAudioEnded();
                 });
@@ -674,9 +890,7 @@
                 setTxt('btn-restart-text', d.restartBtn);
                 setTxt('nav-text-dashboard', d.navDashboard);
                 setTxt('nav-text-app', d.navApp);
-                setTxt('bar-text-dashboard', d.barDashboard);
                 setTxt('btn-quick-scan-text', d.quickScan);
-                setTxt('floating-btn-text', d.floatingBtn);
                 setTxt('cta-bottom-btn-compare', d.compareBtn);
                 setTxt('footer-copy', d.footerCopy);
                 setTxt('footer-link-home', d.footerHome);
@@ -685,30 +899,22 @@
                 setTxt('footer-link-priv', d.footerPriv);
 
                 // Actos
-                setTxt('act1-label', d.act1.label);
                 setHtml('act1-title', d.act1.title);
                 setHtml('act1-desc', d.act1.desc);
 
-                setTxt('act2-label', d.act2.label);
                 setHtml('act2-title', d.act2.title);
                 setHtml('act2-desc', d.act2.desc);
 
-                setTxt('act3-label', d.act3.label);
                 setHtml('act3-title', d.act3.title);
                 setHtml('act3-desc', d.act3.desc);
 
-                setTxt('act4-label', d.act4.label);
                 setHtml('act4-title', d.act4.title);
                 setHtml('act4-desc', d.act4.desc);
 
                 setTxt('act5-badge', d.act5.badge);
-                setTxt('act5-label', d.act5.label);
                 setHtml('act5-title', d.act5.title);
                 setHtml('act5-desc', d.act5.desc);
                 setTxt('act5-btn-cta', d.act5.cta);
-                setTxt('act5-pill-1', d.act5.pill1);
-                setTxt('act5-pill-2', d.act5.pill2);
-                setTxt('act5-pill-3', d.act5.pill3);
 
                 setTxt('cta-bottom-title', d.ctaBottom.title);
                 setTxt('cta-bottom-desc', d.ctaBottom.desc);
@@ -730,17 +936,26 @@
                     });
                 }
 
-                // Actualizar estilo visual de los 4 botones de idiomas
+                // Actualizar estilo de botones de idiomas
                 ['es', 'en', 'de', 'fr'].forEach(l => {
                     const b = document.getElementById(`lang-btn-${l}`);
                     if (b) {
                         if (l === lang) {
-                            b.className = 'px-2 py-1 rounded-lg bg-accent-blue text-black font-bold transition-all';
+                            b.className = 'px-2 py-1 rounded bg-fiduciary-cyan text-black font-semibold transition-all';
                         } else {
-                            b.className = 'px-2 py-1 rounded-lg text-gray-300 hover:text-white transition-all';
+                            b.className = 'px-2 py-1 rounded text-slate-400 hover:text-white transition-all';
                         }
                     }
                 });
+
+                const navAppBtn = document.getElementById('nav-btn-app');
+                if (navAppBtn) {
+                    navAppBtn.href = (lang === 'en') ? '/?lang=en&ref=nordic#scanner-section' : '/#scanner-section';
+                }
+                const ctaBottomBtn = document.getElementById('cta-bottom-btn');
+                if (ctaBottomBtn) {
+                    ctaBottomBtn.href = (lang === 'en') ? '/?lang=en&ref=nordic#scanner-section' : '/#scanner-section';
+                }
             },
 
             toggleVoice() {
@@ -748,10 +963,10 @@
                 const d = i18nData[this.currentLang];
                 if (!this.voiceEnabled) {
                     if (this.audioPlayer) this.audioPlayer.pause();
-                    document.getElementById('voice-icon').innerText = '🔇';
+                    document.getElementById('voice-icon').innerHTML = '<svg class="w-3 h-3 text-slate-500 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"/></svg>';
                     document.getElementById('voice-text').innerText = d.voiceMute;
                 } else {
-                    document.getElementById('voice-icon').innerText = '🎙️';
+                    document.getElementById('voice-icon').innerHTML = '<svg class="w-3 h-3 text-fiduciary-cyan inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>';
                     document.getElementById('voice-text').innerText = d.voiceBtn;
                     if (this.isPlaying) {
                         this.playAct(this.currentAct);
@@ -824,20 +1039,17 @@
             onActAudioEnded() {
                 if (!this.isPlaying) return;
 
-                // Si terminó el Acto 1, 2, 3 o 4:
                 if (this.currentAct < 4) {
-                    // Indicar sutilmente transición de 1 segundo (respiración)
                     const actTagEl = document.getElementById('act-tag');
-                    actTagEl.innerText = '⏳ ...';
-                    actTagEl.className = 'text-gray-400 font-bold ml-1 animate-pulse';
+                    actTagEl.innerText = 'TRANSICIÓN FORENSE EN CURSO...';
+                    actTagEl.className = 'text-slate-400 font-semibold';
 
                     this.transitionTimeout = setTimeout(() => {
                         if (this.isPlaying) {
                             this.playAct(this.currentAct + 1);
                         }
-                    }, 1000); // 1 segundo exacto de pausa antes del siguiente recuadro
+                    }, 900);
                 } else {
-                    // Acto 5 finalizado: mantener pantalla activa para el CTA de compra
                     this.audioPlayer.pause();
                     document.getElementById('play-icon').innerText = '▶';
                     document.getElementById('play-text').innerText = i18nData[this.currentLang].playBtn;
@@ -850,17 +1062,9 @@
 
             showFrame(actIdx) {
                 const d = i18nData[this.currentLang] || i18nData['es'];
-                const tagColors = [
-                    'text-accent-blue font-bold ml-1',
-                    'text-amber-400 font-bold ml-1',
-                    'text-red-400 font-bold ml-1',
-                    'text-emerald-400 font-bold ml-1',
-                    'text-accent-blue font-bold ml-1'
-                ];
-
                 const actTagEl = document.getElementById('act-tag');
                 actTagEl.innerText = d.actNames[actIdx];
-                actTagEl.className = tagColors[actIdx];
+                actTagEl.className = 'text-fiduciary-cyan font-semibold';
 
                 const acts = [
                     document.getElementById('frame-act-1'),
@@ -879,7 +1083,7 @@
                         } else {
                             frame.style.opacity = '0';
                             frame.style.pointerEvents = 'none';
-                            frame.style.transform = 'scale(0.95)';
+                            frame.style.transform = 'scale(0.98)';
                         }
                     }
                 });
@@ -888,9 +1092,9 @@
                     const btn = document.getElementById(`btn-act-${i}`);
                     if (btn) {
                         if ((i - 1) === actIdx) {
-                            btn.className = 'p-2.5 rounded-lg bg-accent-blue/20 text-accent-blue border border-accent-blue/40 font-bold transition-all';
+                            btn.className = 'p-2 rounded bg-fiduciary-cyan/15 text-fiduciary-cyan border border-fiduciary-cyan/30 font-semibold transition-all';
                         } else {
-                            btn.className = 'p-2.5 rounded-lg bg-dark-surface text-gray-400 border border-dark-border hover:text-white transition-all';
+                            btn.className = 'p-2 rounded bg-fiduciary-card text-slate-400 border border-fiduciary-border hover:text-white transition-all';
                         }
                     }
                 }
@@ -904,6 +1108,16 @@
                         this.updateProgressUI();
                     }
                 }, 200);
+            },
+
+            seek(event) {
+                const rect = event.currentTarget.getBoundingClientRect();
+                const clickX = event.clientX - rect.left;
+                const width = rect.width;
+                const clickRatio = Math.max(0, Math.min(1, clickX / width));
+                this.elapsedTime = clickRatio * this.totalDuration;
+                const targetAct = Math.min(4, Math.floor(this.elapsedTime / 8));
+                this.jumpToAct(targetAct);
             },
 
             updateProgressUI() {
