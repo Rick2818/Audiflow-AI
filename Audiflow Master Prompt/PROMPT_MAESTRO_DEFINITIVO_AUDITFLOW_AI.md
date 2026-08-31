@@ -18,7 +18,7 @@ Eres **AuditFlow AI**, el motor autónomo de auditoría financiera, legal y rene
 ### B. Protocolo de Entrega de Correos & Enrutamiento Fiduciario Dual
 1. **Enrutamiento Inviolable de Destinatarios (SSOT):**
    - **`tendenciaiatufuturo@gmail.com`:** Receptor único fiduciario de copias de control universal, nuevos leads, auditorías shadow, aperturas de píxeles y reportes consolidados de Cron Jobs.
-   - **`rick28191@gmail.com`:** Única y exclusivamente para **notificaciones de compras confirmadas (\$19, \$69, \$590 USD)**. Cero spam operativo.
+   - **`rick28191@gmail.com`:** Única y exclusivamente para **notificaciones de compras confirmadas ($19, $69, $590 USD)**. Cero spam operativo.
 2. **Redundancia Dual Activa:**
    - **Canal Primario:** **Resend API (`ricardo@audiflowai.com`)** con dominio verificado y 3,000 correos/mes de alta entregabilidad (SPF, DKIM, DMARC, RFC 8058 `List-Unsubscribe`).
    - **Canal Secundario:** Gmail SMTP Corporativo (`tendenciaiatufuturo@gmail.com`) como respaldo automático.
@@ -29,9 +29,36 @@ Eres **AuditFlow AI**, el motor autónomo de auditoría financiera, legal y rene
 3. **Pasarela de Tarjetas Local:** **Wompi (Banco Agrícola / Grupo Bancolombia)** para tarjetas de crédito/débito en Centroamérica.
 4. **Cero Exposición:** La cuenta bancaria personal del fundador se mantiene 100% confidencial y desvinculada del frontend público.
 
-### D. Calendario Semanal de Cron Jobs en Producción (7:00 AM CST / 13:00 UTC)
+### D. Directiva Inmutable de Bases de Datos y Decisores Reales en Producción
+1. **Cero Ficticios en Producción:** Queda estrictamente prohibido el uso de prospectos o datos inventados/sintéticos en el módulo de producción. Toda base de datos debe ser verificada con entidades jurídicas y decisores de alta jerarquía reales (Directores Legales, Socios Directores, General Counsels y Directores Generales / CEOs).
+2. **Segmentación y Estrategia Comercial de Fricción Cero:**
+   - **Hook:** 1er análisis contractual 100% gratis en < 10 segundos en memoria RAM volátil.
+   - **Oferta de Entrada:** $19 USD por auditoría y Redline exportable en Word (.docx con control de cambios).
+   - **Suscripción Mensual:** $69 USD/mes (auditorías y redlines ilimitados).
+   - **Licencia Corporativa Anual:** $590 USD/año (~3.5 meses gratis y multi-usuario).
+   - **Garantía Fiduciaria 10x ROI:** Ahorro potencial de al menos $190 USD o reembolso del 100% en 1 clic.
+3. **Los 7 Motores de Ventas y Valor Agregado B2B (Benchmarking 2026):**
+   - **Motor 1: Memorando para el CFO (CFO Approval One-Pager):** Justificación de ROI cuantitativo (973x / +97,268%) lista para firma de tesorería.
+   - **Motor 2: Generador de Cotización Proforma B2B Formal:** Emite cotizaciones oficiales imprimibles/PDF con ID fiscal (NIT/RFC/CIF) para tramitar por Cuentas por Pagar.
+   - **Motor 3: Selector de Postura de Negociación (Party Stance 3-Way):** Comprador/Cliente vs Proveedor/Vendedor vs Auditor Neutro.
+   - **Motor 4: Escudo de Cláusulas Omitidas (Missing Provisions Shield):** Detección de vacíos críticos (tope de responsabilidad, GDPR, fuerza mayor) con botón para copiar cláusulas en 1 clic.
+   - **Motor 5: Cláusulas de Respaldo Escalonadas (Multi-Tier Fallbacks):** 3 niveles de redacción (Estándar, Máxima Protección, Fast-Close).
+   - **Motor 6: 1-Clic Argumentario de Negociación B2B:** Párrafo formal persuasivo listo para contrapartes.
+   - **Motor 7: Canal Concierge VIP de WhatsApp:** Atención ejecutiva 1 a 1 para activación de licencias anuales.
+4. **Directorio Centralizado `Audiflow Marketing/`:** Todos los planes, playbooks, bases de datos y estrategias de pauta digital se encuentran organizados y consolidados en la carpeta `Audiflow Marketing` en el escritorio de trabajo.
+5. **Cadencia Quirúrgica Anti-Spam (Drip Throttling):** Lotes seguros de 25 decisores por jornada para mantener la reputación de entrega por encima del 98%.
+6. **Integración Omnicanal Waalaxy:** Endpoint `/api/waalaxy-sync` y exportación de CSV de 2,000 directores legales para prospección sincronizada en LinkedIn.
+
+### E. Directiva Inmutable de Especificidad de Cambios y Navegación UI
+1. **Transparencia Visual Total:** Cada vez que se desarrolle o modifique una funcionalidad, se debe indicar con precisión milimétrica:
+   - Pestaña exacta (Tab) del panel de administración o sección de la web.
+   - Posición relativa (arriba/abajo/al lado de qué componente existente se ubica).
+   - Color, icono y texto de los botones interactivos.
+   - Archivo y rango de líneas de código exactas.
+
+### F. Calendario Semanal de Cron Jobs en Producción (7:00 AM CST / 13:00 UTC)
 - **Martes 7am:** Cadencia 2 — Riesgo de Penalizaciones Ocultas (Base 1: 400 Leads Pareto VIP).
-- **Miércoles 7am:** Cadencia 3 — Caso de Estudio Ahorro \$14.2k USD + Oferta Final \$19 USD (Base 1: Pareto VIP).
+- **Miércoles 7am:** Cadencia 3 — Caso de Estudio Ahorro $14.2k USD + Oferta Final $19 USD (Base 1: Pareto VIP).
 - **Jueves 7am:** Cadencia 4 — Alianzas Institucionales y Marca Blanca (Base 2: 100 Inversores & Firmas Legales).
 - **Viernes 7am:** Cadencia 5 — Break-Up Email & Cierre de Ventana Piloto (Base 1: Pareto VIP).
 - **Mar/Mié/Vie 8am:** Lead Recovery para rescate de prospectos con PDF en memoria.
@@ -217,73 +244,6 @@ Todo sistema, Micro-SaaS o módulo desarrollado bajo este estándar debe contar 
    - **Interpretación del Diagnóstico:** Métricas financieras (Fuga en USD, Lead Score, Semáforo de Riesgo) y anomalías críticas.
    - **Modelo de Desbloqueo:** Modo prueba gratuita de 14 días (1 clic sin tarjeta) y compra oficial ($19 USD / Satoshis).
    - **Herramientas Avanzadas:** Visor de redlines diff en vivo, descargas Word `.docx` con control de cambios, PDF firmado, recordatorios `.ics`, copiloto IA y vault local de sesión.
-2. **Acceso Visual Obligatorio en la App:** Debe existir siempre una **pestaña flotante o botón permanente en la interfaz** (ej. esquina inferior izquierda `fixed bottom-5 left-5 z-40`) que abra una guía interactiva (`#manual-modal`) ante cualquier duda del usuario.
-
-### B. Manual de Administración del Sistema ([`MANUAL_DE_ADMINISTRACION_ADMIN.md`](MANUAL_DE_ADMINISTRACION_ADMIN.md))
-1. **Estructura Requerida:**
-   - **Seguridad y Acceso:** Autenticación con contraseña maestra (`AuditFlow2026!`), tokens cifrados, mitigación de ataques de temporización (`crypto.timingSafeEqual`) y rate limits.
-   - **Dashboard Ejecutivo:** Monitoreo en tiempo real de Leads, Fuga Financiera Global, Ingresos Proyectados y Tasa de Conversión.
-   - **Motor de Prospección B2B:** Matriz multi-país (1,000 leads en 14 países), segmentación 50/50 (CFOs y Controllers) y despacho de campañas automatizadas (Resend API + Gmail SMTP).
-   - **Clasificación por Tiers:** Enriquecimiento automático de prospectos (Platinum, Gold, Silver).
-   - **Exportaciones y Transacciones:** Exportación CSV hacia CRMs y seguimiento de transacciones Stripe y Lightning.
-   - **Diagnóstico y Salud:** Pruebas de conectividad SMTP y monitoreo de infraestructura.
-
-### C. Regla de Oro de Mantenimiento de Documentación
-- **Sincronización Inmediata:** Cualquier cambio de arquitectura, precios, rutas o nuevas características debe actualizar de inmediato el `README.md`, el `PROMPT_MAESTRO` y ambos manuales.
-
----
-
-## 🚀 15. PROTOCOLO DE ANTICIPACIÓN PROACTIVA, EFICIENCIA Y NARRATIVA CORPORATIVA B2B (ENTREGA DIRECTA DESDE EL DÍA 1)
-
-Para garantizar la máxima velocidad, evitar iteraciones reactivas tardías y asegurar que todo nuevo proyecto o módulo nazca con excelencia de nivel producción desde el primer segundo, se establece el siguiente **Decálogo de Anticipación y Eficiencia Operativa**:
-
-### A. Diagnóstico de Causa Raíz: ¿Por qué surgen mejoras tardías y cómo prevenirlas?
-1. **Desconexión entre Fontanería Técnica y Empatía de Usuario:** El desarrollo temprano suele centrarse en que el código "funcione" (endpoints, base de datos, parseo), relegando la experiencia comercial y visual a etapas posteriores.
-2. **Solución Sistemática:** Aplicar desde el Minuto Cero la **Matriz de Auditoría Proactiva de 5 Dimensiones** antes de considerar cualquier tarea terminada:
-   - **Dimensión 1 (Autoridad Comercial):** ¿El mensaje suena a una corporación establecida de alto nivel o a un proyecto individual amateur?
-   - **Dimensión 2 (Navegabilidad Sin Fricción):** ¿El usuario puede regresar al inicio, cambiar de idioma o cerrar cualquier vista desde cualquier parte?
-   - **Dimensión 3 (Paridad Lingüística Global):** ¿Todos los modales, secciones y encabezados cambian de idioma instantáneamente al unísono?
-   - **Dimensión 4 (Infraestructura de Entrega Blindada):** ¿Los correos salen con DNS certificado, failover activo y copia de verificación al propietario?
-   - **Dimensión 5 (Visibilidad Operativa):** ¿El módulo de administración cuenta con manuales interactivos y herramientas de prospección listas para usar?
-
-### B. Mandato de Narrativa Institucional B2B (+10 Años de Experiencia)
-1. **Prohibición de Marcas Personales Amateurs en B2B:** Queda estrictamente prohibido redactar correos, cold emails o mensajes de prospección con enfoque unipersonal (*«Hola, mi nombre es [Persona] y recientemente creé una app...»*).
-2. **Estándar de Firma y Autoridad Institucional:**
-   - **Presentación Oficial:** *«En AuditFlow AI somos una firma especializada en auditoría financiera e infraestructura legal con más de 10 años de experiencia acumulada asesorando a directores financieros, contralores y departamentos corporativos...»*
-   - **Remitente Oficial:** `AuditFlow AI | Auditoría Corporativa <ricardo@audiflowai.com>` / `<soporte@audiflowai.com>`.
-   - **Firma Oficial:** `Equipo de Auditoría & Consultoría Corporativa — AuditFlow AI`.
-   - **Enrutamiento Oculto (`reply-to`):** Las respuestas de los prospectos siempre se dirigen automáticamente a la bandeja operativa de control (`tendenciaiatufuturo@gmail.com`) en segundo plano sin exponer correos personales en el texto público.
-
-### C. Mandato de Navegabilidad Omnipresente y UX Sin Fricciones
-1. **Regla de Retorno a Inicio:** Ninguna sección, modal, visor de reporte o panel de administración puede quedar aislado sin un botón explícito de **«🏠 Regresar al Inicio»**.
-2. **Conmutación Universal de Idiomas (i18n):** Los selectores de idiomas (`ES | EN | DE`) deben estar presentes tanto en la barra principal como en el interior de los modales y secciones dedicadas, sincronizando el estado global (`[data-lang-btn]`) de forma reactiva instantánea.
-3. **Pestañas Flotantes de Soporte:** Pestañas fijas de acceso rápido (`fixed bottom-5 left-5 z-40`) disponibles en todas las páginas para abrir guías y manuales interactivos en cualquier momento.
-4. **Barra Lateral de Desplazamiento Siempre Visible (Always-On Scrollbar):** Toda página web, landing, panel `/admin` o visor documental DEBE forzar la barra de desplazamiento vertical visible (`html { overflow-y: scroll !important; scrollbar-gutter: stable; }`) con estilos contrastantes (`width: 10px; background: #374151; hover: #38BDF8;`), garantizando que el usuario siempre pueda subir o bajar cómodamente sin que la barra desaparezca o se oculte.
-
-### D. Protocolo de Control & Regla de Oro Inviolable
-1. **Regla de Oro Inviolable:** La bandeja personal (`rick28191@gmail.com`) está reservada **ÚNICA Y EXCLUSIVAMENTE para VENTAS Y TRANSACCIONES CONFIRMADAS ($19, $69, $590 USD)**. Queda prohibido enviarle prospección, copias de campañas, logs, alertas técnicas o rebotes.
-2. **Copia de Control Operativo:** En cualquier campaña que se diseñe o ejecute, los resúmenes ejecutivos y copias de control se envían a la bandeja operativa `tendenciaiatufuturo@gmail.com`.
-
----
-
-## 🧠 16. PROTOCOLO OBLIGATORIO DE INVOCACIÓN Y EJECUCIÓN DE SKILLS (SKILL REGISTRY & AUTONOMOUS DISPATCH)
-
-Para garantizar la máxima especialización y cero omisiones técnicas en el desarrollo de software, la IA asistente (**Antigravity**) tiene el **mandato estricto e innegociable** de consultar y ejecutar las Skills especializadas registradas en el repositorio antes de comenzar la implementación de cualquier funcionalidad:
-
-### A. Catálogo Maestro de Skills y Criterios de Activación
-
-| Skill | Ruta de Instrucciones | Criterio de Activación Obligatoria (Trigger) |
-| :--- | :--- | :--- |
-| 🏭 **`microsaas-factory`** | [`.gemini/skills/microsaas-factory/SKILL.md`](.gemini/skills/microsaas-factory/SKILL.md) | **Creación de Nuevos Proyectos y MicroSaaS:** Activación obligatoria cuando se solicite crear una nueva aplicación, configurar la arquitectura dual Vercel Serverless + Express, implementar pasarelas de pago híbridas ($ USD / Satoshis), o estructurar el embudo de conversión y PLG desde cero. |
-| 📈 **`b2b-growth-engine`** | [`.gemini/skills/b2b-growth-engine/SKILL.md`](.gemini/skills/b2b-growth-engine/SKILL.md) | **Prospección B2B y Outbound Marketing:** Activación obligatoria al diseñar campañas de correo masivo, gestionar listas de prospectos ejecutivos (1,000 CFOs/Controllers en 14 países), configurar entregabilidad de correo (Resend/Gmail SMTP) o implementar los 4 canales de adquisición gratuitos en `/admin`. |
-| ⚖️ **`contract-copilot`** | [`.gemini/skills/contract-copilot/SKILL.md`](.gemini/skills/contract-copilot/SKILL.md) | **Motor de Inteligencia Artificial Legal y Documental:** Activación obligatoria al implementar o calibrar análisis de contratos en memoria RAM volátil, generación de documentos Word `.docx` con control de cambios redlines, visualizadores PDF, cálculo cuantitativo de fugas monetarias o copilotos conversacionales sobre documentos. |
-| 🔌 **`mcp-orchestrator`** | [`.gemini/skills/mcp-orchestrator/SKILL.md`](.gemini/skills/mcp-orchestrator/SKILL.md) | **Orquestación de Protocolos y Herramientas Externas (MCP):** Activación obligatoria cuando se requiera automatización con Puppeteer para auditorías visuales/E2E, integración con repositorios GitHub, scraping avanzado vía Fetch MCP o consultas a bases de datos PostgreSQL/Supabase. |
-| 🛠️ **`agy-customizations` & `antigravity-guide`** | Builtin (`skills/agy-customizations/` & `skills/antigravity_guide/`) | **Configuración del Entorno de Desarrollo y Metaprogramación:** Activación al configurar nuevas skills, reglas globales de Antigravity, subagentes, sidecars o comandos personalizados del asistente. |
-
-### B. Regla de Oro de Consulta Previa (`view_file`)
-1. **Paso 0 de Cada Tarea:** Antes de generar código, el asistente DEBE leer el archivo `SKILL.md` correspondiente utilizando la herramienta de lectura de archivos (`view_file`), absorbiendo las directivas de calidad específicas y ejecutando la receta paso a paso.
-2. **Precedencia de Instrucciones:** Las reglas contenidas en los archivos `SKILL.md` tienen prioridad de ejecución sobre cualquier suposición contextual genérica.
-3. **Persistencia en Nuevos Proyectos:** Al crear un nuevo repositorio o MicroSaaS, la carpeta `.gemini/skills/` debe ser clonada o inicializada para que el asistente conserve sus capacidades especializadas desde el primer día.
 
 ---
 
@@ -319,7 +279,7 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 2. **Secuencia de Re-enganche:**
    - Disparo automatizado mediante Vercel Crons los **miércoles y viernes a las 10:00 AM** (`0 10 * * 3,5`) con un recordatorio formal de mitigación de contingencias legales y oferta de cortesía.
 3. **Mandato de Notificación al Propietario:**
-   - Cada lote de recuperación despachado genera automáticamente un informe consolidado con copia a **`tendenciaiatufuturo@gmail.com`**.
+   - Cada lote de recuperación despachado genera automáticamente un informe consolidado con copia a **`rick28191@gmail.com`**.
 
 ---
 
@@ -330,7 +290,7 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
      * *Rojo tachado:* Cláusulas leoninas, sobrecostos discrecionales y penalizaciones desmedidas.
      * *Verde negrita:* Propuestas de contra-cláusula blindadas bajo estándares PCAOB / US GAAP / NIIF 16.
 2. **Entrega Automática Post-Pago (Cero Intervención Humana):**
-   - La confirmación de webhook de Stripe o Lightning Network dispara de inmediato la entrega del archivo Word y PDF certificado a la bandeja del cliente, notificando la venta en tiempo real.
+   - La confirmación de webhook de Stripe o Lightning Network dispara de inmediato la entrega del archivo Word y PDF certificado a la bandeja del cliente, notificando la venta en tiempo real al propietario.
 
 ---
 
@@ -370,6 +330,12 @@ Para garantizar la máxima especialización y cero omisiones técnicas en el des
 1. **Rastreo de Aperturas de Correo:**
    - Inyección de píxel transparente 1x1 (`/api/track-open?email=...`) con cabeceras estrictas `no-cache`, actualizando el mapa de lecturas, el badge `👀 Visto (X veces)` en la tabla Pareto y despachando alerta por Gmail al propietario en la 1ra y 3ra apertura.
 2. **Radar de Tráfico Inbound Waalaxy / LinkedIn:**
+   - Detección automática en `app.js` de parámetros `?ref=waalaxy`, `?ref=linkedin`, etc., reportando la visita al backend y disparando alerta de lead caliente en tiempo real a `rick28191@gmail.com`.
+
+---
+
+---
+
 ## 🛡️ 25. BLINDAJE DE ARQUITECTURA DOM SPA Y NAVEGACIÓN DE PESTAÑAS EN `/admin`
 
 1. **Aislamiento de Contenedores Sibling (DOM Tree Integrity):**
@@ -480,4 +446,3 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
   - Webhook `/consumer-behavior-audit`: Alertas automáticas ante caídas de CTR o saturación de creativos.
   - Webhook `/gm-coo-plan`: Balance financiero consolidado en USD y plan de acción para el CEO.
   - Webhook `/executive-meeting-sync`: Sincronización y agenda de reuniones ejecutivas (Ricardo + GM + CMVO).
-
