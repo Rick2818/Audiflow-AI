@@ -1,4 +1,4 @@
-{
+﻿{
   "mcpServers": {
     "google-workspace": {
       "command": "npx",
@@ -8,6 +8,11 @@
         "GOOGLE_WORKSPACE_TOKEN_FILE": "token.json"
       },
       "description": "Servidor MCP para Google Workspace: Envío de correos por Gmail, gestión de prospectos en Google Sheets, reportes en Google Drive y agendamiento en Google Calendar."
+    },
+    "google-drive": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-gdrive"],
+      "description": "Servidor MCP para Google Drive: Lectura, escritura, backup y sincronización de carpetas y archivos en Google Drive."
     },
     "n8n-automation-bridge": {
       "command": "npx",
