@@ -306,6 +306,10 @@
     {
       "path": "/api/social-publish?action=daily_cron_dispatch",
       "schedule": "0 14 * * *"
+    },
+    {
+      "path": "/api/admin?action=cron_monitor",
+      "schedule": "0 8,14,20 * * *"
     }
   ]
 }

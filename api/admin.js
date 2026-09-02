@@ -127,6 +127,18 @@ export default async function handler(req, res) {
   const { action, email, name, role, company, document_name, custom_notes, prospects, test_mode = false } = body;
 
   // 0. Tracker de Aperturas y Visitas Waalaxy/LinkedIn (Píxel o POST)
+  // Handler de Monitoreo Autónomo 24/7 y Cron Job de Vigilancia en la Nube
+  if (action === 'cron_monitor' || action === 'health_check' || (req.url && req.url.includes('cron_monitor'))) {
+    try {
+      const { runHealthCheckAndAlert } = await import('../lib/health-monitor.js');
+      const forceAlert = (req.query?.force_alert === 'true' || body?.force_alert === true);
+      const result = await runHealthCheckAndAlert({ forceAlert });
+      return res.status(200).json({ success: true, monitor: result });
+    } catch (mErr) {
+      return res.status(500).json({ success: false, error: mErr.message });
+    }
+  }
+
   if (req.url && (req.url.includes('track-open') || action === 'track_open')) {
     try {
       const parsedUrl = new URL(req.url || '', `http://${req.headers.host || 'localhost'}`);
