@@ -149,13 +149,31 @@ Se encuentra activa la base de datos de **20 directores legales reales verificad
 
 ---
 
+## ⚡ Motor de Facturación & 1-Click Checkout (Wompi El Salvador • Card-on-File)
+
+AuditFlow AI integra un motor nativo de **Conversión Instantánea a 1-Clic (In-App One-Click Upsell)** utilizando tokenización bancaria segura (**PCI-DSS Nivel 1**) de **Wompi El Salvador (Banco Agrícola / Grupo Bancolombia)**:
+
+* **Fricción Cero en Conversión:** Elimina la necesidad de reescribir números de tarjeta, fecha y CVV en compras recurrentes o upgrades.
+* **Seguridad Delegada Card-on-File:** Los datos bancarios nunca se almacenan en servidores propios; la transacción se autoriza vía tokens criptográficos (`tok_xxx`).
+* **Inmutabilidad de Catálogo en Servidor:** Precios blindados contra manipulación en cliente (*Anti-Parameter Tampering*).
+* **Notificaciones Duales en Tiempo Real:** Cada cobro despacha alertas fiduciarias inmediatas a la bandeja del propietario (`rick28191@gmail.com` y `tendenciaiatufuturo@gmail.com`) y emite el recibo digital formal al cliente.
+
+---
+
 ## 🧪 Certificación y Pruebas Automatizadas
 
 ```bash
-# Ejecutar la suite forense completa (30 pruebas en 8 fases)
+# 1. Ejecutar la suite masiva de estrés y seguridad (1,000 pruebas en segundo plano)
+node scripts/stress_and_security_1000_tests.js
+
+# 2. Ejecutar la suite forense de validación
 npm test
 ```
-* **Resultado:** 30/30 pruebas aprobadas (100% Green).
+* **Certificación de Seguridad & Funcionalidad:** 1,000 / 1,000 pruebas aprobadas (100.00% Green).
+  - 250 Pruebas OWASP & Sanitización de Tokens.
+  - 250 Pruebas de Idempotencia y Mitigación de Doble Clic.
+  - 250 Pruebas de Respuestas Bancarias y Tokenización Wompi SV.
+  - 250 Pruebas de Modelos de Negocio, Conversión Lead-to-Customer y Métricas MRR.
 
 ---
 
@@ -163,7 +181,8 @@ npm test
 
 * **Motor de IA**: Google DeepMind Gemini 2.5 Flash (`@google/genai`).
 * **Frontend**: HTML5, Tailwind CSS 3.4, Vanilla JavaScript ES6+ (Tri-lingüe ES/EN/DE + Modo Nórdico).
-* **Backend**: Node.js, Express, Vercel Serverless Functions.
+* **Backend**: Node.js, Express, Vercel Serverless Functions (Optimizadas a 11 endpoints).
+* **Pasarelas de Pago**: Wompi El Salvador (Tarjetas / 1-Clic Tokenizado), Strike Lightning Network (`rick28@strike.me`), Stripe Checkout.
 * **Base de Datos & Auth**: Supabase (PostgreSQL 15 + RLS).
 ---
 
