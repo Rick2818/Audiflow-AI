@@ -61,6 +61,56 @@ export default async function handler(req, res) {
       // Modo desarrollo / simulación controlada
       if (!wompiSecret || wompiSecret.includes('tu_api_secret') || process.env.NODE_ENV !== 'production') {
         const fakeAuth = `AUTH_${Math.floor(100000 + Math.random() * 900000)}`;
+        const customerEmail = email ? String(email).trim() : 'cliente@empresa.com';
+
+        // Disparar Notificación Inmediata por Correo al Propietario (rick28191@gmail.com)
+        try {
+          const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER).trim();
+          const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '').trim();
+
+          if (gmailUser && gmailPass && !gmailUser.includes('tu_correo')) {
+            const nodemailer = (await import('nodemailer')).default;
+            const transporter = nodemailer.createTransport({
+              service: 'gmail',
+              auth: { user: gmailUser, pass: gmailPass }
+            });
+
+            // 1. Notificación al Propietario
+            await transporter.sendMail({
+              from: CONFIG.EMAIL.FROM_SALES,
+              to: `${CONFIG.EMAIL.OWNER_SALES}, ${CONFIG.EMAIL.OWNER_CONTROL}`,
+              subject: `🎉 [Venta $${selectedProduct.amount} USD] Nueva Compra 1-Clic: ${selectedProduct.name}`,
+              html: `
+                <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #10b981; max-width: 600px; margin: 0 auto;">
+                  <h2 style="color: #10b981; margin-top: 0;">🎉 ¡NUEVA VENTA 1-CLIC CONFIRMADA!</h2>
+                  <p style="font-size: 22px; font-weight: bold; color: #38bdf8; margin: 10px 0;">$${selectedProduct.amount} ${selectedProduct.currency}</p>
+                  <table style="width: 100%; color: #d1d5db; font-size: 14px; border-collapse: collapse;">
+                    <tr><td style="padding: 6px 0; color: #9ca3af;">Producto:</td><td style="text-align: right; font-weight: bold; color: #ffffff;">${selectedProduct.name}</td></tr>
+                    <tr><td style="padding: 6px 0; color: #9ca3af;">Cliente / Email:</td><td style="text-align: right; font-weight: bold; color: #38bdf8;">${customerEmail}</td></tr>
+                    <tr><td style="padding: 6px 0; color: #9ca3af;">Pasarela:</td><td style="text-align: right; font-weight: bold; color: #f59e0b;">Wompi SV (1-Clic Token)</td></tr>
+                    <tr><td style="padding: 6px 0; color: #9ca3af;">Código Autorización:</td><td style="text-align: right; color: #10b981; font-family: monospace;">${fakeAuth}</td></tr>
+                  </table>
+                </div>`
+            });
+
+            // 2. Correo de Recibo al Cliente
+            await transporter.sendMail({
+              from: `"AuditFlow AI" <${gmailUser}>`,
+              to: customerEmail,
+              subject: `🎉 Recibo de Pago & Confirmación - ${selectedProduct.name} [AuditFlow AI]`,
+              html: `
+                <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 10px; border: 1px solid #38bdf8; max-width: 600px; margin: 0 auto;">
+                  <h2 style="color: #38bdf8; margin-top: 0;">¡Pago Confirmado con 1 Clic!</h2>
+                  <p>Tu activación de <strong>${selectedProduct.name}</strong> por <strong>$${selectedProduct.amount} ${selectedProduct.currency}</strong> ha sido completada con éxito.</p>
+                  <p>Código de Autorización Bancaria: <strong>${fakeAuth}</strong></p>
+                  <p style="margin-top: 20px;"><a href="https://audiflowai.com" style="background: #2563eb; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold;">Ir a Mi Panel de Auditoría →</a></p>
+                </div>`
+            });
+          }
+        } catch (mailErr) {
+          console.warn('[Mail Warning]:', mailErr.message);
+        }
+
         return res.json({
           success: true,
           oneClick: true,
