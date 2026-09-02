@@ -1159,33 +1159,54 @@
                         <input type="text" id="ent-name-input" placeholder="Empresa o Despacho Legal" autocomplete="organization" required class="input-field text-xs font-mono">
                     </div>
 
-                    <!-- SELECCIÓN DE MÉTODO DE PAGO CORPORATIVO: STRIPE VS LIGHTNING SATOSHIS -->
-                    <div class="grid grid-cols-2 gap-2 p-1 bg-dark-surface rounded-lg mb-3 border border-border-dark font-mono text-[11px]">
-                        <button type="button" id="tab-ent-pay-stripe" onclick="window.AppHandler.selectEnterprisePaymentMethod('stripe')" class="py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1">
-                            <span data-i18n="ent_pay_card">💳 Tarjeta ($ USD)</span>
+                    <!-- SELECCIÓN DE MÉTODO DE PAGO CORPORATIVO: 1-CLIC WOMPI VS STRIPE VS LIGHTNING -->
+                    <div class="grid grid-cols-3 gap-1.5 p-1 bg-dark-surface rounded-lg mb-3 border border-border-dark font-mono text-[10px]">
+                        <button type="button" id="tab-ent-pay-wompi" onclick="window.AppHandler.selectEnterprisePaymentMethod('wompi_one_click')" class="py-2 px-1 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1 shadow-glow cursor-pointer">
+                            <span>⚡ 1-Clic Wompi</span>
                         </button>
-                        <button type="button" id="tab-ent-pay-ln" onclick="window.AppHandler.selectEnterprisePaymentMethod('lightning')" class="py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1">
-                            <span data-i18n="ent_pay_ln">⚡ Lightning (Strike Sats)</span>
+                        <button type="button" id="tab-ent-pay-stripe" onclick="window.AppHandler.selectEnterprisePaymentMethod('stripe')" class="py-2 px-1 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1 cursor-pointer">
+                            <span>💳 Nueva Tarjeta</span>
+                        </button>
+                        <button type="button" id="tab-ent-pay-ln" onclick="window.AppHandler.selectEnterprisePaymentMethod('lightning')" class="py-2 px-1 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1 cursor-pointer">
+                            <span>⚡ Lightning</span>
                         </button>
                     </div>
 
-                    <!-- FORMULARIO INTERACTIVO DE TARJETA DE CRÉDITO / DÉBITO -->
-                    <div id="ent-card-form-container" class="space-y-3 p-3.5 rounded-xl bg-dark-surface border border-border-dark">
+                    <!-- CONTENEDOR 1-CLIC WOMPI (TARJETA GUARDADA / CARD-ON-FILE) -->
+                    <div id="ent-wompi-one-click-container" class="p-3.5 rounded-xl bg-sky-950/40 border border-sky-500/40 space-y-2 text-left font-mono">
+                        <div class="flex items-center justify-between text-xs">
+                            <span class="text-sky-300 font-bold">💳 Tarjeta Guardada (Wompi SV)</span>
+                            <span class="text-[10px] text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/40">● 1-Clic Activo</span>
+                        </div>
+                        <div class="flex items-center gap-3 bg-dark-card/90 p-2.5 rounded-lg border border-border-dark">
+                            <span class="text-2xl">💳</span>
+                            <div>
+                                <div id="ent-saved-card-brand" class="text-xs font-bold text-white">Visa Corporate</div>
+                                <div id="ent-saved-card-number" class="text-[11px] text-sky-400 tracking-wider">•••• •••• •••• 4321</div>
+                            </div>
+                        </div>
+                        <div class="text-[10px] text-gray-400">
+                            🔒 Token bancario seguro encriptado vía Wompi El Salvador. Cero fricción (No necesitas escribir los 16 dígitos ni el CVC).
+                        </div>
+                    </div>
+
+                    <!-- FORMULARIO MANUAL DE NUEVA TARJETA (SOLO SI ELIGE 'NUEVA TARJETA') -->
+                    <div id="ent-card-form-container" class="hidden space-y-3 p-3.5 rounded-xl bg-dark-surface border border-border-dark">
                         <div>
                             <label data-i18n="ent_label_card_num" class="block text-[11px] font-mono text-gray-300 mb-1">Número de Tarjeta de Crédito / Débito</label>
                             <div class="relative">
-                                <input type="text" id="ent-card-number" placeholder="4242 •••• •••• 4242" maxlength="19" autocomplete="cc-number" inputmode="numeric" required class="input-field text-xs font-mono pl-9 tracking-widest text-white">
+                                <input type="text" id="ent-card-number" placeholder="4242 •••• •••• 4242" maxlength="19" autocomplete="cc-number" inputmode="numeric" class="input-field text-xs font-mono pl-9 tracking-widest text-white">
                                 <span class="absolute left-3 top-2.5 text-gray-400 text-sm">💳</span>
                             </div>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
                                 <label data-i18n="ent_label_expiry" class="block text-[11px] font-mono text-gray-300 mb-1">Expiración (MM/YY)</label>
-                                <input type="text" id="ent-card-expiry" placeholder="12/28" maxlength="5" autocomplete="cc-exp" inputmode="numeric" required class="input-field text-xs font-mono text-center text-white">
+                                <input type="text" id="ent-card-expiry" placeholder="12/28" maxlength="5" autocomplete="cc-exp" inputmode="numeric" class="input-field text-xs font-mono text-center text-white">
                             </div>
                             <div>
                                 <label data-i18n="ent_label_cvc" class="block text-[11px] font-mono text-gray-300 mb-1">Código CVC</label>
-                                <input type="text" id="ent-card-cvc" placeholder="123" maxlength="4" autocomplete="cc-csc" inputmode="numeric" required class="input-field text-xs font-mono text-center text-white">
+                                <input type="text" id="ent-card-cvc" placeholder="123" maxlength="4" autocomplete="cc-csc" inputmode="numeric" class="input-field text-xs font-mono text-center text-white">
                             </div>
                         </div>
                     </div>
