@@ -88,19 +88,23 @@ export class SalesNavWaalaxyN8nEngine {
           auth: { user: gmailUser, pass: gmailPass }
         });
 
-        const subject = `Tu Acceso de Cortesía para Auditar Contratos con IA — Audiflow AI / ${company}`;
+        const subject = `Lo costoso de un contrato no es lo que dice, sino lo que no vio a tiempo — Audiflow AI / ${company}`;
         const html = `
-          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #d4af37;">
-            <h2 style="color: #d4af37; margin-top: 0;">Hola ${name},</h2>
-            <p>Tal como conversamos en LinkedIn, aquí tienes el enlace directo para que tu equipo pruebe la auditoría de 1 contrato completo en memoria RAM volátil:</p>
+          <div style="font-family: Arial, sans-serif; background-color: #0b0f19; color: #ffffff; padding: 25px; border-radius: 12px; border: 1px solid #38bdf8;">
+            <h2 style="color: #38bdf8; margin-top: 0;">Hola ${name},</h2>
+            <p>En acuerdos comerciales y de proveedores, lo costoso nunca es lo que dice el documento, sino lo que no se vio a tiempo antes de firmar.</p>
+            <p>Tal como conversamos, tu equipo no necesita más pestañas ni hojas de cálculo dispersas, sino un <strong>flujo único de 6 etapas</strong> (Centralizar ➔ Escanear ➔ Detectar ➔ Mitigar ➔ Certificar ➔ Proteger).</p>
+            <div style="background-color: #1e293b; padding: 16px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #10b981;">
+              <p style="margin: 0 0 10px 0;"><strong>🎁 Diagnostica tu primer contrato sin costo ni tarjeta:</strong> Si la IA no detecta penalizaciones ocultas ni nada que corregir, no pagas nada.</p>
+              <p style="margin: 0;"><strong>⚡ Redline en Word (.docx con Control de Cambios):</strong> Listo antes de que termine tu café.</p>
+            </div>
             <div style="text-align: center; margin: 25px 0;">
-              <a href="${this.appUrl}/?ref=waalaxy-auto" style="background-color: #d4af37; color: #000000; padding: 12px 24px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px; display: inline-block;">
-                Auditar 1 Contrato Gratis en 10 Segundos →
+              <a href="${this.appUrl}/?ref=waalaxy-auto" style="background-color: #10b981; color: #000000; padding: 14px 28px; border-radius: 8px; font-weight: bold; text-decoration: none; font-size: 14px; display: inline-block;">
+                Auditar Mi Primer Contrato sin Costo (30s) →
               </a>
             </div>
-            <p style="color: #94a3b8; font-size: 13px;">🔒 Privacidad de Grado Bancario: Procesamiento efímero en memoria RAM con cero retención en disco.</p>
-            <p>Cualquier duda, puedes responder a este correo o escribir a <strong>soporte@audiflowai.com</strong>.</p>
-            <p>Saludos cordiales,<br><strong>Equipo Audiflow AI</strong></p>
+            <p style="color: #94a3b8; font-size: 12px;">🔒 Privacidad Estricta: Memoria RAM volátil, cero almacenamiento en disco y garantía de no-entrenamiento de modelos públicos con datos corporativos.</p>
+            <p>Saludos cordiales,<br><strong>Ricardo Bolaños</strong><br><span style="color: #94a3b8; font-size: 12px;">Director General • AuditFlow AI (<a href="https://audiflowai.com" style="color: #38bdf8;">audiflowai.com</a>)</span></p>
           </div>
         `;
 

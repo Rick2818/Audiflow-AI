@@ -1037,35 +1037,37 @@ export default async function handler(req, res) {
       for (const prospect of batchToDispatch) {
         const isNordic = Boolean(cluster === 'cluster_c_nordics');
         const subject = isNordic
-          ? `confidential contract audit & instant word redlines / ${prospect.company}`
-          : `auditoría preventiva de contratos y redlines en word / ${prospect.company}`;
+          ? `The real cost of a contract is what was missed before signing / ${prospect.company}`
+          : `Lo costoso de un contrato no es lo que dice, sino lo que no vio a tiempo / ${prospect.company}`;
 
         const htmlContent = isNordic
           ? `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.6;">
-              <p>Dear ${escapeHtml(prospect.name)},</p>
-              <p>Reaching out regarding your executive leadership at <strong>${escapeHtml(prospect.company)}</strong>.</p>
-              <p>At <strong>AuditFlow AI</strong>, we built a deterministic forensic engine executing entirely in transient RAM with zero data persistence (EU GDPR Art. 28 & SOC-2 compliant).</p>
-              <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px;">
-                <p style="margin: 0 0 8px 0;"><strong>🎁 1st Audit: 100% Free</strong> in volatile RAM (zero file retention): <a href="https://audiflowai.com/?ref=salesnav-nordic" style="color: #0284c7; font-weight: bold;">audiflowai.com →</a></p>
-                <p style="margin: 0 0 8px 0;"><strong>⚡ Single Agreement Redline (.docx with Track Changes):</strong> $19 USD (1-Click Wompi / Stripe).</p>
-                <p style="margin: 0;"><strong>💼 Unlimited Pro Monthly:</strong> $69 USD/mo | <strong>🏛️ Annual Corporate:</strong> $599 USD/yr.</p>
+              <p>Dear <strong>${escapeHtml(prospect.name)}</strong>,</p>
+              <p>Reaching out regarding your executive oversight at <strong>${escapeHtml(prospect.company)}</strong>.</p>
+              <p style="font-size: 15px; color: #0f172a; font-weight: 600;">The most expensive clause in any vendor contract is never what is written, but what was missed before signing.</p>
+              <p>Your team doesn't need more browser tabs or fragmented spreadsheets, but a single, frictionless 6-step workflow: <em>Centralize ➔ Scan ➔ Detect ➔ Mitigate ➔ Certify ➔ Protect</em>.</p>
+              <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #0284c7; margin: 18px 0; border-radius: 6px;">
+                <p style="margin: 0 0 8px 0;"><strong>🎁 Benchmark your 1st Agreement at Zero Cost:</strong> If our engine detects no hidden liabilities, you pay nothing: <a href="https://audiflowai.com/?ref=salesnav-nordic" style="color: #0284c7; font-weight: bold;">audiflowai.com →</a></p>
+                <p style="margin: 0 0 8px 0;"><strong>⚡ Instant Word Redline (.docx with Track Changes):</strong> Ready before your coffee cools ($19 USD via 1-Click Wompi / Stripe).</p>
+                <p style="margin: 0;"><strong>🛡️ Strict Confidentiality:</strong> 100% volatile RAM execution, zero disk retention, no training on proprietary data (EU GDPR Art. 28 & SOC-2).</p>
               </div>
-              <p>Would you be open to benchmarking 1 sample agreement at zero cost?</p>
+              <p>Would you be open to running a quick test on one draft agreement today?</p>
               <p style="margin-top: 24px;">Best regards,<br><strong>Ricardo Bolaños</strong><br><span style="color: #64748b; font-size: 13px;">Chief Executive Officer • AuditFlow AI (<a href="https://audiflowai.com" style="color: #0284c7;">audiflowai.com</a>)</span></p>
             </div>
           `
           : `
             <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.6;">
               <p>Estimado(a) <strong>${escapeHtml(prospect.name)}</strong>,</p>
-              <p>Le contacto en relación a su gestión en <strong>${escapeHtml(prospect.company)}</strong>.</p>
-              <p>Desarrollamos <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7;">audiflowai.com</a>), un copiloto forense que audita contratos mercantiles y facturas de proveedores en <strong>menos de 10 segundos</strong> en memoria RAM volátil (0 retención en disco), detectando cláusulas abusivas, sobrecostos y penalizaciones desproporcionadas.</p>
-              <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px;">
-                <p style="margin: 0 0 8px 0;"><strong>🎁 Su 1er Análisis: 100% Gratuito</strong> (sin registro forzoso ni tarjeta de crédito): <a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7; font-weight: bold;">Probar gratis aquí →</a></p>
-                <p style="margin: 0 0 8px 0;"><strong>⚡ Redline Individual en Word (.docx con Control de Cambios):</strong> Solo <strong>$19 USD</strong> vía cobro 1-Clic Wompi (Banco Agrícola).</p>
-                <p style="margin: 0;"><strong>💼 Plan Pro Mensual:</strong> $69 USD/mes (ilimitado) | <strong>🏛️ Licencia Corporativa:</strong> $599 USD/año (Marca blanca para clientes).</p>
+              <p>Le contacto en relación a su liderazgo y gestión en <strong>${escapeHtml(prospect.company)}</strong>.</p>
+              <p style="font-size: 15px; color: #0f172a; font-weight: 600;">Lo costoso de un contrato mercantil o de proveedores nunca es lo que dice, sino lo que no se vio a tiempo antes de firmar.</p>
+              <p>Su equipo no necesita más pestañas abiertas ni hojas de cálculo dispersas, sino un <strong>flujo único de 6 etapas</strong>: <em>1. Centralizar ➔ 2. Escanear ➔ 3. Detectar ➔ 4. Mitigar ➔ 5. Certificar ➔ 6. Proteger</em>.</p>
+              <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #0284c7; margin: 18px 0; border-radius: 6px;">
+                <p style="margin: 0 0 8px 0;"><strong>🎁 Diagnostique su 1er contrato sin costo:</strong> Si nuestro motor forense no detecta penalizaciones ocultas ni nada que corregir, no paga nada: <a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7; font-weight: bold;">Probar gratis aquí →</a></p>
+                <p style="margin: 0 0 8px 0;"><strong>⚡ Redline Inmediato en Word (.docx con Control de Cambios):</strong> Listo antes de que termine su café por solo <strong>$19 USD</strong> (Cobro 1-Clic Wompi / Banco Agrícola).</p>
+                <p style="margin: 0;"><strong>🛡️ Privacidad Estricta:</strong> Memoria RAM encriptada, 0 almacenamiento en disco y garantía de no-entrenamiento de modelos con sus datos.</p>
               </div>
-              <p>¿Le parecería útil auditar un contrato confidencial de prueba con su equipo técnico hoy?</p>
+              <p>¿Le parecería útil correr un contrato de prueba sin costo con su equipo técnico hoy?</p>
               <p style="margin-top: 24px;">Atentamente,<br><strong>Ricardo Bolaños</strong><br><span style="color: #64748b; font-size: 13px;">Gerente General • AuditFlow AI (<a href="https://audiflowai.com" style="color: #0284c7;">audiflowai.com</a>)</span></p>
             </div>
           `;
