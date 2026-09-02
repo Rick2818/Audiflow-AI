@@ -1,0 +1,420 @@
+/* ==============================================================================
+   AUDITFLOW AI - DESIGN SYSTEM & STYLESHEET PRINCIPAL (B2B SaaS CLASS)
+   Estándar de diseño de alta fidelidad: Linear / Stripe / Vercel
+   Optimizado para 60fps, contraste WCAG AAA (>7:1) y renderizado nítido.
+   ============================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+:root {
+    /* Superficies y Fondos Obsidian/Zinc */
+    --bg-canvas: #09090b;
+    --bg-surface: #101014;
+    --bg-card: #15151a;
+    --bg-card-hover: #1c1c23;
+    --bg-elevated: #22222b;
+
+    /* Bordes y Separadores */
+    --border-subtle: #27272a;
+    --border-card: rgba(255, 255, 255, 0.08);
+    --border-hover: rgba(56, 189, 248, 0.4);
+    --border-focus: #38bdf8;
+
+    /* Acentos y Gradientes */
+    --accent-blue: #38bdf8;
+    --accent-blue-rgb: 56, 189, 248;
+    --accent-emerald: #10b981;
+    --accent-emerald-rgb: 16, 185, 129;
+    --accent-purple: #a855f7;
+    --accent-amber: #f59e0b;
+    --accent-rose: #f43f5e;
+
+    /* Tipografía y Textos con Alto Contraste */
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --text-faint: #64748b;
+
+    /* Sombras y Luces Radiales (Glows) */
+    --glow-blue: 0 0 35px rgba(56, 189, 248, 0.22);
+    --glow-emerald: 0 0 35px rgba(16, 185, 129, 0.22);
+    --glow-purple: 0 0 35px rgba(168, 85, 247, 0.22);
+    --shadow-card: 0 8px 32px -8px rgba(0, 0, 0, 0.6);
+    --shadow-dropdown: 0 16px 48px -12px rgba(0, 0, 0, 0.8);
+}
+
+/* ==============================================================================
+   RESETEO Y BASE TIPOGRÁFICA
+   ============================================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: dark !important;
+    background-color: #09090b !important;
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: #09090b !important;
+    color: #f8fafc !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    letter-spacing: -0.01em;
+}
+
+/* Números y Cifras con Alineación Tabular de Precisión */
+.font-mono, [data-tabular-nums] {
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-feature-settings: "tnum", "zero", "cv02", "cv03";
+    font-variant-numeric: tabular-nums;
+}
+
+/* ==============================================================================
+   EFECTO HERO SPOTLIGHT & ILUMINACIÓN RADIAL
+   ============================================================================== */
+.hero-spotlight-bg {
+    position: relative;
+}
+
+.hero-spotlight-bg::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 85%;
+    max-width: 900px;
+    height: 480px;
+    background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(16, 185, 129, 0.06) 40%, rgba(9, 9, 11, 0) 70%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(45px);
+}
+
+/* ==============================================================================
+   ZONA DROPZONE HERO (TACTICAL DROP-CARD)
+   ============================================================================== */
+.drop-card {
+    background: linear-gradient(180deg, var(--bg-card) 0%, #101015 100%);
+    border: 1.5px dashed var(--border-subtle);
+    border-radius: 20px;
+    box-shadow: var(--shadow-card);
+    transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.drop-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(56, 189, 248, 0.06), transparent 40%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.drop-card:hover {
+    border-color: rgba(56, 189, 248, 0.55);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px -10px rgba(56, 189, 248, 0.18), 0 0 0 1px rgba(56, 189, 248, 0.2);
+}
+
+.drop-card:hover::before {
+    opacity: 1;
+}
+
+.drop-card.drag-over {
+    border-color: var(--accent-blue) !important;
+    border-style: solid !important;
+    background: linear-gradient(180deg, #151f2e 0%, #0d1522 100%) !important;
+    transform: scale(1.018);
+    box-shadow: 0 0 50px rgba(56, 189, 248, 0.35), inset 0 0 24px rgba(56, 189, 248, 0.12);
+}
+
+/* ==============================================================================
+   BOTONES PREMIUM B2B
+   ============================================================================== */
+.btn-primary {
+    background: linear-gradient(135deg, #0284c7 0%, #0284c7 40%, #0d9488 100%);
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 12px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 4px 18px rgba(2, 132, 199, 0.35);
+    position: relative;
+    user-select: none;
+}
+
+.btn-primary:hover {
+    opacity: 0.96;
+    transform: translateY(-1.5px);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 8px 26px rgba(56, 189, 248, 0.45);
+}
+
+.btn-primary:active {
+    transform: translateY(0) scale(0.985);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-secondary {
+    background-color: var(--bg-surface);
+    color: var(--text-primary);
+    border: 1px solid var(--border-subtle);
+    padding: 9px 18px;
+    border-radius: 12px;
+    font-weight: 500;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.btn-secondary:hover {
+    background-color: var(--bg-card-hover);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.btn-secondary:active {
+    transform: translateY(0) scale(0.99);
+}
+
+/* ==============================================================================
+   INPUTS Y CAMPOS DE FORMULARIO
+   ============================================================================== */
+.input-field {
+    width: 100%;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    padding: 11px 16px;
+    color: var(--text-primary);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.input-field:focus {
+    border-color: var(--accent-blue);
+    background-color: #121217;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2), inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.input-field::placeholder {
+    color: var(--text-faint);
+}
+
+/* ==============================================================================
+   INSIGNIAS DE PRIVACIDAD & DOTS PULSANTES
+   ============================================================================== */
+.badge-privacy {
+    background-color: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+    padding: 5px 13px;
+    border-radius: 999px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 0 16px rgba(16, 185, 129, 0.12);
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+}
+
+.pulse-dot::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    background-color: rgba(16, 185, 129, 0.5);
+    animation: pulse-ring 1.8s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulse-ring {
+    0% {
+        transform: scale(0.8);
+        opacity: 0.8;
+    }
+    70% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(2.4);
+        opacity: 0;
+    }
+}
+
+/* ==============================================================================
+   BLUR DE SEGURIDAD & REPORT OVERLAYS
+   ============================================================================== */
+.blurred-content {
+    filter: blur(8px);
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    text-shadow: 0 0 16px rgba(255, 255, 255, 0.4);
+    transition: filter 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.unblurred {
+    filter: none !important;
+    user-select: auto !important;
+    text-shadow: none !important;
+}
+
+.blur-overlay {
+    background: linear-gradient(180deg, rgba(21, 21, 26, 0.5) 0%, rgba(21, 21, 26, 0.85) 100%);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+/* ==============================================================================
+   TARJETAS B2B MODERNA TIPO LINEAR / VERCEL
+   ============================================================================== */
+.b2b-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: var(--shadow-card);
+}
+
+.b2b-card:hover {
+    border-color: rgba(255, 255, 255, 0.16);
+    background-color: var(--bg-card-hover);
+}
+
+/* Glow Shadows Especiales */
+.shadow-glow {
+    box-shadow: var(--glow-blue);
+}
+
+.shadow-glow-emerald {
+    box-shadow: var(--glow-emerald);
+}
+
+.shadow-glow-purple {
+    box-shadow: var(--glow-purple);
+}
+
+/* ==============================================================================
+   ANIMACIONES A 60FPS
+   ============================================================================== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.32s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==============================================================================
+   PERSONALIZACIÓN DE SCROLLBARS (SIEMPRE VISIBLE Y DE ALTO CONTRASTE)
+   ============================================================================== */
+html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0B0F19;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #374151;
+    border-radius: 6px;
+    border: 2px solid #0B0F19;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #38BDF8;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #374151 #0B0F19;
+}
+
+/* ==============================================================================
+   ESTILOS DE IMPRESIÓN OFICIAL EN PDF (@media print)
+   ============================================================================== */
+@media print {
+    header, footer, .no-print, #unlock-banner, #upsell-banner, .blur-overlay, #btn-sample-demo, #admin-login-modal {
+        display: none !important;
+    }
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+    }
+    main {
+        max-width: 100% !important;
+        padding: 0 !important;
+    }
+    .bg-dark-card, .bg-dark-surface, .b2b-card {
+        background-color: #ffffff !important;
+        border: 1px solid #d1d5db !important;
+        color: #000000 !important;
+        box-shadow: none !important;
+    }
+    .blurred-content {
+        filter: none !important;
+        user-select: auto !important;
+        text-shadow: none !important;
+        color: #000000 !important;
+    }
+    .text-white {
+        color: #000000 !important;
+    }
+    .text-gray-300, .text-gray-400 {
+        color: #374151 !important;
+    }
+    .text-accent-blue {
+        color: #0284c7 !important;
+    }
+    .text-accent-emerald {
+        color: #059669 !important;
+    }
+}
