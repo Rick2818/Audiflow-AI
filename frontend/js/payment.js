@@ -48,6 +48,7 @@ window.PaymentHandler = {
             if (contentWompi) contentWompi.classList.remove('hidden');
             if (contentLightning) contentLightning.classList.add('hidden');
             this.clearPollingAndTimers();
+            this.renderWompiTab();
         } else {
             if (tabLightning) {
                 tabLightning.className = 'py-2.5 px-2 rounded-lg text-xs font-extrabold text-black bg-gradient-to-r from-amber-400 to-amber-500 transition-all flex items-center justify-center gap-1 shadow-glow cursor-pointer';
@@ -58,6 +59,66 @@ window.PaymentHandler = {
             if (contentLightning) contentLightning.classList.remove('hidden');
             if (contentWompi) contentWompi.classList.add('hidden');
             this.generateLightningInvoice();
+        }
+    },
+
+    renderWompiTab() {
+        const savedToken = localStorage.getItem('wompi_card_token') || 'tok_auditflow_demo_4321';
+        const rawLast4 = localStorage.getItem('wompi_card_last4') || '4321';
+        const rawBrand = localStorage.getItem('wompi_card_brand') || 'Visa Corporate';
+
+        const safeLast4 = String(rawLast4).replace(/[^0-9]/g, '').slice(0, 4) || '4321';
+        const safeBrand = String(rawBrand).replace(/[^a-zA-Z0-9\s]/g, '') || 'Visa Corporate';
+
+        const btnPayWompi = document.getElementById('btn-pay-wompi');
+
+        if (btnPayWompi) {
+            btnPayWompi.textContent = `⚡ Pagar $9.00 USD con 1 Clic (${safeBrand} •••• ${safeLast4})`;
+            btnPayWompi.onclick = (e) => {
+                e.preventDefault();
+                this.executeOneClickPayment(savedToken, safeLast4);
+            };
+        }
+    },
+
+    async executeOneClickPayment(cardToken, last4) {
+        const btn = document.getElementById('btn-pay-wompi');
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '⏳ Procesando cargo seguro con Wompi SV...';
+        }
+
+        try {
+            const res = await fetch('/api/payment', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    action: 'one-click',
+                    report_id: this.currentReportId || 'rep_demo_' + Date.now(),
+                    cardToken: cardToken,
+                    amount: 9.00,
+                    email: this.currentLeadEmail || 'cfo@empresa.com'
+                })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                alert(`🎉 ¡Pago Aprobado con 1 Clic! ($9.00 USD)\\nCódigo de Autorización: ${data.authorizationCode || 'AUTH_98124'}\\n\\nTu reporte y control de cambios en Word (.docx) han sido desbloqueados.`);
+                this.closePaymentModal();
+                if (window.AppHandler && window.AppHandler.unblurReport) {
+                    window.AppHandler.unblurReport();
+                }
+            } else {
+                alert('❌ ' + (data.error || 'No fue posible procesar el cobro a 1 Clic.'));
+            }
+        } catch (err) {
+            alert('❌ Error de comunicación con la pasarela.');
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                this.renderWompiTab();
+            }
         }
     },
 
@@ -149,9 +210,9 @@ window.PaymentHandler = {
 
         if (typeof window.gtag === 'function') {
             window.gtag('event', 'begin_checkout', {
-                value: 19.0,
+                value: 9.0,
                 currency: 'USD',
-                items: [{ item_id: 'report_unlock_19', item_name: 'Desbloqueo Reporte Ejecutivo + Word DOCX + PDF' }]
+                items: [{ item_id: 'report_unlock_9', item_name: 'Boleto de Entrada: Desbloqueo Reporte Ejecutivo + Word DOCX + PDF' }]
             });
         }
 
@@ -163,7 +224,7 @@ window.PaymentHandler = {
                     report_id: this.currentReportId || 'rep_123456',
                     email: this.currentLeadEmail || 'cliente@empresa.com',
                     document_name: this.currentDocName || 'contrato.pdf',
-                    amount_usd: 19.00
+                    amount_usd: 9.00
                 })
             });
 
@@ -176,18 +237,18 @@ window.PaymentHandler = {
                 if (window.AppHandler && window.AppHandler.unblurReport) {
                     window.AppHandler.unblurReport();
                 }
-                alert('🎉 ¡Pago Exitoso de $19.00 USD!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF + Word editable a tu correo.');
+                alert('🎉 ¡Pago Exitoso de $9.00 USD (Boleto de Entrada)!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF + Word editable a tu correo.');
             }
         } catch (err) {
             console.error('Error en checkout Stripe:', err);
             alert('⚠️ No se pudo procesar la solicitud de Stripe (' + err.message + '). Por favor intenta de nuevo.');
         } finally {
-            if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($19 USD)';
+            if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($9 USD)';
         }
     },
 
     /**
-     * Genera Factura Lightning Network BOLT11 en Satoshis ($19 USD)
+     * Genera Factura Lightning Network BOLT11 en Satoshis ($9 USD)
      */
     async generateLightningInvoice() {
         this.clearPollingAndTimers();
@@ -198,20 +259,20 @@ window.PaymentHandler = {
                 body: JSON.stringify({
                     report_id: this.currentReportId || 'rep_123456',
                     document_name: this.currentDocName || 'contrato.pdf',
-                    amount_usd: 19.00
+                    amount_usd: 9.00
                 })
             });
 
             const data = await res.json();
             const bolt11 = data.lightningInvoice || 'lightning:rick28@strike.me';
-            const satsAmount = data.amountSats || 29230;
+            const satsAmount = data.amountSats || 13850;
 
             const inputInvoice = document.getElementById('ln-invoice-input');
             const satsAmountEl = document.getElementById('ln-sats-amount');
 
             if (inputInvoice) inputInvoice.value = bolt11;
             if (satsAmountEl) {
-                satsAmountEl.innerText = `${satsAmount.toLocaleString()} Sats (~$19 USD)`;
+                satsAmountEl.innerText = `${satsAmount.toLocaleString()} Sats (~$9 USD)`;
             }
 
             // Generar Código QR interactivo de alta fiabilidad (Zero dependencies)

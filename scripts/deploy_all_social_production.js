@@ -4,47 +4,35 @@ import fs from 'fs';
 
 const USER_DATA_DIR = path.resolve(process.env.LOCALAPPDATA || 'C:\\Users\\Ricardo\\AppData\\Local', 'AuditFlowChromeProfile');
 
-const FB_COPY = `🚨 ANTES DE FIRMAR CUALQUIER CONTRATO ESTE FIN DE SEMANA: El 74% de las penalizaciones contractuales en 2026 provienen de cláusulas invisibles de "Renovación Automática Silenciosa" y "Jurisdicción Forzosa".
+const FB_COPY = `💡 CASO REAL: Cómo detectar una fuga de $14,400 USD en una factura de proveedor antes de pagar (Desliza ➔)
 
-¿Sabías que subir tus contratos o borradores a herramientas de IA pública viola directamente el secreto comercial de tu empresa? 
+El 62% de las empresas pagan sobrecostos en facturas de tecnología y compras porque conciliar manualmente 50 páginas de contrato contra una factura es inviable para un equipo ocupado.
 
-Si tu equipo legal o directivo está cerrando acuerdos antes de fin de mes, no dejes que un detalle de redacción te cueste miles de dólares. En AuditFlow AI creamos el primer auditor contractual forense 100% privado en memoria RAM volátil:
-✅ 0% persistencia de datos (tus contratos jamás se almacenan en disco ni entrenan modelos).
-✅ Detección en 10 segundos de cláusulas trampa, penalizaciones desproporcionadas e inconsistencias fiduciarias.
-✅ Descarga inmediata del informe Redline en Word (.docx) con las cláusulas ya corregidas.
+Con AuditFlow AI:
+✅ Subes el contrato y la factura.
+✅ Gemini 2.5 Flash cruza las cláusulas en 8 segundos en memoria RAM volátil.
+✅ Genera la carta de objeción en Word (.docx) lista para frenar el pago indebido.
 
-👉 Audita tu primer contrato GRATIS y en 10 segundos aquí: https://audiflowai.com
+🛡️ Sin almacenamiento en disco. Máxima confidencialidad fiduciaria.
+👉 Haz tu prueba gratuita hoy: https://audiflowai.com
 
-💬 Comenta la palabra "AUDITORIA" (o "AUDIT") y te enviamos por Messenger el Checklist Fiduciario 2026 en PDF + acceso directo sin registro previo.
+💬 Comenta "CONCILIAR" para enviarte una plantilla de objeción en Word.
+#AuditoriaFinanciera #CFO #ControlDeCostos #FinanzasEmpresariales #MicroSaaS #LegalTech`;
 
----
-🌍 Available globally: Audit vendor & partner agreements in under 10s with zero-data-retention RAM security.
-#AuditFlowAI #LegalTech #ContratosInteligentes #CFO #Compliance2026 #GestionDeRiesgos #IAEmpresarial`;
+const LI_COPY = `🚨 El 81% de las pérdidas por sobrecostos contractuales no son fraudes: son cláusulas mal leídas que se pagaron sin objeción previa.
 
-const LI_COPY = `El 78% de los litigios comerciales en 2026 provienen de cláusulas que nadie leyó con detenimiento.
+En contratos de servicios corporativos, proveedores de software y logística, existen 3 cláusulas que aumentan silenciosamente su facturación:
+1. Indexaciones compuestas no notificadas.
+2. Cargos por mantenimiento que exceden el SLA pactado.
+3. Renovaciones automáticas con penalidad por cancelación tardía.
 
-No es falta de abogados.
-Es falta de tiempo y exceso de volumen contractual.
+Con AuditFlow AI, los directores financieros y counsels corporativos concilian facturas vs contratos en 8 segundos en RAM volátil, descargando el Redline en Word con control de cambios instantáneo.
 
-Con la entrada en vigor de los nuevos marcos regulatorios de cumplimiento y gobernanza este año, firmar contratos bajo plantillas de 2023 o 2024 es una ruleta rusa corporativa.
+🔗 Conozca cómo blindar el presupuesto corporativo hoy: https://audiflowai.com
 
-Los 3 riesgos silenciosos más costosos que estamos detectando en auditorías:
+¿En su organización cuánto tiempo toma conciliar una factura compleja contra sus términos contractuales? Los leo en comentarios.
 
-1. Cláusulas de Renovación Automática Opacas: Penalizaciones ocultas de hasta un 35% del valor anual sin ventana de salida viable.
-2. Responsabilidad y Traspaso de Datos (AI Act & DORA): Cláusulas de indemnización desproporcionadas ante brechas de terceros.
-3. Desalineación Jurisdiccional: Arbitrajes en sedes extranjeras con costos legales que triplican el valor del contrato en disputa.
-
-Revisar 120 páginas de anexos técnicos y legales ya no puede depender del cansancio del viernes a las 7 PM de tu equipo legal.
-
-La IA privada no reemplaza el juicio de tus abogados o auditores; les da visión de rayos X en 30 segundos.
-
-AuditFlow AI analiza, clasifica y detecta anomalías, trampas y riesgos de cumplimiento en segundos con privacidad estricta de datos (cero entrenamiento con tu información).
-
-👇 ¿Quieres verificar la salud de tus contratos actuales?
-
-Comenta "AUDITORIA" (o "AUDIT" en inglés) en este post y te enviamos por mensaje privado un Diagnóstico Exprés Gratuito de Riesgos Contractuales 2026.
-
-#LegalTech #AuditoriaLegal #Compliance2026 #GestionDeRiesgos #B2B #AuditFlowAI #CFO #GeneralCounsel`;
+#FinanzasCorporativas #CFO #LegalTech #AuditoriaDigital #Compliance2026 #AuditFlowAI`;
 
 async function deployAllSocial() {
   console.log('\n============================================================');

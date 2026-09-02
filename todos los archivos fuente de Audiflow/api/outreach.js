@@ -29,7 +29,6 @@ export const REAL_LEGAL_DIRECTORS = [
   { id: 'legal_18', name: 'Carlos Cornejo', role: 'Socio de Servicios Legales & Tributarios', company: 'KPMG Legal El Salvador', email: 'kpmg@kpmg.com.sv', country: 'El Salvador', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_19', name: 'Eduardo Calderón', role: 'Director de Práctica Legal Corporativa', company: 'Deloitte Legal Latam', email: 'contacto@deloitte.com', country: 'México', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_20', name: 'Carlos Albiñana', role: 'Socio Director de Servicios Jurídicos', company: 'PwC InterAméricas', email: 'contacto@pwc.com', country: 'Panamá', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
-  { id: 'legal_21', name: 'Javier Ybáñez', role: 'Socio Responsable Práctica Latam', company: 'Garrigues Latam', email: 'info@garrigues.com', country: 'España', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_22', name: 'Rafael Fontana', role: 'Presidente Ejecutivo & General Counsel', company: 'Cuatrecasas', email: 'info@cuatrecasas.com', country: 'España', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_23', name: 'Jaime Trujillo', role: 'Socio Director Práctica Corporativa Latam', company: 'Baker McKenzie Latam', email: 'info@bakermckenzie.com', country: 'Colombia', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_24', name: 'Jaime Herrera', role: 'Socio Director Corporativo', company: 'Posse Herrera Ruiz', email: 'info@phrlegal.com', country: 'Colombia', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 97, pareto_tier: 'TOP_20', revenue_potential: 590 },
@@ -238,7 +237,6 @@ const realLawFirmsByCountry = {
     { firm: 'Baker McKenzie Colombia', dom: 'bakermckenzie.com', email: 'info@bakermckenzie.com' }
   ],
   'España': [
-    { firm: 'Garrigues Abogados', dom: 'garrigues.com', email: 'info@garrigues.com' },
     { firm: 'Cuatrecasas', dom: 'cuatrecasas.com', email: 'info@cuatrecasas.com' },
     { firm: 'Uría Menéndez', dom: 'uria.com', email: 'informacion@uria.com' },
     { firm: 'Pérez-Llorca', dom: 'perezllorca.com', email: 'info@perezllorca.com' },

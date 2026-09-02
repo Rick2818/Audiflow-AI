@@ -1,0 +1,17 @@
+{
+  "name": "auditflow-one-click-billing",
+  "version": "1.0.0",
+  "description": "Motor de cobro 1-Click Upsell y Tokenización Wompi para AuditFlow AI",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "helmet": "^7.1.0"
+  }
+}

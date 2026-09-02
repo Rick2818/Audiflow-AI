@@ -1,0 +1,18 @@
+{
+  "suppressed_emails": [
+    "info@garrigues.com",
+    "javier.ybez@garrigues.com",
+    "jorge.snchez@garrigues.com",
+    "toms.kubin@garrigues.com"
+  ],
+  "suppressed_domains": [
+    "garrigues.com"
+  ],
+  "suppressed_companies": [
+    "garrigues",
+    "garrigues latam",
+    "garrigues perú",
+    "garrigues chile",
+    "garrigues abogados"
+  ]
+}

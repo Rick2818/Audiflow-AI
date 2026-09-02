@@ -1,5 +1,5 @@
-import { NORDIC_LEGAL_EXECUTIVE_LEADS } from '../api/outreach.js';
-import { CONFIG } from '../lib/config.js';
+import { NORDIC_LEGAL_EXECUTIVE_LEADS } from '../../api/outreach.js';
+import { CONFIG } from '../../lib/config.js';
 
 async function executeNordicosCampaignDispatch() {
   console.log('======================================================================');

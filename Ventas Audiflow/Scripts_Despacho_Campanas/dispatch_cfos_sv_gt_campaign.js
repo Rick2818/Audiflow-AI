@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
-import { CONFIG } from '../lib/config.js';
-import { waalaxyProspectsStore } from '../api/waalaxy-sync.js';
+import { CONFIG } from '../../lib/config.js';
+import { waalaxyProspectsStore } from '../../api/waalaxy-sync.js';
 
 async function dispatchElSalvadorGuatemalaCampaign() {
   console.log('======================================================================');

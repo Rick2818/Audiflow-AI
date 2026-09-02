@@ -124,7 +124,6 @@ const LEGAL_FIRMS_AND_CORPORATIONS = [
   { fn: "Hans", ln: "Ulrich Meister", co: "Geberit AG", ro: "Head of Legal Affairs", coDomain: "geberit.com", cy: "Suiza", lg: "de" },
 
   // --- ESPAÑA & LATAM (80) ---
-  { fn: "Javier", ln: "Ybáñez", co: "Garrigues", ro: "Socio Responsable Práctica Corporativa Latam", coDomain: "garrigues.com", cy: "España", lg: "es" },
   { fn: "Rafael", ln: "Fontana", co: "Cuatrecasas", ro: "Presidente Ejecutivo & General Counsel", coDomain: "cuatrecasas.com", cy: "España", lg: "es" },
   { fn: "Salvador", ln: "Sánchez-Terán", co: "Uría Menéndez", ro: "Socio Director", coDomain: "uria.com", cy: "España", lg: "es" },
   { fn: "Pedro", ln: "Pérez-Llorca", co: "Pérez-Llorca", ro: "Socio Director", coDomain: "perezllorca.com", cy: "España", lg: "es" },
@@ -182,10 +181,8 @@ const LEGAL_FIRMS_AND_CORPORATIONS = [
   { fn: "Alberto", ln: "Rebaza", co: "Rebaza, Alcázar & De Las Casas", ro: "Managing Partner", coDomain: "rebaza-alcazar.com", cy: "Perú", lg: "es" },
   { fn: "Rafael", ln: "Alcázar", co: "Rebaza, Alcázar & De Las Casas", ro: "Socio Director", coDomain: "rebaza-alcazar.com", cy: "Perú", lg: "es" },
   { fn: "Guillermo", ln: "Ferrero", co: "Philippi Prietocarrizosa Ferrero DU & Uría Perú", ro: "Socio Director", coDomain: "ppulegal.com", cy: "Perú", lg: "es" },
-  { fn: "Jorge", ln: "Sánchez", co: "Garrigues Perú", ro: "Socio Responsable", coDomain: "garrigues.com", cy: "Perú", lg: "es" },
   { fn: "Diego", ln: "Peralta", co: "Carey Abogados", ro: "Socio Banca & Finanzas", coDomain: "carey.cl", cy: "Chile", lg: "es" },
   { fn: "Guillermo", ln: "Acuña", co: "Cuatrecasas Chile", ro: "Socio Director", coDomain: "cuatrecasas.com", cy: "Chile", lg: "es" },
-  { fn: "Tomás", ln: "Kubin", co: "Garrigues Chile", ro: "Socio Director", coDomain: "garrigues.com", cy: "Chile", lg: "es" },
   { fn: "Alfonso", ln: "Rey", co: "Uría Menéndez Chile", ro: "Socio Responsable", coDomain: "uria.com", cy: "Chile", lg: "es" },
   { fn: "Francisco", ln: "Guzmán", co: "Carey Venture Capital Desk", ro: "Socio Director", coDomain: "carey.cl", cy: "Chile", lg: "es" },
   { fn: "Jorge", ln: "Larraín", co: "Guerrero Olivos", ro: "Managing Partner", coDomain: "guerrero.cl", cy: "Chile", lg: "es" },
