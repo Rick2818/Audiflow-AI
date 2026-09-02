@@ -1025,8 +1025,22 @@ export default async function handler(req, res) {
           { name: 'Eduardo Mayora', company: 'Mayora & Mayora', role: 'Socio Director Legal', email: 'info@mayora-mayora.com', country: 'Guatemala', lead_score: 97 },
           { name: 'Mónica Machuca', company: 'EY Law Centroamérica', role: 'Directora Legal El Salvador', email: 'eylaw@sv.ey.com', country: 'El Salvador', lead_score: 98 }
         ];
+      } else if (cluster === 'cluster_c_nordic_midmarket' || cluster === 'cluster_c_nordics') {
+        clusterName = '🇪🇺 Cluster C: Bufetes Medianos Nórdicos (Sweden, Norway, Denmark, Finland)';
+        targetProspects = [
+          { name: 'Mats Dahlberg', company: 'Delphi Advokatbyrå', role: 'Partner & Head of Corporate Contracts', email: 'mats.dahlberg@delphi.se', country: 'Suecia', lead_score: 98 },
+          { name: 'Peter Högström', company: 'Cirio Advokatbyrå', role: 'Partner M&A / Commercial', email: 'peter.hogstrom@cirio.se', country: 'Suecia', lead_score: 98 },
+          { name: 'Tone Østensen', company: 'Kvale Advokatfirma', role: 'Partner Corporate & IT Contracts', email: 'toe@kvale.no', country: 'Noruega', lead_score: 97 },
+          { name: 'Vibe Lindhart', company: 'Lundgrens Advokatpartnerselskab', role: 'Partner Commercial Contracts', email: 'vli@lundgrens.com', country: 'Dinamarca', lead_score: 98 },
+          { name: 'Mårten Steen', company: 'Cederquist', role: 'Partner Corporate Commercial', email: 'marten.steen@cederquist.se', country: 'Suecia', lead_score: 97 },
+          { name: 'Pål Kvernaas', company: 'Advokatfirmaet Haavind', role: 'Partner Technology & Contracts', email: 'p.kvernaas@haavind.no', country: 'Noruega', lead_score: 97 },
+          { name: 'Carsten Brink', company: 'Mazanti-Andersen', role: 'Partner Commercial & Tech', email: 'cb@mazanti.dk', country: 'Dinamarca', lead_score: 97 },
+          { name: 'Juha Koponen', company: 'Borenius Attorneys', role: 'Partner Head of Contracts & Tech', email: 'juha.koponen@borenius.com', country: 'Finlandia', lead_score: 98 },
+          { name: 'Niklas Thibblin', company: 'Krogerus Attorneys', role: 'Partner Corporate Advisory', email: 'niklas.thibblin@krogerus.com', country: 'Finlandia', lead_score: 97 },
+          { name: 'Robert Kullgren', company: 'Wistrand Advokatbyrå', role: 'Partner Corporate Law', email: 'robert.kullgren@wistrand.se', country: 'Suecia', lead_score: 96 }
+        ];
       } else {
-        clusterName = '🇪🇺 Cluster C: Zona Nórdica (Sweden, Norway, Denmark, Finland)';
+        clusterName = '🇪🇺 Cluster C: Zona Nórdica General';
         targetProspects = NORDIC_LEGAL_EXECUTIVE_LEADS.slice(0, 10);
       }
 
