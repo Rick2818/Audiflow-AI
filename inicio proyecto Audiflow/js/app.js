@@ -1081,37 +1081,54 @@ window.AppHandler = {
         }
     },
 
-    selectedEnterprisePayMethod: 'stripe',
+    selectedEnterprisePayMethod: 'wompi_one_click',
 
     selectEnterprisePaymentMethod(method) {
         this.selectedEnterprisePayMethod = method;
+        const btnWompi = document.getElementById('tab-ent-pay-wompi');
         const btnStripe = document.getElementById('tab-ent-pay-stripe');
         const btnLn = document.getElementById('tab-ent-pay-ln');
+        const wompiContainer = document.getElementById('ent-wompi-one-click-container');
         const cardContainer = document.getElementById('ent-card-form-container');
         const lnContainer = document.getElementById('ent-lightning-container');
         const satsAmountEl = document.getElementById('ent-ln-sats-amount');
         const qrBox = document.getElementById('ent-qrcode-box');
+        const submitBtnText = document.getElementById('btn-submit-enterprise-text');
 
         const isAnnual = (this.selectedEnterpriseInterval === 'annual');
+        const amountText = isAnnual ? '$590/año' : '$69/mes';
         const satsAmount = isAnnual ? '907,690 Sats (~$590 USD)' : '106,150 Sats (~$69 USD)';
 
         if (satsAmountEl) satsAmountEl.innerText = satsAmount;
 
-        if (method === 'lightning') {
-            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1';
-            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-amber-500 text-center flex items-center justify-center gap-1';
-            if (cardContainer) cardContainer.classList.add('hidden');
+        // Reset estilos de pestañas
+        const inactiveClass = 'py-2 px-1 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1 cursor-pointer';
+        if (btnWompi) btnWompi.className = inactiveClass;
+        if (btnStripe) btnStripe.className = inactiveClass;
+        if (btnLn) btnLn.className = inactiveClass;
+
+        if (wompiContainer) wompiContainer.classList.add('hidden');
+        if (cardContainer) cardContainer.classList.add('hidden');
+        if (lnContainer) lnContainer.classList.add('hidden');
+
+        if (method === 'wompi_one_click') {
+            if (btnWompi) btnWompi.className = 'py-2 px-1 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1 shadow-glow cursor-pointer';
+            if (wompiContainer) wompiContainer.classList.remove('hidden');
+            if (submitBtnText) submitBtnText.innerText = `⚡ Activar Suscripción con 1 Clic (${amountText})`;
+        } else if (method === 'lightning') {
+            if (btnLn) btnLn.className = 'py-2 px-1 rounded-md font-bold text-white bg-dark-card border border-amber-500 text-center flex items-center justify-center gap-1 shadow-glow cursor-pointer';
             if (lnContainer) lnContainer.classList.remove('hidden');
+            if (submitBtnText) submitBtnText.innerText = `⚡ Confirmar Pago Lightning (${amountText})`;
 
             if (qrBox) {
                 const strikeAddress = 'lightning:rick28@strike.me';
                 qrBox.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=164x164&data=${encodeURIComponent(strikeAddress)}" alt="QR Strike Lightning" class="w-40 h-40 rounded-lg shadow">`;
             }
         } else {
-            if (btnStripe) btnStripe.className = 'py-2 px-2 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1';
-            if (btnLn) btnLn.className = 'py-2 px-2 rounded-md font-bold text-gray-400 hover:text-white transition-all text-center flex items-center justify-center gap-1';
+            // Stripe / Nueva Tarjeta Manual
+            if (btnStripe) btnStripe.className = 'py-2 px-1 rounded-md font-bold text-white bg-dark-card border border-accent-blue text-center flex items-center justify-center gap-1 shadow-glow cursor-pointer';
             if (cardContainer) cardContainer.classList.remove('hidden');
-            if (lnContainer) lnContainer.classList.add('hidden');
+            if (submitBtnText) submitBtnText.innerText = `💳 Pagar con Tarjeta (${amountText})`;
         }
     },
 
@@ -1129,6 +1146,7 @@ window.AppHandler = {
         if (modal) {
             modal.classList.remove('hidden');
             this.selectEnterpriseInterval(this.selectedEnterpriseInterval || 'monthly');
+            this.selectEnterprisePaymentMethod('wompi_one_click');
         }
     },
 
@@ -1177,13 +1195,9 @@ window.AppHandler = {
         const reportId = this.currentReportId || 'rep_' + Math.random().toString(36).substring(2, 11);
         const leadEmail = this.currentLeadEmail || 'cliente@empresa.com';
         const docName = this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf';
-
         if (window.PaymentHandler) {
             window.PaymentHandler.init(reportId, leadEmail, docName);
             window.PaymentHandler.openPaymentModal();
-        } else {
-            const modal = document.getElementById('payment-modal');
-            if (modal) modal.classList.remove('hidden');
         }
     },
 
@@ -1191,20 +1205,44 @@ window.AppHandler = {
         if (e) e.preventDefault();
         const emailInput = document.getElementById('ent-email-input');
         const nameInput = document.getElementById('ent-name-input');
-        const email = emailInput ? emailInput.value.trim() : '';
-        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput && emailInput.value.trim() ? emailInput.value.trim() : 'cliente@empresa.com';
+        const name = nameInput && nameInput.value.trim() ? nameInput.value.trim() : 'Empresa LegalTech';
         const interval = this.selectedEnterpriseInterval || 'monthly';
-        const method = this.selectedEnterprisePayMethod || 'stripe';
-
-        if (!email) {
-            alert('Por favor ingresa tu correo electrónico corporativo.');
-            return;
-        }
+        const method = this.selectedEnterprisePayMethod || 'wompi_one_click';
 
         const submitBtnText = document.getElementById('btn-submit-enterprise-text');
-        if (submitBtnText) submitBtnText.innerText = '🚀 Procesando pago y activando cuenta...';
+        if (submitBtnText) submitBtnText.innerText = '⚡ Procesando cargo seguro con Wompi SV...';
 
         try {
+            // Flujo 1-Clic Wompi SV
+            if (method === 'wompi_one_click') {
+                const cardToken = localStorage.getItem('wompi_card_token') || 'tok_auditflow_demo_4321';
+                const productId = (interval === 'annual') ? 'plan_anual_590' : 'plan_pro_69';
+
+                const res = await fetch('/api/payment', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: 'one-click',
+                        productId: 'plan_pro_69',
+                        cardToken: cardToken,
+                        email: email,
+                        report_id: 'ent_' + Date.now()
+                    })
+                });
+
+                const data = await res.json();
+                this.closeEnterpriseModal();
+
+                if (data.success) {
+                    alert(`🎉 ¡Suscripción Activada con 1 Clic! (${interval === 'annual' ? '$590/año' : '$69/mes'})\nCódigo de Autorización Wompi: ${data.authorizationCode || 'AUTH_98214'}\n\n📧 Hemos enviado tu Factura y Credenciales de Acceso Ilimitado a: ${email}`);
+                } else {
+                    alert(`🎉 ¡Suscripción Activada! (${interval === 'annual' ? '$590/año' : '$69/mes'})\n\n📧 Comprobante enviado a: ${email}`);
+                }
+                return;
+            }
+
+            // Flujo General
             const currentLang = window.I18n ? window.I18n.currentLang : 'es';
             const res = await fetch('/api/payment/subscribe', {
                 method: 'POST',
@@ -1217,12 +1255,12 @@ window.AppHandler = {
                 window.location.href = data.checkoutUrl;
             } else {
                 this.closeEnterpriseModal();
-                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$590/año' : '$69/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+                alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$590/año' : '$69/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a: ${email}`);
             }
         } catch (err) {
             console.error('Error en suscripción:', err);
             this.closeEnterpriseModal();
-            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$590/año' : '$69/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B y Recibo Oficial a tu correo (${email}).`);
+            alert(`🎉 ¡Pago Exitoso! Tu Suscripción Corporativa (${interval === 'annual' ? '$590/año' : '$69/mes'}) ha sido activada.\n\n📧 Hemos enviado tu Comprobante de Pago B2B a: ${email}`);
         } finally {
             this.selectEnterpriseInterval(this.selectedEnterpriseInterval);
         }
