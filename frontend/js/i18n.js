@@ -29,11 +29,11 @@ window.I18n = {
             support_btn_submit: "🤖 Re-Analizar y Corregir con IA",
             
             // Hero
-            hero_free_badge: "🎁 Diagnóstico Inicial Gratuito • Sin tarjeta de crédito requerida",
-            hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • Procesamiento ultra-rápido",
-            hero_title_1: "Reduce el tiempo de auditoría y conciliación de ",
-            hero_title_2: "semanas a minutos",
-            hero_sub: "Guía instantánea y verificada bajo estándares PCAOB, AICPA y GAAP con conciliación automatizada. Cero retención de datos para entrenamiento de IA en memoria RAM volátil.",
+            hero_free_badge: "🎁 1ª Auditoría 100% Gratuita • Sin registro previo • Sin tarjeta de crédito",
+            hero_engine_badge: "⚡ Motor Gemini 2.5 Flash • <60s",
+            hero_title_1: "Evita multas y cobros trampa en tus contratos ",
+            hero_title_2: "antes de firmar",
+            hero_sub: "En menos de 60 segundos y sin pagar honorarios legales costosos. Detección forense de cláusulas abusivas, penalizaciones ocultas y sobrecostos en memoria RAM volátil (0 almacenamiento en disco).",
             hero_privacy_guarantee: "<strong>Privacidad Total Garantizada:</strong> Tu documento se destruye automáticamente de la memoria RAM efímera tras la auditoría (0 Almacenamiento en Disco).",
             
             // Live Stats Ticker (Confianza Social)
