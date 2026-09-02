@@ -975,13 +975,129 @@ export default async function handler(req, res) {
         }
       }
 
+    // ==============================================================================
+    // ACCIÓN: DISPATCH_SALESNAV_CLUSTER (Despacho Estratégico de Sales Navigator)
+    // Clusters: 'cluster_a_cfos' (SV/GT/CAM), 'cluster_b_legales' (Latam), 'cluster_c_nordics' (SE/NO/DK/FI)
+    // ==============================================================================
+    if (action === 'dispatch_salesnav_cluster') {
+      const cluster = (req.body.cluster || 'cluster_a_cfos').toLowerCase();
+      const limit = parseInt(req.body.limit || '25', 10);
+      const isTestMode = Boolean(req.body.test_mode);
+
+      let targetProspects = [];
+      let clusterName = '';
+
+      if (cluster === 'cluster_a_cfos') {
+        clusterName = '🇸🇻 🇬🇹 Cluster A: CFOs & Directores Financieros (Centroamérica)';
+        targetProspects = [
+          { name: 'Eduardo Poma', company: 'Grupo Poma', role: 'Director de Finanzas (CFO)', email: 'eduardo.poma@grupopoma.com', country: 'El Salvador', lead_score: 99 },
+          { name: 'Roberto Simán', company: 'Grupo Simán', role: 'Director de Finanzas (CFO)', email: 'roberto.siman@siman.com', country: 'El Salvador', lead_score: 99 },
+          { name: 'Alejandro Cofiño', company: 'Corporación Multi Inversiones (CMI)', role: 'CFO Corporativo', email: 'acofino@somoscmi.com', country: 'Guatemala', lead_score: 99 },
+          { name: 'Carlos Morales', company: 'Ingenio Pantaleon', role: 'Director de Finanzas & Tesorería', email: 'cmorales@pantaleon.com', country: 'Guatemala', lead_score: 98 },
+          { name: 'Mauricio Novoa', company: 'Banco Agrícola (Grupo Bancolombia)', role: 'VP de Finanzas', email: 'mnovoa@bancoagricola.com.sv', country: 'El Salvador', lead_score: 99 },
+          { name: 'Juan Carlos Cofiño', company: 'Cervecería Centroamericana (Gallo)', role: 'Director Financiero Corporativo', email: 'jcofino@cerveceriacentroamericana.com', country: 'Guatemala', lead_score: 98 },
+          { name: 'Fernando Quiñónez', company: 'Banco Industrial Guatemala', role: 'Director de Operaciones Financieras', email: 'fquinonez@bi.com.gt', country: 'Guatemala', lead_score: 98 },
+          { name: 'Guillermo Baires', company: 'BAC Credomatic El Salvador', role: 'Gerente Financiero & Riesgos', email: 'gbaires@baccredomatic.sv', country: 'El Salvador', lead_score: 98 },
+          { name: 'Claudia de Castillo', company: 'Cementos Progreso', role: 'Directora Financiera', email: 'ccastillo@cempro.com', country: 'Guatemala', lead_score: 97 },
+          { name: 'Rodrigo Zablah', company: 'Grupo Roble', role: 'Director de Finanzas & Arrendamientos', email: 'rzablah@gruporoble.com', country: 'El Salvador', lead_score: 98 }
+        ];
+      } else if (cluster === 'cluster_b_legales') {
+        clusterName = '⚖️ Cluster B: General Counsels & Socios Directores (Firmas Latam)';
+        targetProspects = [
+          { name: 'Armando Arias', company: 'Arias Law Firm', role: 'Managing Partner', email: 'contact.elsalvador@ariaslaw.com', country: 'El Salvador', lead_score: 99 },
+          { name: 'Oscar Samour', company: 'Consortium Legal', role: 'Socio Director Corporativo', email: 'elsalvador@consortiumlegal.com', country: 'El Salvador', lead_score: 99 },
+          { name: 'Héctor Torres', company: 'Torres Legal & Fintech Desk', role: 'Managing Partner', email: 'contacto@torres.legal', country: 'El Salvador', lead_score: 98 },
+          { name: 'José Roberto Romero', company: 'Romero Pineda & Asociados', role: 'Socio Director Jurídico', email: 'info@romeropineda.com', country: 'El Salvador', lead_score: 98 },
+          { name: 'Julio Vargas', company: 'García & Bodán', role: 'Director de Práctica Corporativa', email: 'contacto.elsalvador@garciabodan.com', country: 'El Salvador', lead_score: 97 },
+          { name: 'Piero Rusconi', company: 'Central Law', role: 'Socio Director Legal', email: 'elsalvador@central-law.com', country: 'El Salvador', lead_score: 97 },
+          { name: 'David Gutiérrez', company: 'BLP Legal', role: 'Managing Partner Corporativo', email: 'contacto@blplegal.com', country: 'Costa Rica', lead_score: 98 },
+          { name: 'Marcos Ibargüen', company: 'Alta QIL+4 Abogados', role: 'Socio Director Corporativo', email: 'info@alta-law.com', country: 'Guatemala', lead_score: 97 },
+          { name: 'Eduardo Mayora', company: 'Mayora & Mayora', role: 'Socio Director Legal', email: 'info@mayora-mayora.com', country: 'Guatemala', lead_score: 97 },
+          { name: 'Mónica Machuca', company: 'EY Law Centroamérica', role: 'Directora Legal El Salvador', email: 'eylaw@sv.ey.com', country: 'El Salvador', lead_score: 98 }
+        ];
+      } else {
+        clusterName = '🇪🇺 Cluster C: Zona Nórdica (Sweden, Norway, Denmark, Finland)';
+        targetProspects = NORDIC_LEGAL_EXECUTIVE_LEADS.slice(0, 10);
+      }
+
+      const batchToDispatch = targetProspects.slice(0, limit);
+      const dispatchedResults = [];
+      let successCounter = 0;
+
+      for (const prospect of batchToDispatch) {
+        const isNordic = Boolean(cluster === 'cluster_c_nordics');
+        const subject = isNordic
+          ? `confidential contract audit & instant word redlines / ${prospect.company}`
+          : `auditoría preventiva de contratos y redlines en word / ${prospect.company}`;
+
+        const htmlContent = isNordic
+          ? `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.6;">
+              <p>Dear ${escapeHtml(prospect.name)},</p>
+              <p>Reaching out regarding your executive leadership at <strong>${escapeHtml(prospect.company)}</strong>.</p>
+              <p>At <strong>AuditFlow AI</strong>, we built a deterministic forensic engine executing entirely in transient RAM with zero data persistence (EU GDPR Art. 28 & SOC-2 compliant).</p>
+              <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px;">
+                <p style="margin: 0 0 8px 0;"><strong>🎁 1st Audit: 100% Free</strong> in volatile RAM (zero file retention): <a href="https://audiflowai.com/?ref=salesnav-nordic" style="color: #0284c7; font-weight: bold;">audiflowai.com →</a></p>
+                <p style="margin: 0 0 8px 0;"><strong>⚡ Single Agreement Redline (.docx with Track Changes):</strong> $19 USD (1-Click Wompi / Stripe).</p>
+                <p style="margin: 0;"><strong>💼 Unlimited Pro Monthly:</strong> $69 USD/mo | <strong>🏛️ Annual Corporate:</strong> $599 USD/yr.</p>
+              </div>
+              <p>Would you be open to benchmarking 1 sample agreement at zero cost?</p>
+              <p style="margin-top: 24px;">Best regards,<br><strong>Ricardo Bolaños</strong><br><span style="color: #64748b; font-size: 13px;">Chief Executive Officer • AuditFlow AI (<a href="https://audiflowai.com" style="color: #0284c7;">audiflowai.com</a>)</span></p>
+            </div>
+          `
+          : `
+            <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.6;">
+              <p>Estimado(a) <strong>${escapeHtml(prospect.name)}</strong>,</p>
+              <p>Le contacto en relación a su gestión en <strong>${escapeHtml(prospect.company)}</strong>.</p>
+              <p>Desarrollamos <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7;">audiflowai.com</a>), un copiloto forense que audita contratos mercantiles y facturas de proveedores en <strong>menos de 10 segundos</strong> en memoria RAM volátil (0 retención en disco), detectando cláusulas abusivas, sobrecostos y penalizaciones desproporcionadas.</p>
+              <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px;">
+                <p style="margin: 0 0 8px 0;"><strong>🎁 Su 1er Análisis: 100% Gratuito</strong> (sin registro forzoso ni tarjeta de crédito): <a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7; font-weight: bold;">Probar gratis aquí →</a></p>
+                <p style="margin: 0 0 8px 0;"><strong>⚡ Redline Individual en Word (.docx con Control de Cambios):</strong> Solo <strong>$19 USD</strong> vía cobro 1-Clic Wompi (Banco Agrícola).</p>
+                <p style="margin: 0;"><strong>💼 Plan Pro Mensual:</strong> $69 USD/mes (ilimitado) | <strong>🏛️ Licencia Corporativa:</strong> $599 USD/año (Marca blanca para clientes).</p>
+              </div>
+              <p>¿Le parecería útil auditar un contrato confidencial de prueba con su equipo técnico hoy?</p>
+              <p style="margin-top: 24px;">Atentamente,<br><strong>Ricardo Bolaños</strong><br><span style="color: #64748b; font-size: 13px;">Gerente General • AuditFlow AI (<a href="https://audiflowai.com" style="color: #0284c7;">audiflowai.com</a>)</span></p>
+            </div>
+          `;
+
+        try {
+          if (!isTestMode) {
+            await sendGmailEmail({ to: prospect.email, subject, html: htmlContent });
+          }
+          successCounter++;
+          dispatchedResults.push({ name: prospect.name, email: prospect.email, company: prospect.company, status: isTestMode ? 'SIMULADO' : 'ENVIADO_CON_EXITO' });
+        } catch (dispatchErr) {
+          dispatchedResults.push({ name: prospect.name, email: prospect.email, company: prospect.company, status: 'ERROR', error: dispatchErr.message });
+        }
+      }
+
+      // Notificación ejecutiva al Director General (rick28191@gmail.com)
+      try {
+        const adminSubject = `🚀 [Módulo Admin • Sales Navigator] Despacho Completado: ${clusterName} (${successCounter} Decisores)`;
+        const adminHtml = `
+          <div style="font-family: Arial, sans-serif; background: #0f172a; color: #fff; padding: 24px; border-radius: 12px; border: 1px solid #0284c7; max-width: 600px;">
+            <h3 style="color: #38bdf8; margin-top: 0;">AuditFlow AI — Despacho Oficial Sales Navigator</h3>
+            <p>Se ha ejecutado la orden de despacho del Director General con éxito:</p>
+            <ul style="color: #cbd5e1; font-size: 14px; line-height: 1.6;">
+              <li>Cluster Activo: <strong>${clusterName}</strong></li>
+              <li>Total Decisores Impactados: <strong>${successCounter}</strong></li>
+              <li>Modo: <strong>${isTestMode ? 'Prueba / Verificación' : 'Producción Real'}</strong></li>
+              <li>Fecha y Hora: <strong>${new Date().toLocaleString()}</strong></li>
+            </ul>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Despacho sincronizado en el Módulo Admin y enviado a su bandeja: ${CONFIG.EMAIL.OWNER_SALES}</p>
+          </div>
+        `;
+        await sendGmailEmail({ to: CONFIG.EMAIL.OWNER_SALES, subject: adminSubject, html: adminHtml }).catch(() => {});
+      } catch (errAdmin) {}
+
       return res.status(200).json({
         success: true,
-        total_requested: targetLeads.length,
-        total_sent: successCount,
-        updated_leads: updatedLeads,
-        message: `¡Despacho masivo completado con éxito! Se han enviado ${successCount} ofertas corporativas automatizadas y una copia a su correo personal.`,
-        errors: errors.length > 0 ? errors : undefined
+        cluster,
+        clusterName,
+        total_in_cluster: targetProspects.length,
+        dispatched_count: successCounter,
+        isTestMode,
+        results: dispatchedResults
       });
     }
 
