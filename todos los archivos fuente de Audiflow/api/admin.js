@@ -975,6 +975,16 @@ export default async function handler(req, res) {
         }
       }
 
+      return res.status(200).json({
+        success: true,
+        total_requested: targetLeads.length,
+        total_sent: successCount,
+        updated_leads: updatedLeads,
+        message: `¡Despacho masivo completado con éxito! Se han enviado ${successCount} ofertas corporativas automatizadas y una copia a su correo personal.`,
+        errors: errors.length > 0 ? errors : undefined
+      });
+    }
+
     // ==============================================================================
     // ACCIÓN: DISPATCH_SALESNAV_CLUSTER (Despacho Estratégico de Sales Navigator)
     // Clusters: 'cluster_a_cfos' (SV/GT/CAM), 'cluster_b_legales' (Latam), 'cluster_c_nordics' (SE/NO/DK/FI)
