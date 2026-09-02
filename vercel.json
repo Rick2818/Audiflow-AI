@@ -278,8 +278,12 @@
       "destination": "/api/social-publish"
     },
     {
+      "source": "/api/indexnow",
+      "destination": "/api/admin"
+    },
+    {
       "source": "/api/waalaxy-sync",
-      "destination": "/api/waalaxy-sync"
+      "destination": "/api/outreach"
     },
     {
       "source": "/api/(.*)",
