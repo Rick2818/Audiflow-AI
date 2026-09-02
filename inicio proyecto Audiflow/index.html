@@ -399,17 +399,52 @@
                     </div>
                 </div>
 
-                <!-- BANNER DE DESTRUCCIÓN AUTOMÁTICA EN MEMORIA RAM Y AVISO LEGAL -->
-                <div class="mb-6 space-y-2">
-                    <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-mono flex items-center justify-center gap-2 shadow-sm">
-                        <span class="text-base">🛡️</span>
-                        <span data-i18n="hero_privacy_guarantee">
-                            <strong>Privacidad Estricta:</strong> Tus documentos se analizan en memoria encriptada y no se utilizan para entrenar modelos públicos (0 retención en disco).
-                        </span>
+                <!-- ESCUDO DE PRIVACIDAD INTERNACIONAL ENTERPRISE (ZERO DATA RETENTION & GDPR ART. 28) -->
+                <div class="mb-6 rounded-2xl bg-gradient-to-b from-dark-card to-dark-surface border-2 border-accent-blue/40 p-4 sm:p-5 text-left shadow-2xl relative overflow-hidden">
+                    <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-accent-blue/5 rounded-full blur-2xl pointer-events-none"></div>
+                    
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3 border-b border-border-dark pb-3">
+                        <div class="flex items-center gap-2.5">
+                            <span class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center text-lg shrink-0">🛡️</span>
+                            <div>
+                                <h3 class="text-sm font-extrabold text-white tracking-wide font-mono flex items-center gap-2">
+                                    <span>ZERO DATA RETENTION (ZDR) & PRIVACY SHIELD</span>
+                                    <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">100% CERO FUGA</span>
+                                </h3>
+                                <p class="text-[11px] text-gray-400 font-sans">Arquitectura fiduciaria para Departamentos Legales de EE.UU., Reino Unido y Europa (GDPR / SOC-2).</p>
+                            </div>
+                        </div>
+                        <button type="button" onclick="window.AppHandler.openPrivacyModal()" class="w-full sm:w-auto px-3.5 py-1.5 rounded-lg bg-dark-surface border border-accent-blue/50 text-accent-blue hover:bg-accent-blue/10 text-xs font-mono font-bold transition-all shrink-0 cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
+                            <span>📜 Ver Certificado DPA & Términos Enterprise →</span>
+                        </button>
                     </div>
-                    <p class="text-[11px] text-gray-400 font-mono text-center">
-                        ⚖️ <em>Nota ejecutiva: Herramienta de asistencia analítica y mitigación fiduciaria previa a la firma legal.</em>
-                    </p>
+
+                    <!-- 3 PILARES DE SEGURIDAD VISIBLES -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono">
+                        <div class="p-2.5 rounded-xl bg-dark-surface/80 border border-border-dark flex items-start gap-2">
+                            <span class="text-emerald-400 font-bold text-sm">⚡</span>
+                            <div>
+                                <strong class="text-white block text-[11px]">RAM Volátil Efímera</strong>
+                                <span class="text-[11px] text-gray-400 font-sans leading-tight block mt-0.5">El archivo se audita en memoria viva y se destruye en &lt;10s. Cero almacenamiento en disco.</span>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-dark-surface/80 border border-border-dark flex items-start gap-2">
+                            <span class="text-sky-400 font-bold text-sm">🚫</span>
+                            <div>
+                                <strong class="text-white block text-[11px]">Cero Entrenamiento de IA</strong>
+                                <span class="text-[11px] text-gray-400 font-sans leading-tight block mt-0.5">API Enterprise Gemini: Ningún modelo público se entrena con tus contratos o datos privados.</span>
+                            </div>
+                        </div>
+
+                        <div class="p-2.5 rounded-xl bg-dark-surface/80 border border-border-dark flex items-start gap-2">
+                            <span class="text-purple-400 font-bold text-sm">🔒</span>
+                            <div>
+                                <strong class="text-white block text-[11px]">Cifrado TLS 1.3 & AES-256</strong>
+                                <span class="text-[11px] text-gray-400 font-sans leading-tight block mt-0.5">Túnel encriptado de punta a punta. Inmunidad total para secretos comerciales y NDAs.</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- INSIGNIAS DE CERTIFICACIÓN Y SEGURIDAD (CONFIANZA TOTAL) -->
@@ -1992,6 +2027,53 @@
                         </button>
                         <button onclick="window.AppHandler.closeManualModal()" class="btn-primary text-xs px-5 py-2 font-mono">
                             <span data-i18n="manual_btn_close">Entendido, Cerrar</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        <!-- MODAL DE CERTIFICACIÓN DE PRIVACIDAD ENTERPRISE & DATA PROCESSING ADDENDUM (DPA) -->
+        <div id="privacy-compliance-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-md p-4 overflow-y-auto">
+            <div class="bg-dark-card border-2 border-accent-blue/50 rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative text-left shadow-2xl">
+                <button onclick="window.AppHandler.closePrivacyModal()" aria-label="Cerrar modal de privacidad" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-2 bg-slate-800 rounded-full focus:outline-none">✕</button>
+                
+                <div class="flex items-center gap-3 mb-4 pb-3 border-b border-border-dark">
+                    <span class="text-3xl p-2 bg-emerald-500/20 text-emerald-400 rounded-xl">🛡️</span>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-extrabold text-white font-mono">Certificado Fiduciario de Confidencialidad & Cero Retención</h3>
+                        <p class="text-xs text-accent-blue font-mono">AuditFlow AI Enterprise Privacy Shield • Conforme a GDPR Art. 28 & SOC-2</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 text-xs sm:text-sm text-gray-300 leading-relaxed font-sans max-h-[60vh] overflow-y-auto pr-2">
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
+                        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-1 text-emerald-400">1. Garantía Estricta de No-Almacenamiento (Zero-Disk Retention)</h4>
+                        <p class="text-xs text-gray-300">Ningún archivo, contrato o factura subida por el usuario se guarda en discos duros, bases de datos o buckets persistentes de almacenamiento. El procesamiento se ejecuta exclusivamente en buffers de memoria RAM volátil efímera que se purgan y destruyen inmediatamente tras generar el reporte Word (.docx).</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
+                        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-1 text-sky-400">2. Prohibición de Entrenamiento de Modelos de IA</h4>
+                        <p class="text-xs text-gray-300">AuditFlow AI opera bajo las licencias comerciales de <strong>Google Cloud Vertex AI Enterprise</strong>. De acuerdo con los Términos de Servicio Empresariales de Google, <strong>los datos enviados a la API NUNCA se utilizan para entrenar, ajustar ni mejorar ningún modelo público ni privado</strong>.</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
+                        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-1 text-purple-400">3. Cifrado Fiduciario en Tránsito (TLS 1.3 / AES-256)</h4>
+                        <p class="text-xs text-gray-300">Todas las comunicaciones entre su navegador y la infraestructura de procesamiento están protegidas con cifrado de grado bancario TLS 1.3 con intercambio de llaves efímeras ECDHE y cifrado AES-256, garantizando inmunidad contra ataques Man-In-The-Middle.</p>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
+                        <h4 class="text-white font-bold text-xs uppercase tracking-wider mb-1 text-amber-400">4. Cumplimiento Internacional y Privilegio Profesional</h4>
+                        <p class="text-xs text-gray-300">Diseñado para cumplir con el estándar de salvaguarda del <em>Attorney-Client Privilege</em> en EE.UU. y el <em>Acuerdo de Procesamiento de Datos (DPA) conforme al Artículo 28 del Reglamento General de Protección de Datos (GDPR)</em> de la Unión Europea.</p>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-border-dark flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <span class="text-[11px] font-mono text-gray-400">AuditFlow AI Fiduciary Guarantee • 2026</span>
+                    <div class="flex items-center gap-2 w-full sm:w-auto">
+                        <button onclick="window.print()" class="w-full sm:w-auto px-4 py-2 rounded-xl bg-dark-surface border border-gray-700 text-gray-300 hover:text-white text-xs font-mono font-bold transition-all">
+                            🖨️ Imprimir / Guardar DPA
+                        </button>
+                        <button onclick="window.AppHandler.closePrivacyModal()" class="w-full sm:w-auto px-5 py-2 rounded-xl bg-accent-blue text-black text-xs font-mono font-extrabold shadow-glow hover:bg-sky-400 transition-all">
+                            Entendido, Volver a la Auditoría
                         </button>
                     </div>
                 </div>

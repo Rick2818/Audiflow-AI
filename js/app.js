@@ -1344,6 +1344,16 @@ window.AppHandler = {
         if (modal) modal.classList.add('hidden');
     },
 
+    openPrivacyModal() {
+        const modal = document.getElementById('privacy-compliance-modal');
+        if (modal) modal.classList.remove('hidden');
+    },
+
+    closePrivacyModal() {
+        const modal = document.getElementById('privacy-compliance-modal');
+        if (modal) modal.classList.add('hidden');
+    },
+
     copyShareableReportLink() {
         const reportId = this.currentReportId || 'rep_x89';
         const url = `${window.location.origin}/?reportId=${reportId}`;
