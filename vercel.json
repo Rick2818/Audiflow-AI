@@ -114,6 +114,14 @@
       "destination": "/frontend/alternativas-docusign.html"
     },
     {
+      "source": "/alternativas-ironclad",
+      "destination": "/frontend/alternativas-ironclad.html"
+    },
+    {
+      "source": "/alternativas-spellbook",
+      "destination": "/frontend/alternativas-spellbook.html"
+    },
+    {
       "source": "/Prompt_Maestro_AuditFlow_AI.pdf",
       "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
     },
