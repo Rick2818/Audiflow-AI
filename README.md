@@ -186,22 +186,51 @@ npm test
 * **Base de Datos & Auth**: Supabase (PostgreSQL 15 + RLS).
 ---
 
+## 🪜 Escalera Ascendente de 6 Etapas ("Flujo Único B2B")
+
+Inspirada en las mejores prácticas de reducción de sobrecarga operativa y fatiga de pestañas (*Tab Fatigue*), AuditFlow AI integra en su página principal la **escalera fiduciaria ascendente de 6 peldaños**:
+
+1. **📥 1. Centralizar:** Carga directa de contratos (PDF o Word) en un repositorio unificado sin dispersión en correos.
+2. **⚡ 2. Escanear:** Procesamiento automático por IA determinística en memoria RAM volátil (0 almacenamiento en disco).
+3. **🔍 3. Detectar:** Resaltado inmediato de pasivos ocultos, penalizaciones abusivas y vacíos legales (Aversión a pérdidas).
+4. **✍️ 4. Mitigar:** Generación de redacciones alternativas y contrapropuestas en Microsoft Word (.docx con Control de Cambios).
+5. **📊 5. Certificar:** Exportación de informes ejecutivos con semáforo de riesgo (Rojo, Amarillo, Verde) para socios y directores.
+6. **🛡️ 6. Proteger:** Ajuste de políticas internas que retroalimenta y blinda las negociaciones futuras (Ciclo virtuoso).
+
+---
+
+## 🎯 "Plan Maestro": Sales Navigator + Waalaxy en 3 Clics (Gobernanza de 5 Días)
+
+Bajo la supervisión directa del Gerente General (COO) y con una vigencia inicial de **5 días consecutivos** (02 al 07 de Septiembre 2026), opera el **Plan Maestro de Monetización y Cierre B2B**:
+
+### 📌 Los 3 Clusters de Extracción Fiduciaria:
+* **Cluster A (CFOs Centroamérica):** 250 Directores Financieros de El Salvador 🇸🇻, Guatemala 🇬🇹, Costa Rica 🇨🇷 y Panamá 🇵🇦 (Grupo Poma, Simán, CMI, Pantaleon, Banco Agrícola, BAC, Banco Industrial).
+* **Cluster B (Firmas Legales & General Counsels):** 250 Socios Directores de despachos y asesorías corporativas de Latam (Arias, Consortium, Torres Legal, Romero Pineda, BLP, Central Law, EY Law).
+* **Cluster C (Zona Nórdica & DACH):** Directores Jurídicos y de Cumplimiento de Suecia 🇸🇪, Noruega 🇳🇴, Dinamarca 🇩🇰, Finlandia 🇫🇮 y Alemania 🇩🇪 con estricto apego a **EU GDPR Art. 28**.
+
+### 📧 Mandato Inmutable de Notificación por Correo:
+Cada vez que el Módulo Admin (`/api/admin?action=dispatch_salesnav_cluster`) o Waalaxy ejecutan el despacho de una base de datos o cluster de decisores, el sistema remite **obligatoria e instantáneamente una confirmación detallada al Director General (`rick28191@gmail.com`)**.
+
+---
+
 ## 🏛️ Gobernanza Ejecutiva, Equipo Multi-Agente & Orquestación n8n
 
 AuditFlow AI cuenta con un sistema de agentes autónomos coordinados mediante **n8n** y **Google Workspace MCP**:
 
 1. **Director General (CEO):** Ricardo (`ricardo@audiflowai.com`, `rick28191@gmail.com`).
-2. **Gerente General / COO (`general-manager-coo`):** Asesoría de planes de acción estratégicos para el CEO, custodia estricta de métricas y resultados financieros en **USD ($)** (MRR, ARR, LTV/CAC > 4.0x) y co-liderazgo del comité directivo.
-3. **Directora de Marketing y Ventas (`marketing-director`):** Orquestación unificada de demanda, prospección multicanal y balance diario.
+2. **Gerente General / COO (`general-manager-coo`):** Asesoría de planes de acción estratégicos para el CEO, custodia estricta de métricas y resultados financieros en **USD ($)** (MRR, ARR, LTV/CAC > 4.0x), liderazgo del **Plan Maestro** y co-liderazgo del comité directivo.
+3. **Directora de Marketing y Ventas (`marketing-director`):** Orquestación unificada de demanda, prospección multicanal, embudo de neuromarketing y balance diario.
 4. **Director Senior de Meta Ads (`meta-ads-specialist`):** Experto con +20 años de trayectoria en arquitectura publicitaria de Facebook e Instagram, CAPI, Advantage+, escalado fiduciario y meta de **ROAS >= 4.5x**.
-5. **Especialista Senior en Psicología del Consumidor & Anti-Fatiga (`consumer-behavior-diagnostician`):** Experto con +20 años en diagnóstico de adopción de la app, drivers de compra/no-compra y **Escudo Anti-Fatiga de Anuncios** (frecuencia < 2.8, cooldowns y rotación de ángulos psicológicos para evitar el aburrimiento).
-6. **Especialistas Senior de Ventas (+20 años):** `legal-sales-specialist`, `financial-sales-specialist`, `gov-sales-specialist` y `waalaxy-specialist`.
+5. **Especialista en Automatización Social (`buffer-specialist`):** Conector moderno Buffer GraphQL 2026 (`https://api.buffer.com`) y despacho multicanal.
+6. **Especialista Senior en Psicología del Consumidor & Anti-Fatiga (`consumer-behavior-diagnostician`):** Experto con +20 años en diagnóstico de adopción de la app, drivers de compra/no-compra y **Escudo Anti-Fatiga de Anuncios**.
+7. **Especialistas Senior de Ventas (+20 años):** `legal-sales-specialist`, `financial-sales-specialist`, `gov-sales-specialist` y `waalaxy-specialist`.
 
 ### 🔄 Flujos Automatizados en n8n ([`n8n_workflows_auditflow.json`](n8n_workflows_auditflow.json)):
 * `meta-ads-reporting`: Monitoreo y auditoría diaria de pauta en USD.
 * `consumer-behavior-audit`: Alertas de fatiga y recomendaciones de rotación creativa.
 * `gm-coo-plan`: Informes consolidados de facturación, rentabilidad y planes de acción para el CEO.
 * `executive-meeting-sync`: Sincronización periódica de la mesa directiva (Ricardo + GM + CMVO).
+* `salesnav-waalaxy-sync`: Despacho transaccional de prospectos y alertas en caliente a `rick28191@gmail.com`.
 
 ---
 

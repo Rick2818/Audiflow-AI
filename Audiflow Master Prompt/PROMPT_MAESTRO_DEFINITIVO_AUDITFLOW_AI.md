@@ -461,3 +461,38 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
   - Webhook `/consumer-behavior-audit`: Alertas automáticas ante caídas de CTR o saturación de creativos.
   - Webhook `/gm-coo-plan`: Balance financiero consolidado en USD y plan de acción para el CEO.
   - Webhook `/executive-meeting-sync`: Sincronización y agenda de reuniones ejecutivas (Ricardo + GM + CMVO).
+  - Webhook `/salesnav-waalaxy-sync`: Despacho transaccional de prospectos y alertas en caliente a `rick28191@gmail.com`.
+
+---
+
+## 🪜 31. ARQUITECTURA DE LA ESCALERA ASCENDENTE DE 6 ETAPAS ("FLUJO ÚNICO B2B")
+
+Inspirada en el modelo de alta conversión de reducción de fatiga de pestañas (*Tab Fatigue*), AuditFlow AI implementa en su página principal la **escalera visual isométrica ascendente de 6 etapas continuas**:
+
+1. **📥 1. Centralizar:** Carga directa de contratos (PDF o Word) en un repositorio fiduciario unificado sin dispersión en correos ni carpetas locales.
+2. **⚡ 2. Escanear:** Procesamiento automático por IA determinística (Gemini 2.5 Flash) en memoria RAM volátil (0 almacenamiento en disco físico).
+3. **🔍 3. Detectar:** Resaltado inmediato de pasivos ocultos, penalizaciones abusivas y vacíos legales (Activación de la aversión a la pérdida).
+4. **✍️ 4. Mitigar:** Generación de redacciones alternativas y contrapropuestas en Microsoft Word (.docx nativo con Control de Cambios / Track Changes).
+5. **📊 5. Certificar:** Exportación de informes ejecutivos con semáforo de riesgo (Rojo, Amarillo, Verde) y Score fiduciario para socios y juntas directivas.
+6. **🛡️ 6. Proteger:** Ajuste de políticas internas que retroalimenta y blinda las negociaciones futuras (Ciclo virtuoso y mejora continua).
+
+* **Comportamiento Responsivo:** En pantallas de escritorio (`≥ 1024px`) se presenta como escalera isométrica ascendente; en pantallas móviles (`< 1024px`) se transforma automáticamente en un timeline vertical fiduciario continuo para garantizar lectura natural sin desbordamiento horizontal.
+* **Llamada a la Acción (CTA de Cero Fricción):** Botón directo al final del flujo: *"Auditar mi primer contrato sin costo (30s)"* con micro-copia de apoyo *"Sin tarjeta de crédito • Cero almacenamiento en disco"*.
+
+---
+
+## 🎯 32. DIRECTIVA INMUTABLE DEL "PLAN MAESTRO" (5 DÍAS) & SALES NAVIGATOR
+
+Bajo el mando del Gerente General y COO (GM/COO) y con una vigencia obligatoria de **5 días consecutivos** (02 al 07 de Septiembre de 2026), opera el **Plan Maestro de Monetización B2B**:
+
+### A. Los 3 Clusters de Decisores Reales en Sales Navigator
+1. **Cluster A (CFOs & Directores Financieros de Centroamérica):** 250 decisores en El Salvador 🇸🇻, Guatemala 🇬🇹, Costa Rica 🇨🇷 y Panamá 🇵🇦 (Grupo Poma, Simán, CMI, Pantaleon, Banco Agrícola, BAC, Banco Industrial).
+2. **Cluster B (General Counsels & Socios de Firmas Legales Latam):** 250 Socios Directores y Directores Jurídicos (Arias, Consortium Legal, Torres Legal, Romero Pineda, BLP, Central Law, EY Law).
+3. **Cluster C (Zona Nórdica & DACH):** Directores Jurídicos y de Cumplimiento de Suecia 🇸🇪, Noruega 🇳🇴, Dinamarca 🇩🇰, Finlandia 🇫🇮 y Alemania 🇩🇪 bajo estricto cumplimiento **EU GDPR Art. 28**.
+
+### B. Mandato Inmutable de Notificación por Correo al Director General
+Cada vez que el Módulo Admin (`/api/admin?action=dispatch_salesnav_cluster`) o Waalaxy ejecutan el despacho de una base de datos o cluster de decisores, el sistema remite **obligatoria e instantáneamente una confirmación detallada con tabla de prospectos al correo oficial del Director General:**
+👉 **`rick28191@gmail.com`**
+
+### C. Conector Buffer.com GraphQL 2026
+Conector actualizado bajo la especificación oficial de Buffer GraphQL API (`https://api.buffer.com`) con soporte para tipos de retorno polimórficos (`... on PostActionSuccess`), despacho masivo simultáneo (`mode: shareNow`) y manejo de contingencias a prueba de fallos.
