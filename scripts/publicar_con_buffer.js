@@ -49,22 +49,26 @@ async function runBufferAutomation() {
       console.log(`      ID Canal: ${ch.id} | Organización: ${ch.organizationName || 'Principal'}`);
     });
 
-    // Contenido oficial de alto impacto para B2B
-    const copyPublicacion = `💡 CASO REAL: Cómo detectar una fuga de $14,400 USD en una factura de proveedor antes de pagar (Desliza ➔)
+    // Copy fresco y de alto valor (Caso Forense Real de Rescisión Anticipada)
+    const postPayload = {
+      text: `¿Sabías que una cláusula de rescisión mal negociada puede costarle $23,000+ USD a tu empresa?
 
-El 62% de las empresas pagan sobrecostos en facturas de tecnología y compras porque conciliar manualmente 50 páginas de contrato contra una factura es inviable para un equipo ocupado.
+Hace poco auditamos un contrato donde la Cláusula 11.4 obligaba al cliente a pagar el 100% de las mensualidades restantes ante cualquier salida anticipada por mal servicio.
 
-Con AuditFlow AI:
-✅ Subes el contrato y la factura.
-✅ Gemini 2.5 Flash cruza las cláusulas en 8 segundos en memoria RAM volátil.
-✅ Genera la carta de objeción en Word (.docx) lista para frenar el pago indebido.
+3 Cláusulas críticas que debes neutralizar antes de firmar:
+1️⃣ Salida por incumplimiento de SLA (sin penalización).
+2️⃣ Topes de responsabilidad recíprocos.
+3️⃣ Preaviso de no-renovación a 30 días (evita amarres de 12 meses).
 
-🛡️ Sin almacenamiento en disco. Máxima confidencialidad fiduciaria.
-👉 Haz tu prueba gratuita hoy: https://audiflowai.com
+AuditFlow AI escanea contratos y facturas en menos de 45s en memoria RAM volátil (0 almacenamiento en disco) y te entrega el Redline en Word (.docx con control de cambios) listo para renegociar.
 
-#AuditoriaFinanciera #CFO #ControlDeCostos #FinanzasEmpresariales #MicroSaaS #LegalTech`;
+🎁 Prueba tu 1ª auditoría 100% GRATIS (sin tarjeta ni registro):
+👉 https://audiflowai.com
 
-    const imagenUrl = 'https://audiflowai.com/assets/demo_hyperframes.jpg';
+#DireccionGeneral #CFO #ContratosB2B #FinanzasCorporativas #LegalTech #MicroSaaS`,
+      mediaUrls: ['https://audiflowai.com/assets/demo_hyperframes.jpg'],
+      mode: 'shareNow'
+    };
 
     console.log('\n────────────────────────────────────────────────────────────────────────────────');
     console.log('🚀 INICIANDO DESPACHO SIMULTÁNEO (SHARE_NOW) A TODAS LAS REDES ACTIVAS...');
