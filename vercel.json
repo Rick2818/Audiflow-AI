@@ -309,7 +309,7 @@
     },
     {
       "path": "/api/admin?action=cron_monitor",
-      "schedule": "0 8,14,20 * * *"
+      "schedule": "0 8 * * *"
     }
   ]
 }
