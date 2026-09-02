@@ -139,6 +139,18 @@ export default async function handler(req, res) {
     }
   }
 
+  // Handler de Reporte Ejecutivo Diario de Ventas en USD (GM / COO) a las 2:00 PM y 6:00 PM
+  if (action === 'daily_sales_report' || action === 'sales_report_2pm' || action === 'sales_report_6pm' || (req.url && req.url.includes('daily_sales_report'))) {
+    try {
+      const { generateAndSendDailySalesReport } = await import('../lib/daily-sales-report.js');
+      const timeSlot = req.query?.slot || body?.slot || '6:00 PM';
+      const result = await generateAndSendDailySalesReport({ timeSlot });
+      return res.status(200).json({ success: true, report: result });
+    } catch (sErr) {
+      return res.status(500).json({ success: false, error: sErr.message });
+    }
+  }
+
   if (req.url && (req.url.includes('track-open') || action === 'track_open')) {
     try {
       const parsedUrl = new URL(req.url || '', `http://${req.headers.host || 'localhost'}`);
