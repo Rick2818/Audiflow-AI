@@ -318,6 +318,14 @@
     {
       "path": "/api/admin?action=cron_monitor",
       "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/admin?action=daily_sales_report&slot=2:00+PM",
+      "schedule": "0 20 * * 1-5"
+    },
+    {
+      "path": "/api/admin?action=daily_sales_report&slot=6:00+PM",
+      "schedule": "0 0 * * 2-6"
     }
   ]
 }
