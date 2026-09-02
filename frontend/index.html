@@ -311,10 +311,10 @@
                     </div>
                 </div>
 
-                <!-- BADGE DE AUDITORÍA GRATUITA 100% SIN FRICCIÓN -->
+                <!-- BADGE DE AUDITORÍA GRATUITA 100% SIN FRICCIÓN (RECIPROCIDAD) -->
                 <div class="flex flex-wrap items-center justify-center gap-2.5 mb-5">
                     <span data-i18n="hero_free_badge" class="px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-xs sm:text-sm font-mono text-emerald-300 font-extrabold shadow-glow animate-bounce">
-                        🎁 1ª Auditoría 100% Gratuita • Sin registro previo • Sin tarjeta de crédito
+                        🎁 Diagnostica tu 1er contrato sin costo • Si no encuentras nada que corregir, no pagas nada
                     </span>
                     <span data-i18n="hero_engine_badge" class="px-3.5 py-1.5 rounded-full bg-dark-card border border-gray-700/70 text-xs font-mono text-accent-blue shadow-sm">
                         ⚡ Motor Gemini 2.5 Flash • &lt;60s
@@ -322,11 +322,21 @@
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-4">
-                    <span data-i18n="hero_title_1">Evita multas y cobros trampa en tus contratos </span><span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-sky-400 to-accent-emerald">antes de firmar</span>
+                    <span data-i18n="hero_title_1">Lo costoso de un contrato no es lo que dice, </span><br class="hidden sm:inline" /><span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-sky-400 to-accent-emerald">sino lo que no viste a tiempo</span>
                 </h1>
-                <p data-i18n="hero_sub" class="text-gray-300 text-sm sm:text-base md:text-lg mb-7 max-w-2xl mx-auto leading-relaxed">
-                    En menos de 60 segundos y sin pagar honorarios legales costosos. Detección forense de cláusulas abusivas, penalizaciones ocultas y sobrecostos en memoria RAM volátil (0 almacenamiento en disco).
+                <p data-i18n="hero_sub" class="text-gray-300 text-sm sm:text-base md:text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
+                    Sube tu acuerdo en PDF o Word. Detecta penalizaciones abusivas y vacíos legales en menos de 60 segundos con Inteligencia Artificial en memoria RAM volátil (0 almacenamiento en disco).
                 </p>
+
+                <!-- MINI GUÍA VISUAL ASCENDENTE (6 PASOS) EN EL HERO -->
+                <div class="hidden sm:flex items-center justify-center gap-1.5 mb-6 py-2 px-4 rounded-xl bg-dark-card/90 border border-border-dark text-[11px] font-mono text-gray-300 max-w-2xl mx-auto">
+                    <span class="text-accent-blue font-bold">1. Centralizar</span> ➔
+                    <span class="text-cyan-400 font-bold">2. Escanear</span> ➔
+                    <span class="text-amber-400 font-bold">3. Detectar</span> ➔
+                    <span class="text-purple-400 font-bold">4. Mitigar</span> ➔
+                    <span class="text-emerald-400 font-bold">5. Certificar</span> ➔
+                    <span class="text-accent-emerald font-bold">6. Proteger 🛡️</span>
+                </div>
 
                 <!-- BANNER DE ENTRADA RÁPIDA & DEMO 1-CLIC (ANULACIÓN DE FRICCIÓN PSICOLÓGICA B2B) -->
                 <div class="mb-5 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-accent-blue/20 via-emerald-950/50 to-dark-surface border-2 border-emerald-500/60 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-glow text-left animate-pulse">
@@ -375,26 +385,31 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="text-base sm:text-lg font-semibold text-white mb-1"><span data-i18n="drag_title">Arrastra tu archivo aquí o </span><span data-i18n="drag_browse" class="text-accent-blue underline hover:text-accent-blue/80">explora tus archivos</span></p>
-                            <p data-i18n="drag_sub_free" class="text-xs text-emerald-400 font-mono mb-1 font-semibold">Diagnóstico inicial gratuito • Sin tarjeta requerida • Conciliación automatizada</p>
-                            <p data-i18n="drag_formats" class="text-xs text-gray-400 font-mono">Soporta PDF, PNG, JPG o WebP (Hasta 15MB)</p>
+                            <p class="text-base sm:text-lg font-bold text-white mb-1"><span data-i18n="drag_title">Arrastra tu archivo aquí para escanear riesgos o </span><span data-i18n="drag_browse" class="text-accent-blue underline hover:text-accent-blue/80">explora tus archivos</span></p>
+                            <p data-i18n="drag_sub_free" class="text-xs text-emerald-400 font-mono mb-1 font-semibold">Auditar mi contrato gratis en 30 segundos • Sin tarjeta de crédito • Análisis confidencial inmediato</p>
+                            <p data-i18n="drag_formats" class="text-xs text-gray-400 font-mono">Admite PDF o Word (.docx) hasta 25 MB • Datos encriptados</p>
                         </div>
 
                         <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
-                            <span class="text-xs font-mono text-gray-400">— O si prefieres —</span>
+                            <span class="text-xs font-mono text-gray-400">— Alternativa sin archivo —</span>
                             <button type="button" onclick="event.stopPropagation(); window.AppHandler.loadSampleContract();" class="px-4 py-2 rounded-xl bg-dark-surface border border-accent-blue/40 text-accent-blue hover:bg-accent-blue/20 text-xs font-mono font-bold transition-all shadow-sm flex items-center gap-1.5 cursor-pointer">
-                                <span>📄 Probar con Contrato de Ejemplo (Sin archivo)</span>
+                                <span>📄 Ver auditoría interactiva de ejemplo (Contrato precargado)</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- BANNER DE DESTRUCCIÓN AUTOMÁTICA EN MEMORIA RAM (PRIVACIDAD 100%) -->
-                <div class="mb-6 p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-mono flex items-center justify-center gap-2 shadow-sm">
-                    <span class="text-base">🛡️</span>
-                    <span data-i18n="hero_privacy_guarantee">
-                        <strong>Privacidad Total Garantizada:</strong> Tu documento se destruye automáticamente de la memoria RAM efímera tras la auditoría (0 Almacenamiento en Disco).
-                    </span>
+                <!-- BANNER DE DESTRUCCIÓN AUTOMÁTICA EN MEMORIA RAM Y AVISO LEGAL -->
+                <div class="mb-6 space-y-2">
+                    <div class="p-3.5 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-emerald-300 text-xs sm:text-sm font-mono flex items-center justify-center gap-2 shadow-sm">
+                        <span class="text-base">🛡️</span>
+                        <span data-i18n="hero_privacy_guarantee">
+                            <strong>Privacidad Estricta:</strong> Tus documentos se analizan en memoria encriptada y no se utilizan para entrenar modelos públicos (0 retención en disco).
+                        </span>
+                    </div>
+                    <p class="text-[11px] text-gray-400 font-mono text-center">
+                        ⚖️ <em>Nota ejecutiva: Herramienta de asistencia analítica y mitigación fiduciaria previa a la firma legal.</em>
+                    </p>
                 </div>
 
                 <!-- INSIGNIAS DE CERTIFICACIÓN Y SEGURIDAD (CONFIANZA TOTAL) -->
@@ -979,10 +994,10 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono text-gray-400">
-                <span id="step-1" data-i18n="step_ram" class="p-2 rounded bg-dark-card border border-border-dark text-accent-blue font-bold">RAM Buffer</span>
-                <span id="step-2" data-i18n="step_gemini" class="p-2 rounded bg-dark-card border border-border-dark">Gemini AI</span>
-                <span id="step-3" data-i18n="step_scoring" class="p-2 rounded bg-dark-card border border-border-dark">Lead Scoring</span>
-                <span id="step-4" data-i18n="step_ready" class="p-2 rounded bg-dark-card border border-border-dark">Reporte Listo</span>
+                <span id="step-1" data-i18n="step_ram" class="p-2 rounded bg-dark-card border border-border-dark text-accent-blue font-bold">1. RAM Buffer (Cero Disco)</span>
+                <span id="step-2" data-i18n="step_gemini" class="p-2 rounded bg-dark-card border border-border-dark">2. Analizando Rescisión & Multas</span>
+                <span id="step-3" data-i18n="step_scoring" class="p-2 rounded bg-dark-card border border-border-dark">3. Verificando Topes & Penalidades</span>
+                <span id="step-4" data-i18n="step_ready" class="p-2 rounded bg-dark-card border border-border-dark">4. Diagnóstico Listo</span>
             </div>
         </section>
 
