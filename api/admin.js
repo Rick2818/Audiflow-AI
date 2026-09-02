@@ -1049,7 +1049,7 @@ export default async function handler(req, res) {
       let successCounter = 0;
 
       for (const prospect of batchToDispatch) {
-        const isNordic = Boolean(cluster === 'cluster_c_nordics');
+        const isNordic = Boolean(cluster.includes('nordic') || cluster === 'cluster_c_nordics');
         const subject = isNordic
           ? `The real cost of a contract is what was missed before signing / ${prospect.company}`
           : `Lo costoso de un contrato no es lo que dice, sino lo que no vio a tiempo / ${prospect.company}`;

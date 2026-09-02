@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin.html
+Disallow: /api/
+
+# XML Sitemap oficial de AuditFlow AI
+Sitemap: https://audiflowai.com/sitemap.xml
