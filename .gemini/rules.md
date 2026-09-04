@@ -1,5 +1,12 @@
 # REGLAS FIDUCIARIAS & DE ARQUITECTURA DE AUDITFLOW AI
 
+## 0. REGLA DE ORO SUPREMA: PROTECCIÓN DE MARCA AUDITFLOW AI Y CONTROL PRE-PUBLICACIÓN (INMUTABLE)
+- **MANDATO DE PROTECCIÓN INSTITUCIONAL ABSOLUTA**:
+  1. **PROHIBIDO PUBLICAR NADA QUE PONGA EN RIESGO LA EMPRESA AUDITFLOW AI**: Queda estrictamente prohibido publicar cualquier contenido, copy, mensaje o anuncio que siembre desconfianza, miedo o sospechas sobre herramientas web o IAs que puedan hacer que un profesional dude de AuditFlow AI.
+  2. **PROHIBIDO EL ENFOQUE DE MIEDO O BRECHAS DE SEGURIDAD**: Nunca incluir listas de riesgos (como "los datos se almacenan en servidores de terceros", "se vulnera la confidencialidad", "se indexa la información sensible", etc.). Esos argumentos siembran dudas y pueden volverse en nuestra contra porque AuditFlow AI opera como una solución en la nube/web.
+  3. **REVISIÓN OBLIGATORIA PREVIA A TODA PUBLICACIÓN**: Todo contenido debe ser 100% afirmativo, enfocado en productividad, velocidad de respuesta (8 segundos), detección de cláusulas trampa, entrega directa en Word (.docx con Control de Cambios) y tranquilidad operativa.
+  4. **POSICIONAMIENTO DE ALTO PRESTIGIO**: Presentar a AuditFlow AI como la herramienta técnica fiduciaria por excelencia para despachos y gerencias que valoran su tiempo y la precisión de sus acuerdos.
+
 ## 1. Regla Inmutable de Pasarelas de Pago
 - **Stripe NO opera nativamente para cuentas bancarias de El Salvador**.
 - **Canales de Cobro Oficiales de la Plataforma**:

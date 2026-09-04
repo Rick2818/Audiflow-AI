@@ -6,9 +6,12 @@ import { CONFIG } from '../lib/config.js';
 
 dotenv.config();
 
-// 14 PAÍSES OBJETIVO OFICIALES CON MAPEO RIGUROSO DE IDIOMA
-export const REAL_LEGAL_DIRECTORS = [
-  // --- 25 DIRECTORES LEGALES & SOCIOS DE FIRMAS CORPORATIVAS REALES ---
+// ==============================================================================
+// ⚠️ AVISO: CAMPAÑAS ANTERIORES DE MEGACORPORACIONES DEPRECADAS POR ORDEN DE DIRECCIÓN
+// Sustituidas por: Nuevo Pareto de Bufetes Medianos (~25 Abogados) y 250 de El Salvador
+// ==============================================================================
+export const DEPRECATED_LEGACY_CORPORATE_LEADS = [
+  // Archivo histórico deprecado (Ciclos de venta lentos de 6-12 meses en Big Law)
   { id: 'legal_01', name: 'Armando Arias', role: 'Socio Director & General Counsel', company: 'Arias Law Firm', email: 'contact.elsalvador@ariaslaw.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_02', name: 'Oscar Samour', role: 'Socio Director Corporativo & M&A', company: 'Consortium Legal', email: 'elsalvador@consortiumlegal.com', country: 'El Salvador', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 99, pareto_tier: 'TOP_20', revenue_potential: 590 },
   { id: 'legal_03', name: 'Héctor Torres', role: 'Managing Partner & Director Legal Tech', company: 'Torres Legal & Fintech Desk', email: 'contacto@torres.legal', country: 'El Salvador', lang: 'es', category: 'LEGAL', tag: '⚖️ LEGAL_COUNSEL', lead_score: 98, pareto_tier: 'TOP_20', revenue_potential: 590 },
