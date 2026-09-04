@@ -1,0 +1,135 @@
+{
+  "name": "AuditFlow AI — Sub-WF 01: Extractor de Cláusulas (Stateless)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-extractor",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizar y validar TaskPayload<ExtractorInput>\nconst input = $input.first().json;\n\nif (!input.taskId || !input.inputData || !input.inputData.rawContractText) {\n  throw new Error('Payload inválido: taskId e inputData.rawContractText son mandatorios.');\n}\n\nconst rawText = input.inputData.rawContractText;\nconst targetClauses = input.inputData.targetClauses || [\n  'INDEMNIFICATION',\n  'LIMITATION_OF_LIABILITY',\n  'JURISDICTION_AND_GOVERNING_LAW',\n  'TERMINATION'\n];\n\nreturn [{\n  json: {\n    taskId: input.taskId,\n    auditId: input.auditId,\n    rawContractText: rawText,\n    targetClauses: targetClauses,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "prepare-prompt-extractor",
+      "name": "Prepare Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Extrae las cláusulas críticas del siguiente contrato legal según la lista: {{ $json.targetClauses.join(', ') }}\n\nCONTRATO A ANALIZAR:\n\"\"\"\n{{ $json.rawContractText }}\n\"\"\"\n\nRecuerda: Extrae únicamente el texto textual (verbatim). Está estrictamente prohibido resumir, opinar o alterar las palabras originales.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "### SYSTEM DIRECTIVE: CONTRACT CLAUSE EXTRACTOR\nYou are an isolated, stateless clause extraction system for AuditFlow AI.\nYour single goal is to find, verbatim extract, and classify specific legal clauses from the provided contract.\n\nCRITICAL INSTRUCTIONS:\n1. Verbatim Extraction Only: Do NOT edit, summarize, improve, or rephrase the extracted text.\n2. Complete Silence: Return ONLY the mandatory JSON schema.\n\nSTRICT NEGATIVE BOUNDARIES (DO NOT ATTEMPT):\n- FORBIDDEN: You must NEVER rate, analyze, or qualify the risk of the clause.\n- FORBIDDEN: You must NEVER propose alternative phrasing or redlines.\n- FORBIDDEN: You must NEVER speculate on legal validity or jurisdictional enforceability.\n- FORBIDDEN: You must NEVER ask follow-up questions or refer to previous conversations."
+        }
+      },
+      "id": "llm-chain-extractor",
+      "name": "Basic LLM Chain (Extractor)",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [640, 240]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "id": "openai-model-extractor",
+      "name": "OpenAI Chat Model (Temp 0.0)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [640, 440],
+      "credentials": {
+        "openAiApi": {
+          "id": "auditflow-openai-creds",
+          "name": "AuditFlow OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "fromJson",
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": { \"type\": \"string\", \"enum\": [\"SUCCESS\"] },\n    \"clausesExtractedCount\": { \"type\": \"number\" },\n    \"clauses\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"clauseId\": { \"type\": \"string\" },\n          \"clauseType\": {\n            \"type\": \"string\",\n            \"enum\": [\"INDEMNIFICATION\", \"LIMITATION_OF_LIABILITY\", \"JURISDICTION_AND_GOVERNING_LAW\", \"TERMINATION\"]\n          },\n          \"verbatimText\": { \"type\": \"string\" },\n          \"sourceReference\": {\n            \"type\": \"object\",\n            \"properties\": {\n              \"sectionNumber\": { \"type\": \"string\" }\n            }\n          },\n          \"detectedKeyTerms\": {\n            \"type\": \"array\",\n            \"items\": { \"type\": \"string\" }\n          }\n        },\n        \"required\": [\"clauseId\", \"clauseType\", \"verbatimText\"]\n      }\n    },\n    \"missingClauseTypes\": {\n      \"type\": \"array\",\n      \"items\": { \"type\": \"string\" }\n    },\n    \"extractionTimestamp\": { \"type\": \"string\" }\n  },\n  \"required\": [\"status\", \"clausesExtractedCount\", \"clauses\", \"missingClauseTypes\", \"extractionTimestamp\"]\n}"
+      },
+      "id": "structured-parser-extractor",
+      "name": "Structured Output Parser (ExtractionOutput)",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [800, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Empaquetar respuesta limpia de vuelta al orquestador\nconst rawOutput = $input.first().json.output || $input.first().json;\n\nreturn [{\n  json: {\n    outputData: rawOutput,\n    executedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "format-output-extractor",
+      "name": "Format Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 240]
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Payload": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain (Extractor)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain (Extractor)": {
+      "main": [
+        [
+          {
+            "node": "Format Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model (Temp 0.0)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain (Extractor)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser (ExtractionOutput)": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain (Extractor)",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

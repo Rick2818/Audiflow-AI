@@ -1,0 +1,49 @@
+================================================================================
+🚀 GUÍA RÁPIDA: ACTUALIZACIÓN DE TU PERFIL DE LINKEDIN (60 SEGUNDOS)
+================================================================================
+
+1. FOTO DE PORTADA / BANNER:
+   - Ya está guardado en esta misma carpeta: "BANNER_LINKEDIN_AUDITFLOW.jpg"
+   - En tu LinkedIn, haz clic en la camarita en la portada arriba y selecciónalo.
+
+--------------------------------------------------------------------------------
+2. TITULAR (Headline) — Copia y pega esto:
+--------------------------------------------------------------------------------
+Founder & CEO en AuditFlow AI | Ayudo a Directores y Empresas a detectar penalizaciones y cláusulas abusivas en contratos comerciales en <10s con IA en RAM Volátil (0% retención en disco) | LegalTech & B2B Compliance
+
+--------------------------------------------------------------------------------
+3. ENLACE DESTACADO (Custom Link) — Justo debajo de tu ubicación:
+--------------------------------------------------------------------------------
+Texto del enlace: 🚀 Audita tu 1er Contrato Gratis (Demo 3s)
+URL del enlace: https://audiflowai.com
+
+--------------------------------------------------------------------------------
+4. SECCIÓN "ACERCA DE" (About) — Copia y pega esto:
+--------------------------------------------------------------------------------
+Lo costoso de un contrato mercantil o de proveedores nunca es lo que dice, sino lo que no se vio a tiempo antes de firmar.
+
+A lo largo de mi trayectoria en dirección y mercadeo estratégico, he visto a decenas de empresas y directores perder miles de dólares por cláusulas de renovación automática forzosa, doble indexación por inflación y penalizaciones de salida desproporcionadas que nadie leyó a tiempo.
+
+Por eso fundé AuditFlow AI (https://audiflowai.com): una plataforma fiduciaria diseñada para directores ejecutivos, departamentos corporativos y firmas legales que necesitan auditar acuerdos comerciales en menos de 10 segundos.
+
+🛡️ Nuestra Promesa de Seguridad y Privacidad:
+• Zero Data Retention (ZDR): Procesamiento 100% en memoria RAM volátil efímera. Cero almacenamiento en disco.
+• Cumplimiento Fiduciario: Diseñado bajo los estándares de EU GDPR Art. 28 y salvaguardas SOC-2. Los modelos de IA jamás se entrenan con sus contratos privados.
+• Entrega Inmediata: Genera la contrapropuesta editable en Word (.docx con Control de Cambios) lista para negociar.
+
+¿Quieres probar cómo audita un acuerdo comercial en 3 segundos sin subir tus documentos privados?
+👉 Experimenta la demo interactiva gratuita aquí: https://audiflowai.com
+
+--------------------------------------------------------------------------------
+5. EXPERIENCIA ACTUAL (AuditFlow AI):
+--------------------------------------------------------------------------------
+Cargo: Founder & Chief Executive Officer (CEO)
+Empresa: AuditFlow AI
+Ubicación: San Salvador, El Salvador (Modalidad Híbrida / Global)
+Descripción:
+Liderando la visión y expansión de AuditFlow AI (https://audiflowai.com), infraestructura B2B de auditoría instantánea de contratos y mitigación de riesgos financieros para directores y departamentos legales en América Latina y Europa.
+
+• Dirección estratégica del motor de análisis en memoria volátil RAM (0 almacenamiento en disco).
+• Implementación de estándares de privacidad empresarial (Zero Data Retention & GDPR Art. 28).
+• Soluciones de redline automatizado en Word (.docx) para acelerar cierres comerciales y prevenir fugas de capital.
+================================================================================

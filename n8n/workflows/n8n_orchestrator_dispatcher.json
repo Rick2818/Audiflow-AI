@@ -1,0 +1,339 @@
+{
+  "name": "AuditFlow AI — Orquestador Central (Dispatcher & Gatekeeper)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "audit-contract-pipeline",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger-orchestrator",
+      "name": "Webhook Ingestion Trigger",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [100, 300],
+      "webhookId": "audit-contract-pipeline-webhook"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Inicializar identificadores de sesión sin estado e idempotencia\nconst body = $input.first().json.body || $input.first().json;\n\nif (!body.contractText) {\n  throw new Error('El campo \"contractText\" es requerido para iniciar la auditoría.');\n}\n\nconst auditId = body.auditId || ('audit_' + Math.random().toString(36).substring(2, 12));\nconst executionId = $execution.id || 'exec_' + Date.now();\n\n// Task 1 Payload: Extractor\nconst extractorTaskId = 'task_ext_' + Math.random().toString(36).substring(2, 9);\nconst extractorPayload = {\n  taskId: extractorTaskId,\n  auditId: auditId,\n  executionId: executionId,\n  targetAgent: 'EXTRACTOR',\n  timestamp: new Date().toISOString(),\n  constraints: {\n    timeoutMs: 30000,\n    maxRetries: 3,\n    jurisdictionFallback: body.jurisdiction || 'Delaware, USA',\n    strictJsonOnly: true\n  },\n  inputData: {\n    rawContractText: body.contractText,\n    documentType: body.documentType || 'MASTER_SERVICES_AGREEMENT',\n    targetClauses: [\n      'INDEMNIFICATION',\n      'LIMITATION_OF_LIABILITY',\n      'JURISDICTION_AND_GOVERNING_LAW',\n      'TERMINATION'\n    ]\n  }\n};\n\nreturn [{\n  json: {\n    auditId,\n    executionId,\n    originalBody: body,\n    extractorPayload\n  }\n}];"
+      },
+      "id": "init-dispatcher",
+      "name": "Init & Build TaskPayload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [320, 300]
+    },
+    {
+      "parameters": {
+        "workflowId": "={{ $env.N8N_SUBWF_EXTRACTOR_ID || 'AuditFlow AI — Sub-WF 01: Extractor de Cláusulas (Stateless)' }}",
+        "options": {}
+      },
+      "id": "exec-subwf-extractor",
+      "name": "Execute Sub-WF: Extractor",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [540, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// GATEKEEPER 1: Validador de Esquema Extractor\nconst item = $input.first().json;\nconst out = item.outputData || item;\nconst errors = [];\n\nif (!out || out.status !== 'SUCCESS') {\n  errors.push('Status must be SUCCESS');\n}\nif (!Array.isArray(out.clauses)) {\n  errors.push('Clauses must be an array');\n} else {\n  out.clauses.forEach((c, idx) => {\n    if (!c.clauseId) errors.push(`Clause[${idx}] missing clauseId`);\n    if (!c.clauseType) errors.push(`Clause[${idx}] missing clauseType`);\n    if (!c.verbatimText) errors.push(`Clause[${idx}] missing verbatimText`);\n  });\n}\n\nif (errors.length > 0) {\n  return [{\n    json: {\n      isValid: false,\n      gatekeeperError: {\n        status: 'ERROR',\n        stage: 'EXTRACTOR',\n        errorCode: 'SCHEMA_VALIDATION_FAILED',\n        message: errors.join('; '),\n        timestamp: new Date().toISOString()\n      }\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    isValid: true,\n    extractedData: out\n  }\n}];"
+      },
+      "id": "gatekeeper-extractor",
+      "name": "Gatekeeper: Validate Extractor",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [760, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isValid }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "if-valid-extractor",
+      "name": "Check Gatekeeper 1",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [980, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Preparar TaskPayload para el Analista de Riesgo\nconst extracted = $json.extractedData;\nconst prev = $('Init & Build TaskPayload').first().json;\n\nconst riskTaskId = 'task_risk_' + Math.random().toString(36).substring(2, 9);\n\nreturn [{\n  json: {\n    taskId: riskTaskId,\n    auditId: prev.auditId,\n    executionId: prev.executionId,\n    targetAgent: 'RISK_ANALYZER',\n    timestamp: new Date().toISOString(),\n    constraints: {\n      timeoutMs: 35000,\n      maxRetries: 3,\n      strictJsonOnly: true\n    },\n    inputData: {\n      governingJurisdiction: prev.originalBody.jurisdiction || 'Delaware, USA',\n      applicableLaw: prev.originalBody.applicableLaw || 'Corporate & Commercial',\n      clausesToEvaluate: extracted.clauses,\n      partyAudited: 'CLIENT'\n    },\n    extractedSnapshot: extracted\n  }\n}];"
+      },
+      "id": "prepare-risk-task",
+      "name": "Build Risk TaskPayload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1220, 240]
+    },
+    {
+      "parameters": {
+        "workflowId": "={{ $env.N8N_SUBWF_RISK_ID || 'AuditFlow AI — Sub-WF 02: Analista de Riesgo (Stateless)' }}",
+        "options": {}
+      },
+      "id": "exec-subwf-risk",
+      "name": "Execute Sub-WF: Risk Analyzer",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [1440, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "// GATEKEEPER 2: Validador de Esquema Analista de Riesgo\nconst item = $input.first().json;\nconst out = item.outputData || item;\nconst errors = [];\n\nif (!out || out.status !== 'SUCCESS') errors.push('Status must be SUCCESS');\nif (typeof out.overallContractRiskScore !== 'number') errors.push('overallContractRiskScore must be number');\nif (!Array.isArray(out.assessments)) {\n  errors.push('assessments must be an array');\n} else {\n  out.assessments.forEach((a, idx) => {\n    if (!a.clauseId) errors.push(`Assessment[${idx}] missing clauseId`);\n    if (!a.severity) errors.push(`Assessment[${idx}] missing severity`);\n    if (typeof a.riskScore !== 'number') errors.push(`Assessment[${idx}] riskScore must be number`);\n  });\n}\n\nif (errors.length > 0) {\n  return [{\n    json: {\n      isValid: false,\n      gatekeeperError: {\n        status: 'ERROR',\n        stage: 'RISK_ANALYZER',\n        errorCode: 'SCHEMA_VALIDATION_FAILED',\n        message: errors.join('; '),\n        timestamp: new Date().toISOString()\n      }\n    }\n  }];\n}\n\nreturn [{\n  json: {\n    isValid: true,\n    riskData: out\n  }\n}];"
+      },
+      "id": "gatekeeper-risk",
+      "name": "Gatekeeper: Validate Risk",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1660, 240]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ $json.isValid }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "if-valid-risk",
+      "name": "Check Gatekeeper 2",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1880, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Preparar Tareas de Mitigación solo para cláusulas HIGH o CRITICAL\nconst risk = $json.riskData;\nconst prevRiskTask = $('Build Risk TaskPayload').first().json;\nconst extractedClauses = prevRiskTask.extractedSnapshot.clauses;\n\nconst highRiskAssessments = risk.assessments.filter(a => a.severity === 'HIGH' || a.severity === 'CRITICAL');\n\nif (highRiskAssessments.length === 0) {\n  return [{\n    json: {\n      hasMitigationTasks: false,\n      riskReport: risk,\n      mitigationProposals: []\n    }\n  }];\n}\n\n// Tomamos la cláusula más crítica para mitigación inmediata\nconst topRisk = highRiskAssessments[0];\nconst matchedClause = extractedClauses.find(c => c.clauseId === topRisk.clauseId) || extractedClauses[0];\n\nconst mitTaskId = 'task_mit_' + Math.random().toString(36).substring(2, 9);\n\nreturn [{\n  json: {\n    hasMitigationTasks: true,\n    taskId: mitTaskId,\n    auditId: prevRiskTask.auditId,\n    executionId: prevRiskTask.executionId,\n    targetAgent: 'MITIGATION_WRITER',\n    timestamp: new Date().toISOString(),\n    constraints: { timeoutMs: 30000, maxRetries: 3, strictJsonOnly: true },\n    inputData: {\n      clauseId: topRisk.clauseId,\n      clauseType: topRisk.clauseType,\n      verbatimText: matchedClause.verbatimText,\n      riskAssessment: {\n        severity: topRisk.severity,\n        riskScore: topRisk.riskScore,\n        rationale: topRisk.legalExposureRationale\n      },\n      advocacyPosition: 'DEFENSIVE'\n    },\n    riskSnapshot: risk\n  }\n}];"
+      },
+      "id": "prepare-mitigation-task",
+      "name": "Build Mitigation TaskPayload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2100, 200]
+    },
+    {
+      "parameters": {
+        "workflowId": "={{ $env.N8N_SUBWF_MITIGATION_ID || 'AuditFlow AI — Sub-WF 03: Mitigador y Redactor (Stateless)' }}",
+        "options": {}
+      },
+      "id": "exec-subwf-mitigation",
+      "name": "Execute Sub-WF: Mitigation",
+      "type": "n8n-nodes-base.executeWorkflow",
+      "typeVersion": 1.1,
+      "position": [2320, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// GATEKEEPER 3 & Consolidación Final\nconst rawMit = $input.first().json;\nconst mitOutput = rawMit.outputData || rawMit;\nconst prevMit = $('Build Mitigation TaskPayload').first().json;\n\nconst finalReport = {\n  auditId: prevMit.auditId,\n  status: 'AUDIT_COMPLETED_SUCCESSFULLY',\n  overallContractRiskScore: prevMit.riskSnapshot.overallContractRiskScore,\n  dominantRiskFactor: prevMit.riskSnapshot.dominantRiskFactor,\n  assessments: prevMit.riskSnapshot.assessments,\n  mitigations: mitOutput.proposals || [],\n  completedAt: new Date().toISOString()\n};\n\nreturn [{ json: finalReport }];"
+      },
+      "id": "consolidate-final-report",
+      "name": "Consolidate Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [2540, 200]
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "id": "respond-success",
+      "name": "Respond 200 (Success Report)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [2760, 200]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Manejador Central de Dead-Letter Queue (DLQ)\nconst errorContext = $input.first().json.gatekeeperError || $input.first().json;\n\nreturn [{\n  json: {\n    status: 'AUDIT_FAILED_ROUTED_TO_DLQ',\n    error: errorContext,\n    remediationAction: 'Stored in task_executions as DLQ_REVISE. Alert dispatched.',\n    dispatchedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "dlq-handler",
+      "name": "Dead-Letter Queue Handler",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1660, 480]
+    },
+    {
+      "parameters": {
+        "options": {
+          "responseCode": 422
+        }
+      },
+      "id": "respond-error",
+      "name": "Respond 422 (Schema Error)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1880, 480]
+    }
+  ],
+  "connections": {
+    "Webhook Ingestion Trigger": {
+      "main": [
+        [
+          {
+            "node": "Init & Build TaskPayload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Init & Build TaskPayload": {
+      "main": [
+        [
+          {
+            "node": "Execute Sub-WF: Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Sub-WF: Extractor": {
+      "main": [
+        [
+          {
+            "node": "Gatekeeper: Validate Extractor",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gatekeeper: Validate Extractor": {
+      "main": [
+        [
+          {
+            "node": "Check Gatekeeper 1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Gatekeeper 1": {
+      "main": [
+        [
+          {
+            "node": "Build Risk TaskPayload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dead-Letter Queue Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Risk TaskPayload": {
+      "main": [
+        [
+          {
+            "node": "Execute Sub-WF: Risk Analyzer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Sub-WF: Risk Analyzer": {
+      "main": [
+        [
+          {
+            "node": "Gatekeeper: Validate Risk",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gatekeeper: Validate Risk": {
+      "main": [
+        [
+          {
+            "node": "Check Gatekeeper 2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Gatekeeper 2": {
+      "main": [
+        [
+          {
+            "node": "Build Mitigation TaskPayload",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Dead-Letter Queue Handler",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Mitigation TaskPayload": {
+      "main": [
+        [
+          {
+            "node": "Execute Sub-WF: Mitigation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Sub-WF: Mitigation": {
+      "main": [
+        [
+          {
+            "node": "Consolidate Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Consolidate Report": {
+      "main": [
+        [
+          {
+            "node": "Respond 200 (Success Report)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Dead-Letter Queue Handler": {
+      "main": [
+        [
+          {
+            "node": "Respond 422 (Schema Error)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

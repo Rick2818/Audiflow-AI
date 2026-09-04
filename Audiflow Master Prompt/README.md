@@ -4,5 +4,7 @@ Este directorio contiene la versión **Definitiva y Blindada del Prompt Maestro 
 
 ---
 
-## 📄 Archivo Principal
+## 📄 Archivo Principal Único
 * **`PROMPT_MAESTRO_DEFINITIVO_AUDITFLOW_AI.md`:** Especificación completa, protocolos de calidad, calibración fiduciaria en 195 países, los 7 motores de ventas B2B y directivas inmutables para el ecosistema de IA.
+
+> **Nota de Gobernanza:** Todas las versiones anteriores y borradores han sido depurados. Este es el único archivo fuente de verdad activo y reconocido por el sistema.

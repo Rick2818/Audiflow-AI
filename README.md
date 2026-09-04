@@ -22,7 +22,7 @@
 * ⚙️ **Todos los Archivos Fuente**: [`todos los archivos fuente de Audiflow/`](todos%20los%20archivos%20fuente%20de%20Audiflow/) *(Backend, endpoints API, librerías, seguridad y scripts)*
 * 🏛️ **Centro Maestro de Marketing B2B**: [`Audiflow Marketing/`](Audiflow%20Marketing/) *(Directorio unificado de planes, playbooks, pauta y bases de datos)*
 * 💼 **Centro de Operaciones y Campañas de Ventas**: [`Ventas Audiflow/`](Ventas%20Audiflow/) *(Campañas outbound, bases de datos de leads, scripts de despacho y pauta)*
-* 🧠 **Repositorio Oficial del Prompt Maestro**: [`Audiflow Master Prompt/`](Audiflow%20Master%20Prompt/) *(Prompt Maestro definitivo v5.0 Enterprise, protocolos y directivas)*
+* 🧠 **Repositorio Oficial del Prompt Maestro**: [`Audiflow Master Prompt/`](Audiflow%20Master%20Prompt/) *(Prompt Maestro definitivo v5.0 Enterprise único y blindado: `PROMPT_MAESTRO_DEFINITIVO_AUDITFLOW_AI.md`)*
 * ❄️ **Entorno Especializado Zona Nórdica (SWE/NOR/DNK/FIN)**: [https://audiflowai.com/?ref=nordic&country=se](https://audiflowai.com/?ref=nordic&country=se)
 * ⚡ **Operación 10 Clientes Hoy (Fast-Track 24h)**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Pestaña `⚡ 10 Clientes Hoy`)*
 * 🎬 **Video Oficial Ejecutivo (40s • Voz Neuronal)**: [https://audiflowai.com/video](https://audiflowai.com/video)

@@ -1,0 +1,135 @@
+{
+  "name": "AuditFlow AI — Sub-WF 03: Mitigador y Redactor (Stateless)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-mitigation-writer",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizar y validar TaskPayload<MitigationWriterInput>\nconst input = $input.first().json;\n\nif (!input.taskId || !input.inputData || !input.inputData.clauseId) {\n  throw new Error('Payload inválido: taskId y inputData.clauseId son requeridos.');\n}\n\nreturn [{\n  json: {\n    taskId: input.taskId,\n    auditId: input.auditId,\n    clauseId: input.inputData.clauseId,\n    clauseType: input.inputData.clauseType,\n    verbatimText: input.inputData.verbatimText,\n    riskAssessment: JSON.stringify(input.inputData.riskAssessment, null, 2),\n    advocacyPosition: input.inputData.advocacyPosition || 'BALANCED'\n  }\n}];"
+      },
+      "id": "prepare-prompt-mitigation",
+      "name": "Prepare Mitigation Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Genera una propuesta de mitigación y redacción alternativa (Redline) para la siguiente cláusula riesgosa.\n\nPOSICIÓN DE DEFENSA: {{ $json.advocacyPosition }}\nCLÁUSULA ORIGINAL:\n\"\"\"\n{{ $json.verbatimText }}\n\"\"\"\n\nEVALUACIÓN DE RIESGO RECIBIDA:\n{{ $json.riskAssessment }}\n\nRedacta el texto con adenda equilibrada y la nota de negociación para la contraparte.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "### SYSTEM DIRECTIVE: CONTRACT MITIGATION & REDLINE SPECIALIST\nYou are an isolated, stateless redlining and contract mitigation specialist for AuditFlow AI.\nYour task is to take high/critical risk assessments and draft defensive or balanced counterproposals.\n\nCRITICAL INSTRUCTIONS:\n1. Generate clear, actionable redlines using standard legal drafting conventions.\n2. Provide tactical negotiation arguments for client counsel.\n3. Completely stateless: Produce output exclusively derived from the provided payload.\n\nSTRICT NEGATIVE BOUNDARIES (DO NOT ATTEMPT):\n- FORBIDDEN: You must NEVER reassess or recalculate the risk severity score.\n- FORBIDDEN: You must NEVER accept liability or indemnification without caps.\n- FORBIDDEN: You must NEVER alter clauses that were not flagged as problematic.\n- FORBIDDEN: You must NEVER output text outside the specified JSON schema."
+        }
+      },
+      "id": "llm-chain-mitigation",
+      "name": "Basic LLM Chain (Mitigation)",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [640, 240]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.2
+        }
+      },
+      "id": "openai-model-mitigation",
+      "name": "OpenAI Chat Model (Temp 0.2)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [640, 440],
+      "credentials": {
+        "openAiApi": {
+          "id": "auditflow-openai-creds",
+          "name": "AuditFlow OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "fromJson",
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": { \"type\": \"string\", \"enum\": [\"SUCCESS\"] },\n    \"proposals\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"clauseId\": { \"type\": \"string\" },\n          \"originalText\": { \"type\": \"string\" },\n          \"proposedRedlineText\": { \"type\": \"string\" },\n          \"cleanFinalText\": { \"type\": \"string\" },\n          \"negotiationNote\": { \"type\": \"string\" },\n          \"mitigatedRiskDeltaScore\": { \"type\": \"number\" }\n        },\n        \"required\": [\"clauseId\", \"originalText\", \"proposedRedlineText\", \"cleanFinalText\", \"negotiationNote\", \"mitigatedRiskDeltaScore\"]\n      }\n    },\n    \"generatedAt\": { \"type\": \"string\" }\n  },\n  \"required\": [\"status\", \"proposals\", \"generatedAt\"]\n}"
+      },
+      "id": "structured-parser-mitigation",
+      "name": "Structured Output Parser (MitigationOutput)",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [800, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawOutput = $input.first().json.output || $input.first().json;\n\nreturn [{\n  json: {\n    outputData: rawOutput,\n    executedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "format-output-mitigation",
+      "name": "Format Mitigation Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 240]
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Mitigation Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Mitigation Payload": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain (Mitigation)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain (Mitigation)": {
+      "main": [
+        [
+          {
+            "node": "Format Mitigation Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model (Temp 0.2)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain (Mitigation)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser (MitigationOutput)": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain (Mitigation)",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}

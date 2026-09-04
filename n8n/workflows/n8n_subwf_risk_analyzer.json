@@ -1,0 +1,135 @@
+{
+  "name": "AuditFlow AI — Sub-WF 02: Analista de Riesgo (Stateless)",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "trigger-risk-analyzer",
+      "name": "Execute Workflow Trigger",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1,
+      "position": [180, 240]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Normalizar y validar TaskPayload<RiskAnalyzerInput>\nconst input = $input.first().json;\n\nif (!input.taskId || !input.inputData || !input.inputData.clausesToEvaluate) {\n  throw new Error('Payload inválido: taskId y inputData.clausesToEvaluate son requeridos.');\n}\n\nreturn [{\n  json: {\n    taskId: input.taskId,\n    auditId: input.auditId,\n    governingJurisdiction: input.inputData.governingJurisdiction || 'Delaware, USA / Global Standard',\n    clausesToEvaluate: JSON.stringify(input.inputData.clausesToEvaluate, null, 2),\n    partyAudited: input.inputData.partyAudited || 'CLIENT'\n  }\n}];"
+      },
+      "id": "prepare-prompt-risk",
+      "name": "Prepare Risk Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 240]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Evalúa el riesgo legal y financiero para la parte auditada ({{ $json.partyAudited }}) bajo la jurisdicción de {{ $json.governingJurisdiction }}.\n\nCLÁUSULAS A EVALUAR:\n{{ $json.clausesToEvaluate }}\n\nRecuerda: Proporciona la justificación legal y financiera y asigna un puntaje estricto de 0 a 100.",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "### SYSTEM DIRECTIVE: LEGAL & FINANCIAL RISK EVALUATOR\nYou are an isolated, stateless risk assessment engine for AuditFlow AI.\nYour sole purpose is to evaluate the severity and legal/financial exposure of pre-extracted clauses.\n\nCRITICAL INSTRUCTIONS:\n1. Score each clause rigorously on a 0-100 scale based on standard corporate risk tolerance.\n2. Provide concrete legal and financial rationale for each finding.\n3. Completely stateless: Base your reasoning strictly on the input provided.\n\nSTRICT NEGATIVE BOUNDARIES (DO NOT ATTEMPT):\n- FORBIDDEN: You must NEVER extract clauses from raw contracts (you only consume pre-extracted clauses).\n- FORBIDDEN: You must NEVER draft or rewrite clauses or propose replacement language.\n- FORBIDDEN: You must NEVER produce natural language chatter outside the JSON object."
+        }
+      },
+      "id": "llm-chain-risk",
+      "name": "Basic LLM Chain (Risk Analyzer)",
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.4,
+      "position": [640, 240]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "id": "openai-model-risk",
+      "name": "OpenAI Chat Model (Temp 0.1)",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [640, 440],
+      "credentials": {
+        "openAiApi": {
+          "id": "auditflow-openai-creds",
+          "name": "AuditFlow OpenAI API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "schemaType": "fromJson",
+        "jsonSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": { \"type\": \"string\", \"enum\": [\"SUCCESS\"] },\n    \"overallContractRiskScore\": { \"type\": \"number\" },\n    \"dominantRiskFactor\": {\n      \"type\": \"string\",\n      \"enum\": [\"LOW\", \"MEDIUM\", \"HIGH\", \"CRITICAL\"]\n    },\n    \"assessments\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"clauseId\": { \"type\": \"string\" },\n          \"clauseType\": { \"type\": \"string\" },\n          \"severity\": {\n            \"type\": \"string\",\n            \"enum\": [\"LOW\", \"MEDIUM\", \"HIGH\", \"CRITICAL\"]\n          },\n          \"riskScore\": { \"type\": \"number\" },\n          \"financialExposureEstimateUsd\": { \"type\": [\"number\", \"null\"] },\n          \"legalExposureRationale\": { \"type\": \"string\" },\n          \"financialExposureRationale\": { \"type\": \"string\" },\n          \"triggerConditions\": {\n            \"type\": \"array\",\n            \"items\": { \"type\": \"string\" }\n          }\n        },\n        \"required\": [\"clauseId\", \"clauseType\", \"severity\", \"riskScore\", \"legalExposureRationale\", \"financialExposureRationale\", \"triggerConditions\"]\n      }\n    },\n    \"analysisCompletedAt\": { \"type\": \"string\" }\n  },\n  \"required\": [\"status\", \"overallContractRiskScore\", \"dominantRiskFactor\", \"assessments\", \"analysisCompletedAt\"]\n}"
+      },
+      "id": "structured-parser-risk",
+      "name": "Structured Output Parser (RiskAnalysisOutput)",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [800, 440]
+    },
+    {
+      "parameters": {
+        "jsCode": "const rawOutput = $input.first().json.output || $input.first().json;\n\nreturn [{\n  json: {\n    outputData: rawOutput,\n    executedAt: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "format-output-risk",
+      "name": "Format Risk Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [960, 240]
+    }
+  ],
+  "connections": {
+    "Execute Workflow Trigger": {
+      "main": [
+        [
+          {
+            "node": "Prepare Risk Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Risk Payload": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain (Risk Analyzer)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain (Risk Analyzer)": {
+      "main": [
+        [
+          {
+            "node": "Format Risk Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model (Temp 0.1)": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain (Risk Analyzer)",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser (RiskAnalysisOutput)": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Basic LLM Chain (Risk Analyzer)",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  }
+}
