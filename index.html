@@ -179,10 +179,10 @@
         },
         {
           "@type": "Question",
-          "name": "¿Qué incluye el Boleto de Entrada por $9.00 USD / Satoshis?",
+          "name": "¿Qué incluye el Boleto de Entrada por $19.00 USD / Satoshis?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "La vista previa es 100% gratuita. Al abonar $9.00 USD (vía Stripe o Bitcoin Lightning), desbloqueas las 3 soluciones tácticas de renegociación, exportación de Redlines a Word .docx editable con control de cambios y el informe PDF oficial firmado."
+            "text": "La vista previa es 100% gratuita. Al abonar $19.00 USD (vía Stripe o Bitcoin Lightning), desbloqueas las 3 soluciones tácticas de renegociación, exportación de Redlines a Word .docx editable con control de cambios y el informe PDF oficial firmado."
           }
         }
       ]
@@ -263,10 +263,10 @@
                     </select>
                 </div>
 
-                <!-- ENLACE DIRECTO A SECCIÓN MANUAL DE USUARIO -->
-                <a href="#manual-section" class="text-xs font-mono font-bold text-gray-300 hover:text-accent-blue transition-all hidden md:inline-flex items-center gap-1">
+                <!-- ENLACE DIRECTO A MANUAL DE USUARIO (MODAL) -->
+                <button type="button" id="btn-header-manual" onclick="if(window.AppHandler &amp;&amp; window.AppHandler.openManualModal){window.AppHandler.openManualModal();}else{var m=document.getElementById('manual-modal');if(m){m.classList.remove('hidden');m.style.display='flex';}}" class="text-xs font-mono font-bold text-gray-300 hover:text-accent-blue transition-all inline-flex items-center gap-1 cursor-pointer">
                     📘 <span data-i18n="tab_user_manual_nav">Manual</span>
-                </a>
+                </button>
                 <!-- BOTÓN HISTORIAL DE SESIÓN LOCAL -->
                 <button onclick="window.AppHandler.openVaultModal()" class="px-2.5 py-1.5 rounded-lg bg-dark-card hover:bg-dark-surface border border-gray-700 text-gray-300 hover:text-white font-mono text-xs transition-all hidden md:inline-flex items-center gap-1.5">
                     📁 <span data-i18n="nav_vault">Historial Local</span>
@@ -311,46 +311,61 @@
                     </div>
                 </div>
 
-                <!-- BADGE DE AUDITORÍA GRATUITA 100% SIN FRICCIÓN (RECIPROCIDAD) -->
-                <div class="flex flex-wrap items-center justify-center gap-2.5 mb-5">
-                    <span data-i18n="hero_free_badge" class="px-4 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-xs sm:text-sm font-mono text-emerald-300 font-extrabold shadow-glow animate-bounce">
-                        🎁 Diagnostica tu 1er contrato sin costo • Si no encuentras nada que corregir, no pagas nada
-                    </span>
-                    <span data-i18n="hero_engine_badge" class="px-3.5 py-1.5 rounded-full bg-dark-card border border-gray-700/70 text-xs font-mono text-accent-blue shadow-sm">
-                        ⚡ Motor Gemini 2.5 Flash • &lt;60s
-                    </span>
+                <!-- BADGE SOBRIO B2B -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-dark-card border border-border-dark text-xs font-mono text-gray-300 mb-6 shadow-sm">
+                    <span class="text-accent-blue">🏛️</span>
+                    <span>Auditoría Fiduciaria B2B &bull; Sector Medio</span>
+                    <span class="text-gray-600">&bull;</span>
+                    <span class="text-emerald-400 font-semibold" data-i18n="hero_free_badge">1ª Auditoría Sin Costo</span>
                 </div>
 
                 <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-tight mb-4">
                     <span data-i18n="hero_title_1">Lo costoso de un contrato no es lo que dice, </span><br class="hidden sm:inline" /><span data-i18n="hero_title_2" class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-sky-400 to-accent-emerald">sino lo que no viste a tiempo</span>
                 </h1>
-                <p data-i18n="hero_sub" class="text-gray-300 text-sm sm:text-base md:text-lg mb-6 max-w-2xl mx-auto leading-relaxed">
-                    Sube tu acuerdo en PDF o Word. Detecta penalizaciones abusivas y vacíos legales en menos de 60 segundos con Inteligencia Artificial en memoria RAM volátil (0 almacenamiento en disco).
+                <p data-i18n="hero_sub" class="text-gray-300 text-sm sm:text-base md:text-lg mb-8 max-w-2xl mx-auto leading-relaxed">
+                    Plataforma fiduciaria para despachos de abogados y directores financieros (CFOs). Detecta penalizaciones ocultas y genera contrapropuestas en Word (.docx con Control de Cambios) en 8 segundos en memoria RAM volátil.
                 </p>
 
-                <!-- MINI GUÍA VISUAL ASCENDENTE (6 PASOS) EN EL HERO -->
-                <div class="hidden sm:flex items-center justify-center gap-1.5 mb-6 py-2 px-4 rounded-xl bg-dark-card/90 border border-border-dark text-[11px] font-mono text-gray-300 max-w-2xl mx-auto">
-                    <span class="text-accent-blue font-bold">1. Centralizar</span> ➔
-                    <span class="text-cyan-400 font-bold">2. Escanear</span> ➔
-                    <span class="text-amber-400 font-bold">3. Detectar</span> ➔
-                    <span class="text-purple-400 font-bold">4. Mitigar</span> ➔
-                    <span class="text-emerald-400 font-bold">5. Certificar</span> ➔
-                    <span class="text-accent-emerald font-bold">6. Proteger 🛡️</span>
-                </div>
-
-                <!-- BANNER DE ENTRADA RÁPIDA & DEMO 1-CLIC (ANULACIÓN DE FRICCIÓN PSICOLÓGICA B2B) -->
-                <div class="mb-5 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-accent-blue/20 via-emerald-950/50 to-dark-surface border-2 border-emerald-500/60 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-glow text-left animate-pulse">
-                    <div class="flex items-center gap-3 text-xs font-mono">
-                        <span class="text-3xl p-2.5 rounded-2xl bg-emerald-500/20 text-emerald-400 shrink-0">⚡</span>
-                        <div>
-                            <span class="text-white font-extrabold text-sm sm:text-base block">¿No tienes un contrato confidencial a mano en este momento?</span>
-                            <span class="text-emerald-300 text-xs font-sans">Experimenta en 3 segundos cómo la IA descuartiza un contrato real y detecta <strong>$14,400 USD en fugas de dinero</strong>.</span>
-                            <span class="text-sky-300 text-[11px] block mt-1">🛡️ <strong>Garantía Fiduciaria 10x:</strong> Te ahorramos $90+ USD o te reembolsamos los $9 en 1 clic.</span>
+                <!-- SHOWCASE VISUAL PALPABLE: ARCHIVO WORD (.DOCX) CON REDLINES REALES -->
+                <div class="max-w-2xl mx-auto mb-6 p-4 sm:p-5 rounded-2xl bg-dark-surface/90 border border-sky-500/40 shadow-xl text-left">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-border-dark">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 border border-sky-500/40 flex items-center justify-center font-bold text-xl shrink-0">
+                                📄
+                            </div>
+                            <div>
+                                <span class="text-xs sm:text-sm font-mono font-bold text-white block">Auditoria_Ejemplo_AuditFlow_AI.docx</span>
+                                <span class="text-[11px] text-sky-300/90 font-mono">Microsoft Word • Control de Cambios (Track Changes) • 38.6 KB</span>
+                            </div>
                         </div>
+                        <span class="px-2.5 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/40 text-emerald-400 text-[10px] font-mono font-bold self-start sm:self-auto">
+                            ✓ DESCARGA DISPONIBLE
+                        </span>
                     </div>
-                    <button onclick="window.AppHandler.loadSampleContract()" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-emerald-400 via-accent-emerald to-accent-blue text-black font-extrabold text-xs sm:text-sm font-mono shadow-2xl hover:scale-105 transition-all shrink-0 cursor-pointer flex items-center justify-center gap-2">
-                        <span>🚀 Probar Demo en Vivo (1 Clic) →</span>
-                    </button>
+
+                    <!-- EXTRACTO VISUAL DEL REPORTE EN WORD (REDLINES ANTES / DESPUÉS) -->
+                    <div class="my-3 p-3.5 rounded-xl bg-dark-card border border-border-dark text-xs font-mono leading-relaxed text-gray-300 space-y-2">
+                        <div class="text-[10px] text-gray-400 font-bold uppercase tracking-wider flex items-center justify-between">
+                            <span>Muestra Forense Extraída del Archivo Word:</span>
+                            <span class="text-sky-400">Párrafo 12.1</span>
+                        </div>
+                        <p class="text-rose-400/90 line-through decoration-rose-500 decoration-2 bg-rose-950/20 p-2 rounded-lg border border-rose-900/30">
+                            «Cláusula Original Proveedor: Indexación unilateral acumulativa del 15% anual y penalización de 90 días por mora sin preaviso...»
+                        </p>
+                        <p class="text-emerald-300 font-semibold underline decoration-emerald-500 decoration-2 bg-emerald-950/20 p-2 rounded-lg border border-emerald-900/30">
+                            «Contrapropuesta Fiduciaria en Word: Ajuste limitado al IPC simple anual no acumulativo con límite del 3%, y período de subsanación de 15 días.»
+                        </p>
+                    </div>
+
+                    <!-- BOTONES DE ACCIÓN: DESCARGAR WORD (.DOCX) O PROBAR EN VIVO -->
+                    <div class="flex flex-wrap items-center justify-between gap-3 pt-1">
+                        <a href="/downloads/Auditoria_Ejemplo_AuditFlow_AI.docx" download="Auditoria_Ejemplo_AuditFlow_AI.docx" class="flex-1 min-w-[220px] px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 no-underline text-center cursor-pointer">
+                            <span>📥 Descargar Archivo Word (.docx)</span>
+                        </a>
+                        <button type="button" onclick="window.AppHandler.loadSampleContract()" class="flex-1 min-w-[220px] px-5 py-2.5 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/50 text-emerald-300 font-mono font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer text-center">
+                            <span>🚀 Probar Demo Interactiva (1 Clic) →</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- SELECTOR DE POSTURA DE NEGOCIACIÓN (PARTY STANCE SELECTOR - BENCHMARKING SPELLBOOK/LEGALON) -->
@@ -399,94 +414,29 @@
                     </div>
                 </div>
 
-                <!-- ESCUDO DE PRIVACIDAD INTERNACIONAL ENTERPRISE (ZERO DATA RETENTION & GDPR ART. 28) -->
-                <div class="mb-6 rounded-2xl bg-gradient-to-b from-dark-card to-dark-surface border-2 border-accent-blue/40 p-4 sm:p-5 text-left shadow-2xl relative overflow-hidden">
-                    <div class="absolute -right-8 -bottom-8 w-32 h-32 bg-accent-blue/5 rounded-full blur-2xl pointer-events-none"></div>
-                    
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-3 border-b border-border-dark pb-3">
-                        <div class="flex items-center gap-2.5">
-                            <span class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-500/50 flex items-center justify-center text-lg shrink-0">🛡️</span>
-                            <div>
-                                <h3 class="text-sm font-extrabold text-white tracking-wide font-mono flex items-center gap-2">
-                                    <span>ZERO DATA RETENTION (ZDR) & PRIVACY SHIELD</span>
-                                    <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 font-bold">100% CERO FUGA</span>
-                                </h3>
-                                <p class="text-[11px] text-gray-400 font-sans">Arquitectura fiduciaria para Departamentos Legales de EE.UU., Reino Unido y Europa (GDPR / SOC-2).</p>
-                            </div>
-                        </div>
-                        <button type="button" onclick="window.AppHandler.openPrivacyModal()" class="w-full sm:w-auto px-3.5 py-1.5 rounded-lg bg-dark-surface border border-accent-blue/50 text-accent-blue hover:bg-accent-blue/10 text-xs font-mono font-bold transition-all shrink-0 cursor-pointer flex items-center justify-center gap-1.5 shadow-sm">
-                            <span>📜 Ver Certificado DPA & Términos Enterprise →</span>
-                        </button>
+                <!-- BARRA FIDUCIARIA MINIMALISTA (ZERO RETENTION & CUMPLIMIENTO INTERNACIONAL) -->
+                <div class="mb-8 py-3 px-4 rounded-xl bg-dark-card/40 border border-border-dark flex flex-wrap items-center justify-between gap-3 text-xs font-mono text-gray-400">
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1.5">
+                        <span class="flex items-center gap-1.5 text-gray-300">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+                            <span>100% RAM Volátil (0 Retención en Disco)</span>
+                        </span>
+                        <span class="text-gray-600 hidden sm:inline">•</span>
+                        <span class="flex items-center gap-1.5 text-gray-300">
+                            <span class="w-1.5 h-1.5 rounded-full bg-accent-blue"></span>
+                            <span>SOC-2 & GDPR Art. 28</span>
+                        </span>
+                        <span class="text-gray-600 hidden sm:inline">•</span>
+                        <span class="flex items-center gap-1.5 text-gray-300">
+                            <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>
+                            <span>Cifrado TLS 1.3 / AES-256</span>
+                        </span>
+                        <span class="text-gray-600 hidden sm:inline">•</span>
+                        <span class="text-gray-400">Sin entrenamiento de IA en contratos</span>
                     </div>
-
-                    <!-- 3 PILARES DE SEGURIDAD VISIBLES -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs font-mono">
-                        <div class="p-2.5 rounded-xl bg-dark-surface/80 border border-border-dark flex items-start gap-2">
-                            <span class="text-emerald-400 font-bold text-sm">⚡</span>
-                            <div>
-                                <strong class="text-white block text-[11px]">RAM Volátil Efímera</strong>
-                                <span class="text-[11px] text-gray-400 font-sans leading-tight block mt-0.5">El archivo se audita en memoria viva y se destruye en &lt;10s. Cero almacenamiento en disco.</span>
-                            </div>
-                        </div>
-
-                        <div class="p-2.5 rounded-xl bg-dark-surface/80 border border-border-dark flex items-start gap-2">
-                            <span class="text-sky-400 font-bold text-sm">🚫</span>
-                            <div>
-                                <strong class="text-white block text-[11px]">Cero Entrenamiento de IA</strong>
-                                <span class="text-[11px] text-gray-400 font-sans leading-tight block mt-0.5">API Enterprise Gemini: Ningún modelo público se entrena con tus contratos o datos privados.</span>
-                            </div>
-                        </div>
-
-                        <div class="p-2.5 rounded-xl bg-dark-surface/80 border border-border-dark flex items-start gap-2">
-                            <span class="text-purple-400 font-bold text-sm">🔒</span>
-                            <div>
-                                <strong class="text-white block text-[11px]">Cifrado TLS 1.3 & AES-256</strong>
-                                <span class="text-[11px] text-gray-400 font-sans leading-tight block mt-0.5">Túnel encriptado de punta a punta. Inmunidad total para secretos comerciales y NDAs.</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- INSIGNIAS DE CERTIFICACIÓN Y SEGURIDAD (CONFIANZA TOTAL) -->
-                <div class="flex flex-wrap items-center justify-center gap-2 sm:gap-4 mb-10 text-[11px] font-mono text-gray-400">
-                    <span class="px-3 py-1.5 rounded-lg bg-dark-card border border-border-dark flex items-center gap-1.5">
-                        <span class="text-accent-emerald">✓</span> <span data-i18n="badge_soc2">Conforme a SOC-2 & GDPR</span>
-                    </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-dark-card border border-border-dark flex items-center gap-1.5">
-                        <span class="text-accent-emerald">✓</span> <span data-i18n="badge_iso">Norma ISO 27001 en RAM</span>
-                    </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-dark-card border border-border-dark flex items-center gap-1.5">
-                        <span class="text-accent-emerald">✓</span> <span data-i18n="badge_stripe">Comerciante Verificado Stripe</span>
-                    </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-dark-card border border-border-dark flex items-center gap-1.5 text-emerald-400 font-semibold">
-                        <span class="text-accent-emerald">🛡️</span> <span data-i18n="badge_guarantee">Garantía de Satisfacción 100%</span>
-                    </span>
-                </div>
-
-                <!-- TICKER DE METRICAS SOCIALES DE CONFIANZA -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 p-3 rounded-2xl bg-dark-card/60 border border-border-dark text-center font-mono">
-                    <div class="p-2">
-                        <span class="text-lg sm:text-xl font-bold text-accent-blue">14,820+</span>
-                        <span data-i18n="stat_audits" class="text-[11px] text-gray-400 block">Contratos Auditados</span>
-                    </div>
-                    <div class="p-2">
-                        <span class="text-lg sm:text-xl font-bold text-accent-emerald">$2.4M+</span>
-                        <span data-i18n="stat_leakage" class="text-[11px] text-gray-400 block">Fugas Detectadas</span>
-                    </div>
-                    <div class="p-2">
-                        <span class="text-lg sm:text-xl font-bold text-amber-400">0</span>
-                        <span data-i18n="stat_retention" class="text-[11px] text-gray-400 block">Archivos en Disco</span>
-                    </div>
-                    <div class="p-2">
-                        <span class="text-lg sm:text-xl font-bold text-purple-400">AES-256</span>
-                        <span data-i18n="stat_encryption" class="text-[11px] text-gray-400 block">Cifrado Volátil</span>
-                    </div>
-                </div>
-
-                <!-- TICKER DE URGENCIA Y PRUEBA SOCIAL EN VIVO -->
-                <div class="flex items-center justify-center gap-2 mb-8 text-xs font-mono text-emerald-400 bg-emerald-950/30 border border-emerald-500/20 py-2 px-4 rounded-full max-w-xl mx-auto shadow-glow">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                    <span>🟢 <strong>En vivo hoy:</strong> 14 auditorías realizadas • Fuga promedio detectada: <strong>$4,250.00 USD</strong></span>
+                    <button type="button" onclick="window.AppHandler.openPrivacyModal()" class="text-accent-blue hover:text-white transition-colors cursor-pointer text-[11px] underline underline-offset-4">
+                        Ver DPA Enterprise & Certificaciones →
+                    </button>
                 </div>
 
                 <!-- CALCULADORA INTERACTIVA DE FUGAS FINANCIERAS (HERRAMIENTA PLG) -->
@@ -570,206 +520,65 @@
                     window.updateRoiCalculator = updateRoiCalculator;
                     document.addEventListener('DOMContentLoaded', updateRoiCalculator);
                 </script>
-                    <span class="px-3 py-1.5 rounded-lg bg-dark-card border border-border-dark flex items-center gap-1.5">
-                        <span class="text-accent-emerald">✓</span> <span data-i18n="badge_stripe">Comerciante Verificado Stripe</span>
-                    </span>
-                    <span class="px-3 py-1.5 rounded-lg bg-dark-card border border-border-dark flex items-center gap-1.5 text-emerald-400 font-semibold">
-                        <span class="text-accent-emerald">🛡️</span> <span data-i18n="badge_guarantee">Garantía de Satisfacción 100%</span>
-                    </span>
-                </div>
-
-                <!-- BANNERS ESTÁTICOS DE CONFIANZA VISUAL Y SEGURIDAD CORPORATIVA -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-left">
-                    <div class="p-4 rounded-xl bg-dark-surface border border-emerald-500/30 flex items-start gap-3.5 shadow-sm">
-                        <span class="text-xl shrink-0">🔒</span>
-                        <div>
-                            <h4 data-i18n="trust_title_1" class="text-xs font-bold text-white uppercase tracking-wider mb-1">Procesamiento efímero:</h4>
-                            <p data-i18n="trust_sub_1" class="text-xs text-gray-300 leading-relaxed">Tu documento se analiza exclusivamente en memoria RAM (volátil) y se destruye en &lt; 5 segundos.</p>
-                        </div>
-                    </div>
-                    <div class="p-4 rounded-xl bg-dark-surface border border-accent-blue/30 flex items-start gap-3.5 shadow-sm">
-                        <span class="text-xl shrink-0">🛡️</span>
-                        <div>
-                            <h4 data-i18n="trust_title_2" class="text-xs font-bold text-white uppercase tracking-wider mb-1">Privacidad estricta:</h4>
-                            <p data-i18n="trust_sub_2" class="text-xs text-gray-300 leading-relaxed">Cero almacenamiento en disco. Cifrado de grado bancario AES-256 en tránsito.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SECCIÓN VISUAL DE TRANSPARENCIA: PASO A PASO DE SEGURIDAD -->
-                <div class="p-6 rounded-2xl bg-dark-card/80 border border-border-dark text-left mb-8">
-                    <h3 data-i18n="how_title" class="text-sm font-bold text-white uppercase tracking-wider mb-4 flex items-center gap-2">
-                        <span>🔒 ¿Cómo garantizamos la seguridad de tu información?</span>
-                    </h3>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                        <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
-                            <strong data-i18n="step_1_title" class="text-accent-blue block mb-1">1. Buffer RAM Volátil</strong>
-                            <p data-i18n="step_1_desc" class="text-gray-300 leading-relaxed">El documento entra directamente a memoria RAM sin pasar por discos físicos ni servidores de almacenamiento.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
-                            <strong data-i18n="step_2_title" class="text-accent-emerald block mb-1">2. Purga Inmediata</strong>
-                            <p data-i18n="step_2_desc" class="text-gray-300 leading-relaxed">Gemini 2.5 Flash analiza el texto y el buffer de memoria se destruye automáticamente en &lt; 5 segundos.</p>
-                        </div>
-                        <div class="p-3.5 rounded-xl bg-dark-surface border border-border-dark">
-                            <strong data-i18n="step_3_title" class="text-purple-400 block mb-1">3. Vista Previa Gratis</strong>
-                            <p data-i18n="step_3_desc" class="text-gray-300 leading-relaxed">Ves el diagnóstico en pantalla de forma gratuita. Decides pagar $9 solo si deseas descargar las soluciones en Word + PDF.</p>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- ========================================================================= -->
-                <!-- SECCIÓN ESCALERA ASCENDENTE: TU EQUIPO NO NECESITA MÁS PESTAÑAS (6 PASOS) -->
+                <!-- SECCIÓN FORENSE: LA FUGA DE CAPITAL EN EMPRESAS MEDIANAS (NOTEBOOKLM DATA) -->
                 <!-- ========================================================================= -->
-                <div id="workflow-ladder-section" class="py-10 text-left border-y border-border-dark/60 mb-12 relative overflow-hidden">
-                    <div class="text-center max-w-3xl mx-auto mb-10">
-                        <span class="px-3.5 py-1 rounded-full bg-accent-blue/10 border border-accent-blue/30 text-accent-blue font-mono text-xs font-bold uppercase tracking-widest inline-flex items-center gap-1.5 mb-3">
-                            <span class="w-2 h-2 rounded-full bg-accent-blue animate-ping"></span>
-                            Arquitectura de Flujo Único B2B
-                        </span>
-                        <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight leading-tight mb-3">
-                            Tu equipo no necesita más pestañas, <br class="hidden sm:inline" />
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent-blue via-emerald-400 to-accent-emerald">
-                                sino un flujo único e ininterrumpido.
+                <div class="py-10 text-left border-y border-border-dark/60 mb-12 relative">
+                    <div class="max-w-4xl mx-auto">
+                        <div class="text-center mb-8">
+                            <span class="px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono text-xs font-bold uppercase tracking-widest inline-flex items-center gap-1.5 mb-3">
+                                📊 Diagnóstico Fiduciario del Sector Medio
                             </span>
-                        </h2>
-                        <p class="text-gray-300 text-xs sm:text-sm leading-relaxed max-w-2xl mx-auto">
-                            Basta de dispersión entre PDFs, procesadores de texto, prompts desprotegidos y hojas de cálculo. Centraliza la auditoría integral en una sola escalera fiduciaria ascendente.
-                        </p>
-                    </div>
+                            <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-tight mb-2">
+                                La Fuga Invisible en Contratos de Proveedores y Cuentas por Pagar
+                            </h2>
+                            <p class="text-gray-300 text-xs sm:text-sm max-w-2xl mx-auto">
+                                En el sector medio, el 100% de las disputas financieras nacen en cláusulas no detectadas antes de firmar. AuditFlow AI actúa como tu asociado virtual para blindar el balance.
+                            </p>
+                        </div>
 
-                    <!-- VISTA 1: ESCALERA ISOMÉTRICA ASCENDENTE (DESKTOP >= 1024px) -->
-                    <div class="hidden lg:grid lg:grid-cols-6 gap-3 items-end pt-8 pb-4">
-                        
-                        <!-- PASO 1: CENTRALIZAR -->
-                        <div class="group relative flex flex-col justify-between p-4 rounded-xl bg-dark-card border border-border-dark hover:border-accent-blue/60 transition-all duration-300 shadow-lg hover:-translate-y-1 h-[210px]">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="w-7 h-7 rounded-lg bg-accent-blue/20 text-accent-blue font-mono text-xs font-black flex items-center justify-center border border-accent-blue/40">01</span>
-                                <span class="text-lg">📥</span>
+                        <!-- 3 DOLORES CLAVE (DATOS REALES NOTEBOOKLM) -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+                            <div class="p-5 rounded-2xl bg-dark-card border border-red-500/30 shadow-lg">
+                                <div class="text-2xl mb-2">⏳</div>
+                                <h3 class="text-sm font-bold text-white mb-1">Pérdida de Descuentos (2% - 5%)</h3>
+                                <p class="text-xs text-gray-300 leading-relaxed">
+                                    La revisión manual de contratos toma días. Las empresas pierden sistemáticamente descuentos por pronto pago por cuellos de botella en la aprobación de términos.
+                                </p>
                             </div>
+
+                            <div class="p-5 rounded-2xl bg-dark-card border border-amber-500/30 shadow-lg">
+                                <div class="text-2xl mb-2">📦</div>
+                                <h3 class="text-sm font-bold text-white mb-1">Inventarios Paralizados</h3>
+                                <p class="text-xs text-gray-300 leading-relaxed">
+                                    Discrepancias en cláusulas marco facultan a proveedores a suspender suministros críticos. Blindamos la continuidad operativa y la entrega de insumos.
+                                </p>
+                            </div>
+
+                            <div class="p-5 rounded-2xl bg-dark-card border border-emerald-500/30 shadow-lg">
+                                <div class="text-2xl mb-2">🛡️</div>
+                                <h3 class="text-sm font-bold text-white mb-1">Penalizaciones Ocultas</h3>
+                                <p class="text-xs text-gray-300 leading-relaxed">
+                                    Indexaciones unilaterales de precios e intereses moratorios abusivos desalinean el flujo de caja. Entregamos la contrapropuesta en Word lista para negociar.
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- CTA CON MUESTRA PALPABLE -->
+                        <div class="p-5 rounded-2xl bg-gradient-to-r from-dark-surface via-dark-card to-dark-surface border border-accent-blue/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
                             <div>
-                                <h3 class="text-xs font-black text-white group-hover:text-accent-blue transition-colors uppercase tracking-wider mb-1">1. Centralizar</h3>
-                                <p class="text-[11px] text-gray-300 leading-snug">Carga PDF o Word sin dispersión de archivos entre correos o carpetas.</p>
+                                <h4 class="text-sm font-bold text-white font-mono">Comprueba el informe forense en tu propio Microsoft Word:</h4>
+                                <p class="text-xs text-gray-400 mt-0.5">Descarga el caso real de contrato de proveedor con 4 cláusulas trampa resueltas en Control de Cambios.</p>
                             </div>
-                            <div class="pt-2 border-t border-border-dark/40 text-[9px] font-mono text-gray-400 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Repositorio Unificado
-                            </div>
-                        </div>
-
-                        <!-- PASO 2: ESCANEAR -->
-                        <div class="group relative flex flex-col justify-between p-4 rounded-xl bg-dark-card border border-border-dark hover:border-cyan-400/60 transition-all duration-300 shadow-lg hover:-translate-y-1 h-[240px]">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="w-7 h-7 rounded-lg bg-cyan-500/20 text-cyan-400 font-mono text-xs font-black flex items-center justify-center border border-cyan-400/40">02</span>
-                                <span class="text-lg">⚡</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white group-hover:text-cyan-400 transition-colors uppercase tracking-wider mb-1">2. Escanear</h3>
-                                <p class="text-[11px] text-gray-300 leading-snug">IA determinística en RAM volátil. Cero almacenamiento en disco físico.</p>
-                            </div>
-                            <div class="pt-2 border-t border-border-dark/40 text-[9px] font-mono text-cyan-300 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span> Purga en &lt; 5 seg
-                            </div>
-                        </div>
-
-                        <!-- PASO 3: DETECTAR -->
-                        <div class="group relative flex flex-col justify-between p-4 rounded-xl bg-dark-card border border-amber-500/30 hover:border-amber-400/60 transition-all duration-300 shadow-lg hover:-translate-y-1 h-[270px]">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="w-7 h-7 rounded-lg bg-amber-500/20 text-amber-400 font-mono text-xs font-black flex items-center justify-center border border-amber-400/40">03</span>
-                                <span class="text-lg">🔍</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white group-hover:text-amber-400 transition-colors uppercase tracking-wider mb-1">3. Detectar</h3>
-                                <p class="text-[11px] text-gray-300 leading-snug">Identifica pasivos ocultos, penalizaciones abusivas y vacíos legales.</p>
-                            </div>
-                            <div class="pt-2 border-t border-border-dark/40 text-[9px] font-mono text-amber-300 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> Aversión a pérdidas
-                            </div>
-                        </div>
-
-                        <!-- PASO 4: MITIGAR -->
-                        <div class="group relative flex flex-col justify-between p-4 rounded-xl bg-dark-card border border-purple-500/30 hover:border-purple-400/60 transition-all duration-300 shadow-lg hover:-translate-y-1 h-[300px]">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="w-7 h-7 rounded-lg bg-purple-500/20 text-purple-400 font-mono text-xs font-black flex items-center justify-center border border-purple-400/40">04</span>
-                                <span class="text-lg">✍️</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white group-hover:text-purple-400 transition-colors uppercase tracking-wider mb-1">4. Mitigar</h3>
-                                <p class="text-[11px] text-gray-300 leading-snug">Redlines nativos en Word (.docx) con Control de Cambios profesional listo.</p>
-                            </div>
-                            <div class="pt-2 border-t border-border-dark/40 text-[9px] font-mono text-purple-300 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span> Track Changes
-                            </div>
-                        </div>
-
-                        <!-- PASO 5: CERTIFICAR -->
-                        <div class="group relative flex flex-col justify-between p-4 rounded-xl bg-dark-card border border-emerald-500/40 hover:border-emerald-400/70 transition-all duration-300 shadow-lg hover:-translate-y-1 h-[330px]">
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 font-mono text-xs font-black flex items-center justify-center border border-emerald-400/40">05</span>
-                                <span class="text-lg">📊</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white group-hover:text-emerald-400 transition-colors uppercase tracking-wider mb-1">5. Certificar</h3>
-                                <p class="text-[11px] text-gray-300 leading-snug">Semáforo ejecutivo de riesgo (Rojo/Amarillo/Verde) y Score fiduciario.</p>
-                            </div>
-                            <div class="pt-2 border-t border-border-dark/40 text-[9px] font-mono text-emerald-300 flex items-center gap-1">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Reporte de Directorio
-                            </div>
-                        </div>
-
-                        <!-- PASO 6: PROTEGER -->
-                        <div class="group relative flex flex-col justify-between p-4 rounded-xl bg-gradient-to-b from-dark-card to-emerald-950/40 border-2 border-accent-emerald hover:border-emerald-300 transition-all duration-300 shadow-2xl hover:-translate-y-1 h-[360px]">
-                            <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-accent-emerald text-black font-mono font-bold text-[9px] uppercase tracking-wider shadow">
-                                Blindaje Total
-                            </div>
-                            <div class="flex items-center justify-between mb-2">
-                                <span class="w-7 h-7 rounded-lg bg-accent-emerald text-black font-mono text-xs font-black flex items-center justify-center">06</span>
-                                <span class="text-lg">🛡️</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xs font-black text-white group-hover:text-emerald-300 transition-colors uppercase tracking-wider mb-1">6. Proteger</h3>
-                                <p class="text-[11px] text-gray-200 leading-snug">Ajuste de políticas y blindaje en negociaciones futuras. Ciclo virtuoso.</p>
-                            </div>
-                            <div class="pt-2 border-t border-emerald-500/40 text-[9px] font-mono text-emerald-300 flex items-center gap-1 font-bold">
-                                <span class="w-1.5 h-1.5 rounded-full bg-accent-emerald animate-pulse"></span> Cumplimiento 100%
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <!-- VISTA 2: TIMELINE VERTICAL FIDUCIARIO (MOBILE & TABLET < 1024px) -->
-                    <div class="lg:hidden relative pl-6 border-l-2 border-accent-blue/40 space-y-4 my-4">
-                        <div class="relative bg-dark-card p-3.5 rounded-xl border border-border-dark">
-                            <span class="absolute -left-[33px] top-3.5 w-5 h-5 rounded-full bg-dark-surface border-2 border-accent-blue text-accent-blue font-mono text-[10px] font-black flex items-center justify-center">1</span>
-                            <h4 class="text-xs font-bold text-white mb-1">📥 1. Centralizar</h4>
-                            <p class="text-xs text-gray-300">Carga directa de contratos (PDF o Word) sin dispersión de archivos.</p>
-                        </div>
-                        <div class="relative bg-dark-card p-3.5 rounded-xl border border-border-dark">
-                            <span class="absolute -left-[33px] top-3.5 w-5 h-5 rounded-full bg-dark-surface border-2 border-cyan-400 text-cyan-400 font-mono text-[10px] font-black flex items-center justify-center">2</span>
-                            <h4 class="text-xs font-bold text-white mb-1">⚡ 2. Escanear</h4>
-                            <p class="text-xs text-gray-300">Procesamiento automático en memoria RAM volátil para clasificar cláusulas.</p>
-                        </div>
-                        <div class="relative bg-dark-card p-3.5 rounded-xl border border-border-dark">
-                            <span class="absolute -left-[33px] top-3.5 w-5 h-5 rounded-full bg-dark-surface border-2 border-amber-400 text-amber-400 font-mono text-[10px] font-black flex items-center justify-center">3</span>
-                            <h4 class="text-xs font-bold text-white mb-1">🔍 3. Detectar</h4>
-                            <p class="text-xs text-gray-300">Resaltado inmediato de pasivos ocultos, penalizaciones abusivas y vacíos legales.</p>
-                        </div>
-                        <div class="relative bg-dark-card p-3.5 rounded-xl border border-border-dark">
-                            <span class="absolute -left-[33px] top-3.5 w-5 h-5 rounded-full bg-dark-surface border-2 border-purple-400 text-purple-400 font-mono text-[10px] font-black flex items-center justify-center">4</span>
-                            <h4 class="text-xs font-bold text-white mb-1">✍️ 4. Mitigar</h4>
-                            <p class="text-xs text-gray-300">Generación de redacciones alternativas y contrapropuestas en Word (.docx).</p>
-                        </div>
-                        <div class="relative bg-dark-card p-3.5 rounded-xl border border-border-dark">
-                            <span class="absolute -left-[33px] top-3.5 w-5 h-5 rounded-full bg-dark-surface border-2 border-emerald-400 text-emerald-400 font-mono text-[10px] font-black flex items-center justify-center">5</span>
-                            <h4 class="text-xs font-bold text-white mb-1">📊 5. Certificar</h4>
-                            <p class="text-xs text-gray-300">Exportación de informes ejecutivos con semáforo de riesgo para socios y directores.</p>
-                        </div>
-                        <div class="relative bg-dark-card p-3.5 rounded-xl border-2 border-accent-emerald">
-                            <span class="absolute -left-[33px] top-3.5 w-5 h-5 rounded-full bg-accent-emerald text-black font-mono text-[10px] font-black flex items-center justify-center">6</span>
-                            <h4 class="text-xs font-bold text-white mb-1">🛡️ 6. Proteger</h4>
-                            <p class="text-xs text-gray-300">Ajuste de políticas internas que retroalimenta y blinda las negociaciones futuras.</p>
+                            <a href="/downloads/Auditoria_Ejemplo_AuditFlow_AI.docx" download="Auditoria_Ejemplo_AuditFlow_AI.docx" class="px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-mono font-bold text-xs shadow-lg transition-all shrink-0 hover:scale-105 no-underline">
+                                📥 Descargar Caso de Muestra (.docx) ↓
+                            </a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- CTA CERO FRICCIONES AL PIE DE LA ESCALERA -->
+                <!-- CTA CERO FRICCIONES AL PIE DE LA ESCALERA -->
                     <div class="text-center mt-6">
                         <a href="#upload-section" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-accent-blue via-sky-400 to-accent-emerald text-black font-black text-xs uppercase tracking-wider transition-all transform hover:scale-105 shadow-glow">
                             <span>Auditar mi primer contrato sin costo (30s)</span>
@@ -810,14 +619,14 @@
                             </button>
                         </div>
 
-                        <!-- TARJETA 2: BOLETO DE ENTRADA FIDUCIARIO ($9 USD) - DESTACADA -->
+                        <!-- TARJETA 2: BOLETO DE ENTRADA FIDUCIARIO ($19 USD) - DESTACADA -->
                         <div class="p-6 rounded-2xl bg-gradient-to-b from-dark-card to-dark-surface border-2 border-accent-blue flex flex-col justify-between shadow-2xl relative">
                             <span data-i18n="pricing_card2_top_badge" class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-blue text-black font-extrabold font-mono text-[10px] px-3 py-1 rounded-full shadow-glow uppercase">MÁS POPULAR • BOLETO DE ENTRADA</span>
                             <div>
                                 <span data-i18n="pricing_card2_tag" class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-accent-blue/15 text-accent-blue border border-accent-blue/40 uppercase">PAGO ÚNICO</span>
                                 <h4 data-i18n="pricing_card2_title" class="text-lg font-bold text-white mt-3 mb-1">Boleto de Entrada Fiduciario</h4>
                                 <div class="flex items-baseline gap-1 mb-3">
-                                    <span data-i18n="pricing_card2_price" class="text-3xl font-extrabold text-accent-blue font-mono">$9</span>
+                                    <span data-i18n="pricing_card2_price" class="text-3xl font-extrabold text-accent-blue font-mono">$19</span>
                                     <span data-i18n="pricing_card2_period" class="text-xs text-gray-400 font-mono">USD / por auditoría</span>
                                 </div>
                                 <p data-i18n="pricing_card2_desc" class="text-xs text-gray-300 mb-6 leading-relaxed">Auditoría exhaustiva completa con documentos editables para tu equipo legal.</p>
@@ -825,11 +634,11 @@
                                     <li data-i18n="pricing_card2_f1" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Desbloqueo de 3 Soluciones Tácticas</li>
                                     <li data-i18n="pricing_card2_f2" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Redlines en Word .docx con Control de Cambios</li>
                                     <li data-i18n="pricing_card2_f3" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Informe Oficial PDF Firmado Digitalmente</li>
-                                    <li data-i18n="pricing_card2_f4" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Garantía 10x ROI (Ahorras $90+ USD o reembolso)</li>
+                                    <li data-i18n="pricing_card2_f4" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Garantía 10x ROI (Ahorras $190+ USD o reembolso)</li>
                                 </ul>
                             </div>
                             <button onclick="window.AppHandler.openSingleAuditPurchase()" class="btn-primary w-full py-3 text-xs font-bold text-center shadow-glow">
-                                <span data-i18n="pricing_card2_btn">🔓 Auditar 1 Documento ($9 USD)</span>
+                                <span data-i18n="pricing_card2_btn">🔓 Auditar 1 Documento ($19 USD)</span>
                             </button>
                         </div>
 
@@ -872,8 +681,8 @@
                             <p data-i18n="faq_a2" class="text-gray-300 leading-relaxed">No. AuditFlow AI opera con una arquitectura de memoria RAM volátil estricta (0 Disk Retention). El archivo se analiza en memoria y se destruye en menos de 5 segundos.</p>
                         </div>
                         <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
-                            <h4 data-i18n="faq_q3" class="font-bold text-accent-blue mb-1">¿Qué incluye el Boleto de Entrada por $9.00 USD / Satoshis?</h4>
-                            <p data-i18n="faq_a3" class="text-gray-300 leading-relaxed">La vista previa es 100% gratuita. Al abonar $9.00 USD (vía Stripe o Bitcoin Lightning), desbloqueas las 3 soluciones tácticas de renegociación, exportación de Redlines a Word .docx editable con control de cambios y el informe PDF oficial firmado.</p>
+                            <h4 data-i18n="faq_q3" class="font-bold text-accent-blue mb-1">¿Qué incluye la Auditoría Individual por $19.00 USD / Satoshis?</h4>
+                            <p data-i18n="faq_a3" class="text-gray-300 leading-relaxed">La vista previa es 100% gratuita. Al abonar $19.00 USD (vía Wompi o Bitcoin Lightning/Strike), desbloqueas las soluciones tácticas de renegociación, exportación de Redlines a Word .docx editable con Control de Cambios y el informe PDF oficial.</p>
                         </div>
                         <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
                             <h4 data-i18n="faq_q4" class="font-bold text-accent-blue mb-1">¿Tienen plan corporativo para auditorías ilimitadas?</h4>
@@ -882,78 +691,6 @@
                     </div>
                 </div>
 
-                <!-- SECCIÓN VISUAL DEL MANUAL DE USUARIO & GUÍA DE USO -->
-                <div id="manual-section" class="p-6 sm:p-8 rounded-2xl bg-dark-card border border-border-dark text-left mb-8 shadow-xl">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-border-dark pb-4 mb-6">
-                        <div class="flex items-center gap-3">
-                            <div class="w-12 h-12 rounded-xl bg-accent-blue/10 border border-accent-blue/30 flex items-center justify-center text-2xl shrink-0">📘</div>
-                            <div>
-                                <h3 data-i18n="manual_modal_title" class="text-lg sm:text-xl font-bold text-white">Manual de Usuario — AuditFlow AI</h3>
-                                <p data-i18n="manual_modal_sub" class="text-xs text-gray-400 font-mono">Guía paso a paso para auditar documentos, interpretar métricas y aplicar soluciones tácticas.</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-3 flex-wrap">
-                            <!-- SWITCHER DE IDIOMAS DE LA SECCIÓN MANUAL -->
-                            <div class="inline-flex items-center bg-dark-surface border border-border-dark rounded-lg p-1 text-xs font-mono">
-                                <button data-lang-btn="es" id="btn-section-lang-es" aria-label="Cambiar idioma a Español" onclick="window.I18n.setLanguage('es')" class="px-2.5 py-1 rounded bg-accent-blue text-black font-bold transition-all focus:outline-none">ES</button>
-                                <button data-lang-btn="en" id="btn-section-lang-en" aria-label="Switch language to English" onclick="window.I18n.setLanguage('en')" class="px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">EN</button>
-                                <button data-lang-btn="de" id="btn-section-lang-de" aria-label="Sprache auf Deutsch umstellen" onclick="window.I18n.setLanguage('de')" class="px-2.5 py-1 rounded text-gray-300 hover:text-white transition-all focus:outline-none">DE</button>
-                            </div>
-                            <button onclick="window.AppHandler.resetToHome()" class="btn-secondary text-xs px-3.5 py-2 font-mono flex items-center gap-1.5 border border-border-dark text-gray-300 hover:text-white hover:bg-dark-surface transition-all rounded-xl">
-                                <span data-i18n="manual_btn_home">🏠 Regresar al Inicio</span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-4 text-left">
-                        <!-- Paso 1 -->
-                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
-                            <span class="text-2xl shrink-0">⚖️</span>
-                            <div>
-                                <h4 data-i18n="manual_step1_title" class="text-xs sm:text-sm font-bold text-white">1. Selección de Normativa y Carga</h4>
-                                <p data-i18n="manual_step1_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Elige tu marco legal (PCAOB/US GAAP, NIIF/IFRS o Código Local) y arrastra tu PDF o imagen.</p>
-                            </div>
-                        </div>
-
-                        <!-- Paso 2 -->
-                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
-                            <span class="text-2xl shrink-0">⚡</span>
-                            <div>
-                                <h4 data-i18n="manual_step2_title" class="text-xs sm:text-sm font-bold text-emerald-400">2. Análisis Volátil en &lt; 10 Segundos</h4>
-                                <p data-i18n="manual_step2_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Gemini 2.5 Flash audita en memoria RAM volátil (0 disco) y calcula tu fuga económica en USD.</p>
-                            </div>
-                        </div>
-
-                        <!-- Paso 3 -->
-                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
-                            <span class="text-2xl shrink-0">🎁</span>
-                            <div>
-                                <h4 data-i18n="manual_step3_title" class="text-xs sm:text-sm font-bold text-yellow-400">3. Diagnóstico Gratuito y Desbloqueo</h4>
-                                <p data-i18n="manual_step3_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Diagnóstico Inicial).</p>
-                            </div>
-                        </div>
-
-                        <!-- Paso 4 -->
-                        <div class="p-4 rounded-xl bg-dark-surface border border-border-dark flex items-start gap-3">
-                            <span class="text-2xl shrink-0">🛠️</span>
-                            <div>
-                                <h4 data-i18n="manual_step4_title" class="text-xs sm:text-sm font-bold text-accent-blue">4. Herramientas Avanzadas y Negociación</h4>
-                                <p data-i18n="manual_step4_desc" class="text-xs text-gray-400 font-sans mt-1 leading-relaxed">Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="pt-4 border-t border-border-dark flex flex-wrap items-center justify-between gap-3">
-                        <button onclick="window.AppHandler.loadSampleContract()" class="text-xs font-mono text-emerald-400 hover:text-emerald-300 flex items-center gap-1.5">
-                            ⚡ <span data-i18n="btn_sample_demo">Probar con Contrato de Ejemplo</span>
-                        </button>
-                        <div class="flex items-center gap-2 flex-wrap">
-                            <button onclick="window.AppHandler.resetToHome()" class="btn-primary text-xs px-5 py-2 font-mono flex items-center gap-1.5 shadow-glow">
-                                <span data-i18n="manual_btn_home">🏠 Regresar al Inicio</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- INDICADOR DE SELECCIÓN DE ARCHIVO -->
                 <div id="file-selected-box" class="hidden mt-4 p-4 sm:p-5 rounded-xl bg-dark-card border border-accent-blue/40 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg animate-fade-in">
@@ -990,24 +727,6 @@
                     </div>
                 </div>
 
-                <!-- CARACTERÍSTICAS CLAVE -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 text-left">
-                    <div class="p-6 rounded-xl bg-dark-card border border-border-dark hover:border-gray-700 transition-colors">
-                        <div data-i18n="feat_1_tag" class="text-accent-blue mb-2 font-bold font-mono text-xs uppercase tracking-wider">01. Privacidad Total</div>
-                        <h3 data-i18n="feat_1_title" class="text-white font-semibold text-base mb-1.5">Cero Guardado en Disco</h3>
-                        <p data-i18n="feat_1_desc" class="text-gray-300 text-xs leading-relaxed">El documento se convierte a memoria RAM volátil, se audita por Gemini y se destruye inmediatamente.</p>
-                    </div>
-                    <div class="p-6 rounded-xl bg-dark-card border border-border-dark hover:border-gray-700 transition-colors">
-                        <div data-i18n="feat_2_tag" class="text-accent-emerald mb-2 font-bold font-mono text-xs uppercase tracking-wider">02. Detección Táctica</div>
-                        <h3 data-i18n="feat_2_title" class="text-white font-semibold text-base mb-1.5">3 Fallas Críticas</h3>
-                        <p data-i18n="feat_2_desc" class="text-gray-300 text-xs leading-relaxed">Detecta penalizaciones ocultas, indexaciones dobles y sobrecargos en minutos de lectura.</p>
-                    </div>
-                    <div class="p-6 rounded-xl bg-dark-card border border-border-dark hover:border-gray-700 transition-colors">
-                        <div data-i18n="feat_3_tag" class="text-purple-400 mb-2 font-bold font-mono text-xs uppercase tracking-wider">03. Pagos Híbridos</div>
-                        <h3 data-i18n="feat_3_title" class="text-white font-semibold text-base mb-1.5">$9 USD o Satoshis</h3>
-                        <p data-i18n="feat_3_desc" class="text-gray-300 text-xs leading-relaxed">Mira los hallazgos gratis. Paga $9 sólo para descargar las soluciones en Word .docx + PDF.</p>
-                    </div>
-                </div>
             </div>
         </section>
 
@@ -1185,7 +904,7 @@
                             <span data-i18n="btn_unlock_report_free">🎁 Desbloquear 3 Soluciones Tácticas Gratis (Diagnóstico Inicial)</span>
                         </button>
                         <button id="btn-open-payment-modal" onclick="window.PaymentHandler.openPaymentModal()" class="btn-secondary text-xs sm:text-sm px-5 py-3.5 w-full sm:w-auto text-gray-300 hover:text-white flex items-center justify-center gap-1.5">
-                            <span data-i18n="btn_unlock_report">🔓 O Comprar Boleto de Entrada ($9 USD)</span>
+                            <span data-i18n="btn_unlock_report">🔓 O Comprar Boleto de Entrada ($19 USD)</span>
                         </button>
                         <button id="btn-open-invite-modal" onclick="window.AppHandler.openInviteModal()" class="btn-secondary border border-accent-blue/40 text-xs sm:text-sm px-5 py-3.5 w-full sm:w-auto text-blue-300 hover:text-white flex items-center justify-center gap-1.5 hover:bg-blue-950/40 transition-all">
                             <span>👥 Invitar a mi Asesor Legal / Colega</span>
@@ -1251,15 +970,15 @@
 
                 <h3 data-i18n="pay_title" class="text-xl font-bold text-white mb-1">Desbloquear Informe Completo en Word (.docx)</h3>
                 <div class="mb-4 p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/40 text-left">
-                    <p class="text-xs text-emerald-300 font-mono font-bold">💰 Boleto de Entrada: $9.00 USD</p>
+                    <p class="text-xs text-emerald-300 font-mono font-bold">💰 Boleto de Entrada: $19.00 USD</p>
                     <p class="text-[11px] text-gray-300 font-sans mt-0.5">Retorno inmediato: Desbloquea redlines editables y protege tu empresa contra <strong>$14,400+ USD</strong> en cláusulas abusivas.</p>
-                    <p class="text-[10px] text-sky-300 font-mono mt-1">🛡️ <strong>Garantía 10x:</strong> Te ahorramos $90+ USD o te reembolsamos los $9 en 1 clic.</p>
+                    <p class="text-[10px] text-sky-300 font-mono mt-1">🛡️ <strong>Garantía 10x:</strong> Te ahorramos $190+ USD o te reembolsamos los $19 en 1 clic.</p>
                 </div>
 
                 <!-- PESTAÑAS SELECCIONADORAS: STRIKE ($ USD / SATS) VS WOMPI (TARJETAS VISA/MASTERCARD) -->
                 <div class="grid grid-cols-2 gap-2 p-1.5 bg-dark-surface rounded-xl mb-6 border border-border-dark">
                     <button id="tab-lightning" onclick="window.PaymentHandler.switchTab('lightning')" class="py-2.5 px-2 rounded-lg text-xs font-extrabold text-black bg-gradient-to-r from-amber-400 to-amber-500 transition-all flex items-center justify-center gap-1 shadow-glow cursor-pointer">
-                        ⚡ Strike ($9 / Sats)
+                        ⚡ Strike ($19 / Sats)
                     </button>
                     <button id="tab-wompi" onclick="window.PaymentHandler.switchTab('wompi')" class="py-2.5 px-2 rounded-lg text-xs font-bold text-gray-300 hover:text-white bg-dark-card border border-border-dark transition-all flex items-center justify-center gap-1 cursor-pointer">
                         💳 Tarjetas (Wompi)
@@ -1279,8 +998,8 @@
 
                         <div class="mt-3">
                             <span data-i18n="pay_ln_sats_label" class="text-xs text-gray-400 block font-mono">Monto en Dólares / Satoshis:</span>
-                            <span class="text-lg font-extrabold text-amber-400 font-mono">$9.00 USD</span>
-                            <span id="ln-sats-amount" class="text-xs text-gray-400 block font-mono mt-0.5">~13,850 Sats</span>
+                            <span class="text-lg font-extrabold text-amber-400 font-mono">$19.00 USD</span>
+                            <span id="ln-sats-amount" class="text-xs text-gray-400 block font-mono mt-0.5">~29,200 Sats</span>
                         </div>
                     </div>
 
@@ -1307,7 +1026,7 @@
                     <div class="p-4 rounded-xl bg-dark-surface border border-border-dark">
                         <div class="flex justify-between items-center mb-2">
                             <span class="text-xs font-medium text-gray-400">Total a Pagar</span>
-                            <span class="text-xl font-extrabold text-white">$9.00 USD</span>
+                            <span class="text-xl font-extrabold text-white">$19.00 USD</span>
                         </div>
                         <p class="text-xs text-gray-300 leading-relaxed mb-3">
                             Procesamiento fiduciario bancario con encriptación 256-bit y autorización instantánea a <strong>1-Clic</strong> vía <strong>Wompi El Salvador</strong>.
@@ -1318,7 +1037,7 @@
                         </div>
                     </div>
                     <button id="btn-pay-wompi" class="btn-primary w-full py-3.5 text-center flex justify-center items-center gap-2 font-bold text-xs bg-gradient-to-r from-blue-600 to-indigo-600 shadow-glow cursor-pointer">
-                        ⚡ Pagar $9.00 USD con 1 Clic (Tarjeta Guardada) →
+                        ⚡ Pagar $19.00 USD con 1 Clic (Tarjeta Guardada) →
                     </button>
                     <div class="text-center text-[10px] text-gray-400 font-mono">
                         🏛️ Banco Agrícola / Wompi SV • Protección PCI-DSS Nivel 1
@@ -1337,7 +1056,7 @@
             </div>
         </div>
 
-        <!-- MODAL DE SUSCRIPCIÓN CORPORATIVA B2B ($49/MES O $399/AÑO) -->
+        <!-- MODAL DE SUSCRIPCIÓN CORPORATIVA B2B ($69/MES O $590/AÑO) -->
         <div id="enterprise-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto">
             <div class="bg-dark-card border border-purple-500/50 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto">
                 <button onclick="window.AppHandler.closeEnterpriseModal()" aria-label="Cerrar modal corporativo" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none">✕</button>
@@ -1532,7 +1251,7 @@
                         <span data-i18n="sample_pdf_seal">Firma Digital &amp; Sello de Validación por IA Gemini 2.5 Flash</span>
                     </div>
                     <button onclick="window.PaymentHandler.openPaymentModal(); window.AppHandler.closeSamplePdfModal();" class="btn-primary text-xs py-3 px-6 font-bold shadow-glow">
-                        <span data-i18n="sample_pdf_btn_unlock">🔓 Desbloquear Mi Reporte Oficial ($9 USD)</span>
+                        <span data-i18n="sample_pdf_btn_unlock">🔓 Desbloquear Mi Reporte Oficial ($19 USD)</span>
                     </button>
                 </div>
             </div>
@@ -1568,7 +1287,7 @@
                     <div class="grid grid-cols-3 gap-2 text-center py-2 bg-dark-card/60 p-2.5 rounded-lg border border-gray-800">
                         <div>
                             <span class="text-gray-400 block text-[10px]">Costo AuditFlow AI</span>
-                            <span class="font-bold text-accent-blue text-sm">$9.00 USD</span>
+                            <span class="font-bold text-accent-blue text-sm">$19.00 USD</span>
                         </div>
                         <div>
                             <span class="text-gray-400 block text-[10px]">Costo Legal Tradicional</span>
@@ -1576,14 +1295,14 @@
                         </div>
                         <div>
                             <span class="text-gray-400 block text-[10px]">ROI Proyectado</span>
-                            <span class="font-extrabold text-emerald-400 text-sm">2,055x (+205,455%)</span>
+                            <span class="font-extrabold text-emerald-400 text-sm">974x (+97,368%)</span>
                         </div>
                     </div>
 
                     <div class="p-3 rounded-lg bg-emerald-950/40 border border-emerald-500/40">
                         <strong class="text-emerald-300 block mb-1 text-[11px]">🎯 Dictamen Fiduciario:</strong>
                         <p id="cfo-memo-text" class="text-gray-300 leading-relaxed font-sans text-xs">
-                            Se recomienda la aprobación inmediata de $9.00 USD para desbloquear el informe completo de redlines y las 3 propuestas sustitutivas. La inversión mitiga $18,500 USD en penalizaciones leoninas y sobrecargos contractuales.
+                            Se recomienda la aprobación inmediata de $19.00 USD para desbloquear el informe completo de redlines y las 3 propuestas sustitutivas. La inversión mitiga $18,500 USD en penalizaciones leoninas y sobrecargos contractuales.
                         </p>
                     </div>
                 </div>
@@ -1593,7 +1312,7 @@
                         <span>📋 Copiar Memorando para WhatsApp / Email</span>
                     </button>
                     <button onclick="window.PaymentHandler.openPaymentModal(); window.AppHandler.closeCfoApprovalModal();" class="btn-primary w-full sm:w-auto text-xs py-2.5 px-6 font-bold shadow-glow flex items-center justify-center gap-1.5">
-                        <span>🔓 Proceder al Pago ($9 USD)</span>
+                        <span>🔓 Proceder al Pago ($19 USD)</span>
                     </button>
                 </div>
             </div>
@@ -1629,7 +1348,7 @@
                     <div>
                         <label class="block text-gray-400 mb-1">Plan / Servicio a Cotizar:</label>
                         <select id="prof-plan-select" onchange="window.AppHandler.updateProformaPreview()" class="input-field text-xs font-mono bg-dark-surface">
-                            <option value="single">Boleto de Entrada: Reporte de Auditoría Individual & Redlines DOCX — $9.00 USD</option>
+                            <option value="single">Boleto de Entrada: Reporte de Auditoría Individual & Redlines DOCX — $19.00 USD</option>
                             <option value="monthly">Plan Corporativo Mensual Ilimitado Multi-Usuario — $69.00 USD / mes</option>
                             <option value="annual" selected>Licencia Corporativa Anual (~3.5 Meses Gratis) — $590.00 USD / año</option>
                         </select>
@@ -1878,8 +1597,8 @@
 
         <!-- PESTAÑA FLOTANTE INFERIOR IZQUIERDA: MANUAL DE USUARIO / DUDAS -->
         <div class="fixed bottom-5 left-5 z-40">
-            <button onclick="window.AppHandler.openManualModal()" 
-                    class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-dark-surface/95 border border-accent-blue/40 hover:border-accent-blue text-white shadow-xl hover:shadow-accent-blue/20 hover:scale-105 transition-all duration-300 backdrop-blur-md group"
+            <button onclick="if(window.AppHandler &amp;&amp; window.AppHandler.openManualModal){window.AppHandler.openManualModal();}else{var m=document.getElementById('manual-modal');if(m){m.classList.remove('hidden');m.style.display='flex';}}" 
+                    class="flex items-center gap-2 px-3.5 py-2 rounded-full bg-dark-surface/95 border border-accent-blue/40 hover:border-accent-blue text-white shadow-xl hover:shadow-accent-blue/20 hover:scale-105 transition-all duration-300 backdrop-blur-md group cursor-pointer"
                     title="Manual de Usuario y Guía Rápida">
                 <span class="text-base group-hover:rotate-12 transition-transform">📘</span>
                 <span data-i18n="tab_user_manual" class="text-xs font-mono font-medium text-gray-200 group-hover:text-accent-blue">¿Dudas? Manual de Usuario</span>
@@ -1958,7 +1677,7 @@
         </div>
 
         <!-- MODAL: GUÍA Y MANUAL DE USUARIO -->
-        <div id="manual-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+        <div id="manual-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto" onclick="if(event.target === this) window.AppHandler.closeManualModal()">
             <div class="bg-dark-card border border-border-dark w-full max-w-2xl rounded-2xl p-6 sm:p-8 shadow-2xl relative max-h-[90vh] flex flex-col">
                 <div class="flex items-center justify-between border-b border-border-dark pb-4">
                     <div class="flex items-center gap-3">

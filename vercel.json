@@ -58,6 +58,14 @@
   ],
   "rewrites": [
     {
+      "source": "/downloads/(.*)",
+      "destination": "/frontend/downloads/$1"
+    },
+    {
+      "source": "/Auditoria_Ejemplo_AuditFlow_AI.docx",
+      "destination": "/frontend/downloads/Auditoria_Ejemplo_AuditFlow_AI.docx"
+    },
+    {
       "source": "/audio/(.*)",
       "destination": "/frontend/audio/$1"
     },

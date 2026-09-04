@@ -1868,15 +1868,21 @@ window.AppHandler = {
     // 5. MODAL DE MANUAL DE USUARIO / DUDAS
     openManualModal() {
         const modal = document.getElementById('manual-modal');
-        if (modal) modal.classList.remove('hidden');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+        }
         if (typeof window.clarity === 'function') {
-            window.clarity('event', 'user_manual_modal_opened');
+            try { window.clarity('event', 'user_manual_modal_opened'); } catch(e){}
         }
     },
 
     closeManualModal() {
         const modal = document.getElementById('manual-modal');
-        if (modal) modal.classList.add('hidden');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        }
     },
 
     // 6. BUCLE VIRAL PRODUCT-LED GROWTH (INVITACIÓN DE ASESOR LEGAL / COLEGA)
