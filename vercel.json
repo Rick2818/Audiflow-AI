@@ -58,6 +58,10 @@
   ],
   "rewrites": [
     {
+      "source": "/images/(.*)",
+      "destination": "/frontend/images/$1"
+    },
+    {
       "source": "/downloads/(.*)",
       "destination": "/frontend/downloads/$1"
     },

@@ -18,6 +18,14 @@
       "source": "/(.*)",
       "headers": [
         {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "Pragma",
+          "value": "no-cache"
+        },
+        {
           "key": "X-Content-Type-Options",
           "value": "nosniff"
         },
@@ -49,6 +57,18 @@
     }
   ],
   "rewrites": [
+    {
+      "source": "/images/(.*)",
+      "destination": "/frontend/images/$1"
+    },
+    {
+      "source": "/downloads/(.*)",
+      "destination": "/frontend/downloads/$1"
+    },
+    {
+      "source": "/Auditoria_Ejemplo_AuditFlow_AI.docx",
+      "destination": "/frontend/downloads/Auditoria_Ejemplo_AuditFlow_AI.docx"
+    },
     {
       "source": "/audio/(.*)",
       "destination": "/frontend/audio/$1"
@@ -104,6 +124,14 @@
     {
       "source": "/alternativas-docusign",
       "destination": "/frontend/alternativas-docusign.html"
+    },
+    {
+      "source": "/alternativas-ironclad",
+      "destination": "/frontend/alternativas-ironclad.html"
+    },
+    {
+      "source": "/alternativas-spellbook",
+      "destination": "/frontend/alternativas-spellbook.html"
     },
     {
       "source": "/Prompt_Maestro_AuditFlow_AI.pdf",
@@ -270,8 +298,12 @@
       "destination": "/api/social-publish"
     },
     {
+      "source": "/api/indexnow",
+      "destination": "/api/admin"
+    },
+    {
       "source": "/api/waalaxy-sync",
-      "destination": "/api/waalaxy-sync"
+      "destination": "/api/outreach"
     },
     {
       "source": "/api/(.*)",
@@ -294,6 +326,18 @@
     {
       "path": "/api/social-publish?action=daily_cron_dispatch",
       "schedule": "0 14 * * *"
+    },
+    {
+      "path": "/api/admin?action=cron_monitor",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/admin?action=daily_sales_report&slot=2:00+PM",
+      "schedule": "0 20 * * 1-5"
+    },
+    {
+      "path": "/api/admin?action=daily_sales_report&slot=6:00+PM",
+      "schedule": "0 0 * * 2-6"
     }
   ]
 }
