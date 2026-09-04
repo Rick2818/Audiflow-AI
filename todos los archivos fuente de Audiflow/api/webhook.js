@@ -42,10 +42,16 @@ export default async function handler(req, res) {
     }
 
     // Filtro y Protección Anti-Spam: Descartar eventos de rebote (Bounces / NDR) sin notificar al correo personal
-    const isBounce = event && (event.type === 'email.bounced' || event.type === 'email.complained' || event.type === 'email.delivery_delayed' || body.event === 'email.bounced');
+    const eventTypeStr = String(event?.type || body?.event || body?.type || '').toLowerCase();
+    const isBounce = eventTypeStr.includes('bounce') || eventTypeStr.includes('fail') || eventTypeStr.includes('complaint') || eventTypeStr.includes('delayed') || eventTypeStr.includes('dropped') || eventTypeStr.includes('undelivered');
     if (isBounce) {
-      const bouncedEmail = event.data?.to?.[0] || body.data?.to || 'desconocido';
-      console.log(`🛡️ [Bounce Filter] Rebote detectado y aislado para ${bouncedEmail}. Cero notificaciones enviadas a la bandeja personal.`);
+      const bouncedEmail = event.data?.to?.[0] || body.data?.to || body.data?.email || event.data?.email || 'desconocido';
+      console.log(`🛡️ [Bounce Filter] Rebote/Fallo detectado y aislado para ${bouncedEmail}. Cero notificaciones al correo personal.`);
+      if (supabase && bouncedEmail && bouncedEmail !== 'desconocido') {
+        try {
+          await supabase.from('audit_leads').update({ email_status: 'BOUNCED', updated_at: new Date().toISOString() }).eq('email', bouncedEmail);
+        } catch(e){}
+      }
       return res.status(200).json({ received: true, status: 'bounce_isolated_silently' });
     }
 

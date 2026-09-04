@@ -1110,10 +1110,10 @@ export default async function handler(req, res) {
               <li>Modo: <strong>${isTestMode ? 'Prueba / Verificación' : 'Producción Real'}</strong></li>
               <li>Fecha y Hora: <strong>${new Date().toLocaleString()}</strong></li>
             </ul>
-            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Despacho sincronizado en el Módulo Admin y enviado a su bandeja: ${CONFIG.EMAIL.OWNER_SALES}</p>
+            <p style="font-size: 12px; color: #94a3b8; margin-bottom: 0;">Despacho sincronizado en el Módulo Admin y archivado en buzón de control: ${CONFIG.EMAIL.OWNER_CONTROL}</p>
           </div>
         `;
-        await sendGmailEmail({ to: CONFIG.EMAIL.OWNER_SALES, subject: adminSubject, html: adminHtml }).catch(() => {});
+        await sendGmailEmail({ to: CONFIG.EMAIL.OWNER_CONTROL, subject: adminSubject, html: adminHtml }).catch(() => {});
       } catch (errAdmin) {}
 
       return res.status(200).json({

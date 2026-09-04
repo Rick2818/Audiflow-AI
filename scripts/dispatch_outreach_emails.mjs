@@ -4,7 +4,7 @@ dotenv.config();
 
 const gmailUser = (process.env.GMAIL_USER || '').trim();
 const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim();
-const adminNotifyEmail = process.env.PERSONAL_NOTIFICATION_EMAIL || process.env.OWNER_CORPORATE_EMAIL || 'rick28191@gmail.com';
+const adminNotifyEmail = process.env.OWNER_CONTROL_EMAIL || 'tendenciaiatufuturo@gmail.com'; // Aislamiento Total de Rebotes (Nunca a rick28191@gmail.com)
 
 if (!gmailUser || !gmailPass) {
   console.error('❌ Error: Credenciales de Gmail no configuradas en .env');

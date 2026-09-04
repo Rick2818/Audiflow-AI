@@ -51,7 +51,8 @@ async function executeNordicDispatch() {
 
     try {
       await transporter.sendMail({
-        from: `"Ricardo | AuditFlow AI" <${CONFIG.EMAIL.OWNER_SALES}>`,
+        from: `"Ricardo | AuditFlow AI" <${CONFIG.EMAIL.FROM_OUTREACH || 'ricardo@audiflowai.com'}>`,
+        replyTo: CONFIG.EMAIL.REPLY_TO_OUTREACH || CONFIG.EMAIL.OWNER_CONTROL,
         to: partner.email,
         subject,
         html: htmlContent
@@ -95,7 +96,7 @@ async function executeNordicDispatch() {
 
   await transporter.sendMail({
     from: CONFIG.EMAIL.FROM_SALES,
-    to: `${CONFIG.EMAIL.OWNER_SALES}, ${CONFIG.EMAIL.OWNER_CONTROL}`,
+    to: CONFIG.EMAIL.OWNER_CONTROL,
     subject: adminSubject,
     html: adminHtml
   });

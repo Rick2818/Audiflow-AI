@@ -15,7 +15,7 @@ export const CONFIG = Object.freeze({
     // Receptor Universal: Leads, Shadow Audits, Soporte, Pixeles de Apertura, Reportes de Crons y Copias de Control
     OWNER_CONTROL: 'tendenciaiatufuturo@gmail.com',
 
-    // Receptor Exclusivo Financiero: Ventas y Pagos Confirmados ($9, $19, $29, $69, $590 USD)
+    // Receptor Exclusivo Financiero: Ventas y Pagos Confirmados ($19, $69, $590 USD) y Balance Diario
     OWNER_SALES: 'rick28191@gmail.com',
 
     // Remitente Autenticado SMTP (Gmail Relay)
@@ -26,8 +26,9 @@ export const CONFIG = Object.freeze({
     RESEND_API_KEY: (process.env.RESEND_API_KEY || '').trim(),
     FROM_TRANSACTIONAL: (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim(),
     FROM_OUTREACH: '"AuditFlow AI | Auditoría Corporativa" <ricardo@audiflowai.com>',
-    FROM_SALES: '"AuditFlow AI | Sistema de Ventas" <rick28191@gmail.com>',
+    FROM_SALES: '"AuditFlow AI | Facturación & Ventas" <ricardo@audiflowai.com>',
     REPLY_TO_CONTROL: 'tendenciaiatufuturo@gmail.com',
+    REPLY_TO_OUTREACH: 'tendenciaiatufuturo@gmail.com', // Aislamiento de Rebotes (Nunca copiar a rick28191@gmail.com)
   }),
 
   // 2. Seguridad y Autenticacion Administrativa
