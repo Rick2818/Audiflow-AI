@@ -101,6 +101,15 @@
 - **MANDATO DE AUTONOMÍA ABSOLUTA:** El contenido de Facebook, Instagram, LinkedIn y Waalaxy debe ser publicado y despachado **exclusivamente por los agentes**. Queda terminantemente prohibido pedirle al usuario que copie, pegue o publique el contenido manualmente.
 - **OBLIGACIÓN DE RESOLUCIÓN TÉCNICA AUTOMATIZADA:** Si una API oficial impone barreras o errores de permisos (como `#200` en Meta Graph API o expiración de tokens), los agentes de ingeniería deben activar y mantener canales automatizados de despacho (motor de navegación automatizado Playwright con sesión persistente, puentes de publicación vía webhooks con n8n/Buffer/Metricool) para garantizar que la publicación se ejecute en producción de forma 100% desatendida.
 
+## 13. Regla Inmutable de Distribución: PROHIBICIÓN TOTAL DE MENCIONAR O PROPONER META ADS (SOLO BUFFER + WAALAXY)
+- **MANDATO DE CANAL ÚNICO Y DEFINITIVO (ORDEN DE DIRECCIÓN GENERAL - DON RICARDO)**:
+  1. **PROHIBIDO TERMINANTEMENTE VOLVER A MENCIONAR O PROPONER META ADS**: Queda estrictamente erradicado de cualquier recomendación, informe, análisis o plan el concepto de "Meta Ads", "publicidad pagada", "pauta publicitaria", "anuncios pagados" o cualquier variante de paid traffic.
+  2. **ESTRATEGIA OFICIAL EXCLUSIVA: SOLO BUFFER Y WAALAXY**:
+     - **Buffer**: Canal exclusivo para la programación y distribución multicanal automática en Facebook (`Audiflowai.com`), Instagram (`audiflowai`) y LinkedIn (`Audiflowai`), apalancando el formato de imágenes técnicas de alto contraste (+44% engagement).
+     - **Waalaxy**: Canal exclusivo para prospección directa 1 a 1 en LinkedIn (Lunes a Sábado) hacia socios directores y CFOs.
+  3. Todo esfuerzo, análisis de métricas y generación de demanda debe concentrarse exclusivamente en el perfeccionamiento de los contenidos visuales en Buffer y las secuencias de contacto en Waalaxy. Cero desvíos hacia publicidad pagada.
+
+
 
 
 
