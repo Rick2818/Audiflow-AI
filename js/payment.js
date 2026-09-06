@@ -262,20 +262,20 @@ window.PaymentHandler = {
                 body: JSON.stringify({
                     report_id: this.currentReportId || 'rep_123456',
                     document_name: this.currentDocName || 'contrato.pdf',
-                    amount_usd: 9.00
+                    amount_usd: 19.00
                 })
             });
 
             const data = await res.json();
             const bolt11 = data.lightningInvoice || 'lightning:rick28@strike.me';
-            const satsAmount = data.amountSats || 13850;
+            const satsAmount = data.amountSats || 29200;
 
             const inputInvoice = document.getElementById('ln-invoice-input');
             const satsAmountEl = document.getElementById('ln-sats-amount');
 
             if (inputInvoice) inputInvoice.value = bolt11;
             if (satsAmountEl) {
-                satsAmountEl.innerText = `${satsAmount.toLocaleString()} Sats (~$9 USD)`;
+                satsAmountEl.innerText = `${satsAmount.toLocaleString()} Sats (~$19 USD)`;
             }
 
             // Generar Código QR interactivo de alta fiabilidad (Zero dependencies)

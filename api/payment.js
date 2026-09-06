@@ -172,8 +172,9 @@ export default async function handler(req, res) {
       });
     }
 
-    // Flujo Lightning / OpenNode
-    if (path.includes('lightning')) {
+    // Flujo Lightning / Strike (LUD-16 & LNURL-pay a rick28@strike.me)
+    if (path.includes('lightning') || body.gateway === 'lightning') {
+      const amountUsd = Number(body.amount_usd) || 19.00;
       let btcPrice = 65000;
       try {
         const priceRes = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd');
@@ -187,43 +188,34 @@ export default async function handler(req, res) {
         console.warn('Usando precio BTC por defecto $65,000 USD');
       }
 
-      const satsAmount = Math.round((9 / btcPrice) * 100000000);
-      const openNodeKey = process.env.OPENNODE_API_KEY;
+      const satsAmount = Math.round((amountUsd / btcPrice) * 100000000);
+      const millisats = satsAmount * 1000;
+      const strikeAddress = process.env.LIGHTNING_ADDRESS || CONFIG.PAYMENTS.LIGHTNING_ADDRESS || 'rick28@strike.me';
+      const strikeUser = strikeAddress.split('@')[0] || 'rick28';
 
-      if (openNodeKey && !openNodeKey.includes('tu_opennode')) {
-        try {
-          const openNodeRes = await fetch('https://api.opennode.com/v1/charges', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': openNodeKey
-            },
-            body: JSON.stringify({
-              amount: satsAmount,
-              description: `AuditFlow AI Boleto de Entrada Fiduciario ($9 USD): ${document_name || report_id}`,
-              currency: 'SATS',
-              callback_url: `${req.headers.origin || 'https://audiflowai.com'}/api/webhooks/lightning`,
-              success_url: `${req.headers.origin || 'https://audiflowai.com'}/?reportId=${report_id}&status=success`
-            })
-          });
-
-          if (openNodeRes.ok) {
-            const chargeData = await openNodeRes.json();
-            return res.json({
-              lightning_invoice: chargeData.data.lightning_invoice.payreq,
-              sats_amount: satsAmount,
-              checkout_url: chargeData.data.hosted_checkout_url
-            });
+      let realBolt11 = null;
+      try {
+        const strikeRes = await fetch(`https://strike.me/api/lnurlp/${strikeUser}/?amount=${millisats}`);
+        if (strikeRes.ok) {
+          const strikeJson = await strikeRes.json();
+          if (strikeJson?.pr) {
+            realBolt11 = strikeJson.pr;
           }
-        } catch (openNodeErr) {
-          console.warn('Error llamando OpenNode API:', openNodeErr);
         }
+      } catch (strikeErr) {
+        console.warn('Error obteniendo invoice directo de Strike:', strikeErr);
       }
 
+      const invoice = realBolt11 || `lightning:${strikeAddress}`;
+
       return res.json({
-        lightning_invoice: "lnbc90u1p3...mock_lightning_invoice_auditflow_ai",
+        success: true,
+        lightningInvoice: invoice,
+        lightning_invoice: invoice,
+        amountSats: satsAmount,
         sats_amount: satsAmount,
-        checkout_url: `${req.headers.origin || 'https://audiflowai.com'}/?reportId=${report_id}&status=success`
+        strikeAddress: strikeAddress,
+        checkout_url: `https://strike.me/${strikeUser}`
       });
     }
 
