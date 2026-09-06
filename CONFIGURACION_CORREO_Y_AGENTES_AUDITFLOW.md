@@ -54,18 +54,21 @@ Archivo `.agents/mcp_config.json`:
 
 ---
 
-## 4. Protocolo Obligatorio y Regla de Oro de Reporte al Director General (Ricardo)
+## 4. Protocolo Obligatorio y Regla de Oro de Reporte y Prospección
 > 🏆 **REGLA DE ORO INMUTABLE:**  
-> De **Lunes a Viernes**, es obligatorio y prioritario el envío del **Reporte Diario de Ventas y Operaciones** al correo personal (`rick28191@gmail.com`) y corporativo (`ricardo@audiflowai.com`).
+> De **Lunes a Sábado**, es obligatorio y prioritario el envío del **Reporte Diario de Ventas y Operaciones** a las 6:00 PM al correo personal (`rick28191@gmail.com`) y corporativo (`ricardo@audiflowai.com`).
+> Las **Campañas de Waalaxy (LinkedIn)** operan estrictamente de **Lunes a Sábado**, descansando los domingos.
 
-1. **Daily Sales & Operations Briefing (Lunes a Viernes a las 6:00 PM — Cron: `0 18 * * 1-5`):**
+1. **Daily Sales & Operations Briefing (Lunes a Sábado a las 6:00 PM — Cron: `0 18 * * 1-6`):**
    - Asunto: `📊 [AuditFlow AI] Reporte Diario de Ventas & Operaciones — [Fecha]`
-   - Resumen detallado de ventas del día ($19, $69, $599), pipeline activo en los 14 países, demostraciones en RAM volátil y estado de prospección.
-2. **Weekly Executive Summary (Viernes 5:00 PM):**
+   - Resumen detallado de ventas del día ($19, $69, $590), pipeline activo en los 14 países, demostraciones en RAM volátil y estado de prospección.
+2. **Campañas de Prospección Waalaxy (Lunes a Sábado de 8:00 AM a 6:00 PM):**
+   - Disparo de secuencias de mensajes fiduciarios a bufetes y CFOs en horario comercial. Domingo: pausa absoluta de prospección.
+3. **Weekly Executive Summary (Sábado 6:00 PM):**
    - Asunto: `📈 [AuditFlow AI] Cierre Semanal Financiero & Pipeline — [Fecha]`
-   - Balance de ventas ingresadas ($19, $69, $599) y licitaciones de gobierno.
-3. **Alertas Inmediatas:**
-   - Ante cada venta cerrada ($19 diagnóstico, $69 Plan Pro, $599 Licencia Corporativa Anual) o avance con sector público.
+   - Balance de ventas ingresadas ($19, $69, $590) y convenios corporativos.
+4. **Alertas Inmediatas:**
+   - Ante cada venta cerrada ($19 diagnóstico, $69 Plan Pro, $590 Licencia Corporativa Anual) despachada en tiempo real.
 
 ---
 
