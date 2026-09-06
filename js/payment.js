@@ -23,7 +23,10 @@ window.PaymentHandler = {
 
     openPaymentModal() {
         const modal = document.getElementById('payment-modal');
-        if (modal) modal.classList.remove('hidden');
+        if (modal) {
+            modal.classList.remove('hidden');
+            this.switchTab('lightning');
+        }
     },
 
     closePaymentModal() {
@@ -73,7 +76,7 @@ window.PaymentHandler = {
         const btnPayWompi = document.getElementById('btn-pay-wompi');
 
         if (btnPayWompi) {
-            btnPayWompi.textContent = `⚡ Pagar $9.00 USD con 1 Clic (${safeBrand} •••• ${safeLast4})`;
+            btnPayWompi.textContent = `⚡ Pagar $19.00 USD con 1 Clic (${safeBrand} •••• ${safeLast4})`;
             btnPayWompi.onclick = (e) => {
                 e.preventDefault();
                 this.executeOneClickPayment(savedToken, safeLast4);
@@ -96,7 +99,7 @@ window.PaymentHandler = {
                     action: 'one-click',
                     report_id: this.currentReportId || 'rep_demo_' + Date.now(),
                     cardToken: cardToken,
-                    amount: 9.00,
+                    amount: 19.00,
                     email: this.currentLeadEmail || 'cfo@empresa.com'
                 })
             });
@@ -104,7 +107,7 @@ window.PaymentHandler = {
             const data = await res.json();
 
             if (data.success) {
-                alert(`🎉 ¡Pago Aprobado con 1 Clic! ($9.00 USD)\\nCódigo de Autorización: ${data.authorizationCode || 'AUTH_98124'}\\n\\nTu reporte y control de cambios en Word (.docx) han sido desbloqueados.`);
+                alert(`🎉 ¡Pago Aprobado con 1 Clic! ($19.00 USD)\\nCódigo de Autorización: ${data.authorizationCode || 'AUTH_98124'}\\n\\nTu reporte y control de cambios en Word (.docx) han sido desbloqueados.`);
                 this.closePaymentModal();
                 if (window.AppHandler && window.AppHandler.unblurReport) {
                     window.AppHandler.unblurReport();

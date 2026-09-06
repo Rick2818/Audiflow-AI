@@ -1,4 +1,4 @@
-﻿import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import { publicarAnuncioMeta } from '../lib/meta_ads_publisher.js';
 
 dotenv.config();
@@ -32,9 +32,9 @@ Con AuditFlow AI, los General Counsels auditan contratos complejos en menos de 3
 🚀 Activa tu Plan Pro por solo $69/mes y audita tu primer contrato hoy.`,
     paisCodigo: 'SV',
     paisesAdicionales: ['GT', 'HN', 'CR', 'PA', 'CO', 'MX', 'PE', 'AR'],
-    estadoCampana: 'PAUSED',
-    estadoAdSet: 'PAUSED',
-    estadoAnuncio: 'PAUSED'
+    estadoCampana: 'ACTIVE',
+    estadoAdSet: 'ACTIVE',
+    estadoAnuncio: 'ACTIVE'
   },
   {
     nombreCampana: 'AuditFlow AI - [CFOs] Detección de Sobrecostos en Facturas',
@@ -56,9 +56,9 @@ AuditFlow AI realiza el cruce forense de forma automática:
 Comienza hoy a auditar tus facturas en audiflowai.com`,
     paisCodigo: 'SV',
     paisesAdicionales: ['GT', 'HN', 'CR', 'PA', 'CO', 'MX', 'PE', 'AR'],
-    estadoCampana: 'PAUSED',
-    estadoAdSet: 'PAUSED',
-    estadoAnuncio: 'PAUSED'
+    estadoCampana: 'ACTIVE',
+    estadoAdSet: 'ACTIVE',
+    estadoAnuncio: 'ACTIVE'
   },
   {
     nombreCampana: 'AuditFlow AI - [CEOs] Blindaje Zero-Retention Regional',
@@ -78,9 +78,9 @@ AuditFlow AI está diseñado con arquitectura de procesamiento volátil:
 Prueba el Plan Pro ($69/mes) o consulta por Licencias Corporativas multiusuario en audiflowai.com`,
     paisCodigo: 'SV',
     paisesAdicionales: ['GT', 'HN', 'CR', 'PA', 'CO', 'MX', 'PE', 'AR', 'BR'],
-    estadoCampana: 'PAUSED',
-    estadoAdSet: 'PAUSED',
-    estadoAnuncio: 'PAUSED'
+    estadoCampana: 'ACTIVE',
+    estadoAdSet: 'ACTIVE',
+    estadoAnuncio: 'ACTIVE'
   }
 ];
 

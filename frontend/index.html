@@ -620,7 +620,7 @@
                         </div>
 
                         <!-- TARJETA 2: BOLETO DE ENTRADA FIDUCIARIO ($19 USD) - DESTACADA -->
-                        <div class="p-6 rounded-2xl bg-gradient-to-b from-dark-card to-dark-surface border-2 border-accent-blue flex flex-col justify-between shadow-2xl relative">
+                        <div onclick="window.AppHandler.openSingleAuditPurchase()" class="p-6 rounded-2xl bg-gradient-to-b from-dark-card to-dark-surface border-2 border-accent-blue flex flex-col justify-between shadow-2xl relative cursor-pointer hover:border-sky-300 transition-all">
                             <span data-i18n="pricing_card2_top_badge" class="absolute -top-3 left-1/2 -translate-x-1/2 bg-accent-blue text-black font-extrabold font-mono text-[10px] px-3 py-1 rounded-full shadow-glow uppercase">MÁS POPULAR • BOLETO DE ENTRADA</span>
                             <div>
                                 <span data-i18n="pricing_card2_tag" class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-accent-blue/15 text-accent-blue border border-accent-blue/40 uppercase">PAGO ÚNICO</span>
@@ -637,13 +637,13 @@
                                     <li data-i18n="pricing_card2_f4" class="flex items-center gap-2"><span class="text-accent-blue font-bold">✓</span> Garantía 10x ROI (Ahorras $190+ USD o reembolso)</li>
                                 </ul>
                             </div>
-                            <button onclick="window.AppHandler.openSingleAuditPurchase()" class="btn-primary w-full py-3 text-xs font-bold text-center shadow-glow">
+                            <button onclick="event.stopPropagation(); window.AppHandler.openSingleAuditPurchase()" class="btn-primary w-full py-3 text-xs font-bold text-center shadow-glow">
                                 <span data-i18n="pricing_card2_btn">🔓 Auditar 1 Documento ($19 USD)</span>
                             </button>
                         </div>
 
                         <!-- TARJETA 3: PLAN CORPORATIVO ($69/MES O $590/AÑO) -->
-                        <div class="p-6 rounded-2xl bg-dark-card border border-purple-500/40 flex flex-col justify-between hover:border-purple-500 transition-all">
+                        <div onclick="window.AppHandler.subscribeEnterprise()" class="p-6 rounded-2xl bg-dark-card border border-purple-500/40 flex flex-col justify-between hover:border-purple-500 transition-all cursor-pointer">
                             <div>
                                 <span data-i18n="pricing_card3_tag" class="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-purple-950/60 border border-purple-500/40 text-purple-300 uppercase">EMPRESAS • ILIMITADO</span>
                                 <h4 data-i18n="pricing_card3_title" class="text-lg font-bold text-white mt-3 mb-1">Plan Corporativo</h4>
@@ -659,7 +659,7 @@
                                     <li data-i18n="pricing_card3_f4" class="flex items-center gap-2"><span class="text-purple-400 font-bold">✓</span> Soporte prioritario & cuota compartida</li>
                                 </ul>
                             </div>
-                            <button onclick="window.AppHandler.subscribeEnterprise()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue w-full py-2.5 text-xs font-bold text-center">
+                            <button onclick="event.stopPropagation(); window.AppHandler.subscribeEnterprise()" class="btn-primary bg-gradient-to-r from-purple-600 to-accent-blue w-full py-2.5 text-xs font-bold text-center">
                                 <span data-i18n="pricing_card3_btn">🚀 Ver Planes ($69/mes o $590/año)</span>
                             </button>
                         </div>

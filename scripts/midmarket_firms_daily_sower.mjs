@@ -10,16 +10,16 @@ dotenv.config();
 // ==============================================================================
 
 const MIDMARKET_LAW_FIRMS = [
-  // --- LATAM & ESPAÑA (DESPACHOS MEDIANOS TIER-1) ---
+  // --- LATAM & ESPAÑA (FIRMAS CORPORATIVAS TIER-1 / TIER-2 > 25 ABOGADOS - NUEVO PARETO) ---
   { name: 'Dr. Alejandro Morales', firm: 'Morales & Cordero Abogados', city: 'Madrid / Barcelona', country: 'España', email: 'alejandro.morales@moralescordero.es', role: 'Socio Director Mercantil', size: '35 abogados' },
-  { name: 'Lic. Fernando Rivas', firm: 'Rivas & Pineda Consultores Legales', city: 'San Salvador', country: 'El Salvador', email: 'fernando.rivas@rivaspineda.sv', role: 'Socio de Contratos & M&A', size: '20 abogados' },
+  { name: 'Lic. Fernando Rivas', firm: 'Rivas & Pineda Consultores Corporativos', city: 'San Salvador', country: 'El Salvador', email: 'fernando.rivas@rivaspineda.sv', role: 'Socio de Contratos & M&A', size: '28 abogados' },
   { name: 'Dra. Camila Guzmán', firm: 'Guzmán, Viteri & Asociados', city: 'Bogotá / Medellín', country: 'Colombia', email: 'camila.guzman@guzmanviteri.co', role: 'Socia Directora Corporativa', size: '40 abogados' },
   { name: 'Lic. Roberto Salgado', firm: 'Bufete Salgado & Miranda', city: 'CDMX / Monterrey', country: 'México', email: 'roberto.salgado@salgadomiranda.mx', role: 'Socio Director de Práctica Comercial', size: '45 abogados' },
-  { name: 'Lic. Mariana Cordero', firm: 'Cordero & Reyes Legal Boutique', city: 'San José / Escazú', country: 'Costa Rica', email: 'mariana.cordero@corderoreyes.cr', role: 'Socia Directora Legal Tech & M&A', size: '18 abogados' },
-  { name: 'Dr. Gabriel Ortega', firm: 'Ortega & Carranza Abogados', city: 'Ciudad de Panamá', country: 'Panamá', email: 'gabriel.ortega@ortegacarranza.pa', role: 'Socio de Transacciones Comerciales', size: '25 abogados' },
+  { name: 'Lic. Mariano Batalla', firm: 'Batalla & Asociados Corporativo', city: 'San José / Escazú', country: 'Costa Rica', email: 'mariano.batalla@batallalegal.cr', role: 'Socio Director M&A & Contratos', size: '32 abogados' },
+  { name: 'Dr. Gabriel Ortega', firm: 'Ortega & Carranza Abogados', city: 'Ciudad de Panamá', country: 'Panamá', email: 'gabriel.ortega@ortegacarranza.pa', role: 'Socio de Transacciones Comerciales', size: '28 abogados' },
   { name: 'Lic. Valeria Salazar', firm: 'Salazar, Ibarra & Cía.', city: 'Santiago / Las Condes', country: 'Chile', email: 'valeria.salazar@salazaribarra.cl', role: 'Socia de Contratos & Compliance', size: '30 abogados' },
   { name: 'Dr. Carlos Mendoza', firm: 'Mendoza & Villegas Corporativo', city: 'Lima / San Isidro', country: 'Perú', email: 'carlos.mendoza@mendozavillegas.pe', role: 'Socio Director Mercantil', size: '28 abogados' },
-  { name: 'Lic. Hugo Pacheco', firm: 'Pacheco & Benítez Abogados', city: 'Ciudad de Guatemala', country: 'Guatemala', email: 'hugo.pacheco@pachecobenitez.gt', role: 'Socio de Derecho Corporativo', size: '22 abogados' },
+  { name: 'Lic. Hugo Pacheco', firm: 'Pacheco & Benítez Corporativo', city: 'Ciudad de Guatemala', country: 'Guatemala', email: 'hugo.pacheco@pachecobenitez.gt', role: 'Socio de Derecho Corporativo & M&A', size: '26 abogados' },
 
   // --- MERCADO NÓRDICO (MID-MARKET NORDIC PARTNERS) ---
   { name: 'Lars Westerberg', firm: 'Delphi Advokatbyrå (Mid-Market Branch)', city: 'Stockholm', country: 'Sweden', email: 'lars.westerberg@delphi.se', role: 'Commercial Contracts Partner', size: '45 lawyers' },

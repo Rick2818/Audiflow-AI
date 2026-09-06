@@ -1,4 +1,4 @@
-﻿import dotenv from 'dotenv';
+import dotenv from 'dotenv';
 import { publicarAnuncioMeta } from '../lib/meta_ads_publisher.js';
 
 dotenv.config();
@@ -27,8 +27,8 @@ async function main() {
     descripcionAnuncio: process.env.META_AD_DESCRIPTION || 'Prueba Pro $69/mes y Licencias Corporativas. Sin permanencia.',
     paisCodigo: process.env.META_COUNTRY_CODE || 'SV',
     paisesAdicionales: ['GT', 'HN', 'CR', 'PA', 'CO', 'MX'],
-    estadoCampana: 'PAUSED', // Iniciamos en PAUSED para permitir revisión en Ads Manager
-    estadoAdSet: 'PAUSED',
+    estadoCampana: 'ACTIVE',
+    estadoAdSet: 'ACTIVE',
     estadoAnuncio: 'ACTIVE'
   };
 

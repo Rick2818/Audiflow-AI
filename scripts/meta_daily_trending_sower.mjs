@@ -123,6 +123,7 @@ export async function runDailyMetaTrendingPublication() {
   // Canales oficiales
   const FB_CHANNEL_ID = '6a970164065799be4669eea1'; // Audiflowai.com
   const IG_CHANNEL_ID = '6a970416065799be4669fa58'; // audiflowai
+  const LI_CHANNEL_ID = '6a97043a065799be4669fadb'; // AuditFlow AI (LinkedIn)
 
   const results = {};
 
@@ -163,6 +164,29 @@ export async function runDailyMetaTrendingPublication() {
   } catch (igErr) {
     console.error(`❌ Error en Instagram: ${igErr.message}`);
     results.instagram = { success: false, error: igErr.message };
+  }
+
+  // 3. Publicar en LinkedIn
+  try {
+    console.log('\n⏳ Publicando en LinkedIn (AuditFlow AI)...');
+    const liPost = await publisher.createPost({
+      channelId: LI_CHANNEL_ID,
+      text: trend.copy,
+      mode: 'shareNow',
+      service: 'linkedin',
+      assets: [
+        {
+          image: {
+            url: trend.image
+          }
+        }
+      ]
+    });
+    console.log(`✅ ¡Éxito en LinkedIn! Post ID: ${liPost.id} | Estado: ${liPost.status}`);
+    results.linkedin = { success: true, id: liPost.id, status: liPost.status };
+  } catch (liErr) {
+    console.error(`❌ Error en LinkedIn: ${liErr.message}`);
+    results.linkedin = { success: false, error: liErr.message };
   }
 
   // Registrar en feed de auditoría

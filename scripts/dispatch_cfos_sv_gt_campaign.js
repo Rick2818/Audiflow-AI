@@ -1,14 +1,20 @@
 import fs from 'fs';
 import path from 'path';
 import { CONFIG } from '../lib/config.js';
-import { waalaxyProspectsStore } from '../api/waalaxy-sync.js';
+import { waalaxyProspectsStore } from '../lib/waalaxy-sync.js';
 
 async function dispatchElSalvadorGuatemalaCampaign() {
   console.log('======================================================================');
   console.log('🚀 DISPARANDO CAMPAÑA: [EL SALVADOR Y GUATEMALA] (250 CFOS REALES)');
   console.log('======================================================================');
 
-  const csvPath = path.resolve('c:/Users/Ricardo/Desktop/Audiflow Ai/CFOS_EL_SALVADOR_Y_GUATEMALA_250.csv');
+  let csvPath = path.resolve('Audiflow Marketing/CFOS_EL_SALVADOR_Y_GUATEMALA_250.csv');
+  if (!fs.existsSync(csvPath)) {
+    csvPath = path.resolve('Ventas Audiflow/Bases_de_Datos_Leads/CFOS_EL_SALVADOR_Y_GUATEMALA_250.csv');
+  }
+  if (!fs.existsSync(csvPath)) {
+    csvPath = path.resolve('CFOS_EL_SALVADOR_Y_GUATEMALA_250.csv');
+  }
   if (!fs.existsSync(csvPath)) {
     console.error('❌ Archivo no encontrado en:', csvPath);
     return;

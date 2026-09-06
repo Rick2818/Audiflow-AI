@@ -101,7 +101,7 @@ async function runFullEcosystemTest() {
   const filesToCheck = [
     'n8n_workflows_auditflow.json',
     '.agents/mcp_config.json',
-    '.agents/agents/meta-ads-specialist.md',
+    '.agents/agents/buffer-specialist.md',
     '.agents/agents/consumer-behavior-diagnostician.md',
     '.agents/agents/general-manager-coo.md',
     '.agents/agents/marketing-director.md',

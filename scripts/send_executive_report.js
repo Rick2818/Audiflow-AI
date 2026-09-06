@@ -85,7 +85,8 @@ async function sendReport() {
   console.log('⏳ Despachando Reporte Ejecutivo de Fin del Día...');
   const info = await transporter.sendMail({
     from: '"Directora de Marketing | AuditFlow AI" <cmvo@audiflowai.com>',
-    to: 'ricardo@audiflowai.com, tendenciaiatufuturo@gmail.com',
+    to: 'rick28191@gmail.com, tendenciaiatufuturo@gmail.com',
+    replyTo: 'rick28191@gmail.com',
     subject: `📈 [AuditFlow AI] Reporte Ejecutivo de Fin del Día y Cierre Semanal — ${todayStr}`,
     html: htmlContent
   });

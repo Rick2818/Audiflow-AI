@@ -1133,20 +1133,33 @@ window.AppHandler = {
     },
 
     subscribeEnterprise() {
-        if (typeof window.gtag === 'function') {
-            window.gtag('event', 'enterprise_modal_opened', {
-                event_category: 'conversion',
-                event_label: 'b2b_corp_plan_modal'
-            });
+        try {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'enterprise_modal_opened', {
+                    event_category: 'conversion',
+                    event_label: 'b2b_corp_plan_modal'
+                });
+            }
+        } catch (e) {
+            console.warn('Analytics warning:', e);
         }
-        if (typeof window.clarity === 'function') {
-            window.clarity('event', 'enterprise_modal_opened');
+        try {
+            if (typeof window.clarity === 'function') {
+                window.clarity('event', 'enterprise_modal_opened');
+            }
+        } catch (e) {
+            console.warn('Clarity warning:', e);
         }
+
         const modal = document.getElementById('enterprise-modal');
         if (modal) {
             modal.classList.remove('hidden');
-            this.selectEnterpriseInterval(this.selectedEnterpriseInterval || 'monthly');
-            this.selectEnterprisePaymentMethod('wompi_one_click');
+            if (typeof this.selectEnterpriseInterval === 'function') {
+                this.selectEnterpriseInterval(this.selectedEnterpriseInterval || 'monthly');
+            }
+            if (typeof this.selectEnterprisePaymentMethod === 'function') {
+                this.selectEnterprisePaymentMethod(this.selectedEnterprisePayMethod || 'wompi_one_click');
+            }
         }
     },
 
@@ -1182,22 +1195,35 @@ window.AppHandler = {
     },
 
     openSingleAuditPurchase() {
-        if (typeof window.gtag === 'function') {
-            window.gtag('event', 'begin_checkout', {
-                event_category: 'ecommerce',
-                value: 19.00,
-                currency: 'USD'
-            });
+        try {
+            if (typeof window.gtag === 'function') {
+                window.gtag('event', 'begin_checkout', {
+                    event_category: 'ecommerce',
+                    value: 19.00,
+                    currency: 'USD'
+                });
+            }
+        } catch (e) {
+            console.warn('Analytics warning:', e);
         }
-        if (typeof window.clarity === 'function') {
-            window.clarity('event', 'single_audit_checkout_opened');
+        try {
+            if (typeof window.clarity === 'function') {
+                window.clarity('event', 'single_audit_checkout_opened');
+            }
+        } catch (e) {
+            console.warn('Clarity warning:', e);
         }
+
         const reportId = this.currentReportId || 'rep_' + Math.random().toString(36).substring(2, 11);
         const leadEmail = this.currentLeadEmail || 'cliente@empresa.com';
         const docName = this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf';
-        if (window.PaymentHandler) {
+
+        if (window.PaymentHandler && typeof window.PaymentHandler.openPaymentModal === 'function') {
             window.PaymentHandler.init(reportId, leadEmail, docName);
             window.PaymentHandler.openPaymentModal();
+        } else {
+            const modal = document.getElementById('payment-modal');
+            if (modal) modal.classList.remove('hidden');
         }
     },
 
