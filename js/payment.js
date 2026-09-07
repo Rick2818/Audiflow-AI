@@ -66,20 +66,15 @@ window.PaymentHandler = {
     },
 
     renderWompiTab() {
-        const savedToken = localStorage.getItem('wompi_card_token') || 'tok_auditflow_demo_4321';
-        const rawLast4 = localStorage.getItem('wompi_card_last4') || '4321';
-        const rawBrand = localStorage.getItem('wompi_card_brand') || 'Visa Corporate';
-
-        const safeLast4 = String(rawLast4).replace(/[^0-9]/g, '').slice(0, 4) || '4321';
-        const safeBrand = String(rawBrand).replace(/[^a-zA-Z0-9\s]/g, '') || 'Visa Corporate';
-
+        const wompiLink = 'https://s.wompi.sv/2199099xEg';
         const btnPayWompi = document.getElementById('btn-pay-wompi');
 
         if (btnPayWompi) {
-            btnPayWompi.textContent = `⚡ Pagar $19.00 USD con 1 Clic (${safeBrand} •••• ${safeLast4})`;
+            btnPayWompi.href = wompiLink;
+            btnPayWompi.textContent = '💳 Pagar $19.00 USD con Tarjeta (Wompi Checkout) →';
             btnPayWompi.onclick = (e) => {
-                e.preventDefault();
-                this.executeOneClickPayment(savedToken, safeLast4);
+                // Abre pasarela oficial Wompi de Banco Agrícola en pestaña segura
+                console.log('Abriendo pasarela Wompi oficial:', wompiLink);
             };
         }
     },
