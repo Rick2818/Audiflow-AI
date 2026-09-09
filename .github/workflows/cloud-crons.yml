@@ -1,0 +1,80 @@
+name: AuditFlow AI - Cloud Crons 24/7
+
+on:
+  schedule:
+    # 04:00 AM CST (10:00 UTC) - Siembra Diaria Nórdicos Midmarket
+    - cron: '0 10 * * *'
+    # 08:00 AM CST (14:00 UTC) - Publicador Matutino Buffer (LinkedIn, FB, IG)
+    - cron: '0 14 * * *'
+    # 05:00 PM CST(23:00 UTC) - Publicador Vespertino Buffer (Reels / Visual)
+    - cron: '0 23 * * *'
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Acción a ejecutar manualmente'
+        required: true
+        default: 'buffer_8am'
+        type: choice
+        options:
+          - 'nordicos_4am'
+          - 'buffer_8am'
+          - 'buffer_5pm'
+          - 'all'
+
+jobs:
+  run-cloud-automation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout Repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Instalar Dependencias
+        run: npm ci || npm install --legacy-peer-deps
+
+      - name: Ejecutar Automatización Correspondiente
+        env:
+          BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          EMAIL_FROM: ${{ secrets.EMAIL_FROM || 'cmvo@audiflowai.com' }}
+          ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD || 'AuditFlow2026!' }}
+          GMAIL_USER: ${{ secrets.GMAIL_USER }}
+          GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+          SMTP_HOST: smtp.gmail.com
+          SMTP_PORT: 465
+          SMTP_SECURE: true
+        run: |
+          HOUR=$(date -u +'%H')
+          ACTION="${{ github.event.inputs.action }}"
+          
+          echo "⏰ Hora actual UTC: $HOUR:00"
+          echo "🎯 Acción solicitada: $ACTION"
+          
+          if [ "$ACTION" = "nordicos_4am" ] || [ "$HOUR" = "10" ]; then
+            echo "🚀 [04:00 AM CST] Ejecutando Sembrador Diario de Nórdicos..."
+            node scripts/nordic_midmarket_daily_sower.mjs
+          fi
+          
+          if [ "$ACTION" = "buffer_8am" ] || [ "$HOUR" = "14" ]; then
+            echo "☀️ [08:00 AM CST] Ejecutando Publicador Matutino Buffer..."
+            node scripts/buffer_daily_publisher_8am.mjs
+          fi
+          
+          if [ "$ACTION" = "buffer_5pm" ] || [ "$HOUR" = "23" ]; then
+            echo "🌆 [05:00 PM CST] Ejecutando Publicador Vespertino Buffer..."
+            node scripts/buffer_daily_publisher_5pm.mjs
+          fi
+          
+          if [ "$ACTION" = "all" ]; then
+            echo "⚡ Ejecutando suite completa..."
+            node scripts/buffer_daily_publisher_8am.mjs || true
+            node scripts/nordic_midmarket_daily_sower.mjs || true
+          fi
+

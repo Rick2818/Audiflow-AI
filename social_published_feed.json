@@ -1,246 +1,204 @@
 [
   {
-    "timestamp": "2026-09-04T15:55:19.991Z",
-    "dateFormatted": "2026-09-04",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "linkedin_company_page",
-      "facebook_business",
-      "instagram_professional"
-    ],
-    "data": {
+    "timestamp": "2026-09-09T15:05:14.799Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "dayOfWeek": 3,
+    "theme": "Comparativa Forense: 4.5 Horas vs. 8 Segundos",
+    "results": {
       "linkedin": {
-        "channel": "AuditFlow AI Company Page",
-        "postType": "Authority & RAM Zero Data Retention",
-        "content": "Cómo los despachos y directores legales auditan contratos comerciales en 8 segundos con entrega directa en Word (.docx).\n\nRevisar contratos de proveedores, acuerdos de servicios y cláusulas comerciales complejas no tiene por qué consumir horas de lectura manual los viernes por la tarde.\n\nAuditFlow AI fue desarrollado específicamente como un copiloto de auditoría fiduciaria para firmas y gerencias legales que exigen máxima agilidad y rigor técnico:\n\n1️⃣ Detección Instantánea: Analiza en 8 segundos términos críticos como cláusulas de rescisión unilateral, penalidades ocultas, desequilibrios indemnizatorios y prórrogas tácitas.\n2️⃣ Entrega Directa en Word (.docx): No entrega resúmenes abstractos ni explicaciones genéricas; genera el archivo Word con el Control de Cambios activado y propuestas de redacción fiduciaria listas para contraofertar.\n3️⃣ Control Total de la Negociación: El abogado o director financiero lidera la estrategia con datos precisos, acelerando la firma de acuerdos y protegiendo el margen del negocio.\n4️⃣ Máxima Eficiencia Operativa: Diseñado a la medida de despachos medianos y empresas que necesitan resolver contratos a demanda sin sobrecostos ni plataformas complejas.\n\nLa tecnología fiduciaria moderna está diseñada para multiplicar la capacidad de tu equipo y asegurar cada línea de tus contratos.\n\nHabilita un escaneo de cortesía para auditar tu próximo acuerdo:\n👉 https://audiflowai.com\n\n#LegalTech #DerechoCorporativo #ContratosComerciales #Abogados #CFO #DireccionGeneral #ProductividadLegal #AuditFlowAI",
-        "scheduledTime": "09:30 CST",
-        "triggerKeyword": "RAM",
-        "targetUrl": "https://audiflowai.com/?ref=linkedin-company-page"
-      }
-    }
-  },
-  {
-    "timestamp": "2026-09-04T15:25:58.585Z",
-    "dateFormatted": "2026-09-04",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "linkedin_company_page",
-      "facebook_business",
-      "instagram_professional"
-    ],
-    "data": {
-      "linkedin": {
-        "channel": "AuditFlow AI Company Page",
-        "postType": "Authority & RAM Zero Data Retention",
-        "content": "Subir un contrato de confidencialidad o un acuerdo con proveedores a una IA pública comercial puede ser la brecha de seguridad más cara de tu empresa en 2026.\n\nLa mayoría de los directores y equipos legales no se han percatado de un detalle crítico:\n\nAl pegar un borrador o un anexo comercial en interfaces web públicas de inteligencia artificial:\n❌ Los datos pueden quedar almacenados en servidores de terceros.\n❌ El secreto industrial y comercial queda técnicamente expuesto.\n❌ Se vulneran cláusulas de confidencialidad recíproca (NDAs) firmadas con clientes.\n❌ Se incumplen normativas de custodia de datos (GDPR Art. 28 y estándares SOC-2).\n\nEn AuditFlow AI diseñamos una arquitectura radicalmente diferente: Secreto Profesional en RAM Volátil Efímera.\n\n¿Cómo funciona nuestra infraestructura fiduciaria?\n1️⃣ Zero Data Retention (ZDR): El contrato se procesa únicamente en la memoria RAM del servidor.\n2️⃣ Destrucción Cero Rastro: Una vez generado el análisis de riesgos, la memoria se purga instantáneamente. Cero almacenamiento en bases de datos o discos duros.\n3️⃣ Modelos Ciegos: Ningún documento de cliente se utiliza jamás para reentrenar modelos de lenguaje.\n\nTus contratos comerciales jamás deben abandonar el perímetro de seguridad de tu negocio.\n\nAuditFlow AI entrega tu informe de riesgos y la contrapropuesta editable en Word (.docx con Control de Cambios) en menos de 10 segundos, garantizando secreto fiduciario absoluto.\n\n👇 Si deseas validar los estándares de privacidad y probar el motor sin registro previo:\nComenta la palabra \"RAM\" en esta publicación y te enviamos por mensaje privado nuestro Whitepaper de Seguridad Fiduciaria 2026 + 1 Auditoría de Cortesía.\n\nO pruébalo directamente aquí: https://audiflowai.com\n\n#Ciberseguridad #LegalTech #Compliance #SecretoProfesional #ZeroDataRetention #AuditFlowAI #CFO #DireccionGeneral #GeneralCounsel",
-        "scheduledTime": "09:30 CST",
-        "triggerKeyword": "RAM",
-        "targetUrl": "https://audiflowai.com/?ref=linkedin-company-page"
-      }
-    }
-  },
-  {
-    "timestamp": "2026-08-30T17:49:53.299Z",
-    "dateFormatted": "2026-08-30",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "facebook",
-      "instagram",
-      "linkedin",
-      "waalaxy"
-    ],
-    "data": {
+        "success": true,
+        "id": "6aa093743bd0dd9ef31ded95"
+      },
       "facebook": {
-        "title": "Blindaje Contractual Domingo • AuditFlow AI",
-        "content": "🚨 AUDITORÍA DE FIN DE SEMANA • BLINDAJE CONTRACTUAL EN 3 SEGUNDOS:\n\n¿Sabías que un contrato estándar de 400 páginas puede ocultar hasta $14,400 en fugas financieras y cláusulas de renovación forzosa invisibles?\n\nEn AuditFlow AI creamos la primera Demo en 1 Clic con Análisis Fiduciario Forense 100% privado en memoria RAM volátil:\n⚡ Detección instantánea de $14,400 en riesgos y sobrecostos en 3 segundos.\n🔒 Privacidad estricta: Cero persistencia en disco, cumplimiento GDPR & SOC-2 en 14 países.\n🛡️ Garantía Fiduciaria 10x: Si no detectamos riesgos críticos en tus contratos, tu auditoría es 100% reembolsable.\n\n👉 Prueba la Demo Interactiva en 1 Clic ahora mismo: https://audiflowai.com\n\n💬 Comenta \"DEMO\" para recibir el Checklist de Fugas Financieras 2026 de inmediato.",
-        "tags": [
-          "AuditFlowAI",
-          "LegalTech",
-          "Compliance2026",
-          "CFO"
-        ]
+        "success": true,
+        "id": "6aa0938b493bbf8c2823a4c7"
       },
       "instagram": {
-        "title": "Blindaje Fiduciario • Domingo",
-        "content": "¿Firmarías un contrato que tiene $14,400 en fugas ocultas? 📄⚠️\n\nEl 74% de las penalizaciones comerciales ocurren por cláusulas leoninas que pasan desapercibidas.\n\nDescubre cómo blindar tu empresa en 3 segundos con AuditFlow AI:\n⚡ Demo en 1 Clic con detección de $14,400 en riesgos fiduciarios.\n🔒 100% Privado en RAM Volátil (Zero Data Retention).\n🛡️ Garantía Fiduciaria 10x en 14 jurisdicciones.\n\n👉 Comenta “AUDITORIA” y te enviamos acceso instantáneo a la Demo en 1 Clic.\n\n#AuditFlowAI #LegalTech #CFO #Compliance2026 #FinanzasB2B",
-        "tags": [
-          "LegalTech",
-          "AuditFlowAI",
-          "ContractManagement"
-        ]
-      },
-      "linkedin": {
-        "title": "Gobernanza y Cumplimiento 2026 • Domingo",
-        "content": "Gobernanza y Cumplimiento Fiduciario 2026 • Análisis en RAM Volátil\n\nEl 78% de las contingencias legales corporativas provienen de contratos que superan las 400 páginas y que ningún equipo humano puede auditar línea por línea en minutos.\n\nAuditFlow AI procesa 400 páginas en 3 segundos detectando un promedio de $14,400 en fugas y cláusulas trampa, respaldado por nuestra Garantía Fiduciaria 10x.\n\n👇 Prueba la Demo en 1 Clic sin registro previo:\nhttps://audiflowai.com\n\n#LegalTech #Compliance2026 #CFO #GeneralCounsel #RiskManagement #AuditFlowAI",
-        "tags": [
-          "LegalTech",
-          "Compliance2026",
-          "GeneralCounsel"
-        ]
+        "success": true,
+        "id": "6aa09380a83dcb71a3e73d28"
       }
     }
   },
   {
-    "timestamp": "2026-08-30T17:42:47.150Z",
-    "dateFormatted": "2026-08-30",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "facebook",
-      "instagram",
-      "linkedin",
-      "waalaxy"
-    ],
-    "data": {
+    "timestamp": "2026-09-09T14:59:08.157Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "dayOfWeek": 3,
+    "theme": "Comparativa Forense: 4.5 Horas vs. 8 Segundos",
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa093743bd0dd9ef31ded95"
+      },
       "facebook": {
-        "title": "Blindaje Contractual Domingo • AuditFlow AI",
-        "content": "🚨 AUDITORÍA DE FIN DE SEMANA • BLINDAJE CONTRACTUAL EN 3 SEGUNDOS:\n\n¿Sabías que un contrato estándar de 400 páginas puede ocultar hasta $14,400 en fugas financieras y cláusulas de renovación forzosa invisibles?\n\nEn AuditFlow AI creamos la primera Demo en 1 Clic con Análisis Fiduciario Forense 100% privado en memoria RAM volátil:\n⚡ Detección instantánea de $14,400 en riesgos y sobrecostos en 3 segundos.\n🔒 Privacidad estricta: Cero persistencia en disco, cumplimiento GDPR & SOC-2 en 14 países.\n🛡️ Garantía Fiduciaria 10x: Si no detectamos riesgos críticos en tus contratos, tu auditoría es 100% reembolsable.\n\n👉 Prueba la Demo Interactiva en 1 Clic ahora mismo: https://audiflowai.com\n\n💬 Comenta \"DEMO\" para recibir el Checklist de Fugas Financieras 2026 de inmediato.",
-        "tags": [
-          "AuditFlowAI",
-          "LegalTech",
-          "Compliance2026",
-          "CFO"
-        ]
+        "success": true,
+        "id": "6aa0938b493bbf8c2823a4c7"
       },
       "instagram": {
-        "title": "Blindaje Fiduciario • Domingo",
-        "content": "¿Firmarías un contrato que tiene $14,400 en fugas ocultas? 📄⚠️\n\nEl 74% de las penalizaciones comerciales ocurren por cláusulas leoninas que pasan desapercibidas.\n\nDescubre cómo blindar tu empresa en 3 segundos con AuditFlow AI:\n⚡ Demo en 1 Clic con detección de $14,400 en riesgos fiduciarios.\n🔒 100% Privado en RAM Volátil (Zero Data Retention).\n🛡️ Garantía Fiduciaria 10x en 14 jurisdicciones.\n\n👉 Comenta “AUDITORIA” y te enviamos acceso instantáneo a la Demo en 1 Clic.\n\n#AuditFlowAI #LegalTech #CFO #Compliance2026 #FinanzasB2B",
-        "tags": [
-          "LegalTech",
-          "AuditFlowAI",
-          "ContractManagement"
-        ]
-      },
-      "linkedin": {
-        "title": "Gobernanza y Cumplimiento 2026 • Domingo",
-        "content": "Gobernanza y Cumplimiento Fiduciario 2026 • Análisis en RAM Volátil\n\nEl 78% de las contingencias legales corporativas provienen de contratos que superan las 400 páginas y que ningún equipo humano puede auditar línea por línea en minutos.\n\nAuditFlow AI procesa 400 páginas en 3 segundos detectando un promedio de $14,400 en fugas y cláusulas trampa, respaldado por nuestra Garantía Fiduciaria 10x.\n\n👇 Prueba la Demo en 1 Clic sin registro previo:\nhttps://audiflowai.com\n\n#LegalTech #Compliance2026 #CFO #GeneralCounsel #RiskManagement #AuditFlowAI",
-        "tags": [
-          "LegalTech",
-          "Compliance2026",
-          "GeneralCounsel"
-        ]
+        "success": true,
+        "id": "6aa09380a83dcb71a3e73d28"
       }
     }
   },
   {
-    "timestamp": "2026-08-30T17:42:09.662Z",
-    "dateFormatted": "2026-08-30",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "facebook",
-      "instagram",
-      "linkedin",
-      "waalaxy"
+    "timestamp": "2026-09-08T23:00:33.929Z",
+    "eventType": "BUFFER_DAILY_5PM_REELS_VESPERTINO",
+    "dayOfWeek": 2,
+    "theme": "Reel Martes: 4 Horas de Revisión Manual vs. 8 Segundos de Algoritmo",
+    "textSnippet": "Para un Director Financiero o Socio de Bufete, el ",
+    "imageUrls": [
+      "https://audiflowai.com/images/comparativa_eficiencia.jpg"
     ],
-    "data": {
-      "facebook": {
-        "title": "Blindaje Contractual Domingo • AuditFlow AI",
-        "content": "🚨 ANTES DE FIRMAR CUALQUIER CONTRATO ESTE DOMINGO: El 74% de las penalizaciones contractuales en 2026 provienen de cláusulas invisibles de renovación forzosa y jurisdicción desproporcionada.\n\nEn AuditFlow AI creamos el primer auditor forense 100% privado en memoria RAM volátil:\n✅ 0% persistencia de datos (tus contratos jamás se almacenan en disco ni entrenan modelos).\n✅ Detección en 10 segundos de cláusulas leoninas y sobrecostos.\n✅ Descarga inmediata del informe Redline en Word (.docx) con control de cambios.\n\n👉 Audita tu primer contrato GRATIS en 10s: https://audiflowai.com\n\n💬 Comenta \"AUDITORIA\" para recibir el Checklist Fiduciario 2026 sin costo.",
-        "tags": [
-          "AuditFlowAI",
-          "LegalTech",
-          "Compliance2026",
-          "CFO"
-        ]
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa093743bd0dd9ef31ded95"
       },
       "instagram": {
-        "title": "5 Cláusulas Trampa en Contratos B2B • Domingo",
-        "content": "Firmar un contrato sin leer la letra chica puede costarte meses de trabajo o demandas absurdas. 📄⚠️\n\nEl 85% de los litigios comerciales ocurren por 3 o 4 líneas mal redactadas.\n\nProtege tu negocio en 5 segundos con IA privada en RAM volátil:\n⚡ Sube tu documento a AuditFlow AI.\n🔒 Análisis 100% confidencial (Zero Data Retention).\n🛡️ Detección instantánea de riesgos y sugerencias de contrapropuesta.\n\n👉 Comenta “CONTRATO” y te enviamos tu auditoría 100% GRATIS.\n\n#LegalTech #InteligenciaArtificial #ContratosB2B #AuditFlowAI",
-        "tags": [
-          "LegalTech",
-          "AuditFlowAI",
-          "ContractManagement"
-        ]
+        "success": true,
+        "id": "6aa09380a83dcb71a3e73d28"
       },
-      "linkedin": {
-        "title": "Gobernanza y Cumplimiento 2026 • Domingo",
-        "content": "El 78% de los litigios comerciales en 2026 provienen de cláusulas que nadie leyó con detenimiento.\n\nNo es falta de abogados; es falta de tiempo y exceso de volumen contractual.\n\nAuditFlow AI analiza, clasifica y detecta anomalías contractuales en menos de 10 segundos con privacidad estricta de datos (cero almacenamiento en disco).\n\n👇 ¿Quieres verificar la salud de tus contratos actuales?\n\nComenta \"AUDITORIA\" en este post para recibir un Diagnóstico Exprés Gratuito.\n\n#LegalTech #Compliance2026 #GestionDeRiesgos #B2B #AuditFlowAI #CFO #GeneralCounsel",
-        "tags": [
-          "LegalTech",
-          "Compliance2026",
-          "GeneralCounsel"
-        ]
+      "facebook": {
+        "success": true,
+        "id": "6aa0938b493bbf8c2823a4c7"
       }
     }
   },
   {
-    "timestamp": "2026-08-29T16:05:26.671Z",
-    "dateFormatted": "2026-08-29",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "facebook",
-      "instagram",
-      "linkedin",
-      "waalaxy"
-    ],
-    "data": {
+    "timestamp": "2026-09-08T14:57:04.699Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "dayOfWeek": 2,
+    "theme": "CFO Briefing: Fuga de EBITDA y Responsabilidad Solidaria",
+    "results": {
+      "linkedin": {
+        "success": false,
+        "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+      },
       "facebook": {
-        "title": "Blindaje Contractual Sábado • AuditFlow AI",
-        "content": "🚨 ANTES DE FIRMAR CUALQUIER CONTRATO ESTE SÁBADO: El 74% de las penalizaciones contractuales en 2026 provienen de cláusulas invisibles de renovación forzosa y jurisdicción desproporcionada.\n\nEn AuditFlow AI creamos el primer auditor forense 100% privado en memoria RAM volátil:\n✅ 0% persistencia de datos (tus contratos jamás se almacenan en disco ni entrenan modelos).\n✅ Detección en 10 segundos de cláusulas leoninas y sobrecostos.\n✅ Descarga inmediata del informe Redline en Word (.docx) con control de cambios.\n\n👉 Audita tu primer contrato GRATIS en 10s: https://audiflowai.com\n\n💬 Comenta \"AUDITORIA\" para recibir el Checklist Fiduciario 2026 sin costo.",
-        "tags": [
-          "AuditFlowAI",
-          "LegalTech",
-          "Compliance2026",
-          "CFO"
-        ]
+        "success": false,
+        "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
       },
       "instagram": {
-        "title": "5 Cláusulas Trampa en Contratos B2B • Sábado",
-        "content": "Firmar un contrato sin leer la letra chica puede costarte meses de trabajo o demandas absurdas. 📄⚠️\n\nEl 85% de los litigios comerciales ocurren por 3 o 4 líneas mal redactadas.\n\nProtege tu negocio en 5 segundos con IA privada en RAM volátil:\n⚡ Sube tu documento a AuditFlow AI.\n🔒 Análisis 100% confidencial (Zero Data Retention).\n🛡️ Detección instantánea de riesgos y sugerencias de contrapropuesta.\n\n👉 Comenta “CONTRATO” y te enviamos tu auditoría 100% GRATIS.\n\n#LegalTech #InteligenciaArtificial #ContratosB2B #AuditFlowAI",
-        "tags": [
-          "LegalTech",
-          "AuditFlowAI",
-          "ContractManagement"
-        ]
-      },
-      "linkedin": {
-        "title": "Gobernanza y Cumplimiento 2026 • Sábado",
-        "content": "El 78% de los litigios comerciales en 2026 provienen de cláusulas que nadie leyó con detenimiento.\n\nNo es falta de abogados; es falta de tiempo y exceso de volumen contractual.\n\nAuditFlow AI analiza, clasifica y detecta anomalías contractuales en menos de 10 segundos con privacidad estricta de datos (cero almacenamiento en disco).\n\n👇 ¿Quieres verificar la salud de tus contratos actuales?\n\nComenta \"AUDITORIA\" en este post para recibir un Diagnóstico Exprés Gratuito.\n\n#LegalTech #Compliance2026 #GestionDeRiesgos #B2B #AuditFlowAI #CFO #GeneralCounsel",
-        "tags": [
-          "LegalTech",
-          "Compliance2026",
-          "GeneralCounsel"
-        ]
+        "success": true,
+        "id": "6aa0223715c77b0e77ad05d8"
       }
     }
   },
   {
-    "timestamp": "2026-08-29T16:03:16.901Z",
-    "dateFormatted": "2026-08-29",
-    "status": "PUBLISHED_AUTONOMOUSLY",
-    "platforms": [
-      "facebook",
-      "instagram",
-      "linkedin",
-      "waalaxy"
-    ],
-    "data": {
+    "timestamp": "2026-09-08T14:56:05.079Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "dayOfWeek": 2,
+    "theme": "CFO Briefing: Fuga de EBITDA y Responsabilidad Solidaria",
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa021f4a3304df0c37491f0"
+      },
       "facebook": {
-        "title": "Blindaje Contractual Sábado • AuditFlow AI",
-        "content": "🚨 ANTES DE FIRMAR CUALQUIER CONTRATO ESTE SÁBADO: El 74% de las penalizaciones contractuales en 2026 provienen de cláusulas invisibles de renovación forzosa y jurisdicción desproporcionada.\n\nEn AuditFlow AI creamos el primer auditor forense 100% privado en memoria RAM volátil:\n✅ 0% persistencia de datos (tus contratos jamás se almacenan en disco ni entrenan modelos).\n✅ Detección en 10 segundos de cláusulas leoninas y sobrecostos.\n✅ Descarga inmediata del informe Redline en Word (.docx) con control de cambios.\n\n👉 Audita tu primer contrato GRATIS en 10s: https://audiflowai.com\n\n💬 Comenta \"AUDITORIA\" para recibir el Checklist Fiduciario 2026 sin costo.",
-        "tags": [
-          "AuditFlowAI",
-          "LegalTech",
-          "Compliance2026",
-          "CFO"
-        ]
+        "success": true,
+        "id": "6aa021f6892baaaf1e940dca"
       },
       "instagram": {
-        "title": "5 Cláusulas Trampa en Contratos B2B • Sábado",
-        "content": "Firmar un contrato sin leer la letra chica puede costarte meses de trabajo o demandas absurdas. 📄⚠️\n\nEl 85% de los litigios comerciales ocurren por 3 o 4 líneas mal redactadas.\n\nProtege tu negocio en 5 segundos con IA privada en RAM volátil:\n⚡ Sube tu documento a AuditFlow AI.\n🔒 Análisis 100% confidencial (Zero Data Retention).\n🛡️ Detección instantánea de riesgos y sugerencias de contrapropuesta.\n\n👉 Comenta “CONTRATO” y te enviamos tu auditoría 100% GRATIS.\n\n#LegalTech #InteligenciaArtificial #ContratosB2B #AuditFlowAI",
-        "tags": [
-          "LegalTech",
-          "AuditFlowAI",
-          "ContractManagement"
-        ]
+        "success": true,
+        "id": "6aa021fa892baaaf1e940e1a"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-08T01:59:54.209Z",
+    "eventType": "DIRECT_DISPATCH_3_NETWORKS_MANUAL",
+    "theme": "Auditoría Forense de Contratos: Protección Fiduciaria y Redlines en Word",
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6a9f6bfc4c4e8f2911783ef7"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6a9f6c0741a7828a66adc3a1"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6a9f6c11555f6e1cb7757d82"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-08T01:56:33.444Z",
+    "eventType": "BUFFER_DAILY_5PM_REELS_VESPERTINO",
+    "dayOfWeek": 1,
+    "theme": "Reel Lunes: La Cláusula de $142,000 USD que se le pasó al Abogado",
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6a9f6b354c4e8f2911783421"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6a9f6b40054b6beb81aacf70"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6a9f6b495b3dd39bb3a11b25"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-07T15:59:29.088Z",
+    "eventType": "BUFFER_DAILY_5PM",
+    "dayOfWeek": 1,
+    "theme": "Cierre del Lunes: Auditoría de Contratos Firmados",
+    "results": {
+      "facebook": {
+        "success": true,
+        "id": "6a9edf42d5886de167bfd89c"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6a9edf4d0814f882ee20cffa"
       },
       "linkedin": {
-        "title": "Gobernanza y Cumplimiento 2026 • Sábado",
-        "content": "El 78% de los litigios comerciales en 2026 provienen de cláusulas que nadie leyó con detenimiento.\n\nNo es falta de abogados; es falta de tiempo y exceso de volumen contractual.\n\nAuditFlow AI analiza, clasifica y detecta anomalías contractuales en menos de 10 segundos con privacidad estricta de datos (cero almacenamiento en disco).\n\n👇 ¿Quieres verificar la salud de tus contratos actuales?\n\nComenta \"AUDITORIA\" en este post para recibir un Diagnóstico Exprés Gratuito.\n\n#LegalTech #Compliance2026 #GestionDeRiesgos #B2B #AuditFlowAI #CFO #GeneralCounsel",
-        "tags": [
-          "LegalTech",
-          "Compliance2026",
-          "GeneralCounsel"
-        ]
+        "success": true,
+        "id": "6a9edf5726ef151da69c6ac1"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-05T16:36:05.980Z",
+    "eventType": "META_DAILY_TRENDING_8AM",
+    "dayOfWeek": 6,
+    "theme": "Fin de Semana sin Cargas Contractuales",
+    "results": {
+      "facebook": {
+        "success": false,
+        "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+      },
+      "instagram": {
+        "success": true,
+        "id": "6a9c44e418e142b386339ec0",
+        "status": "sent"
+      },
+      "linkedin": {
+        "success": true,
+        "id": "6a9c44ebe6524401a658c010",
+        "status": "sending"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-05T16:09:11.401Z",
+    "eventType": "META_DAILY_TRENDING_8AM",
+    "dayOfWeek": 6,
+    "theme": "Fin de Semana sin Cargas Contractuales",
+    "results": {
+      "facebook": {
+        "success": true,
+        "id": "6a9c3e99e6524401a6581ca8",
+        "status": "sent"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6a9c3e9d85ccb3a22c0528c6",
+        "status": "sending"
       }
     }
   }
