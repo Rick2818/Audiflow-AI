@@ -314,6 +314,10 @@
       "destination": "/api/outreach"
     },
     {
+      "source": "/api/verify-client",
+      "destination": "/api/payment?action=verify_client"
+    },
+    {
       "source": "/api/(.*)",
       "destination": "/api/$1"
     },

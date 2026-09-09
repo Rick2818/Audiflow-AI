@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import subscribeHandler from '../lib/subscribe.js';
+import verifyClientHandler from '../lib/verify-client.js';
 import { CONFIG } from '../lib/config.js';
 
 const stripeSecret = process.env.STRIPE_SECRET_KEY || CONFIG.PAYMENTS.STRIPE_SECRET_KEY || '';
@@ -21,6 +22,9 @@ export default async function handler(req, res) {
     }
 
     const path = req.url || '';
+    if (path.includes('verify-client') || path.includes('verify_client') || body.action === 'verify_client' || body.action === 'verify-client') {
+      return await verifyClientHandler(req, res);
+    }
     if (path.includes('subscribe') || body.interval) {
       return await subscribeHandler(req, res);
     }

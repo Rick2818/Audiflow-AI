@@ -27,7 +27,7 @@ import outreachHandler from './api/outreach.js';
 import reportHandler from './api/report.js';
 import supportHandler from './api/support.js';
 import subscribeHandler from './lib/subscribe.js';
-import verifyClientHandler from './api/verify-client.js';
+import verifyClientHandler from './lib/verify-client.js';
 import inviteColleagueHandler from './lib/invite-colleague.js';
 import fastTrackHandler from './lib/fast-track-blast.js';
 import { LinkedInMcpAgent } from './lib/linkedin-mcp-agent.js';
