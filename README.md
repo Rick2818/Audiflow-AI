@@ -3,13 +3,14 @@
 ![AuditFlow AI Showcase](frontend/assets/demo_hyperframes.jpg)
 
 [![Production](https://img.shields.io/badge/Vercel%20Production-LIVE-10b981.svg)](https://audiflowai.com)
+[![Cloud Crons 24/7](https://img.shields.io/badge/GitHub%20Actions-Crons%2024%2F7%20LIVE-38bdf8.svg)](.github/workflows/cloud-crons.yml)
 [![Admin Control Center](https://img.shields.io/badge/Admin%20Dashboard-%2Fadmin-a855f7.svg)](https://audiflowai.com/admin)
 [![SOC2 & GDPR](https://img.shields.io/badge/Compliance-SOC2%20%7C%20EU%20GDPR%20Art.%2028-10b981.svg)](https://audiflowai.com/privacy)
 [![AppSec Hardened](https://img.shields.io/badge/Security-AppSec%20%7C%20Fail--Fast%20Guard-38bdf8.svg)](lib/security.js)
-[![Harvard Marketing Blueprint](https://img.shields.io/badge/Growth-HBS%20%7C%20Reforge%20Standard-purple.svg)](PLAN_MAESTRO_MERCADEO_DIGITAL_B2B.md)
+[![Distribution Engine](https://img.shields.io/badge/Distribution-Buffer%20%2B%20Waalaxy%20(Rule%2013)-blue.svg)](#-distribucion-multicanal-exclusiva-buffer--waalaxy-regla-13)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![Powered by Gemini 2.5](https://img.shields.io/badge/AI-Gemini%202.5%20Flash-38bdf8.svg)](https://deepmind.google/technologies/gemini/)
-[![Payments](https://img.shields.io/badge/Payments-Strike%20Lightning%20%7C%20Wompi%20%7C%20Stripe-amber.svg)](#-pasarelas-de-pago-y-blindaje-de-privacidad)
+[![Payments](https://img.shields.io/badge/Payments-Strike%20Lightning%20%7C%20Wompi%20%7C%20Stripe-amber.svg)](#-pasarelas-de-pago-activas)
 
 **AuditFlow AI** es una infraestructura Micro-SaaS B2B de grado corporativo diseñada para operar 24/7 de forma autónoma. Reduce el tiempo de auditoría, papeles de trabajo y conciliación contractual de **semanas a minutos** mediante el motor de **Gemini 2.5 Flash**, detectando fugas financieras de **$3,500 a $18,500 USD** en menos de 4 segundos, con estricta privacidad (**cero almacenamiento de archivos en disco, procesamiento 100% en memoria volátil RAM**), garantía formal de No-Entrenamiento de IA, motor de entrega de **Redlines en Word (.docx con Control de Cambios)** y arquitectura comercial fiduciaria escalonada.
 
@@ -18,18 +19,16 @@
 ## 🌐 Enlaces Oficiales en Producción
 
 * 🏠 **Aplicación Principal**: [https://audiflowai.com](https://audiflowai.com)
+* ☁️ **Automatización Cloud Crons 24/7**: [`.github/workflows/cloud-crons.yml`](.github/workflows/cloud-crons.yml) *(Siembra Nórdica 4AM, Buffer Matutino 8AM, Buffer Vespertino 5PM)*
+* 🧠 **Repositorio del Prompt Maestro Blueprint 2.0**: [`Audiflow Master Prompt/`](Audiflow%20Master%20Prompt/) *(Blueprint 2.0: `MASTER_PROMPT_BLUEPRINT_2.0.md` y `MASTER PROMPT BLUEPRINT 2.docx`)*
 * 🌐 **Inicio Proyecto (HTML, CSS & JS)**: [`inicio proyecto Audiflow/`](inicio%20proyecto%20Audiflow/) *(Interfaz web, index.html, estilos CSS, app.js y recursos visuales)*
 * ⚙️ **Todos los Archivos Fuente**: [`todos los archivos fuente de Audiflow/`](todos%20los%20archivos%20fuente%20de%20Audiflow/) *(Backend, endpoints API, librerías, seguridad y scripts)*
 * 🏛️ **Centro Maestro de Marketing B2B**: [`Audiflow Marketing/`](Audiflow%20Marketing/) *(Directorio unificado de planes, playbooks, pauta y bases de datos)*
-* 💼 **Centro de Operaciones y Campañas de Ventas**: [`Ventas Audiflow/`](Ventas%20Audiflow/) *(Campañas outbound, bases de datos de leads, scripts de despacho y pauta)*
-* 🧠 **Repositorio Oficial del Prompt Maestro**: [`Audiflow Master Prompt/`](Audiflow%20Master%20Prompt/) *(Prompt Maestro definitivo v5.0 Enterprise único y blindado: `PROMPT_MAESTRO_DEFINITIVO_AUDITFLOW_AI.md`)*
+* 💼 **Centro de Operaciones y Campañas de Ventas**: [`Ventas Audiflow/`](Ventas%20Audiflow/) *(Campañas outbound, bases de datos de leads, scripts de despacho y dashboards)*
 * ❄️ **Entorno Especializado Zona Nórdica (SWE/NOR/DNK/FIN)**: [https://audiflowai.com/?ref=nordic&country=se](https://audiflowai.com/?ref=nordic&country=se)
+* 🇸🇻🇬🇹 **Base de Datos CFOs El Salvador & Guatemala**: [`CFOS_EL_SALVADOR_Y_GUATEMALA_250.csv`](Audiflow%20Marketing/CFOS_EL_SALVADOR_Y_GUATEMALA_250.csv) *(250 decisores reales)*
 * ⚡ **Operación 10 Clientes Hoy (Fast-Track 24h)**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Pestaña `⚡ 10 Clientes Hoy`)*
 * 🎬 **Video Oficial Ejecutivo (40s • Voz Neuronal)**: [https://audiflowai.com/video](https://audiflowai.com/video)
-* ⚖️ **Comparador SEM / Alternativas DocuSign & Ironclad**: [https://audiflowai.com/alternativas-docusign](https://audiflowai.com/alternativas-docusign)
-* 🏢 **Auditoría de Arrendamiento Comercial**: [https://audiflowai.com/auditar-contrato-arrendamiento](https://audiflowai.com/auditar-contrato-arrendamiento)
-* 💻 **Auditoría de Contratos de Servicios IT & SaaS**: [https://audiflowai.com/auditar-contrato-servicios-it](https://audiflowai.com/auditar-contrato-servicios-it)
-* 🧾 **Auditoría de Facturación B2B**: [https://audiflowai.com/auditar-factura-proveedor](https://audiflowai.com/auditar-factura-proveedor)
 * 🛡️ **Política de Privacidad & SOC-2 / GDPR**: [https://audiflowai.com/privacy](https://audiflowai.com/privacy)
 * ⚙️ **Panel Privado de Administración**: [https://audiflowai.com/admin](https://audiflowai.com/admin) *(Contraseña: `AuditFlow2026!` o Acceso Rápido)*
 * 🐙 **Repositorio GitHub**: [https://github.com/Rick2818/Audiflow-AI](https://github.com/Rick2818/Audiflow-AI)
@@ -213,24 +212,23 @@ Cada vez que el Módulo Admin (`/api/admin?action=dispatch_salesnav_cluster`) o 
 
 ---
 
-## 🏛️ Gobernanza Ejecutiva, Equipo Multi-Agente & Orquestación n8n
+## 🏛️ Gobernanza Ejecutiva, Equipo Multi-Agente & Automatización Cloud 24/7
 
-AuditFlow AI cuenta con un sistema de agentes autónomos coordinados mediante **n8n** y **Google Workspace MCP**:
+AuditFlow AI cuenta con un sistema de agentes autónomos coordinados mediante **GitHub Actions 24/7**, **n8n** y **Google Workspace MCP**:
 
 1. **Director General (CEO):** Ricardo (`ricardo@audiflowai.com`, `rick28191@gmail.com`).
 2. **Gerente General / COO (`general-manager-coo`):** Asesoría de planes de acción estratégicos para el CEO, custodia estricta de métricas y resultados financieros en **USD ($)** (MRR, ARR, LTV/CAC > 4.0x), liderazgo del **Plan Maestro** y co-liderazgo del comité directivo.
-3. **Directora de Marketing y Ventas (`marketing-director`):** Orquestación unificada de demanda, prospección multicanal, embudo de neuromarketing y balance diario.
-4. **Director Senior de Meta Ads (`meta-ads-specialist`):** Experto con +20 años de trayectoria en arquitectura publicitaria de Facebook e Instagram, CAPI, Advantage+, escalado fiduciario y meta de **ROAS >= 4.5x**.
-5. **Especialista en Automatización Social (`buffer-specialist`):** Conector moderno Buffer GraphQL 2026 (`https://api.buffer.com`) y despacho multicanal.
-6. **Especialista Senior en Psicología del Consumidor & Anti-Fatiga (`consumer-behavior-diagnostician`):** Experto con +20 años en diagnóstico de adopción de la app, drivers de compra/no-compra y **Escudo Anti-Fatiga de Anuncios**.
-7. **Especialistas Senior de Ventas (+20 años):** `legal-sales-specialist`, `financial-sales-specialist`, `gov-sales-specialist` y `waalaxy-specialist`.
+3. **Directora de Marketing y Ventas (`marketing-director`):** Orquestación unificada de demanda fiduciaria, supervisión de prospección 1 a 1 en LinkedIn y distribución multicanal diaria.
+4. **Especialista Senior en Distribución Buffer (`buffer-specialist`):** Distribución y publicación multicanal fiduciaria (LinkedIn Company Page, Facebook, Instagram) vía Buffer API GraphQL 2026 (`https://api.buffer.com`) y automatización de parrillas de contenido sin dependencia de Meta Ads (Regla Inmutable 13).
+5. **Especialista Senior en LinkedIn B2B & Thought Leadership (`linkedin-specialist`):** Copywriting persuasivo de alto impacto, redacción de casos forenses reales y gestión del posicionamiento orgánico ante Directores Legales, CFOs y CEOs.
+6. **Especialista Senior en Psicología del Consumidor & Anti-Fatiga (`consumer-behavior-diagnostician`):** Diagnóstico de fricción de adopción de la app, drivers de decisión fiduciaria y protección de marca.
+7. **Especialista en Prospección Outbound 1 a 1 (`waalaxy-specialist`):** Prospección directa hacia 250 CFOs de Centroamérica y socios directores nórdicos de sector medio.
 
-### 🔄 Flujos Automatizados en n8n ([`n8n_workflows_auditflow.json`](n8n_workflows_auditflow.json)):
-* `meta-ads-reporting`: Monitoreo y auditoría diaria de pauta en USD.
-* `consumer-behavior-audit`: Alertas de fatiga y recomendaciones de rotación creativa.
-* `gm-coo-plan`: Informes consolidados de facturación, rentabilidad y planes de acción para el CEO.
-* `executive-meeting-sync`: Sincronización periódica de la mesa directiva (Ricardo + GM + CMVO).
-* `salesnav-waalaxy-sync`: Despacho transaccional de prospectos y alertas en caliente a `rick28191@gmail.com`.
+### 🔄 Automatizaciones en la Nube 24/7 ([`.github/workflows/cloud-crons.yml`](.github/workflows/cloud-crons.yml)):
+* `04:00 AM CST`: **Siembra Diaria Nórdicos Midmarket** (Socios de despachos de 15 a 50 abogados).
+* `08:00 AM CST`: **Publicador Matutino Buffer** (LinkedIn Company Page, Facebook Page e Instagram).
+* `05:00 PM CST`: **Publicador Vespertino Buffer** (Reels técnicos y formato visual de alto rendimiento).
+* `Webhook Serverless`: Sincronización continua de endpoints en Vercel Production (`https://audiflowai.com/api/social-publish`).
 
 ---
 
