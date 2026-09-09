@@ -16,7 +16,12 @@ CREATE TABLE IF NOT EXISTS public.audit_leads (
     company_estimate VARCHAR(100) DEFAULT 'Desconocido',
     document_type VARCHAR(100) NOT NULL,
     is_enterprise BOOLEAN DEFAULT FALSE,
+    cliente VARCHAR(10) NOT NULL DEFAULT 'NO' CHECK (cliente IN ('SI', 'NO')),
     emails_sent INT DEFAULT 0,
+    email_opened BOOLEAN DEFAULT FALSE,
+    opens_count INT DEFAULT 0,
+    opened_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    recovery_sent_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
@@ -67,6 +72,7 @@ CREATE TABLE IF NOT EXISTS public.subscriptions (
     price_usd DECIMAL(8, 2) DEFAULT 69.00,
     interval VARCHAR(20) DEFAULT 'month' CHECK (interval IN ('month', 'year')),
     status VARCHAR(20) NOT NULL DEFAULT 'active' CHECK (status IN ('trialing', 'active', 'canceled', 'past_due')),
+    cliente VARCHAR(10) NOT NULL DEFAULT 'SI' CHECK (cliente IN ('SI', 'NO')),
     current_period_start TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     current_period_end TIMESTAMP WITH TIME ZONE DEFAULT (NOW() + INTERVAL '1 month'),
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()

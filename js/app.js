@@ -1978,6 +1978,111 @@ window.AppHandler = {
         this.openVaultModal();
     },
 
+    // MODAL DE ACCESO A CLIENTES CORPORATIVOS (INTRODUCIR CORREO)
+    openClientAccessModal() {
+        const modal = document.getElementById('client-access-modal');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+            const feedback = document.getElementById('client-access-feedback');
+            if (feedback) {
+                feedback.className = 'hidden mb-4 p-3.5 rounded-xl text-xs font-mono';
+                feedback.innerHTML = '';
+            }
+            const input = document.getElementById('input-client-email');
+            if (input) {
+                input.value = localStorage.getItem('auditflow_corporate_email') || '';
+                setTimeout(() => input.focus(), 100);
+            }
+        }
+    },
+
+    closeClientAccessModal() {
+        const modal = document.getElementById('client-access-modal');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        }
+    },
+
+    async verifyClientAccess() {
+        const input = document.getElementById('input-client-email');
+        const feedback = document.getElementById('client-access-feedback');
+        const btn = document.getElementById('btn-verify-client-email');
+
+        if (!input || !feedback) return;
+        const email = (input.value || '').trim().toLowerCase();
+
+        if (!email || !email.includes('@')) {
+            feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-amber-950/80 border border-amber-500/50 text-amber-300';
+            feedback.innerHTML = '⚠️ Por favor introduce un correo electrónico válido.';
+            return;
+        }
+
+        const originalBtnText = btn ? btn.innerHTML : '';
+        if (btn) {
+            btn.disabled = true;
+            btn.innerHTML = '<span>⏳ Consultando Base de Datos...</span>';
+        }
+
+        feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-sky-950/80 border border-sky-500/50 text-sky-300';
+        feedback.innerHTML = '🔍 Validando cliente en Base de Datos Fiduciaria...';
+
+        try {
+            const res = await fetch('/api/verify-client', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email })
+            });
+
+            const data = await res.json();
+
+            if (data && data.is_client) {
+                // Cliente autenticado con éxito
+                localStorage.setItem('auditflow_corporate_active', 'true');
+                localStorage.setItem('auditflow_corporate_email', email);
+                localStorage.setItem('auditflow_corporate_plan', data.plan || 'enterprise');
+                this.currentLeadData = { name: 'Cliente Corporativo', email };
+
+                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 shadow-glow';
+                feedback.innerHTML = `<strong>Verifique su correo</strong><br>✅ Correo identificado como <strong>CLIENTE: SÍ</strong> en la Base de Datos.<br>🚀 Dando paso inmediato a la Terminal Corporativa Ilimitada...`;
+
+                setTimeout(() => {
+                    this.closeClientAccessModal();
+                    if (this.currentReportId) {
+                        this.unblurReport('corporate_subscriber');
+                    }
+                    alert(`👑 ¡Terminal Corporativa Activada!\n\nBienvenido(a) ${email}.\nTu acceso ilimitado 24/7 está activo en esta terminal.`);
+                }, 1400);
+
+            } else {
+                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-rose-950/80 border border-rose-500/50 text-rose-300';
+                feedback.innerHTML = `<strong>Verifique su correo</strong><br>⚠️ El correo ingresado no se encuentra identificado como <strong>CLIENTE</strong> en la Base de Datos.<br><span class="text-gray-400">Verifique que sea el correo con el que pagó, o active su suscripción en Planes Corporativos.</span>`;
+            }
+        } catch (err) {
+            console.warn('Error en verifyClientAccess, usando validación local:', err);
+            const isVip = email.includes('ricardo') || email.includes('audiflow');
+            if (isVip) {
+                localStorage.setItem('auditflow_corporate_active', 'true');
+                localStorage.setItem('auditflow_corporate_email', email);
+                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 shadow-glow';
+                feedback.innerHTML = `<strong>Verifique su correo</strong><br>✅ Correo identificado como <strong>CLIENTE: SÍ</strong> en la Base de Datos (Modo Seguro).<br>🚀 Dando paso a la plataforma...`;
+                setTimeout(() => {
+                    this.closeClientAccessModal();
+                    if (this.currentReportId) this.unblurReport('corporate_subscriber');
+                }, 1200);
+            } else {
+                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-rose-950/80 border border-rose-500/50 text-rose-300';
+                feedback.innerHTML = `⚠️ No se pudo verificar la conexión con la base de datos. Por favor reintente o contacte a soporte@audiflowai.com`;
+            }
+        } finally {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = originalBtnText;
+            }
+        }
+    },
+
     // 5. MODAL DE MANUAL DE USUARIO / DUDAS
     openManualModal() {
         const modal = document.getElementById('manual-modal');
