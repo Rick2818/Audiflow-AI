@@ -1,4 +1,4 @@
-﻿name: 🎛️ Centro de Comando Autónomo AuditFlow AI (Despacho Manual)
+name: 🎛️ Centro de Comando Autónomo AuditFlow AI (Despacho Manual)
 
 on:
   workflow_dispatch:
@@ -15,6 +15,7 @@ on:
           - 'sales_report_2pm (Reporte Ejecutivo de Ventas 2 PM)'
           - 'buffer_5pm (Publicación Vespertina Reels)'
           - 'sales_report_6pm (Reporte Ejecutivo de Ventas 6 PM)'
+          - 'waalaxy_sprint (Campaña Waalaxy LinkedIn Sprint 48H)'
 
 jobs:
   run_selected_agent:
@@ -70,6 +71,10 @@ jobs:
             *"sales_report_6pm"*)
               echo "📈 Ejecutando Reporte de Ventas 6:00 PM..."
               node scripts/dispatch_sales_report_6pm.js
+              ;;
+            *"waalaxy_sprint"*)
+              echo "🛰️ Ejecutando Campaña Waalaxy LinkedIn..."
+              node scripts/dispatch_waalaxy_medianos_campaign.js
               ;;
             *)
               echo "Acción desconocida"
