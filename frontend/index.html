@@ -267,9 +267,9 @@
                 <button type="button" id="btn-header-manual" onclick="if(window.AppHandler &amp;&amp; window.AppHandler.openManualModal){window.AppHandler.openManualModal();}else{var m=document.getElementById('manual-modal');if(m){m.classList.remove('hidden');m.style.display='flex';}}" class="text-xs font-mono font-bold text-gray-300 hover:text-accent-blue transition-all inline-flex items-center gap-1 cursor-pointer">
                     📘 <span data-i18n="tab_user_manual_nav">Manual</span>
                 </button>
-                <!-- BOTÓN ACCESO CLIENTES CORPORATIVOS (INTRODUCIR CORREO) -->
-                <button type="button" id="btn-client-access" onclick="window.AppHandler.openClientAccessModal()" class="px-2.5 py-1.5 rounded-lg bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 hover:text-white hover:bg-emerald-900/80 font-mono text-xs font-bold transition-all inline-flex items-center gap-1.5 shadow-sm cursor-pointer">
-                    🔑 <span data-i18n="nav_client_access">Acceso Clientes</span>
+                <!-- BOTÓN ACCESO CLIENTES CORPORATIVOS (INTRODUCIR CORREO) - DORADO BRILLANTE VIP -->
+                <button type="button" id="btn-client-access" onclick="window.AppHandler.openClientAccessModal()" class="px-3.5 py-1.5 rounded-xl bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-black font-extrabold font-mono text-xs shadow-[0_0_18px_rgba(245,158,11,0.6)] hover:shadow-[0_0_26px_rgba(245,158,11,0.9)] hover:scale-105 transition-all inline-flex items-center gap-1.5 cursor-pointer border border-yellow-200">
+                    🔑 <span data-i18n="nav_client_access" class="tracking-wide">Acceso Clientes</span>
                 </button>
                 <!-- BOTÓN HISTORIAL DE SESIÓN LOCAL -->
                 <button onclick="window.AppHandler.openVaultModal()" class="px-2.5 py-1.5 rounded-lg bg-dark-card hover:bg-dark-surface border border-gray-700 text-gray-300 hover:text-white font-mono text-xs transition-all hidden md:inline-flex items-center gap-1.5">
@@ -1746,20 +1746,20 @@
 
         <!-- MODAL: ACCESO A CLIENTES CORPORATIVOS (INTRODUCIR CORREO) -->
         <div id="client-access-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/85 backdrop-blur-md p-4 overflow-y-auto" onclick="if(event.target === this) window.AppHandler.closeClientAccessModal()">
-            <div class="bg-dark-card border border-emerald-500/50 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-2xl my-auto text-left">
+            <div class="bg-dark-card border-2 border-amber-500/60 rounded-2xl max-w-md w-full p-6 sm:p-8 relative shadow-[0_0_30px_rgba(245,158,11,0.25)] my-auto text-left">
                 <button onclick="window.AppHandler.closeClientAccessModal()" aria-label="Cerrar modal de acceso" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-1 focus:outline-none cursor-pointer">✕</button>
 
-                <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-2xl mb-4 mx-auto">
+                <div class="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-400 flex items-center justify-center font-bold text-2xl mb-4 mx-auto shadow-glow">
                     🔑
                 </div>
                 <h3 class="text-xl font-bold text-white text-center mb-1">Acceso a Clientes Corporativos</h3>
-                <p class="text-xs text-emerald-300 text-center mb-5 font-mono">Terminal Ilimitada 24/7 • Reconocimiento Fiduciario en Base de Datos</p>
+                <p class="text-xs text-amber-300 text-center mb-5 font-mono font-semibold">Terminal Ilimitada 24/7 • Reconocimiento Fiduciario en Base de Datos</p>
 
                 <div class="p-4 rounded-xl bg-dark-surface border border-border-dark mb-4 space-y-2">
-                    <label for="input-client-email" class="block text-xs font-mono font-bold text-white">
+                    <label for="input-client-email" class="block text-xs font-mono font-bold text-amber-300">
                         Introducir el correo electrónico del cliente:
                     </label>
-                    <input type="email" id="input-client-email" placeholder="ejemplo@tuempresa.com" class="input-field text-xs font-mono w-full text-white bg-dark-card border border-gray-600 focus:border-emerald-400 p-2.5 rounded-lg">
+                    <input type="email" id="input-client-email" placeholder="ejemplo@tuempresa.com" class="input-field text-xs font-mono w-full text-white bg-dark-card border border-amber-500/40 focus:border-amber-400 p-2.5 rounded-lg">
                     <p class="text-[11px] text-gray-400 font-sans">
                         Ingresa el correo corporativo con el que pagaste tu membresía o recibiste tu comprobante.
                     </p>
@@ -1767,7 +1767,7 @@
 
                 <div id="client-access-feedback" class="hidden mb-4 p-3.5 rounded-xl text-xs font-mono"></div>
 
-                <button type="button" id="btn-verify-client-email" onclick="window.AppHandler.verifyClientAccess()" class="btn-primary w-full py-3 text-xs font-mono font-bold bg-gradient-to-r from-emerald-500 to-accent-blue shadow-glow hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer">
+                <button type="button" id="btn-verify-client-email" onclick="window.AppHandler.verifyClientAccess()" class="btn-primary w-full py-3.5 text-xs font-mono font-extrabold bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 text-black shadow-[0_0_20px_rgba(245,158,11,0.6)] hover:brightness-110 flex items-center justify-center gap-2 cursor-pointer border border-yellow-200">
                     <span>⚡ Verificar Correo y Dar Paso →</span>
                 </button>
 
