@@ -1,4 +1,4 @@
-﻿import fs from 'fs';
+import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import { Resend } from 'resend';
@@ -30,9 +30,10 @@ function saveState(state) {
 
 export async function dispatchWaalaxyMedianosCampaign() {
   console.log('======================================================================');
-  console.log('🛰️ AUDITFLOW AI — MOTOR WAALAXY LINKEDIN (SPRINT 48 HORAS)');
-  console.log('   Estrategia: Prospección directa en LinkedIn a Socios y Directores Legales');
-  console.log('   Blindaje: 100% libre de Gmail SMTP • Seguro y Fiduciario');
+  console.log('🛰️ AUDITFLOW AI — MOTOR WAALAXY LINKEDIN (PUENTE WARMUP 14 DÍAS)');
+  console.log('   Estrategia: Prospección ininterrumpida en LinkedIn a Socios y Directores');
+  console.log('   Objetivo: Generar clientes y demos mientras se calienta ricardo.audiflowai@gmail.com');
+  console.log('   Blindaje: 100% libre de Gmail SMTP • rick28191@gmail.com protegido para ventas');
   console.log('======================================================================\n');
 
   let csvPath1 = path.resolve('Waalaxy/DIRECTORES_LEGALES_250_WAALAXY.csv');
@@ -131,16 +132,26 @@ export async function dispatchWaalaxyMedianosCampaign() {
     }
   }
 
-  // Actualizar estado persistente
+  // Actualizar estado persistente y seguimiento del ciclo de 14 días
+  if (!state.warmupCycleStart) {
+    state.warmupCycleStart = new Date().toISOString();
+  }
+  const daysElapsed = Math.floor((Date.now() - new Date(state.warmupCycleStart).getTime()) / (1000 * 60 * 60 * 24));
+  const currentWarmupDay = Math.min(14, daysElapsed + 1);
+
   state.lastIndex = (endIndex >= leads.length) ? 0 : endIndex;
   state.totalProcessed = (state.totalProcessed || 0) + currentBatch.length;
+  state.currentWarmupDay = currentWarmupDay;
   state.lastRun = new Date().toISOString();
   saveState(state);
 
   console.log('\n======================================================================');
   console.log(`✅ LOTE WAALAXY PROCESADO CON ÉXITO: ${currentBatch.length} DECISORES`);
   console.log(`📈 Total Acumulado en Secuencia: ${state.totalProcessed} prospectos`);
+  console.log(`📅 Ciclo Warmup Instantly: Día ${currentWarmupDay} de 14`);
   console.log(`🔒 Modo Seguro: 100% LinkedIn B2B (Sin impacto en cuentas de Google)`);
+  console.log(`🛡️ Cuenta Outreach Oficial: ricardo.audiflowai@gmail.com`);
+  console.log(`👑 Cuenta Personal CEO: rick28191@gmail.com (Blindada para Ventas)`);
   console.log('======================================================================\n');
 
   // Telemetría por Resend DKIM al buzón de control
@@ -153,19 +164,24 @@ export async function dispatchWaalaxyMedianosCampaign() {
       await resend.emails.send({
         from: 'Directora de Marketing | AuditFlow AI <cmvo@audiflowai.com>',
         to: adminEmail,
-        subject: `🛰️ [WAALAXY SPRINT 48H] Lote Procesado: ${currentBatch.length} Socios Directores en LinkedIn`,
+        subject: `🛰️ [WAALAXY PUENTE DÍA ${currentWarmupDay}/14] Lote Procesado: ${currentBatch.length} Socios Directores en LinkedIn`,
         html: `
           <div style="font-family: Arial, sans-serif; background: #0f172a; color: #ffffff; padding: 22px; border-radius: 10px; border: 1px solid #38bdf8; max-width: 620px;">
-            <h3 style="color: #38bdf8; margin-top: 0;">🛰️ Reporte de Ejecución: Campaña Waalaxy LinkedIn (48H)</h3>
-            <p style="font-size: 13px; color: #cbd5e1;">Don Ricardo, se procesó el lote programado en la nube para conexión con directores legales:</p>
+            <h3 style="color: #38bdf8; margin-top: 0;">🛰️ Reporte de Ejecución: Waalaxy LinkedIn (Puente 14 Días)</h3>
+            <p style="font-size: 13px; color: #cbd5e1;">Don Ricardo, reporte ejecutivo de la prospección activa mientras corre el calentamiento de Instantly:</p>
             <ul style="color: #e2e8f0; font-size: 13px; line-height: 1.7;">
               <li><strong>Lote Ejecutado:</strong> ${currentBatch.length} decisores calificados.</li>
               <li><strong>Canal Activo:</strong> LinkedIn B2B / Waalaxy (Directores Legales & Socios M&A).</li>
-              <li><strong>Estado de Instantly:</strong> ⏸️ DESCONECTADO (Protección de cuenta Google).</li>
-              <li><strong>Total Acumulado en Secuencia:</strong> ${state.totalProcessed} contactos.</li>
-              <li><strong>Muestra de Contactos:</strong> ${currentBatch.slice(0, 3).map(l => `${l.name} (${l.company})`).join(', ')}.</li>
+              <li><strong>Día del Protocolo de Calentamiento:</strong> Día ${currentWarmupDay} de 14.</li>
+              <li><strong>Cuenta Outreach Oficial en Instantly:</strong> <code>ricardo.audiflowai@gmail.com</code> (Warmup P2P).</li>
+              <li><strong>Buzón Personal del CEO (Blindado):</strong> <code>rick28191@gmail.com</code> (Exclusivo para Ventas $19, $69, $590).</li>
+              <li><strong>Total Acumulado en Secuencia:</strong> ${state.totalProcessed} contactos alcanzados.</li>
+              <li><strong>Muestra de Decisores:</strong> ${currentBatch.slice(0, 3).map(l => `${l.name} (${l.company})`).join(', ')}.</li>
             </ul>
-            <p style="font-size: 11px; color: #94a3b8; margin-top: 15px;">AuditFlow AI • Operación Continua en la Nube 24/7</p>
+            <div style="margin-top: 15px; padding: 12px; background: #1e293b; border-radius: 6px; font-size: 12px; color: #94a3b8;">
+              🔄 <em>Estrategia de Relevo:</em> Waalaxy continuará ejecutando 50 toques/día hasta que <code>ricardo.audiflowai@gmail.com</code> certifique Health Score ≥ 90% al día 14, momento en el cual comenzará el cold email masivo en Instantly.
+            </div>
+            <p style="font-size: 11px; color: #64748b; margin-top: 15px;">AuditFlow AI • Operación Fiduciaria Continua 24/7</p>
           </div>
         `
       });

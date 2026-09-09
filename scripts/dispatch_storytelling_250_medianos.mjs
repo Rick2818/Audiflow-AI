@@ -10,11 +10,106 @@ const RESEND_API_KEY = process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY
 const resend = RESEND_API_KEY ? new Resend(RESEND_API_KEY) : null;
 
 const STATE_FILE = path.resolve('storytelling_dispatch_state.json');
-const CSV_FILE = fs.existsSync(path.resolve('Waalaxy/waalaxy_pareto_top_medianos_25abog.csv'))
-  ? path.resolve('Waalaxy/waalaxy_pareto_top_medianos_25abog.csv')
-  : path.resolve('Waalaxy/DIRECTORES_LEGALES_250_WAALAXY.csv');
 
-// Plantillas de la Campaña de Storytelling Forense
+// Cargar el universo consolidado de los 250 bufetes y decisores legales
+function loadAllStorytellingLeads() {
+  const leadsMap = new Map();
+  const csvFiles = [
+    path.resolve('Waalaxy/DIRECTORES_LEGALES_250_WAALAXY.csv'),
+    path.resolve('Waalaxy/waalaxy_pareto_top_medianos_25abog.csv')
+  ];
+
+  for (const filePath of csvFiles) {
+    if (!fs.existsSync(filePath)) continue;
+    const content = fs.readFileSync(filePath, 'utf8');
+    const lines = content.trim().split('\n');
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i];
+      const regex = /(".*?"|[^",]+)(?=\s*,|\s*$)/g;
+      const matches = line.match(regex);
+      if (!matches || matches.length < 7) continue;
+
+      let fn = '', ln = '', company = '', role = '', email = '';
+
+      if (filePath.includes('DIRECTORES_LEGALES_250_WAALAXY')) {
+        fn = (matches[1] || '').replace(/"/g, '').trim();
+        ln = (matches[2] || '').replace(/"/g, '').trim();
+        company = (matches[3] || '').replace(/"/g, '').trim();
+        role = (matches[4] || '').replace(/"/g, '').trim();
+        email = (matches[6] || '').replace(/"/g, '').trim().toLowerCase();
+      } else {
+        fn = (matches[0] || '').replace(/"/g, '').trim();
+        ln = (matches[1] || '').replace(/"/g, '').trim();
+        role = (matches[2] || '').replace(/"/g, '').trim();
+        company = (matches[3] || '').replace(/"/g, '').trim();
+        email = (matches[6] || '').replace(/"/g, '').trim().toLowerCase();
+      }
+
+      if (email && email.includes('@') && !leadsMap.has(email)) {
+        leadsMap.set(email, {
+          name: `${fn} ${ln}`.trim() || company,
+          firstName: fn,
+          lastName: ln,
+          company,
+          role: role || 'Managing Partner / Director Legal',
+          email
+        });
+      }
+    }
+  }
+
+  return Array.from(leadsMap.values());
+}
+
+function loadState(totalLeads) {
+  let state = {
+    warmupCycleStart: new Date().toISOString(),
+    currentIndex: 0,
+    currentChapter: 1,
+    batchSize: 50,
+    totalSent: 0,
+    history: []
+  };
+
+  if (fs.existsSync(STATE_FILE)) {
+    try {
+      state = { ...state, ...JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')) };
+    } catch (e) {
+      console.warn('⚠️ No se pudo leer estado anterior, iniciando desde cero.');
+    }
+  }
+
+  if (!state.warmupCycleStart) {
+    state.warmupCycleStart = new Date().toISOString();
+  }
+
+  // Sincronización fiduciaria con los 14 días de calentamiento
+  const daysElapsed = Math.floor((Date.now() - new Date(state.warmupCycleStart).getTime()) / (1000 * 60 * 60 * 24));
+  const warmupDay = Math.min(14, Math.max(1, daysElapsed + 1));
+  state.warmupDay = warmupDay;
+
+  // Asignación de capítulos por bloques de los 14 días
+  // Días 1 a 4: Capítulo 1 (Lote ~62 leads/día -> 250 alcanzados)
+  // Días 5 a 9: Capítulo 2 (Lote ~50 leads/día -> 250 alcanzados)
+  // Días 10 a 14: Capítulo 3 (Lote ~50 leads/día -> 250 alcanzados con CTA a audiflowai.com)
+  if (warmupDay <= 4) {
+    state.currentChapter = 1;
+    state.batchSize = 65;
+  } else if (warmupDay <= 9) {
+    state.currentChapter = 2;
+    state.batchSize = 50;
+  } else {
+    state.currentChapter = 3;
+    state.batchSize = 50;
+  }
+
+  return state;
+}
+
+function saveState(state) {
+  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
+}
+
 const CHAPTER_TEMPLATES = {
   1: {
     subject: '[Caso Real] 45 páginas revisadas, pero faltó leer una palabra en el Anexo C',
@@ -161,88 +256,26 @@ const CHAPTER_TEMPLATES = {
   }
 };
 
-function parseCsvLeads(filePath) {
-  if (!fs.existsSync(filePath)) {
-    throw new Error(`CSV file not found at: ${filePath}`);
-  }
-  const content = fs.readFileSync(filePath, 'utf8');
-  const lines = content.trim().split('\n');
-  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, ''));
-  const rows = [];
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i];
-    const regex = /(".*?"|[^",]+)(?=\s*,|\s*$)/g;
-    const matches = line.match(regex);
-    if (!matches) continue;
-    const obj = {};
-    headers.forEach((h, idx) => {
-      obj[h] = matches[idx] ? matches[idx].trim().replace(/^"|"$/g, '') : '';
-    });
-    const fName = obj.firstName || obj.Nombre || '';
-    const lName = obj.lastName || obj.Apellido || '';
-    const comp = obj.companyName || obj.Empresa || '';
-    rows.push({
-      name: `${fName} ${lName}`.trim() || comp,
-      firstName: fName,
-      lastName: lName,
-      company: comp,
-      city: obj.city || obj.Pais || '',
-      lawyersCount: obj.lawyersCount || '',
-      email: obj.email || obj.Email || '',
-      linkedin: obj.linkedinUrl || obj.LinkedIn_URL || '',
-      customMessage: obj.customMessage || ''
-    });
-  }
-  return rows.filter(r => r.email && r.email.includes('@'));
-}
-
-function loadState(totalLeads) {
-  if (fs.existsSync(STATE_FILE)) {
-    try {
-      return JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
-    } catch (e) {
-      console.warn('⚠️ No se pudo leer estado anterior, iniciando desde cero.');
-    }
-  }
-  return {
-    currentIndex: 0,
-    currentChapter: 1,
-    batchSize: 25, // 25 leads por día de Lunes a Sábado para alcanzar los 250 bufetes
-    totalSent: 0,
-    history: []
-  };
-}
-
-function saveState(state) {
-  fs.writeFileSync(STATE_FILE, JSON.stringify(state, null, 2), 'utf8');
-}
-
 export async function runStorytellingDailyDispatch() {
   console.log('======================================================================');
-  console.log('📖 AUDITFLOW AI — CAMPAÑA DE STORYTELLING FORENSE (6:00 AM CST)');
-  console.log('🎯 Segmento: 250 Bufetes Medianos (Socios Directores)');
-  console.log('🛡️ Blindaje Activo: Resend API + Aislamiento en tendenciaiatufuturo@gmail.com');
+  console.log('📖 AUDITFLOW AI — CAMPAÑA DE STORYTELLING FORENSE (14 DÍAS RESTANTES)');
+  console.log('🎯 Segmento: 250 Bufetes Medianos (Socios Directores y General Counsels)');
+  console.log('🛡️ Remitente: cmvo@audiflowai.com • Aislamiento: tendenciaiatufuturo@gmail.com');
+  console.log('👑 Buzón CEO: rick28191@gmail.com (100% blindado para ventas)');
   console.log('======================================================================');
 
-  const allLeads = parseCsvLeads(CSV_FILE);
-  console.log(`📊 Base de datos cargada: ${allLeads.length} bufetes medianos.`);
+  const allLeads = loadAllStorytellingLeads();
+  console.log(`📊 Base de datos consolidada: ${allLeads.length} bufetes y decisores legales.`);
 
   const state = loadState(allLeads.length);
-  const startIndex = state.currentIndex;
-  const batchSize = state.batchSize || 25;
+  const startIndex = state.currentIndex % allLeads.length;
+  const batchSize = state.batchSize || 50;
   const endIndex = Math.min(startIndex + batchSize, allLeads.length);
   const todaysBatch = allLeads.slice(startIndex, endIndex);
 
+  console.log(`📅 Día del Ciclo Storytelling / Warmup: Día ${state.warmupDay} de 14`);
+  console.log(`📚 Capítulo Activo: #${state.currentChapter}`);
   console.log(`📍 Lote de Hoy: Leads ${startIndex + 1} a ${endIndex} (Total: ${todaysBatch.length})`);
-  console.log(`📚 Capítulo a Despachar: ${state.currentChapter || 1}`);
-
-  if (todaysBatch.length === 0) {
-    console.log('🏁 Ciclo completo alcanzado para los 250 bufetes. Reiniciando al Capítulo siguiente.');
-    state.currentIndex = 0;
-    state.currentChapter = (state.currentChapter % 3) + 1;
-    saveState(state);
-    return runStorytellingDailyDispatch();
-  }
 
   const chapter = CHAPTER_TEMPLATES[state.currentChapter || 1];
   let sentCount = 0;

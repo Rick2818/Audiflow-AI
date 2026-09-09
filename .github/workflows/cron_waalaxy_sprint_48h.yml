@@ -1,4 +1,4 @@
-﻿name: 🛰️ Campaña Waalaxy LinkedIn (Sprint 48H Seguro)
+name: 🛰️ Campaña Waalaxy LinkedIn (Puente 14 Días Warmup Instantly)
 
 on:
   schedule:
@@ -9,17 +9,16 @@ on:
 
 jobs:
   waalaxy_sprint:
-    name: Despacho Lote Waalaxy LinkedIn en la Nube
+    name: Despacho Lote Waalaxy LinkedIn (Puente Warmup 14 Días)
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     env:
       RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
       BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
-      GMAIL_USER: ${{ secrets.GMAIL_USER }}
-      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
       ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
-      INSTANTLY_ACTIVE: 'false'
+      INSTANTLY_ACTIVE: 'warmup'
+      OUTREACH_EMAIL: 'ricardo.audiflowai@gmail.com'
       APP_URL: https://audiflowai.com
       NODE_ENV: production
 
