@@ -74,8 +74,8 @@ const htmlContent = `
 async function enviarConvocatoria() {
   const mailOptions = {
     from: '"AuditFlow AI Executive Desk" <cmvo@audiflowai.com>',
-    to: 'rick28191@gmail.com',
-    replyTo: 'rick28191@gmail.com',
+    to: 'ricardo@audiflowai.com, tendenciaiatufuturo@gmail.com',
+    replyTo: 'tendenciaiatufuturo@gmail.com',
     subject: '📅 [AuditFlow AI] Convocatoria Confirmada: Reunión Ejecutiva Lunes 8:00 AM (Compromiso 1 Cliente/Día)',
     html: htmlContent
   };

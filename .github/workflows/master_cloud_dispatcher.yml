@@ -1,0 +1,78 @@
+﻿name: 🎛️ Centro de Comando Autónomo AuditFlow AI (Despacho Manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: 'Selecciona el Agente / Campaña a ejecutar en la nube:'
+        required: true
+        default: 'sales_report_6pm'
+        type: choice
+        options:
+          - 'nordicos_4am (Campaña Nórdicos Sector Medio)'
+          - 'storytelling_6am (Campaña Storytelling 250 Bufetes)'
+          - 'buffer_8am (Publicación Redes LinkedIn/FB/IG)'
+          - 'sales_report_2pm (Reporte Ejecutivo de Ventas 2 PM)'
+          - 'buffer_5pm (Publicación Vespertina Reels)'
+          - 'sales_report_6pm (Reporte Ejecutivo de Ventas 6 PM)'
+
+jobs:
+  run_selected_agent:
+    name: Ejecución en la Nube
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      APP_URL: https://audiflowai.com
+      NODE_ENV: production
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install --omit=dev
+
+      - name: Run Selected Agent Script
+        run: |
+          case "${{ github.event.inputs.service }}" in
+            *"nordicos_4am"*)
+              echo "❄️ Ejecutando Campaña Nórdicos..."
+              node scripts/nordic_midmarket_daily_sower.mjs
+              ;;
+            *"storytelling_6am"*)
+              echo "📖 Ejecutando Storytelling 250 Bufetes..."
+              node scripts/dispatch_storytelling_250_medianos.mjs
+              ;;
+            *"buffer_8am"*)
+              echo "☀️ Ejecutando Publicación Matutina Buffer..."
+              node scripts/buffer_daily_publisher_8am.mjs
+              ;;
+            *"sales_report_2pm"*)
+              echo "📊 Ejecutando Reporte de Ventas 2:00 PM..."
+              node scripts/dispatch_sales_report_2pm.js
+              ;;
+            *"buffer_5pm"*)
+              echo "🌇 Ejecutando Publicación Vespertina Buffer..."
+              node scripts/buffer_daily_publisher_5pm.mjs
+              ;;
+            *"sales_report_6pm"*)
+              echo "📈 Ejecutando Reporte de Ventas 6:00 PM..."
+              node scripts/dispatch_sales_report_6pm.js
+              ;;
+            *)
+              echo "Acción desconocida"
+              exit 1
+              ;;
+          esac

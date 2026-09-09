@@ -109,8 +109,51 @@ Una vez desbloqueado el reporte, dispones de una barra de herramientas integral:
 
 ---
 
-## 🏢 7. PLANES CORPORATIVOS B2B (PARA EMPRESAS & FIRMAS)
+## 🏢 7. PLANES CORPORATIVOS B2B Y GUÍA DE ACTIVACIÓN ILIMITADA
 
-Si tu empresa audita contratos y facturas recurrentemente, puedes suscribirte a los planes de blindaje continuo:
-* **Plan Mensual:** $69.00 USD / mes (Auditorías ilimitadas, soporte prioritario, exportaciones Word/PDF y multi-usuario).
-* **Plan Anual Recomendado:** $590.00 USD / año (Ahorro de $238 USD, onboarding asistido y reportes marca blanca).
+Si tu empresa, firma de abogados o departamento de finanzas audita contratos y facturas recurrentemente, puedes suscribirte a los planes de blindaje continuo con **Auditorías Ilimitadas 24/7**:
+* **Plan Mensual:** $69.00 USD / mes (Auditorías ilimitadas, soporte prioritario, exportaciones Word/PDF y cuota compartida).
+* **Plan Anual Recomendado:** $590.00 USD / año (~3.5 meses gratis, ahorro directo de $238 USD, onboarding asistido y reportes ejecutivos).
+
+---
+
+### 7.1. ¿Cómo sabe la plataforma que tienes derecho a Auditorías Ilimitadas?
+Para evitar la fricción de tener que recordar contraseñas complejas (que hacen perder tiempo a directores legales y CFOs), **AuditFlow AI utiliza tu Correo Electrónico Corporativo como tu Llave Universal de Licencia**:
+1. **Registro en Base de Datos Fiduciaria (Supabase):** En el momento exacto en que tu pago es procesado por Stripe, Wompi o Strike, el sistema registra tu correo en la tabla de suscripciones activas (`subscriptions`) con una vigencia de **30 días** (Plan Mensual) o **365 días** (Plan Anual).
+2. **Reconocimiento en Tiempo Real:** Cada vez que arrastras un contrato e introduces tu correo, la API valida en milisegundos tu vigencia activa y **suprime de inmediato la pantalla de pago de $19 USD**, entregándote acceso instantáneo e ilimitado al análisis completo, redlines en Word (.docx) y PDF oficial firmado.
+
+---
+
+### 7.2. Correo Oficial de Bienvenida y Magic Link de 1 Clic
+Inmediatamente después del pago, recibirás en tu bandeja un correo electrónico oficial emitido por `ricardo@audiflowai.com` con firma criptográfica DKIM/SPF que contiene:
+* **🧾 Tu Comprobante Digital Oficial B2B:** Número de recibo único (ej. `REC-9X82LA`), detalle del plan, monto pagado en USD y estado `✅ LIQUIDADO & ACTIVO`.
+* **🚀 Enlace Mágico de Activación Directa (Magic Link):**  
+  Un botón directo:  
+  `https://audiflowai.com/?subscriber=active&email=tu-correo@empresa.com&plan=annual`  
+  Al hacer clic, tu navegador (Chrome, Edge, Safari) queda autenticado permanentemente como **Terminal Corporativa Autorizada**.
+
+---
+
+### 7.3. Paso a Paso para Auditar con tu Membresía Corporativa
+1. **Accede a la plataforma:** Ingresa a [audiflowai.com](https://audiflowai.com) desde tu navegador autenticado o con tu Magic Link.
+2. **Selecciona tu marco normativo:** Elige entre *PCAOB & US GAAP*, *NIIF / IFRS* o *Código Local*.
+3. **Carga el documento:** Arrastra tu contrato o factura (PDF, DOCX o imagen).
+4. **Verificación transparente:** Al ingresar tu correo corporativo registrado, el sistema desplegará el distintivo dorado:  
+   *«👑 Membresía Corporativa Activa — Tu plan corporativo cubre este documento al 100%. Acceso completo a Word y PDF sin costos adicionales.»*
+5. **Descarga ilimitada:** Descarga tus Redlines en **Microsoft Word (.docx con marcas de Control de Cambios)** y el informe oficial en **PDF firmado** tantas veces como requieras durante todo el mes o año.
+
+---
+
+### 7.4. Cuota Compartida para tu Despacho o Equipo Legal
+Tu suscripción corporativa incluye acceso multi-usuario:
+* Puedes compartir el correo oficial de activación o tu **Magic Link** con los abogados, auditores y controllers de tu misma firma o empresa.
+* Cualquier miembro de tu equipo que trabaje en un equipo autorizado o ingrese con el correo registrado podrá procesar auditorías ilimitadas sin cargos por evento.
+
+---
+
+### 7.5. Canales Exclusivos de Soporte Prioritario 24/7
+Como suscriptor corporativo, cuentas con canales de atención VIP directa:
+* 💬 **WhatsApp Concierge VIP:** [+503 7989 3922](https://wa.me/50379893922) (Comunicación directa y en vivo con Dirección para resolución inmediata de dudas o casos complejos).
+* ✉️ **Correo Oficial de Soporte:** [soporte@audiflowai.com](mailto:soporte@audiflowai.com) (Tiempo de respuesta garantizado < 2 horas).
+* 🎧 **Pestaña de Soporte en la Web:** Puedes abrir el Centro de Soporte en cualquier momento desde la barra superior de la app para enviar consultas o solicitar re-análisis asistido por IA.
+

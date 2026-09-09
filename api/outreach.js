@@ -184,6 +184,7 @@ Tienes el link en nuestro perfil. Pruébalo antes de firmar cualquier papel hoy.
   };
 }
 
+export const REAL_LEGAL_DIRECTORS = DEPRECATED_LEGACY_CORPORATE_LEADS;
 export const REAL_50_DECISION_MAKERS = REAL_LEGAL_DIRECTORS;
 
 // LISTA DE FIRMAS LEGALES CORPORATIVAS Y DESPACHOS DE REFERENCIA

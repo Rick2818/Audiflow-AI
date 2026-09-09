@@ -1,0 +1,38 @@
+﻿name: 📖 Campaña Storytelling 6:00 AM CST (250 Bufetes Medianos)
+
+on:
+  schedule:
+    # 6:00 AM CST = 12:00 UTC (Lunes a Sábado)
+    - cron: '0 12 * * 1-6'
+  workflow_dispatch:
+
+jobs:
+  dispatch_storytelling:
+    name: Despacho Storytelling Forense 6:00 AM en la Nube
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      APP_URL: https://audiflowai.com
+      NODE_ENV: production
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install --omit=dev
+
+      - name: Execute Storytelling 250 Midmarket Campaign
+        run: node scripts/dispatch_storytelling_250_medianos.mjs

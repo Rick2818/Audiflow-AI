@@ -126,9 +126,17 @@ export default async function handler(req, res) {
 
   const { action, email, name, role, company, document_name, custom_notes, prospects, test_mode = false } = body;
 
-  // 0. Tracker de Aperturas y Visitas Waalaxy/LinkedIn (Píxel o POST)
-  // Handler de Monitoreo Autónomo 24/7 y Cron Job de Vigilancia en la Nube
+  const isVercelCron = Boolean(
+    req.headers['x-vercel-cron'] === '1' ||
+    (req.headers['user-agent'] || '').includes('vercel-cron')
+  );
+  const isAuthorized = isVercelCron || verifyAdminAuth(req);
+
+  // 0. Handler de Monitoreo Autónomo 24/7 y Cron Job de Vigilancia en la Nube
   if (action === 'cron_monitor' || action === 'health_check' || (req.url && req.url.includes('cron_monitor'))) {
+    if (!isAuthorized) {
+      return res.status(401).json({ success: false, error: 'No autorizado. Se requiere autenticación de administrador o Vercel Cron.' });
+    }
     try {
       const { runHealthCheckAndAlert } = await import('../lib/health-monitor.js');
       const forceAlert = (req.query?.force_alert === 'true' || body?.force_alert === true);
@@ -141,6 +149,9 @@ export default async function handler(req, res) {
 
   // Handler de Reporte Ejecutivo Diario de Ventas en USD (GM / COO) a las 2:00 PM y 6:00 PM
   if (action === 'daily_sales_report' || action === 'sales_report_2pm' || action === 'sales_report_6pm' || (req.url && req.url.includes('daily_sales_report'))) {
+    if (!isAuthorized) {
+      return res.status(401).json({ success: false, error: 'No autorizado. Se requiere autenticación de administrador o Vercel Cron.' });
+    }
     try {
       const { generateAndSendDailySalesReport } = await import('../lib/daily-sales-report.js');
       const timeSlot = req.query?.slot || body?.slot || '6:00 PM';

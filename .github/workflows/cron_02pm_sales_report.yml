@@ -1,0 +1,38 @@
+﻿name: 📊 Reporte Ejecutivo de Ventas 2:00 PM CST
+
+on:
+  schedule:
+    # 2:00 PM CST = 20:00 UTC (Lunes a Domingo)
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+
+jobs:
+  sales_report_2pm:
+    name: Generación Reporte Ventas 2:00 PM en la Nube
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    env:
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      BUFFER_ACCESS_TOKEN: ${{ secrets.BUFFER_ACCESS_TOKEN }}
+      GMAIL_USER: ${{ secrets.GMAIL_USER }}
+      GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
+      ADMIN_PASSWORD: ${{ secrets.ADMIN_PASSWORD }}
+      APP_URL: https://audiflowai.com
+      NODE_ENV: production
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install --omit=dev
+
+      - name: Dispatch 2:00 PM Sales Report
+        run: node scripts/dispatch_sales_report_2pm.js

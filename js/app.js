@@ -489,51 +489,105 @@ window.AppHandler = {
 
     openSupportModal() {
         const modal = document.getElementById('support-modal');
-        if (modal) modal.classList.remove('hidden');
+        if (modal) {
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+        }
+        const emailInput = document.getElementById('support-email-input');
+        if (emailInput && !emailInput.value && this.currentLeadData && this.currentLeadData.email) {
+            emailInput.value = this.currentLeadData.email;
+        }
+        if (typeof window.clarity === 'function') {
+            try { window.clarity('event', 'support_modal_opened'); } catch(e){}
+        }
     },
 
     closeSupportModal() {
         const modal = document.getElementById('support-modal');
-        if (modal) modal.classList.add('hidden');
+        if (modal) {
+            modal.classList.add('hidden');
+            modal.style.display = 'none';
+        }
+        const statusBox = document.getElementById('support-status-msg');
+        if (statusBox) {
+            statusBox.classList.add('hidden');
+            statusBox.innerText = '';
+        }
+    },
+
+    copySupportEmail(btnEl) {
+        const email = 'soporte@audiflowai.com';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(email).then(() => {
+                if (btnEl) {
+                    const oldText = btnEl.innerHTML;
+                    btnEl.innerHTML = '✅ ¡Copiado!';
+                    setTimeout(() => { btnEl.innerHTML = oldText; }, 2500);
+                }
+            }).catch(() => {
+                alert('Correo de soporte: ' + email);
+            });
+        } else {
+            prompt('Copia el correo de soporte:', email);
+        }
     },
 
     async handleSupportFormSubmit() {
+        const emailEl = document.getElementById('support-email-input');
         const inputEl = document.getElementById('support-issue-input');
+        const email = emailEl ? emailEl.value.trim() : (this.currentLeadData?.email || '');
         const issue = inputEl ? inputEl.value.trim() : '';
 
         if (!issue) return;
 
         const btnSubmit = document.getElementById('btn-submit-support');
-        if (btnSubmit) btnSubmit.innerText = '🤖 Procesando con Agente IA...';
+        const statusBox = document.getElementById('support-status-msg');
+        if (btnSubmit) {
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = '🤖 Enviando a Soporte...';
+        }
 
         try {
-            const res = await fetch('/api/support/ai-fix', {
+            const res = await fetch('/api/support', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    report_id: this.currentReportId,
-                    email: this.currentLeadData.email || '',
+                    report_id: this.currentReportId || null,
+                    email: email,
+                    message: issue,
                     issue_description: issue,
                     lang: window.I18n ? window.I18n.currentLang : 'es'
                 })
             });
 
             const data = await res.json();
-            if (data.success && data.audit_data) {
-                this.currentAuditData = data.audit_data;
-                this.closeSupportModal();
-                this.renderAuditReportDashboard();
-                this.unblurReport();
-                alert(data.message || 'Reporte re-analizado y des-enfocado por la IA exitosamente.');
+            if (data.success) {
+                if (statusBox) {
+                    statusBox.classList.remove('hidden');
+                    statusBox.className = 'p-3 rounded-xl bg-emerald-950/70 border border-emerald-500/50 text-emerald-300 text-xs font-mono text-center';
+                    statusBox.innerText = '✅ ' + (data.message || 'Mensaje recibido. Nuestro equipo te responderá de inmediato.');
+                }
+                if (inputEl) inputEl.value = '';
+                setTimeout(() => {
+                    this.closeSupportModal();
+                }, 3000);
             } else {
-                alert('El Agente de Soporte IA procesó tu mensaje. Revisa los resultados.');
+                throw new Error(data.error || 'Error al procesar solicitud');
             }
         } catch (err) {
-            console.error('Error en soporte IA:', err);
-            alert('Error al conectar con el Agente de Soporte IA: ' + err.message);
+            console.error('Error en soporte:', err);
+            if (statusBox) {
+                statusBox.classList.remove('hidden');
+                statusBox.className = 'p-3 rounded-xl bg-red-950/70 border border-red-500/50 text-red-300 text-xs font-mono text-center';
+                statusBox.innerText = '❌ Error: ' + err.message;
+            } else {
+                alert('Error al conectar con soporte: ' + err.message);
+            }
         } finally {
-            if (btnSubmit) btnSubmit.innerText = '🤖 Re-Analizar y Corregir con IA';
-            if (inputEl) inputEl.value = '';
+            if (btnSubmit) {
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = '📨 Enviar Consulta a Soporte';
+            }
         }
     },
 
@@ -801,6 +855,14 @@ window.AppHandler = {
                 this.currentLeadData ? this.currentLeadData.email : null, 
                 this.selectedFile ? this.selectedFile.name : 'Contrato_Servicios.pdf'
             );
+        }
+
+        // Auto-desbloqueo inmediato si el usuario es un Suscriptor Corporativo Activo
+        const isCorporateActive = localStorage.getItem('auditflow_corporate_active') === 'true';
+        if (isCorporateActive) {
+            setTimeout(() => {
+                this.unblurReport('corporate_subscriber');
+            }, 100);
         }
     },
 
@@ -1335,6 +1397,27 @@ window.AppHandler = {
         const reportId = urlParams.get('reportId');
         const status = urlParams.get('status');
 
+        const isSubscriber = urlParams.get('subscriber') === 'active' || status === 'success_subscription';
+        const subEmail = urlParams.get('email');
+        const subPlan = urlParams.get('plan') || 'monthly';
+
+        if (isSubscriber && subEmail) {
+            localStorage.setItem('auditflow_corporate_active', 'true');
+            localStorage.setItem('auditflow_corporate_email', subEmail);
+            localStorage.setItem('auditflow_corporate_plan', subPlan);
+            this.currentLeadData = { name: 'Cliente Corporativo', email: subEmail };
+
+            const isEn = window.I18n && window.I18n.currentLang === 'en';
+            const welcomeTitle = isEn ? '👑 Enterprise Terminal Activated!' : '👑 ¡Terminal Corporativa Activada!';
+            const welcomeMsg = isEn
+                ? `Welcome ${subEmail}. You have unlimited 24/7 contract audits active with zero per-event fees.`
+                : `Bienvenido(a) ${subEmail}. Tu membresía corporativa está activa con auditorías ilimitadas 24/7 sin cargos por evento.`;
+
+            setTimeout(() => {
+                alert(`${welcomeTitle}\n\n${welcomeMsg}`);
+            }, 600);
+        }
+
         if (reportId && status === 'success') {
             this.currentReportId = reportId;
             const repSec = document.getElementById('report-section');
@@ -1461,6 +1544,10 @@ window.AppHandler = {
             if (source === 'free_trial') {
                 if (titleEl) titleEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_title') : '🎉 ¡Soluciones Tácticas Desbloqueadas!';
                 if (subEl) subEl.innerText = window.I18n ? window.I18n.t('trial_unlocked_sub') : 'Has desbloqueado el acceso completo a las 3 Soluciones Tácticas con tu Diagnóstico Inicial Gratuito. Puedes leer las soluciones y exportar Word .docx o PDF.';
+            } else if (source === 'corporate_subscriber') {
+                const isEn = window.I18n && window.I18n.currentLang === 'en';
+                if (titleEl) titleEl.innerText = isEn ? '👑 Enterprise Plan Active (Unlimited Audits)' : '👑 ¡Membresía Corporativa Activa (Auditorías Ilimitadas)!';
+                if (subEl) subEl.innerText = isEn ? 'Your enterprise subscription covers this document 100%. Full access to redlines in Word (.docx) and signed PDF with zero fees.' : 'Tu plan corporativo cubre este documento al 100%. Acceso completo a redlines, Word (.docx con Control de Cambios) y PDF firmado sin costos adicionales.';
             }
             successBanner.classList.remove('hidden');
             successBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });

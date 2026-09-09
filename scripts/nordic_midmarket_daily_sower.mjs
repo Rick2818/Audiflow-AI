@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { CONFIG } from '../lib/config.js';
 
@@ -197,18 +198,8 @@ export async function runNordicDailySower() {
   // Asegurar que el archivo CSV para Waalaxy esté actualizado
   exportNordicWaalaxyCsv();
 
-  const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER || '').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS || '').replace(/\s+/g, '').trim();
-
-  if (!gmailUser || !gmailPass || gmailUser.includes('tu_correo')) {
-    console.warn('⚠️ Credenciales SMTP no configuradas. Prospección registrada en CSV y archivo de telemetría.');
-    return;
-  }
-
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: { user: gmailUser, pass: gmailPass }
-  });
+  const resendApiKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
+  const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
   let dispatchedCount = 0;
   const dispatchResults = [];
@@ -222,43 +213,58 @@ export async function runNordicDailySower() {
   console.log(`📨 Despachando lote del día (${todaysBatch.length} socios seleccionados para hoy):`);
 
   for (const partner of todaysBatch) {
-    const trialUrl = `https://audiflowai.com/?ref=nordic-midmarket&lang=en&lead=${encodeURIComponent(partner.firstName)}`;
-    const subject = `commercial contract audit & instant word redlines / ${partner.firm}`;
+    const trialUrl = `https://audiflowai.com/?ref=nordic-storytelling-ch1&lang=en&lead=${encodeURIComponent(partner.firstName)}`;
+    const subject = `[Case Brief] 45 pages reviewed, but 18 words in Schedule C cost €142,000 / ${partner.firm}`;
     const html = `
-      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.6;">
-        <p>Dear <strong>${partner.firstName}</strong>,</p>
-        <p>Reaching out regarding your commercial agreements and procurement advisory at <strong>${partner.firm}</strong>.</p>
-        <p>Mid-market Nordic practices frequently review 40+ page vendor and cross-border agreements under tight deadlines, where manual line-by-line checks risk missing indexation caps or unilateral termination conditions.</p>
-        <p>We engineered AuditFlow AI as a fast, private fiduciary audit engine specifically designed for mid-market legal teams:</p>
-        <div style="background-color: #f8fafc; padding: 14px 18px; border-left: 4px solid #0284c7; margin: 16px 0; border-radius: 6px;">
-          <p style="margin: 0 0 6px 0; font-weight: 600; color: #0f172a;">⚡ 8-Second Forensic Review:</p>
-          <p style="margin: 0 0 10px 0; color: #334155; font-size: 13px;">Detects asymmetric liabilities, CPI inflation multipliers, and automatic renewal traps.</p>
-          <p style="margin: 0 0 6px 0; font-weight: 600; color: #0f172a;">📄 Direct Word (.docx) Redline with Track Changes:</p>
-          <p style="margin: 0 0 10px 0; color: #334155; font-size: 13px;">Delivers the document with suggested institutional counter-clauses ready to negotiate.</p>
-          <p style="margin: 0 0 6px 0; font-weight: 600; color: #0f172a;">🛡️ Strict EU GDPR Article 28 Compliance:</p>
-          <p style="margin: 0; color: #334155; font-size: 13px;">100% volatile RAM processing, zero disk persistence, no model retraining on client data.</p>
+      <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.65; margin: 0 auto; background-color: #ffffff; padding: 26px; border: 1px solid #e2e8f0; border-radius: 8px;">
+        <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 18px;">
+          <span style="font-size: 13px; font-weight: 800; letter-spacing: 1px; color: #0284c7;">AUDITFLOW AI</span>
+          <span style="font-size: 11px; color: #64748b; margin-left: 8px; text-transform: uppercase;">| Contract Forensic Briefing #1 (Part 1 of 3)</span>
         </div>
-        <p>You can test a complimentary benchmark audit with your team without uploading client confidential documents:</p>
-        <p style="margin: 18px 0;">
-          👉 <a href="${trialUrl}" style="color: #0284c7; font-weight: bold; text-decoration: underline;">Test Complimentary Agreement Audit (8s) →</a>
+
+        <p style="margin-top: 0; font-size: 15px;">Dear Partner <strong>${partner.firstName}</strong>,</p>
+
+        <p>In 2025, the corporate legal department of a mid-market distribution group approved a 45-page cross-border logistics agreement. On the surface, the document was institutional and sound: agreed pricing schedules, clear SLAs, and standard Nordic arbitration jurisdiction.</p>
+
+        <p>For 11 months, services proceeded without incident. In month 12, however, the provider issued an accumulated retroactive price adjustment invoice for <strong style="color: #dc2626;">€142,000</strong>.</p>
+
+        <div style="background-color: #f8fafc; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 4px; margin: 18px 0;">
+          <p style="margin: 0; font-size: 13px; color: #7f1d1d; font-style: italic;">
+            «The finance director attempted to reject the invoice immediately. The provider simply referred them to Schedule C, page 41, paragraph 4. Outside counsel confirmed the wording was fully binding and legally indefensible.»
+          </p>
+        </div>
+
+        <p>The failure was not in the executive clauses. It lay in an open-ended, 18-word adjustment formula that human visual fatigue failed to catch after 4 hours of continuous mechanical reading.</p>
+
+        <p style="color: #0284c7; font-weight: 600;">
+          In our next brief, I will share the exact verbatim clause text so your team can verify whether current supplier agreements across your practice contain this identical trap.
         </p>
-        <p>Would you be open to running a draft agreement through the engine this week?</p>
-        <p style="margin-top: 24px; font-size: 13px; color: #64748b;">
+
+        <div style="background-color: #f0f9ff; border: 1px solid #bae6fd; padding: 14px 18px; border-radius: 6px; margin: 18px 0;">
+          <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 700; color: #0369a1;">⚡ The Fiduciary Efficiency Angle:</p>
+          <p style="margin: 0; font-size: 12px; color: #0c4a6e;">
+            At AuditFlow AI, our forensic engine scans 45+ pages in <strong>8.2 seconds</strong> in volatile RAM under strict <strong>EU GDPR Art. 28</strong> compliance—pinpointing asymmetric liability risks with zero client data persistence on disk.
+          </p>
+        </div>
+
+        <p style="margin-top: 24px; font-size: 13px; color: #64748b; border-top: 1px solid #f1f5f9; padding-top: 16px;">
           Best regards,<br>
           <strong style="color: #0f172a;">Ricardo Bolaños</strong><br>
-          CEO • AuditFlow AI (<a href="https://audiflowai.com/?lang=en" style="color: #0284c7;">audiflowai.com</a>)
+          Founder & CEO • AuditFlow AI (<a href="https://audiflowai.com/?ref=nordic-storytelling-ch1&lang=en" style="color: #0284c7; text-decoration: none;">audiflowai.com</a>)
         </p>
       </div>
     `;
 
     try {
-      await transporter.sendMail({
-        from: `"Ricardo Bolaños | AuditFlow AI" <${CONFIG.EMAIL.FROM_OUTREACH}>`,
-        replyTo: CONFIG.EMAIL.REPLY_TO_OUTREACH,
-        to: partner.email,
-        subject,
-        html
-      });
+      if (resend) {
+        await resend.emails.send({
+          from: 'Directora de Marketing | AuditFlow AI <cmvo@audiflowai.com>',
+          reply_to: CONFIG.EMAIL.REPLY_TO_OUTREACH,
+          to: partner.email,
+          subject,
+          html
+        });
+      }
       dispatchedCount++;
       dispatchResults.push({ name: `${partner.firstName} ${partner.lastName}`, firm: partner.firm, status: 'SENT' });
       console.log(`   ✅ Enviado a: ${partner.firstName} ${partner.lastName} (${partner.firm})`);
@@ -283,13 +289,15 @@ export async function runNordicDailySower() {
       </div>
     `;
 
-    await transporter.sendMail({
-      from: `"AuditFlow AI • Telemetría" <${CONFIG.EMAIL.FROM_OUTREACH}>`,
-      to: CONFIG.EMAIL.OWNER_CONTROL,
-      subject: `❄️ [CRON 4:00 AM] Despacho Sector Medio Nórdicos: ${dispatchedCount} socios contactados`,
-      html: adminHtml
-    });
-    console.log(`📬 Telemetría enviada al buzón de control (${CONFIG.EMAIL.OWNER_CONTROL})`);
+    if (resend) {
+      await resend.emails.send({
+        from: 'Directora de Marketing | AuditFlow AI <cmvo@audiflowai.com>',
+        to: CONFIG.EMAIL.OWNER_CONTROL,
+        subject: `❄️ [CRON 4:00 AM] Despacho Sector Medio Nórdicos: ${dispatchedCount} socios contactados`,
+        html: adminHtml
+      });
+      console.log(`📬 Telemetría enviada al buzón de control (${CONFIG.EMAIL.OWNER_CONTROL})`);
+    }
   } catch (adminErr) {
     console.warn('Alerta admin omitida:', adminErr.message);
   }

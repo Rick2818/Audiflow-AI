@@ -14,6 +14,7 @@ window.I18n = {
             nav_speed_badge: "Auditoría <10s",
             nav_corp_plan: "Plan Corporativo B2B",
             nav_pricing: "Precios",
+            nav_support: "Soporte",
             
             // Actions Toolbar
             btn_back_home: "← Regresar al Inicio / Auditar Otro",
@@ -180,6 +181,8 @@ window.I18n = {
             manual_step3_desc: "Revisa las 3 anomalías críticas gratis y desbloquea las soluciones en 1 clic (Diagnóstico Inicial).",
             manual_step4_title: "4. Herramientas Avanzadas y Negociación",
             manual_step4_desc: "Activa Redlines en vivo, descarga Word .docx, chatea con el copiloto IA o agenda una llamada de 10 min.",
+            manual_step5_title: "5. Planes Corporativos & Auditorías Ilimitadas ($69/mes o $590/año)",
+            manual_step5_desc: "Tu correo electrónico es tu llave de acceso. Con el Magic Link enviado a tu bandeja tras pagar, tu navegador queda autenticado y el cobro de $19 USD se suprime automáticamente para auditar de forma 100% ilimitada.",
             manual_btn_close: "Entendido, Cerrar",
             manual_btn_home: "🏠 Regresar al Inicio",
             tab_return_home: "🏠 Regresar al Inicio",
@@ -352,6 +355,7 @@ window.I18n = {
             nav_speed_badge: "Audit <10s",
             nav_corp_plan: "B2B Enterprise Plan",
             nav_pricing: "Pricing",
+            nav_support: "Support",
             
             // Actions Toolbar
             btn_back_home: "← Back to Home / Audit Another",
@@ -517,6 +521,8 @@ window.I18n = {
             manual_step3_desc: "Review the 3 critical anomalies for free and unblur tactical solutions in 1 click (Initial Diagnostic).",
             manual_step4_title: "4. Advanced Tools & Negotiation",
             manual_step4_desc: "Toggle live redlines diff, download Word .docx, chat with AI Copilot, or book a 10-min live session.",
+            manual_step5_title: "5. Enterprise Plans & Unlimited Audits ($69/mo or $590/yr)",
+            manual_step5_desc: "Your email is your universal license key. With the 1-click Magic Link sent to your inbox upon checkout, your browser is authenticated and the $19 fee is waived automatically for 100% unlimited audits.",
             manual_btn_close: "Got it, Close",
             manual_btn_home: "🏠 Return to Home",
             tab_return_home: "🏠 Back to Home",
@@ -689,6 +695,7 @@ window.I18n = {
             nav_speed_badge: "Prüfung <10s",
             nav_corp_plan: "B2B Unternehmens-Plan",
             nav_pricing: "Preise",
+            nav_support: "Support",
             
             // Actions Toolbar (DE)
             btn_back_home: "← Zurück zur Startseite / Weiteres Dokument prüfen",
@@ -854,6 +861,8 @@ window.I18n = {
             manual_step3_desc: "Prüfen Sie 3 kritische Mängel kostenlos und schalten Sie taktische Lösungen mit 1 Klick frei (Erstdiagnose).",
             manual_step4_title: "4. Erweiterte Tools & Verhandlung",
             manual_step4_desc: "Aktivieren Sie Live-Redlines, laden Sie Word .docx herunter oder buchen Sie eine 10-Minuten-Live-Session.",
+            manual_step5_title: "5. Unternehmens-Pläne & Unbegrenzte Audits (69 $/Monat oder 590 $/Jahr)",
+            manual_step5_desc: "Ihre E-Mail ist Ihr Lizenzschlüssel. Mit dem 1-Klick-Magic-Link nach dem Checkout wird Ihr Browser authentifiziert und die 19-Dollar-Gebühr für unbegrenzte Prüfungen automatisch erlassen.",
             manual_btn_close: "Verstanden, Schließen",
             manual_btn_home: "🏠 Zur Startseite",
             tab_return_home: "🏠 Zur Startseite",

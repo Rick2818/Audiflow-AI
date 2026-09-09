@@ -2,215 +2,234 @@ import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { BufferPublisher } from '../lib/buffer-publisher.js';
+import { CONFIG } from '../lib/config.js';
+import { Resend } from 'resend';
 
 dotenv.config();
 
 /**
  * ==============================================================================
- * AUDITFLOW AI — PUBLICADOR VESPERTINO EN BUFFER (5:00 PM CST)
+ * AUDITFLOW AI — PUBLICADOR VESPERTINO EN BUFFER (5:00 PM CST — LUNES A DOMINGO)
  * ==============================================================================
- * Publica contenido estratégico de autoridad y conversión fiduciaria en:
- * 1. Facebook Page (Audiflowai.com)
- * 2. Instagram (@audiflowai)
- * 3. LinkedIn Company Page (Audiflowai)
+ * FORMATO: REELS / ASSETS VISUALES DINÁMICOS
+ * PRIORIDAD B2B: LINKEDIN COMPANY PAGE (Audiflowai)
+ * Canales Multimedia: Instagram Reels (@audiflowai) & Facebook Reels / Video
  * ==============================================================================
  */
 
-const EVENING_TRENDS = {
-  // Lunes (1)
+const REELS_EVENING_TRENDS = {
+  // Lunes (1): Reel de Inicio de Semana - "La Cláusula Trampa de los $142k"
   1: {
-    title: 'Cierre del Lunes: Auditoría de Contratos Firmados',
-    copy: `¿Cerrando negociaciones este lunes? 📄⚖️
+    title: 'Reel Lunes: La Cláusula de $142,000 USD que se le pasó al Abogado',
+    hook: '¿Cerrando negociaciones este lunes? Cuidado con el Anexo C...',
+    copy: `¿Cerrando contratos o acuerdos este lunes? 📄⚖️
 
-Antes de estampar la firma final en contratos de proveedores o convenios comerciales, asegúrate de que no haya trampas ocultas:
-⚠️ Cláusulas de renovación automática sin aviso previo.
-⚠️ Responsabilidad ilimitada ante demoras de terceros.
-⚠️ Penalizaciones desproporcionadas en el anexo técnico.
+En este Reel te mostramos el caso real de una empresa que pagó $142,000 USD por 8 palabras ambiguas en la página 41 de un anexo técnico.
 
-En AuditFlow AI auditamos tus acuerdos en 8 segundos en memoria RAM volátil (0% retención en disco) y te entregamos el Redline en Word (.docx con Control de Cambios) listo para negociar.
+Las 3 cláusulas trampa más peligrosas en contratos de proveedores:
+1️⃣ Renovación automática sin preaviso ni opción de salida.
+2️⃣ Ajustes de tarifa vinculados a "costos directos" sin tope porcentual (uncapped).
+3️⃣ Responsabilidad solidaria ilimitada por demoras de terceros.
 
-👉 Prueba tu auditoría de cortesía hoy:
-https://audiflowai.com/?ref=buffer-5pm-lunes
+⚡ Con AuditFlow AI:
+• Subes el borrador confidencial a memoria RAM volátil.
+• En 8.2 segundos el algoritmo resalta las contingencias.
+• Descargas tu Redline en Word (.docx con Control de Cambios) listo para negociar.
 
-#LegalTech #Contratos #CFO #DerechoCorporativo #AuditFlowAI #Buffer`,
-    image: 'https://audiflowai.com/images/redline_forense_clausulas.jpg'
+👉 Haz tu auditoría de prueba sin costo:
+https://audiflowai.com/?ref=buffer-reels-5pm-lunes
+
+#Reels #LegalTech #Contratos #CFO #DerechoCorporativo #AuditFlowAI #LinkedInVideo`,
+    image: 'https://audiflowai.com/images/auditoria_forense_dashboard_nueva.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Martes (2)
+  // Martes (2): Reel de Productividad - "4 Horas de Lectura vs. 8 Segundos"
   2: {
-    title: 'Mitigación de Riesgo Contractual para CFOs',
-    copy: `Para un Director Financiero, un contrato mal auditado es una fuga directa de EBITDA. 💼📉
+    title: 'Reel Martes: 4 Horas de Revisión Manual vs. 8 Segundos de Algoritmo',
+    hook: '¿Tu equipo legal sigue revisando contratos de 50 páginas a mano?',
+    copy: `Para un Director Financiero o Socio de Bufete, el tiempo de su equipo es el activo más costoso. 💼⏱️
 
-El 74% de los sobrecostos imprevistos en empresas medianas provienen de cláusulas de indexación inflacionaria sin tope y penalidades asimétricas.
+❌ 4.5 horas leyendo párrafos monótonos = Fatiga cognitiva y errores humanos.
+⚡ 8.2 segundos en AuditFlow AI = Detección forense automática y Redline en Word con control de cambios.
 
-AuditFlow AI inspecciona cada párrafo en 8 segundos con inteligencia artificial fiduciaria privada.
-✅ Cero almacenamiento de tus documentos en servidores.
-✅ Detección algorítmica de pasivos contingentes.
-✅ Descarga inmediata del informe de riesgo y Redline en Word.
+Cero instalación, cero almacenamiento de documentos en disco y total cumplimiento GDPR Art. 28.
 
-👉 Audita tu contrato ahora:
-https://audiflowai.com/?ref=buffer-5pm-martes
+Mira cómo funciona en vivo y pruébalo gratis:
+👉 https://audiflowai.com/?ref=buffer-reels-5pm-martes
 
-#CFO #FinanzasCorporativas #AuditoriaForense #Compliance #AuditFlowAI`,
-    image: 'https://audiflowai.com/images/comparativa_eficiencia.jpg'
+#Productividad #LegalOps #Innovacion #CFO #AuditFlowAI #Reels`,
+    image: 'https://audiflowai.com/images/comparativa_eficiencia.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Miércoles (3)
+  // Miércoles (3): Reel de Cláusula Trampa - "La Autopsia Contractual"
   3: {
-    title: 'Productividad Legal: Redlines en 8 Segundos',
-    copy: `¿Cuánto tiempo le toma a tu equipo revisar un contrato de 50 páginas? ⏱️
+    title: 'Reel Miércoles: Autopsia de una Cláusula de Ajuste Inflacionario',
+    hook: 'La cláusula trampa que ningún humano detectó a simple vista...',
+    copy: `Revisar contratos sin una herramienta forense es apostar el presupuesto anual de la empresa. 📉⚠️
 
-El modelo tradicional: 4 a 6 horas de lectura manual y fatiga cognitiva.
-El estándar 2026 de AuditFlow AI: 8 segundos en memoria RAM privada con entrega directa del archivo Word con control de cambios.
+En este reel analizamos la trampa de indexación acumulativa que trasladó sobrecostos del 18% sin previo aviso.
 
-Dedica tu tiempo a la estrategia legal, no a buscar errores de formato a mano.
+Descubre cómo neutralizarla con solo 3 líneas en tu contrapropuesta de Redline:
+👉 https://audiflowai.com/?ref=buffer-reels-5pm-miercoles
 
-👉 Haz un escaneo gratuito de prueba:
-https://audiflowai.com/?ref=buffer-5pm-miercoles
-
-#LegalTech #AbogadosCorporativos #Bufetes #Eficiencia #AuditFlowAI`,
-    image: 'https://audiflowai.com/images/carousel/slide5_redline.jpg'
+#Abogados #Finanzas #ContratosB2B #AuditFlowAI #Reels`,
+    image: 'https://audiflowai.com/images/carousel/slide3_inflation.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Jueves (4)
+  // Jueves (4): Reel de Privacidad - "Por qué no debes subir contratos a ChatGPT"
   4: {
-    title: 'Privacidad Estricta en RAM: Cero Entrenamiento de Modelos',
-    copy: `🔒 Tu secreto comercial es innegociable.
+    title: 'Reel Jueves: El Peligro Oculto de Subir Contratos a IAs Públicas',
+    hook: '¿Sabías que subir contratos a IAs públicas puede violar tus NDAs?',
+    copy: `🔒 Tu secreto profesional no puede comprometerse.
 
-Subir contratos confidenciales a herramientas de IA pública viola los acuerdos de confidencialidad de tu empresa.
+Las IAs públicas utilizan las entradas de texto para reentrenar sus modelos comerciales.
 
-AuditFlow AI opera bajo una arquitectura de Cero Retención de Datos:
-1. El documento se procesa exclusivamente en memoria RAM volátil.
-2. Al terminar el análisis, la memoria se purga de forma irreversible.
-3. Tus datos jamás entrenan modelos de terceros.
+AuditFlow AI procesa 100% en memoria RAM volátil:
+✅ Al terminar la auditoría, la sesión se purga.
+✅ Cero persistencia en servidores o bases de datos.
+✅ Cumplimiento fiduciario estricto para despachos exigentes.
 
-Auditoría forense de alta precisión con seguridad bancaria:
-👉 https://audiflowai.com/?ref=buffer-5pm-jueves
+Protege la información confidencial de tu empresa:
+👉 https://audiflowai.com/?ref=buffer-reels-5pm-jueves
 
-#Ciberseguridad #Privacidad #LegalTech #IAConfiable #AuditFlowAI`,
-    image: 'https://audiflowai.com/images/post_ig_ciberseguridad.jpg'
+#Ciberseguridad #Privacidad #LegalTech #Compliance #AuditFlowAI`,
+    image: 'https://audiflowai.com/images/post_ig_ciberseguridad.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Viernes (5)
+  // Viernes (5): Reel de Cierre - "El Fin de Semana Tranquilo del Director Legal"
   5: {
-    title: 'Blindaje de Fin de Semana: Cierra Contratos sin Preocupaciones',
-    copy: `Termina la semana con la tranquilidad de que ningún acuerdo firmado te costará un litigio. 📄✨
+    title: 'Reel Viernes: Apaga la Computadora con tus Contratos Blindados',
+    hook: 'Viernes 5:00 PM: ¿Contratos pendientes para el lunes?',
+    copy: `Termina la semana con la certeza de que ningún contrato firmado te quitará el sueño. 📄✨
 
-Antes de apagar la computadora este viernes:
-⚡ Sube tu borrador a AuditFlow AI.
-⚡ En 8 segundos detecta inconsistencias y cláusulas abusivas.
-⚡ Descarga tu Redline en Word listo para enviar.
+Antes de cerrar tu laptop:
+1. Sube el borrador de tu proveedor a AuditFlow AI.
+2. Descarga el Redline con las observaciones exactas en Word.
+3. Envíalo a la contraparte y disfruta de tu descanso.
 
-Que el lunes comience con contratos blindados y relaciones comerciales claras:
-👉 https://audiflowai.com/?ref=buffer-5pm-viernes
+👉 Prueba gratuita en segundos:
+https://audiflowai.com/?ref=buffer-reels-5pm-viernes
 
-#FinDeSemanaTranquilo #ContratosB2B #LegalTech #Empresas #AuditFlowAI`,
-    image: 'https://audiflowai.com/images/carousel/slide1_cover.jpg'
+#FinDeSemana #DirectoresLegales #CFO #Tranquilidad #AuditFlowAI`,
+    image: 'https://audiflowai.com/images/carousel/slide5_redline.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Sábado (6)
+  // Sábado (6): Reel de Estrategia - "El Asesor Legal del Futuro"
   6: {
-    title: 'Estrategia de Fin de Semana para Directivos',
-    copy: `¿Revisando contratos para la reunión del lunes a primera hora? ☕📄
+    title: 'Reel Sábado: Cómo los Abogados Top Ahorran 15 Horas por Semana',
+    hook: 'El abogado del futuro no cobra por leer contratos mecánicamente...',
+    copy: `Los clientes corporativos no pagan por 5 horas de lectura lenta; pagan por estrategia, claridad y negociación de alto nivel. 💡⚖️
 
-No pases el fin de semana descifrando letra chica. AuditFlow AI audita contratos complejos de proveedores y convenios comerciales en 8 segundos.
+AuditFlow AI se encarga de la inspección mecánica en 8 segundos para que tú te enfoques en liderar la mesa de negociación.
 
-Recibe el informe forense y el Redline en Word con control de cambios activado, sin fricción y con privacidad empresarial absoluta.
+👉 Conoce la plataforma fiduciaria:
+https://audiflowai.com/?ref=buffer-reels-5pm-sabado
 
-👉 Pruébalo sin costo aquí:
-https://audiflowai.com/?ref=buffer-5pm-sabado
-
-#LegalTech #CFO #Productividad #AuditFlowAI`,
-    image: 'https://audiflowai.com/images/redline_forense_clausulas.jpg'
+#AbogaciaModerna #LegalOps #EstrategiaB2B #AuditFlowAI`,
+    image: 'https://audiflowai.com/images/carousel/slide1_cover.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Domingo (0)
+  // Domingo (0): Reel de Preparación - "Lunes sin Sorpresas"
   0: {
-    title: 'Preparación Dominical de Negociaciones',
-    copy: `Empieza la semana con ventaja competitiva. 🚀
+    title: 'Reel Domingo: Anticipa la Semana y Llega con Redlines Listos',
+    hook: '¿Reunión de junta directiva o comité de compras mañana lunes?',
+    copy: `Llega a la reunión del lunes con el mapa completo de riesgos y el archivo Word listo para contraofertar. 🚀
 
-Una auditoría rápida de 8 segundos hoy te ahorra horas de debate contractual y renegociaciones tensas a lo largo de la semana.
+Una auditoría preventiva de 8 segundos hoy te ahorra semanas de disputas contractuales.
 
-AuditFlow AI: tu copiloto fiduciario para blindar contratos mercantiles sin esfuerzo.
+👉 Escaneo de prueba confidencial:
+https://audiflowai.com/?ref=buffer-reels-5pm-domingo
 
-👉 Escaneo de prueba gratuito:
-https://audiflowai.com/?ref=buffer-5pm-domingo
-
-#Planificacion #Liderazgo #Contratos #AuditFlowAI`,
-    image: 'https://audiflowai.com/images/carousel/slide3_inflation.jpg'
+#LiderazgoEmpresarial #CFO #Negociacion #AuditFlowAI`,
+    image: 'https://audiflowai.com/images/redline_forense_clausulas.jpg',
+    videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   }
 };
 
 export async function runDailyBuffer5PMPublication() {
   console.log('================================================================================');
-  console.log('📱 AUDITFLOW AI — PUBLICACIÓN VESPERTINA EN BUFFER (5:00 PM CST)');
-  console.log('   Canales: Facebook (Audiflowai.com), Instagram (@audiflowai), LinkedIn (Audiflowai)');
+  console.log('🌆 AUDITFLOW AI — PUBLICADOR VESPERTINO EN BUFFER (5:00 PM CST — REELS/VIDEO)');
+  console.log('🎯 PRIORIDAD LINKEDIN B2B (Audiflowai) + INSTAGRAM REELS & FACEBOOK VIDEO');
   console.log('================================================================================\n');
 
   const token = (process.env.BUFFER_ACCESS_TOKEN || '').trim();
   if (!token) {
-    console.error('❌ Falta BUFFER_ACCESS_TOKEN en .env');
-    return;
+    throw new Error('❌ Falta BUFFER_ACCESS_TOKEN en las variables de entorno');
   }
 
   const publisher = new BufferPublisher(token);
   const dayOfWeek = new Date().getDay();
-  const trend = EVENING_TRENDS[dayOfWeek];
+  const trend = REELS_EVENING_TRENDS[dayOfWeek];
 
-  console.log(`📅 Día: ${dayOfWeek} | Tema: "${trend.title}"`);
+  console.log(`📅 Día: ${dayOfWeek} | Tema Reels: "${trend.title}"`);
 
-  const FB_CHANNEL_ID = '6a970164065799be4669eea1';
+  const LI_CHANNEL_ID = '6a97043a065799be4669fadb'; // PRIORIDAD MÁXIMA
   const IG_CHANNEL_ID = '6a970416065799be4669fa58';
-  const LI_CHANNEL_ID = '6a97043a065799be4669fadb';
+  const FB_CHANNEL_ID = '6a970164065799be4669eea1';
 
   const results = {};
 
-  // 1. Publicar en Facebook
+  // 1. PUBLICAR EN LINKEDIN (CANAL ESTRELLA)
+  console.log('\n🚀 [1/3] Publicando en LINKEDIN COMPANY PAGE (Prioridad #1)...');
   try {
-    console.log('\n⏳ Publicando en Facebook (Audiflowai.com)...');
-    const fb = await publisher.createPost({
-      channelId: FB_CHANNEL_ID,
-      text: trend.copy,
-      mode: 'shareNow',
-      service: 'facebook',
-      assets: [{ image: { url: trend.image } }]
-    });
-    console.log(`✅ [FACEBOOK OK] ID: ${fb?.id || 'OK'}`);
-    results.facebook = { success: true, id: fb?.id };
-  } catch (err) {
-    console.warn(`⚠️ [FACEBOOK] Error: ${err.message}`);
-    results.facebook = { success: false, error: err.message };
-  }
-
-  // 2. Publicar en Instagram
-  try {
-    console.log('\n⏳ Publicando en Instagram (@audiflowai)...');
-    const ig = await publisher.createPost({
-      channelId: IG_CHANNEL_ID,
-      text: trend.copy,
-      mode: 'shareNow',
-      service: 'instagram',
-      assets: [{ image: { url: trend.image } }]
-    });
-    console.log(`✅ [INSTAGRAM OK] ID: ${ig?.id || 'OK'}`);
-    results.instagram = { success: true, id: ig?.id };
-  } catch (err) {
-    console.warn(`⚠️ [INSTAGRAM] Error: ${err.message}`);
-    results.instagram = { success: false, error: err.message };
-  }
-
-  // 3. Publicar en LinkedIn
-  try {
-    console.log('\n⏳ Publicando en LinkedIn (Audiflowai)...');
     const li = await publisher.createPost({
       channelId: LI_CHANNEL_ID,
-      text: trend.copy,
+      text: `${trend.hook}\n\n${trend.copy}`,
       mode: 'shareNow',
       service: 'linkedin',
       assets: [{ image: { url: trend.image } }]
     });
-    console.log(`✅ [LINKEDIN OK] ID: ${li?.id || 'OK'}`);
+    console.log(`✅ [LINKEDIN OK] Publicado exitosamente. ID: ${li?.id || 'OK'}`);
     results.linkedin = { success: true, id: li?.id };
-  } catch (err) {
-    console.warn(`⚠️ [LINKEDIN] Error: ${err.message}`);
-    results.linkedin = { success: false, error: err.message };
+  } catch (errLI) {
+    console.error(`❌ [LINKEDIN FALLO]: ${errLI.message}`);
+    results.linkedin = { success: false, error: errLI.message };
   }
 
-  // Guardar log
+  // 2. PUBLICAR EN INSTAGRAM (REELS / FEED)
+  console.log('\n🚀 [2/3] Publicando en INSTAGRAM (@audiflowai - Formato Reel/Feed)...');
+  try {
+    const ig = await publisher.createPost({
+      channelId: IG_CHANNEL_ID,
+      text: `${trend.hook}\n\n${trend.copy}`,
+      mode: 'shareNow',
+      service: 'instagram',
+      metadata: {
+        instagram: {
+          type: 'post',
+          shouldShareToFeed: true
+        }
+      },
+      assets: [{ image: { url: trend.image } }]
+    });
+    console.log(`✅ [INSTAGRAM OK] Publicado exitosamente. ID: ${ig?.id || 'OK'}`);
+    results.instagram = { success: true, id: ig?.id };
+  } catch (errIG) {
+    console.warn(`⚠️ [INSTAGRAM NOTA]: ${errIG.message}`);
+    results.instagram = { success: false, error: errIG.message };
+  }
+
+  // 3. PUBLICAR EN FACEBOOK (REELS / VIDEO POST)
+  console.log('\n🚀 [3/3] Publicando en FACEBOOK PAGE (Audiflowai.com)...');
+  try {
+    const fb = await publisher.createPost({
+      channelId: FB_CHANNEL_ID,
+      text: `${trend.hook}\n\n${trend.copy}`,
+      mode: 'shareNow',
+      service: 'facebook',
+      metadata: {
+        facebook: { type: 'post' }
+      },
+      assets: [{ image: { url: trend.image } }]
+    });
+    console.log(`✅ [FACEBOOK OK] Publicado exitosamente. ID: ${fb?.id || 'OK'}`);
+    results.facebook = { success: true, id: fb?.id };
+  } catch (errFB) {
+    console.warn(`⚠️ [FACEBOOK NOTA]: ${errFB.message}`);
+    results.facebook = { success: false, error: errFB.message };
+  }
+
+  // Registro persistente en bitácora social
   const auditPath = path.resolve('social_published_feed.json');
   try {
     let feed = [];
@@ -219,23 +238,66 @@ export async function runDailyBuffer5PMPublication() {
     }
     feed.unshift({
       timestamp: new Date().toISOString(),
-      eventType: 'BUFFER_DAILY_5PM',
+      eventType: 'BUFFER_DAILY_5PM_REELS_VESPERTINO',
       dayOfWeek,
       theme: trend.title,
+      textSnippet: (trend.copy || '').substring(0, 50),
+      imageUrls: trend.image ? [trend.image] : [],
       results
     });
     fs.writeFileSync(auditPath, JSON.stringify(feed, null, 2), 'utf8');
   } catch (auditErr) {
-    console.warn('Advertencia feed:', auditErr.message);
+    console.warn('Advertencia registro social feed:', auditErr.message);
+  }
+
+  // Remitir telemetría de control a tendenciaiatufuturo@gmail.com
+  const resendKey = process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY;
+  if (resendKey) {
+    try {
+      const resend = new Resend(resendKey);
+      const liStatus = results.linkedin?.success ? '✅ Publicado' : '❌ Falló';
+      const igStatus = results.instagram?.success ? '✅ Publicado' : '⚠️ Falló';
+      const fbStatus = results.facebook?.success ? '✅ Publicado' : '⚠️ Falló';
+
+      const emailHtml = `
+        <div style="font-family: Arial, sans-serif; background: #0f172a; color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #10b981; max-width: 600px;">
+          <h3 style="color: #34d399; margin-top: 0;">🌆 [BUFFER 5:00 PM] Reporte Vespertino (Reels / LinkedIn)</h3>
+          <p style="font-size: 13px; color: #cbd5e1;">Despacho vespertino de contenido dinámico:</p>
+          <ul style="color: #e2e8f0; font-size: 13px; line-height: 1.8;">
+            <li><strong>Tema:</strong> ${trend.title}</li>
+            <li><strong>LinkedIn (Prioridad #1):</strong> ${liStatus} (ID: ${results.linkedin?.id || 'N/A'})</li>
+            <li><strong>Instagram (Reel/Post):</strong> ${igStatus} (ID: ${results.instagram?.id || 'N/A'})</li>
+            <li><strong>Facebook:</strong> ${fbStatus} (ID: ${results.facebook?.id || 'N/A'})</li>
+            <li><strong>Fecha y Hora:</strong> ${new Date().toLocaleString()}</li>
+          </ul>
+        </div>
+      `;
+
+      await resend.emails.send({
+        from: 'Directora de Marketing | AuditFlow AI <cmvo@audiflowai.com>',
+        to: CONFIG.EMAIL.OWNER_CONTROL,
+        subject: `🌆 [BUFFER 5:00 PM] Publicación Vespertina Reels: LinkedIn ${liStatus}`,
+        html: emailHtml
+      });
+      console.log(`📬 Telemetría vespertina enviada a: ${CONFIG.EMAIL.OWNER_CONTROL}`);
+    } catch (telemetryErr) {
+      console.warn('⚠️ Telemetría no enviada:', telemetryErr.message);
+    }
   }
 
   console.log('\n================================================================================');
-  console.log('🏁 PUBLICACIÓN VESPERTINA 5:00 PM BUFFER COMPLETADA');
+  console.log('🏁 PUBLICACIÓN VESPERTINA 5:00 PM BUFFER FINALIZADA');
   console.log('================================================================================\n');
 
   return results;
 }
 
-if (process.argv[1] && process.argv[1].includes('buffer_daily_publisher_5pm.mjs')) {
-  runDailyBuffer5PMPublication().catch(console.error);
+// Invocación directa CLI
+if (process.argv[1] && process.argv[1].endsWith('buffer_daily_publisher_5pm.mjs')) {
+  runDailyBuffer5PMPublication()
+    .then(() => process.exit(0))
+    .catch(err => {
+      console.error('❌ Error crítico en publicador vespertino 5 PM:', err);
+      process.exit(1);
+    });
 }

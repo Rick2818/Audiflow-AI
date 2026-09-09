@@ -294,6 +294,14 @@
       "destination": "/api/report"
     },
     {
+      "source": "/api/support/(.*)",
+      "destination": "/api/support"
+    },
+    {
+      "source": "/api/support",
+      "destination": "/api/support"
+    },
+    {
       "source": "/api/social-publish",
       "destination": "/api/social-publish"
     },

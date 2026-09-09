@@ -9,10 +9,14 @@ const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABA
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 const resendKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
-const emailFrom = process.env.EMAIL_FROM || CONFIG.EMAIL.FROM_TRANSACTIONAL;
+// Campañas y seguimiento siempre salen a nombre de la Directora de Marketing (Opción A)
+const emailFrom = process.env.EMAIL_FROM || CONFIG.EMAIL.FROM_OUTREACH;
+
+// Registro en memoria de idempotencia para prevenir duplicados en la misma jornada
+const recoveredLeadsSet = new Set();
 
 async function sendRecoveryEmail({ to, subject, html }) {
-  // 1. Resend API
+  // 1. Resend API con firmas oficiales DKIM (@audiflowai.com)
   if (resendKey) {
     try {
       const resend = new Resend(resendKey);
@@ -23,7 +27,7 @@ async function sendRecoveryEmail({ to, subject, html }) {
     }
   }
 
-  // 2. Gmail SMTP
+  // 2. Gmail SMTP Relay (solo si Resend falla)
   try {
     const user = process.env.GMAIL_USER || CONFIG.EMAIL.SMTP_USER;
     const pass = (process.env.GMAIL_APP_PASSWORD || CONFIG.EMAIL.SMTP_PASS).replace(/\s+/g, '');
@@ -61,12 +65,13 @@ export default async function handler(req, res) {
         .limit(25);
 
       if (!error && Array.isArray(data)) {
-        targetLeads = data;
+        // Filtrar leads ya recuperados para evitar bucles de spam
+        targetLeads = data.filter(lead => !recoveredLeadsSet.has(lead.email));
       }
     }
 
     if (targetLeads.length === 0) {
-      return res.status(200).json({ success: true, total_processed: 0, results: [], message: 'No hay leads pendientes de recuperación.' });
+      return res.status(200).json({ success: true, total_processed: 0, results: [], message: 'No hay leads pendientes de recuperación (todos filtrados por cerrojo de no-duplicidad).' });
     }
 
     const results = [];
@@ -74,7 +79,7 @@ export default async function handler(req, res) {
     for (const lead of targetLeads) {
       const lName = lead.name || 'Estimado(a) Colega';
       const lEmail = lead.email;
-      if (!lEmail || !lEmail.includes('@')) continue;
+      if (!lEmail || !lEmail.includes('@') || recoveredLeadsSet.has(lEmail)) continue;
 
       const subject = `AuditFlow AI — Seguimiento a su auditoría preventiva (${lead.document_type || 'Contrato B2B'})`;
       const html = `
@@ -105,26 +110,31 @@ export default async function handler(req, res) {
           <p style="font-size: 12px; color: #94a3b8; line-height: 1.5;">
             Si tiene alguna consulta o desea que nuestro equipo revise un contrato marco de mayor escala, responda directamente a este correo.<br><br>
             Atentamente,<br>
-            <strong style="color: #f8fafc;">Equipo de Consultoría Corporativa — AuditFlow AI</strong>
+            <strong style="color: #f8fafc;">Directora de Marketing — AuditFlow AI</strong>
           </p>
         </div>
       `;
 
       const sendRes = await sendRecoveryEmail({ to: lEmail, subject, html });
+      if (sendRes.success) {
+        recoveredLeadsSet.add(lEmail);
+      }
       results.push({ email: lEmail, status: sendRes.success ? 'sent' : 'error', provider: sendRes.provider });
     }
 
-    // Mandato Universal: Copia al Propietario
-    const ownerSubject = `[Recuperación de Leads] AuditFlow AI — Lote de Seguimiento Ejecutado (${results.length} Leads)`;
-    const ownerHtml = `
-      <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #38bdf8;">
-        <h3 style="color: #38bdf8; margin-top: 0;">AuditFlow AI — Reporte de Recuperación de Leads</h3>
-        <p>Se ha ejecutado la secuencia automatizada de recuperación para leads no convertidos.</p>
-        <p>Total procesados: <strong>${results.length}</strong></p>
-        <p style="font-size: 12px; color: #94a3b8;">Copia de control enviada a la bandeja del propietario: ${CONFIG.EMAIL.OWNER_CONTROL}.</p>
-      </div>
-    `;
-    await sendRecoveryEmail({ to: CONFIG.EMAIL.OWNER_CONTROL, subject: ownerSubject, html: ownerHtml });
+    // Mandato Universal: Copia de control al Propietario
+    if (results.length > 0) {
+      const ownerSubject = `[Recuperación de Leads] AuditFlow AI — Lote de Seguimiento Ejecutado (${results.length} Leads)`;
+      const ownerHtml = `
+        <div style="font-family: Arial, sans-serif; background: #0f172a; color: #f8fafc; padding: 20px; border-radius: 10px; border: 1px solid #38bdf8;">
+          <h3 style="color: #38bdf8; margin-top: 0;">AuditFlow AI — Reporte de Recuperación de Leads</h3>
+          <p>Se ha ejecutado la secuencia automatizada de recuperación para leads no convertidos.</p>
+          <p>Total procesados: <strong>${results.length}</strong></p>
+          <p style="font-size: 12px; color: #94a3b8;">Copia de control enviada a la bandeja oficial: ${CONFIG.EMAIL.OWNER_CONTROL}.</p>
+        </div>
+      `;
+      await sendRecoveryEmail({ to: CONFIG.EMAIL.OWNER_CONTROL, subject: ownerSubject, html: ownerHtml });
+    }
 
     return res.status(200).json({
       success: true,

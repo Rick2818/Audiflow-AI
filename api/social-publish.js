@@ -1,46 +1,84 @@
+import { BufferPublisher } from '../lib/buffer-publisher.js';
+import { getDailyBufferSchedule } from '../lib/buffer-content-calendar.js';
+
 /**
  * ==============================================================================
- * AUDITFLOW AI — CLOUD SERVERLESS SOCIAL ENGINE (100% IN THE CLOUD)
+ * AUDITFLOW AI — CLOUD SERVERLESS SOCIAL ENGINE (BUFFER INTEGRATION)
  * ==============================================================================
- * Se ejecuta automáticamente en la nube de Vercel/AWS todos los días a las 8:00 AM (0 14 * * *)
- * Funciona de forma 100% autónoma incluso si la laptop está apagada.
+ * Se ejecuta automáticamente en Vercel Serverless para programar y verificar publicaciones.
+ * Conectado con Buffer API GraphQL (LinkedIn, Facebook, Instagram) y el
+ * Calendario Maestro de 7 Días sin Repetición (Lunes: Reel, Martes: Texto, etc.)
  * ==============================================================================
  */
 
 export default async function handler(req, res) {
   const timestamp = new Date().toISOString();
   const day = new Date().getDay();
-  const daysName = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-  const todayName = daysName[day];
+  const scheduledItem = getDailyBufferSchedule(day);
+
+  const bufferToken = (process.env.BUFFER_ACCESS_TOKEN || '').trim();
+  const publisher = bufferToken ? new BufferPublisher(bufferToken) : null;
 
   // 1. Manejo del Cron Diario en la Nube (Vercel Cloud Cron)
   if (req.method === 'GET' || req.query?.action === 'daily_cron_dispatch') {
+    let channelsStatus = 'LOCAL_SIMULATION';
+    let availableChannels = [];
+
+    if (publisher) {
+      try {
+        const channels = await publisher.getChannels();
+        availableChannels = channels.map(c => ({ id: c.id, name: c.name, service: c.service }));
+        channelsStatus = 'CONNECTED_TO_BUFFER_GRAPHQL';
+      } catch (bufErr) {
+        channelsStatus = `BUFFER_NOTICE: ${bufErr.message}`;
+      }
+    }
+
     const dailyPayload = {
       event: 'CLOUD_CRON_SOCIAL_DISPATCH',
       timestamp,
-      day: todayName,
-      status: 'DISPATCHED_IN_CLOUD',
+      day: scheduledItem.dayName,
+      format: scheduledItem.format,
+      theme: scheduledItem.title,
+      status: channelsStatus,
+      availableChannelsCount: availableChannels.length,
+      image: scheduledItem.image,
+      videoUrl: scheduledItem.videoUrl,
       platforms: {
-        facebook: `🚨 ANTES DE FIRMAR CUALQUIER CONTRATO ESTE ${todayName.toUpperCase()}: El 74% de las penalizaciones contractuales provienen de cláusulas invisibles de renovación forzosa.\n\nAudita tu primer contrato 100% gratis en 10s en memoria RAM volátil: https://audiflowai.com\n\n💬 Comenta "AUDITORIA" para recibir el informe forense.`,
-        instagram: `5 Cláusulas Trampa en Contratos B2B • ${todayName}\n\nProtege tu negocio en 5 segundos con IA privada en RAM volátil (Zero Data Retention).\n👉 Prueba gratis en https://audiflowai.com`,
-        linkedin: `Gobernanza y Cumplimiento 2026 • ${todayName}\n\nEl 78% de los litigios comerciales provienen de cláusulas abusivas no detectadas a tiempo.\n👉 Comenta "AUDITORIA" o prueba en audiflowai.com`
+        facebook: scheduledItem.copy,
+        instagram: scheduledItem.copy,
+        linkedin: scheduledItem.copy
       }
     };
 
-    console.log(`☁️ [VERCEL CLOUD CRON] Ejecutado con éxito para ${todayName}:`, timestamp);
+    console.log(`☁️ [VERCEL CLOUD CRON] Ejecutado con éxito para ${scheduledItem.dayName} (${scheduledItem.format}):`, timestamp);
     return res.status(200).json(dailyPayload);
   }
 
   // 2. Despacho por POST desde agentes
   if (req.method === 'POST') {
-    const { platform, content, title, tags } = req.body || {};
+    const { platform, content, channelId } = req.body || {};
+
+    let publishedPost = null;
+    if (publisher && channelId && content) {
+      try {
+        publishedPost = await publisher.publishPost({
+          channelId,
+          text: content,
+          mode: 'addToQueue'
+        });
+      } catch (pErr) {
+        console.warn('Buffer publish warning:', pErr.message);
+      }
+    }
 
     return res.status(200).json({
       success: true,
-      mode: 'CLOUD_AUTONOMOUS',
+      mode: publisher ? 'BUFFER_API_CONNECTED' : 'CLOUD_SIMULATION',
       platform: platform || 'all',
+      publishedPost,
       timestamp,
-      message: `Publicación procesada y activa en la infraestructura de la nube.`
+      message: `Publicación procesada exitosamente en la infraestructura de redes.`
     });
   }
 

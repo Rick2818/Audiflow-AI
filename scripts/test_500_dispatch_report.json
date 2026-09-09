@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-09-09T00:48:35.794Z",
+  "metrics": {
+    "durationMs": 15,
+    "throughputPerSec": "33333.3",
+    "startMemoryMb": 20.13939666748047,
+    "endMemoryMb": 17.597244262695312
+  },
+  "results": {
+    "total": 500,
+    "passed": 500,
+    "failed": 0,
+    "monthlyCount": 250,
+    "annualCount": 250,
+    "langEsCount": 333,
+    "langEnCount": 167,
+    "errors": [],
+    "sampleRecIds": [
+      {
+        "index": 1,
+        "recId": "REC-JZK9DII",
+        "interval": "annual",
+        "email": "test_corp_lead_1@lexcapital.com"
+      },
+      {
+        "index": 2,
+        "recId": "REC-WFTORM7",
+        "interval": "monthly",
+        "email": "test_corp_lead_2@corporacionandina.com"
+      },
+      {
+        "index": 3,
+        "recId": "REC-IJ4SJBU",
+        "interval": "annual",
+        "email": "test_corp_lead_3@bancofiduciario.com"
+      },
+      {
+        "index": 4,
+        "recId": "REC-YHXIHWA",
+        "interval": "monthly",
+        "email": "test_corp_lead_4@auditpartners.org"
+      },
+      {
+        "index": 5,
+        "recId": "REC-WLB3KLN",
+        "interval": "annual",
+        "email": "test_corp_lead_5@complianceglobal.net"
+      }
+    ],
+    "sampleMagicLinks": [
+      "https://audiflowai.com/?subscriber=active&email=test_corp_lead_1%40lexcapital.com&plan=annual",
+      "https://audiflowai.com/?subscriber=active&email=test_corp_lead_2%40corporacionandina.com&plan=monthly",
+      "https://audiflowai.com/?subscriber=active&email=test_corp_lead_3%40bancofiduciario.com&plan=annual",
+      "https://audiflowai.com/?subscriber=active&email=test_corp_lead_4%40auditpartners.org&plan=monthly",
+      "https://audiflowai.com/?subscriber=active&email=test_corp_lead_5%40complianceglobal.net&plan=annual"
+    ],
+    "liveTest": {
+      "success": true,
+      "target": "tendenciaiatufuturo@gmail.com",
+      "response": {
+        "data": {
+          "id": "79eb3980-8de8-421a-a6c2-a1837315270c"
+        },
+        "error": null
+      }
+    }
+  }
+}

@@ -220,14 +220,13 @@ if (process.argv[1] && process.argv[1].endsWith('dispatch_storytelling_forense_c
 
   const targetLeads = isTestOnly
     ? [
-        { name: 'Ricardo Bolaños', email: 'rick28191@gmail.com', company: 'AuditFlow AI Dirección' }
+        { name: 'Control Técnico', email: 'tendenciaiatufuturo@gmail.com', company: 'AuditFlow AI Control' }
       ]
     : [
         { name: 'Dr. Alejandro Morales', email: 'alejandro.morales@moralescordero.es', firm: 'Morales & Cordero Abogados', company: 'Morales & Cordero Abogados' },
         { name: 'Lic. Fernando Rivas', email: 'fernando.rivas@rivaspineda.sv', firm: 'Rivas & Pineda Corporativo', company: 'Rivas & Pineda' },
         { name: 'Dra. Camila Guzmán', email: 'camila.guzman@guzmanviteri.co', firm: 'Guzmán, Viteri & Asociados', company: 'Guzmán & Viteri' },
-        { name: 'Lic. Mariano Batalla', email: 'mariano.batalla@batallalegal.cr', firm: 'Batalla & Asociados', company: 'Batalla Corporativo' },
-        { name: 'Ricardo Bolaños (Control)', email: 'rick28191@gmail.com', company: 'AuditFlow AI' }
+        { name: 'Lic. Mariano Batalla', email: 'mariano.batalla@batallalegal.cr', firm: 'Batalla & Asociados', company: 'Batalla Corporativo' }
       ];
 
   dispatchStorytellingEpisode(chapterArg, targetLeads, false)
