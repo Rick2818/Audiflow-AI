@@ -77,7 +77,7 @@ export async function runDailyBuffer8AMPublication() {
       mode: 'shareNow',
       service: 'facebook',
       metadata: {
-        facebook: { type: isReel ? 'reel' : 'post' }
+        facebook: { type: 'post' }
       },
       assets: assetsForPost
     });
@@ -102,7 +102,7 @@ export async function runDailyBuffer8AMPublication() {
       service: 'instagram',
       metadata: {
         instagram: {
-          type: isReel ? 'reel' : 'post',
+          type: 'post',
           shouldShareToFeed: true
         }
       },

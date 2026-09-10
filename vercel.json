@@ -1,5 +1,35 @@
 {
   "version": 2,
+  "crons": [
+    {
+      "path": "/api/cron/master-dispatcher",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron/nordic-sower",
+      "schedule": "0 10 * * 1-5"
+    },
+    {
+      "path": "/api/cron/storytelling",
+      "schedule": "0 12 * * 1-6"
+    },
+    {
+      "path": "/api/cron/buffer-morning",
+      "schedule": "0 14 * * *"
+    },
+    {
+      "path": "/api/admin?action=daily_sales_report&slot=2:00+PM",
+      "schedule": "0 20 * * 1-5"
+    },
+    {
+      "path": "/api/cron/buffer-evening",
+      "schedule": "0 23 * * *"
+    },
+    {
+      "path": "/api/admin?action=daily_sales_report&slot=6:00+PM",
+      "schedule": "0 0 * * 2-6"
+    }
+  ],
   "headers": [
     {
       "source": "/admin",

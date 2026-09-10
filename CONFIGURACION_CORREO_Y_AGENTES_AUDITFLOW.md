@@ -12,15 +12,15 @@
 
 ---
 
-## 2. Credenciales Verificadas de Envío de Correo (SMTP / Gmail)
-Utiliza estas credenciales ya probadas y activas para despachar correos electrónicos de forma 100% autónoma y desatendida:
-
-- **Servidor SMTP:** `smtp.gmail.com`
-- **Puerto:** `465` (SSL) o `587` (TLS)
-- **Usuario Autenticado:** `rick28191@gmail.com`
-- **Contraseña de Aplicación (Google App Password):** `humycnvzdtyzmnos`
-- **Nombre de Remitente:** `Directora de Marketing | AuditFlow AI <cmvo@audiflowai.com>`
-- **Destinatarios de todo Reporte/Alerta:** `ricardo@audiflowai.com, rick28191@gmail.com`
+## 2. Política de Despacho y Aislamiento Fiduciario de Rebotes
+- **Canal Exclusivo para Prospección y Outreach:** Resend API oficial con firmas DKIM y SPF de `@audiflowai.com`.
+  * **Remitente:** `Directora de Marketing | AuditFlow AI <cmvo@audiflowai.com>`
+  * **Reply-To:** `tendenciaiatufuturo@gmail.com`
+  * **Aislamiento de Rebotes:** Enrutados al servidor de Resend. **PROHIBIDO** usar Gmail SMTP personal (`rick28191@gmail.com`) para campañas de prospección en frío para evitar que las notificaciones "Delivery Status Notification (Failure)" contaminen la bandeja de entrada del CEO.
+- **Credenciales SMTP Gmail (Exclusivamente para Fallback de Reportes Internos Directos al CEO):**
+  * Servidor: `smtp.gmail.com` | Puerto: `465` (SSL)
+  * Usuario: `rick28191@gmail.com` | App Password: `humycnvzdtyzmnos`
+  * Uso restringido: Alertas críticas transaccionales internas, nunca prospección externa.
 
 ---
 

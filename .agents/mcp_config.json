@@ -1,4 +1,4 @@
-﻿{
+{
   "mcpServers": {
     "google-workspace": {
       "command": "npx",
@@ -22,6 +22,14 @@
         "N8N_API_KEY": "${N8N_API_KEY}"
       },
       "description": "Puente local para orquestar flujos de trabajo, webhooks y cron jobs sin intervención humana."
+    },
+    "instantly-outreach-engine": {
+      "command": "node",
+      "args": ["scripts/instantly_mcp_bridge.mjs"],
+      "env": {
+        "INSTANTLY_API_KEY": "${INSTANTLY_API_KEY}"
+      },
+      "description": "Servidor y Puente de Integración Instantly.ai: Monitoreo de Warmup de cuentas, gestión de campañas de cold email y sincronización de prospectos con Waalaxy."
     }
   }
 }

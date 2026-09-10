@@ -1,0 +1,81 @@
+
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>Master Prompt Nuevo Septiembre 2026</title>
+  <style>
+    body { font-family: 'Calibri', Arial, sans-serif; color: #1e293b; line-height: 1.6; margin: 40px; }
+    h1 { color: #1e40af; border-bottom: 2px solid #3b82f6; padding-bottom: 6px; font-size: 20pt; }
+    h2 { color: #0f172a; margin-top: 24px; font-size: 15pt; }
+    .header-box { background: #0f172a; color: white; padding: 24px; border-radius: 8px; text-align: center; }
+    .header-box h1 { color: #38bdf8; border: none; margin: 0 0 8px 0; font-size: 22pt; }
+    .badge { background: #2563eb; color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 10pt; }
+    .code-box { background: #f1f5f9; border-left: 4px solid #2563eb; padding: 14px; font-family: 'Courier New', monospace; font-size: 10pt; margin: 16px 0; }
+    .info-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .info-table td { padding: 8px 12px; border: 1px solid #cbd5e1; }
+    ul { padding-left: 20px; }
+    li { margin-bottom: 6px; }
+  </style>
+</head>
+<body>
+  <div class="header-box">
+    <h1>AUDITFLOW AI CORP.</h1>
+    <p style="margin: 0; font-size: 13pt; color: #cbd5e1;"><strong>MASTER PROMPT NUEVO • SEPTIEMBRE 2026</strong></p>
+    <p style="margin: 6px 0 0 0; font-size: 10pt; color: #94a3b8;">System Architecture Blueprint, Gobernanza Fiduciaria y Orquestación con N8N</p>
+  </div>
+
+  <h2>1. Manifiesto y Principios Inmutables de Diseño</h2>
+  <p>Este documento es la <strong>Constitución Técnica y Guía Paso a Paso</strong> para gobernar sistemas multi-agente integrados con N8N. Aplica para AuditFlow AI y cualquier nuevo Micro-SaaS o producto de IA.</p>
+  <ul>
+    <li><strong>Determinismo sobre Creatividad Abierta:</strong> Salidas confinadas a esquemas JSON Schema inmutables.</li>
+    <li><strong>Principio Fail-Closed:</strong> Si un agente o webhook falla o responde con un esquema inválido, el sistema aborta de inmediato de forma controlada.</li>
+    <li><strong>Privacidad en RAM Volátil:</strong> Cero almacenamiento de contratos o datos confidenciales en disco duro de servidores.</li>
+    <li><strong>Desacoplamiento Estricto:</strong> El agente diagnostica; N8N transporta y valida; la base de datos persiste exclusivamente estados autorizados.</li>
+    <li><strong>Aislamiento de Contexto:</strong> Ningún agente recibe historial innecesario; opera estrictamente con su System Prompt y su TaskPayload.</li>
+  </ul>
+
+  <h2>2. Pilar 1: Configuración y Gobernanza de Agentes</h2>
+  <p>Estructura jerárquica de 3 niveles:</p>
+  <ul>
+    <li><strong>Nivel 1 (Dirección Estratégica):</strong> Orquestador Maestro / COO — Descompone objetivos de negocio en planes modulares.</li>
+    <li><strong>Nivel 2 (Especialistas de Dominio):</strong> Legal, Financiero, Marketing y Seguridad — Aplican reglas y heurísticas de industria.</li>
+    <li><strong>Nivel 3 (Ejecutores Técnicos):</strong> Extractor, Risk Analyzer, Mitigation Writer, DevOps — Unidades atómicas sin estado con entrada y salida determinística JSON.</li>
+  </ul>
+
+  <h2>3. Pilar 2: Estructura de Orquestación con N8N</h2>
+  <p>N8N funciona como el Bus de Comunicación Central con topología Dispatcher & Gatekeepers:</p>
+  <div class="code-box">
+    <strong>Flujo de Ejecución:</strong><br>
+    1. Webhook Ingestion Trigger (POST /webhook/pipeline)<br>
+    2. Generación de IDs idempotentes (auditId, executionId, taskId)<br>
+    3. Invocación de Sub-Workflows sin estado (Execute Workflow)<br>
+    4. Nodos Gatekeeper (JavaScript) validan el esquema JSON antes de cada transición<br>
+    5. Fallo Seguro (Fail-Closed) ante cualquier error o timeout<br>
+    6. Consolidación de respuesta final
+  </div>
+
+  <p><strong>Enrutamiento Dual Inviolable de Notificaciones:</strong></p>
+  <ul>
+    <li><strong>Bandeja Operativa (tendenciaiatufuturo@gmail.com):</strong> Nuevos leads, aperturas, logs de crons y alertas operativas.</li>
+    <li><strong>Bandeja Personal del Director General (rick28191@gmail.com):</strong> ÚNICA Y EXCLUSIVAMENTE para COMPRAS CONFIRMADAS ($19, $69, $590 USD). Cero spam operativo.</li>
+  </ul>
+
+  <h2>4. Playbook Paso a Paso: Del Día 0 a Producción</h2>
+  <ol>
+    <li><strong>Día 1:</strong> Definición de Ontología y Esquemas de Datos (JSON Schema).</li>
+    <li><strong>Día 2:</strong> Aprovisionamiento de Agentes en <code>.agents/agents/</code> con YAML frontmatter y límites de tokens.</li>
+    <li><strong>Día 3:</strong> Construcción del Dispatcher y Sub-Workflows en N8N.</li>
+    <li><strong>Día 4:</strong> Inserción de Gatekeepers de validación de esquema y rutas Fail-Closed.</li>
+    <li><strong>Día 5:</strong> Pruebas de Cero Regresión y Aprobación E2E.</li>
+  </ol>
+
+  <h2>5. Checklist Final de Confiabilidad</h2>
+  <ul>
+    <li>[X] Validación sintáctica ejecutada sin errores.</li>
+    <li>[X] Salidas de IA forzadas a JSON sin markdown conversational.</li>
+    <li>[X] Gatekeepers activos en cada nodo de N8N.</li>
+    <li>[X] Secretos protegidos en variables de entorno.</li>
+    <li>[X] Enrutamiento dual verificado y activo.</li>
+  </ul>
+</body>
+</html>

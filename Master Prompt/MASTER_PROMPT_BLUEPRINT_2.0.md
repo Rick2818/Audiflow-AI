@@ -1,6 +1,7 @@
 # MASTER PROMPT BLUEPRINT 2.0 — FÁBRICA DE MICROSaaS B2B DE ALTA CONVERSIÓN
 
-> **Propósito:** Guía maestra e instrucciones completas de arquitectura, SEO, infraestructura, marketing y prospección automatizada para replicar y construir 3 nuevos MicroSaaS B2B rentables en menos de 24 horas.
+> 🚨 **ACTUALIZACIÓN SEPTIEMBRE 2026:** Este documento ha sido evolucionado y consolidado con el sistema multi-agente y orquestación N8N en:
+> 👉 **[`MASTER_PROMPT_BLUEPRINT_3.0_MAGNA.md`](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/Master%20Prompt/MASTER_PROMPT_BLUEPRINT_3.0_MAGNA.md)** (Fuente Única de Verdad).
 
 ---
 

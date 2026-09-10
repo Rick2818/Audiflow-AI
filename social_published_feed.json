@@ -1,5 +1,72 @@
 [
   {
+    "timestamp": "2026-09-10T15:51:49.552Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "dayOfWeek": 4,
+    "theme": "Autopsia de un Desastre Contractual: Cláusulas de Indexación",
+    "imageUrls": [
+      "https://audiflowai.com/images/redline_forense_clausulas.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa2d1cd178aa05a26db2e27"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa2d205e006e240ded0db0a"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6aa2d20be006e240ded0db89"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-09T23:26:09.978Z",
+    "eventType": "BUFFER_DAILY_5PM_REELS_VESPERTINO",
+    "dayOfWeek": 3,
+    "theme": "Reel Miércoles: Autopsia de una Cláusula de Ajuste Inflacionario",
+    "textSnippet": "Revisar contratos sin una herramienta forense es a",
+    "imageUrls": [
+      "https://audiflowai.com/images/carousel/slide3_inflation.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa1eafa06a7fa7bc8e7011d"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6aa1eb0506a7fa7bc8e704d0"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa1eb0def7d95ea1b4be26e"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-09T17:45:21.313Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "dayOfWeek": 3,
+    "theme": "Comparativa Forense: 4.5 Horas vs. 8 Segundos",
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa093743bd0dd9ef31ded95"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa0938b493bbf8c2823a4c7"
+      },
+      "instagram": {
+        "success": true,
+        "id": "6aa09380a83dcb71a3e73d28"
+      }
+    }
+  },
+  {
     "timestamp": "2026-09-09T15:05:14.799Z",
     "eventType": "BUFFER_DAILY_8AM_MATUTINO",
     "dayOfWeek": 3,

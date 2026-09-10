@@ -1,14 +1,20 @@
 import fs from 'fs';
 import path from 'path';
 import { CONFIG } from '../../lib/config.js';
-import { waalaxyProspectsStore } from '../../api/waalaxy-sync.js';
+import { waalaxyProspectsStore } from '../../lib/waalaxy-sync.js';
 
 async function loadAndDispatchAll250Leads() {
   console.log('======================================================================');
   console.log('🚀 CARGANDO Y DISPARANDO 250 DIRECTORES LEGALES EN LA BASE DE DATOS');
   console.log('======================================================================');
 
-  const csvPath = path.resolve('c:/Users/Ricardo/Desktop/Audiflow Ai/DIRECTORES_LEGALES_250_WAALAXY.csv');
+  let csvPath = path.resolve('Audiflow Marketing/DIRECTORES_LEGALES_250_WAALAXY.csv');
+  if (!fs.existsSync(csvPath)) {
+    csvPath = path.resolve('Ventas Audiflow/Bases_de_Datos_Leads/DIRECTORES_LEGALES_250_WAALAXY.csv');
+  }
+  if (!fs.existsSync(csvPath)) {
+    csvPath = path.resolve('DIRECTORES_LEGALES_250_WAALAXY.csv');
+  }
   if (!fs.existsSync(csvPath)) {
     console.error('❌ Archivo CSV no encontrado en:', csvPath);
     return;

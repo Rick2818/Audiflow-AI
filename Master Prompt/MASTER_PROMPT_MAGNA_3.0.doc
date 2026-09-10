@@ -1,0 +1,147 @@
+<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+  <meta charset='utf-8'>
+  <title>Master Prompt Blueprint 3.0 Magna</title>
+  <style>
+    body { font-family: 'Calibri', Arial, sans-serif; color: #1e293b; line-height: 1.6; margin: 40px; }
+    h1 { color: #0f172a; font-size: 20pt; border-bottom: 2px solid #0284c7; padding-bottom: 6px; }
+    h2 { color: #0284c7; font-size: 15pt; margin-top: 24px; border-bottom: 1px solid #cbd5e1; padding-bottom: 4px; }
+    h3 { color: #0f172a; font-size: 12pt; margin-top: 16px; }
+    .header-box { background: #0f172a; color: white; padding: 26px; border-radius: 8px; text-align: center; }
+    .header-box h1 { color: #38bdf8; border: none; margin: 0 0 8px 0; font-size: 22pt; }
+    .badge { background: #0284c7; color: white; padding: 4px 12px; border-radius: 4px; font-weight: bold; font-size: 10pt; }
+    .notice-box { background: #f0f9ff; border-left: 4px solid #0284c7; padding: 14px; margin: 18px 0; font-size: 11pt; color: #0369a1; }
+    .code-box { background: #f8fafc; border: 1px solid #cbd5e1; border-left: 4px solid #0f172a; padding: 16px; font-family: 'Consolas', 'Courier New', monospace; font-size: 9.5pt; margin: 18px 0; line-height: 1.5; white-space: pre-wrap; }
+    .info-table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    .info-table th { background: #0f172a; color: #38bdf8; font-weight: bold; text-align: left; padding: 10px; border: 1px solid #0f172a; }
+    .info-table td { padding: 9px 12px; border: 1px solid #cbd5e1; font-size: 10pt; }
+    ul { padding-left: 22px; }
+    li { margin-bottom: 6px; }
+    strong { color: #0f172a; }
+  </style>
+</head>
+<body>
+
+  <div class="header-box">
+    <h1>AUDITFLOW AI & DESARROLLOS CON IA</h1>
+    <p style="margin: 0; font-size: 14pt; color: #cbd5e1;"><strong>MASTER PROMPT BLUEPRINT 3.0 MAGNA</strong></p>
+    <p style="margin: 6px 0 0 0; font-size: 10pt; color: #94a3b8;">Fábrica de MicroSaaS B2B, Arquitectura Multi-Agente, Orquestación N8N & Cloud 24/7</p>
+  </div>
+
+  <div class="notice-box">
+    <strong>DIRECTIVA INMUTABLE DE PRODUCCIÓN:</strong> Este documento es la Fuente Única de Verdad (SSOT) para construir y replicar sistemas autónomos y MicroSaaS de alta rentabilidad. Rige el principio de <em>Independencia Física Absoluta</em>: ningún proceso en producción debe depender de la computadora local del desarrollador.
+  </div>
+
+  <h2>1. Manifiesto y las 5 Leyes Inmutables</h2>
+  <ul>
+    <li><strong>Ley 1 (Determinismo):</strong> La IA generativa debe estar acotada por esquemas estrictos (JSON Schema). Queda prohibido emitir texto libre donde se esperan contratos de datos estructurados.</li>
+    <li><strong>Ley 2 (Principio Fail-Closed):</strong> Ante una falla, discrepancia de esquema o timeout en un agente, el flujo se detiene de forma segura. Prohibido asumir datos por defecto o alucinar respuestas.</li>
+    <li><strong>Ley 3 (Memoria RAM Volátil y Privacidad Bancaria):</strong> El procesamiento de documentos y secretos comerciales se ejecuta exclusivamente en búferes de memoria RAM volátil que se purgan en bloques <code>finally</code>. Cero almacenamiento de documentos confidenciales en disco duro o bases de datos no cifradas (SOC-2 Type II y RGPD / GDPR Art. 28).</li>
+    <li><strong>Ley 4 (Desacoplamiento Estricto):</strong> Cada agente piensa y decide dentro de un ámbito de dominio ultra-específico. N8N o el bus de eventos transporta y valida el estado. La base de datos persiste inmutablemente los estados finales.</li>
+    <li><strong>Ley 5 (Aislamiento de Contexto - Anti-Context Bloat):</strong> Ningún agente debe recibir el historial completo del proyecto. Cada subagente recibe únicamente su System Prompt especializado y el TaskPayload mínimo requerido.</li>
+  </ul>
+
+  <h2>2. Pilar 1: Gobernanza Multi-Agente & Jerarquía de 3 Niveles</h2>
+  <ul>
+    <li><strong>Nivel 1 (Dirección Estratégica):</strong> Director General (CEO Humano - Ricardo) fija visión y aprueba cambios. Gerente General y Director de Operaciones (GM/COO Agente) supervisa rentabilidad en USD y orquesta especialistas.</li>
+    <li><strong>Nivel 2 (Especialistas de Dominio):</strong> Directora de Marketing & Ventas (CMVO), Especialista Legal/Regulatorio, Especialista Financiero (CFO), y Psicólogo del Consumidor & Anti-Fatiga.</li>
+    <li><strong>Nivel 3 (Ejecutores Técnicos Atómicos):</strong> Unidades stateless de tarea única (Extractor de datos, Analizador de riesgos, Generador de Redline en Word .docx, Despachador de telemetría).</li>
+    <li><strong>Plantilla YAML Frontmatter:</strong> Todo agente en <code>.agents/agents/</code> debe incluir <code>name, version, role, model, temperature (0.1)</code> y <code>context_budget_tokens (8192)</code>.</li>
+  </ul>
+
+  <h2>3. Pilar 2: Arquitectura de Integración y Workflows con N8N</h2>
+  <ul>
+    <li><strong>Dispatcher Pattern:</strong> Un flujo central en N8N recibe webhooks autenticados (<code>X-AuditFlow-Key</code>), valida el esquema JSON y enruta hacia sub-workflows por dominio.</li>
+    <li><strong>Resiliencia y Circuit Breakers:</strong> Reintentos exponenciales automáticos (1s, 5s, 15s) y alerta inmediata al correo personal del CEO (<code>rick28191@gmail.com</code>) ante fallas no recuperables.</li>
+  </ul>
+
+  <h2>4. Pilar 3: Fábrica de MicroSaaS B2B & Frontend de Alta Conversión</h2>
+  <ul>
+    <li><strong>Backend Dual:</strong> <code>server.js</code> en Express para desarrollo local/Docker y directorio <code>/api</code> con funciones serverless independientes para Vercel.</li>
+    <li><strong>SEO Programático & IndexNow:</strong> Notificación automática en &lt;5 segundos a Bing y Yandex vía <code>POST /api/indexnow</code> al publicar landings con Schema.org.</li>
+    <li><strong>Psicología de Dolor Financiero:</strong> Titulares anclados a dinero ahorrado / pasivos evitados ("El 87% de los contratos contiene entre $3,500 y $18,000 USD en fugas ocultas") y generación de entregables en Word (.docx con Control de Cambios).</li>
+  </ul>
+
+  <h2>5. Pilar 4: Pasarelas de Pago Híbridas (Stripe USD & Bitcoin Lightning)</h2>
+  <ul>
+    <li><strong>Stripe Fiat USD:</strong> Desbloqueo individual ($19 USD) y suscripciones recurrentes ($49 - $69/mes o $590/año) con webhooks verificados por firma criptográfica.</li>
+    <li><strong>Strike Lightning Network:</strong> Pagos globales en Satoshis de Bitcoin con liquidación instantánea y conciliación contable automática en USD.</li>
+  </ul>
+
+  <h2>6. Pilar 5: Prospección Fiduciaria, Email Outreach & Buffer Multicanal</h2>
+  <ul>
+    <li><strong>Aislamiento de Rebotes (Bounce Isolation):</strong> Despacho exclusivo vía Resend API con SPF/DKIM y buzón de control (<code>tendenciaiatufuturo@gmail.com</code>), manteniendo el buzón del CEO 100% blindado para ventas.</li>
+    <li><strong>Segmentación de Idiomas:</strong> Español para LATAM/España e Inglés Corporativo para EE.UU. y Europa Nórdica (Suecia, Noruega, Dinamarca, Finlandia).</li>
+    <li><strong>Buffer Social Multicanal:</strong> Prioridad B2B en LinkedIn Company Page, guardas anti-duplicados de 24 horas y validación de formatos (post para imágenes, reels para video).</li>
+  </ul>
+
+  <h2>7. Pilar 6: Infraestructura Cloud 24/7 (Cero Dependencia Local)</h2>
+  <ul>
+    <li><strong>Ley de Independencia Física:</strong> Queda terminantemente PROHIBIDO usar el Programador de Windows local o scripts .bat para tareas de producción. La nube debe operar de forma autónoma aunque la computadora del desarrollador esté apagada durante semanas.</li>
+    <li><strong>Patrón Master Cloud Dispatcher:</strong> Endpoint único (<code>/api/cron/master-dispatcher</code>) activado por un Webhook Scheduler externo gratuito (cron-job.org / Upstash QStash) que supera cualquier límite de planes Hobby serverless.</li>
+    <li><strong>Persistencia Externa Obligatoria (Database-First):</strong> Toda memoria de estado (leads contactados, calentamiento y bitácora social) debe persistirse en Supabase (<code>system_state</code>).</li>
+    <li><strong>Criterio de Certificación en Producción Viva:</strong> Ninguna tarea se da por terminada sin ejecutar una llamada HTTP real contra la URL pública (<code>https://tudominio.com/api/...</code>) y verificar retorno <code>HTTP 200 OK</code> con telemetría entregada al CEO.</li>
+  </ul>
+
+  <h2>8. Checklist Operativo de Despliegue en 24 Horas</h2>
+  <table class="info-table">
+    <thead>
+      <tr>
+        <th style="width: 20%;">Horario</th>
+        <th style="width: 40%;">Fase de Construcción</th>
+        <th style="width: 40%;">Criterio de Certificación</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>00:00 - 02:00</strong></td>
+        <td>Dominio, DNS, SSL y Hosting Vercel</td>
+        <td>10/10 en Mail-Tester y HTTPS canónico forzado</td>
+      </tr>
+      <tr>
+        <td><strong>02:00 - 06:00</strong></td>
+        <td>Backend Dual y Memoria RAM Volátil</td>
+        <td>0 archivos residuales en disco duro (GDPR Art. 28)</td>
+      </tr>
+      <tr>
+        <td><strong>06:00 - 09:00</strong></td>
+        <td>Stripe USD + Bitcoin Lightning Sats</td>
+        <td>Webhooks acreditando tokens en milisegundos</td>
+      </tr>
+      <tr>
+        <td><strong>09:00 - 13:00</strong></td>
+        <td>Frontend de Conversión & IndexNow</td>
+        <td>IndexNow HTTP 200 en Bing API y Schema.org OK</td>
+      </tr>
+      <tr>
+        <td><strong>13:00 - 17:00</strong></td>
+        <td>Sistema Multi-Agente & N8N Workflows</td>
+        <td>Validación estricta de JSON Schema sin fallas</td>
+      </tr>
+      <tr>
+        <td><strong>17:00 - 20:00</strong></td>
+        <td>Prospección Resend & Buffer Social</td>
+        <td>Buzón del CEO blindado y posts en redes OK</td>
+      </tr>
+      <tr>
+        <td><strong>20:00 - 24:00</strong></td>
+        <td>Certificación Cloud 24/7 (Master Dispatcher)</td>
+        <td>Llamada HTTP externa 200 OK e independencia de PC</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>9. Prompt Maestro de Inicialización (Copiar y Pegar en Nuevos Proyectos)</h2>
+  <div class="code-box">Usted es un Arquitecto de Software Principal, Diseñador de Sistemas Multi-Agente, Growth Hacker e Ingeniero de Infraestructura Cloud de nivel Staff/Fellow.
+Su misión es construir, auditar y desplegar desde cero un MicroSaaS B2B de alta conversión, gobernado por agentes autónomos inteligentes y orquestado en la nube con disponibilidad ininterrumpida 24/7.
+
+Usted NO crea prototipos frágiles ni soluciones a medias. Toda arquitectura construida bajo su supervisión debe adherirse estrictamente a los 6 PILARES MAGNA:
+- Pilar 1: Gobernanza Multi-Agente (3 Niveles, Determinismo, Fail-Closed, Memoria RAM Volátil, YAML Frontmatter).
+- Pilar 2: Orquestación N8N (Dispatcher-Worker, Validación de Schemas JSON, Reintentos Exponenciales).
+- Pilar 3: Fábrica MicroSaaS B2B (Backend Dual Express/Serverless, SEO Programático, IndexNow &lt;5s, Word .docx con Control de Cambios).
+- Pilar 4: Pagos Híbridos (Stripe USD Pay-per-use $19 y Suscripciones $49-$69/mes + Strike Bitcoin Lightning en Satoshis).
+- Pilar 5: Prospección Fiduciaria & Buffer Multicanal (Resend SPF/DKIM, Aislamiento de Rebotes, LinkedIn Company Page, Guardas Anti-Duplicados).
+- Pilar 6: Infraestructura Cloud 24/7 (Cero Dependencia Local de Windows Task Scheduler, Master Cloud Dispatcher, Supabase system_state, Certificación en Producción Viva HTTP 200 OK).</div>
+
+</body>
+</html>

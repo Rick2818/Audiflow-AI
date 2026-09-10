@@ -1,0 +1,749 @@
+[
+  {
+    "firstName": "Henrik",
+    "lastName": "Dock",
+    "firm": "Mannheimer Swartling",
+    "role": "Managing Partner",
+    "country": "Suecia",
+    "email": "henrik.dock@msa.se",
+    "linkedinUrl": "https://www.linkedin.com/in/henrik-dock-legal-1"
+  },
+  {
+    "firstName": "Anna",
+    "lastName": "Remse",
+    "firm": "Mannheimer Swartling",
+    "role": "General Counsel & Risk Partner",
+    "country": "Suecia",
+    "email": "anna.remse@msa.se",
+    "linkedinUrl": "https://www.linkedin.com/in/anna-remse-legal-2"
+  },
+  {
+    "firstName": "Louise",
+    "lastName": "Brorsson Salomon",
+    "firm": "Advokatfirman Vinge",
+    "role": "CEO & Managing Partner",
+    "country": "Suecia",
+    "email": "louise.brorssonsalomon@vinge.se",
+    "linkedinUrl": "https://www.linkedin.com/in/louise-brorsson-salomon-legal-3"
+  },
+  {
+    "firstName": "Johanna",
+    "lastName": "Rutberg",
+    "firm": "Advokatfirman Vinge",
+    "role": "General Counsel",
+    "country": "Suecia",
+    "email": "johanna.rutberg@vinge.se",
+    "linkedinUrl": "https://www.linkedin.com/in/johanna-rutberg-legal-4"
+  },
+  {
+    "firstName": "Henrik",
+    "lastName": "Kjellander",
+    "firm": "Setterwalls Advokatbyrå",
+    "role": "Managing Partner",
+    "country": "Suecia",
+    "email": "henrik.kjellander@setterwalls.se",
+    "linkedinUrl": "https://www.linkedin.com/in/henrik-kjellander-legal-5"
+  },
+  {
+    "firstName": "Tone",
+    "lastName": "Myhre-Jensen",
+    "firm": "Advokatfirman Cederquist",
+    "role": "Managing Partner",
+    "country": "Suecia",
+    "email": "tone.myhrejensen@cederquist.se",
+    "linkedinUrl": "https://www.linkedin.com/in/tone-myhre-jensen-legal-6"
+  },
+  {
+    "firstName": "Tobias",
+    "lastName": "Puckalgis",
+    "firm": "Advokatfirman Lindahl",
+    "role": "Managing Partner",
+    "country": "Suecia",
+    "email": "tobias.puckalgis@lindahl.se",
+    "linkedinUrl": "https://www.linkedin.com/in/tobias-puckalgis-legal-7"
+  },
+  {
+    "firstName": "Stefan",
+    "lastName": "Erhag",
+    "firm": "Delphi Advokatbyrå",
+    "role": "Managing Partner",
+    "country": "Suecia",
+    "email": "stefan.erhag@delphi.se",
+    "linkedinUrl": "https://www.linkedin.com/in/stefan-erhag-legal-8"
+  },
+  {
+    "firstName": "Mats",
+    "lastName": "Dahlberg",
+    "firm": "Delphi Advokatbyrå",
+    "role": "Partner & Head of Corporate Contracts",
+    "country": "Suecia",
+    "email": "mats.dahlberg@delphi.se",
+    "linkedinUrl": "https://www.linkedin.com/in/mats-dahlberg-delphi"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Högström",
+    "firm": "Cirio Advokatbyrå",
+    "role": "Partner M&A / Commercial",
+    "country": "Suecia",
+    "email": "peter.hogstrom@cirio.se",
+    "linkedinUrl": "https://www.linkedin.com/in/peter-hogstrom-cirio"
+  },
+  {
+    "firstName": "Mårten",
+    "lastName": "Steen",
+    "firm": "Advokatfirman Cederquist",
+    "role": "Partner Corporate Commercial",
+    "country": "Suecia",
+    "email": "marten.steen@cederquist.se",
+    "linkedinUrl": "https://www.linkedin.com/in/marten-steen-cederquist"
+  },
+  {
+    "firstName": "Robert",
+    "lastName": "Kullgren",
+    "firm": "Wistrand Advokatbyrå",
+    "role": "Partner Corporate Law",
+    "country": "Suecia",
+    "email": "robert.kullgren@wistrand.se",
+    "linkedinUrl": "https://www.linkedin.com/in/robert-kullgren-wistrand"
+  },
+  {
+    "firstName": "Lars",
+    "lastName": "Westerberg",
+    "firm": "Advokatfirman Lindahl",
+    "role": "Partner Commercial Contracts",
+    "country": "Suecia",
+    "email": "lars.westerberg@lindahl.se",
+    "linkedinUrl": "https://www.linkedin.com/in/lars-westerberg-lindahl"
+  },
+  {
+    "firstName": "Sverre",
+    "lastName": "Tyrhaug",
+    "firm": "Advokatfirmaet Thommessen",
+    "role": "Managing Partner",
+    "country": "Noruega",
+    "email": "sverre.tyrhaug@thommessen.no",
+    "linkedinUrl": "https://www.linkedin.com/in/sverre-tyrhaug-legal-21"
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Svensen",
+    "firm": "BAHR Advokatfirma",
+    "role": "Managing Partner",
+    "country": "Noruega",
+    "email": "thomas.svensen@bahr.no",
+    "linkedinUrl": "https://www.linkedin.com/in/thomas-svensen-legal-22"
+  },
+  {
+    "firstName": "Preben",
+    "lastName": "Willoch",
+    "firm": "Wikborg Rein",
+    "role": "Managing Partner",
+    "country": "Noruega",
+    "email": "preben.willoch@wr.no",
+    "linkedinUrl": "https://www.linkedin.com/in/preben-willoch-legal-23"
+  },
+  {
+    "firstName": "Erling",
+    "lastName": "Christiansen",
+    "firm": "Advokatfirmaet Schjødt",
+    "role": "Managing Partner",
+    "country": "Noruega",
+    "email": "erling.christiansen@schjodt.com",
+    "linkedinUrl": "https://www.linkedin.com/in/erling-christiansen-legal-24"
+  },
+  {
+    "firstName": "Per Conradi",
+    "lastName": "Andersen",
+    "firm": "Arntzen de Besche",
+    "role": "Managing Partner",
+    "country": "Noruega",
+    "email": "per.conradiandersen@adeb.no",
+    "linkedinUrl": "https://www.linkedin.com/in/per-conradi-andersen-legal-25"
+  },
+  {
+    "firstName": "Tone",
+    "lastName": "Østensen",
+    "firm": "Kvale Advokatfirma",
+    "role": "Partner Corporate & IT Contracts",
+    "country": "Noruega",
+    "email": "toe@kvale.no",
+    "linkedinUrl": "https://www.linkedin.com/in/tone-ostensen-kvale"
+  },
+  {
+    "firstName": "Pål",
+    "lastName": "Kvernaas",
+    "firm": "Advokatfirmaet Haavind",
+    "role": "Partner Technology & Contracts",
+    "country": "Noruega",
+    "email": "p.kvernaas@haavind.no",
+    "linkedinUrl": "https://www.linkedin.com/in/pal-kvernaas-haavind"
+  },
+  {
+    "firstName": "Morten",
+    "lastName": "Kvale",
+    "firm": "Advokatfirmaet Simonsen Vogt Wiig",
+    "role": "Partner Commercial Contracts",
+    "country": "Noruega",
+    "email": "m.kvale@svw.no",
+    "linkedinUrl": "https://www.linkedin.com/in/morten-kvale-svw"
+  },
+  {
+    "firstName": "Niklas",
+    "lastName": "Christensen",
+    "firm": "Plesner Advokatpartnerselskab",
+    "role": "Managing Partner",
+    "country": "Dinamarca",
+    "email": "niklas.christensen@plesner.com",
+    "linkedinUrl": "https://www.linkedin.com/in/niklas-christensen-legal-36"
+  },
+  {
+    "firstName": "Martin",
+    "lastName": "Lavesen",
+    "firm": "Gorrissen Federspiel",
+    "role": "Managing Partner",
+    "country": "Dinamarca",
+    "email": "martin.lavesen@gorrissenfederspiel.com",
+    "linkedinUrl": "https://www.linkedin.com/in/martin-lavesen-legal-37"
+  },
+  {
+    "firstName": "Simon",
+    "lastName": "Hjelmborg",
+    "firm": "Bech-Bruun",
+    "role": "Managing Partner",
+    "country": "Dinamarca",
+    "email": "simon.hjelmborg@bechbruun.com",
+    "linkedinUrl": "https://www.linkedin.com/in/simon-hjelmborg-legal-38"
+  },
+  {
+    "firstName": "Jens Munk",
+    "lastName": "Plum",
+    "firm": "Kromann Reumert",
+    "role": "Managing Partner",
+    "country": "Dinamarca",
+    "email": "jens.munkplum@kromannreumert.com",
+    "linkedinUrl": "https://www.linkedin.com/in/jens-munk-plum-legal-39"
+  },
+  {
+    "firstName": "Dan",
+    "lastName": "Moalem",
+    "firm": "Moalem Weitemeyer",
+    "role": "Managing Partner",
+    "country": "Dinamarca",
+    "email": "dan.moalem@moalemweitemeyer.com",
+    "linkedinUrl": "https://www.linkedin.com/in/dan-moalem-legal-41"
+  },
+  {
+    "firstName": "Vibe",
+    "lastName": "Lindhart",
+    "firm": "Lundgrens Advokatpartnerselskab",
+    "role": "Partner Commercial Contracts & Procurement",
+    "country": "Dinamarca",
+    "email": "vli@lundgrens.com",
+    "linkedinUrl": "https://www.linkedin.com/in/vibe-lindhart-lundgrens"
+  },
+  {
+    "firstName": "Carsten",
+    "lastName": "Brink",
+    "firm": "Mazanti-Andersen Advokatpartnerselskab",
+    "role": "Partner Commercial & Tech Transactions",
+    "country": "Dinamarca",
+    "email": "cb@mazanti.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/carsten-brink-mazanti"
+  },
+  {
+    "firstName": "Thomas",
+    "lastName": "Moalem",
+    "firm": "Moalem Weitemeyer Advokatpartnerselskab",
+    "role": "Partner Corporate & Commercial",
+    "country": "Dinamarca",
+    "email": "tm@moalemweitemeyer.com",
+    "linkedinUrl": "https://www.linkedin.com/in/thomas-moalem-legal"
+  },
+  {
+    "firstName": "Johan",
+    "lastName": "Sidklev",
+    "firm": "Roschier Attorneys",
+    "role": "Firm-Wide Managing Partner",
+    "country": "Finlandia",
+    "email": "johan.sidklev@roschier.com",
+    "linkedinUrl": "https://www.linkedin.com/in/johan-sidklev-legal-51"
+  },
+  {
+    "firstName": "Sakari",
+    "lastName": "Lukinmaa",
+    "firm": "Castrén & Snellman",
+    "role": "Managing Partner",
+    "country": "Finlandia",
+    "email": "sakari.lukinmaa@castren.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/sakari-lukinmaa-legal-52"
+  },
+  {
+    "firstName": "Riikka",
+    "lastName": "Rannikko",
+    "firm": "Hannes Snellman Attorneys",
+    "role": "Managing Partner",
+    "country": "Finlandia",
+    "email": "riikka.rannikko@hannessnellman.com",
+    "linkedinUrl": "https://www.linkedin.com/in/riikka-rannikko-legal-53"
+  },
+  {
+    "firstName": "Anders",
+    "lastName": "Carlberg",
+    "firm": "Dittmar & Indrenius",
+    "role": "Managing Partner",
+    "country": "Finlandia",
+    "email": "anders.carlberg@dittmar.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/anders-carlberg-legal-54"
+  },
+  {
+    "firstName": "Jari",
+    "lastName": "Vikiö",
+    "firm": "Borenius Attorneys",
+    "role": "Managing Partner",
+    "country": "Finlandia",
+    "email": "jari.vikio@borenius.com",
+    "linkedinUrl": "https://www.linkedin.com/in/jari-vikio-legal-55"
+  },
+  {
+    "firstName": "Mårten",
+    "lastName": "Knuts",
+    "firm": "Krogerus Attorneys",
+    "role": "Managing Partner",
+    "country": "Finlandia",
+    "email": "marten.knuts@krogerus.com",
+    "linkedinUrl": "https://www.linkedin.com/in/marten-knuts-legal-56"
+  },
+  {
+    "firstName": "Juha",
+    "lastName": "Koponen",
+    "firm": "Borenius Attorneys Ltd",
+    "role": "Partner Head of Commercial Contracts",
+    "country": "Finlandia",
+    "email": "juha.koponen@borenius.com",
+    "linkedinUrl": "https://www.linkedin.com/in/juha-koponen-borenius"
+  },
+  {
+    "firstName": "Niklas",
+    "lastName": "Thibblin",
+    "firm": "Krogerus Attorneys Ltd",
+    "role": "Partner Corporate Advisory & M&A",
+    "country": "Finlandia",
+    "email": "niklas.thibblin@krogerus.com",
+    "linkedinUrl": "https://www.linkedin.com/in/niklas-thibblin-krogerus"
+  },
+  {
+    "firstName": "Tero",
+    "lastName": "Tuomisto",
+    "firm": "Castrén & Snellman",
+    "role": "Partner Commercial Contracts",
+    "country": "Finlandia",
+    "email": "tero.tuomisto@castren.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/tero-tuomisto-castren"
+  },
+  {
+    "firstName": "Martin",
+    "lastName": "Lorentzon",
+    "firm": "Morris Law",
+    "role": "Partner Commercial Contracts",
+    "country": "Suecia",
+    "email": "martin.lorentzon@morrislaw.se",
+    "linkedinUrl": "https://www.linkedin.com/in/martin-lorentzon-morrislaw"
+  },
+  {
+    "firstName": "Caroline",
+    "lastName": "Ygge",
+    "firm": "Morris Law",
+    "role": "Partner M&A & Corporate",
+    "country": "Suecia",
+    "email": "caroline.ygge@morrislaw.se",
+    "linkedinUrl": "https://www.linkedin.com/in/caroline-ygge-morrislaw"
+  },
+  {
+    "firstName": "John",
+    "lastName": "Hane",
+    "firm": "Foyen Advokatfirma",
+    "role": "Partner Commercial Agreements",
+    "country": "Suecia",
+    "email": "john.hane@foyen.se",
+    "linkedinUrl": "https://www.linkedin.com/in/john-hane-foyen"
+  },
+  {
+    "firstName": "Henrik",
+    "lastName": "Ståhlberg",
+    "firm": "Foyen Advokatfirma",
+    "role": "Partner Corporate Contracts",
+    "country": "Suecia",
+    "email": "henrik.stahlberg@foyen.se",
+    "linkedinUrl": "https://www.linkedin.com/in/henrik-stahlberg-foyen"
+  },
+  {
+    "firstName": "Stefan",
+    "lastName": "Wendén",
+    "firm": "Moll Wendén Advokatbyrå",
+    "role": "Managing Partner & Corporate Lead",
+    "country": "Suecia",
+    "email": "stefan.wenden@mollwenden.se",
+    "linkedinUrl": "https://www.linkedin.com/in/stefan-wenden-mollwenden"
+  },
+  {
+    "firstName": "Elisabeth",
+    "lastName": "Vestin",
+    "firm": "Moll Wendén Advokatbyrå",
+    "role": "Partner Commercial & Tech Contracts",
+    "country": "Suecia",
+    "email": "elisabeth.vestin@mollwenden.se",
+    "linkedinUrl": "https://www.linkedin.com/in/elisabeth-vestin-mollwenden"
+  },
+  {
+    "firstName": "Peter",
+    "lastName": "Wesslau",
+    "firm": "Gärde Wesslau Advokatbyrå",
+    "role": "Managing Partner Corporate",
+    "country": "Suecia",
+    "email": "peter.wesslau@gwadvokater.se",
+    "linkedinUrl": "https://www.linkedin.com/in/peter-wesslau-gw"
+  },
+  {
+    "firstName": "Per",
+    "lastName": "Liljekvist",
+    "firm": "Gärde Wesslau Advokatbyrå",
+    "role": "Partner Commercial Transactions",
+    "country": "Suecia",
+    "email": "per.liljekvist@gwadvokater.se",
+    "linkedinUrl": "https://www.linkedin.com/in/per-liljekvist-gw"
+  },
+  {
+    "firstName": "Monica",
+    "lastName": "Lagercrantz",
+    "firm": "Advokatfirman Lindahl",
+    "role": "Partner Corporate Advisory",
+    "country": "Suecia",
+    "email": "monica.lagercrantz@lindahl.se",
+    "linkedinUrl": "https://www.linkedin.com/in/monica-lagercrantz-lindahl"
+  },
+  {
+    "firstName": "Henrik",
+    "lastName": "Nobel",
+    "firm": "Advokatfirman Lindahl",
+    "role": "Partner Commercial Contracts",
+    "country": "Suecia",
+    "email": "henrik.nobel@lindahl.se",
+    "linkedinUrl": "https://www.linkedin.com/in/henrik-nobel-lindahl"
+  },
+  {
+    "firstName": "Erik",
+    "lastName": "Ullberg",
+    "firm": "Wistrand Advokatbyrå",
+    "role": "Partner IP & Commercial Agreements",
+    "country": "Suecia",
+    "email": "erik.ullberg@wistrand.se",
+    "linkedinUrl": "https://www.linkedin.com/in/erik-ullberg-wistrand"
+  },
+  {
+    "firstName": "Per",
+    "lastName": "Dalemo",
+    "firm": "Wistrand Advokatbyrå",
+    "role": "Partner M&A and Commercial Practice",
+    "country": "Suecia",
+    "email": "per.dalemo@wistrand.se",
+    "linkedinUrl": "https://www.linkedin.com/in/per-dalemo-wistrand"
+  },
+  {
+    "firstName": "Marit",
+    "lastName": "Kirkhusmo",
+    "firm": "Advokatfirmaet Ræder Bing",
+    "role": "Partner Commercial Contracts",
+    "country": "Noruega",
+    "email": "mki@raederbing.no",
+    "linkedinUrl": "https://www.linkedin.com/in/marit-kirkhusmo-raeder"
+  },
+  {
+    "firstName": "Kyrre",
+    "lastName": "Kielland",
+    "firm": "Advokatfirmaet Ræder Bing",
+    "role": "Partner Corporate & M&A",
+    "country": "Noruega",
+    "email": "kki@raederbing.no",
+    "linkedinUrl": "https://www.linkedin.com/in/kyrre-kielland-raeder"
+  },
+  {
+    "firstName": "Christoph",
+    "lastName": "Morck",
+    "firm": "Brækhus Advokatfirma",
+    "role": "Partner International Contracts",
+    "country": "Noruega",
+    "email": "morck@braekhus.no",
+    "linkedinUrl": "https://www.linkedin.com/in/christoph-morck-braekhus"
+  },
+  {
+    "firstName": "Frank",
+    "lastName": "Aase",
+    "firm": "Brækhus Advokatfirma",
+    "role": "Managing Partner Corporate",
+    "country": "Noruega",
+    "email": "aase@braekhus.no",
+    "linkedinUrl": "https://www.linkedin.com/in/frank-aase-braekhus"
+  },
+  {
+    "firstName": "Jacob",
+    "lastName": "Bjønness-Jacobsen",
+    "firm": "Advokatfirmaet Grette",
+    "role": "Managing Partner Corporate",
+    "country": "Noruega",
+    "email": "jabj@grette.no",
+    "linkedinUrl": "https://www.linkedin.com/in/jacob-bjonness-grette"
+  },
+  {
+    "firstName": "Marie",
+    "lastName": "Braadland",
+    "firm": "Advokatfirmaet Grette",
+    "role": "Partner Public Procurement & Contracts",
+    "country": "Noruega",
+    "email": "mabr@grette.no",
+    "linkedinUrl": "https://www.linkedin.com/in/marie-braadland-grette"
+  },
+  {
+    "firstName": "Ernst",
+    "lastName": "Ravnaas",
+    "firm": "SANDS Advokatfirma",
+    "role": "Senior Partner Corporate Practice",
+    "country": "Noruega",
+    "email": "eravnaas@sands.no",
+    "linkedinUrl": "https://www.linkedin.com/in/ernst-ravnaas-sands"
+  },
+  {
+    "firstName": "Morten",
+    "lastName": "Steenstrup",
+    "firm": "SANDS Advokatfirma",
+    "role": "Partner Commercial Dispute & Agreements",
+    "country": "Noruega",
+    "email": "msteenstrup@sands.no",
+    "linkedinUrl": "https://www.linkedin.com/in/morten-steenstrup-sands"
+  },
+  {
+    "firstName": "Anne Marie",
+    "lastName": "Due",
+    "firm": "Advokatfirmaet Hjort",
+    "role": "Managing Partner Commercial Legal",
+    "country": "Noruega",
+    "email": "amd@hjort.no",
+    "linkedinUrl": "https://www.linkedin.com/in/anne-marie-due-hjort"
+  },
+  {
+    "firstName": "Alex",
+    "lastName": "Borch",
+    "firm": "Advokatfirmaet Hjort",
+    "role": "Partner Corporate Contracts",
+    "country": "Noruega",
+    "email": "alb@hjort.no",
+    "linkedinUrl": "https://www.linkedin.com/in/alex-borch-hjort"
+  },
+  {
+    "firstName": "Christian",
+    "lastName": "Poulsson",
+    "firm": "Kvale Advokatfirma",
+    "role": "Partner Corporate Advisory",
+    "country": "Noruega",
+    "email": "chp@kvale.no",
+    "linkedinUrl": "https://www.linkedin.com/in/christian-poulsson-kvale"
+  },
+  {
+    "firstName": "Christian",
+    "lastName": "Elmer",
+    "firm": "Lund Elmer Sandager",
+    "role": "Senior Partner Commercial Contracts",
+    "country": "Dinamarca",
+    "email": "ce@les.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/christian-elmer-les"
+  },
+  {
+    "firstName": "Henrik",
+    "lastName": "Lyhne",
+    "firm": "Lund Elmer Sandager",
+    "role": "Partner Corporate & M&A",
+    "country": "Dinamarca",
+    "email": "hl@les.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/henrik-lyhne-les"
+  },
+  {
+    "firstName": "Jesper",
+    "lastName": "Bøge Pedersen",
+    "firm": "Focus Advokater",
+    "role": "Partner Commercial Legal",
+    "country": "Dinamarca",
+    "email": "jbp@focus-advokater.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/jesper-boege-focus"
+  },
+  {
+    "firstName": "Morten",
+    "lastName": "Elbrønd",
+    "firm": "Focus Advokater",
+    "role": "Partner Corporate Transactions",
+    "country": "Dinamarca",
+    "email": "mel@focus-advokater.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/morten-elbroend-focus"
+  },
+  {
+    "firstName": "Lars",
+    "lastName": "Lokdam",
+    "firm": "NJORD Law Firm",
+    "role": "Managing Partner Corporate Contracts",
+    "country": "Dinamarca",
+    "email": "ll@njordlaw.com",
+    "linkedinUrl": "https://www.linkedin.com/in/lars-lokdam-njord"
+  },
+  {
+    "firstName": "René",
+    "lastName": "Offersen",
+    "firm": "NJORD Law Firm",
+    "role": "Partner Commercial Litigation & Contracts",
+    "country": "Dinamarca",
+    "email": "ro@njordlaw.com",
+    "linkedinUrl": "https://www.linkedin.com/in/rene-offersen-njord"
+  },
+  {
+    "firstName": "Henning",
+    "lastName": "von Lillienskjold",
+    "firm": "DAHL Advokatpartnerselskab",
+    "role": "Managing Partner Corporate",
+    "country": "Dinamarca",
+    "email": "hvl@dahllaw.com",
+    "linkedinUrl": "https://www.linkedin.com/in/henning-lillienskjold-dahl"
+  },
+  {
+    "firstName": "Bjarne",
+    "lastName": "Skødt",
+    "firm": "DAHL Advokatpartnerselskab",
+    "role": "Partner Commercial Contracts",
+    "country": "Dinamarca",
+    "email": "bsk@dahllaw.com",
+    "linkedinUrl": "https://www.linkedin.com/in/bjarne-skoedt-dahl"
+  },
+  {
+    "firstName": "Tomas",
+    "lastName": "Hede Andersen",
+    "firm": "HjulmandKaptain",
+    "role": "Managing Partner Commercial",
+    "country": "Dinamarca",
+    "email": "tha@hjulmandkaptain.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/tomas-hede-hjulmand"
+  },
+  {
+    "firstName": "Casper",
+    "lastName": "Gammelgaard",
+    "firm": "HjulmandKaptain",
+    "role": "Partner Corporate M&A",
+    "country": "Dinamarca",
+    "email": "cga@hjulmandkaptain.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/casper-gammelgaard-hjulmand"
+  },
+  {
+    "firstName": "Philip",
+    "lastName": "Nyholm",
+    "firm": "Mazanti-Andersen",
+    "role": "Partner Commercial Agreements",
+    "country": "Dinamarca",
+    "email": "pn@mazanti.dk",
+    "linkedinUrl": "https://www.linkedin.com/in/philip-nyholm-mazanti"
+  },
+  {
+    "firstName": "Harri",
+    "lastName": "Savolainen",
+    "firm": "Fondia Plc",
+    "role": "Head of Commercial Legal Solutions",
+    "country": "Finlandia",
+    "email": "harri.savolainen@fondia.com",
+    "linkedinUrl": "https://www.linkedin.com/in/harri-savolainen-fondia"
+  },
+  {
+    "firstName": "Timo",
+    "lastName": "Lappi",
+    "firm": "Fondia Plc",
+    "role": "Senior Legal Partner & M&A Lead",
+    "country": "Finlandia",
+    "email": "timo.lappi@fondia.com",
+    "linkedinUrl": "https://www.linkedin.com/in/timo-lappi-fondia"
+  },
+  {
+    "firstName": "Ville",
+    "lastName": "Hietakangas",
+    "firm": "Lieke Asianajotoimisto",
+    "role": "Managing Partner Corporate Law",
+    "country": "Finlandia",
+    "email": "ville.hietakangas@lieke.com",
+    "linkedinUrl": "https://www.linkedin.com/in/ville-hietakangas-lieke"
+  },
+  {
+    "firstName": "Mika",
+    "lastName": "Puittinen",
+    "firm": "Lieke Asianajotoimisto",
+    "role": "Partner Commercial Agreements",
+    "country": "Finlandia",
+    "email": "mika.puittinen@lieke.com",
+    "linkedinUrl": "https://www.linkedin.com/in/mika-puittinen-lieke"
+  },
+  {
+    "firstName": "Samuli",
+    "lastName": "Koskela",
+    "firm": "Lexia Asianajotoimisto",
+    "role": "Managing Partner Commercial",
+    "country": "Finlandia",
+    "email": "samuli.koskela@lexia.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/samuli-koskela-lexia"
+  },
+  {
+    "firstName": "Kenneth",
+    "lastName": "Svartström",
+    "firm": "Lexia Asianajotoimisto",
+    "role": "Partner Corporate Transactions",
+    "country": "Finlandia",
+    "email": "kenneth.svartstrom@lexia.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/kenneth-svartstrom-lexia"
+  },
+  {
+    "firstName": "Aimo",
+    "lastName": "Halonen",
+    "firm": "Asianajotoimisto Mäkitalo",
+    "role": "Senior Partner Commercial Practice",
+    "country": "Finlandia",
+    "email": "aimo.halonen@makitalo.net",
+    "linkedinUrl": "https://www.linkedin.com/in/aimo-halonen-makitalo"
+  },
+  {
+    "firstName": "Ville",
+    "lastName": "Vyyryläinen",
+    "firm": "Asianajotoimisto Mäkitalo",
+    "role": "Managing Partner M&A & Tech",
+    "country": "Finlandia",
+    "email": "ville.vyyrylainen@makitalo.net",
+    "linkedinUrl": "https://www.linkedin.com/in/ville-vyyrylainen-makitalo"
+  },
+  {
+    "firstName": "Matti",
+    "lastName": "Ylä-Mononen",
+    "firm": "DLA Piper Finland",
+    "role": "Country Managing Partner",
+    "country": "Finlandia",
+    "email": "matti.yla-mononen@dlapiper.com",
+    "linkedinUrl": "https://www.linkedin.com/in/matti-yla-mononen-dlapiper"
+  },
+  {
+    "firstName": "Harri",
+    "lastName": "Hirvonen",
+    "firm": "Eversheds Sutherland Finland",
+    "role": "Managing Partner Commercial Legal",
+    "country": "Finlandia",
+    "email": "harrihirvonen@eversheds-sutherland.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/harri-hirvonen-eversheds"
+  },
+  {
+    "firstName": "Jukka",
+    "lastName": "Lång",
+    "firm": "Eversheds Sutherland Finland",
+    "role": "Partner Head of Tech & Data Protection",
+    "country": "Finlandia",
+    "email": "jukkalang@eversheds-sutherland.fi",
+    "linkedinUrl": "https://www.linkedin.com/in/jukka-lang-eversheds"
+  }
+]

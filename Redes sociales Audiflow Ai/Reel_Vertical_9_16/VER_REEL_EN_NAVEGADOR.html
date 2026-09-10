@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang='es'>
+<head>
+<meta charset='UTF-8'>
+<title>AuditFlow AI — Reel Oficial 9:16 Preview</title>
+<style>
+body { background: #0b0f19; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; font-family: sans-serif; margin: 0; }
+.reel { width: 360px; height: 640px; border-radius: 24px; overflow: hidden; position: relative; box-shadow: 0 20px 50px rgba(56,189,248,0.35); cursor: pointer; }
+.slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 0.5s ease-in-out; }
+.slide.active { opacity: 1; }
+.bars { position: absolute; top: 14px; left: 14px; right: 14px; display: flex; gap: 6px; z-index: 10; }
+.bar { flex: 1; height: 3px; background: rgba(255,255,255,0.3); border-radius: 2px; }
+.fill { width: 0%; height: 100%; background: #38bdf8; }
+.tag { position: absolute; bottom: 20px; left: 20px; background: #10b981; color: #000; font-weight: bold; padding: 6px 12px; border-radius: 12px; font-size: 12px; z-index: 10; }
+</style>
+</head>
+<body>
+<h2 style='color:#38bdf8;margin-bottom:14px;'>🎬 AuditFlow AI — Reel Oficial 9:16</h2>
+<p style='color:#94a3b8;font-size:13px;margin-bottom:16px;'>Haz clic en la pantalla para avanzar escenas manualmente</p>
+<div class='reel' id='r' onclick='advance()'>
+<div class='bars'><div class='bar'><div class='fill' id='f0'></div></div><div class='bar'><div class='fill' id='f1'></div></div><div class='bar'><div class='fill' id='f2'></div></div></div>
+<div class='slide active' id='s0' style='background-image:url(Reel_Vertical_9_16/scene_1_hook_cfo_14k.jpg)'></div>
+<div class='slide' id='s1' style='background-image:url(Reel_Vertical_9_16/scene_2_solucion_ia_8s.jpg)'></div>
+<div class='slide' id='s2' style='background-image:url(Reel_Vertical_9_16/scene_3_resultado_word_cta.jpg)'></div>
+<div class='tag' id='t'>🚨 Escena 1/3: Gancho CFO (,400)</div>
+</div>
+<script>
+let cur = 0, el = 0;
+const tags = ['🚨 Escena 1/3: Gancho CFO (,400)', '⚡ Escena 2/3: Auditoria en 8s en RAM', '📄 Escena 3/3: Redlines Word (.docx) y CTA'];
+function show(i) {
+cur = i; el = 0;
+for(let j=0; j<3; j++) {
+document.getElementById('s'+j).className = 'slide' + (j===i?' active':'');
+document.getElementById('f'+j).style.width = j<i?'100%':'0%';
+}
+document.getElementById('t').innerText = tags[i];
+}
+function advance() { show((cur+1)%3); }
+setInterval(function() {
+el += 100;
+document.getElementById('f'+cur).style.width = (el/40)+'%';
+if(el>=4000) advance();
+}, 100);
+</script>
+</body>
+</html>
