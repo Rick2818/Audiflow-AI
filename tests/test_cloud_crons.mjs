@@ -1,9 +1,9 @@
 import http from 'http';
-import bufferMorningHandler from '../api/cron/buffer-morning.js';
-import bufferEveningHandler from '../api/cron/buffer-evening.js';
-import storytellingHandler from '../api/cron/storytelling.js';
-import nordicSowerHandler from '../api/cron/nordic-sower.js';
-import masterDispatcherHandler from '../api/cron/master-dispatcher.js';
+import bufferMorningHandler from '../lib/cron-handlers/buffer-morning.js';
+import bufferEveningHandler from '../lib/cron-handlers/buffer-evening.js';
+import storytellingHandler from '../lib/cron-handlers/storytelling.js';
+import nordicSowerHandler from '../lib/cron-handlers/nordic-sower.js';
+import masterDispatcherHandler from '../api/cron.js';
 
 function mockReqRes(query = {}, headers = {}) {
   const req = {

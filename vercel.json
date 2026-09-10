@@ -2,32 +2,8 @@
   "version": 2,
   "crons": [
     {
-      "path": "/api/cron/master-dispatcher",
+      "path": "/api/cron",
       "schedule": "0 * * * *"
-    },
-    {
-      "path": "/api/cron/nordic-sower",
-      "schedule": "0 10 * * 1-5"
-    },
-    {
-      "path": "/api/cron/storytelling",
-      "schedule": "0 12 * * 1-6"
-    },
-    {
-      "path": "/api/cron/buffer-morning",
-      "schedule": "0 14 * * *"
-    },
-    {
-      "path": "/api/admin?action=daily_sales_report&slot=2:00+PM",
-      "schedule": "0 20 * * 1-5"
-    },
-    {
-      "path": "/api/cron/buffer-evening",
-      "schedule": "0 23 * * *"
-    },
-    {
-      "path": "/api/admin?action=daily_sales_report&slot=6:00+PM",
-      "schedule": "0 0 * * 2-6"
     }
   ],
   "headers": [
@@ -325,11 +301,11 @@
     },
     {
       "source": "/api/support/(.*)",
-      "destination": "/api/support"
+      "destination": "/api/report"
     },
     {
       "source": "/api/support",
-      "destination": "/api/support"
+      "destination": "/api/report"
     },
     {
       "source": "/api/social-publish",
@@ -354,32 +330,6 @@
     {
       "source": "/((?!api/).*)",
       "destination": "/frontend/$1"
-    }
-  ],
-  "crons": [
-    {
-      "path": "/api/outreach?campaign=daily_master_dispatch&batch=pareto_top20",
-      "schedule": "0 13 * * 1-5"
-    },
-    {
-      "path": "/api/lead-recovery",
-      "schedule": "0 14 * * 1-5"
-    },
-    {
-      "path": "/api/social-publish?action=daily_cron_dispatch",
-      "schedule": "0 14 * * *"
-    },
-    {
-      "path": "/api/admin?action=cron_monitor",
-      "schedule": "0 8 * * *"
-    },
-    {
-      "path": "/api/admin?action=daily_sales_report&slot=2:00+PM",
-      "schedule": "0 20 * * 1-5"
-    },
-    {
-      "path": "/api/admin?action=daily_sales_report&slot=6:00+PM",
-      "schedule": "0 0 * * 2-6"
     }
   ]
 }

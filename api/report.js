@@ -97,6 +97,8 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent, l
   return { status: 'logged_internally' };
 }
 
+import supportHandler from '../lib/support.js';
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
@@ -104,6 +106,12 @@ export default async function handler(req, res) {
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
+  }
+
+  // Delegar solicitudes de soporte
+  const url = req.url || '';
+  if (url.includes('/api/support') || req.query?.type === 'support' || req.body?.is_support) {
+    return await supportHandler(req, res);
   }
 
   // Handle POST (Report Issue)

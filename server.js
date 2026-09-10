@@ -25,7 +25,7 @@ import chatDocumentHandler from './api/chat-document.js';
 import adminHandler from './api/admin.js';
 import outreachHandler from './api/outreach.js';
 import reportHandler from './api/report.js';
-import supportHandler from './api/support.js';
+import supportHandler from './lib/support.js';
 import subscribeHandler from './lib/subscribe.js';
 import verifyClientHandler from './lib/verify-client.js';
 import inviteColleagueHandler from './lib/invite-colleague.js';

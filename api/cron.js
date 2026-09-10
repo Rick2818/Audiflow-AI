@@ -1,9 +1,9 @@
-import bufferMorningHandler from './buffer-morning.js';
-import bufferEveningHandler from './buffer-evening.js';
-import storytellingHandler from './storytelling.js';
-import nordicSowerHandler from './nordic-sower.js';
-import { getCloudState, setCloudState } from '../../lib/cloud-state.js';
-import { verifyAdminAuth } from '../../lib/security.js';
+import bufferMorningHandler from '../lib/cron-handlers/buffer-morning.js';
+import bufferEveningHandler from '../lib/cron-handlers/buffer-evening.js';
+import storytellingHandler from '../lib/cron-handlers/storytelling.js';
+import nordicSowerHandler from '../lib/cron-handlers/nordic-sower.js';
+import { getCloudState, setCloudState } from '../lib/cloud-state.js';
+import { verifyAdminAuth } from '../lib/security.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -113,3 +113,4 @@ export default async function handler(req, res) {
     });
   }
 }
+
