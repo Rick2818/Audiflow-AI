@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { BufferPublisher } from '../lib/buffer-publisher.js';
 import { CONFIG } from '../lib/config.js';
-import { getDailyBufferSchedule } from '../lib/buffer-content-calendar.js';
+import { getNextUnusedBufferPost, recordBufferPostPublication } from '../lib/buffer-content-calendar.js';
 import { Resend } from 'resend';
 
 dotenv.config();
@@ -12,20 +12,15 @@ dotenv.config();
  * ==============================================================================
  * AUDITFLOW AI — PUBLICADOR MATUTINO EN BUFFER (8:00 AM CST — LUNES A DOMINGO)
  * ==============================================================================
- * PARRILLA MAESTRA DE 7 DÍAS SIN REPETICIÓN (APROBADA POR DON RICARDO):
- *  - Lunes: Reel / Video (Caso $142k USD)
- *  - Martes: Texto Puro (CFO Briefing - Fuga de EBITDA)
- *  - Miércoles: Post con Imagen (Comparativa 4.5 Horas vs 8 Segundos)
- *  - Jueves: Reel / Video (Autopsia Cláusulas de Indexación)
- *  - Viernes: Texto Puro (Cierre de Semana sin Pasivos Ocultos)
- *  - Sábado: Post con Imagen (Seguridad RAM Volátil vs IAs Públicas)
- *  - Domingo: Reflexión Estratégica & Visión de Negocio
+ * REGLA INMUTABLE ZERO-REPEAT:
+ * Cada post matutino consume una imagen NUEVA y un copy fresco de la librería.
+ * Cero repetición visual ni cíclica en redes sociales.
  * ==============================================================================
  */
 
 export async function runDailyBuffer8AMPublication() {
   console.log('================================================================================');
-  console.log('☀️ AUDITFLOW AI — PUBLICADOR DIARIO EN BUFFER (CALENDARIO 7 DÍAS SIN REPETICIÓN)');
+  console.log('☀️ AUDITFLOW AI — PUBLICADOR DIARIO EN BUFFER (MOTOR DINÁMICO ZERO-REPEAT)');
   console.log('🎯 CANAL PRIORITARIO #1: LINKEDIN COMPANY PAGE (Audiflowai)');
   console.log('📱 Canales Complementarios: Facebook Page & Instagram');
   console.log('================================================================================\n');
@@ -36,13 +31,11 @@ export async function runDailyBuffer8AMPublication() {
   }
 
   const publisher = new BufferPublisher(token);
-  const dayOfWeek = new Date().getDay();
-  const trend = getDailyBufferSchedule(dayOfWeek);
-  const isReel = trend.format === 'REEL';
-  const hasImage = Boolean(trend.image);
-  const assetsForPost = hasImage ? [{ image: { url: trend.image } }] : [];
+  const trend = getNextUnusedBufferPost({ format: 'FEED' });
+  const assetsForPost = [{ image: { url: trend.image } }];
 
-  console.log(`📅 Día de la Semana: ${dayOfWeek} | Tema Matutino: "${trend.title}"`);
+  console.log(`📅 Fecha: ${new Date().toLocaleDateString()} | Tema Matutino: "${trend.title}"`);
+  console.log(`🖼️ Imagen Única Seleccionada: ${trend.image}`);
 
   // Canales oficiales registrados en Buffer
   const LI_CHANNEL_ID = '6a97043a065799be4669fadb'; // PRIORIDAD MÁXIMA
@@ -88,13 +81,9 @@ export async function runDailyBuffer8AMPublication() {
     results.facebook = { success: false, error: errFB.message };
   }
 
-  // 3. PUBLICAR EN INSTAGRAM (REELS O FEED CON ASSET VISUAL)
+  // 3. PUBLICAR EN INSTAGRAM (FEED CON ASSET VISUAL NUEVO)
   console.log('\n🚀 [3/3] Publicando en INSTAGRAM (@audiflowai)...');
   try {
-    const igAssets = assetsForPost.length > 0 ? assetsForPost : [{
-      image: { url: 'https://audiflowai.com/images/carousel/slide1_cover.jpg' }
-    }];
-
     const ig = await publisher.createPost({
       channelId: IG_CHANNEL_ID,
       text: trend.copy,
@@ -106,7 +95,7 @@ export async function runDailyBuffer8AMPublication() {
           shouldShareToFeed: true
         }
       },
-      assets: igAssets
+      assets: assetsForPost
     });
     console.log(`✅ [INSTAGRAM OK] Publicado exitosamente. ID: ${ig?.id || 'OK'}`);
     results.instagram = { success: true, id: ig?.id };
@@ -115,7 +104,9 @@ export async function runDailyBuffer8AMPublication() {
     results.instagram = { success: false, error: errIG.message };
   }
 
-  // Registro persistente en bitácora social
+  // Registro persistente en bitácora social y ledger de no repetición
+  recordBufferPostPublication({ post: trend, results });
+
   const auditPath = path.resolve('social_published_feed.json');
   try {
     let feed = [];
@@ -125,8 +116,9 @@ export async function runDailyBuffer8AMPublication() {
     feed.unshift({
       timestamp: new Date().toISOString(),
       eventType: 'BUFFER_DAILY_8AM_MATUTINO',
-      dayOfWeek,
       theme: trend.title,
+      image: trend.image,
+      imageUrls: [trend.image],
       results
     });
     fs.writeFileSync(auditPath, JSON.stringify(feed, null, 2), 'utf8');

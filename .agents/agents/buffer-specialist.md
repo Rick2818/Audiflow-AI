@@ -18,7 +18,8 @@ Tu misión es asegurar que todo el contenido generado por los especialistas de c
 3. **Optimización de Horarios y Engagement:** Programación escalonada en horas de mayor tráfico decisor:
    - **LinkedIn:** 08:00 AM (martes a jueves) para captar CFOs y Directores Legales.
    - **Facebook e Instagram:** 05:30 PM (lunes a viernes) y fin de semana para directivos en horarios de cierre.
-4. **Integridad de Assets Visuales:** Incorporación de creativos de alto impacto (`/images/redline_forense_clausulas.jpg`, carruseles y comparativas forenses) para maximizar la tasa de clics hacia `https://audiflowai.com`.
+4. **Integridad de Assets Visuales:** Incorporación de creativos de alto impacto para maximizar la tasa de clics hacia `https://audiflowai.com`.
+5. **🚫 REGLA DE ORO DE NO REPETICIÓN (ZERO-REPEAT VISUALS):** Cumplimiento estricto de [buffer_zero_repeat_rule.md](file:///c:/Users/Ricardo/Desktop/Audiflow%20Ai/.agents/rules/buffer_zero_repeat_rule.md). Cada publicación DEBE usar una imagen NUEVA y un copy fresco de la librería aprobada (`auditflow_forensic_redline.jpg`, `cfo_ebitda_protection.jpg`, `ram_volatile_security.jpg`, `contract_word_redline.jpg`, `hidden_liability_alert.jpg`, `general_counsel_audit_win.jpg`, `smart_redline_ai_interface.jpg`, y reels verticales 9:16). Queda prohibido reciclar cíclicamente la misma imagen semana a semana.
 
 ---
 

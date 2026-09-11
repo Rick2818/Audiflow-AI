@@ -1,58 +1,77 @@
 {
-  "0": {
-    "dayName": "Domingo",
-    "format": "STRATEGIC_VISION",
-    "title": "Domingo de Perspectiva: Certeza en los Negocios",
-    "copy": "Domingo de perspectiva: La ventaja asimétrica de quienes deciden con certeza. 🏛️📈\n  >\n  > En el entorno comercial actual, la diferencia entre una empresa que escala de forma rentable y una que queda atrapada en litigios interminables no es la agresividad comercial; es la calidad de sus acuerdos.\n  >\n  > Históricamente, solo las corporaciones multinacionales con presupuestos legales de millones de dólares podían auditar minuciosamente cada adenda y contrato de suministro.\n  >\n  > Hoy, AuditFlow AI democratiza esa capacidad fiduciaria para cualquier empresa mediana, despacho o consultor:\n  > Auditorías forenses inmediatas, redlines listos para negociar en Word y protección fiduciaria a $19 USD por documento.\n  >\n  > Inicie su semana con la tranquilidad de que ningún acuerdo pondrá en riesgo el patrimonio construido.\n  >\n  > Explore el motor de auditoría antes de su primera reunión del lunes:  \n  > 👉 `https://audiflowai.com/?ref=buffer-domingo-vision`",
-    "image": "https://audiflowai.com/images/carousel/slide1_cover.jpg",
-    "videoUrl": null
-  },
-  "1": {
-    "dayName": "Lunes",
-    "format": "REEL",
-    "title": "La Cláusula Trampa de los $142,000 USD",
-    "copy": "¿Cuánto le costaría a su empresa firmar un contrato sin revisar la letra chica del anexo técnico?\n  >\n  > En este caso real, 8 palabras ambiguas le costaron $142,000 USD a una empresa mediana por no advertir una cláusula de indexación no topada.\n  >\n  > Las 3 cláusulas trampa más frecuentes al inicio de semana:\n  > 1️⃣ Renovaciones forzosas sin ventana de salida.  \n  > 2️⃣ Ajustes de tarifa por 'costos directos' ilimitados.  \n  > 3️⃣ Responsabilidad solidaria por demoras de terceros.\n  >\n  > Con AuditFlow AI, subes el documento confidencial y en 8.2 segundos en memoria RAM volátil tienes tu informe de pasivos ocultos y tu Redline en Word (.docx con Control de Cambios) listo para negociar.\n  >\n  > ⚡ Audite su primer contrato por $19 USD sin suscripciones forzosas:  \n  > 👉 `https://audiflowai.com/?ref=buffer-lunes-reel`",
-    "image": "https://audiflowai.com/images/auditoria_forense_dashboard_nueva.jpg",
-    "videoUrl": "https://audiflowai.com/images/reel_forense_muestra.mp4"
-  },
-  "2": {
-    "dayName": "Martes",
-    "format": "TEXT_ONLY",
-    "title": "CFO Briefing: Fuga de EBITDA y Responsabilidad Solidaria",
-    "copy": "Para un CFO, un contrato firmado a ciegas no es un trámite legal; es una fuga directa de EBITDA.\n  >\n  > El 74% de los sobrecostos imprevistos en empresas de servicios y manufactura no provienen de caídas en ventas, sino de pasivos contingentes enterrados en las páginas 30 a 60 de los contratos con proveedores.\n  >\n  > Penalidades asimétricas, cesión involuntaria de propiedad intelectual y cláusulas leoninas de terminación anticipada.\n  >\n  > La pregunta fiduciaria no es si su equipo legal es competente; la pregunta es:  \n  > ¿Tiene un abogado la capacidad cognitiva de revisar 70 páginas a las 6:00 PM sin omitir una sola referencia cruzada?\n  >\n  > La respuesta biológica es no. La respuesta algorítmica es AuditFlow AI:\n  > • 8.2 segundos de escaneo determinista.  \n  > • Cero retención de información confidencial en disco (Memoria RAM volátil).  \n  > • Informe financiero de contingencias + Redline editable en Word.  \n  > • Solo $19 USD por contrato auditado.\n  >\n  > Proteja el margen operativo de su organización antes de estampar la firma:  \n  > 👉 `https://audiflowai.com/?ref=buffer-martes-texto`",
-    "image": null,
-    "videoUrl": null
-  },
-  "3": {
-    "dayName": "Miércoles",
-    "format": "IMAGE",
-    "title": "Comparativa Forense: 4.5 Horas vs. 8 Segundos",
-    "copy": "¿4.5 horas de revisión manual o 8 segundos de auditoría algorítmica? ⚖️⏱️\n  >\n  > La eficiencia de un despacho o departamento legal moderno no se mide por cuántas noches se desvela su equipo leyendo contratos, sino por la velocidad y certeza con la que responde a sus clientes.\n  >\n  > [Mire la gráfica comparativa]:\n  > ❌ Método Tradicional:  \n  > • 4 a 5 horas de fatiga visual.  \n  > • Riesgo de omisión en anexos cruzados.  \n  > • Cientos de dólares en horas facturables consumidas en tareas mecánicas.\n  >\n  > ⚡ Estándar AuditFlow AI:  \n  > • 8.2 segundos en memoria RAM volátil.  \n  > • 100% de cláusulas contrastadas contra pasivos ocultos.  \n  > • Exportación directa a Microsoft Word con Control de Cambios.  \n  > • $19 USD. Sin ataduras ni contratos mensuales forzosos.\n  >\n  > Pruebe la auditoría en vivo con su propio borrador contractual:  \n  > 👉 `https://audiflowai.com/?ref=buffer-miercoles-img`",
-    "image": "https://audiflowai.com/images/comparativa_eficiencia.jpg",
-    "videoUrl": null
-  },
-  "4": {
-    "dayName": "Jueves",
-    "format": "REEL",
-    "title": "Autopsia de un Desastre Contractual: Cláusulas de Indexación",
-    "copy": "¿Por qué los contratos comerciales se vuelven impagables al segundo año? 📉\n  >\n  > En este Reel desglosamos la 'Cláusula Camaleón': una fórmula de indexación acumulativa que parecía inofensiva en el borrador inicial, pero que tras 18 meses trasladó un sobrecosto no presupuestado del 22%.\n  >\n  > Ningún ojo humano lo detectó en la lectura veloz previa a la firma.\n  >\n  > Con el motor forense de AuditFlow AI, el sistema subraya en rojo la cláusula, calcula el impacto financiero del pasivo y redacta automáticamente el texto de contrapropuesta en Word para proteger a su empresa.\n  >\n  > 8 segundos que salvan presupuestos anuales completos.\n  >\n  > Audite un borrador ahora mismo:  \n  > 👉 `https://audiflowai.com/?ref=buffer-jueves-reel`",
-    "image": "https://audiflowai.com/images/redline_forense_clausulas.jpg",
-    "videoUrl": "https://audiflowai.com/images/reel_forense_muestra.mp4"
-  },
-  "5": {
-    "dayName": "Viernes",
-    "format": "TEXT_ONLY",
-    "title": "El Cierre de Semana del Abogado que Sí Duerme",
-    "copy": "Es viernes, 4:30 PM. Entra un contrato urgente de 62 páginas a su correo con la nota: 'Necesitamos su firma hoy antes de las 6:00 PM'.\n  >\n  > Escenario A:  \n  > Cancela sus compromisos personales, se queda 3 horas leyendo párrafos densos con fatiga visual y firma con la duda de si se le escapó una cláusula de penalidad o renovación automática.\n  >\n  > Escenario B:  \n  > Sube el documento a AuditFlow AI.  \n  > En 8.2 segundos la memoria RAM volátil audita cada riesgo, genera un informe ejecutivo y le entrega un archivo Word (.docx) con todas las correcciones en Control de Cambios.  \n  > Envía la contrapropuesta formal a las 4:45 PM y termina su jornada con certeza fiduciaria absoluta.\n  >\n  > La tranquilidad jurídica de su empresa no debería costarle los fines de semana.\n  >\n  > Pruebe el estándar 2026 de auditoría legal:  \n  > 👉 `https://audiflowai.com/?ref=buffer-viernes-texto`",
-    "image": null,
-    "videoUrl": null
-  },
-  "6": {
-    "dayName": "Sábado",
-    "format": "IMAGE",
-    "title": "Arquitectura de Privacidad: RAM Volátil vs. IAs Públicas",
-    "copy": "¿Por qué nunca debería subir un contrato confidencial o un NDA a una IA pública? 🔒⚠️\n  >\n  > Cuando utiliza herramientas de IA convencionales sin acuerdos empresariales fiduciarios, sus textos contractuales pueden ser almacenados en servidores permanentes y utilizados para reentrenar modelos de terceros, comprometiendo secretos comerciales.\n  >\n  > En AuditFlow AI la privacidad es fiduciaria y no negociable:\n  >\n  > 1️⃣ Procesamiento Exclusivo en Memoria RAM Volátil: Sus archivos jamás tocan almacenamiento permanente en disco.  \n  > 2️⃣ Purga Automática Irreversible: Terminada la auditoría, la sesión se destruye en milisegundos.  \n  > 3️⃣ Cero Reentrenamiento: Sus cláusulas y datos no entrenan ningún algoritmo.  \n  > 4️⃣ Cumplimiento Institucional: Alineado con SOC-2 Type II y RGPD / GDPR Art. 28.\n  >\n  > Privacidad bancaria y precisión quirúrgica para sus acuerdos estratégicos.\n  >\n  > Conozca nuestra arquitectura de seguridad:  \n  > 👉 `https://audiflowai.com/?ref=buffer-sabado-img`",
-    "image": "https://audiflowai.com/images/post_ig_ciberseguridad.jpg",
-    "videoUrl": null
-  }
+  "posts": [
+    {
+      "id": "post_01_cfo_ebitda",
+      "format": "FEED",
+      "title": "Fuga de EBITDA y Responsabilidad Solidaria en Contratos de Proveedores",
+      "copy": "Para un CFO o Director General, un contrato firmado a ciegas no es un trámite legal; es una fuga directa de EBITDA. 💼📉\n\nEl 74% de los sobrecostos imprevistos en empresas medianas provienen de pasivos contingentes enterrados en las cláusulas intermedias de contratos comerciales:\n• Penalidades asimétricas no topadas.\n• Renovaciones forzosas con ventanas de salida imposibles.\n• Indexaciones acumulativas que trasladan sobrecostos de dos dígitos.\n\nAuditFlow AI audita contratos en 8.2 segundos en memoria RAM volátil privada (cero retención en disco) y te entrega un informe financiero de contingencias junto al Redline en Word (.docx con Control de Cambios) listo para negociar.\n\n⚡ Protege el margen operativo de tu organización antes de firmar:\n👉 https://audiflowai.com/?ref=buffer-cfo-ebitda\n\n#CFO #FinanzasCorporativas #EBITDA #GestionDeRiesgos #AuditFlowAI #LegalTech",
+      "image": "https://audiflowai.com/images/cfo_ebitda_protection.jpg"
+    },
+    {
+      "id": "post_02_forensic_redline",
+      "format": "FEED",
+      "title": "Auditoría Forense en 8 Segundos: Del Borrador al Redline Negociable",
+      "copy": "¿Cuánto tiempo invierte su equipo revisando 50 páginas de contrato antes de cada cierre? ⚖️⏱️\n\nLa fatiga visual de revisar contratos extensos a última hora provoca que cláusulas desproporcionadas pasen inadvertidas.\n\nCon AuditFlow AI:\n1️⃣ Subes el archivo confidencial en PDF o Word.\n2️⃣ El motor forense contrasta cada párrafo contra estándares de pasivos ocultos.\n3️⃣ Descargas la contrapropuesta editable en Word (.docx) con redlines y justificación legal de cada cambio.\n\nSin licencias anuales de miles de dólares: $19 USD por auditoría puntual o prueba gratuita en RAM.\n\nPrueba el motor forense ahora mismo:\n👉 https://audiflowai.com/?ref=buffer-forensic-redline\n\n#DerechoCorporativo #LegalOps #ContratosB2B #ProductividadLegal #AuditFlowAI",
+      "image": "https://audiflowai.com/images/auditflow_forensic_redline.jpg"
+    },
+    {
+      "id": "post_03_ram_security",
+      "format": "FEED",
+      "title": "Arquitectura Zero-Disk: Por Qué Nunca Debes Subir NDAs a IAs Públicas",
+      "copy": "🔒 Advertencia de Privacidad Fiduciaria para Directores Jurídicos y CFOs:\n\nCuando subes un borrador de contrato, un acuerdo de confidencialidad o un convenio a inteligencias artificiales públicas convencionales, tus datos pueden ser almacenados en servidores permanentes y usados para reentrenar modelos comerciales.\n\nEn AuditFlow AI la privacidad fiduciaria no es negociable:\n✅ Procesamiento 100% en Memoria RAM Volátil: Los archivos jamás tocan disco rígido ni bases de datos.\n✅ Purga Instantánea: Terminada la auditoría, la sesión y los textos se destruyen irreversiblemente.\n✅ Cero Entrenamiento: Ningún algoritmo se entrena con tus acuerdos.\n✅ Cumplimiento RGPD Art. 28 y estándares SOC-2 Type II.\n\nAudita con secreto profesional absoluto:\n👉 https://audiflowai.com/?ref=buffer-ram-security\n\n#Ciberseguridad #Privacidad #Compliance #GDPR #AuditFlowAI #LegalTech",
+      "image": "https://audiflowai.com/images/ram_volatile_security.jpg"
+    },
+    {
+      "id": "post_04_hidden_liability",
+      "format": "FEED",
+      "title": "La Lupa Forense: Detectando Cláusulas de Responsabilidad Ilimitada",
+      "copy": "Una sola cláusula de responsabilidad solidaria ilimitada puede comprometer el flujo de caja del año entero. 🔍⚠️\n\nEn auditorías recientes, detectamos que 6 de cada 10 contratos de servicios IT y logística incluyen estipulaciones donde el contratante asume costos indirectos y lucro cesante de terceros sin ningún límite económico (uncapped liability).\n\nCon AuditFlow AI, esa cláusula queda iluminada en rojo en 8.2 segundos, con la redacción exacta de contrapropuesta para topar la contingencia al 100% del valor del contrato.\n\nNo firme a ciegas:\n👉 https://audiflowai.com/?ref=buffer-hidden-liability\n\n#RiesgoLegal #ContratosComerciales #AbogadosB2B #CFO #AuditFlowAI",
+      "image": "https://audiflowai.com/images/hidden_liability_alert.jpg"
+    },
+    {
+      "id": "post_05_general_counsel_win",
+      "format": "FEED",
+      "title": "Certeza Jurídica en Minutos: 0 Pasivos Ocultos Antes de la Firma",
+      "copy": "El rol del Asesor Legal de élite no es pasar la madrugada leyendo cláusulas mecánicas, sino liderar la negociación con argumentos sólidos. 🏛️✨\n\nCuando entras a la junta de negociación con tu informe de auditoría forense de AuditFlow AI:\n• Conoces exactamente en qué página está el riesgo desproporcionado.\n• Tienes el cálculo financiero del pasivo contingente.\n• Entregas el archivo Word con redlines profesionales y justificación fiduciaria.\n\nEl resultado: negociaciones que se cierran en horas, protegiendo el patrimonio de la compañía.\n\nAudita tu primer contrato hoy por $19 USD:\n👉 https://audiflowai.com/?ref=buffer-gc-win\n\n#GeneralCounsel #DirectoresLegales #NegociacionEstrategica #AuditFlowAI",
+      "image": "https://audiflowai.com/images/general_counsel_audit_win.jpg"
+    },
+    {
+      "id": "post_06_smart_redline_diff",
+      "format": "FEED",
+      "title": "Autopsia Contractual: Penalidad Desproporcionada vs. Contrapropuesta Equilibrada",
+      "copy": "Mire este caso real de penalidad contractual: 📄🔴\n\n❌ Cláusula Original Impuesta:\n'El contratista pagará $25,000 USD diarios por cada día de demora, sin tope máximo y sin exención por causas atribuibles a terceros.'\n\n✅ Contrapropuesta Generada en Word por AuditFlow AI:\n'Cláusula 8.4 Tope de Responsabilidad: La responsabilidad total acumulada por demora no excederá en ningún caso de $50,000 USD, excluyendo penalidades por demoras causadas por la contraparte o fuerza mayor.'\n\nUn simple cambio de 2 líneas que blindó el presupuesto de la empresa.\n\nPrueba el generador de Redlines fiduciario:\n👉 https://audiflowai.com/?ref=buffer-smart-diff\n\n#Redlines #ControlDeCambios #WordLegal #AuditFlowAI #LegalOps",
+      "image": "https://audiflowai.com/images/smart_redline_ai_interface.jpg"
+    },
+    {
+      "id": "post_07_word_redline_desk",
+      "format": "FEED",
+      "title": "Del Escaneo al Archivo Word (.docx) con Control de Cambios en Segundos",
+      "copy": "La mayoría de herramientas de IA te entregan un chat con sugerencias vagas que luego tienes que redactar manualmente en Word. 💻📝\n\nAuditFlow AI fue diseñado para el flujo de trabajo real de despachos y empresas medianas:\n1. Arrastras el contrato en PDF o Word.\n2. El algoritmo analiza pasivos, multas y trampas de salida.\n3. Descargas directamente el archivo Word (.docx) con todas las correcciones integradas en Control de Cambios oficial.\n\nAbres el archivo, revisas las marcas rojas y verdes, y lo remites a tu contraparte en menos de 10 minutos.\n\nComprueba la velocidad de auditoría:\n👉 https://audiflowai.com/?ref=buffer-word-desk\n\n#Productividad #MicrosoftWord #LegalTech2026 #AuditFlowAI",
+      "image": "https://audiflowai.com/images/contract_word_redline.jpg"
+    },
+    {
+      "id": "reel_01_hook_penalty",
+      "format": "REEL",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "hook": "🚨 ¿Firmando contratos hoy? Mira las 8 palabras que costaron $142,000 USD...",
+      "copy": "¿Firmando contratos de proveedores esta semana? Cuidado con el Anexo Técnico. 🚨⚖️\n\nEn este caso real, una empresa mediana pagó $142,000 USD por una cláusula camaleón de indexación que parecía inofensiva en la lectura rápida.\n\nLas 3 trampas más comunes:\n1️⃣ Renovación forzosa sin preaviso.\n2️⃣ Ajustes tarifarios ilimitados por costos directos.\n3️⃣ Responsabilidad solidaria por fallas de terceros.\n\n⚡ Con AuditFlow AI subes el archivo a memoria RAM y en 8.2 segundos tienes tu Redline en Word para proteger a tu empresa.\n\n👉 Haz tu auditoría de prueba en:\nhttps://audiflowai.com/?ref=buffer-reel-penalty\n\n#Reels #LegalTech #Contratos #CFO #AuditFlowAI",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg"
+    },
+    {
+      "id": "reel_02_ram_scan_8s",
+      "format": "REEL",
+      "title": "Reel: 8.2 Segundos de Escaneo en Memoria RAM Volátil vs 5 Horas de Lectura",
+      "hook": "⚡ 8.2 segundos en memoria RAM privada vs. 5 horas de fatiga visual...",
+      "copy": "Revisar contratos de 60 páginas a mano es el método del siglo pasado. ⏱️💼\n\n❌ 5 horas leyendo párrafos densos = Agotamiento mental y omisión de cláusulas leoninas.\n⚡ 8.2 segundos en AuditFlow AI = Escaneo determinista en RAM, 0 persistencia en disco y Redline listo en Word.\n\nCumplimiento estricto GDPR y privacidad bancaria.\n\nDescubre el estándar 2026 de auditoría:\n👉 https://audiflowai.com/?ref=buffer-reel-ram-scan\n\n#Reels #Productividad #Ciberseguridad #LegalOps #AuditFlowAI",
+      "image": "https://audiflowai.com/images/reel_scene2_ram_scan_8s.jpg"
+    },
+    {
+      "id": "reel_03_counsel_word_cta",
+      "format": "REEL",
+      "title": "Reel: Negocia con Certeza Absoluta y Cierra Acuerdos sin Estrés",
+      "hook": "📄 Termina tu jornada con la tranquilidad de que ningún acuerdo pondrá en riesgo a tu empresa...",
+      "copy": "La diferencia entre un contrato que protege tu empresa y uno que la atrapa en litigios es un escaneo forense a tiempo. 🏛️✨\n\nAuditFlow AI pone en tus manos la misma capacidad de revisión fiduciaria de las grandes firmas de Wall Street por solo $19 USD por contrato auditado.\n\nSin suscripciones forzosas. Descarga tu Redline en Word editable al instante.\n\n👉 Prueba tu primer escaneo confidencial:\nhttps://audiflowai.com/?ref=buffer-reel-counsel-cta\n\n#Reels #DirectoresLegales #CFO #NegociosSeguros #AuditFlowAI",
+      "image": "https://audiflowai.com/images/reel_scene3_counsel_word_cta.jpg"
+    }
+  ]
 }

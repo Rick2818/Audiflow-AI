@@ -1,0 +1,26 @@
+{
+  "lastPublishedIndex": 0,
+  "publishedHistory": [
+    {
+      "timestamp": "2026-09-10T23:56:42.621Z",
+      "id": "reel_01_hook_penalty",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Image could not be read from its URL."
+        },
+        "instagram": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Image could not be read from its URL."
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Image could not be read from its URL."
+        }
+      }
+    }
+  ]
+}

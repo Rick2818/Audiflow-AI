@@ -4,6 +4,7 @@ import path from 'path';
 import { BufferPublisher } from '../lib/buffer-publisher.js';
 import { CONFIG } from '../lib/config.js';
 import { Resend } from 'resend';
+import { getNextUnusedBufferPost, recordBufferPostPublication } from '../lib/buffer-content-calendar.js';
 
 dotenv.config();
 
@@ -158,10 +159,10 @@ export async function runDailyBuffer5PMPublication() {
   }
 
   const publisher = new BufferPublisher(token);
-  const dayOfWeek = new Date().getDay();
-  const trend = REELS_EVENING_TRENDS[dayOfWeek];
+  const trend = getNextUnusedBufferPost({ format: 'REEL' });
 
-  console.log(`📅 Día: ${dayOfWeek} | Tema Reels: "${trend.title}"`);
+  console.log(`📅 Fecha: ${new Date().toLocaleDateString()} | Tema Reels: "${trend.title}"`);
+  console.log(`🖼️ Asset Visual Vertical / Reel: ${trend.image}`);
 
   const LI_CHANNEL_ID = '6a97043a065799be4669fadb'; // PRIORIDAD MÁXIMA
   const IG_CHANNEL_ID = '6a970416065799be4669fa58';
@@ -229,7 +230,9 @@ export async function runDailyBuffer5PMPublication() {
     results.facebook = { success: false, error: errFB.message };
   }
 
-  // Registro persistente en bitácora social
+  // Registro persistente en bitácora social y ledger de no repetición
+  recordBufferPostPublication({ post: trend, results });
+
   const auditPath = path.resolve('social_published_feed.json');
   try {
     let feed = [];
@@ -239,10 +242,10 @@ export async function runDailyBuffer5PMPublication() {
     feed.unshift({
       timestamp: new Date().toISOString(),
       eventType: 'BUFFER_DAILY_5PM_REELS_VESPERTINO',
-      dayOfWeek,
       theme: trend.title,
       textSnippet: (trend.copy || '').substring(0, 50),
       imageUrls: trend.image ? [trend.image] : [],
+      image: trend.image,
       results
     });
     fs.writeFileSync(auditPath, JSON.stringify(feed, null, 2), 'utf8');
