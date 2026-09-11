@@ -1,0 +1,234 @@
+{
+  "campaign": "Nuevo Pareto Clientes Medianos (25 Bufetes)",
+  "date": "2026-09-11T14:47:41.530Z",
+  "totalLeads": 25,
+  "sentCount": 25,
+  "errorCount": 0,
+  "results": [
+    {
+      "id": "pareto_mid_01",
+      "name": "Henrik Dock",
+      "firm": "Mannheimer Swartling",
+      "email": "henrik.dock@msa.se",
+      "resendId": "a5b1e44f-47df-4692-9bcc-8c1d5fbed664",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:46:59.424Z"
+    },
+    {
+      "id": "pareto_mid_02",
+      "name": "Louise Brorsson Salomon",
+      "firm": "Advokatfirman Vinge",
+      "email": "louise.brorssonsalomon@vinge.se",
+      "resendId": "44f7b3a7-045a-4365-9c07-5b44ef8c01cd",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:01.163Z"
+    },
+    {
+      "id": "pareto_mid_03",
+      "name": "Henrik Kjellander",
+      "firm": "Setterwalls Advokatbyrå",
+      "email": "henrik.kjellander@setterwalls.se",
+      "resendId": "1ef2aa1f-92bd-45e7-89bb-0259d16ec580",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:02.821Z"
+    },
+    {
+      "id": "pareto_mid_04",
+      "name": "Tone Myhre-Jensen",
+      "firm": "Advokatfirman Cederquist",
+      "email": "tone.myhrejensen@cederquist.se",
+      "resendId": "863fb7e1-b8fa-4bd5-8598-e38c3f009244",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:04.485Z"
+    },
+    {
+      "id": "pareto_mid_05",
+      "name": "Tobias Puckalgis",
+      "firm": "Advokatfirman Lindahl",
+      "email": "tobias.puckalgis@lindahl.se",
+      "resendId": "35cae470-da53-469c-b7d0-5e3f87143e1c",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:06.182Z"
+    },
+    {
+      "id": "pareto_mid_06",
+      "name": "Stefan Erhag",
+      "firm": "Delphi Advokatbyrå",
+      "email": "stefan.erhag@delphi.se",
+      "resendId": "7dca1503-259d-47bd-9c48-1c489c358188",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:07.958Z"
+    },
+    {
+      "id": "pareto_mid_07",
+      "name": "Mats Dahlberg",
+      "firm": "Delphi Advokatbyrå",
+      "email": "mats.dahlberg@delphi.se",
+      "resendId": "8808f92b-1d6d-4fcb-b325-44ffd640c1ba",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:09.636Z"
+    },
+    {
+      "id": "pareto_mid_08",
+      "name": "Peter Högström",
+      "firm": "Cirio Advokatbyrå",
+      "email": "peter.hogstrom@cirio.se",
+      "resendId": "86fd350b-9fcd-475c-8125-bf4e84a60984",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:11.401Z"
+    },
+    {
+      "id": "pareto_mid_09",
+      "name": "Mårten Steen",
+      "firm": "Advokatfirman Cederquist",
+      "email": "marten.steen@cederquist.se",
+      "resendId": "d8e3c63b-8000-4efc-868c-b06ea7e19105",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:13.208Z"
+    },
+    {
+      "id": "pareto_mid_10",
+      "name": "Robert Kullgren",
+      "firm": "Wistrand Advokatbyrå",
+      "email": "robert.kullgren@wistrand.se",
+      "resendId": "22725b53-2799-4c98-9153-e37e4516e2e3",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:14.903Z"
+    },
+    {
+      "id": "pareto_mid_11",
+      "name": "Lars Westerberg",
+      "firm": "Lindahl Advokatbyrå",
+      "email": "lars.westerberg@lindahl.se",
+      "resendId": "027b624d-1e01-4a0f-b580-53492732090d",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:16.591Z"
+    },
+    {
+      "id": "pareto_mid_12",
+      "name": "Tone Østensen",
+      "firm": "Kvale Advokatfirma",
+      "email": "toe@kvale.no",
+      "resendId": "0eee4c9b-b44d-4433-9b23-c2653b69f43d",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:18.227Z"
+    },
+    {
+      "id": "pareto_mid_13",
+      "name": "Pål Kvernaas",
+      "firm": "Advokatfirmaet Haavind",
+      "email": "p.kvernaas@haavind.no",
+      "resendId": "c1b32867-d525-4bb2-8f6a-a16d5149deb4",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:19.927Z"
+    },
+    {
+      "id": "pareto_mid_14",
+      "name": "Morten Kvale",
+      "firm": "Advokatfirmaet Simonsen Vogt Wiig",
+      "email": "m.kvale@svw.no",
+      "resendId": "933f72ac-36da-4321-9c64-aba5677aba22",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:21.591Z"
+    },
+    {
+      "id": "pareto_mid_15",
+      "name": "Vibe Lindhart",
+      "firm": "Lundgrens Advokatpartnerselskab",
+      "email": "vli@lundgrens.com",
+      "resendId": "52f35960-ec7a-4601-95c3-59acbfdd5a3b",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:23.243Z"
+    },
+    {
+      "id": "pareto_mid_16",
+      "name": "Carsten Brink",
+      "firm": "Mazanti-Andersen Advokatpartnerselskab",
+      "email": "cb@mazanti.dk",
+      "resendId": "6b232612-6861-45e7-8cdc-d4a490136e58",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:24.905Z"
+    },
+    {
+      "id": "pareto_mid_17",
+      "name": "Thomas Moalem",
+      "firm": "Moalem Weitemeyer Advokatpartnerselskab",
+      "email": "tm@moalemweitemeyer.com",
+      "resendId": "405a44e1-4c8c-4213-947e-81cfaebacd83",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:26.567Z"
+    },
+    {
+      "id": "pareto_mid_18",
+      "name": "Juha Koponen",
+      "firm": "Borenius Attorneys Ltd",
+      "email": "juha.koponen@borenius.com",
+      "resendId": "83c88274-c730-4caa-aa44-ce0b6279987c",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:28.296Z"
+    },
+    {
+      "id": "pareto_mid_19",
+      "name": "Niklas Thibblin",
+      "firm": "Krogerus Attorneys Ltd",
+      "email": "niklas.thibblin@krogerus.com",
+      "resendId": "04f59009-65cf-4948-a203-dabbfa9bce43",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:29.955Z"
+    },
+    {
+      "id": "pareto_mid_20",
+      "name": "Tero Tuomisto",
+      "firm": "Castrén & Snellman",
+      "email": "tero.tuomisto@castren.fi",
+      "resendId": "ffd3dc70-4c88-44c7-a418-f3390a54079e",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:31.600Z"
+    },
+    {
+      "id": "pareto_mid_21",
+      "name": "Mikko Heinonen",
+      "firm": "Roschier Attorneys Ltd",
+      "email": "mikko.heinonen@roschier.com",
+      "resendId": "f509ad73-b7df-43d0-a534-44058390991b",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:33.314Z"
+    },
+    {
+      "id": "pareto_mid_22",
+      "name": "Riikka Rantanen",
+      "firm": "Hannes Snellman Attorneys Ltd",
+      "email": "riikka.rantanen@hannessnellman.com",
+      "resendId": "719caeca-7c73-461e-9dc8-345800e63929",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:34.954Z"
+    },
+    {
+      "id": "pareto_mid_23",
+      "name": "Erinarne Tangen",
+      "firm": "Advokatfirmaet Schjødt",
+      "email": "erinarne.tangen@schjodt.com",
+      "resendId": "ee30823b-db13-4f5a-9db8-2ae1d487a916",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:36.692Z"
+    },
+    {
+      "id": "pareto_mid_24",
+      "name": "Thomas Svensson",
+      "firm": "Advokatfirmaet BAHR",
+      "email": "thomas.svensson@bahr.no",
+      "resendId": "02b62c48-6016-4e18-8542-0ec1bc17d742",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:38.342Z"
+    },
+    {
+      "id": "pareto_mid_25",
+      "name": "Anna Remse",
+      "firm": "Mannheimer Swartling",
+      "email": "anna.remse@msa.se",
+      "resendId": "f2025012-dc44-4511-9c7c-09182c6233f2",
+      "status": "DELIVERED_TO_RESEND",
+      "timestamp": "2026-09-11T14:47:40.023Z"
+    }
+  ]
+}
