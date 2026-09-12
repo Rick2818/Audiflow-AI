@@ -30,6 +30,11 @@
         "INSTANTLY_API_KEY": "${INSTANTLY_API_KEY}"
       },
       "description": "Servidor y Puente de Integración Instantly.ai: Monitoreo de Warmup de cuentas, gestión de campañas de cold email y sincronización de prospectos con Waalaxy."
+    },
+    "microsaas-sales-automation": {
+      "command": "node",
+      "args": ["scripts/microsaas_sales_automation_mcp.mjs"],
+      "description": "Servidor MCP de Prospección Web B2B, Ventas MicroSaaS y Automatización Desatendida: Generación de pitches fiduciarios, embudos de monetización en USD y orquestación de cadencias."
     }
   }
 }
