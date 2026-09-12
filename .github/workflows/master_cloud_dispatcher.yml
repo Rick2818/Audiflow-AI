@@ -11,6 +11,7 @@ on:
         options:
           - 'nordicos_4am (Campaña Nórdicos Sector Medio)'
           - 'storytelling_6am (Campaña Storytelling 250 Bufetes)'
+          - 'centroamerica_7am (Prospección Centroamérica Bufetes & CFOs 7:00 AM CST)'
           - 'buffer_8am (Publicación Redes LinkedIn/FB/IG)'
           - 'sales_report_2pm (Reporte Ejecutivo de Ventas 2 PM)'
           - 'buffer_5pm (Publicación Vespertina Reels)'
@@ -55,6 +56,10 @@ jobs:
             *"storytelling_6am"*)
               echo "📖 Ejecutando Storytelling 250 Bufetes..."
               node scripts/dispatch_storytelling_250_medianos.mjs
+              ;;
+            *"centroamerica_7am"*)
+              echo "☀️ Ejecutando Prospección Centroamérica (100% Real)..."
+              node scripts/dispatch_centroamerica_8am_cron.mjs
               ;;
             *"buffer_8am"*)
               echo "☀️ Ejecutando Publicación Matutina Buffer..."

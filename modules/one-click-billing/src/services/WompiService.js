@@ -7,13 +7,11 @@ export class WompiService {
     this.appId = config.appId || process.env.WOMPI_APP_ID;
     this.apiSecret = config.apiSecret || process.env.WOMPI_API_SECRET;
     this.apiUrl = config.apiUrl || process.env.WOMPI_API_URL || 'https://api.wompi.sv';
-    this.simulationMode = config.simulationMode !== undefined 
-      ? config.simulationMode 
-      : (process.env.WOMPI_SIMULATION_MODE === 'true');
+    this.simulationMode = false;
   }
 
   /**
-   * Ejecuta un cargo con Token de Tarjeta previamente guardado
+   * Ejecuta un cargo con Token de Tarjeta previamente guardado (100% Real Producción)
    * @param {Object} params
    * @param {string} params.cardToken - Token de tarjeta (tok_xxx)
    * @param {number} params.amount - Monto en USD
@@ -23,30 +21,12 @@ export class WompiService {
    * @param {string} params.transactionId - Identificador único de transacción interna
    */
   async chargeCardToken({ cardToken, amount, currency = 'USD', description, customerEmail, transactionId }) {
-    if (this.simulationMode) {
-      // Simulación controlada para desarrollo y pruebas
-      await new Promise(resolve => setTimeout(resolve, 800)); // Latencia de red simulada
-
-      // Simular fallo si el token incluye 'rechazado' o 'declined'
-      if (cardToken.includes('declined') || cardToken.includes('rechazado')) {
-        return {
-          success: false,
-          code: 'BANK_DECLINED',
-          message: 'Transacción denegada por la entidad bancaria emisora (Fondos insuficientes o límite excedido).',
-          transactionId: null
-        };
-      }
-
+    if (!this.apiSecret || this.apiSecret.includes('tu_api_secret') || !this.appId) {
       return {
-        success: true,
-        transactionId: `wompi_tx_${Date.now()}_${Math.floor(Math.random() * 10000)}`,
-        authorizationCode: `AUTH_${Math.floor(100000 + Math.random() * 900000)}`,
-        amountCharged: amount,
-        currency,
-        timestamp: new Date().toISOString(),
-        brand: 'Visa',
-        last4: '4321',
-        status: 'APROBADA'
+        success: false,
+        code: 'REAL_PAYMENT_REQUIRED',
+        message: 'Pasarela de pago Wompi requiere credenciales reales de producción. Simulación prohibida.',
+        transactionId: null
       };
     }
 

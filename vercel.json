@@ -325,5 +325,15 @@
       "source": "/((?!api/).*)",
       "destination": "/frontend/$1"
     }
+  ],
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "0 * * * *"
+    },
+    {
+      "path": "/api/cron?task=centroamerica-sower",
+      "schedule": "0 13 * * 1-5"
+    }
   ]
 }

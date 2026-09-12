@@ -2,6 +2,7 @@ import bufferMorningHandler from '../lib/cron-handlers/buffer-morning.js';
 import bufferEveningHandler from '../lib/cron-handlers/buffer-evening.js';
 import storytellingHandler from '../lib/cron-handlers/storytelling.js';
 import nordicSowerHandler from '../lib/cron-handlers/nordic-sower.js';
+import centroamericaSowerHandler from '../lib/cron-handlers/centroamerica-sower.js';
 import { getCloudState, setCloudState } from '../lib/cloud-state.js';
 import { verifyAdminAuth } from '../lib/security.js';
 import dotenv from 'dotenv';
@@ -34,7 +35,6 @@ export default async function handler(req, res) {
 
   // Permite forzar una tarea específica via querystring: ?task=buffer-morning
   const forcedTask = req.query?.task || null;
-  const isDryRun = req.query?.dryRun === 'true';
 
   let taskToExecute = forcedTask;
   let scheduleReason = 'Manual / Query Override';
@@ -49,6 +49,11 @@ export default async function handler(req, res) {
     else if (utcHours === 12 && utcDay >= 1 && utcDay <= 6) {
       taskToExecute = 'storytelling';
       scheduleReason = '06:00 AM CST (12:00 UTC) - Storytelling Bufetes';
+    }
+    // 13:00 UTC = 07:00 AM CST (Lunes a Viernes) -> Prospección Centroamérica
+    else if (utcHours === 13 && utcDay >= 1 && utcDay <= 5) {
+      taskToExecute = 'centroamerica-sower';
+      scheduleReason = '07:00 AM CST (13:00 UTC) - Prospección Centroamérica Bufetes y CFOs';
     }
     // 14:00 UTC = 08:00 AM CST (Lunes a Domingo) -> Buffer Morning
     else if (utcHours === 14) {
@@ -66,18 +71,6 @@ export default async function handler(req, res) {
     }
   }
 
-  if (isDryRun) {
-    return res.status(200).json({
-      event: 'MASTER_DISPATCHER_DRY_RUN',
-      timestamp,
-      utcHours,
-      cstHours: (utcHours - 6 + 24) % 24,
-      utcDay,
-      selectedTask: taskToExecute,
-      scheduleReason
-    });
-  }
-
   // Ejecución según la tarea detectada
   try {
     if (taskToExecute === 'buffer-morning') {
@@ -86,6 +79,8 @@ export default async function handler(req, res) {
       return await bufferEveningHandler(req, res);
     } else if (taskToExecute === 'storytelling') {
       return await storytellingHandler(req, res);
+    } else if (taskToExecute === 'centroamerica-sower') {
+      return await centroamericaSowerHandler(req, res);
     } else if (taskToExecute === 'nordic-sower') {
       return await nordicSowerHandler(req, res);
     } else {

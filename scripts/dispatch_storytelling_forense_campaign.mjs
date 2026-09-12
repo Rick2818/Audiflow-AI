@@ -5,22 +5,22 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // ==============================================================================
-// AUDITFLOW AI — CAMPAÑA INBOUND NURTURING & STORYTELLING FORENSE (3 CAPÍTULOS)
+// AUDITFLOW AI — CAMPAÑA INBOUND NURTURING & STORYTELLING PREVENTIVO (3 CAPÍTULOS)
 // Capítulo 1: Lunes 8:30 AM — El Detonante y Suspenso ($142,000 USD)
-// Capítulo 2: Miércoles 8:30 AM — La Autopsia de la Cláusula Trampa
+// Capítulo 2: Miércoles 8:30 AM — La Detección de la Cláusula Trampa
 // Capítulo 3: Viernes 8:30 AM — El Redline Preventivo y Cierre en audiflowai.com
 // ==============================================================================
 
 const CHAPTER_TEMPLATES = {
   1: {
     subject: '[Caso Real] 45 páginas revisadas, pero faltó leer una palabra en el Anexo C',
-    title: 'EXPEDIENTE FORENSE CONTRACTUAL #1',
+    title: 'EXPEDIENTE DE AUDITORÍA CONTRACTUAL #1',
     subtitle: 'El Anexo C de $142,000 USD — Capítulo 1 de 3',
     renderHtml: (lead) => `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 20px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
         <div style="border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 24px;">
           <span style="font-size: 15px; font-weight: 800; letter-spacing: 1px; color: #38bdf8;">AUDITFLOW AI</span>
-          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos Forenses de Contratación</span>
+          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos de Blindaje Contractual</span>
         </div>
 
         <p style="font-size: 15px; color: #e2e8f0; margin-bottom: 18px;">
@@ -59,13 +59,13 @@ const CHAPTER_TEMPLATES = {
   },
   2: {
     subject: 'Parte 2: La cláusula de $142,000 USD al descubierto (y el costo de no auditar a tiempo)',
-    title: 'EXPEDIENTE FORENSE CONTRACTUAL #1',
+    title: 'EXPEDIENTE DE AUDITORÍA CONTRACTUAL #1',
     subtitle: 'La Cláusula Trampa — Capítulo 2 de 3',
     renderHtml: (lead) => `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 20px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
         <div style="border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 24px;">
           <span style="font-size: 15px; font-weight: 800; letter-spacing: 1px; color: #38bdf8;">AUDITFLOW AI</span>
-          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos Forenses de Contratación</span>
+          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos de Blindaje Contractual</span>
         </div>
 
         <p style="font-size: 15px; color: #e2e8f0; margin-bottom: 18px;">
@@ -91,7 +91,7 @@ const CHAPTER_TEMPLATES = {
 
         <div style="background-color: #0f172a; padding: 18px; border-radius: 8px; border: 1px solid #334155; margin: 20px 0;">
           <p style="margin: 0; font-size: 13px; color: #38bdf8;">
-            ⚡ <strong>Comparativa de Eficiencia Forense:</strong><br>
+            ⚡ <strong>Comparativa de Eficiencia Contractual:</strong><br>
             • Revisión humana manual de 45 págs: 3 a 5 horas (fatiga visual extrema).<br>
             • Análisis algorítmico en AuditFlow AI: <strong>8.2 segundos</strong> en memoria RAM volátil.
           </p>
@@ -110,7 +110,7 @@ const CHAPTER_TEMPLATES = {
   },
   3: {
     subject: 'El Redline Preventivo: Cómo blindar sus contratos antes de firmar',
-    title: 'EXPEDIENTE FORENSE CONTRACTUAL #1',
+    title: 'EXPEDIENTE DE AUDITORÍA CONTRACTUAL #1',
     subtitle: 'El Redline de Blindaje — Capítulo 3 de 3',
     renderHtml: (lead) => `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 20px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
@@ -157,7 +157,7 @@ const CHAPTER_TEMPLATES = {
   }
 };
 
-export async function dispatchStorytellingEpisode(chapterNum = 1, leads = [], isDryRun = false) {
+export async function dispatchStorytellingEpisode(chapterNum = 1, leads = []) {
   const chapter = CHAPTER_TEMPLATES[chapterNum];
   if (!chapter) throw new Error(`Capítulo inválido: ${chapterNum}`);
 
@@ -165,7 +165,7 @@ export async function dispatchStorytellingEpisode(chapterNum = 1, leads = [], is
   console.log(`🚀 DESPACHO DE STORYTELLING FORENSE — CAPÍTULO ${chapterNum}`);
   console.log(`📌 Asunto: ${chapter.subject}`);
   console.log(`👥 Destinatarios objetivo: ${leads.length}`);
-  console.log(`⚙️ Modo: ${isDryRun ? 'SIMULACIÓN (DRY RUN)' : 'PRODUCCIÓN / REAL'}`);
+  console.log(`⚙️ Modo: PRODUCCIÓN / 100% REAL (CERO SIMULACIÓN - CERO DRY-RUN)`);
   console.log(`======================================================================`);
 
   const user = process.env.GMAIL_USER || process.env.SMTP_USER;
@@ -177,7 +177,6 @@ export async function dispatchStorytellingEpisode(chapterNum = 1, leads = [], is
     secure: true,
     auth: { user, pass }
   });
-
 
   let sentCount = 0;
   const results = [];
@@ -192,20 +191,14 @@ export async function dispatchStorytellingEpisode(chapterNum = 1, leads = [], is
       html: htmlContent
     };
 
-    if (isDryRun) {
-      console.log(`   [DRY-RUN] Preparado para: ${lead.name} <${lead.email}> (${lead.company || lead.firm})`);
-      results.push({ lead: lead.email, status: 'dry_run_ready' });
+    try {
+      const info = await transporter.sendMail(mailOptions);
+      console.log(`   ✅ Enviado con éxito a: ${lead.name} <${lead.email}> [ID: ${info.messageId}]`);
+      results.push({ lead: lead.email, status: 'sent', messageId: info.messageId });
       sentCount++;
-    } else {
-      try {
-        const info = await transporter.sendMail(mailOptions);
-        console.log(`   ✅ Enviado con éxito a: ${lead.name} <${lead.email}> [ID: ${info.messageId}]`);
-        results.push({ lead: lead.email, status: 'sent', messageId: info.messageId });
-        sentCount++;
-      } catch (err) {
-        console.error(`   ❌ Error enviando a ${lead.email}:`, err.message);
-        results.push({ lead: lead.email, status: 'error', error: err.message });
-      }
+    } catch (err) {
+      console.error(`   ❌ Error enviando a ${lead.email}:`, err.message);
+      results.push({ lead: lead.email, status: 'error', error: err.message });
     }
   }
 
@@ -229,7 +222,7 @@ if (process.argv[1] && process.argv[1].endsWith('dispatch_storytelling_forense_c
         { name: 'Lic. Mariano Batalla', email: 'mariano.batalla@batallalegal.cr', firm: 'Batalla & Asociados', company: 'Batalla Corporativo' }
       ];
 
-  dispatchStorytellingEpisode(chapterArg, targetLeads, false)
+  dispatchStorytellingEpisode(chapterArg, targetLeads)
     .then(() => process.exit(0))
     .catch(err => {
       console.error('Fallo crítico en despacho:', err);
