@@ -51,7 +51,7 @@ https://audiflowai.com/?ref=buffer-reels-5pm-lunes
     copy: `Para un Director Financiero o Socio de Bufete, el tiempo de su equipo es el activo más costoso. 💼⏱️
 
 ❌ 4.5 horas leyendo párrafos monótonos = Fatiga cognitiva y errores humanos.
-⚡ 8.2 segundos en AuditFlow AI = Detección forense automática y Redline en Word con control de cambios.
+⚡ 8.2 segundos en AuditFlow AI = Detección preventiva automática y Redline en Word con control de cambios.
 
 Cero instalación, cero almacenamiento de documentos en disco y total cumplimiento GDPR Art. 28.
 
@@ -62,11 +62,11 @@ Mira cómo funciona en vivo y pruébalo gratis:
     image: 'https://audiflowai.com/images/comparativa_eficiencia.jpg',
     videoUrl: 'https://audiflowai.com/images/reel_forense_muestra.mp4'
   },
-  // Miércoles (3): Reel de Cláusula Trampa - "La Autopsia Contractual"
+  // Miércoles (3): Reel de Cláusula Trampa - "El Desglose Contractual"
   3: {
-    title: 'Reel Miércoles: Autopsia de una Cláusula de Ajuste Inflacionario',
+    title: 'Reel Miércoles: Desglose de una Cláusula de Ajuste Inflacionario',
     hook: 'La cláusula trampa que ningún humano detectó a simple vista...',
-    copy: `Revisar contratos sin una herramienta forense es apostar el presupuesto anual de la empresa. 📉⚠️
+    copy: `Revisar contratos sin una herramienta de blindaje preventivo es apostar el presupuesto anual de la empresa. 📉⚠️
 
 En este reel analizamos la trampa de indexación acumulativa que trasladó sobrecostos del 18% sin previo aviso.
 

@@ -1,5 +1,5 @@
 {
-  "lastPublishedIndex": 0,
+  "lastPublishedIndex": 6,
   "publishedHistory": [
     {
       "timestamp": "2026-09-10T23:56:42.621Z",
@@ -19,6 +19,132 @@
         "facebook": {
           "success": false,
           "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Image could not be read from its URL."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-11T00:03:32.432Z",
+      "id": "reel_02_ram_scan_8s",
+      "title": "Reel: 8.2 Segundos de Escaneo en Memoria RAM Volátil vs 5 Horas de Lectura",
+      "image": "https://audiflowai.com/images/reel_scene2_ram_scan_8s.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa3453a71ba1c02ccee054b"
+        },
+        "instagram": {
+          "success": true,
+          "id": "6aa34545bc5ba21062ed8cbc"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa3454f48fd860ab1fe34f4"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-11T14:29:22.856Z",
+      "id": "post_01_cfo_ebitda",
+      "title": "Fuga de EBITDA y Responsabilidad Solidaria en Contratos de Proveedores",
+      "image": "https://audiflowai.com/images/cfo_ebitda_protection.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa4102a262bdff0e87dd0d4"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa4103532d420cab6f7362c"
+        },
+        "instagram": {
+          "success": true,
+          "id": "6aa4103a262bdff0e87dd1bb"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-11T23:00:31.830Z",
+      "id": "reel_03_counsel_word_cta",
+      "title": "Reel: Negocia con Certeza Absoluta y Cierra Acuerdos sin Estrés",
+      "image": "https://audiflowai.com/images/reel_scene3_counsel_word_cta.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa487f507d009223c6530f7"
+        },
+        "instagram": {
+          "success": true,
+          "id": "6aa48800fea6482ddb4a79f0"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa4880a2ac3c81fe8884b58"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-12T14:13:51.777Z",
+      "id": "post_02_forensic_redline",
+      "title": "Auditoría Forense en 8 Segundos: Del Borrador al Redline Negociable",
+      "image": "https://audiflowai.com/images/auditflow_forensic_redline.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa55e069b54f82b9c35111a"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa55e119a7f0553d16aaa29"
+        },
+        "instagram": {
+          "success": true,
+          "id": "6aa55e169b54f82b9c35123e"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-12T14:15:00.191Z",
+      "id": "post_03_ram_security",
+      "title": "Arquitectura Zero-Disk: Por Qué Nunca Debes Subir NDAs a IAs Públicas",
+      "image": "https://audiflowai.com/images/ram_volatile_security.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa55e4a66679b076f0f2586"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa55e5466679b076f0f264f"
+        },
+        "instagram": {
+          "success": true,
+          "id": "6aa55e5bc637430b6b58c96c"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-12T23:00:41.048Z",
+      "id": "reel_01_hook_penalty",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa5d9747da3ee968d067e88"
+        },
+        "instagram": {
+          "success": true,
+          "id": "6aa5d982e58a7c35836fecf9"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa5d98ee58a7c35836ff0a5"
         }
       }
     }

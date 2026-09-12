@@ -113,13 +113,13 @@ function saveState(state) {
 const CHAPTER_TEMPLATES = {
   1: {
     subject: '[Caso Real] 45 páginas revisadas, pero faltó leer una palabra en el Anexo C',
-    title: 'EXPEDIENTE FORENSE CONTRACTUAL #1',
+    title: 'EXPEDIENTE DE AUDITORÍA CONTRACTUAL #1',
     subtitle: 'El Anexo C de $142,000 USD — Capítulo 1 de 3',
     renderHtml: (lead) => `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 20px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
         <div style="border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 24px;">
           <span style="font-size: 15px; font-weight: 800; letter-spacing: 1px; color: #38bdf8;">AUDITFLOW AI</span>
-          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos Forenses de Contratación</span>
+          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos de Blindaje Contractual</span>
         </div>
 
         <p style="font-size: 15px; color: #e2e8f0; margin-bottom: 18px;">
@@ -158,13 +158,13 @@ const CHAPTER_TEMPLATES = {
   },
   2: {
     subject: 'Parte 2: La cláusula de $142,000 USD al descubierto (y el costo de no auditar a tiempo)',
-    title: 'EXPEDIENTE FORENSE CONTRACTUAL #1',
+    title: 'EXPEDIENTE DE AUDITORÍA CONTRACTUAL #1',
     subtitle: 'La Cláusula Trampa — Capítulo 2 de 3',
     renderHtml: (lead) => `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 20px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
         <div style="border-bottom: 1px solid #1e293b; padding-bottom: 16px; margin-bottom: 24px;">
           <span style="font-size: 15px; font-weight: 800; letter-spacing: 1px; color: #38bdf8;">AUDITFLOW AI</span>
-          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos Forenses de Contratación</span>
+          <span style="font-size: 11px; color: #64748b; margin-left: 10px; text-transform: uppercase;">| Casos de Blindaje Contractual</span>
         </div>
 
         <p style="font-size: 15px; color: #e2e8f0; margin-bottom: 18px;">
@@ -190,7 +190,7 @@ const CHAPTER_TEMPLATES = {
 
         <div style="background-color: #0f172a; padding: 18px; border-radius: 8px; border: 1px solid #334155; margin: 20px 0;">
           <p style="margin: 0; font-size: 13px; color: #38bdf8;">
-            ⚡ <strong>Comparativa de Eficiencia Forense:</strong><br>
+            ⚡ <strong>Comparativa de Eficiencia Contractual:</strong><br>
             • Revisión humana manual de 45 págs: 3 a 5 horas (fatiga visual extrema).<br>
             • Análisis algorítmico en AuditFlow AI: <strong>8.2 segundos</strong> en memoria RAM volátil.
           </p>
@@ -209,7 +209,7 @@ const CHAPTER_TEMPLATES = {
   },
   3: {
     subject: 'El Redline Preventivo: Cómo blindar sus contratos antes de firmar',
-    title: 'EXPEDIENTE FORENSE CONTRACTUAL #1',
+    title: 'EXPEDIENTE DE AUDITORÍA CONTRACTUAL #1',
     subtitle: 'El Redline de Blindaje — Capítulo 3 de 3',
     renderHtml: (lead) => `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 20px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
@@ -258,7 +258,7 @@ const CHAPTER_TEMPLATES = {
 
 export async function runStorytellingDailyDispatch() {
   console.log('======================================================================');
-  console.log('📖 AUDITFLOW AI — CAMPAÑA DE STORYTELLING FORENSE (14 DÍAS RESTANTES)');
+  console.log('📖 AUDITFLOW AI — CAMPAÑA DE STORYTELLING CONTRACTUAL PREVENTIVO (14 DÍAS RESTANTES)');
   console.log('🎯 Segmento: 250 Bufetes Medianos (Socios Directores y General Counsels)');
   console.log('🛡️ Remitente: cmvo@audiflowai.com • Aislamiento: tendenciaiatufuturo@gmail.com');
   console.log('👑 Buzón CEO: rick28191@gmail.com (100% blindado para ventas)');
@@ -330,7 +330,7 @@ export async function runStorytellingDailyDispatch() {
     if (resend) {
       const summaryHtml = `
         <div style="font-family: Arial, sans-serif; background: #0f172a; color: #ffffff; padding: 20px; border-radius: 10px; border: 1px solid #10b981; max-width: 600px;">
-          <h3 style="color: #34d399; margin-top: 0;">📖 [CRON 6:00 AM] Storytelling Forense Despachado</h3>
+          <h3 style="color: #34d399; margin-top: 0;">📖 [CRON 6:00 AM] Storytelling Contractual Preventivo Despachado</h3>
           <p style="font-size: 13px; color: #cbd5e1;">Reporte operativo para la Dirección General:</p>
           <ul style="color: #e2e8f0; font-size: 13px; line-height: 1.6;">
             <li><strong>Capítulo:</strong> #${state.currentChapter} — ${chapter.subject}</li>
@@ -344,7 +344,7 @@ export async function runStorytellingDailyDispatch() {
       await resend.emails.send({
         from: 'AuditFlow AI Telemetría <ricardo@audiflowai.com>',
         to: CONFIG.EMAIL.OWNER_CONTROL,
-        subject: `📖 [CRON 6:00 AM] Storytelling Forense: ${sentCount} Bufetes Medianos Impactados (Capítulo ${state.currentChapter})`,
+        subject: `📖 [CRON 6:00 AM] Storytelling Preventivo: ${sentCount} Bufetes Medianos Impactados (Capítulo ${state.currentChapter})`,
         html: summaryHtml
       });
       console.log(`📬 Telemetría enviada a buzón de control: ${CONFIG.EMAIL.OWNER_CONTROL}`);

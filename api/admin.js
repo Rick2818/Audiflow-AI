@@ -339,7 +339,7 @@ export default async function handler(req, res) {
           <p style="font-size: 13px; color: #4b5563; margin: 0;">
             <strong>Ricardo</strong><br>
             Fundador • AuditFlow AI Corp. (<a href="https://audiflowai.com" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>)<br>
-            <span style="font-size: 11px; color: #9ca3af;">Auditoría Forense de Contratos en Memoria RAM Volátil • SOC-2 &amp; GDPR Compliant</span>
+            <span style="font-size: 11px; color: #9ca3af;">Auditoría Preventiva y Blindaje Contractual en Memoria RAM Volátil • SOC-2 &amp; GDPR Compliant</span>
           </p>
         </div>
       `;
@@ -1088,7 +1088,7 @@ export default async function handler(req, res) {
               <p style="font-size: 15px; color: #0f172a; font-weight: 600;">Lo costoso de un contrato mercantil o de proveedores nunca es lo que dice, sino lo que no se vio a tiempo antes de firmar.</p>
               <p>Su equipo no necesita más pestañas abiertas ni hojas de cálculo dispersas, sino un <strong>flujo único de 6 etapas</strong>: <em>1. Centralizar ➔ 2. Escanear ➔ 3. Detectar ➔ 4. Mitigar ➔ 5. Certificar ➔ 6. Proteger</em>.</p>
               <div style="background-color: #f8fafc; padding: 16px; border-left: 4px solid #0284c7; margin: 18px 0; border-radius: 6px;">
-                <p style="margin: 0 0 8px 0;"><strong>🎁 Diagnostique su 1er contrato sin costo:</strong> Si nuestro motor forense no detecta penalizaciones ocultas ni nada que corregir, no paga nada: <a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7; font-weight: bold;">Probar gratis aquí →</a></p>
+                <p style="margin: 0 0 8px 0;"><strong>🎁 Diagnostique su 1er contrato sin costo:</strong> Si nuestro motor de diagnóstico preventivo no detecta penalizaciones ocultas ni nada que corregir, no paga nada: <a href="https://audiflowai.com/?ref=salesnav-latam" style="color: #0284c7; font-weight: bold;">Probar gratis aquí →</a></p>
                 <p style="margin: 0 0 8px 0;"><strong>⚡ Redline Inmediato en Word (.docx con Control de Cambios):</strong> Listo antes de que termine su café por solo <strong>$19 USD</strong> (Cobro 1-Clic Wompi / Banco Agrícola).</p>
                 <p style="margin: 0;"><strong>🛡️ Privacidad Estricta:</strong> Memoria RAM encriptada, 0 almacenamiento en disco y garantía de no-entrenamiento de modelos con sus datos.</p>
               </div>

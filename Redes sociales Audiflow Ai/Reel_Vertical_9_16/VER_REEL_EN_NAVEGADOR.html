@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang='es'>
 <head>
 <meta charset='UTF-8'>
@@ -19,14 +19,14 @@ body { background: #0b0f19; color: #fff; display: flex; flex-direction: column; 
 <p style='color:#94a3b8;font-size:13px;margin-bottom:16px;'>Haz clic en la pantalla para avanzar escenas manualmente</p>
 <div class='reel' id='r' onclick='advance()'>
 <div class='bars'><div class='bar'><div class='fill' id='f0'></div></div><div class='bar'><div class='fill' id='f1'></div></div><div class='bar'><div class='fill' id='f2'></div></div></div>
-<div class='slide active' id='s0' style='background-image:url(Reel_Vertical_9_16/scene_1_hook_cfo_14k.jpg)'></div>
-<div class='slide' id='s1' style='background-image:url(Reel_Vertical_9_16/scene_2_solucion_ia_8s.jpg)'></div>
-<div class='slide' id='s2' style='background-image:url(Reel_Vertical_9_16/scene_3_resultado_word_cta.jpg)'></div>
-<div class='tag' id='t'>🚨 Escena 1/3: Gancho CFO (,400)</div>
+<div class='slide active' id='s0' style='background-image:url(reel_scene1_hook_penalty.jpg)'></div>
+<div class='slide' id='s1' style='background-image:url(reel_scene2_ram_scan_8s.jpg)'></div>
+<div class='slide' id='s2' style='background-image:url(reel_scene3_counsel_word_cta.jpg)'></div>
+<div class='tag' id='t'>🚨 Escena 1/3: Penalidad Imprevista $142,000 USD</div>
 </div>
 <script>
 let cur = 0, el = 0;
-const tags = ['🚨 Escena 1/3: Gancho CFO (,400)', '⚡ Escena 2/3: Auditoria en 8s en RAM', '📄 Escena 3/3: Redlines Word (.docx) y CTA'];
+const tags = ['🚨 Escena 1/3: Penalidad Imprevista $142,000 USD', '⚡ Escena 2/3: Auditoría en 8s en RAM Volátil (0 Disco)', '📄 Escena 3/3: Redlines Word (.docx) Listos y Aprobados'];
 function show(i) {
 cur = i; el = 0;
 for(let j=0; j<3; j++) {

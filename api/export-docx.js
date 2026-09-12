@@ -41,7 +41,7 @@ export default async function handler(req, res) {
           <div style="background-color: #f8fafc; padding: 18px; border-left: 4px solid #2563eb; margin: 20px 0; border-radius: 6px;">
             <h3 style="margin-top: 0; color: #1e293b; font-size: 15px;">📄 Tu Redline en Word (.docx con Control de Cambios):</h3>
             <p style="font-size: 13px; color: #475569; margin-bottom: 14px;">
-              El informe forense incluye las cláusulas abusivas tachadas en rojo y las contra-propuestas blindadas redactadas en verde listas para enviar a tu contraparte.
+              El informe de diagnóstico preventivo incluye las cláusulas riesgosas tachadas en rojo y las contra-propuestas blindadas redactadas en verde listas para enviar a tu contraparte.
             </p>
             <div style="text-align: center; margin: 16px 0;">
               <a href="${appUrl}/?ref=auto-redline" style="background-color: #2563eb; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 14px; display: inline-block; box-shadow: 0 2px 6px rgba(37,99,235,0.3);">
