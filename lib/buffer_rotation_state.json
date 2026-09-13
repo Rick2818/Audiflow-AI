@@ -1,5 +1,5 @@
 {
-  "lastPublishedIndex": 6,
+  "lastPublishedIndex": 9,
   "publishedHistory": [
     {
       "timestamp": "2026-09-10T23:56:42.621Z",
@@ -145,6 +145,72 @@
         "facebook": {
           "success": true,
           "id": "6aa5d98ee58a7c35836ff0a5"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-13T14:07:52.255Z",
+      "id": "post_04_hidden_liability",
+      "title": "La Lupa Forense: Detectando Cláusulas de Responsabilidad Ilimitada",
+      "image": "https://audiflowai.com/images/hidden_liability_alert.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa6ae2deba7bc5677988a96"
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-13T14:09:57.019Z",
+      "id": "post_05_general_counsel_win",
+      "title": "Certeza Jurídica en Minutos: 0 Pasivos Ocultos Antes de la Firma",
+      "image": "https://audiflowai.com/images/general_counsel_audit_win.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa6aea51f8cf810a1141e49"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa6aeaff7b1958d5ce96d82"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-13T14:15:35.199Z",
+      "id": "post_06_smart_redline_diff",
+      "title": "Autopsia Contractual: Penalidad Desproporcionada vs. Contrapropuesta Equilibrada",
+      "image": "https://audiflowai.com/images/smart_redline_ai_interface.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa6aff666679b076f2b2b7b"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa6b0011f8cf810a114443f"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
         }
       }
     }

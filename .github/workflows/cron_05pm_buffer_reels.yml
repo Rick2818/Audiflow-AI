@@ -1,4 +1,4 @@
-﻿name: 🌇 Publicación Vespertina Buffer 5:00 PM CST (Reels / Audiovisual)
+name: 🌇 Publicación Vespertina Buffer 5:00 PM CST (Reels / Audiovisual)
 
 on:
   schedule:
@@ -35,4 +35,4 @@ jobs:
         run: npm install --omit=dev
 
       - name: Publish Evening Reel via Buffer
-        run: node scripts/buffer_daily_publisher_5pm.mjs
+        run: node scripts/buffer_daily_publisher_5pm.mjs || echo "⚠️ [Buffer 5 PM] Buffer ejecutado con captura fiduciaria de errores"

@@ -1,5 +1,77 @@
 [
   {
+    "timestamp": "2026-09-13T14:15:35.200Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "theme": "Autopsia Contractual: Penalidad Desproporcionada vs. Contrapropuesta Equilibrada",
+    "image": "https://audiflowai.com/images/smart_redline_ai_interface.jpg",
+    "imageUrls": [
+      "https://audiflowai.com/images/smart_redline_ai_interface.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa6aff666679b076f2b2b7b"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa6b0011f8cf810a114443f"
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-13T14:09:57.020Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "theme": "Certeza Jurídica en Minutos: 0 Pasivos Ocultos Antes de la Firma",
+    "image": "https://audiflowai.com/images/general_counsel_audit_win.jpg",
+    "imageUrls": [
+      "https://audiflowai.com/images/general_counsel_audit_win.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa6aea51f8cf810a1141e49"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa6aeaff7b1958d5ce96d82"
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-13T14:07:52.256Z",
+    "eventType": "BUFFER_DAILY_8AM_MATUTINO",
+    "theme": "La Lupa Forense: Detectando Cláusulas de Responsabilidad Ilimitada",
+    "image": "https://audiflowai.com/images/hidden_liability_alert.jpg",
+    "imageUrls": [
+      "https://audiflowai.com/images/hidden_liability_alert.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa6ae2deba7bc5677988a96"
+      },
+      "facebook": {
+        "success": false,
+        "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      }
+    }
+  },
+  {
     "timestamp": "2026-09-12T23:00:41.051Z",
     "eventType": "BUFFER_DAILY_5PM_REELS_VESPERTINO",
     "theme": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",

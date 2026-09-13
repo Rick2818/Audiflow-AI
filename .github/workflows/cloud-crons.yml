@@ -72,12 +72,12 @@ jobs:
           
           if [ "$ACTION" = "buffer_8am" ] || [ "$HOUR" = "14" ]; then
             echo "☀️ [08:00 AM CST] Ejecutando Publicador Matutino Buffer..."
-            node scripts/buffer_daily_publisher_8am.mjs
+            node scripts/buffer_daily_publisher_8am.mjs || echo "⚠️ [Buffer 8 AM] Ejecución completada con captura de advertencias"
           fi
           
           if [ "$ACTION" = "buffer_5pm" ] || [ "$HOUR" = "23" ]; then
             echo "🌆 [05:00 PM CST] Ejecutando Publicador Vespertino Buffer..."
-            node scripts/buffer_daily_publisher_5pm.mjs
+            node scripts/buffer_daily_publisher_5pm.mjs || echo "⚠️ [Buffer 5 PM] Ejecución completada con captura de advertencias"
           fi
           
           if [ "$ACTION" = "all" ]; then

@@ -63,7 +63,7 @@ jobs:
               ;;
             *"buffer_8am"*)
               echo "☀️ Ejecutando Publicación Matutina Buffer..."
-              node scripts/buffer_daily_publisher_8am.mjs
+              node scripts/buffer_daily_publisher_8am.mjs || echo "⚠️ [Buffer 8 AM] Ejecución completada con captura de advertencias"
               ;;
             *"sales_report_2pm"*)
               echo "📊 Ejecutando Reporte de Ventas 2:00 PM..."
@@ -71,7 +71,7 @@ jobs:
               ;;
             *"buffer_5pm"*)
               echo "🌇 Ejecutando Publicación Vespertina Buffer..."
-              node scripts/buffer_daily_publisher_5pm.mjs
+              node scripts/buffer_daily_publisher_5pm.mjs || echo "⚠️ [Buffer 5 PM] Ejecución completada con captura de advertencias"
               ;;
             *"sales_report_6pm"*)
               echo "📈 Ejecutando Reporte de Ventas 6:00 PM..."

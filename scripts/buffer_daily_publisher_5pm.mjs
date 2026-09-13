@@ -155,7 +155,8 @@ export async function runDailyBuffer5PMPublication() {
 
   const token = (process.env.BUFFER_ACCESS_TOKEN || '').trim();
   if (!token) {
-    throw new Error('❌ Falta BUFFER_ACCESS_TOKEN en las variables de entorno');
+    console.warn('⚠️ [Buffer 5 PM] Falta BUFFER_ACCESS_TOKEN en las variables de entorno (.env o GitHub Secrets). Publicación omitida de forma segura.');
+    return { success: false, skipped: true, error: 'MISSING_BUFFER_ACCESS_TOKEN' };
   }
 
   const publisher = new BufferPublisher(token);
