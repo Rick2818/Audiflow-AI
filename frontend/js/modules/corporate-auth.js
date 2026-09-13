@@ -17,8 +17,10 @@ export const CorporateAuth = {
         if (email) localStorage.setItem(this.EMAIL_KEY, email);
         if (plan) localStorage.setItem(this.PLAN_KEY, plan);
 
-        // Cookie de respaldo por 30 días
-        document.cookie = `${this.TOKEN_KEY}=${encodeURIComponent(token)}; path=/; max-age=2592000; SameSite=Lax`;
+        // Cookie de respaldo por 30 días (con flag Secure en entornos HTTPS)
+        const isHttps = typeof window !== 'undefined' && window.location && window.location.protocol === 'https:';
+        const secureFlag = isHttps ? '; Secure' : '';
+        document.cookie = `${this.TOKEN_KEY}=${encodeURIComponent(token)}; path=/; max-age=2592000; SameSite=Lax${secureFlag}`;
     },
 
     getToken() {

@@ -163,7 +163,7 @@ export default async function handler(req, res) {
       });
     }
 
-    // Flujo Stripe Checkout ($9.00 USD - Boleto de Entrada Fiduciario)
+    // Flujo Stripe Checkout (Fallback opcional secundario si está configurado en entorno)
     if (stripe) {
       const session = await stripe.checkout.sessions.create({
         payment_method_types: ['card'],
@@ -185,11 +185,17 @@ export default async function handler(req, res) {
         metadata: { report_id }
       });
 
-      return res.json({ checkoutUrl: session.url });
+      return res.status(200).json({ checkoutUrl: session.url });
     }
 
-    return res.json({
-      checkoutUrl: `${req.headers.origin || 'https://audiflowai.com'}/?reportId=${report_id}&status=success`
+    // Pasarela Oficial y Primaria: Wompi El Salvador ($19 USD)
+    // Cero bypass libre: Requiere checkout fiduciario verificado
+    const defaultWompiLink = CONFIG.PAYMENTS.WOMPI_LINK_19 || 'https://wompi.sv';
+    return res.status(200).json({
+      success: true,
+      gateway: 'wompi',
+      checkoutUrl: defaultWompiLink,
+      report_id
     });
 
   } catch (err) {

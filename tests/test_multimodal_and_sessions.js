@@ -4,6 +4,8 @@ import JSZip from 'jszip';
 import fs from 'fs';
 import path from 'path';
 import verifyClientHandler from '../lib/verify-client.js';
+import downloadPdfHandler from '../lib/download-pdf.js';
+import paymentHandler from '../api/payment.js';
 
 console.log('\n=======================================================');
 console.log('🧪 SUITE DE VALIDACIÓN: MEJORA AUDITFLOW A 9.5/10');
@@ -150,6 +152,92 @@ async function main() {
     const fApp = fs.readFileSync(path.resolve('frontend/js/app.js'), 'utf-8');
     const rApp = fs.readFileSync(path.resolve('js/app.js'), 'utf-8');
     assert.strictEqual(fApp, rApp, 'frontend/js/app.js y js/app.js deben ser estrictamente idénticos');
+  });
+
+  console.log('\n[GRUPO 5] Blindaje de Seguridad Post-Auditoría (Anti-Bypass, Anti-XSS, Timing-Safe):');
+
+  // Test 10: Sincronización exacta 1:1 de corporate-auth.js
+  runTest('Sincronización exacta 1:1 entre frontend/js/modules/corporate-auth.js y js/modules/corporate-auth.js', () => {
+    const fAuth = fs.readFileSync(path.resolve('frontend/js/modules/corporate-auth.js'), 'utf-8');
+    const rAuth = fs.readFileSync(path.resolve('js/modules/corporate-auth.js'), 'utf-8');
+    assert.strictEqual(fAuth, rAuth, 'Ambos módulos corporate-auth.js deben ser estrictamente idénticos');
+    assert(fAuth.includes('; Secure'), 'Debe incluir el flag Secure para conexiones HTTPS');
+  });
+
+  // Test 11: Rechazo de tokens forjados con clave hardcoded antigua
+  await runAsyncTest('Rechazo seguro de tokens forjados con el antiguo secreto estático', async () => {
+    const fakeSecret = 'auditflow-fiduciary-token-secret-2026';
+    const expiresAt = Date.now() + 30 * 24 * 60 * 60 * 1000;
+    const payload = `attacker@evil.com|Enterprise|${expiresAt}`;
+    const forgedSig = crypto.createHmac('sha256', fakeSecret).update(payload).digest('hex');
+    const forgedToken = Buffer.from(`${payload}|${forgedSig}`).toString('base64');
+
+    let responseData = null;
+    let statusCode = 0;
+    const req = {
+      method: 'POST',
+      body: { session_token: forgedToken }
+    };
+    const res = {
+      setHeader() {},
+      status(code) { statusCode = code; return this; },
+      json(data) { responseData = data; return this; }
+    };
+
+    await verifyClientHandler(req, res);
+    assert.strictEqual(responseData.is_client, false, 'El token forjado offline NO debe ser aceptado como cliente');
+  });
+
+  // Test 12: Prevención de XSS en generación de PDF
+  await runAsyncTest('Neutralización de inyecciones XSS / HTML en descarga de PDF', async () => {
+    let htmlOutput = '';
+    let statusCode = 0;
+    const req = {
+      method: 'POST',
+      body: {
+        documentName: 'Contrato<script>alert("xss")</script>.pdf',
+        findings: [
+          {
+            type: '<img src=x onerror=alert("type_xss")>',
+            description: '<script>fetch("http://evil.com")</script>',
+            impact: '<b onmouseover=alert("impact")>Peligro</b>'
+          }
+        ]
+      }
+    };
+    const res = {
+      setHeader() {},
+      status(code) { statusCode = code; return this; },
+      send(data) { htmlOutput = data; return this; }
+    };
+
+    await downloadPdfHandler(req, res);
+    assert.strictEqual(statusCode, 200);
+    assert(!htmlOutput.includes('<script>'), 'El HTML no debe contener etiquetas <script> sin escapar');
+    assert(!htmlOutput.includes('onerror='), 'El HTML no debe contener atributos onerror= sin escapar');
+    assert(htmlOutput.includes('&lt;script&gt;'), 'Los scripts deben ser neutralizados a entidades HTML (&lt;script&gt;)');
+  });
+
+  // Test 13: Erradicación del Bypass Gratuito en Pasarela de Cobro
+  await runAsyncTest('api/payment.js jamás entrega status=success sin cobro fiduciario confirmado', async () => {
+    let responseData = null;
+    let statusCode = 0;
+    const req = {
+      method: 'POST',
+      url: '/api/payment',
+      headers: { origin: 'https://audiflowai.com' },
+      body: { report_id: 'rep_test_bypass_123' }
+    };
+    const res = {
+      setHeader() {},
+      status(code) { statusCode = code; return this; },
+      json(data) { responseData = data; return this; }
+    };
+
+    await paymentHandler(req, res);
+    assert.strictEqual(statusCode, 200);
+    assert(!responseData.checkoutUrl?.includes('status=success'), 'La pasarela no debe emitir status=success gratuito');
+    assert(responseData.gateway === 'wompi', 'Debe dirigir por defecto a la pasarela fiduciaria Wompi SV');
   });
 
   console.log('\n=======================================================');

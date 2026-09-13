@@ -16,13 +16,41 @@ export const GEMINI_SYSTEM_PROMPT = buildAiJurisdictionPrompt('sv');
 
 async function extractDocxText(buffer) {
   try {
+    if (!Buffer.isBuffer(buffer) || buffer.length === 0 || buffer.length > 10 * 1024 * 1024) {
+      return '';
+    }
     const zip = await JSZip.loadAsync(buffer);
-    const docXml = await zip.file('word/document.xml')?.async('text');
+    const MAX_UNCOMPRESSED_ENTRY = 5 * 1024 * 1024; // 5MB
+    const MAX_TOTAL_UNCOMPRESSED = 15 * 1024 * 1024; // 15MB
+
+    // Blindaje contra Zip Bombs (Memory Exhaustion DoS)
+    let totalUncompressed = 0;
+    for (const filename in zip.files) {
+      const entry = zip.files[filename];
+      if (entry && entry._data && typeof entry._data.uncompressedSize === 'number') {
+        totalUncompressed += entry._data.uncompressedSize;
+        if (totalUncompressed > MAX_TOTAL_UNCOMPRESSED) {
+          console.warn('Alerta de seguridad: Archivo DOCX excede cuota total de descompresión segura.');
+          return '';
+        }
+      }
+    }
+
+    const docFile = zip.file('word/document.xml');
+    if (!docFile) return '';
+    if (docFile._data && docFile._data.uncompressedSize > MAX_UNCOMPRESSED_ENTRY) {
+      console.warn('Alerta de seguridad: word/document.xml excede cuota de 5MB.');
+      return '';
+    }
+
+    const docXml = await docFile.async('text');
     if (!docXml) return '';
-    const matches = docXml.match(/<w:t(?:\s+[^>]*)?>([\s\S]*?)<\/w:t>/g) || [];
-    return matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ');
+
+    // Extracción lineal no regresiva de nodos <w:t> (Inmune a ReDoS)
+    const matches = docXml.match(/<w:t[^>]*>([^<]*)<\/w:t>/g) || [];
+    return matches.map(m => m.replace(/<[^>]+>/g, '').trim()).filter(Boolean).join(' ');
   } catch (err) {
-    console.warn('Fallo extrayendo texto docx:', err);
+    console.warn('Fallo extrayendo texto docx:', err.message);
     return '';
   }
 }
@@ -74,9 +102,16 @@ export default async function handler(req, res) {
     // Cálculo fiduciario de Hash SHA-256 en memoria volátil (Cero retención en disco)
     let forensicHash = null;
     let fileBuffer = null;
-    if (body.document_base64) {
-      fileBuffer = Buffer.from(body.document_base64, 'base64');
-      forensicHash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
+    if (body.document_base64 && typeof body.document_base64 === 'string') {
+      try {
+        fileBuffer = Buffer.from(body.document_base64, 'base64');
+        if (fileBuffer && fileBuffer.length > 0) {
+          forensicHash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
+        }
+      } catch (bufErr) {
+        fileBuffer = null;
+        forensicHash = null;
+      }
     }
 
     // Preparar contenido para Gemini Multimodal (PDF, Imágenes, Word o Texto plano)
@@ -84,7 +119,7 @@ export default async function handler(req, res) {
     let isMultimodal = false;
     let extractedText = '';
 
-    if (body.document_base64) {
+    if (fileBuffer && fileBuffer.length > 0) {
       const isPdf = documentName.toLowerCase().endsWith('.pdf') || (body.document_type || '').includes('pdf');
       const isImage = /\.(png|jpe?g|webp|bmp|tiff)$/i.test(documentName) || (body.document_type || '').includes('image');
       const isWord = /\.(docx|doc)$/i.test(documentName) || (body.document_type || '').includes('word') || (body.document_type || '').includes('officedocument');
