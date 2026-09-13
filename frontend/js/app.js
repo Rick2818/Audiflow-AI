@@ -636,6 +636,7 @@ window.AppHandler = {
                     email: email,
                     message: issue,
                     issue_description: issue,
+                    is_support: true,
                     lang: window.I18n ? window.I18n.currentLang : 'es'
                 })
             });
@@ -1406,7 +1407,7 @@ window.AppHandler = {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         action: 'one-click',
-                        productId: 'plan_pro_69',
+                        productId: productId,
                         cardToken: cardToken,
                         email: email,
                         report_id: 'ent_' + Date.now()

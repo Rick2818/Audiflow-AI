@@ -108,20 +108,21 @@ export default async function handler(req, res) {
     return res.status(200).end();
   }
 
+  let body = req.body || {};
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch (e) {}
+  }
+  req.body = body;
+
   // Delegar solicitudes de soporte
   const url = req.url || '';
-  if (url.includes('/api/support') || req.query?.type === 'support' || req.body?.is_support) {
+  if (url.includes('/api/support') || req.query?.type === 'support' || body.is_support || (body.message && !body.issue_type)) {
     return await supportHandler(req, res);
   }
 
   // Handle POST (Report Issue)
   if (req.method === 'POST') {
     try {
-      let body = req.body || {};
-      if (typeof body === 'string') {
-        try { body = JSON.parse(body); } catch (e) {}
-      }
-
       const { email, issue_type, description, user_agent, lang } = body;
       const userEmail = email || 'usuario@anonimo.com';
       const issueType = issue_type || 'Error de Configuración General';

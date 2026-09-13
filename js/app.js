@@ -11,14 +11,90 @@ window.AppHandler = {
     currentPartyStance: 'buyer',
     currentLeadData: { name: '', email: '' },
     isNordicMode: false,
+    selectedJurisdiction: 'sv',
 
     init() {
         this.detectAndApplyNordicMode();
+        this.initJurisdiction();
         this.setupDragAndDrop();
         this.setupFormListeners();
         this.checkUrlForPaymentSuccess();
         this.trackInboundLead();
         this.setPartyStance('buyer');
+    },
+
+    initJurisdiction() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const countryParam = (params.get('country') || params.get('jurisdiction') || '').toLowerCase();
+            if (countryParam) {
+                const validMap = {
+                    'se': 'se', 'sweden': 'se', 'sverige': 'se',
+                    'no': 'no', 'norway': 'no', 'norge': 'no',
+                    'dk': 'dk', 'denmark': 'dk', 'danmark': 'dk',
+                    'fi': 'fi', 'finland': 'fi', 'suomi': 'fi',
+                    'gt': 'gt', 'guatemala': 'gt',
+                    'cr': 'cr', 'costa rica': 'cr', 'costarica': 'cr',
+                    'pa': 'pa', 'panama': 'pa', 'panamá': 'pa',
+                    'hn': 'hn', 'honduras': 'hn',
+                    'de': 'de', 'germany': 'de', 'deutschland': 'de',
+                    'mx': 'mx', 'mexico': 'mx', 'méxico': 'mx',
+                    'co': 'co', 'colombia': 'co',
+                    'es': 'es', 'spain': 'es', 'españa': 'es',
+                    'us': 'global', 'global': 'global',
+                    'sv': 'sv', 'salvador': 'sv', 'el salvador': 'sv'
+                };
+                if (validMap[countryParam]) {
+                    this.selectedJurisdiction = validMap[countryParam];
+                }
+            }
+            this.updateJurisdictionUI();
+        } catch (e) {
+            console.warn('Jurisdiction init warning:', e);
+        }
+    },
+
+    onJurisdictionChanged(jurisdictionId) {
+        this.selectedJurisdiction = jurisdictionId || 'sv';
+        this.updateJurisdictionUI();
+    },
+
+    updateJurisdictionUI() {
+        const tagEl = document.getElementById('active-jurisdiction-tag');
+        const subEl = document.getElementById('active-jurisdiction-sub');
+        const selectEl = document.getElementById('jurisdiction-select');
+
+        const jurMap = {
+            sv: { flag: '🇸🇻', name: 'El Salvador', currency: 'USD ($)', code: 'Código de Comercio de El Salvador (Arts. 945+)', standard: 'Suministro y Servicios Mercantiles' },
+            gt: { flag: '🇬🇹', name: 'Guatemala', currency: 'GTQ (Q)', code: 'Código de Comercio de Guatemala (Decreto 2-70 Art. 688)', standard: 'CRECIG / CENAC' },
+            cr: { flag: '🇨🇷', name: 'Costa Rica', currency: 'CRC (₡)', code: 'Código de Comercio (Ley 3284) y Ley 7472 Art. 42', standard: 'MEIC / CCA' },
+            pa: { flag: '🇵🇦', name: 'Panamá', currency: 'USD ($)', code: 'Código de Comercio y Ley 45 de 2007 (ACODECO)', standard: 'CeCAP Arbitraje' },
+            hn: { flag: '🇭🇳', name: 'Honduras', currency: 'HNL (L)', code: 'Código de Comercio de Honduras (Decreto 73-1950)', standard: 'CCIT' },
+            ni: { flag: '🇳🇮', name: 'Nicaragua', currency: 'NIO (C$)', code: 'Código de Comercio & Ley 842', standard: 'CACONIC' },
+            se: { flag: '🇸🇪', name: 'Suecia', currency: 'SEK (kr)', code: 'Avtalslagen (Lag 1915:218 § 36) & Köplagen', standard: 'NL 17 / NLM 19 & AB 04' },
+            no: { flag: '🇳🇴', name: 'Noruega', currency: 'NOK (kr)', code: 'Avtaleloven § 36 & Kjøpsloven', standard: 'NL 17 & Statens standardavtaler (SSA)' },
+            dk: { flag: '🇩🇰', name: 'Dinamarca', currency: 'DKK (kr)', code: 'Aftaleloven LBK nr 193 § 36 & Købeloven', standard: 'NL 17 & AB 18 / K01' },
+            fi: { flag: '🇫🇮', name: 'Finlandia', currency: 'EUR (€)', code: 'Oikeustoimilaki 36 § & Kauppalaki', standard: 'NL 17 & IT2022 Sopimusehdot' },
+            de: { flag: '🇩🇪', name: 'Alemania / DACH', currency: 'EUR (€)', code: 'BGB §§ 305–310 (AGB-Recht) & HGB § 377', standard: 'EVB-IT & VOB/B' },
+            at: { flag: '🇦🇹', name: 'Austria', currency: 'EUR (€)', code: 'ABGB § 879 Abs. 3 & UGB § 377', standard: 'ÖNORM B 2110' },
+            ch: { flag: '🇨🇭', name: 'Suiza', currency: 'CHF', code: 'OR Art. 1 ff., Art. 100 & UWG Art. 8', standard: 'SWICO & SIA 118' },
+            mx: { flag: '🇲🇽', name: 'México', currency: 'MXN ($)', code: 'Código de Comercio & PROFECO (Arts. 85-90 bis)', standard: 'Contratos Adhesión RCPA / CAM' },
+            co: { flag: '🇨🇴', name: 'Colombia', currency: 'COP ($)', code: 'Código de Comercio (Art. 868) & Ley 1480', standard: 'CAC Bogotá' },
+            es: { flag: '🇪🇸', name: 'España', currency: 'EUR (€)', code: 'Ley 3/2004 Morosidad (máx. 60d) & LCGC', standard: 'Condiciones Generales LCGC' },
+            global: { flag: '🌐', name: 'Internacional', currency: 'USD ($)', code: 'Uniform Commercial Code (UCC § 2-302) & CISG', standard: 'MSA, SLA & AIA' }
+        };
+
+        const active = jurMap[this.selectedJurisdiction] || jurMap.sv;
+
+        if (tagEl) {
+            tagEl.innerHTML = `${active.flag} ${active.name} • ${active.currency}`;
+        }
+        if (subEl) {
+            subEl.innerHTML = `Su documento se procesa bajo el <strong>${active.code}</strong> (Estándar: <em>${active.standard}</em>) y en <strong>memoria RAM volátil efímera</strong> (cero retención, SOC-2 / GDPR Art. 28).`;
+        }
+        if (selectEl && selectEl.value !== this.selectedJurisdiction) {
+            selectEl.value = this.selectedJurisdiction;
+        }
     },
 
     setPartyStance(stance) {
@@ -340,7 +416,9 @@ window.AppHandler = {
                         document_base64: base64,
                         document_name: this.selectedFile.name,
                         party_stance: this.currentPartyStance || 'buyer',
-                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP'
+                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP',
+                        country: this.selectedJurisdiction || 'sv',
+                        jurisdiction: this.selectedJurisdiction || 'sv'
                     })
                 });
             } else {
@@ -350,7 +428,9 @@ window.AppHandler = {
                     body: JSON.stringify({ 
                         sample_text: 'sample_contract_text',
                         party_stance: this.currentPartyStance || 'buyer',
-                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP'
+                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP',
+                        country: this.selectedJurisdiction || 'sv',
+                        jurisdiction: this.selectedJurisdiction || 'sv'
                     })
                 });
             }
@@ -556,6 +636,7 @@ window.AppHandler = {
                     email: email,
                     message: issue,
                     issue_description: issue,
+                    is_support: true,
                     lang: window.I18n ? window.I18n.currentLang : 'es'
                 })
             });
@@ -711,6 +792,12 @@ window.AppHandler = {
         if (docNameEl) docNameEl.innerText = (this.selectedFile ? this.selectedFile.name : (isDe ? 'Gewerbevertrag.pdf' : (isEn ? 'Commercial_Agreement.pdf' : 'Contrato_Servicios.pdf')));
         if (docTypeEl) docTypeEl.innerText = data.document_type || (isDe ? 'Gewerblicher Vertrag' : (isEn ? 'Commercial Agreement' : 'Contrato Comercial'));
         if (reportIdEl) reportIdEl.innerText = this.currentReportId || 'rep_123456';
+
+        const jurisdictionBadgeEl = document.getElementById('rep-jurisdiction-badge');
+        if (jurisdictionBadgeEl) {
+            const jurCountry = data.jurisdiction || data.jurisdiction_applied?.country || (this.selectedJurisdiction === 'se' ? 'Suecia' : (this.selectedJurisdiction === 'gt' ? 'Guatemala' : (this.selectedJurisdiction === 'cr' ? 'Costa Rica' : 'El Salvador')));
+            jurisdictionBadgeEl.innerText = `⚖️ MARCO LEGAL: ${jurCountry.toUpperCase()}`;
+        }
 
         const leakageVal = (typeof data.total_financial_leakage === 'number' && !isNaN(data.total_financial_leakage)) 
             ? data.total_financial_leakage 
@@ -1320,7 +1407,7 @@ window.AppHandler = {
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         action: 'one-click',
-                        productId: 'plan_pro_69',
+                        productId: productId,
                         cardToken: cardToken,
                         email: email,
                         report_id: 'ent_' + Date.now()
@@ -2046,7 +2133,6 @@ window.AppHandler = {
             const data = await res.json();
 
             if (data && data.is_client) {
-                // Cliente autenticado con éxito
                 localStorage.setItem('auditflow_corporate_active', 'true');
                 localStorage.setItem('auditflow_corporate_email', email);
                 localStorage.setItem('auditflow_corporate_plan', data.plan || 'enterprise');

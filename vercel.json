@@ -58,6 +58,10 @@
   ],
   "rewrites": [
     {
+      "source": "/assets/(.*)",
+      "destination": "/frontend/assets/$1"
+    },
+    {
       "source": "/images/(.*)",
       "destination": "/frontend/images/$1"
     },
@@ -140,6 +144,18 @@
     {
       "source": "/prompt-maestro",
       "destination": "/frontend/Prompt_Maestro_AuditFlow_AI.pdf"
+    },
+    {
+      "source": "/manual",
+      "destination": "/frontend/MANUAL_DE_USUARIO_APP.md"
+    },
+    {
+      "source": "/manual-usuario",
+      "destination": "/frontend/MANUAL_DE_USUARIO_APP.md"
+    },
+    {
+      "source": "/MANUAL_DE_USUARIO_APP.md",
+      "destination": "/frontend/MANUAL_DE_USUARIO_APP.md"
     },
     {
       "source": "/Executive_Brief_AuditFlow_AI.pdf",

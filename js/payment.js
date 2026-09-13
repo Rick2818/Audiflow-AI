@@ -222,7 +222,7 @@ window.PaymentHandler = {
                     report_id: this.currentReportId || 'rep_123456',
                     email: this.currentLeadEmail || 'cliente@empresa.com',
                     document_name: this.currentDocName || 'contrato.pdf',
-                    amount_usd: 9.00
+                    amount_usd: 19.00
                 })
             });
 
@@ -235,13 +235,13 @@ window.PaymentHandler = {
                 if (window.AppHandler && window.AppHandler.unblurReport) {
                     window.AppHandler.unblurReport();
                 }
-                alert('🎉 ¡Pago Exitoso de $9.00 USD (Boleto de Entrada)!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF + Word editable a tu correo.');
+                alert('🎉 ¡Pago Exitoso de $19.00 USD (Reporte Oficial)!\n\nHemos desbloqueado tus 3 Soluciones Tácticas en pantalla y enviado la copia PDF + Word editable a tu correo.');
             }
         } catch (err) {
             console.error('Error en checkout Stripe:', err);
             alert('⚠️ No se pudo procesar la solicitud de Stripe (' + err.message + '). Por favor intenta de nuevo.');
         } finally {
-            if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($9 USD)';
+            if (btnPayStripe) btnPayStripe.innerText = 'Pagar con Tarjeta ($19 USD)';
         }
     },
 

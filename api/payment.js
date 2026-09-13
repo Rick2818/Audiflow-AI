@@ -46,9 +46,11 @@ export default async function handler(req, res) {
       // Catálogo Oficial en Servidor (Previene Parameter Tampering / Manipulación de Precios)
       const CATALOGO_PRECIOS = {
         'report_entry_9': { amount: 9.00, currency: 'USD', name: 'Boleto de Entrada Fiduciario ($9 USD)' },
+        'report_unlock_19': { amount: 19.00, currency: 'USD', name: 'Informe Oficial Word .docx + PDF ($19 USD)' },
         'modulo_facturacion_9_99': { amount: 9.99, currency: 'USD', name: 'Módulo de Facturación Automática DTE' },
         'modulo_redlines_19_99': { amount: 19.99, currency: 'USD', name: 'Generador de Redlines Word (.docx)' },
-        'plan_pro_69': { amount: 69.00, currency: 'USD', name: 'Suscripción AuditFlow Pro ($69/mes)' }
+        'plan_pro_69': { amount: 69.00, currency: 'USD', name: 'Suscripción AuditFlow Pro ($69/mes)' },
+        'plan_anual_590': { amount: 590.00, currency: 'USD', name: 'Licencia Corporativa Anual ($590/año)' }
       };
 
       const selectedProduct = CATALOGO_PRECIOS[productId] || CATALOGO_PRECIOS['report_entry_9'];
