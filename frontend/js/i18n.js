@@ -15,6 +15,7 @@ window.I18n = {
             nav_corp_plan: "Plan Corporativo B2B",
             nav_pricing: "Precios",
             nav_support: "Soporte",
+            nav_client_access: "Acceso Clientes",
             
             // Actions Toolbar
             btn_back_home: "← Regresar al Inicio / Auditar Otro",
@@ -356,6 +357,7 @@ window.I18n = {
             nav_corp_plan: "B2B Enterprise Plan",
             nav_pricing: "Pricing",
             nav_support: "Support",
+            nav_client_access: "Client Access",
             
             // Actions Toolbar
             btn_back_home: "← Back to Home / Audit Another",
@@ -696,6 +698,7 @@ window.I18n = {
             nav_corp_plan: "B2B Unternehmens-Plan",
             nav_pricing: "Preise",
             nav_support: "Support",
+            nav_client_access: "Kundenzugang",
             
             // Actions Toolbar (DE)
             btn_back_home: "← Zurück zur Startseite / Weiteres Dokument prüfen",
