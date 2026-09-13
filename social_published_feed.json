@@ -1,5 +1,107 @@
 [
   {
+    "timestamp": "2026-09-13T16:14:58.471Z",
+    "eventType": "VERCEL_CRON_BUFFER_5PM_REELS",
+    "dayOfWeek": 0,
+    "theme": "Reel Domingo: Estrategia y Visión Contractual",
+    "imageUrls": [
+      "https://audiflowai.com/images/carousel/slide1_cover.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa6cba257098b21337d4d20",
+        "skipped": true
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa6cbacf7b1958d5cecc45c",
+        "skipped": true
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-13T16:14:41.691Z",
+    "eventType": "VERCEL_CRON_BUFFER_8AM",
+    "dayOfWeek": 0,
+    "theme": "El Flujo de Blindaje y Precisión en 3 Pasos: De la Lectura al Redline sin Chatbots Genéricos",
+    "imageUrls": [
+      "https://audiflowai.com/images/auditflow_forensic_redline.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa6cbf2f7b1958d5cecc6be",
+        "skipped": false
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa6cbfd4cc07ffa4d3a9a69",
+        "skipped": false
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-13T16:13:21.094Z",
+    "eventType": "VERCEL_CRON_BUFFER_5PM_REELS",
+    "dayOfWeek": 0,
+    "theme": "Reel Domingo: Estrategia y Visión Contractual",
+    "imageUrls": [
+      "https://audiflowai.com/images/carousel/slide1_cover.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": true,
+        "id": "6aa6cba257098b21337d4d20",
+        "skipped": false
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      },
+      "facebook": {
+        "success": true,
+        "id": "6aa6cbacf7b1958d5cecc45c",
+        "skipped": false
+      }
+    }
+  },
+  {
+    "timestamp": "2026-09-13T16:13:15.735Z",
+    "eventType": "VERCEL_CRON_BUFFER_8AM",
+    "dayOfWeek": 0,
+    "theme": "Del Escaneo al Archivo Word (.docx) con Control de Cambios en Segundos",
+    "imageUrls": [
+      "https://audiflowai.com/images/contract_word_redline.jpg"
+    ],
+    "results": {
+      "linkedin": {
+        "success": false,
+        "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+      },
+      "facebook": {
+        "success": false,
+        "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+      },
+      "instagram": {
+        "success": true,
+        "skipped": true,
+        "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+      }
+    }
+  },
+  {
     "timestamp": "2026-09-13T14:15:35.200Z",
     "eventType": "BUFFER_DAILY_8AM_MATUTINO",
     "theme": "Autopsia Contractual: Penalidad Desproporcionada vs. Contrapropuesta Equilibrada",

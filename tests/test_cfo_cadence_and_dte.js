@@ -76,7 +76,7 @@ assert(htmlT2.includes('Redline en Word'), 'Toque 2 debe referenciar Redlines en
 console.log('  ✅ [PASS] Template CFO Toque 2 contiene caso práctico y redline');
 
 const htmlT3 = buildCfoTouch3Html(leadSample);
-assert(htmlT3.includes('50379893922'), 'Toque 3 debe contener el WhatsApp de Don Ricardo');
+assert(htmlT3.includes('50375743444'), 'Toque 3 debe contener el WhatsApp de Don Ricardo');
 assert(htmlT3.includes('Crédito Fiscal Electrónico (DTE'), 'Toque 3 debe incluir facturación fiscal DTE');
 console.log('  ✅ [PASS] Template CFO Toque 3 contiene cierre diplomático, WhatsApp y DTE');
 
@@ -87,7 +87,7 @@ const appJsRoot = fs.readFileSync(path.join(rootDir, 'js/app.js'), 'utf8');
 
 assert(appJsFront.includes('Transfer365'), 'frontend/js/app.js debe incluir Transfer365');
 assert(appJsFront.includes('Crédito Fiscal Electrónico'), 'frontend/js/app.js debe incluir DTE Crédito Fiscal');
-assert(appJsFront.includes('+503 7989 3922'), 'frontend/js/app.js debe incluir WhatsApp fiduciario');
+assert(appJsFront.includes('+503 7574 3444'), 'frontend/js/app.js debe incluir WhatsApp fiduciario');
 
 assert(appJsRoot.includes('Transfer365'), 'js/app.js debe incluir Transfer365');
 assert(appJsRoot.includes('Crédito Fiscal Electrónico'), 'js/app.js debe incluir DTE Crédito Fiscal');
@@ -101,8 +101,8 @@ const htmlRoot = fs.readFileSync(path.join(rootDir, 'index.html'), 'utf8');
 
 assert(htmlFront.includes('btn-sample-audit-cta'), 'frontend/index.html debe tener btn-sample-audit-cta');
 assert(htmlRoot.includes('btn-sample-audit-cta'), 'index.html debe tener btn-sample-audit-cta');
-assert(htmlFront.includes('https://wa.me/50379893922'), 'frontend/index.html debe vincular a wa.me/50379893922');
-assert(htmlRoot.includes('https://wa.me/50379893922'), 'index.html debe vincular a wa.me/50379893922');
+assert(htmlFront.includes('https://wa.me/50375743444'), 'frontend/index.html debe vincular a wa.me/50375743444');
+assert(htmlRoot.includes('https://wa.me/50375743444'), 'index.html debe vincular a wa.me/50375743444');
 assert(htmlFront.includes('Facturación Corporativa con Crédito Fiscal (DTE)'), 'frontend/index.html debe tener banner DTE');
 assert(htmlRoot.includes('Facturación Corporativa con Crédito Fiscal (DTE)'), 'index.html debe tener banner DTE');
 

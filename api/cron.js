@@ -4,28 +4,23 @@ import storytellingHandler from '../lib/cron-handlers/storytelling.js';
 import nordicSowerHandler from '../lib/cron-handlers/nordic-sower.js';
 import centroamericaSowerHandler from '../lib/cron-handlers/centroamerica-sower.js';
 import { getCloudState, setCloudState } from '../lib/cloud-state.js';
-import { verifyAdminAuth } from '../lib/security.js';
+import { verifyAdminAuth, safeCompare, setStrictCors } from '../lib/security.js';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-password, x-vercel-cron');
+  setStrictCors(req, res, 'GET, POST, OPTIONS', 'Content-Type, Authorization, x-admin-password');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  const isVercelCron = Boolean(
-    req.headers['x-vercel-cron'] === '1' ||
-    (req.headers['user-agent'] || '').includes('vercel-cron')
-  );
-  const tokenCandidate = req.query?.token || req.query?.admin_password || '';
-  const isTokenAuth = tokenCandidate === (process.env.ADMIN_PASSWORD || 'AuditFlow2026!');
-  const isAuthorized = isVercelCron || isTokenAuth || verifyAdminAuth(req);
+  const authHeader = req.headers ? (req.headers['authorization'] || req.headers['Authorization'] || '') : '';
+  const cronSecret = (process.env.CRON_SECRET || process.env.ADMIN_PASSWORD || '').trim();
+  const isVercelCron = Boolean(cronSecret && authHeader && safeCompare(authHeader, `Bearer ${cronSecret}`));
+  const isAuthorized = isVercelCron || verifyAdminAuth(req);
 
   if (!isAuthorized) {
-    return res.status(401).json({ success: false, error: 'No autorizado.' });
+    return res.status(401).json({ success: false, error: 'No autorizado. Se requiere autorización de Vercel Cron o token de administrador.' });
   }
 
   const now = new Date();

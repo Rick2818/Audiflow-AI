@@ -47,7 +47,7 @@ ${question.substring(0, 500)}
 </USER_QUERY>
 `;
 
-        const candidateModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+        const candidateModels = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-flash-latest'];
         let gRes = null;
         for (const m of candidateModels) {
           try {
@@ -75,7 +75,7 @@ ${question.substring(0, 500)}
           } catch (e) {}
         }
 
-        if (gRes.ok) {
+        if (gRes && gRes.ok) {
           const gData = await gRes.json();
           const answer = gData.candidates?.[0]?.content?.parts?.[0]?.text;
           if (answer) {

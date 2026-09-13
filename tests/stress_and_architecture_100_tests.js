@@ -448,7 +448,7 @@ async function runTestSuite() {
   // 75. POST /api/lead-recovery con cabecera Vercel Cron -> HTTP 200
   const { req: reqLeadCron, res: resLeadCron } = createMockReqRes({
     method: 'GET',
-    headers: { 'x-vercel-cron': '1' }
+    headers: { 'authorization': `Bearer ${cronSecret}` }
   });
   await leadRecoveryHandler(reqLeadCron, resLeadCron);
   assert('E75: POST /api/lead-recovery con cabecera Vercel Cron procesa leads con HTTP 200', resLeadCron.statusCode === 200);

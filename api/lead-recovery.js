@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import { Resend } from 'resend';
 import nodemailer from 'nodemailer';
-import { verifyAdminAuth } from '../lib/security.js';
+import { verifyAdminAuth, safeCompare, setStrictCors } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
 
 const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE.URL || '').trim();
@@ -41,16 +41,16 @@ async function sendRecoveryEmail({ to, subject, html }) {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-password');
+  setStrictCors(req, res, 'GET, POST, OPTIONS', 'Content-Type, Authorization, x-admin-password');
 
   if (req.method === 'OPTIONS') return res.status(200).end();
 
-  // Autorización: Crons o Administrador
-  const authHeader = req.headers['authorization'] || '';
-  const isCron = authHeader.startsWith('Bearer ') || (req.headers['x-vercel-cron'] === '1') || (req.headers['user-agent'] || '').includes('vercel-cron') || (req.url && req.url.includes('cron=true'));
-  if (!isCron && !verifyAdminAuth(req)) {
+  // Autorización Criptográfica Fiduciaria: Vercel Cron con CRON_SECRET o Administrador
+  const authHeader = req.headers ? (req.headers['authorization'] || req.headers['Authorization'] || '') : '';
+  const cronSecret = (process.env.CRON_SECRET || process.env.ADMIN_PASSWORD || '').trim();
+  const isVercelCron = Boolean(cronSecret && authHeader && safeCompare(authHeader, `Bearer ${cronSecret}`));
+
+  if (!isVercelCron && !verifyAdminAuth(req)) {
     return res.status(401).json({ error: 'Acceso no autorizado a recuperacion de leads.' });
   }
 

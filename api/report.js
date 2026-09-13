@@ -1,6 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { CONFIG } from '../lib/config.js';
+import { setStrictCors } from '../lib/security.js';
+import { ephemeralReportsCache } from './audit.js';
 
 const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE.URL || '').trim();
 const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || CONFIG.SUPABASE.KEY || '').trim();
@@ -100,9 +102,7 @@ async function sendAdminIssueAlert({ email, issueType, description, userAgent, l
 import supportHandler from '../lib/support.js';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  setStrictCors(req, res, 'GET, POST, OPTIONS', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -182,14 +182,37 @@ export default async function handler(req, res) {
   }
 
   // Handle GET (Report status inquiry)
-  const url = req.url || '';
   const reportId = url.split('/').pop().split('?')[0] || req.query?.id || 'rep_active';
 
+  let isUnlocked = false;
+  let reportFound = false;
+
+  if (reportId && ephemeralReportsCache && ephemeralReportsCache.has(reportId)) {
+    const cached = ephemeralReportsCache.get(reportId);
+    reportFound = true;
+    isUnlocked = Boolean(cached.is_unlocked || cached.status === 'unlocked' || cached.status === 'paid');
+  } else if (supabase && reportId && reportId !== 'rep_active') {
+    try {
+      const { data } = await supabase.from('audit_reports').select('status').eq('id', reportId).maybeSingle();
+      if (data) {
+        reportFound = true;
+        isUnlocked = (data.status === 'unlocked' || data.status === 'paid');
+      }
+    } catch (err) {
+      console.warn('Error verificando status en Supabase:', err.message);
+    }
+  }
+
+  const status = isUnlocked ? 'unlocked' : (reportFound ? 'locked' : 'not_found');
+
   return res.status(200).json({
-    success: true,
+    success: reportFound,
     report_id: reportId,
-    status: 'unlocked',
-    message: 'Reporte activo en memoria RAM volátil',
+    status: status,
+    is_unlocked: isUnlocked,
+    message: isUnlocked 
+      ? 'Reporte activo y desbloqueado en memoria RAM volátil' 
+      : (reportFound ? 'Reporte protegido; pendiente de liquidación / pago' : 'Reporte no localizado en memoria RAM volátil'),
     timestamp: new Date().toISOString()
   });
 }

@@ -257,7 +257,7 @@ export function buildCfoTouch2Html(lead) {
 export function buildCfoTouch3Html(lead) {
   const legalNoticeHtml = getLegalNoticeForOutbound(lead, 'es');
   const encodedMsg = encodeURIComponent(`Hola Ricardo, soy ${lead.firstName} ${lead.lastName} de ${lead.company}. Me interesa coordinar una breve demostración ejecutiva de AuditFlow AI.`);
-  const waUrl = `https://wa.me/50379893922?text=${encodedMsg}`;
+  const waUrl = `https://wa.me/50375743444?text=${encodedMsg}`;
 
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 24px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
@@ -291,7 +291,7 @@ export function buildCfoTouch3Html(lead) {
 
       <div style="text-align: center; margin: 24px 0;">
         <a href="${waUrl}" style="background-color: #10b981; color: #022c22; padding: 13px 28px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 10px;">
-          💬 Conversar por WhatsApp (+503 7989 3922) →
+          💬 Conversar por WhatsApp (+503 7574 3444) →
         </a>
         <br>
         <a href="${lead.trialUrl}" style="color: #38bdf8; font-size: 13px; text-decoration: underline;">
@@ -440,14 +440,14 @@ export async function runCentroamerica8AMDispatch(options = {}) {
     if (!tBufete.includes('AUDITFLOW AI') || !tBufete.includes('ricardo@audiflowai.com')) {
       throw new Error('Fallo en template Bufetes');
     }
-    if (!tCfo1.includes('Control de EBITDA') || !tCfo2.includes('$18,500.00 USD') || !tCfo3.includes('50379893922')) {
+    if (!tCfo1.includes('Control de EBITDA') || !tCfo2.includes('$18,500.00 USD') || !tCfo3.includes('50375743444')) {
       throw new Error('Fallo de consistencia en templates de la Cadencia de 3 Toques');
     }
 
     appendLog('✅ [PASS] Template Bufetes: Validado');
     appendLog('✅ [PASS] Template CFO Toque 1 (EBITDA & Trampas): Validado');
     appendLog('✅ [PASS] Template CFO Toque 2 (Caso Práctico $18.5k): Validado');
-    appendLog('✅ [PASS] Template CFO Toque 3 (Cierre & Demo WhatsApp +503 7989 3922): Validado');
+    appendLog('✅ [PASS] Template CFO Toque 3 (Cierre & Demo WhatsApp +503 7574 3444): Validado');
     appendLog('🎉 VERIFICACIÓN COMPLETA: Cadencia Outbound 100% Lista y Blindada.');
 
     return {

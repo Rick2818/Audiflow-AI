@@ -1,17 +1,21 @@
 import assert from 'assert';
+import crypto from 'crypto';
+import dotenv from 'dotenv';
+dotenv.config();
+import { CONFIG } from '../lib/config.js';
 import adminHandler from '../api/admin.js';
 import auditHandler from '../api/audit.js';
 import chatDocumentHandler from '../api/chat-document.js';
 import crossAuditHandler from '../api/cross-audit.js';
 import exportDocxHandler from '../api/export-docx.js';
-import indexnowHandler from '../api/indexnow.js';
+import indexnowHandler from '../lib/indexnow.js';
 import leadRecoveryHandler from '../api/lead-recovery.js';
 import leadHandler from '../lib/lead.js';
 import outreachHandler, { generateExecutiveLeads, generateOutreachProspects, resolveLeadLanguage } from '../api/outreach.js';
 import paymentHandler from '../api/payment.js';
 import reportHandler from '../api/report.js';
 import webhookHandler from '../api/webhook.js';
-import waalaxySyncHandler from '../api/waalaxy-sync.js';
+import waalaxySyncHandler from '../lib/waalaxy-sync.js';
 
 function createMockReqRes(options = {}) {
   const {
@@ -133,6 +137,8 @@ async function runForensicAudit() {
   }
   console.log('');
 
+  let adminSessionToken = '';
+
   // 1. AUDITORÍA DE ADMINISTRACIÓN Y AUTENTICACIÓN
   console.log('[FASE 1] Módulo api/admin.js & Seguridad:');
   {
@@ -149,12 +155,13 @@ async function runForensicAudit() {
     });
     await adminHandler(r2, s2);
     const d2 = s2._getResponseData();
-    recordTest('Autenticación con contraseña maestra AuditFlow2026!', s2._getStatusCode() === 200 && d2.token === 'admin_token_auditflow_2026');
+    adminSessionToken = d2?.token || '';
+    recordTest('Autenticación con contraseña maestra AuditFlow2026!', s2._getStatusCode() === 200 && Boolean(adminSessionToken));
 
     // Dashboard data con Bearer Token
     const { req: r3, res: s3 } = createMockReqRes({
       method: 'GET',
-      headers: { 'authorization': 'Bearer admin_token_auditflow_2026' }
+      headers: { 'authorization': `Bearer ${adminSessionToken}` }
     });
     await adminHandler(r3, s3);
     const d3 = s3._getResponseData();
@@ -163,7 +170,7 @@ async function runForensicAudit() {
     // Auto-Healer diagnostic
     const { req: r4, res: s4 } = createMockReqRes({
       method: 'POST',
-      headers: { 'authorization': 'Bearer admin_token_auditflow_2026' },
+      headers: { 'authorization': `Bearer ${adminSessionToken}` },
       body: { action: 'auto_heal_configuration' }
     });
     await adminHandler(r4, s4);
@@ -242,7 +249,7 @@ async function runForensicAudit() {
       }
     });
     await exportDocxHandler(r1, s1);
-    recordTest('Generación de documento Word (.docx) descargable con marcas de revisión', s1._getStatusCode() === 200 && s1._getHeaders()['content-type'] === 'application/vnd.ms-word');
+    recordTest('Generación de documento Word (.docx) descargable con marcas de revisión', s1._getStatusCode() === 200 && (s1._getHeaders()['content-type']?.includes('wordprocessingml.document') || s1._getHeaders()['content-type'] === 'application/vnd.ms-word'));
 
     const { req: r2, res: s2 } = createMockReqRes({ method: 'POST' });
     await indexnowHandler(r2, s2);
@@ -277,7 +284,7 @@ async function runForensicAudit() {
     // Outreach handler test mode
     const { req: r1, res: s1 } = createMockReqRes({
       method: 'POST',
-      headers: { 'authorization': 'Bearer admin_token_auditflow_2026' },
+      headers: { 'authorization': `Bearer ${adminSessionToken}` },
       body: {
         test_mode: true,
         batch: 'pareto_top20',
@@ -321,20 +328,26 @@ async function runForensicAudit() {
     await reportHandler(r3, s3);
     recordTest('Registro de incidencia técnica con auto-diagnóstico IA', s3._getStatusCode() === 200 && s3._getResponseData()?.success);
 
-    // Webhook simulation
-    const { req: r4, res: s4 } = createMockReqRes({
-      method: 'POST',
-      body: {
-        type: 'checkout.session.completed',
-        data: {
-          object: {
-            id: 'cs_test_mock_123',
-            customer_details: { email: 'comprador@empresa.com' },
-            amount_total: 1900,
-            metadata: { report_id: 'rep_test_999' }
-          }
+    // Webhook simulation (Wompi HMAC firmado fiduciariamente)
+    const wompiSecret = (process.env.WOMPI_INTEGRITY_SECRET || process.env.WOMPI_API_SECRET || CONFIG.PAYMENTS?.WOMPI_API_KEY || 'auditflow_wompi_integrity_secret').trim();
+    const webhookPayload = {
+      event: 'transaction.updated',
+      test_mode: true,
+      data: {
+        transaction: {
+          id: 'cs_test_mock_123',
+          status: 'APPROVED',
+          amount_in_cents: 1900,
+          reference: 'rep_test_999',
+          customer_email: 'comprador@empresa.com'
         }
       }
+    };
+    const wompiSig = crypto.createHmac('sha256', wompiSecret).update(JSON.stringify(webhookPayload)).digest('hex');
+    const { req: r4, res: s4 } = createMockReqRes({
+      method: 'POST',
+      headers: { 'x-wompi-signature': wompiSig },
+      body: webhookPayload
     });
     await webhookHandler(r4, s4);
     recordTest('Procesamiento de webhook de venta con entrega inmediata de Word (.docx)', s4._getStatusCode() === 200 && s4._getResponseData()?.received);
@@ -343,9 +356,10 @@ async function runForensicAudit() {
   // 7. RECUPERACIÓN DE LEADS & INTEGRACIÓN WAALAXY (ZONA NÓRDICA)
   console.log('\n[FASE 7] Módulo api/lead-recovery.js & api/waalaxy-sync.js (Campaña Zona Nórdica):');
   {
+    const cronSecret = (process.env.CRON_SECRET || process.env.ADMIN_PASSWORD || 'AuditFlow2026!').trim();
     const { req: r1, res: s1 } = createMockReqRes({
       method: 'POST',
-      headers: { 'x-vercel-cron': '1' }
+      headers: { 'authorization': `Bearer ${cronSecret}` }
     });
     await leadRecoveryHandler(r1, s1);
     recordTest('Ejecución de secuencia de recuperación vía Vercel Cron', s1._getStatusCode() === 200 && s1._getResponseData()?.success);
@@ -413,26 +427,30 @@ async function runForensicAudit() {
     recordTest(`25/25 Checkouts Corporativos ($69/mes y $590/año) validados`, corpSuccesses === 25);
 
     let webhookSuccesses = 0;
+    const wompiSecret = (process.env.WOMPI_INTEGRITY_SECRET || process.env.WOMPI_API_SECRET || CONFIG.PAYMENTS?.WOMPI_API_KEY || 'auditflow_wompi_integrity_secret').trim();
     for (let i = 1; i <= 25; i++) {
-      const { req, res } = createMockReqRes({
-        method: 'POST',
-        url: '/api/webhook',
-        body: {
-          event: 'transaction.updated',
-          test_mode: true,
-          data: {
-            transaction: {
-              id: `trx_wompi_stress_${i}`,
-              status: 'APPROVED',
-              reference: `rep_confirmed_${i}`,
-              amount_in_cents: 1900,
-              customer_data: {
-                email: `comprador_${i}@empresa.com`,
-                full_name: `Ejecutivo ${i}`
-              }
+      const webhookPayload = {
+        event: 'transaction.updated',
+        test_mode: true,
+        data: {
+          transaction: {
+            id: `trx_wompi_stress_${i}`,
+            status: 'APPROVED',
+            reference: `rep_confirmed_${i}`,
+            amount_in_cents: 1900,
+            customer_data: {
+              email: `comprador_${i}@empresa.com`,
+              full_name: `Ejecutivo ${i}`
             }
           }
         }
+      };
+      const wompiSig = crypto.createHmac('sha256', wompiSecret).update(JSON.stringify(webhookPayload)).digest('hex');
+      const { req, res } = createMockReqRes({
+        method: 'POST',
+        url: '/api/webhook',
+        headers: { 'x-wompi-signature': wompiSig },
+        body: webhookPayload
       });
       await webhookHandler(req, res);
       if (res._getStatusCode() === 200 && res._getResponseData()?.received) {

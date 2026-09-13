@@ -5,11 +5,15 @@ import storytellingHandler from '../lib/cron-handlers/storytelling.js';
 import nordicSowerHandler from '../lib/cron-handlers/nordic-sower.js';
 import masterDispatcherHandler from '../api/cron.js';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 function mockReqRes(query = {}, headers = {}) {
+  const cronSecret = (process.env.CRON_SECRET || process.env.ADMIN_PASSWORD || 'AuditFlow2026!').trim();
   const req = {
     method: 'GET',
     headers: {
-      'x-vercel-cron': '1',
+      'authorization': `Bearer ${cronSecret}`,
       ...headers
     },
     query: {
@@ -87,7 +91,7 @@ async function runTests() {
 
   // Test 6: Auth Rejection Test
   {
-    const { req, res, getResult } = mockReqRes({}, { 'x-vercel-cron': '0' });
+    const { req, res, getResult } = mockReqRes({}, { 'authorization': 'Bearer token_invalido' });
     await masterDispatcherHandler(req, res);
     const { statusCode } = getResult();
     console.log(`6. Auth Rejection Test: Status ${statusCode} (Esperado: 401)`);

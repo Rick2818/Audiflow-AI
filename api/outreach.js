@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
-import { verifyAdminAuth } from '../lib/security.js';
+import { verifyAdminAuth, safeCompare, setStrictCors } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
 import { resolveJurisdiction, getLegalNoticeForOutbound, getTripwirePrice } from '../lib/legal-jurisdictions.js';
 
@@ -305,9 +305,7 @@ export function resolveLeadLanguage(lang, country = '', email = '') {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-password');
+  setStrictCors(req, res, 'POST, GET, OPTIONS', 'Content-Type, Authorization, x-admin-password');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -319,8 +317,9 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
     }
 
-    const authHeader = req.headers['authorization'] || '';
-    const isVercelCron = (req.headers['x-vercel-cron'] === '1' || (req.headers['user-agent'] || '').includes('vercel-cron') || authHeader.startsWith('Bearer ') && authHeader.length > 20 && !authHeader.includes('admin_token'));
+    const authHeader = req.headers ? (req.headers['authorization'] || req.headers['Authorization'] || '') : '';
+    const cronSecret = (process.env.CRON_SECRET || process.env.ADMIN_PASSWORD || '').trim();
+    const isVercelCron = Boolean(cronSecret && authHeader && safeCompare(authHeader, `Bearer ${cronSecret}`));
     
     if (!isVercelCron && !verifyAdminAuth(req)) {
       return res.status(401).json({ success: false, error: 'No autorizado. Contraseña o token de administración incorrecto.' });

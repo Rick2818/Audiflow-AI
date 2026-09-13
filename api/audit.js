@@ -155,7 +155,8 @@ export default async function handler(req, res) {
     const reportId = 'rep_' + Math.random().toString(36).substring(2, 11);
 
     // Detección de GeoIP vía cabeceras Vercel / Cloudflare
-    const ipCountry = (req.headers['x-vercel-ip-country'] || req.headers['cf-ipcountry'] || '').toLowerCase();
+    const headers = req.headers || {};
+    const ipCountry = (headers['x-vercel-ip-country'] || headers['cf-ipcountry'] || '').toLowerCase();
     const targetJurisdictionCandidate = body.country || body.jurisdiction || body.audit_standard || (ipCountry && ipCountry.length === 2 ? ipCountry : '') || 'sv';
     const appliedJur = resolveJurisdiction(targetJurisdictionCandidate);
     const dynamicSystemPrompt = buildAiJurisdictionPrompt(targetJurisdictionCandidate, documentName, partyStance);
@@ -273,9 +274,9 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
     }
 
     // Llamada al motor Gemini Multimodal con cabecera segura y modelos oficiales válidos
-    const candidateModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
+    const candidateModels = ['gemini-3.6-flash', 'gemini-3.5-flash', 'gemini-flash-latest'];
     let geminiRes = null;
-    let selectedModel = 'gemini-2.5-flash';
+    let selectedModel = 'gemini-3.6-flash';
 
     for (const m of candidateModels) {
       try {

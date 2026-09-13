@@ -27,7 +27,7 @@ for (const file of htmlFiles) {
   const bodyCloses = (content.match(/<\/body>/gi) || []).length;
 
   const hasDarkClass = content.includes('dark') || content.includes('color-scheme: dark');
-  const hasDarkBg = content.includes('bg-dark') || content.includes('#09090b') || content.includes('#0B0F19');
+  const hasDarkBg = content.includes('bg-dark') || content.includes('#09090b') || content.includes('#0B0F19') || content.includes('#07090E');
 
   console.log(`📄 ${file}:`);
   console.log(`   - Scripts: ${scriptOpens} opens / ${scriptCloses} closes ${scriptOpens === scriptCloses ? '✅' : '❌'}`);

@@ -170,6 +170,6 @@ Una vez desbloqueado el reporte, dispones de una barra de herramientas integral:
 ## 🏢 7. CANALES EXCLUSIVOS DE ATENCIÓN VIP Y SOPORTE 24/7
 
 Como cliente o suscriptor corporativo, cuentas con canales de atención VIP directos:
-* 💬 **WhatsApp Concierge VIP:** [+503 7989 3922](https://wa.me/50379893922) (Comunicación directa y en vivo con Dirección para resolución inmediata de dudas o casos complejos).
+* 💬 **WhatsApp Concierge VIP:** [+503 7574 3444](https://wa.me/50375743444) (Comunicación directa y en vivo con Dirección para resolución inmediata de dudas o casos complejos).
 * ✉️ **Correo Oficial de Soporte:** [soporte@audiflowai.com](mailto:soporte@audiflowai.com) (Tiempo de respuesta garantizado < 2 horas).
 * 🎧 **Pestaña de Soporte en la Web:** Puedes abrir el Centro de Soporte en cualquier momento desde la barra superior de la app para enviar consultas o solicitar re-análisis asistido por IA.

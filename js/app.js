@@ -1237,7 +1237,7 @@ window.AppHandler = {
             `  • Tarjetas Corporativas / Wompi SV / Stripe: Pago seguro en línea en https://audiflowai.com\n` +
             `  • Bitcoin Lightning Network: rick28@strike.me\n` +
             `Garantía Fiduciaria: Blindaje 10x ROI (Ahorro potencial 10 veces la inversión o reembolso 100%)\n` +
-            `Envío de Comprobantes & Atención Ejecutiva: ricardo@audiflowai.com | WhatsApp: +503 7989 3922\n` +
+            `Envío de Comprobantes & Atención Ejecutiva: ricardo@audiflowai.com | WhatsApp: +503 7574 3444\n` +
             `Enlace de Activación Inmediata: https://audiflowai.com`;
 
         if (navigator.clipboard) {

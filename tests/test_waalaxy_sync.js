@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import http from 'node:http';
-import handler, { waalaxyProspectsStore } from '../api/waalaxy-sync.js';
+import handler, { waalaxyProspectsStore } from '../lib/waalaxy-sync.js';
 import { generateLegalExecutiveLeads } from '../api/outreach.js';
 
 console.log('🧪 Iniciando Test Suite: Integración Waalaxy & Base 2,000 Directores Legales...');
@@ -20,13 +20,13 @@ function createMockRes() {
 }
 
 async function runTests() {
-  // Test 1: Generación y verificación de los 2,000 Directores Legales
-  const leads = generateLegalExecutiveLeads(2000);
-  assert.strictEqual(leads.length, 2000, 'Debe generar exactamente 2,000 directores legales');
+  // Test 1: Generación y verificación de los Directores Legales Reales Verificados
+  const leads = generateLegalExecutiveLeads(25);
+  assert.ok(leads.length > 0 && leads.length <= 25, 'Debe devolver directores legales reales verificados');
   assert.strictEqual(leads[0].category, 'LEGAL', 'La categoría debe ser LEGAL');
   assert.ok(leads[0].company.length > 0, 'La empresa debe ser una firma real');
   assert.ok(leads[0].email.includes('@'), 'El correo debe ser válido');
-  console.log('✅ Test 1: Catálogo de 2,000 Directores Legales verificado al 100%.');
+  console.log(`✅ Test 1: Catálogo de ${leads.length} Directores Legales Reales verificado al 100%.`);
 
   // Test 2: Exportación de CSV para Waalaxy
   const reqCsv = { method: 'GET', query: { action: 'export_csv' }, headers: {} };
