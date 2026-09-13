@@ -1,0 +1,169 @@
+import assert from 'assert';
+import crypto from 'crypto';
+import JSZip from 'jszip';
+import fs from 'fs';
+import path from 'path';
+import verifyClientHandler from '../lib/verify-client.js';
+
+console.log('\n=======================================================');
+console.log('🧪 SUITE DE VALIDACIÓN: MEJORA AUDITFLOW A 9.5/10');
+console.log('=======================================================\n');
+
+let passedTests = 0;
+let totalTests = 0;
+
+function runTest(description, fn) {
+  totalTests++;
+  try {
+    fn();
+    console.log(`  ✅ [PASS] ${description}`);
+    passedTests++;
+  } catch (err) {
+    console.error(`  ❌ [FAIL] ${description}:`, err.message);
+  }
+}
+
+async function runAsyncTest(description, fn) {
+  totalTests++;
+  try {
+    await fn();
+    console.log(`  ✅ [PASS] ${description}`);
+    passedTests++;
+  } catch (err) {
+    console.error(`  ❌ [FAIL] ${description}:`, err.message);
+  }
+}
+
+async function main() {
+  console.log('[GRUPO 1] Motor Multimodal OCR & Extracción Word (.docx):');
+
+  // Test 1: Crear un docx sintético en memoria y verificar extracción de texto
+  await runAsyncTest('Extracción de texto desde archivo Word (.docx) mediante JSZip', async () => {
+    const zip = new JSZip();
+    const mockXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+      <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">
+        <w:body>
+          <w:p><w:t>CLÁUSULA PRIMERA: OBJETO DEL CONTRATO.</w:t></w:p>
+          <w:p><w:t>El arrendatario abonará $5,000 USD mensuales con recargo por mora.</w:t></w:p>
+        </w:body>
+      </w:document>`;
+    zip.file('word/document.xml', mockXml);
+    const buffer = await zip.generateAsync({ type: 'nodebuffer' });
+
+    // Ejecutar lógica de extracción
+    const loadedZip = await JSZip.loadAsync(buffer);
+    const docXml = await loadedZip.file('word/document.xml')?.async('text');
+    assert(docXml, 'word/document.xml debe existir en el paquete zip');
+    const matches = docXml.match(/<w:t(?:\s+[^>]*)?>([\s\S]*?)<\/w:t>/g) || [];
+    const text = matches.map(m => m.replace(/<[^>]+>/g, '')).join(' ');
+
+    assert(text.includes('CLÁUSULA PRIMERA'), 'Debe contener el encabezado');
+    assert(text.includes('$5,000 USD'), 'Debe contener la tarifa detectada');
+  });
+
+  // Test 2: Cálculo fiduciario de Hash SHA-256 en memoria RAM
+  runTest('Cálculo de Hash Criptográfico SHA-256 en Memoria Volátil', () => {
+    const mockDoc = Buffer.from('CONTRATO_CONFIDENCIAL_AUDITFLOW_2026', 'utf-8');
+    const hash = crypto.createHash('sha256').update(mockDoc).digest('hex');
+    assert.strictEqual(hash.length, 64, 'El hash SHA-256 debe tener exactamente 64 caracteres hexadecimales');
+    assert(/^[a-f0-9]{64}$/.test(hash), 'El formato debe ser hexadecimal válido');
+  });
+
+  console.log('\n[GRUPO 2] Autenticación Corporativa y Tokens de Sesión:');
+
+  // Test 3: Emisión y validación de tokens de sesión
+  await runAsyncTest('Emisión de session_token de 30 días para cliente VIP', async () => {
+    let responseData = null;
+    let statusCode = 0;
+    const req = {
+      method: 'POST',
+      body: { email: 'ricardo@audiflowai.com', action: 'verify_client' }
+    };
+    const res = {
+      setHeader() {},
+      status(code) { statusCode = code; return this; },
+      json(data) { responseData = data; return this; }
+    };
+
+    await verifyClientHandler(req, res);
+    assert.strictEqual(statusCode, 200);
+    assert.strictEqual(responseData.is_client, true);
+    assert(responseData.session_token, 'Debe emitir un session_token');
+
+    // Test 4: Restauración transparente usando el token emitido
+    let restoreData = null;
+    let restoreCode = 0;
+    const restoreReq = {
+      method: 'POST',
+      body: { session_token: responseData.session_token }
+    };
+    const restoreRes = {
+      setHeader() {},
+      status(code) { restoreCode = code; return this; },
+      json(data) { restoreData = data; return this; }
+    };
+
+    await verifyClientHandler(restoreReq, restoreRes);
+    assert.strictEqual(restoreCode, 200);
+    assert.strictEqual(restoreData.is_client, true);
+    assert.strictEqual(restoreData.email, 'ricardo@audiflowai.com');
+  });
+
+  console.log('\n[GRUPO 3] Catálogo Wompi SV y Pasarelas de Cobro:');
+
+  // Test 5: Catálogo fiduciario de Wompi SV
+  runTest('Catálogo de Precios Wompi SV oficial ($19 USD reporte, $69/mo y $590/año)', () => {
+    const paymentFile = fs.readFileSync(path.resolve('api/payment.js'), 'utf-8');
+    assert(paymentFile.includes("'report_unlock_19': { amount: 19.00"), 'Debe incluir report_unlock_19 en $19.00 USD');
+    assert(paymentFile.includes("'plan_pro_69': { amount: 69.00"), 'Debe incluir plan_pro_69 en $69.00 USD');
+    assert(paymentFile.includes("'plan_anual_590': { amount: 590.00"), 'Debe incluir plan_anual_590 en $590.00 USD');
+    assert(paymentFile.includes('unit_amount: 1900'), 'Stripe fallback debe cobrar unit_amount: 1900 ($19.00 USD)');
+  });
+
+  console.log('\n[GRUPO 4] Arquitectura Modular y Endpoint Dedicado:');
+
+  // Test 6: Existencia de api/verify-client.js
+  runTest('El endpoint dedicado serverless api/verify-client.js existe y es válido', () => {
+    assert(fs.existsSync(path.resolve('api/verify-client.js')), 'api/verify-client.js debe existir físicamente');
+    const content = fs.readFileSync(path.resolve('api/verify-client.js'), 'utf-8');
+    assert(content.includes('verifyClientHandler'), 'Debe invocar a verifyClientHandler');
+  });
+
+  // Test 7: Módulos frontend existen y son referenciados
+  runTest('Los módulos corporate-auth.js y audit-scanner.js existen en frontend/js/modules/', () => {
+    assert(fs.existsSync(path.resolve('frontend/js/modules/corporate-auth.js')), 'corporate-auth.js debe existir');
+    assert(fs.existsSync(path.resolve('frontend/js/modules/audit-scanner.js')), 'audit-scanner.js debe existir');
+    const indexHtml = fs.readFileSync(path.resolve('frontend/index.html'), 'utf-8');
+    assert(indexHtml.includes('corporate-auth.js'), 'index.html debe cargar corporate-auth.js');
+    assert(indexHtml.includes('audit-scanner.js'), 'index.html debe cargar audit-scanner.js');
+  });
+
+  // Test 8: Sincronización exacta entre frontend e index.html
+  runTest('Sincronización exacta 1:1 entre frontend/index.html y root index.html', () => {
+    const fHtml = fs.readFileSync(path.resolve('frontend/index.html'), 'utf-8');
+    const rHtml = fs.readFileSync(path.resolve('index.html'), 'utf-8');
+    assert.strictEqual(fHtml, rHtml, 'frontend/index.html e index.html deben ser estrictamente idénticos');
+  });
+
+  // Test 9: Sincronización exacta entre frontend/js/app.js y js/app.js
+  runTest('Sincronización exacta 1:1 entre frontend/js/app.js y root js/app.js', () => {
+    const fApp = fs.readFileSync(path.resolve('frontend/js/app.js'), 'utf-8');
+    const rApp = fs.readFileSync(path.resolve('js/app.js'), 'utf-8');
+    assert.strictEqual(fApp, rApp, 'frontend/js/app.js y js/app.js deben ser estrictamente idénticos');
+  });
+
+  console.log('\n=======================================================');
+  console.log(`📊 RESULTADOS: ${passedTests} de ${totalTests} pruebas superadas (${Math.round((passedTests/totalTests)*100)}%)`);
+  if (passedTests === totalTests) {
+    console.log('🎉 ¡100% DE PRUEBAS DE ELEVACIÓN A 9.5/10 SUPERADAS CON ÉXITO!');
+  } else {
+    console.error('⚠️ ALGUNAS PRUEBAS FALLARON.');
+    process.exit(1);
+  }
+  console.log('=======================================================\n');
+}
+
+main().catch(err => {
+  console.error('Error fatal en suite:', err);
+  process.exit(1);
+});

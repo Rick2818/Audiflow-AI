@@ -43,17 +43,15 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Token de tarjeta no proporcionado o formato inválido.' });
       }
 
-      // Catálogo Oficial en Servidor (Previene Parameter Tampering / Manipulación de Precios)
       const CATALOGO_PRECIOS = {
-        'report_entry_9': { amount: 9.00, currency: 'USD', name: 'Boleto de Entrada Fiduciario ($9 USD)' },
         'report_unlock_19': { amount: 19.00, currency: 'USD', name: 'Informe Oficial Word .docx + PDF ($19 USD)' },
-        'modulo_facturacion_9_99': { amount: 9.99, currency: 'USD', name: 'Módulo de Facturación Automática DTE' },
-        'modulo_redlines_19_99': { amount: 19.99, currency: 'USD', name: 'Generador de Redlines Word (.docx)' },
         'plan_pro_69': { amount: 69.00, currency: 'USD', name: 'Suscripción AuditFlow Pro ($69/mes)' },
-        'plan_anual_590': { amount: 590.00, currency: 'USD', name: 'Licencia Corporativa Anual ($590/año)' }
+        'plan_anual_590': { amount: 590.00, currency: 'USD', name: 'Licencia Corporativa Anual ($590/año)' },
+        'modulo_facturacion_9_99': { amount: 9.99, currency: 'USD', name: 'Módulo de Facturación Automática DTE' },
+        'modulo_redlines_19_99': { amount: 19.99, currency: 'USD', name: 'Generador de Redlines Word (.docx)' }
       };
 
-      const selectedProduct = CATALOGO_PRECIOS[productId] || CATALOGO_PRECIOS['report_entry_9'];
+      const selectedProduct = CATALOGO_PRECIOS[productId] || CATALOGO_PRECIOS['report_unlock_19'];
 
       const wompiSecret = process.env.WOMPI_API_SECRET || '';
       const wompiAppId = process.env.WOMPI_APP_ID || '';
@@ -173,10 +171,10 @@ export default async function handler(req, res) {
           price_data: {
             currency: 'usd',
             product_data: {
-              name: 'Boleto de Entrada: Reporte Ejecutivo + Word DOCX Redlines + PDF Certificado',
+              name: 'Reporte Oficial: Word DOCX Redlines + PDF Certificado ($19.00 USD)',
               description: `AuditFlow AI - Auditoría profunda con 3 soluciones tácticas para ${document_name || 'contrato.pdf'}`
             },
-            unit_amount: 900,
+            unit_amount: 1900,
           },
           quantity: 1,
         }],

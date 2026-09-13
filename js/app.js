@@ -19,8 +19,32 @@ window.AppHandler = {
         this.setupDragAndDrop();
         this.setupFormListeners();
         this.checkUrlForPaymentSuccess();
+        this.restoreCorporateSession();
         this.trackInboundLead();
         this.setPartyStance('buyer');
+    },
+
+    async restoreCorporateSession() {
+        try {
+            const token = localStorage.getItem('auditflow_session_token') || sessionStorage.getItem('auditflow_session_token');
+            if (!token) return;
+            const res = await fetch('/api/verify-client', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ session_token: token, action: 'verify_client' })
+            });
+            if (res.ok) {
+                const data = await res.json();
+                if (data && data.is_client) {
+                    localStorage.setItem('auditflow_corporate_active', 'true');
+                    localStorage.setItem('auditflow_corporate_email', data.email);
+                    localStorage.setItem('auditflow_corporate_plan', data.plan || 'enterprise');
+                    this.currentLeadData = { name: 'Cliente Corporativo', email: data.email };
+                }
+            }
+        } catch (e) {
+            console.warn('Advertencia restaurando sesión corporativa:', e);
+        }
     },
 
     initJurisdiction() {
@@ -331,8 +355,16 @@ window.AppHandler = {
         const boxDisplay = document.getElementById('file-selected-box');
         const errBox = document.getElementById('ocr-error-box');
 
+        let typeBadge = '📄 PDF Fiduciario';
+        const fName = (file.name || '').toLowerCase();
+        if (/\.(png|jpe?g|webp|bmp|tiff)$/i.test(fName) || (file.type && file.type.startsWith('image/'))) {
+            typeBadge = '📷 Escaneo / Foto (OCR Visual)';
+        } else if (/\.(docx|doc)$/i.test(fName) || (file.type && file.type.includes('word'))) {
+            typeBadge = '📝 Microsoft Word (.docx)';
+        }
+
         if (nameDisplay) nameDisplay.innerText = file.name || 'documento.pdf';
-        if (sizeDisplay) sizeDisplay.innerText = `${fileSizeMb} ${window.I18n ? window.I18n.t('file_ready_ram') : 'MB • Memoria RAM lista'}`;
+        if (sizeDisplay) sizeDisplay.innerText = `${fileSizeMb} MB • ${typeBadge} • RAM Volátil (0 Disco)`;
         if (boxDisplay) boxDisplay.classList.remove('hidden');
         if (errBox) errBox.classList.add('hidden');
     },
@@ -517,6 +549,8 @@ window.AppHandler = {
         let timer = 0.0;
         const timerEl = document.getElementById('scan-timer');
         const progressEl = document.getElementById('scan-progress-bar');
+        const statusTextEl = document.getElementById('scan-status-text');
+        const subtextEl = document.getElementById('scan-subtext');
 
         const interval = setInterval(() => {
             timer += 0.1;
@@ -525,12 +559,18 @@ window.AppHandler = {
 
             if (timer >= 0.8 && document.getElementById('step-2')) {
                 document.getElementById('step-2').classList.add('text-accent-emerald', 'font-bold');
+                if (statusTextEl) statusTextEl.innerText = 'Cotejando cláusulas contra el Código de Comercio...';
+                if (subtextEl) subtextEl.innerText = 'Verificando penalizaciones, intereses moratorios y topes de responsabilidad';
             }
             if (timer >= 1.8 && document.getElementById('step-3')) {
                 document.getElementById('step-3').classList.add('text-purple-400', 'font-bold');
+                if (statusTextEl) statusTextEl.innerText = 'Calculando fuga financiera de EBITDA...';
+                if (subtextEl) subtextEl.innerText = 'Construyendo soluciones de redline y rescate patrimonial en memoria RAM';
             }
             if (timer >= 2.8 && document.getElementById('step-4')) {
                 document.getElementById('step-4').classList.add('text-accent-blue', 'font-bold');
+                if (statusTextEl) statusTextEl.innerText = '¡Auditoría fiduciaria completada con éxito!';
+                if (subtextEl) subtextEl.innerText = 'Generando certificado de integridad SHA-256';
             }
 
             if (timer >= 3.0) {
@@ -2127,7 +2167,7 @@ window.AppHandler = {
             const res = await fetch('/api/verify-client', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email })
+                body: JSON.stringify({ email, action: 'verify_client' })
             });
 
             const data = await res.json();
@@ -2136,6 +2176,10 @@ window.AppHandler = {
                 localStorage.setItem('auditflow_corporate_active', 'true');
                 localStorage.setItem('auditflow_corporate_email', email);
                 localStorage.setItem('auditflow_corporate_plan', data.plan || 'enterprise');
+                if (data.session_token) {
+                    localStorage.setItem('auditflow_session_token', data.session_token);
+                    sessionStorage.setItem('auditflow_session_token', data.session_token);
+                }
                 this.currentLeadData = { name: 'Cliente Corporativo', email };
 
                 feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 shadow-glow';

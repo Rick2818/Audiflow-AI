@@ -2,6 +2,33 @@
   "version": 2,
   "headers": [
     {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/downloads/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
       "source": "/admin",
       "headers": [
         {
@@ -331,7 +358,7 @@
     },
     {
       "source": "/api/verify-client",
-      "destination": "/api/payment?action=verify_client"
+      "destination": "/api/verify-client"
     },
     {
       "source": "/api/(.*)",

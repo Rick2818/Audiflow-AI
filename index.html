@@ -467,11 +467,11 @@
                 </div>
 
                 <!-- ÁREA DRAG & DROP -->
-                <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-4 focus:outline-none focus:ring-2 focus:ring-accent-blue">
-                    <input type="file" id="file-input" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.webp">
+                <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-3xl border-2 border-dashed border-sky-500/50 bg-gradient-to-b from-dark-card to-dark-surface/90 hover:border-sky-400 hover:shadow-[0_0_35px_rgba(56,189,248,0.25)] ring-1 ring-sky-500/20 transition-all cursor-pointer relative group mb-4 focus:outline-none focus:ring-2 focus:ring-accent-blue">
+                    <input type="file" id="file-input" class="hidden" accept=".pdf,.docx,.doc,.png,.jpg,.jpeg,.webp">
                     
                     <div class="flex flex-col items-center justify-center gap-4">
-                        <div class="w-16 h-16 rounded-2xl bg-border-dark/80 flex items-center justify-center text-accent-blue group-hover:scale-110 group-hover:bg-accent-blue/10 transition-all duration-300">
+                        <div class="w-16 h-16 rounded-2xl bg-sky-500/15 text-sky-400 border border-sky-500/30 flex items-center justify-center group-hover:scale-110 group-hover:bg-sky-500/25 transition-all duration-300 shadow-glow">
                             <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                             </svg>
@@ -479,10 +479,26 @@
                         <div>
                             <p class="text-base sm:text-lg font-bold text-white mb-1"><span data-i18n="drag_title">Arrastra tu archivo aquí para escanear riesgos o </span><span data-i18n="drag_browse" class="text-accent-blue underline hover:text-accent-blue/80">explora tus archivos</span></p>
                             <p data-i18n="drag_sub_free" class="text-xs text-emerald-400 font-mono mb-1 font-semibold">Auditar mi contrato gratis en 30 segundos • Sin tarjeta de crédito • Análisis confidencial inmediato</p>
-                            <p data-i18n="drag_formats" class="text-xs text-gray-400 font-mono">Admite PDF o Word (.docx) hasta 25 MB • Datos encriptados</p>
+                            <p data-i18n="drag_formats" class="text-xs text-gray-300 font-mono">Admite PDF, Word (.docx) o Fotos/Escaneos hasta 25 MB • Procesamiento en RAM efímera (cero retención)</p>
                         </div>
 
-                        <div class="pt-3 flex flex-col sm:flex-row items-center justify-center gap-3">
+                        <!-- MICRO-GUÍA FIDUCIARIA DE 3 PASOS (CLARIDAD EJECUTIVA EN 5 SEGUNDOS) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 my-2 text-[11px] font-mono text-gray-300 text-left w-full max-w-xl">
+                            <div class="p-2.5 rounded-xl bg-dark-surface/90 border border-sky-500/30 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-sky-500/20 text-sky-300 font-bold flex items-center justify-center shrink-0 text-[10px]">1</span>
+                                <span>Sube PDF, Word (.docx) o Foto</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-dark-surface/90 border border-emerald-500/30 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center justify-center shrink-0 text-[10px]">2</span>
+                                <span>Auditoría en RAM Volátil (8s)</span>
+                            </div>
+                            <div class="p-2.5 rounded-xl bg-dark-surface/90 border border-amber-500/30 flex items-center gap-2">
+                                <span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 font-bold flex items-center justify-center shrink-0 text-[10px]">3</span>
+                                <span>Rescate de Fuga de EBITDA</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
                             <button type="button" id="btn-sample-audit-cta" onclick="event.stopPropagation(); window.AppHandler.loadSampleContract();" class="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600/30 via-sky-600/30 to-emerald-600/30 border-2 border-emerald-400/70 text-emerald-300 hover:text-white hover:border-emerald-300 hover:bg-emerald-600/40 text-xs font-mono font-extrabold transition-all shadow-[0_0_20px_rgba(16,185,129,0.3)] flex items-center gap-2 cursor-pointer">
                                 <span>⚡ ¿Prefiere no subir un contrato privado ahora? Ver Auditoría en Vivo con 1 Clic (Muestra Real) →</span>
                             </button>
@@ -848,10 +864,10 @@
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-mono text-gray-400">
-                <span id="step-1" data-i18n="step_ram" class="p-2 rounded bg-dark-card border border-border-dark text-accent-blue font-bold">1. RAM Buffer (Cero Disco)</span>
-                <span id="step-2" data-i18n="step_gemini" class="p-2 rounded bg-dark-card border border-border-dark">2. Analizando Rescisión & Multas</span>
-                <span id="step-3" data-i18n="step_scoring" class="p-2 rounded bg-dark-card border border-border-dark">3. Verificando Topes & Penalidades</span>
-                <span id="step-4" data-i18n="step_ready" class="p-2 rounded bg-dark-card border border-border-dark">4. Diagnóstico Listo</span>
+                <span id="step-1" data-i18n="step_ram" class="p-2 rounded bg-dark-card border border-border-dark text-accent-blue font-bold">1. RAM Buffer (0 Disco)</span>
+                <span id="step-2" data-i18n="step_gemini" class="p-2 rounded bg-dark-card border border-border-dark">2. Código de Comercio</span>
+                <span id="step-3" data-i18n="step_scoring" class="p-2 rounded bg-dark-card border border-border-dark">3. Fuga EBITDA &amp; Mora</span>
+                <span id="step-4" data-i18n="step_ready" class="p-2 rounded bg-dark-card border border-border-dark">4. Sello SHA-256 Listo</span>
             </div>
         </section>
 
@@ -2056,9 +2072,11 @@
         </div>
     </footer>
 
-    <!-- LÓGICA BILINGÜE Y FRONTEND JS CON CACHE-BUSTER -->
-    <script src="js/i18n.js?v=4.0_wompi_1click"></script>
-    <script src="js/payment.js?v=4.0_wompi_1click"></script>
-    <script src="js/app.js?v=4.0_wompi_1click"></script>
+    <!-- LÓGICA MODULAR, BILINGÜE Y FRONTEND JS CON CACHE-BUSTER -->
+    <script src="js/modules/corporate-auth.js?v=5.0_multimodal"></script>
+    <script src="js/modules/audit-scanner.js?v=5.0_multimodal"></script>
+    <script src="js/i18n.js?v=5.0_multimodal"></script>
+    <script src="js/payment.js?v=5.0_multimodal"></script>
+    <script src="js/app.js?v=5.0_multimodal"></script>
 </body>
 </html>
