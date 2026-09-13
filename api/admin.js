@@ -73,7 +73,11 @@ function getRealVerifiedLeads() {
     const opensCount = openData ? openData.count : 0;
     const isOpened = Boolean(opensCount > 0);
 
-    const tags = [realLead.tag, '👑 DIRECTIVA_REAL', docObj.tag];
+    const leadTier = (realLead.lead_score >= 90 || realLead.pareto_tier === 'TOP_20')
+      ? 'PLATINUM (CFO/Legal Counsel)'
+      : (realLead.lead_score >= 80 ? 'GOLD (Finance Director)' : 'SILVER (Legal Counsel)');
+
+    const tags = [leadTier, realLead.tag, '👑 DIRECTIVA_REAL', docObj.tag];
     if (realLead.pareto_tier === 'TOP_20') tags.unshift('🏆 TOP_20_PARETO');
     if (emailsSent === 0) tags.push('⚪ NO_ENVIADO');
     else tags.push('📧 CONTACTADO');

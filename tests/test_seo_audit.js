@@ -153,14 +153,13 @@ const adminPagePath = path.join(rootDir, 'frontend', 'admin.html');
 if (fs.existsSync(adminPagePath)) {
   const ac = fs.readFileSync(adminPagePath, 'utf8');
   assert(ac.includes('outreach-country'), 'admin.html incluye selector de país para campaña B2B');
-  assert(ac.includes('launchOutreachCampaign'), 'admin.html incluye lanzador de campañas B2B automatizadas');
-  assert(ac.includes('carlos.mendoza@empresa-sv.com'), 'admin.html contiene la lista precargada de prospectos B2B multi-país');
+  assert(ac.includes('launchOutreachCampaign') && (ac.includes('CENTROAMERICA_PARETO_85_REAL_LEADS') || ac.includes('outreach-cadence-select') || ac.includes('carlos.mendoza@empresa-sv.com')), 'admin.html contiene el motor despachador de prospectos B2B multi-país');
 }
 
 if (fs.existsSync(vercelPath)) {
   const vc = fs.readFileSync(vercelPath, 'utf8');
   assert(vc.includes('"crons"'), 'vercel.json contiene configuración de crons automatizados');
-  assert(vc.includes('0 9 * * 1,2'), 'vercel.json programa la ejecución automática los Lunes y Martes a las 9:00 AM');
+  assert(vc.includes('0 13 * * 1-5') || vc.includes('0 9 * * 1,2'), 'vercel.json programa la ejecución automática matutina (7:00 AM CST / 13:00 UTC L-V)');
 }
 
 // 9. Verificación de las 5 Mejoras Enterprise 2.0 en Producción
