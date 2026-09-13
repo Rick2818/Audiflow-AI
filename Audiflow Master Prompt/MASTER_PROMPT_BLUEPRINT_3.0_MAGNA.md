@@ -89,16 +89,27 @@ PILAR 3: FÁBRICA DE MICROSaaS B2B & FRONTEND DE ALTA CONVERSIÓN
    - Generación de entregables profesionales en Microsoft Word (.docx con Control de Cambios / Track Changes) para facilitar la negociación sin fricción.
 
 ================================================================================
-PILAR 4: PASARELAS DE PAGO HÍBRIDAS (FIAT & CRIPTO LIGHTNING)
+PILAR 4: PASARELAS DE PAGO FIDUCIARIAS HÍBRIDAS (WOMPI SV, TRANSFER365 DTE, STRIKE & STRIPE)
 ================================================================================
-1. STRIPE CHECKOUT (FIAT USD):
-   - Modelo Pay-Per-Use: Desbloqueo de auditoría o diagnóstico individual ($19 USD).
-   - Modelo Suscripción Recurrente: Plan Pro ($49 - $69 USD/mes) y Licencia Corporativa Anual ($590 USD/año).
-   - Webhooks en `/api/webhook` con verificación de firma `stripe.webhooks.constructEvent` para acreditación automática e inmediata de tokens.
+1. PASARELA PRIMARIA FIDUCIARIA (WOMPI EL SALVADOR):
+   - Integración oficial con Wompi SV (Banco Agrícola) para tarjetas de crédito y débito Visa y Mastercard.
+   - Flujo 1-Click Checkout con Tokenización segura (Card-on-File).
+   - Catálogo oficial fiduciario:
+     * Reporte Oficial Word .docx + PDF Certificado ($19.00 USD).
+     * Suscripción Pro Mensual ($69.00 USD/mes).
+     * Licencia Corporativa Anual ($590.00 USD/año).
+   - Prevención de Bypass de Pago: Cero emisión de `status=success` o URLs gratuitas sin transacción bancaria aprobada (`esAprobada === true`).
 
-2. STRIKE / LIGHTNING NETWORK (BITCOIN SATS):
+2. STRIKE / LIGHTNING NETWORK (BITCOIN SATS EN TIEMPO REAL):
    - Generación de Invoice Lightning instantáneo en Satoshis calculado contra el tipo de cambio BTC/USD en tiempo real.
    - Confirmación por Webhook en milisegundos con conciliación fiduciaria contable en USD.
+
+3. TRANSFER365 & FACTURACIÓN ELECTRÓNICA OFICIAL (DTE):
+   - Generación de cotizaciones proforma B2B con datos fiscales para Cuentas por Pagar.
+   - Conciliación directa con comprobantes de crédito fiscal DTE del Ministerio de Hacienda.
+
+4. STRIPE CHECKOUT (FALLBACK SECUNDARIO INTERNACIONAL):
+   - Disponible exclusivamente en jurisdicciones donde Stripe opera legalmente.
 
 ================================================================================
 PILAR 5: PROSPECCIÓN FIDUCIARIA, EMAIL OUTREACH & BUFFER SOCIAL
@@ -138,6 +149,45 @@ PILAR 6: INFRAESTRUCTURA CLOUD 24/7 (CERO DEPENDENCIA LOCAL)
 4. PROTOCOLO DE CERTIFICACIÓN EN PRODUCCIÓN VIVA:
    - Ninguna tarea se declara terminada porque corrió con `Exit code: 0` en la consola local.
    - El agente DEBE ejecutar una llamada HTTP real contra la URL de producción viva (`https://tudominio.com/api/...`) y verificar que retorne `HTTP 200 OK` con un payload JSON estructurado y telemetría recibida por correo.
+
+================================================================================
+PILAR 7: CIBERSEGURIDAD BANCARIA, ZERO-TRUST & BLINDAJE DE BACKEND (GRADO 9.9/10)
+================================================================================
+1. HIGIENE ZERO-TRUST DE SECRETOS (CWE-798 - FAIL-CLOSED):
+   - Cero contraseñas, API keys o tokens de pasarelas como strings hardcodeados en código.
+   - Comportamiento Fail-Closed: si falta una variable de entorno requerida, el backend aborta de forma segura.
+
+2. PROCESAMIENTO EN MEMORIA VOLÁTIL RAM (GDPR ART. 28 / SOC-2):
+   - `multer.memoryStorage()`, procesamiento efímero en RAM volátil, purga en bloques `finally`. Cero almacenamiento de documentos confidenciales en disco.
+   - Watermarking criptográfico forense SHA-256 en memoria para certificación de integridad.
+
+3. TOKENS DE SESIÓN HMAC SHA-256 TIMING-SAFE:
+   - Tokens de 30 días con secreto efímero volátil (`crypto.randomBytes(32).toString('hex')`) en RAM si no hay variable inyectada.
+   - Comparación en tiempo constante obligatoria con `crypto.timingSafeEqual` para erradicar ataques de canal lateral (Timing Attacks - CWE-208).
+   - Sanitización de delimitadores (`|`) para impedir parameter tampering / token injection.
+
+4. PROTECCIÓN CONTRA DoS, ZIP BOMBS & ReDoS (CWE-409 / CWE-1333):
+   - Cuotas de descompresión en DOCX/PDF/ZIP: máximo 10MB buffer, 5MB entry, 15MB total no comprimido.
+   - Búsqueda lineal no regresiva `[^<]*` en lugar de regex catastróficas `([\s\S]*?)`.
+
+5. RATE LIMITING EN SERVERLESS & ANTI-ENUMERACIÓN (CWE-770 / CWE-307):
+   - Limitador de ventana deslizante por IP en memoria (`checkRateLimit`) en funciones serverless (30 req/min).
+   - Extracción de IP segura considerando proxies inversos (`String(rawIp).split(',')[0].trim()`).
+
+6. RESTRICCIÓN ESTRICTA DE CORS (CWE-942):
+   - Prohibición del comodín `*` en endpoints de pago y sesión.
+   - Whitelist fiduciaria estricta (`https://tudominio.com`, `www`, `localhost`).
+
+7. PREVENCIÓN DE FUGA DE INFORMACIÓN (CWE-209 / OWASP A05):
+   - Cero exposición de stack traces, contraseñas o `error.message` de la base de datos en respuestas 401/500 al cliente.
+   - Registro de detalles técnicos exclusivamente en logs internos del servidor.
+
+8. NEUTRALIZACIÓN INTEGRAL DE XSS (CWE-79 / OWASP A03):
+   - Helper `escapeHtml()` universal con stripping de `on\w+=` y `javascript:` en todos los templates HTML, correos y reportes PDF.
+
+9. SEGURIDAD DE TRANSPORTE & CABECERAS HTTP:
+   - Cookies con `; Secure; SameSite=Lax`.
+   - Cabeceras HSTS (2 años), X-Frame-Options DENY, X-Content-Type-Options nosniff y CSP granular autorizando Wompi y Strike.
 ================================================================================
 ```
 

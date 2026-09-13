@@ -420,3 +420,36 @@ Todo agente, proceso, script y decisión técnica de este sistema está subordin
    - **Forum Ventures & Alchemist Accelerator:** Aceleradoras líderes en Silicon Valley para expansión de ventas corporativas B2B y redes de CFOs.
    - **Acquire.com / MicroAcquire:** Preparación de métricas de tracción (LTV, CAC, MRR) para atracción de inversores ángeles y micro-fondos de capital privado.
 
+---
+
+## 🏛️ 29. FRAMEWORK UNIVERSAL PARA FUTUROS PROYECTOS: BACKEND CLOUD-NATIVE & CIBERSEGURIDAD BANCARIA (GRADO 9.9/10)
+
+Este bloque rige la arquitectura backend de **AuditFlow AI** y sirve como **Prompt Maestro de Inicialización para cualquier proyecto futuro** de MicroSaaS B2B, FinTech o LegalTech:
+
+### Las 7 Leyes Inmutables de Ciberseguridad & Backend en la Nube:
+1. **Independencia Física Absoluta (Cero Dependencia Local 24/7):**
+   - Prohibición estricta de Task Scheduler de Windows o scripts locales para producción.
+   - Despliegue dual: `server.js` (Express) para local/Docker + `/api` serverless para Vercel/Lambda.
+   - Orquestación con Master Cloud Dispatcher (`/api/cron/master-dispatcher`) y Webhook Schedulers redundantes en la nube.
+   - Persistencia obligatoria en Base de Datos Cloud (Supabase/Postgres), cero estado en archivos JSON locales.
+2. **Procesamiento 100% en Memoria Volátil RAM (Cero Retención en Disco):**
+   - `multer.memoryStorage()`. Todo archivo de cliente se procesa como `Buffer` y se purga en bloques `finally`.
+   - Certificación forense con firmas SHA-256 en memoria volátil (Cumplimiento SOC-2 Type II y RGPD Art. 28).
+3. **Higiene Zero-Trust de Secretos (Fail-Closed - CWE-798):**
+   - Cero contraseñas de aplicación (Gmail), API keys o tokens hardcodeados en código fuente.
+   - Comportamiento Fail-Closed: si falta una variable de entorno, el backend aborta de forma segura.
+4. **Autenticación Criptográfica Timing-Safe:**
+   - Tokens de sesión HMAC SHA-256 con clave volátil de 32 bytes (`crypto.randomBytes(32).toString('hex')`) si falta en env.
+   - Comparación de firmas obligatoria con `crypto.timingSafeEqual` en tiempo constante para erradicar Timing Attacks (CWE-208).
+5. **Protección contra DoS, Zip Bombs & ReDoS (CWE-409 / CWE-1333):**
+   - Cuotas de descompresión en DOCX/PDF/ZIP (10MB buffer, 5MB entry, 15MB total).
+   - Expresiones regulares lineales no retroactivas (`[^<]*`) para neutralizar ReDoS.
+6. **Rate Limiting Serverless & Aislamiento CORS (CWE-770 / CWE-942):**
+   - Algoritmo de ventana deslizante (`checkRateLimit`) por IP en endpoints serverless (30 req/min).
+   - Whitelist CORS estricta (`https://audiflowai.com`, `www`, `localhost`). Prohibido `*` en pagos y sesiones.
+7. **Neutralización XSS, Anti-Information Disclosure & Cero Bypass de Pago:**
+   - Helper `escapeHtml()` con stripping de eventos inline (`onerror=`) y `javascript:`.
+   - Cero exposición de contraseñas o `error.message` en respuestas HTTP 401/500.
+   - Pasarelas fiduciarias oficiales: Wompi SV (1-Click, \$19 USD, \$69/mo, \$590/año) + Strike Lightning (Bitcoin Sats) + Transfer365 DTE. Cero emisión de `status=success` sin pago confirmado.
+
+> **Acceso al Documento Completo:** Consulte [`Master Prompt/MASTER_PROMPT_UNIVERSAL_CLOUD_BACKEND_SECURITY.md`](Master%20Prompt/MASTER_PROMPT_UNIVERSAL_CLOUD_BACKEND_SECURITY.md) para el prompt maestro completo listo para copiar y pegar en nuevos proyectos.
