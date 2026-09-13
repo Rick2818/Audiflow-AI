@@ -1,6 +1,10 @@
 {
-  "currentIndex": 0,
+  "cfoIndex": 0,
+  "bufeteIndex": 0,
   "batchSize": 15,
+  "cfoQuota": 12,
+  "bufeteQuota": 3,
+  "currentIndex": 0,
   "totalDispatched": 0,
   "cycleCount": 1,
   "lastRun": null,
