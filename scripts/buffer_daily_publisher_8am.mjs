@@ -81,28 +81,9 @@ export async function runDailyBuffer8AMPublication() {
     results.facebook = { success: false, error: errFB.message };
   }
 
-  // 3. PUBLICAR EN INSTAGRAM (FEED CON ASSET VISUAL NUEVO)
-  console.log('\n🚀 [3/3] Publicando en INSTAGRAM (@audiflowai)...');
-  try {
-    const ig = await publisher.createPost({
-      channelId: IG_CHANNEL_ID,
-      text: trend.copy,
-      mode: 'shareNow',
-      service: 'instagram',
-      metadata: {
-        instagram: {
-          type: 'post',
-          shouldShareToFeed: true
-        }
-      },
-      assets: assetsForPost
-    });
-    console.log(`✅ [INSTAGRAM OK] Publicado exitosamente. ID: ${ig?.id || 'OK'}`);
-    results.instagram = { success: true, id: ig?.id };
-  } catch (errIG) {
-    console.warn(`⚠️ [INSTAGRAM NOTA]: ${errIG.message}`);
-    results.instagram = { success: false, error: errIG.message };
-  }
+  // 3. INSTAGRAM (DESACTIVADO POR DIRECTIVA PRESIDENCIAL - FOCO 100% LINKEDIN B2B)
+  console.log('\n⏸️ [3/3] INSTAGRAM: Desactivado por orden ejecutiva (Foco 100% en LinkedIn B2B).');
+  results.instagram = { success: true, skipped: true, reason: 'DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN' };
 
   // Registro persistente en bitácora social y ledger de no repetición
   recordBufferPostPublication({ post: trend, results });

@@ -95,23 +95,8 @@ export default async function handler(req, res) {
       dispatchResults.facebook = { success: false, error: fbErr.message };
     }
 
-    // 3. Instagram (requiere asset de imagen)
-    if (hasImage) {
-      try {
-        const igRes = await publisher.createPost({
-          channelId: IG_CHANNEL_ID,
-          text: scheduledItem.copy,
-          mode: 'shareNow',
-          assets: assetsForPost,
-          service: 'instagram'
-        });
-        dispatchResults.instagram = { success: true, id: igRes?.id || 'OK', skipped: igRes?.skipped || false };
-      } catch (igErr) {
-        dispatchResults.instagram = { success: false, error: igErr.message };
-      }
-    } else {
-      dispatchResults.instagram = { success: true, skipped: true, reason: 'TEXT_ONLY_POST' };
-    }
+    // 3. Instagram (DESACTIVADO POR DIRECTIVA PRESIDENCIAL - FOCO 100% LINKEDIN B2B)
+    dispatchResults.instagram = { success: true, skipped: true, reason: 'DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN' };
 
     const overallSuccess = Object.values(dispatchResults).some(r => r.success && !r.skipped);
 

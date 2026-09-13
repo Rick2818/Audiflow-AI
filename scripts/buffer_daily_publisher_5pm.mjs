@@ -187,28 +187,9 @@ export async function runDailyBuffer5PMPublication() {
     results.linkedin = { success: false, error: errLI.message };
   }
 
-  // 2. PUBLICAR EN INSTAGRAM (REELS / FEED)
-  console.log('\n🚀 [2/3] Publicando en INSTAGRAM (@audiflowai - Formato Reel/Feed)...');
-  try {
-    const ig = await publisher.createPost({
-      channelId: IG_CHANNEL_ID,
-      text: `${trend.hook}\n\n${trend.copy}`,
-      mode: 'shareNow',
-      service: 'instagram',
-      metadata: {
-        instagram: {
-          type: 'post',
-          shouldShareToFeed: true
-        }
-      },
-      assets: [{ image: { url: trend.image } }]
-    });
-    console.log(`✅ [INSTAGRAM OK] Publicado exitosamente. ID: ${ig?.id || 'OK'}`);
-    results.instagram = { success: true, id: ig?.id };
-  } catch (errIG) {
-    console.warn(`⚠️ [INSTAGRAM NOTA]: ${errIG.message}`);
-    results.instagram = { success: false, error: errIG.message };
-  }
+  // 2. INSTAGRAM (DESACTIVADO POR DIRECTIVA PRESIDENCIAL - FOCO 100% LINKEDIN B2B)
+  console.log('\n⏸️ [2/3] INSTAGRAM: Desactivado por orden ejecutiva (Foco 100% en LinkedIn B2B).');
+  results.instagram = { success: true, skipped: true, reason: 'DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN' };
 
   // 3. PUBLICAR EN FACEBOOK (REELS / VIDEO POST)
   console.log('\n🚀 [3/3] Publicando en FACEBOOK PAGE (Audiflowai.com)...');

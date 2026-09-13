@@ -32,10 +32,14 @@ if (!fs.existsSync(logsDir)) {
   fs.mkdirSync(logsDir, { recursive: true });
 }
 
-function loadState(totalLeads) {
+function loadState(cfoCount = 55, bufeteCount = 48) {
   let state = {
-    currentIndex: 0,
+    cfoIndex: 0,
+    bufeteIndex: 0,
     batchSize: 15,
+    cfoQuota: 12,    // 80% de 15 decisores diarios
+    bufeteQuota: 3,   // 20% de 15 decisores diarios
+    currentIndex: 0,
     totalDispatched: 0,
     cycleCount: 1,
     lastRun: null,
@@ -44,16 +48,24 @@ function loadState(totalLeads) {
 
   if (fs.existsSync(STATE_FILE)) {
     try {
-      state = { ...state, ...JSON.parse(fs.readFileSync(STATE_FILE, 'utf8')) };
+      const raw = JSON.parse(fs.readFileSync(STATE_FILE, 'utf8'));
+      state = { ...state, ...raw };
+      if (state.cfoIndex === undefined) state.cfoIndex = 0;
+      if (state.bufeteIndex === undefined) state.bufeteIndex = 0;
+      if (state.cfoQuota === undefined) state.cfoQuota = 12;
+      if (state.bufeteQuota === undefined) state.bufeteQuota = 3;
     } catch (e) {
       console.warn('⚠️ No se pudo leer estado previo de Centroamérica 8AM, iniciando desde cero.');
     }
   }
 
-  // Reiniciar ciclo al llegar al final de la lista
-  if (state.currentIndex >= totalLeads) {
-    state.currentIndex = 0;
+  // Reiniciar ciclo si los CFOs llegaron al final
+  if (cfoCount > 0 && state.cfoIndex >= cfoCount) {
+    state.cfoIndex = 0;
     state.cycleCount = (state.cycleCount || 1) + 1;
+  }
+  if (bufeteCount > 0 && state.bufeteIndex >= bufeteCount) {
+    state.bufeteIndex = 0;
   }
 
   return state;
@@ -137,32 +149,32 @@ function buildCfoHtml(lead) {
       </p>
 
       <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 14px;">
-        Como responsable financiero en <strong>${lead.company}</strong> (${lead.country}), la protección del flujo de caja frente a cláusulas de ajuste ambiguas en contratos de proveedores es una prioridad crítica de rentabilidad.
+        En corporaciones como <strong>${lead.company}</strong> (${lead.country}), los acuerdos comerciales con proveedores (Cloud IT, logística, telecomunicaciones y arrendamiento) suelen esconder sobrecostos silenciosos que impactan el EBITDA.
       </p>
 
       <p style="font-size: 14px; color: #cbd5e1; margin-bottom: 16px;">
-        El 74% de las sobretarifas en acuerdos comerciales se ocultan en fórmulas de indexación sin tope o responsabilidades solidarias no detectadas en anexos técnicos.
+        El 74% de las fugas contractuales provienen de <strong>fórmulas de indexación inflacionaria sin tope</strong>, cláusulas de prórroga automática con preavisos abusivos y penalizaciones desmedidas de salida.
       </p>
 
       <div style="background-color: #0f172a; border-left: 4px solid #10b981; padding: 18px 20px; border-radius: 8px; margin: 20px 0;">
-        <p style="margin: 0 0 8px 0; font-size: 13px; color: #ffffff;">🛡️ <strong>Blindaje de EBITDA:</strong> Auditoría automatizada de facturas y acuerdos en 8 segundos.</p>
-        <p style="margin: 0 0 8px 0; font-size: 13px; color: #ffffff;">📊 <strong>Identificación de Fugas:</strong> Alertas inmediatas sobre penalizaciones desproporcionadas y falta de derecho de rescisión.</p>
-        <p style="margin: 0; font-size: 13px; color: #38bdf8;">💼 <strong>Sin Licencias Enterprise de $5,000 USD:</strong> Formato flexible desde $19 USD por contrato o Pro $69 USD/mes.</p>
+        <p style="margin: 0 0 8px 0; font-size: 13px; color: #ffffff;">🛡️ <strong>Blindaje de EBITDA en 8 Segundos:</strong> Diagnóstico preventivo en memoria RAM volátil (cumplimiento SOC-2 / GDPR Art. 28, cero retención de archivos).</p>
+        <p style="margin: 0 0 8px 0; font-size: 13px; color: #ffffff;">📄 <strong>Redline Editable en Word (.docx):</strong> Entrega el documento con Control de Cambios y cláusulas de contra-propuesta listas para negociar.</p>
+        <p style="margin: 0; font-size: 13px; color: #38bdf8;">💼 <strong>Ahorro Real de Honorarios:</strong> Evite minutas legales externas de $500–$1,500 USD por borrador. Formato accesible desde $19 USD por contrato o Pro $69 USD/mes.</p>
       </div>
 
       <p style="font-size: 14px; color: #e2e8f0; margin-bottom: 22px;">
-        Puede correr un diagnóstico preventivo con un contrato de muestra de forma 100% gratuita y sin registro:
+        Le hemos habilitado un acceso de cortesía para auditar 1 contrato de prueba en vivo, 100% confidencial y sin tarjeta de crédito:
       </p>
 
       <div style="text-align: center; margin: 26px 0;">
         <a href="${lead.trialUrl}" style="background-color: #10b981; color: #022c22; padding: 14px 30px; border-radius: 8px; font-weight: 700; text-decoration: none; font-size: 14px; display: inline-block;">
-          Verificar Contrato en RAM Volátil (Gratis) →
+          Auditar 1 Contrato de Muestra en RAM (Gratis) →
         </a>
       </div>
 
       <div style="border-top: 1px solid #1e293b; padding-top: 18px; margin-top: 26px; font-size: 12px; color: #64748b;">
         <p style="margin: 0 0 4px 0; color: #e2e8f0; font-weight: 600;">Ricardo Bolaños</p>
-        <p style="margin: 0 0 4px 0;">AuditFlow AI • Control Contractual Automatizado</p>
+        <p style="margin: 0 0 4px 0;">Director General • AuditFlow AI</p>
         <p style="margin: 0;"><a href="https://audiflowai.com" style="color: #38bdf8; text-decoration: none;">audiflowai.com</a> • ricardo@audiflowai.com</p>
       </div>
     </div>
@@ -171,14 +183,14 @@ function buildCfoHtml(lead) {
 
 export async function runCentroamerica8AMDispatch(options = {}) {
   appendLog('================================================================================');
-  appendLog('☀️ AUDITFLOW AI — DESPACHO MATUTINO CENTROAMÉRICA (08:00 AM CST)');
-  appendLog('🎯 Universo: 100% Leads Reales (Bufetes & CFOs de El Salvador, Guatemala y Región)');
+  appendLog('☀️ AUDITFLOW AI — DESPACHO MATUTINO CENTROAMÉRICA (07:00 AM CST)');
+  appendLog('🎯 Universo: 100% Leads Reales (80% CFOs Corporativos + 20% Socios de Bufetes)');
   appendLog(`⏰ Hora de Ejecución: ${new Date().toLocaleTimeString()} CST`);
   appendLog('🛡️ MODO OPERATIVO: 100% REAL EN PRODUCCIÓN (CERO SIMULACIÓN - CERO DRY-RUN)');
   appendLog('================================================================================\n');
 
   if (new Date().getDay() === 0 && !options.forceSunday) {
-    appendLog('ℹ️ DOMINGO: Pausa fiduciaria comercial activa. No se disparan correos en fin de semana. El ciclo se reanuda el LUNES a las 8:00 AM CST.');
+    appendLog('ℹ️ DOMINGO: Pausa fiduciaria comercial activa. No se disparan correos en fin de semana. El ciclo se reanuda el LUNES a las 7:00 AM CST.');
     return { paused: true, reason: 'SUNDAY_COMMERCIAL_PAUSE' };
   }
 
@@ -189,14 +201,33 @@ export async function runCentroamerica8AMDispatch(options = {}) {
   const rawContent = fs.readFileSync(LEADS_FILE, 'utf8').replace(/^\uFEFF/, '');
   const allLeads = JSON.parse(rawContent);
   const cleanLeads = filterActiveLeads(allLeads);
-  appendLog(`📋 Universo Total: ${allLeads.length} | Validados sin rebotes: ${cleanLeads.length}`);
 
-  const state = loadState(cleanLeads.length);
-  const startIdx = state.currentIndex;
-  const batchSize = state.batchSize || 15;
-  const targetBatch = cleanLeads.slice(startIdx, startIdx + batchSize);
+  const cfoLeads = cleanLeads.filter(l => l.type === 'CFO');
+  const bufeteLeads = cleanLeads.filter(l => l.type === 'BUFETE');
 
-  appendLog(`🚀 Despachando Lote del Día: ${targetBatch.length} decisores (Índices ${startIdx + 1} al ${startIdx + targetBatch.length} de ${cleanLeads.length}) | Ciclo #${state.cycleCount}`);
+  appendLog(`📋 Universo Total: ${allLeads.length} | Validados sin rebotes: ${cleanLeads.length} (${cfoLeads.length} CFOs + ${bufeteLeads.length} Bufetes)`);
+
+  const state = loadState(cfoLeads.length, bufeteLeads.length);
+  const cfoQuota = state.cfoQuota || 12;      // 80% CFOs
+  const bufeteQuota = state.bufeteQuota || 3;  // 20% Bufetes
+
+  // Seleccionar 12 CFOs rotativos
+  const batchCfos = [];
+  for (let i = 0; i < cfoQuota && cfoLeads.length > 0; i++) {
+    const idx = (state.cfoIndex + i) % cfoLeads.length;
+    batchCfos.push(cfoLeads[idx]);
+  }
+
+  // Seleccionar 3 Bufetes rotativos
+  const batchBufetes = [];
+  for (let i = 0; i < bufeteQuota && bufeteLeads.length > 0; i++) {
+    const idx = (state.bufeteIndex + i) % bufeteLeads.length;
+    batchBufetes.push(bufeteLeads[idx]);
+  }
+
+  const targetBatch = [...batchCfos, ...batchBufetes];
+
+  appendLog(`🚀 Despachando Lote del Día: ${targetBatch.length} decisores [80% CFOs (${batchCfos.length}) + 20% Bufetes (${batchBufetes.length})] | CFO Idx ${state.cfoIndex + 1} | Bufete Idx ${state.bufeteIndex + 1} | Ciclo #${state.cycleCount}`);
 
   if (!resend) {
     throw new Error('❌ Error crítico de infraestructura: RESEND_API_KEY no está configurado. Prohibido modo simulación.');
@@ -211,7 +242,7 @@ export async function runCentroamerica8AMDispatch(options = {}) {
     
     const subject = isBufete
       ? `[Diagnóstico Contractual] Redlines en Word y revisión en RAM volátil para ${lead.company}`
-      : `[Blindaje Preventivo] Detección de fugas de EBITDA y cláusulas trampa para ${lead.company}`;
+      : `[Control de EBITDA] Detección preventiva de sobrecostos en contratos para ${lead.company}`;
 
     const html = isBufete ? buildBufeteHtml(lead) : buildCfoHtml(lead);
 
@@ -238,13 +269,17 @@ export async function runCentroamerica8AMDispatch(options = {}) {
     await new Promise(r => setTimeout(r, 1500));
   }
 
-  // Actualizar estado del cron job
-  state.currentIndex = startIdx + targetBatch.length;
+  // Actualizar estado del cron job con rotación independiente 80/20
+  state.cfoIndex = (state.cfoIndex + batchCfos.length) % (cfoLeads.length || 1);
+  state.bufeteIndex = (state.bufeteIndex + batchBufetes.length) % (bufeteLeads.length || 1);
+  state.currentIndex = state.cfoIndex + state.bufeteIndex;
   state.totalDispatched = (state.totalDispatched || 0) + sentOk;
   state.lastRun = new Date().toISOString();
   state.history.push({
     date: state.lastRun,
     batchCount: targetBatch.length,
+    cfoCount: batchCfos.length,
+    bufeteCount: batchBufetes.length,
     sentOk,
     sentFail
   });
@@ -265,16 +300,16 @@ export async function runCentroamerica8AMDispatch(options = {}) {
       await resend.emails.send({
         from: 'Operaciones AuditFlow AI <ricardo@audiflowai.com>',
         to: adminTarget,
-        subject: `📊 [CRON 8:00 AM] Despacho Matutino Centroamérica (${sentOk} decisores contactados)`,
+        subject: `📊 [CRON 7:00 AM] Despacho Matutino Centroamérica (${sentOk} decisores contactados: ${batchCfos.length} CFOs + ${batchBufetes.length} Bufetes)`,
         html: `
           <div style="font-family: Arial, sans-serif; background: #0f172a; color: #ffffff; padding: 22px; border-radius: 10px;">
-            <h3 style="color: #38bdf8; margin-top: 0;">☀️ Reporte de Despacho Centroamérica (8:00 AM CST)</h3>
+            <h3 style="color: #38bdf8; margin-top: 0;">☀️ Reporte de Despacho Centroamérica (7:00 AM CST)</h3>
             <p>Se ha ejecutado la siembra matutina programada hacia la base fiduciaria verificada (100% real):</p>
             <ul>
-              <li><strong>Decisores Contactados:</strong> ${sentOk} (Bufetes y CFOs)</li>
+              <li><strong>Decisores Contactados:</strong> ${sentOk} (${batchCfos.length} CFOs Corporativos [80%] + ${batchBufetes.length} Socios de Bufetes [20%])</li>
               <li><strong>Fallos / Rebotes:</strong> ${sentFail}</li>
               <li><strong>Ciclo Actual:</strong> #${state.cycleCount}</li>
-              <li><strong>Avance en Lista:</strong> ${state.currentIndex} de ${cleanLeads.length}</li>
+              <li><strong>Índice CFO:</strong> ${state.cfoIndex} de ${cfoLeads.length} | <strong>Índice Bufetes:</strong> ${state.bufeteIndex} de ${bufeteLeads.length}</li>
             </ul>
             <p style="font-size: 11px; color: #64748b;">AuditFlow AI — Operación Fiduciaria 100% Datos Reales</p>
           </div>

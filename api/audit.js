@@ -9,6 +9,84 @@ export const config = {
   },
 };
 
+const GEMINI_SYSTEM_PROMPT = `
+Eres el motor de auditoría jurídica y financiera de AuditFlow AI, especializado en contratos comerciales, acuerdos de proveedores (IT/Cloud, telecomunicaciones, transporte y arrendamiento corporativo) bajo el marco legal de El Salvador y Centroamérica (Código de Comercio de El Salvador, Ley de Protección al Consumidor, régimen de retenciones fiscales de IVA y Renta, y normas contables NIIF / PCAOB).
+
+Tu misión es realizar una auditoría fiduciaria profunda y rigurosa del documento analizado (digital o escaneado vía visión multimodal).
+
+Debes identificar EXACTAMENTE los hallazgos reales del documento, citar las cláusulas exactas o secciones donde se encuentran, cuantificar el impacto económico estimado en dólares americanos ($ USD), y proponer cláusulas de contra-propuesta para negociación en Word (Redline).
+
+Responde EXCLUSIVAMENTE con un objeto JSON estricto sin delimitadores markdown adicionales fuera del JSON, con esta estructura exacta:
+{
+  "document_type": "Categoría exacta del documento (ej. Contrato de Arrendamiento Comercial, Acuerdo de Nivel de Servicio SLA, Prestación de Servicios Profesionales, Factura Mercantil)",
+  "company_estimate": "Nombre de la empresa, cliente o proveedor detectado en el documento",
+  "party_stance": "buyer",
+  "total_financial_leakage": 14500.00,
+  "leakage_detected_usd": "$14,500 USD",
+  "risk_level": "CRÍTICO",
+  "lead_score": 88,
+  "findings": [
+    {
+      "id": 1,
+      "title": "Nombre conciso de la contingencia o cláusula desequilibrada",
+      "clause_reference": "Cita exacta o referencia de cláusula del documento",
+      "severity": "CRITICAL",
+      "financial_impact": 8500.00,
+      "teaser_preview": "Explicación fiduciaria de por qué esta estipulación perjudica el EBITDA o la seguridad jurídica del cliente conforme al Código de Comercio.",
+      "actionable_solution": "Acción correctiva concreta recomendada.",
+      "fallbacks": {
+        "standard": "Redacción de redline equilibrada estándar.",
+        "maximum": "Redacción altamente protectora a favor del cliente.",
+        "fast_close": "Redacción pragmática de cierre rápido."
+      },
+      "negotiation_pitch": "Argumento persuasivo para presentar a la contraparte negociadora."
+    }
+  ],
+  "missing_provisions": [
+    {
+      "id": "mp_1",
+      "title": "Tope de Responsabilidad Mutua (Mutual Liability Cap)",
+      "status": "MISSING",
+      "severity": "CRITICAL",
+      "risk_explanation": "Evaluación del tope máximo de daños acumulados.",
+      "suggested_clause": "Texto sugerido para incorporar al contrato."
+    },
+    {
+      "id": "mp_2",
+      "title": "Cláusula de Confidencialidad y Custodia de Datos",
+      "status": "MISSING",
+      "severity": "HIGH",
+      "risk_explanation": "Evaluación de salvaguarda de secretos comerciales.",
+      "suggested_clause": "Texto sugerido para incorporar al contrato."
+    },
+    {
+      "id": "mp_3",
+      "title": "Fuerza Mayor y Continuidad Operativa",
+      "status": "MISSING",
+      "severity": "MEDIUM",
+      "risk_explanation": "Evaluación de eventos fortuitos e imprevistos.",
+      "suggested_clause": "Texto sugerido para incorporar al contrato."
+    },
+    {
+      "id": "mp_4",
+      "title": "Resolución de Disputas y Arbitraje Comercial",
+      "status": "PRESENT",
+      "severity": "LOW",
+      "risk_explanation": "Evaluación de jurisdicción y tribunales competentes en San Salvador o arbitraje.",
+      "suggested_clause": "Texto sugerido para pactar jurisdicción clara."
+    }
+  ],
+  "cfo_approval_memo": {
+    "financial_risk_usd": 14500.00,
+    "auditflow_cost_usd": 19,
+    "traditional_lawfirm_cost_usd": 850,
+    "net_roi_multiple": "763x",
+    "roi_percentage": "76,315%",
+    "recommendation": "Dictamen ejecutivo para el Director Financiero (CFO)."
+  }
+}
+`;
+
 function validatePreflightQuality(text) {
   if (!text || typeof text !== 'string') return { valid: true, wordCount: 0 };
   const cleanText = text.replace(/[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g, ' ').trim();
@@ -38,167 +116,167 @@ export default async function handler(req, res) {
   }
 
   try {
-    let documentText = '';
-    let documentName = 'Contrato_Comercial.pdf';
-
     let body = req.body || {};
     if (typeof body === 'string') {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
     }
 
+    let documentName = body.document_name || 'Contrato_Comercial.pdf';
+    const partyStance = body.party_stance || 'buyer';
+    const reportId = 'rep_' + Math.random().toString(36).substring(2, 11);
+
+    // Preparar contenido para Gemini Multimodal (PDF base64 o texto)
+    let parts = [];
+    let isMultimodalPdf = false;
+    let extractedText = '';
+
     if (body.document_base64) {
-      const buffer = Buffer.from(body.document_base64, 'base64');
-      if (body.document_name && body.document_name.endsWith('.pdf')) {
+      const isPdf = documentName.toLowerCase().endsWith('.pdf') || (body.document_type || '').includes('pdf');
+      if (isPdf) {
+        // Enviar el PDF directamente a Gemini como inlineData base64 (OCR visual multimodal)
+        parts.push({
+          inlineData: {
+            mimeType: 'application/pdf',
+            data: body.document_base64
+          }
+        });
+        parts.push({
+          text: `${GEMINI_SYSTEM_PROMPT}\n\nAnaliza este documento PDF (nombre: ${documentName}, postura: ${partyStance}). Audita con lupa fiduciaria bajo las leyes comerciales de El Salvador y Centroamérica.`
+        });
+        isMultimodalPdf = true;
+
+        // Extraer texto opcional con pdfParse para preflight check si es digital
         try {
+          const buffer = Buffer.from(body.document_base64, 'base64');
           const pdfData = await pdfParse(buffer, { max: 15 });
-          documentText = pdfData.text || '';
-        } catch (pdfErr) {
-          console.warn('PDF parse fallback:', pdfErr.message);
-          documentText = buffer.toString('utf-8');
+          extractedText = pdfData.text || '';
+        } catch (e) {
+          // Si falla pdfParse (ej. PDF escaneado con solo imágenes), Gemini se encarga con OCR visual
+          extractedText = '';
         }
       } else {
-        documentText = buffer.toString('utf-8');
+        const buffer = Buffer.from(body.document_base64, 'base64');
+        extractedText = buffer.toString('utf-8');
       }
-      if (body.document_name) documentName = body.document_name;
     } else if (body.sample_text) {
-      documentText = body.sample_text;
-    } else {
-      documentText = `CONTRATO DE SERVICIOS PROFESIONALES Y ARRENDAMIENTO COMERCIAL
-Entre los suscritos a saber, DEUDOR CORPORATIVO S.A. y PROVEEDOR GLOBAL CORP.
-CLÁUSULA 1: OBJETO. Arrendamiento de infraestructura y servicios de consultoría B2B.
-CLÁUSULA 2: TARIFA Y SOBRECARGOS. La tarifa mensual base será de $5,000 USD. Se aplicará un sobrecargo administrativo automático del 18% no reembolsable en caso de mora de 24 horas.
-CLÁUSULA 3: MULTA DE CANCELACIÓN. En caso de terminación anticipada, el cliente deberá abonar una penalización fija equivalente a 12 meses de renta ($60,000 USD) de forma inmediata.
-CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente conforme al IPC más un 5% adicional acumulativo aplicable retroactivamente.`;
+      extractedText = body.sample_text;
     }
 
-    const preflight = validatePreflightQuality(documentText);
-    if (!preflight.valid && documentText.length < 20) {
-      return res.status(422).json({
-        success: false,
-        error_type: 'PREFLIGHT_FAILED',
-        error: 'El documento es ilegible o tiene menos de 10 palabras legibles. Por favor sube una versión más clara.',
-        word_count: preflight.wordCount
+    if (!isMultimodalPdf) {
+      if (!extractedText || extractedText.trim().length === 0) {
+        extractedText = `CONTRATO DE SERVICIOS Y ARRENDAMIENTO COMERCIAL
+Entre DEUDOR CORPORATIVO S.A. y PROVEEDOR GLOBAL CORP.
+CLÁUSULA 1: OBJETO. Arrendamiento de infraestructura y servicios de consultoría B2B.
+CLÁUSULA 2: TARIFA Y SOBRECARGOS. La tarifa mensual base será de $5,000 USD. Se aplicará un sobrecargo administrativo del 18% no reembolsable en caso de mora de 24 horas.
+CLÁUSULA 3: MULTA DE CANCELACIÓN. En caso de terminación anticipada, el cliente abonará penalización fija equivalente a 12 meses de renta ($60,000 USD).
+CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente conforme al IPC más un 5% adicional acumulativo retroactivo.`;
+      }
+
+      const preflight = validatePreflightQuality(extractedText);
+      if (!preflight.valid) {
+        return res.status(422).json({
+          success: false,
+          error_type: 'PREFLIGHT_FAILED',
+          error: 'El documento es ilegible o tiene menos de 10 palabras legibles. Por favor sube una versión más clara.',
+          word_count: preflight.wordCount
+        });
+      }
+
+      parts.push({
+        text: `${GEMINI_SYSTEM_PROMPT}\n\nDOCUMENTO A AUDITAR (Nombre: ${documentName}, Postura: ${partyStance}):\n${extractedText}`
       });
     }
 
-    const partyStance = body.party_stance || 'buyer';
-    const reportId = 'rep_' + Math.random().toString(36).substring(2, 11);
-    
-    const findingsList = [
-      {
-        id: 1,
-        title: "Penalización Excesiva por Terminación Anticipada",
-        clause_reference: "Cláusula 3: Multa de Cancelación Fija ($60,000 USD)",
-        severity: "CRITICAL",
-        financial_impact: 18000,
-        teaser_preview: "Penalización fija desproporcionada de 12 meses de renta que vulnera normativas comerciales estándar.",
-        actionable_solution: "Sustituir por penalización fija de 30 días de preaviso sin cobro retroactivo.",
-        fallbacks: {
-          standard: "En caso de terminación por conveniencia, el Cliente notificará con 30 días de preaviso y abonará una tarifa equivalente a 1 mes de servicio como compensación única.",
-          maximum: "El Cliente podrá rescindir el presente acuerdo en cualquier momento con 30 días de preaviso sin penalización ni sobrecargo económico de ninguna índole.",
-          fast_close: "Penalización escalonada: 2 meses de tarifa si la terminación ocurre en el semestre 1, y 30 días si ocurre en el semestre 2."
-        },
-        negotiation_pitch: "Estimado equipo: Respecto a la Cláusula 3, el estándar B2B del 88% de los contratos del sector limita la penalización por terminación a 30 días de preaviso (o 1 mes de contraprestación). Una penalización de 12 meses genera una contingencia contable desproporcionada que nuestra dirección financiera no puede autorizar. Proponemos el redactado estándar de 30 días para proceder a la firma inmediata."
-      },
-      {
-        id: 2,
-        title: "Sobrecargo Administrativo Automático del 18%",
-        clause_reference: "Cláusula 2: Sobrecargo por mora de 24h",
-        severity: "HIGH",
-        financial_impact: 950,
-        teaser_preview: "Cobro punitivo no reembolsable por retrasos menores sin período de gracia.",
-        actionable_solution: "Establecer período de gracia de 5 días hábiles e interés moratorio tope según tasa bancaria.",
-        fallbacks: {
-          standard: "En caso de mora superior a 5 días hábiles tras notificación formal por escrito, aplicará un interés moratorio máximo del 1.5% mensual sobre el saldo adeudado.",
-          maximum: "No procederá sobrecargo alguno sin previo aviso de subsanación de 10 días hábiles. El interés se topará estrictamente a la tasa legal vigente.",
-          fast_close: "Período de gracia de 3 días hábiles con sobrecargo único del 3% administrativo no acumulativo."
-        },
-        negotiation_pitch: "Sobre la Cláusula 2: Los ciclos administrativos de tesorería requieren un período de gracia razonable. El sobrecargo automático del 18% a las 24 horas resulta punitivo y contrario a los usos comerciales. Solicitamos incorporar 5 días hábiles de gracia y limitar la tasa al 1.5% mensual estándar."
-      },
-      {
-        id: 3,
-        title: "Indexación Doble Semestral Retroactiva",
-        clause_reference: "Cláusula 4: Reajuste IPC + 5% acumulativo",
-        severity: "MEDIUM",
-        financial_impact: 450,
-        teaser_preview: "Duplicación de indexación que sobrecalienta el costo del servicio en plazos medianos.",
-        actionable_solution: "Limitar el reajuste al IPC anual simple sin porcentajes acumulativos adicionales.",
-        fallbacks: {
-          standard: "Los honorarios podrán revisarse anualmente conforme a la variación del Índice de Precios al Consumidor (IPC) oficial sin sobre-porcentajes acumulativos.",
-          maximum: "Tarifas fijas e inalterables durante la vigencia inicial de 12 meses. Cualquier ajuste posterior requerirá anexo bilateral acordado de mutuo acuerdo.",
-          fast_close: "Ajuste anual con tope máximo (Cap) del 4% independientemente de la inflación reportada."
-        },
-        negotiation_pitch: "En referencia a la Cláusula 4: Para mantener la viabilidad presupuestaria y alineación con NIIF/GAAP, los ajustes de precio deben ser anuales y anclados exclusivamente al IPC real reportado, eliminando incrementos acumulativos adicionales."
-      }
-    ];
+    // Validación estricta fiduciaria: GEMINI_API_KEY requerida (Cero Simulación)
+    const apiKey = (process.env.GEMINI_API_KEY || '').trim();
+    if (!apiKey || apiKey === 'tu_gemini_api_key_aqui') {
+      return res.status(503).json({
+        success: false,
+        error_type: 'GEMINI_API_KEY_REQUIRED',
+        error: 'El motor de auditoría real AuditFlow AI requiere configurar GEMINI_API_KEY en el servidor para procesamiento multimodal en producción. La simulación con datos ficticios está estrictamente prohibida.',
+        action_required: 'Configure GEMINI_API_KEY en el archivo .env o en el panel de Vercel/Producción.'
+      });
+    }
 
-    const missingProvisionsList = [
-      {
-        id: 'mp_1',
-        title: 'Tope de Responsabilidad Mutua (Mutual Liability Cap)',
-        status: 'MISSING',
-        severity: 'CRITICAL',
-        risk_explanation: 'El contrato no establece un límite máximo de responsabilidad para el cliente, exponiendo a la empresa a reclamaciones de daños ilimitados.',
-        suggested_clause: 'La responsabilidad total acumulada de cualquiera de las partes bajo este Contrato no excederá el monto total de las tarifas efectivamente pagadas durante los 12 meses anteriores al evento que originó el reclamo.'
-      },
-      {
-        id: 'mp_2',
-        title: 'Cláusula de Privacidad y Cumplimiento de Datos (GDPR / Habeas Data)',
-        status: 'MISSING',
-        severity: 'HIGH',
-        risk_explanation: 'No se delimita la custodia de datos confidenciales ni el cumplimiento de normativas de protección de datos personales.',
-        suggested_clause: 'Ambas partes se comprometen a tratar los datos compartidos bajo estricto apego al GDPR / normativa local aplicable, garantizando confidencialidad y destrucción segura al término de la relación contractual.'
-      },
-      {
-        id: 'mp_3',
-        title: 'Fuerza Mayor y Continuidad Operativa (Force Majeure)',
-        status: 'MISSING',
-        severity: 'MEDIUM',
-        risk_explanation: 'Falta un mecanismo formal de suspensión temporal de obligaciones ante eventos fortuitos o desastres fuera del control de las partes.',
-        suggested_clause: 'Ninguna de las partes será responsable por demoras o incumplimientos resultantes de causas de fuerza mayor imprevisibles y ajenas a su control razonable, mediando notificación en 48 horas.'
-      },
-      {
-        id: 'mp_4',
-        title: 'Resolución de Disputas y Arbitraje Comercial',
-        status: 'PRESENT',
-        severity: 'LOW',
-        risk_explanation: 'El documento cuenta con cláusula de jurisdicción y arbitraje definida.',
-        suggested_clause: 'Jurisdicción pactada conforme a tribunales comerciales competentes.'
-      }
-    ];
+    // Llamada al motor Gemini 2.5 Flash con fallback automático a gemini-1.5-flash
+    let geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+    let geminiRes = await fetch(geminiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts }],
+        generationConfig: {
+          responseMimeType: 'application/json',
+          temperature: 0.1
+        }
+      })
+    });
 
-    const mockAuditData = {
-      report_id: reportId,
-      document_name: documentName,
-      document_type: "Contrato de Servicios Comercial",
-      party_stance: partyStance,
-      total_financial_leakage: 18500,
-      leakage_detected_usd: "$18,500 USD",
-      risk_level: "RIESGO ALTO",
-      lead_score: 92,
-      findings: findingsList,
-      summary: findingsList,
-      missing_provisions: missingProvisionsList,
-      cfo_approval_memo: {
-        financial_risk_usd: 18500,
-        auditflow_cost_usd: 19,
-        traditional_lawfirm_cost_usd: 850,
-        net_roi_multiple: "973x",
-        roi_percentage: "97,268%",
-        recommendation: "APROBACIÓN INMEDIATA RECOMENDADA: El costo de $19 USD de AuditFlow AI genera un ahorro potencial de $18,500 USD y ahorra $831 USD frente a honorarios legales externos tradicionales."
+    if (!geminiRes.ok && (geminiRes.status === 404 || geminiRes.status === 400)) {
+      const fallbackUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      const fallbackRes = await fetch(fallbackUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts }],
+          generationConfig: {
+            responseMimeType: 'application/json',
+            temperature: 0.1
+          }
+        })
+      });
+      if (fallbackRes.ok) {
+        geminiRes = fallbackRes;
       }
-    };
+    }
+
+    if (!geminiRes.ok) {
+      const errData = await geminiRes.json().catch(() => ({}));
+      const errMsg = errData.error?.message || `HTTP ${geminiRes.status}`;
+      return res.status(502).json({
+        success: false,
+        error_type: 'AI_INFERENCE_ERROR',
+        error: `Fallo en el motor multimodal de Gemini: ${errMsg}`
+      });
+    }
+
+    const resJson = await geminiRes.json();
+    const rawOutput = resJson.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const cleanedJson = rawOutput.replace(/```json/gi, '').replace(/```/g, '').trim();
+
+    let auditData = null;
+    try {
+      auditData = JSON.parse(cleanedJson);
+    } catch (parseErr) {
+      return res.status(500).json({
+        success: false,
+        error_type: 'JSON_PARSE_ERROR',
+        error: 'Error al interpretar la respuesta estructurada de la IA: ' + parseErr.message,
+        raw: rawOutput.substring(0, 500)
+      });
+    }
+
+    auditData.report_id = reportId;
+    auditData.document_name = documentName;
+    if (!auditData.summary && auditData.findings) {
+      auditData.summary = auditData.findings;
+    }
 
     return res.status(200).json({
       success: true,
       report_id: reportId,
-      audit_data: mockAuditData,
-      execution_time: "<1.8s",
-      memory_status: "PURGED_FROM_RAM"
+      audit_data: auditData,
+      model: 'gemini-2.5-flash-multimodal',
+      multimodal_ocr: isMultimodalPdf,
+      memory_status: 'PURGED_FROM_RAM'
     });
 
   } catch (err) {
     console.error('Error en api/audit.js:', err);
-    return res.status(500).json({ error: 'Error procesando auditoría en memoria RAM: ' + err.message });
+    return res.status(500).json({
+      success: false,
+      error_type: 'SERVER_ERROR',
+      error: 'Error procesando auditoría en memoria RAM: ' + err.message
+    });
   }
 }
