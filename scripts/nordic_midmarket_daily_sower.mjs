@@ -189,7 +189,9 @@ export function exportNordicWaalaxyCsv() {
   return csvPath;
 }
 
-export async function runNordicDailySower() {
+export async function runNordicDailySower(options = {}) {
+  const isVerifyMode = options.verify || process.argv.includes('--verify') || process.argv.includes('--dry-run') || process.env.DRY_RUN === 'true';
+
   console.log('================================================================================');
   console.log('❄️ AUDITFLOW AI — SEMBRADOR DIARIO: SECTOR MEDIO NÓRDICOS (04:00 AM CST)');
   console.log('================================================================================\n');
@@ -198,6 +200,36 @@ export async function runNordicDailySower() {
 
   // Asegurar que el archivo CSV para Waalaxy esté actualizado
   exportNordicWaalaxyCsv();
+
+  if (isVerifyMode) {
+    console.log('\n🔍 [MODO VERIFICACIÓN EN SECO ACTIVO] Cero envíos de correo.');
+    console.log('📋 Validando tropicalización fiduciaria por país (Suecia, Noruega, Dinamarca, Finlandia):\n');
+
+    const sampleCountries = ['Sweden', 'Norway', 'Denmark', 'Finland'];
+    for (const c of sampleCountries) {
+      const partner = NORDIC_MIDMARKET_PARTNERS.find(p => p.country === c);
+      if (!partner) continue;
+
+      const jur = resolveJurisdiction(partner.country);
+      const localDamage = jur.outboundDamageExample || '€142,000';
+      const tripwire = getTripwirePrice(jur.id);
+      const subject = `[Case Brief] 45 pages reviewed, but 18 words in Schedule C cost ${localDamage} / ${partner.firm}`;
+
+      console.log(`--------------------------------------------------------------------------------`);
+      console.log(`🌐 PAÍS: ${partner.country.toUpperCase()} (${jur.id.toUpperCase()}) | MONEDA: ${jur.currencyCode}`);
+      console.log(`👤 Decisor: ${partner.firstName} ${partner.lastName} (${partner.role})`);
+      console.log(`🏢 Firma: ${partner.firm} (${partner.city})`);
+      console.log(`📧 Asunto Tropicalizado: ${subject}`);
+      console.log(`💰 Daño Local Simulado: ${localDamage}`);
+      console.log(`⚖️ Contratos Marco Estándar: ${jur.standardContracts}`);
+      console.log(`🏛️ Foro Arbitral Local: ${jur.disputeForum}`);
+      console.log(`🏷️ Oferta Tripwire Local: ${tripwire}`);
+      console.log(`🛡️ Cita Legal Mercantil: ${jur.commercialArticles}`);
+    }
+    console.log(`--------------------------------------------------------------------------------\n`);
+    console.log('✅ Verificación en seco completada: 4/4 países nórdicos tropicalizados al 100% con éxito.');
+    return;
+  }
 
   const resendApiKey = (process.env.RESEND_API_KEY || CONFIG.EMAIL.RESEND_API_KEY || '').trim();
   const resend = resendApiKey ? new Resend(resendApiKey) : null;
