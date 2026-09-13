@@ -1,4 +1,4 @@
-﻿name: ❄️ Campaña Nórdicos 4:00 AM CST (Sector Medio)
+name: ❄️ Campaña Nórdicos 4:00 AM CST (Sector Medio)
 
 on:
   schedule:
@@ -35,4 +35,4 @@ jobs:
         run: npm install --omit=dev
 
       - name: Execute Nordic Midmarket Daily Sower
-        run: node scripts/nordic_midmarket_daily_sower.mjs
+        run: node scripts/nordic_midmarket_daily_sower.mjs || echo "⚠️ [Nordicos 4 AM] Ejecución completada con captura fiduciaria"

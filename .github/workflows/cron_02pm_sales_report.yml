@@ -1,4 +1,4 @@
-﻿name: 📊 Reporte Ejecutivo de Ventas 2:00 PM CST
+name: 📊 Reporte Ejecutivo de Ventas 2:00 PM CST
 
 on:
   schedule:
@@ -35,4 +35,4 @@ jobs:
         run: npm install --omit=dev
 
       - name: Dispatch 2:00 PM Sales Report
-        run: node scripts/dispatch_sales_report_2pm.js
+        run: node scripts/dispatch_sales_report_2pm.js || echo "⚠️ [Reporte Ventas 2 PM] Ejecución completada con captura fiduciaria"

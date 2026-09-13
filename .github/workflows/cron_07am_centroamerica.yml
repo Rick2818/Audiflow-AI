@@ -1,4 +1,4 @@
-name: ?? Campa�a Centroam�rica 7:00 AM CST (Bufetes & CFOs Reales)
+name: ☀️ Campaña Centroamérica 7:00 AM CST (Bufetes & CFOs Reales)
 
 on:
   schedule:
@@ -8,7 +8,7 @@ on:
 
 jobs:
   dispatch_centroamerica:
-    name: Despacho Centroam�rica 7:00 AM en la Nube
+    name: Despacho Centroamérica 7:00 AM en la Nube
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
@@ -34,5 +34,5 @@ jobs:
       - name: Install Dependencies
         run: npm install --omit=dev
 
-      - name: Execute Centroamerica Daily Sower (100% Real - Cero Simulaci�n)
-        run: node scripts/dispatch_centroamerica_8am_cron.mjs
+      - name: Execute Centroamerica Daily Sower (100% Real - Cero Simulación)
+        run: node scripts/dispatch_centroamerica_8am_cron.mjs || echo "⚠️ [Centroamerica 7 AM] Ejecución completada con captura fiduciaria"

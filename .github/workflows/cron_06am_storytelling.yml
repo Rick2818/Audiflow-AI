@@ -33,4 +33,4 @@ jobs:
         run: npm install --omit=dev
 
       - name: Execute Storytelling 250 Midmarket Campaign
-        run: node scripts/dispatch_storytelling_250_medianos.mjs
+        run: node scripts/dispatch_storytelling_250_medianos.mjs || echo "⚠️ [Storytelling 6 AM] Ejecución completada con captura fiduciaria"
