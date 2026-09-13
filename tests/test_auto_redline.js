@@ -50,8 +50,8 @@ async function runTests() {
   await handler(reqDoc, resDoc);
 
   assert.strictEqual(resDoc._status, 200);
-  assert.strictEqual(resDoc._headers['Content-Type'], 'application/vnd.ms-word');
-  console.log('✅ Test 2: Generación y descarga de archivo Word (.doc/.docx) confirmada.');
+  assert(resDoc._headers['Content-Type'].includes('openxmlformats-officedocument.wordprocessingml.document'), 'Content-Type debe ser OpenXML .docx nativo');
+  console.log('✅ Test 2: Generación y descarga de archivo Word (.docx) binario nativo confirmada.');
 
   console.log('\n🎉 ¡TODAS LAS PRUEBAS DE AUTO-REDLINE Y DOCX PASARON EXITOSAMENTE (2/2)!');
 }

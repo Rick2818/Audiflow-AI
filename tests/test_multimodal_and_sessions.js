@@ -1,11 +1,16 @@
+process.env.NODE_ENV = 'test';
 import assert from 'assert';
 import crypto from 'crypto';
 import JSZip from 'jszip';
 import fs from 'fs';
 import path from 'path';
-import verifyClientHandler from '../lib/verify-client.js';
+import verifyClientHandler, { generateSessionToken } from '../lib/verify-client.js';
 import downloadPdfHandler from '../lib/download-pdf.js';
 import paymentHandler from '../api/payment.js';
+import auditHandler, { ephemeralReportsCache } from '../api/audit.js';
+import exportDocxHandler from '../api/export-docx.js';
+import webhookHandler from '../api/webhook.js';
+import adminHandler from '../api/admin.js';
 
 console.log('\n=======================================================');
 console.log('🧪 SUITE DE VALIDACIÓN: MEJORA AUDITFLOW A 9.5/10');
@@ -73,8 +78,9 @@ async function main() {
 
   console.log('\n[GRUPO 2] Autenticación Corporativa y Tokens de Sesión:');
 
-  // Test 3: Emisión y validación de tokens de sesión
-  await runAsyncTest('Emisión de session_token de 30 días para cliente VIP', async () => {
+  // Test 3: Flujo de Autenticación OTP en 2 pasos para cliente VIP
+  await runAsyncTest('Flujo de Autenticación OTP de 2 pasos y emisión de session_token de 30 días', async () => {
+    // Paso 1: Solicitud de código OTP para email VIP
     let responseData = null;
     let statusCode = 0;
     const req = {
@@ -90,14 +96,33 @@ async function main() {
     await verifyClientHandler(req, res);
     assert.strictEqual(statusCode, 200);
     assert.strictEqual(responseData.is_client, true);
-    assert(responseData.session_token, 'Debe emitir un session_token');
+    assert.strictEqual(responseData.otp_required, true, 'Debe requerir OTP de 6 dígitos');
+    assert(responseData.test_otp, 'Debe proveer test_otp en modo test');
+
+    // Paso 2: Validación de código OTP y recepción de token HMAC de 30 días
+    let otpResponseData = null;
+    let otpStatusCode = 0;
+    const otpReq = {
+      method: 'POST',
+      body: { email: 'ricardo@audiflowai.com', otp: responseData.test_otp }
+    };
+    const otpRes = {
+      setHeader() {},
+      status(code) { otpStatusCode = code; return this; },
+      json(data) { otpResponseData = data; return this; }
+    };
+
+    await verifyClientHandler(otpReq, otpRes);
+    assert.strictEqual(otpStatusCode, 200);
+    assert.strictEqual(otpResponseData.is_client, true);
+    assert(otpResponseData.session_token, 'Debe emitir un session_token tras verificar OTP');
 
     // Test 4: Restauración transparente usando el token emitido
     let restoreData = null;
     let restoreCode = 0;
     const restoreReq = {
       method: 'POST',
-      body: { session_token: responseData.session_token }
+      body: { session_token: otpResponseData.session_token }
     };
     const restoreRes = {
       setHeader() {},
@@ -279,6 +304,168 @@ async function main() {
     const adminJs = fs.readFileSync(path.resolve('api/admin.js'), 'utf-8');
     assert(!serverJs.includes('Puedes usar: AuditFlow2026!'), 'server.js no debe sugerir la contraseña en el 401');
     assert(!adminJs.includes('Verifica que sea AuditFlow2026!'), 'api/admin.js no debe sugerir la contraseña en el 401');
+  });
+
+  console.log('\n[GRUPO 6] Remediaciones Críticas de Auditoría Forense (Calificación 9.5+/10):');
+
+  // Test 17: Paywall Gating en el Servidor (Protección Real de Propiedad Intelectual)
+  await runAsyncTest('Server-Side Paywall Gating: api/audit.js bloquea soluciones y rechaza desbloqueo no autorizado', async () => {
+    // 17.a Rechazo de desbloqueo no autorizado con HTTP 403
+    let unlockStatus = 0;
+    let unlockData = null;
+    const unauthReq = {
+      method: 'POST',
+      body: { action: 'unlock', report_id: 'rep_unauthorized_999' }
+    };
+    const unauthRes = {
+      setHeader() {},
+      status(code) { unlockStatus = code; return this; },
+      json(data) { unlockData = data; return this; }
+    };
+    await auditHandler(unauthReq, unauthRes);
+    assert.strictEqual(unlockStatus, 403, 'Petición de unlock sin session_token debe ser rechazada con HTTP 403');
+    assert.strictEqual(unlockData.success, false);
+
+    // 17.b Desbloqueo exitoso con session_token corporativo válido
+    const validToken = generateSessionToken('ricardo@audiflowai.com', 'Enterprise');
+    const mockFullReport = {
+      report_id: 'rep_test_cache_123',
+      findings: [
+        {
+          clause_title: 'Cláusula de Mora Desproporcionada',
+          actionable_solution: 'Redactar tope legal del 3% mensual',
+          redline: 'Sustituir párrafo 4'
+        }
+      ],
+      is_unlocked: true
+    };
+    ephemeralReportsCache.set('rep_test_cache_123', mockFullReport);
+
+    let authUnlockStatus = 0;
+    let authUnlockData = null;
+    const authReq = {
+      method: 'POST',
+      body: { action: 'unlock', report_id: 'rep_test_cache_123', session_token: validToken }
+    };
+    const authRes = {
+      setHeader() {},
+      status(code) { authUnlockStatus = code; return this; },
+      json(data) { authUnlockData = data; return this; }
+    };
+    await auditHandler(authReq, authRes);
+    assert.strictEqual(authUnlockStatus, 200, 'Petición de unlock con session_token válido debe responder HTTP 200');
+    assert.strictEqual(authUnlockData.success, true);
+    assert.strictEqual(authUnlockData.is_unlocked, true);
+    assert.strictEqual(authUnlockData.audit_data.findings[0].actionable_solution, 'Redactar tope legal del 3% mensual');
+  });
+
+  // Test 18: Generador Binario OpenXML .docx Nativo y Cálculo Dinámico de ROI
+  await runAsyncTest('Generación de documento Word (.docx) nativo binario conforme a OpenXML', async () => {
+    let docxStatus = 0;
+    let docxContentType = '';
+    let docxBuffer = null;
+
+    const docxReq = {
+      method: 'POST',
+      body: {
+        title: 'Auditoría Contrato Arrendamiento Corporativo',
+        findings: [
+          {
+            clause_title: 'Penalización Asimétrica en Rescisión',
+            financial_exposure: '$15,000 USD',
+            risk_description: 'Cobro de 12 meses forzosos',
+            actionable_solution: 'Limitar a 2 meses con preaviso de 60 días'
+          }
+        ]
+      }
+    };
+    const docxRes = {
+      setHeader(name, val) {
+        if (name.toLowerCase() === 'content-type') docxContentType = val;
+      },
+      status(code) { docxStatus = code; return this; },
+      send(buf) { docxBuffer = buf; return this; }
+    };
+
+    await exportDocxHandler(docxReq, docxRes);
+    assert.strictEqual(docxStatus, 200);
+    assert(Buffer.isBuffer(docxBuffer), 'Debe retornar un Buffer binario real');
+    assert(docxContentType.includes('wordprocessingml.document'), 'El Content-Type debe ser OpenXML .docx');
+    // Magic bytes de archivo ZIP/OpenXML: 0x50 0x4B 0x03 0x04 ('PK\x03\x04')
+    assert.strictEqual(docxBuffer[0], 0x50, 'Byte 0 debe ser P (0x50)');
+    assert.strictEqual(docxBuffer[1], 0x4b, 'Byte 1 debe ser K (0x4b)');
+    assert.strictEqual(docxBuffer[2], 0x03, 'Byte 2 debe ser 0x03');
+    assert.strictEqual(docxBuffer[3], 0x04, 'Byte 3 debe ser 0x04');
+  });
+
+  // Test 19: Blindaje Criptográfico HMAC en Webhooks de Pago (Wompi SV)
+  await runAsyncTest('Rechazo tajante de webhooks no firmados o forjados en api/webhook.js', async () => {
+    // 19.a Webhook Wompi sin firma criptográfica
+    let unsignedStatus = 0;
+    let unsignedData = null;
+    const unsignedReq = {
+      method: 'POST',
+      headers: {},
+      body: {
+        event: 'transaction.updated',
+        data: { transaction: { status: 'APPROVED', amount_in_cents: 1900 } }
+      }
+    };
+    const unsignedRes = {
+      setHeader() {},
+      status(code) { unsignedStatus = code; return this; },
+      json(data) { unsignedData = data; return this; }
+    };
+    await webhookHandler(unsignedReq, unsignedRes);
+    assert.strictEqual(unsignedStatus, 401, 'Webhook Wompi sin firma válida debe responder HTTP 401');
+
+    // 19.b Evento arbitrario desconocido
+    let invalidStatus = 0;
+    const invalidReq = {
+      method: 'POST',
+      headers: {},
+      body: { spoofed_event: 'free_grant' }
+    };
+    const invalidRes = {
+      setHeader() {},
+      status(code) { invalidStatus = code; return this; },
+      json() { return this; }
+    };
+    await webhookHandler(invalidReq, invalidRes);
+    assert.strictEqual(invalidStatus, 400, 'Payload de webhook no reconocido debe responder HTTP 400');
+  });
+
+  // Test 20: Autenticación Admin Segura (Timing-Safe y Cero Bypass por Headers)
+  await runAsyncTest('api/admin.js requiere autenticación criptográfica y emite tokens dinámicos', async () => {
+    // 20.a Intento de spoofing de User-Agent Vercel-Cron
+    let spoofStatus = 0;
+    const spoofReq = {
+      method: 'POST',
+      headers: { 'user-agent': 'vercel-cron/1.0' },
+      body: { action: 'cron_monitor' }
+    };
+    const spoofRes = {
+      setHeader() {},
+      status(code) { spoofStatus = code; return this; },
+      json() { return this; }
+    };
+    await adminHandler(spoofReq, spoofRes);
+    assert.strictEqual(spoofStatus, 401, 'Spoofing de User-Agent vercel-cron debe ser rechazado con HTTP 401');
+
+    // 20.b Contraseña errónea
+    let wrongPassStatus = 0;
+    const wrongPassReq = {
+      method: 'POST',
+      headers: {},
+      body: { action: 'login', password: 'wrong_password_attempt' }
+    };
+    const wrongPassRes = {
+      setHeader() {},
+      status(code) { wrongPassStatus = code; return this; },
+      json() { return this; }
+    };
+    await adminHandler(wrongPassReq, wrongPassRes);
+    assert.strictEqual(wrongPassStatus, 401, 'Contraseña errónea debe ser rechazada con HTTP 401');
   });
 
   console.log('\n=======================================================');

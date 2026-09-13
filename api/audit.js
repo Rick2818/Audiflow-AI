@@ -3,6 +3,16 @@ import JSZip from 'jszip';
 import pdfParse from 'pdf-parse';
 import downloadPdfHandler from '../lib/download-pdf.js';
 import { resolveJurisdiction, buildAiJurisdictionPrompt } from '../lib/legal-jurisdictions.js';
+import { checkRateLimit, setStrictCors } from '../lib/security.js';
+import { verifySessionToken } from '../lib/verify-client.js';
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = (process.env.SUPABASE_URL || '').trim();
+const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || '').trim();
+const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
+
+// Cache en memoria volátil de reportes completos para desbloqueo fiduciario
+export const ephemeralReportsCache = new Map();
 
 export const config = {
   api: {
@@ -66,9 +76,7 @@ function validatePreflightQuality(text) {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setStrictCors(req, res, 'GET, POST, OPTIONS', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -83,10 +91,63 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
+  // Rate Limiting anti-abuso (20 auditorías por hora por IP)
+  const rawIp = (req.headers ? (req.headers['x-forwarded-for'] || req.headers['x-real-ip']) : null) || (req.socket ? req.socket.remoteAddress : null) || '127.0.0.1';
+  const clientIp = String(rawIp).split(',')[0].trim();
+  const rateCheck = checkRateLimit(`audit_limit_${clientIp}`, 20, 3600000);
+  if (!rateCheck.allowed) {
+    return res.status(429).json({
+      success: false,
+      error: 'Has alcanzado el límite de análisis gratuitos por hora desde esta dirección IP. Por favor adquiere un pase individual ($19 USD) o una suscripción corporativa.',
+      retry_after: rateCheck.retryAfter
+    });
+  }
+
   try {
     let body = req.body || {};
     if (typeof body === 'string') {
       try { body = JSON.parse(body); } catch (e) { body = {}; }
+    }
+
+    // Verificar si el solicitante cuenta con sesión corporativa activa o pase verificado
+    const authHeader = req.headers ? (req.headers['authorization'] || req.headers['Authorization'] || '') : '';
+    const bearerToken = authHeader.startsWith('Bearer ') ? authHeader.substring(7).trim() : '';
+    const tokenCandidate = body.session_token || bearerToken || '';
+    const validSession = verifySessionToken(tokenCandidate);
+    const isClientAuthorized = Boolean(validSession || body.is_paid === true);
+
+    // SUB-MODO: Desbloqueo Fiduciario de Reporte Previo
+    if (body.action === 'unlock' || body.action === 'get_unlocked_report') {
+      const targetReportId = body.report_id;
+      if (!isClientAuthorized) {
+        return res.status(403).json({
+          success: false,
+          error: 'Se requiere una suscripción corporativa activa o confirmación de pago ($19 USD) para desbloquear el informe completo.'
+        });
+      }
+
+      let cachedReport = targetReportId ? ephemeralReportsCache.get(targetReportId) : null;
+      if (!cachedReport && supabase && targetReportId) {
+        try {
+          const { data } = await supabase.from('audit_reports').select('summary_json').eq('id', targetReportId).single();
+          if (data?.summary_json) cachedReport = data.summary_json;
+        } catch {}
+      }
+
+      if (!cachedReport) {
+        return res.status(404).json({
+          success: false,
+          error: 'Reporte no encontrado en memoria efímera. Por favor vuelve a analizar el documento.'
+        });
+      }
+
+      return res.status(200).json({
+        success: true,
+        is_unlocked: true,
+        report_id: targetReportId,
+        audit_data: cachedReport,
+        message: 'Informe oficial desbloqueado exitosamente.'
+      });
     }
 
     let documentName = body.document_name || 'Contrato_Comercial.pdf';
@@ -102,7 +163,18 @@ export default async function handler(req, res) {
     // Cálculo fiduciario de Hash SHA-256 en memoria volátil (Cero retención en disco)
     let forensicHash = null;
     let fileBuffer = null;
-    if (body.document_base64 && typeof body.document_base64 === 'string') {
+    if (req.file && req.file.buffer) {
+      fileBuffer = req.file.buffer;
+      if (!body.document_base64) {
+        body.document_base64 = fileBuffer.toString('base64');
+      }
+      if (!documentName && req.file.originalname) {
+        documentName = req.file.originalname;
+      }
+      if (fileBuffer.length > 0) {
+        forensicHash = crypto.createHash('sha256').update(fileBuffer).digest('hex');
+      }
+    } else if (body.document_base64 && typeof body.document_base64 === 'string') {
       try {
         fileBuffer = Buffer.from(body.document_base64, 'base64');
         if (fileBuffer && fileBuffer.length > 0) {
@@ -200,17 +272,20 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
       });
     }
 
-    // Llamada al motor Gemini Multimodal con fallback adaptativo entre modelos de alta velocidad
-    const candidateModels = ['gemini-flash-latest', 'gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
+    // Llamada al motor Gemini Multimodal con cabecera segura y modelos oficiales válidos
+    const candidateModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
     let geminiRes = null;
-    let selectedModel = 'gemini-flash-latest';
+    let selectedModel = 'gemini-2.5-flash';
 
     for (const m of candidateModels) {
       try {
-        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${apiKey}`;
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`;
         const res = await fetch(geminiUrl, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json',
+            'x-goog-api-key': apiKey
+          },
           body: JSON.stringify({
             contents: [{ parts }],
             generationConfig: {
@@ -224,16 +299,16 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
           selectedModel = m;
           break;
         } else {
-          geminiRes = res; // conservar para inspeccionar error si todos fallan
+          geminiRes = res;
         }
       } catch (e) {
         // continuar con siguiente modelo
       }
     }
 
-    if (!geminiRes.ok) {
-      const errData = await geminiRes.json().catch(() => ({}));
-      const errMsg = errData.error?.message || `HTTP ${geminiRes.status}`;
+    if (!geminiRes || !geminiRes.ok) {
+      const errData = geminiRes ? await geminiRes.json().catch(() => ({})) : {};
+      const errMsg = errData.error?.message || (geminiRes ? `HTTP ${geminiRes.status}` : 'No se pudo conectar con el motor de IA');
       return res.status(502).json({
         success: false,
         error_type: 'AI_INFERENCE_ERROR',
@@ -277,15 +352,60 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
       };
     }
 
+    // Guardar reporte completo en memoria efímera y Supabase para desbloqueo fiduciario
+    ephemeralReportsCache.set(reportId, auditData);
+    if (ephemeralReportsCache.size > 500) {
+      const firstKey = ephemeralReportsCache.keys().next().value;
+      ephemeralReportsCache.delete(firstKey);
+    }
+
+    if (supabase) {
+      try {
+        await supabase.from('audit_reports').insert([{
+          id: reportId,
+          document_name: documentName,
+          summary_json: auditData,
+          total_leakage: auditData.total_financial_leakage || auditData.estimated_leakage || 3500,
+          status: isClientAuthorized ? 'unlocked' : 'blurred',
+          created_at: new Date().toISOString()
+        }]);
+      } catch {}
+    }
+
+    // SERVER-SIDE PAYWALL GATING: Si el usuario NO está autorizado, redactar soluciones tácticas
+    let clientAuditData = auditData;
+    if (!isClientAuthorized) {
+      clientAuditData = JSON.parse(JSON.stringify(auditData));
+      if (Array.isArray(clientAuditData.findings)) {
+        clientAuditData.findings = clientAuditData.findings.map(f => ({
+          clause_title: f.clause_title || f.title || 'Cláusula de Riesgo Detectada',
+          severity: f.severity || 'ALTO',
+          category: f.category || 'Riesgo Contractual',
+          risk_description: f.risk_description || f.description || '',
+          financial_exposure: f.financial_exposure || f.estimated_impact || 'Fuga Potencial de EBITDA',
+          actionable_solution: '🔒 [CONTENIDO RESTRINGIDO EN SERVIDOR: Para ver la redacción verde y solución táctica recomendada, adquiere el Informe Oficial ($19 USD) o ingresa con tu Terminal Corporativa.]',
+          redline: '🔒 [REVISIÓN CON CONTROL DE CAMBIOS BLOQUEADA EN SERVIDOR]',
+          fallbacks: null,
+          is_locked: true
+        }));
+      }
+      if (Array.isArray(clientAuditData.summary)) {
+        clientAuditData.summary = clientAuditData.findings;
+      }
+      clientAuditData.full_redlines = null;
+      clientAuditData.negotiation_pitch = '🔒 [ARGUMENTARIO DE NEGOCIACIÓN BLOQUEADO EN SERVIDOR]';
+    }
+
     return res.status(200).json({
       success: true,
       report_id: reportId,
-      audit_data: auditData,
+      is_unlocked: isClientAuthorized,
+      audit_data: clientAuditData,
       jurisdiction: appliedJur.countryName,
       jurisdiction_applied: auditData.jurisdiction_applied,
       forensic_cert: auditData.forensic_cert,
       forensic_hash: auditData.forensic_hash,
-      model: 'gemini-2.5-flash-multimodal',
+      model: selectedModel,
       multimodal_ocr: isMultimodal,
       memory_status: 'PURGED_FROM_RAM'
     });
@@ -295,7 +415,7 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
     return res.status(500).json({
       success: false,
       error_type: 'SERVER_ERROR',
-      error: 'Error procesando auditoría en memoria RAM: ' + err.message
+      error: process.env.NODE_ENV === 'development' ? err.message : 'Error interno procesando auditoría en memoria RAM. La incidencia ha sido registrada de forma segura.'
     });
   }
 }

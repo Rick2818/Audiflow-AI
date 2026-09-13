@@ -1,20 +1,20 @@
+import crypto from 'crypto';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
-import { isSafePublicUrl } from '../lib/security.js';
+import { isSafePublicUrl, safeCompare, setStrictCors } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
+import { ephemeralReportsCache } from './audit.js';
 
-const stripeSecret = (process.env.STRIPE_SECRET_KEY || CONFIG.PAYMENTS.STRIPE_SECRET_KEY || '').trim();
+const stripeSecret = (process.env.STRIPE_SECRET_KEY || CONFIG.PAYMENTS?.STRIPE_SECRET_KEY || '').trim();
 const webhookSecret = (process.env.STRIPE_WEBHOOK_SECRET || '').trim();
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 
-const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE.URL || '').trim();
-const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || CONFIG.SUPABASE.KEY || '').trim();
+const supabaseUrl = (process.env.SUPABASE_URL || CONFIG.SUPABASE?.URL || '').trim();
+const supabaseKey = (process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || CONFIG.SUPABASE?.KEY || '').trim();
 const supabase = (supabaseUrl && supabaseKey) ? createClient(supabaseUrl, supabaseKey) : null;
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, stripe-signature');
+  setStrictCors(req, res, 'POST, OPTIONS', 'Content-Type, stripe-signature, x-wompi-signature, x-signature');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -33,19 +33,11 @@ export default async function handler(req, res) {
       try { body = JSON.parse(body); } catch (e) {}
     }
 
-    // Verificación Criptográfica si existe secreto de webhook y firma
-    if (stripe && webhookSecret && sig) {
-      const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
-      event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
-    } else {
-      event = body;
-    }
-
     // Filtro y Protección Anti-Spam: Descartar eventos de rebote (Bounces / NDR) sin notificar al correo personal
-    const eventTypeStr = String(event?.type || body?.event || body?.type || '').toLowerCase();
+    const eventTypeStr = String(body?.event || body?.type || '').toLowerCase();
     const isBounce = eventTypeStr.includes('bounce') || eventTypeStr.includes('fail') || eventTypeStr.includes('complaint') || eventTypeStr.includes('delayed') || eventTypeStr.includes('dropped') || eventTypeStr.includes('undelivered');
     if (isBounce) {
-      const bouncedEmail = event.data?.to?.[0] || body.data?.to || body.data?.email || event.data?.email || 'desconocido';
+      const bouncedEmail = body.data?.to?.[0] || body.data?.to || body.data?.email || 'desconocido';
       console.log(`🛡️ [Bounce Filter] Rebote/Fallo detectado y aislado para ${bouncedEmail}. Cero notificaciones al correo personal.`);
       if (supabase && bouncedEmail && bouncedEmail !== 'desconocido') {
         try {
@@ -55,9 +47,34 @@ export default async function handler(req, res) {
       return res.status(200).json({ received: true, status: 'bounce_isolated_silently' });
     }
 
-    // Manejar Evento de Pago Exitoso (Stripe / Wompi El Salvador)
-    const isWompi = body.event === 'transaction.updated' || body.data?.transaction?.status === 'APPROVED';
-    const isStripe = event && (event.type === 'checkout.session.completed' || event.type === 'payment_intent.succeeded');
+    const isWompi = body.event === 'transaction.updated' || body.data?.transaction?.status === 'APPROVED' || body.idTransaccion || body.esAprobada;
+    const isStripe = sig && stripe && webhookSecret;
+
+    // Validación Criptográfica Estricta de la Pasarela
+    if (isWompi) {
+      const wompiSecret = (process.env.WOMPI_INTEGRITY_SECRET || process.env.WOMPI_API_SECRET || CONFIG.PAYMENTS?.WOMPI_API_KEY || 'auditflow_wompi_integrity_secret').trim();
+      const wompiSig = req.headers['x-wompi-signature'] || req.headers['x-signature'] || body.signature;
+
+      if (!wompiSig) {
+        return res.status(401).json({ error: 'Firma criptográfica de Wompi requerida y no provista. Solicitud rechazada por seguridad fiduciaria.' });
+      }
+
+      const rawPayload = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+      const expectedWompiSig = crypto.createHmac('sha256', wompiSecret).update(rawPayload).digest('hex');
+      if (!safeCompare(wompiSig, expectedWompiSig)) {
+        return res.status(401).json({ error: 'Firma criptográfica de Wompi inválida. Solicitud rechazada por seguridad fiduciaria.' });
+      }
+      event = body;
+    } else if (isStripe) {
+      const rawBody = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+      try {
+        event = stripe.webhooks.constructEvent(rawBody, sig, webhookSecret);
+      } catch (stripeErr) {
+        return res.status(401).json({ error: 'Firma de Stripe inválida: ' + stripeErr.message });
+      }
+    } else {
+      return res.status(400).json({ error: 'Evento de webhook no reconocido o carente de firma criptográfica válida.' });
+    }
 
     if (isStripe || isWompi) {
       const session = event.data?.object || body.data?.transaction || {};
@@ -74,11 +91,17 @@ export default async function handler(req, res) {
               .eq('id', reportId);
           }
 
+          if (reportId && ephemeralReportsCache.has(reportId)) {
+            const cached = ephemeralReportsCache.get(reportId);
+            cached.is_unlocked = true;
+            ephemeralReportsCache.set(reportId, cached);
+          }
+
           await supabase
             .from('transactions')
             .insert([{
-              id: session.id || `tx_${Date.now()}`,
-              provider: session.subscription ? 'stripe_subscription' : 'stripe',
+              id: session.id || session.idTransaccion || `tx_${Date.now()}`,
+              provider: isWompi ? 'wompi_sv' : (session.subscription ? 'stripe_subscription' : 'stripe'),
               amount_usd: parseFloat(amountTotal),
               customer_email: customerEmail || 'cliente@empresa.com',
               status: 'paid',
@@ -87,9 +110,13 @@ export default async function handler(req, res) {
         } catch (sErr) {
           console.warn('Supabase webhook record notice:', sErr.message);
         }
+      } else if (reportId && ephemeralReportsCache.has(reportId)) {
+        const cached = ephemeralReportsCache.get(reportId);
+        cached.is_unlocked = true;
+        ephemeralReportsCache.set(reportId, cached);
       }
 
-      console.log(`✅ [STRIPE VERIFIED] Report ${reportId} unlocked for ${customerEmail} ($${amountTotal} USD)`);
+      console.log(`✅ [PAYMENT VERIFIED] Report ${reportId} unlocked for ${customerEmail} ($${amountTotal} USD) via ${isWompi ? 'Wompi SV' : 'Stripe'}`);
 
       // Entrega Automática al Cliente (0 Intervención Humana)
       if (customerEmail) {

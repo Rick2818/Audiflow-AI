@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
-import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit } from '../lib/security.js';
+import { verifyAdminAuth, safeCompare, escapeHtml, checkRateLimit, setStrictCors, generateAdminToken } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
 import { REAL_50_DECISION_MAKERS, NORDIC_LEGAL_EXECUTIVE_LEADS, DACH_LEGAL_EXECUTIVE_LEADS, generateLegalExecutiveLeads } from './outreach.js';
 
@@ -115,9 +115,7 @@ function getRealVerifiedLeads() {
 }
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, x-admin-password');
+  setStrictCors(req, res, 'GET, POST, OPTIONS', 'Content-Type, Authorization, x-admin-password');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -130,9 +128,10 @@ export default async function handler(req, res) {
 
   const { action, email, name, role, company, document_name, custom_notes, prospects, test_mode = false } = body;
 
+  const authHeader = req.headers ? (req.headers.authorization || req.headers.Authorization || '') : '';
+  const cronSecret = (process.env.CRON_SECRET || process.env.ADMIN_PASSWORD || '').trim();
   const isVercelCron = Boolean(
-    req.headers['x-vercel-cron'] === '1' ||
-    (req.headers['user-agent'] || '').includes('vercel-cron')
+    cronSecret && authHeader && safeCompare(authHeader, `Bearer ${cronSecret}`)
   );
   const isAuthorized = isVercelCron || verifyAdminAuth(req);
 
@@ -231,7 +230,7 @@ export default async function handler(req, res) {
       if (verifyAdminAuth(req)) {
         return res.status(200).json({
           success: true,
-          token: 'admin_token_auditflow_2026',
+          token: generateAdminToken(12),
           message: 'Autenticación exitosa como Administrador de AuditFlow AI'
         });
       }

@@ -1,10 +1,8 @@
-import { escapeHtml } from '../lib/security.js';
+import { escapeHtml, setStrictCors, checkRateLimit } from '../lib/security.js';
 import { resolveJurisdiction } from '../lib/legal-jurisdictions.js';
 
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  setStrictCors(req, res, 'GET, POST, OPTIONS', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -12,6 +10,13 @@ export default async function handler(req, res) {
 
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
+  }
+
+  const rawIp = (req.headers ? (req.headers['x-forwarded-for'] || req.headers['x-real-ip']) : null) || (req.socket ? req.socket.remoteAddress : null) || '127.0.0.1';
+  const clientIp = String(rawIp).split(',')[0].trim();
+  const rateCheck = checkRateLimit(`chat_doc_${clientIp}`, 30, 3600000);
+  if (!rateCheck.allowed) {
+    return res.status(429).json({ success: false, error: 'Límite de consultas al copiloto alcanzado por esta hora.' });
   }
 
   try {
@@ -42,13 +47,16 @@ ${question.substring(0, 500)}
 </USER_QUERY>
 `;
 
-        const candidateModels = ['gemini-flash-latest', 'gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
+        const candidateModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash'];
         let gRes = null;
         for (const m of candidateModels) {
           try {
-            const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${geminiApiKey}`, {
+            const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: {
+                'Content-Type': 'application/json',
+                'x-goog-api-key': geminiApiKey
+              },
               signal: AbortSignal.timeout(8000),
               body: JSON.stringify({
                 systemInstruction: {

@@ -441,28 +441,38 @@ window.AppHandler = {
                     reader.readAsDataURL(this.selectedFile);
                 });
 
+                const currentToken = (window.CorporateAuth && window.CorporateAuth.getToken()) || localStorage.getItem('auditflow_session_token') || '';
                 res = await fetch('/api/audit', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(currentToken ? { 'Authorization': `Bearer ${currentToken}` } : {})
+                    },
                     body: JSON.stringify({
                         document_base64: base64,
                         document_name: this.selectedFile.name,
                         party_stance: this.currentPartyStance || 'buyer',
                         audit_standard: this.currentAuditStandard || 'PCAOB_GAAP',
                         country: this.selectedJurisdiction || 'sv',
-                        jurisdiction: this.selectedJurisdiction || 'sv'
+                        jurisdiction: this.selectedJurisdiction || 'sv',
+                        session_token: currentToken
                     })
                 });
             } else {
+                const currentToken = (window.CorporateAuth && window.CorporateAuth.getToken()) || localStorage.getItem('auditflow_session_token') || '';
                 res = await fetch('/api/audit', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        ...(currentToken ? { 'Authorization': `Bearer ${currentToken}` } : {})
+                    },
                     body: JSON.stringify({ 
                         sample_text: 'sample_contract_text',
                         party_stance: this.currentPartyStance || 'buyer',
                         audit_standard: this.currentAuditStandard || 'PCAOB_GAAP',
                         country: this.selectedJurisdiction || 'sv',
-                        jurisdiction: this.selectedJurisdiction || 'sv'
+                        jurisdiction: this.selectedJurisdiction || 'sv',
+                        session_token: currentToken
                     })
                 });
             }
@@ -984,12 +994,29 @@ window.AppHandler = {
             );
         }
 
-        // Auto-desbloqueo inmediato si el usuario es un Suscriptor Corporativo Activo
-        const isCorporateActive = localStorage.getItem('auditflow_corporate_active') === 'true';
-        if (isCorporateActive) {
+        // Auto-desbloqueo seguro: si el servidor ya lo entregó desbloqueado o si hay token verificado
+        if (data.is_unlocked === true) {
             setTimeout(() => {
                 this.unblurReport('corporate_subscriber');
             }, 100);
+        } else {
+            const token = (window.CorporateAuth && window.CorporateAuth.getToken()) || localStorage.getItem('auditflow_session_token');
+            if (token && this.currentReportId) {
+                fetch('/api/audit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+                    body: JSON.stringify({ action: 'unlock', report_id: this.currentReportId, session_token: token })
+                })
+                .then(r => r.json())
+                .then(unlockedRes => {
+                    if (unlockedRes && unlockedRes.success && unlockedRes.audit_data) {
+                        this.currentAuditData = unlockedRes.audit_data;
+                        this.renderAuditReportDashboard();
+                        this.unblurReport('corporate_subscriber');
+                    }
+                })
+                .catch(() => {});
+            }
         }
     },
 
@@ -2150,14 +2177,14 @@ window.AppHandler = {
 
         if (!email || !email.includes('@')) {
             feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-amber-950/80 border border-amber-500/50 text-amber-300';
-            feedback.innerHTML = '⚠️ Por favor introduce un correo electrónico válido.';
+            feedback.innerHTML = '⚠️ Por favor introduce un correo electrónico corporativo válido.';
             return;
         }
 
         const originalBtnText = btn ? btn.innerHTML : '';
         if (btn) {
             btn.disabled = true;
-            btn.innerHTML = '<span>⏳ Consultando Base de Datos...</span>';
+            btn.innerHTML = '<span>⏳ Verificando Estatus...</span>';
         }
 
         feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-sky-950/80 border border-sky-500/50 text-sky-300';
@@ -2167,52 +2194,76 @@ window.AppHandler = {
             const res = await fetch('/api/verify-client', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, action: 'verify_client' })
+                body: JSON.stringify({ email })
             });
 
             const data = await res.json();
 
-            if (data && data.is_client) {
-                localStorage.setItem('auditflow_corporate_active', 'true');
-                localStorage.setItem('auditflow_corporate_email', email);
-                localStorage.setItem('auditflow_corporate_plan', data.plan || 'enterprise');
-                if (data.session_token) {
-                    localStorage.setItem('auditflow_session_token', data.session_token);
-                    sessionStorage.setItem('auditflow_session_token', data.session_token);
+            if (data && data.is_client && data.otp_required) {
+                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-amber-950/90 border border-amber-500/60 text-amber-200';
+                feedback.innerHTML = `🔑 <strong>Código OTP Enviado</strong><br>Se ha enviado un código de 6 dígitos a <strong>${email}</strong>.<br><span class="text-gray-300">Ingresa el código para autorizar tu terminal.</span>`;
+
+                const otpCode = prompt(`🔐 Ingrese el código de acceso de 6 dígitos enviado a ${email}:`);
+                if (!otpCode) {
+                    feedback.innerHTML = '⚠️ Verificación cancelada. Por favor introduce el código enviado a tu correo.';
+                    return;
                 }
-                this.currentLeadData = { name: 'Cliente Corporativo', email };
 
-                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 shadow-glow';
-                feedback.innerHTML = `<strong>Verifique su correo</strong><br>✅ Correo identificado como <strong>CLIENTE: SÍ</strong> en la Base de Datos.<br>🚀 Dando paso inmediato a la Terminal Corporativa Ilimitada...`;
+                feedback.innerHTML = '⏳ Verificando código de seguridad en tiempo constante...';
+                const otpRes = await fetch('/api/verify-client', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, otp_code: otpCode.trim() })
+                });
 
-                setTimeout(() => {
-                    this.closeClientAccessModal();
-                    if (this.currentReportId) {
-                        this.unblurReport('corporate_subscriber');
+                const otpData = await otpRes.json();
+                if (otpData && otpData.success && otpData.session_token) {
+                    if (window.CorporateAuth) {
+                        window.CorporateAuth.saveSession(otpData.session_token, email, otpData.plan);
+                    } else {
+                        localStorage.setItem('auditflow_session_token', otpData.session_token);
                     }
-                    alert(`👑 ¡Terminal Corporativa Activada!\n\nBienvenido(a) ${email}.\nTu acceso ilimitado 24/7 está activo en esta terminal.`);
-                }, 1400);
+                    this.currentLeadData = { name: 'Cliente Corporativo', email };
+
+                    feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 shadow-glow';
+                    feedback.innerHTML = `✅ <strong>Terminal Autorizada</strong><br>Acceso corporativo activo por 30 días. Conectando...`;
+
+                    // Si hay un reporte activo, desbloquearlo en backend
+                    if (this.currentReportId) {
+                        fetch('/api/audit', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${otpData.session_token}` },
+                            body: JSON.stringify({ action: 'unlock', report_id: this.currentReportId, session_token: otpData.session_token })
+                        })
+                        .then(r => r.json())
+                        .then(unlocked => {
+                            if (unlocked && unlocked.success && unlocked.audit_data) {
+                                this.currentAuditData = unlocked.audit_data;
+                                this.renderAuditReportDashboard();
+                            }
+                        })
+                        .catch(() => {});
+                    }
+
+                    setTimeout(() => {
+                        this.closeClientAccessModal();
+                        this.unblurReport('corporate_subscriber');
+                        alert(`👑 ¡Terminal Corporativa Activada!\n\nBienvenido(a) ${email}.\nTu acceso seguro está activo en esta terminal.`);
+                    }, 1200);
+
+                } else {
+                    feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-rose-950/80 border border-rose-500/50 text-rose-300';
+                    feedback.innerHTML = `❌ <strong>Error de Validación:</strong> ${otpData.error || 'Código incorrecto o expirado.'}`;
+                }
 
             } else {
                 feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-rose-950/80 border border-rose-500/50 text-rose-300';
-                feedback.innerHTML = `<strong>Verifique su correo</strong><br>⚠️ El correo ingresado no se encuentra identificado como <strong>CLIENTE</strong> en la Base de Datos.<br><span class="text-gray-400">Verifique que sea el correo con el que pagó, o active su suscripción en Planes Corporativos.</span>`;
+                feedback.innerHTML = `<strong>Verifique su correo</strong><br>⚠️ El correo ingresado no se encuentra registrado como <strong>CLIENTE</strong>.<br><span class="text-gray-400">Verifique el correo con el que realizó su compra o active su plan en Planes Corporativos.</span>`;
             }
         } catch (err) {
-            console.warn('Error en verifyClientAccess, usando validación local:', err);
-            const isVip = email.includes('ricardo') || email.includes('audiflow');
-            if (isVip) {
-                localStorage.setItem('auditflow_corporate_active', 'true');
-                localStorage.setItem('auditflow_corporate_email', email);
-                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-emerald-950/90 border border-emerald-500/60 text-emerald-300 shadow-glow';
-                feedback.innerHTML = `<strong>Verifique su correo</strong><br>✅ Correo identificado como <strong>CLIENTE: SÍ</strong> en la Base de Datos (Modo Seguro).<br>🚀 Dando paso a la plataforma...`;
-                setTimeout(() => {
-                    this.closeClientAccessModal();
-                    if (this.currentReportId) this.unblurReport('corporate_subscriber');
-                }, 1200);
-            } else {
-                feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-rose-950/80 border border-rose-500/50 text-rose-300';
-                feedback.innerHTML = `⚠️ No se pudo verificar la conexión con la base de datos. Por favor reintente o contacte a soporte@audiflowai.com`;
-            }
+            console.error('Error en verifyClientAccess:', err);
+            feedback.className = 'mb-4 p-3.5 rounded-xl text-xs font-mono bg-rose-950/80 border border-rose-500/50 text-rose-300';
+            feedback.innerHTML = `⚠️ Error de comunicación con el servicio de autenticación. Por favor reintenta en unos instantes.`;
         } finally {
             if (btn) {
                 btn.disabled = false;
