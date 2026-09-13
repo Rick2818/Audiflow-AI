@@ -235,7 +235,7 @@ export default async function handler(req, res) {
           message: 'Autenticación exitosa como Administrador de AuditFlow AI'
         });
       }
-      return res.status(401).json({ success: false, error: 'Contraseña incorrecta. Verifica que sea AuditFlow2026!' });
+      return res.status(401).json({ success: false, error: 'Contraseña incorrecta o credenciales administrativas no autorizadas.' });
     }
 
     const clientIp = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || 'client_ip';
@@ -279,7 +279,7 @@ export default async function handler(req, res) {
         const smtpUser = (process.env.SMTP_USER || '').trim();
         const smtpPass = (process.env.SMTP_PASS || '').trim();
         const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.OWNER_CONTROL).trim();
-        const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+        const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim();
 
         let transporter;
         let providerName = 'Gmail SMTP';
@@ -398,7 +398,7 @@ export default async function handler(req, res) {
       // 1. Diagnóstico y Autocorrección de SMTP / Despacho
       try {
         const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.OWNER_CONTROL).trim();
-        const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+        const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim();
         
         const testTransporter = nodemailer.createTransport({
           service: 'gmail',
@@ -524,7 +524,7 @@ export default async function handler(req, res) {
       const smtpPass = (process.env.SMTP_PASS || '').trim();
       const emailFrom = (process.env.EMAIL_FROM || '"Ricardo | AuditFlow AI" <ricardo@audiflowai.com>').trim();
       const gmailUser = (process.env.GMAIL_USER || CONFIG.EMAIL.OWNER_CONTROL).trim();
-      const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+      const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim();
 
       let transporter;
       if (!resendClient) {

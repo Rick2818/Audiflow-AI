@@ -6,10 +6,24 @@ import { CONFIG } from '../lib/config.js';
 const stripeSecret = process.env.STRIPE_SECRET_KEY || CONFIG.PAYMENTS.STRIPE_SECRET_KEY || '';
 const stripe = stripeSecret ? new Stripe(stripeSecret) : null;
 
+const ALLOWED_ORIGINS = new Set([
+  'https://audiflowai.com',
+  'https://www.audiflowai.com',
+  'http://localhost:3000',
+  'http://localhost:5173'
+]);
+
 export default async function handler(req, res) {
-  res.setHeader('Access-Control-Allow-Origin', '*');
+  const origin = req.headers ? (req.headers.origin || req.headers.Origin) : null;
+  if (origin && ALLOWED_ORIGINS.has(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  } else if (!origin) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+  } else {
+    res.setHeader('Access-Control-Allow-Origin', 'https://audiflowai.com');
+  }
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -199,6 +213,7 @@ export default async function handler(req, res) {
     });
 
   } catch (err) {
-    return res.status(500).json({ error: 'Error procesando pago: ' + err.message });
+    console.error('Error procesando pago fiduciario:', err);
+    return res.status(500).json({ error: 'Error procesando pasarela de pago fiduciario. Transacción registrada de forma segura.' });
   }
 }

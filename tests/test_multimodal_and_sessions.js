@@ -240,6 +240,47 @@ async function main() {
     assert(responseData.gateway === 'wompi', 'Debe dirigir por defecto a la pasarela fiduciaria Wompi SV');
   });
 
+  // Test 14: Verificación de Purga de Secretos de Gmail en código fuente
+  runTest('Purga completa de contraseñas de aplicación de Gmail en archivos fuente', () => {
+    const filesToCheck = ['server.js', 'lib/config.js', 'api/admin.js', 'lib/daily-sales-report.js'];
+    for (const f of filesToCheck) {
+      const content = fs.readFileSync(path.resolve(f), 'utf-8');
+      assert(!content.includes('fbqiyqmapqplbcim'), `${f} no debe contener la contraseña hardcoded fbqiyqmapqplbcim`);
+      assert(!content.includes('humycnvzdtyzmnos'), `${f} no debe contener la contraseña hardcoded humycnvzdtyzmnos`);
+    }
+  });
+
+  // Test 15: Restricción de CORS en endpoints fiduciarios
+  await runAsyncTest('CORS restringido a dominios fiduciarios autorizados', async () => {
+    let corsHeader = '';
+    const req = {
+      method: 'POST',
+      url: '/api/payment',
+      headers: { origin: 'https://evil-hacker-site.com' },
+      body: { report_id: 'rep_cors_test' }
+    };
+    const res = {
+      setHeader(name, val) {
+        if (name.toLowerCase() === 'access-control-allow-origin') {
+          corsHeader = val;
+        }
+      },
+      status() { return this; },
+      json() { return this; }
+    };
+
+    await paymentHandler(req, res);
+    assert.strictEqual(corsHeader, 'https://audiflowai.com', 'CORS debe rechazar el origen malicioso y reescribir a https://audiflowai.com');
+  });
+
+  // Test 16: No divulgación de contraseña en 401 de admin
+  runTest('Erradicación de divulgación de contraseña en mensajes 401 de error', () => {
+    const serverJs = fs.readFileSync(path.resolve('server.js'), 'utf-8');
+    const adminJs = fs.readFileSync(path.resolve('api/admin.js'), 'utf-8');
+    assert(!serverJs.includes('Puedes usar: AuditFlow2026!'), 'server.js no debe sugerir la contraseña en el 401');
+    assert(!adminJs.includes('Verifica que sea AuditFlow2026!'), 'api/admin.js no debe sugerir la contraseña en el 401');
+  });
+
   console.log('\n=======================================================');
   console.log(`📊 RESULTADOS: ${passedTests} de ${totalTests} pruebas superadas (${Math.round((passedTests/totalTests)*100)}%)`);
   if (passedTests === totalTests) {

@@ -243,7 +243,7 @@ const memoryReportsDB = new Map();
 // ==============================================================================
 async function sendGmailAuditEmail({ recipientEmail, recipientName, auditData, documentName, lang = 'es' }) {
   const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim(); // Eliminar espacios
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim(); // De variable de entorno exclusiva
   const appUrl = process.env.APP_URL || 'http://localhost:3000';
 
   const isEn = (lang === 'en');
@@ -471,7 +471,7 @@ async function sendOwnerPurchaseNotification({
   const ownerEmail = 'ricardo@audiflowai.com';
   const ownerBackupEmail = 'rick28191@gmail.com';
   const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
-  const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+  const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim();
 
   const subject = `💰 ¡NUEVA VENTA CONFIRMADA! [${amount}] - ${customerName}`;
   const nowStr = new Date().toLocaleString('es-ES', { timeZone: 'America/El_Salvador' });
@@ -1237,7 +1237,7 @@ app.post('/api/outreach/send-campaign', async (req, res) => {
   try {
     const { prospects, test_mode = false } = req.body || {};
     const gmailUser = (process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com').trim();
-    const gmailPass = (process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim').replace(/\s+/g, '').trim();
+    const gmailPass = (process.env.GMAIL_APP_PASSWORD || '').replace(/\s+/g, '').trim();
 
     if (!prospects || !Array.isArray(prospects) || prospects.length === 0) {
       return res.status(400).json({ error: 'Se requiere una lista de prospectos B2B en req.body.prospects' });
@@ -1589,7 +1589,7 @@ app.post('/api/admin/login', (req, res) => {
     });
   }
 
-  return res.status(401).json({ success: false, error: 'Contraseña incorrecta. Puedes usar: AuditFlow2026!' });
+  return res.status(401).json({ success: false, error: 'Contraseña incorrecta o credenciales administrativas no autorizadas.' });
 });
 
 // GET /api/admin/stats - Obtener Estadísticas y Métricas en Tiempo Real

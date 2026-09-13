@@ -9,7 +9,7 @@ const transporter = nodemailer.createTransport({
   secure: true,
   auth: {
     user: process.env.GMAIL_USER || 'tendenciaiatufuturo@gmail.com',
-    pass: process.env.GMAIL_APP_PASSWORD || 'fbqiyqmapqplbcim'
+    pass: process.env.GMAIL_APP_PASSWORD || ''
   }
 });
 
