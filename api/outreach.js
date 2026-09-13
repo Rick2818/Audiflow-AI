@@ -3,7 +3,7 @@ import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { verifyAdminAuth } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
-import { resolveJurisdiction, getLegalNoticeForOutbound } from '../lib/legal-jurisdictions.js';
+import { resolveJurisdiction, getLegalNoticeForOutbound, getTripwirePrice } from '../lib/legal-jurisdictions.js';
 
 dotenv.config();
 
@@ -433,6 +433,8 @@ export default async function handler(req, res) {
       const legalNoticeHtml = getLegalNoticeForOutbound(p, targetLang);
 
       // PLANTILLAS CON HOOK GRATIS EN 10S, OFERTA $19 USD Y PLANES $69 / $599
+      const tripwireOffer = getTripwirePrice(leadJur.id);
+
       if (isNordic) {
         // PLANTILLA NÓRDICA CALIBRADA AL PODER ADQUISITIVO REGIONAL CON 20% DESCUENTO EN PRIMERA COMPRA CORPORATIVA
         subject = `vendor contract risk triage & word redlines / ${leadJur.commercialCode.split(' ')[0]} / ${company}`;
@@ -449,7 +451,7 @@ export default async function handler(req, res) {
             <div style="background-color: #f0f9ff; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px; font-size: 13px; color: #0f172a;">
               <p style="margin: 0 0 6px 0;"><strong>🇪🇺 Nordic Privacy Shield:</strong> Pure RAM buffer execution (0 disk storage, automatic memory purge).</p>
               <p style="margin: 0 0 6px 0;"><strong>⚡ Self-Serve Benchmark:</strong> 1st confidential audit 100% free with no credit card required.</p>
-              <p style="margin: 0;"><strong>📄 Single Redline Export:</strong> $49 USD | <strong>🏛️ Corporate Team Annual (20% First Purchase Discount):</strong> <span style="text-decoration: line-through; color: #64748b;">€1,200 / $1,250</span> <strong>€960 / $990 USD/yr</strong> (or €95 / $99/mo).</p>
+              <p style="margin: 0;"><strong>📄 Single Redline Export:</strong> ${tripwireOffer} | <strong>🏛️ Corporate Team Annual (20% First Purchase Discount):</strong> <span style="text-decoration: line-through; color: #64748b;">€1,200 / $1,250</span> <strong>€960 / $990 USD/yr</strong> (or €95 / $99/mo).</p>
             </div>
 
             <p>Would you be open to a 1-page summary of Scandinavian commercial benchmark standards for vendor agreements?</p>
@@ -468,7 +470,7 @@ export default async function handler(req, res) {
 
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 Erste Prüfung: 100% Gratis</strong> in 10s (im flüchtigen RAM, 0 Speicherung): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
-              <p style="margin: 0 0 8px 0;"><strong>⚡ Einzelprüfung &amp; Word-Redline:</strong> Einmalig nur <strong>$19 USD</strong>.</p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Einzelprüfung &amp; Word-Redline:</strong> Einmalig nur <strong>${tripwireOffer}</strong>.</p>
               <p style="margin: 0;"><strong>💼 Monatlich:</strong> $69 USD/Monat (unbegrenzt) | <strong>🏛️ Jahreslizenz:</strong> $599 USD/Jahr (inkl. White-Label für Mandanten).</p>
             </div>
 
@@ -488,7 +490,7 @@ export default async function handler(req, res) {
 
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 Premier audit : 100% Gratuit</strong> en 10s (en mémoire RAM volatile, zéro stockage) : <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
-              <p style="margin: 0 0 8px 0;"><strong>⚡ Audit complet + Redline Word :</strong> Seulement <strong>$19 USD</strong> (sans engagement).</p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Audit complet + Redline Word :</strong> Seulement <strong>${tripwireOffer}</strong> (sans engagement).</p>
               <p style="margin: 0;"><strong>💼 Mensuel :</strong> $69 USD/mois (illimité) | <strong>🏛️ Annuel Cabinet :</strong> $599 USD/an (Marque Blanche incluse).</p>
             </div>
 
@@ -508,7 +510,7 @@ export default async function handler(req, res) {
 
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 1st Audit: 100% Free</strong> in 10s (runs in volatile RAM with zero file storage): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
-              <p style="margin: 0 0 8px 0;"><strong>⚡ Single Agreement Redline (.docx):</strong> Just <strong>$19 USD</strong> trial offer.</p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Single Agreement Redline (.docx):</strong> Just <strong>${tripwireOffer}</strong> trial offer.</p>
               <p style="margin: 0;"><strong>💼 Unlimited Monthly:</strong> $69 USD/mo | <strong>🏛️ Corporate Law Firm Annual:</strong> $599 USD/yr (includes white-label for your clients).</p>
             </div>
 
@@ -529,7 +531,7 @@ export default async function handler(req, res) {
 
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 6px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 Tu 1er Análisis: 100% Gratis</strong> en 10s (en memoria RAM volátil, sin guardar archivos): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold; text-decoration: underline;">Probar gratis aquí →</a></p>
-              <p style="margin: 0 0 8px 0;"><strong>⚡ Oferta Redline Individual:</strong> Solo <strong>$19 USD</strong> por contrato completo con exportación en Word.</p>
+              <p style="margin: 0 0 8px 0;"><strong>⚡ Oferta Redline Individual:</strong> Solo <strong>${tripwireOffer}</strong> por contrato completo con exportación en Word.</p>
               <p style="margin: 0;"><strong>💼 Planes:</strong> <strong>$69 USD/mes</strong> (auditorías ilimitadas) o <strong>$599 USD/año</strong> (licencia corporativa anual con marca blanca para clientes de la firma).</p>
             </div>
 

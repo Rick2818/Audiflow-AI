@@ -13,7 +13,10 @@ import {
   LEGAL_JURISDICTIONS, 
   resolveJurisdiction, 
   getLegalNoticeForOutbound, 
-  buildAiJurisdictionPrompt 
+  buildAiJurisdictionPrompt,
+  formatCurrency,
+  getStandardContracts,
+  getTripwirePrice
 } from '../lib/legal-jurisdictions.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -121,8 +124,36 @@ assert(noticeSE.includes('Fiduciary Governance under Sweden Law'), 'Aviso Nórdi
 assert(noticeSE.includes('Avtalslagen'), 'Aviso Nórdico cita Avtalslagen');
 assert(noticeSE.includes('Zero Data Retention') && noticeSE.includes('volatile RAM'), 'Aviso Nórdico declara RAM volátil');
 
-// GRUPO 5: Integración en Archivos del Sistema
-console.log(`\n[GRUPO 5] Verificación de Integración en el Servidor y la Interfaz:`);
+// GRUPO 5: Tropicalización de Monedas Locales y Ofertas Tripwire
+console.log(`\n[GRUPO 5] Tropicalización de Monedas Locales y Tripwire:`);
+assert(formatCurrency(199, 'se') === '199 kr SEK', 'SEK formatea como 199 kr SEK');
+assert(formatCurrency(199, 'no') === '199 kr NOK', 'NOK formatea como 199 kr NOK');
+assert(formatCurrency(149, 'dk') === '149 kr DKK', 'DKK formatea como 149 kr DKK');
+assert(formatCurrency(19, 'fi').includes('EUR'), 'Finlandia formatea en EUR');
+assert(formatCurrency(19, 'de').includes('EUR'), 'Alemania formatea en EUR');
+assert(formatCurrency(149, 'gt').includes('Q149'), 'Guatemala formatea en Quetzales (GTQ)');
+assert(formatCurrency(9900, 'cr').includes('₡9'), 'Costa Rica formatea en Colones (CRC)');
+assert(formatCurrency(19, 'ch').includes('CHF'), 'Suiza formatea en Francos Suizos (CHF)');
+
+assert(getTripwirePrice('se').includes('199 kr SEK'), 'Tripwire Suecia es 199 kr SEK');
+assert(getTripwirePrice('no').includes('199 kr NOK'), 'Tripwire Noruega es 199 kr NOK');
+assert(getTripwirePrice('dk').includes('149 kr DKK'), 'Tripwire Dinamarca es 149 kr DKK');
+assert(getTripwirePrice('fi').includes('19 € EUR'), 'Tripwire Finlandia es 19 € EUR');
+assert(getTripwirePrice('gt').includes('Q149 GTQ'), 'Tripwire Guatemala es Q149 GTQ');
+assert(getTripwirePrice('cr').includes('₡9,900 CRC'), 'Tripwire Costa Rica es ₡9,900 CRC');
+assert(getTripwirePrice('sv').includes('$19.00 USD'), 'Tripwire El Salvador es $19.00 USD');
+
+// GRUPO 6: Contratos Estándar de la Industria
+console.log(`\n[GRUPO 6] Acuerdos Marco y Contratos Estándar Reconocidos:`);
+assert(getStandardContracts('se').includes('NL 17') && getStandardContracts('se').includes('AB 04'), 'Suecia mapea NL 17 y AB 04');
+assert(getStandardContracts('no').includes('NL 17') && getStandardContracts('no').includes('SSA'), 'Noruega mapea NL 17 y SSA');
+assert(getStandardContracts('dk').includes('AB 18'), 'Dinamarca mapea AB 18');
+assert(getStandardContracts('fi').includes('IT2022'), 'Finlandia mapea IT2022 Sopimusehdot');
+assert(getStandardContracts('de').includes('EVB-IT') && getStandardContracts('de').includes('VOB/B'), 'Alemania mapea EVB-IT y VOB/B');
+assert(getStandardContracts('ch').includes('SWICO'), 'Suiza mapea SWICO');
+
+// GRUPO 7: Verificación de Integración en el Servidor y la Interfaz
+console.log(`\n[GRUPO 7] Verificación de Integración en el Servidor y la Interfaz:`);
 
 const auditApiPath = path.join(rootDir, 'api', 'audit.js');
 const serverPath = path.join(rootDir, 'server.js');
@@ -131,6 +162,10 @@ const outreachPath = path.join(rootDir, 'api', 'outreach.js');
 const frontendIndexPath = path.join(rootDir, 'frontend', 'index.html');
 const rootIndexPath = path.join(rootDir, 'index.html');
 const appJsPath = path.join(rootDir, 'frontend', 'js', 'app.js');
+const crossAuditPath = path.join(rootDir, 'api', 'cross-audit.js');
+const chatDocumentPath = path.join(rootDir, 'api', 'chat-document.js');
+const nordicSowerPath = path.join(rootDir, 'scripts', 'nordic_midmarket_daily_sower.mjs');
+const nordicHandlerPath = path.join(rootDir, 'lib', 'cron-handlers', 'nordic-sower.js');
 
 if (fs.existsSync(auditApiPath)) {
   const c = fs.readFileSync(auditApiPath, 'utf8');
@@ -153,18 +188,45 @@ if (fs.existsSync(outreachPath)) {
   const c = fs.readFileSync(outreachPath, 'utf8');
   assert(c.includes('getLegalNoticeForOutbound'), 'api/outreach.js usa getLegalNoticeForOutbound');
   assert(c.includes('§ 36 on unfair contract terms'), 'api/outreach.js cita § 36 en plantilla nórdica');
+  assert(c.includes('getTripwirePrice'), 'api/outreach.js tropicaliza precio con getTripwirePrice');
+}
+
+if (fs.existsSync(crossAuditPath)) {
+  const c = fs.readFileSync(crossAuditPath, 'utf8');
+  assert(c.includes('resolveJurisdiction'), 'api/cross-audit.js resuelve jurisdicción');
+  assert(c.includes('jurisdiction_applied'), 'api/cross-audit.js retorna jurisdiction_applied');
+}
+
+if (fs.existsSync(chatDocumentPath)) {
+  const c = fs.readFileSync(chatDocumentPath, 'utf8');
+  assert(c.includes('resolveJurisdiction'), 'api/chat-document.js resuelve jurisdicción');
+  assert(c.includes('jurisdiction_applied'), 'api/chat-document.js retorna jurisdiction_applied');
+}
+
+if (fs.existsSync(nordicSowerPath)) {
+  const c = fs.readFileSync(nordicSowerPath, 'utf8');
+  assert(c.includes('localDamage'), 'scripts/nordic_midmarket_daily_sower.mjs tropicaliza daño local');
+  assert(c.includes('getTripwirePrice'), 'scripts/nordic_midmarket_daily_sower.mjs tropicaliza tripwire');
+}
+
+if (fs.existsSync(nordicHandlerPath)) {
+  const c = fs.readFileSync(nordicHandlerPath, 'utf8');
+  assert(c.includes('localDamage'), 'lib/cron-handlers/nordic-sower.js tropicaliza daño local');
+  assert(c.includes('getTripwirePrice'), 'lib/cron-handlers/nordic-sower.js tropicaliza tripwire');
 }
 
 if (fs.existsSync(frontendIndexPath)) {
   const c = fs.readFileSync(frontendIndexPath, 'utf8');
   assert(c.includes('id="jurisdiction-select"'), 'frontend/index.html incluye selector de jurisdicción');
   assert(c.includes('id="rep-jurisdiction-badge"'), 'frontend/index.html incluye rep-jurisdiction-badge');
+  assert(c.includes('SEK • Avtalslagen § 36'), 'frontend/index.html tropicaliza opción de Suecia');
 }
 
 if (fs.existsSync(rootIndexPath)) {
   const c = fs.readFileSync(rootIndexPath, 'utf8');
   assert(c.includes('id="jurisdiction-select"'), 'root index.html incluye selector de jurisdicción');
   assert(c.includes('id="rep-jurisdiction-badge"'), 'root index.html incluye rep-jurisdiction-badge');
+  assert(c.includes('SEK • Avtalslagen § 36'), 'root index.html tropicaliza opción de Suecia');
 }
 
 if (fs.existsSync(appJsPath)) {

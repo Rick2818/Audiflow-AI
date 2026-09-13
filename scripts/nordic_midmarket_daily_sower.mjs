@@ -4,7 +4,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { CONFIG } from '../lib/config.js';
-import { getLegalNoticeForOutbound } from '../lib/legal-jurisdictions.js';
+import { getLegalNoticeForOutbound, resolveJurisdiction, getTripwirePrice } from '../lib/legal-jurisdictions.js';
 
 dotenv.config();
 
@@ -214,20 +214,23 @@ export async function runNordicDailySower() {
   console.log(`📨 Despachando lote del día (${todaysBatch.length} socios seleccionados para hoy):`);
 
   for (const partner of todaysBatch) {
-    const trialUrl = `https://audiflowai.com/?ref=nordic-storytelling-ch1&lang=en&lead=${encodeURIComponent(partner.firstName)}`;
-    const subject = `[Case Brief] 45 pages reviewed, but 18 words in Schedule C cost €142,000 / ${partner.firm}`;
+    const jur = resolveJurisdiction(partner.country || 'se');
+    const localDamage = jur.outboundDamageExample || '€142,000';
+    const tripwire = getTripwirePrice(jur.id);
+    const trialUrl = `https://audiflowai.com/?ref=nordic-storytelling-ch1&lang=en&country=${jur.id}&lead=${encodeURIComponent(partner.firstName)}`;
+    const subject = `[Case Brief] 45 pages reviewed, but 18 words in Schedule C cost ${localDamage} / ${partner.firm}`;
     const html = `
       <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; font-size: 14px; color: #1e293b; max-width: 580px; line-height: 1.65; margin: 0 auto; background-color: #ffffff; padding: 26px; border: 1px solid #e2e8f0; border-radius: 8px;">
         <div style="border-bottom: 1px solid #e2e8f0; padding-bottom: 12px; margin-bottom: 18px;">
           <span style="font-size: 13px; font-weight: 800; letter-spacing: 1px; color: #0284c7;">AUDITFLOW AI</span>
-          <span style="font-size: 11px; color: #64748b; margin-left: 8px; text-transform: uppercase;">| Contract Forensic Briefing #1 (Part 1 of 3)</span>
+          <span style="font-size: 11px; color: #64748b; margin-left: 8px; text-transform: uppercase;">| Contract Forensic Briefing #1 (${jur.countryNameEn} Practice)</span>
         </div>
 
         <p style="margin-top: 0; font-size: 15px;">Dear Partner <strong>${partner.firstName}</strong>,</p>
 
-        <p>In 2025, the corporate legal department of a mid-market distribution group approved a 45-page cross-border logistics agreement. On the surface, the document was institutional and sound: agreed pricing schedules, clear SLAs, and standard Nordic arbitration jurisdiction.</p>
+        <p>In 2025, the corporate legal department of a mid-market distribution group approved a 45-page cross-border logistics agreement. On the surface, the document was institutional and sound: agreed pricing schedules, clear SLAs, and standard Nordic arbitration jurisdiction (${jur.disputeForum}).</p>
 
-        <p>For 11 months, services proceeded without incident. In month 12, however, the provider issued an accumulated retroactive price adjustment invoice for <strong style="color: #dc2626;">€142,000</strong>.</p>
+        <p>For 11 months, services proceeded without incident. In month 12, however, the provider issued an accumulated retroactive price adjustment invoice for <strong style="color: #dc2626;">${localDamage}</strong>.</p>
 
         <div style="background-color: #f8fafc; border-left: 4px solid #dc2626; padding: 14px 18px; border-radius: 4px; margin: 18px 0;">
           <p style="margin: 0; font-size: 13px; color: #7f1d1d; font-style: italic;">
@@ -244,7 +247,14 @@ export async function runNordicDailySower() {
         <div style="background-color: #f0f9ff; border: 1px solid #bae6fd; padding: 14px 18px; border-radius: 6px; margin: 18px 0;">
           <p style="margin: 0 0 4px 0; font-size: 12px; font-weight: 700; color: #0369a1;">⚡ The Fiduciary Efficiency Angle:</p>
           <p style="margin: 0; font-size: 12px; color: #0c4a6e;">
-            At AuditFlow AI, our forensic engine scans 45+ pages in <strong>8.2 seconds</strong> in volatile RAM under strict <strong>EU GDPR Art. 28</strong> compliance—pinpointing asymmetric liability risks with zero client data persistence on disk.
+            At AuditFlow AI, our forensic engine scans 45+ pages in <strong>8.2 seconds</strong> in volatile RAM under strict <strong>EU GDPR Art. 28</strong> compliance—pinpointing asymmetric liability risks against standard frameworks (${jur.standardContracts}) with zero client data persistence on disk.
+          </p>
+        </div>
+
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 12px 16px; border-radius: 6px; margin: 16px 0; font-size: 13px;">
+          <p style="margin: 0 0 4px 0; font-weight: 700; color: #0f172a;">⚡ Instant Benchmark &amp; Word Redline Export:</p>
+          <p style="margin: 0; color: #334155;">
+            Audit your first commercial agreement free, then download complete Word (.docx with Track Changes) redlines for just <strong>${tripwire}</strong>.
           </p>
         </div>
 
@@ -253,7 +263,7 @@ export async function runNordicDailySower() {
         <p style="margin-top: 24px; font-size: 13px; color: #64748b; border-top: 1px solid #f1f5f9; padding-top: 16px;">
           Best regards,<br>
           <strong style="color: #0f172a;">Ricardo Bolaños</strong><br>
-          Founder & CEO • AuditFlow AI (<a href="https://audiflowai.com/?ref=nordic-storytelling-ch1&lang=en" style="color: #0284c7; text-decoration: none;">audiflowai.com</a>)
+          Founder & CEO • AuditFlow AI (<a href="${trialUrl}" style="color: #0284c7; text-decoration: none;">audiflowai.com</a>)
         </p>
       </div>
     `;

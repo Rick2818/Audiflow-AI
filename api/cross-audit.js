@@ -1,4 +1,5 @@
 import pdfParse from 'pdf-parse';
+import { resolveJurisdiction } from '../lib/legal-jurisdictions.js';
 
 export const config = {
   api: {
@@ -22,7 +23,8 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { contract_base64, invoice_base64, contract_name = 'Contrato.pdf', invoice_name = 'Factura.pdf' } = req.body || {};
+    const { contract_base64, invoice_base64, contract_name = 'Contrato.pdf', invoice_name = 'Factura.pdf', country = '', jurisdiction = '' } = req.body || {};
+    const appliedJur = resolveJurisdiction(country || jurisdiction || '');
 
     let contractText = '';
     let invoiceText = '';
@@ -78,7 +80,11 @@ Desglose: Tarifa Base $5,000 USD + Recargo Gastos Mantenimiento Extra $950 USD +
 
     if (geminiApiKey) {
       try {
-        const prompt = `Actúa como un Auditor Financiero y Counsel Legal B2B de primer nivel.
+        const prompt = `Actúa como un Auditor Financiero y Counsel Legal B2B de primer nivel operando bajo las leyes y estándares comerciales de ${appliedJur.countryName} (${appliedJur.commercialCode}).
+Marco tributario y de retenciones: ${appliedJur.taxFramework}.
+Contratos estándar de la industria: ${appliedJur.standardContracts}.
+Moneda de referencia: ${appliedJur.currencyCode}.
+
 Realiza una AUDITORÍA CRUZADA (2-Way Matching Reconciliation) entre el CONTRATO y la FACTURA provistos.
 
 CONTRATO:
@@ -90,9 +96,14 @@ ${invoiceText.substring(0, 4000)}
 Responde estrictamente en formato JSON válido con este esquema:
 {
   "reconciliation_status": "DISCREPANCIAS_DETECTADAS",
+  "jurisdiction_applied": {
+    "country": "${appliedJur.countryName}",
+    "currency": "${appliedJur.currencyCode}",
+    "commercial_code": "${appliedJur.commercialCode}"
+  },
   "financial_discrepancy_usd": 1450.00,
   "overall_risk_score": 85,
-  "summary": "Resumen ejecutivo corto de las discrepancias entre lo pactado y lo cobrado.",
+  "summary": "Resumen ejecutivo corto de las discrepancias entre lo pactado y lo cobrado bajo la legislación de ${appliedJur.countryName}.",
   "risk_heatmap": {
     "red_flags": [
       {
@@ -138,6 +149,13 @@ Responde estrictamente en formato JSON válido con este esquema:
           const rawText = gData.candidates?.[0]?.content?.parts?.[0]?.text;
           if (rawText) {
             const parsedJson = JSON.parse(rawText);
+            if (!parsedJson.jurisdiction_applied) {
+              parsedJson.jurisdiction_applied = {
+                country: appliedJur.countryName,
+                currency: appliedJur.currencyCode,
+                commercial_code: appliedJur.commercialCode
+              };
+            }
             return res.status(200).json({ success: true, ...parsedJson });
           }
         }
@@ -150,6 +168,11 @@ Responde estrictamente en formato JSON válido con este esquema:
     return res.status(200).json({
       success: true,
       reconciliation_status: "DISCREPANCIAS_DETECTADAS",
+      jurisdiction_applied: {
+        country: appliedJur.countryName,
+        currency: appliedJur.currencyCode,
+        commercial_code: appliedJur.commercialCode
+      },
       financial_discrepancy_usd: 1450.00,
       overall_risk_score: 85,
       summary: "Se detectó un sobrecargo no estipulado de $1,450.00 USD en la factura respecto al contrato marco pactado ($5,000 USD base).",

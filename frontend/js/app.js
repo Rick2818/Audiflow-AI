@@ -65,29 +65,32 @@ window.AppHandler = {
         const selectEl = document.getElementById('jurisdiction-select');
 
         const jurMap = {
-            sv: { flag: '🇸🇻', name: 'El Salvador', code: 'Código de Comercio de El Salvador (Arts. 945+)' },
-            gt: { flag: '🇬🇹', name: 'Guatemala', code: 'Código de Comercio de Guatemala (Decreto 2-70 Arts. 669+)' },
-            cr: { flag: '🇨🇷', name: 'Costa Rica', code: 'Código de Comercio (Ley 3284) y Ley 7472 Art. 42' },
-            pa: { flag: '🇵🇦', name: 'Panamá', code: 'Código de Comercio y Ley 45 de 2007 (ACODECO)' },
-            hn: { flag: '🇭🇳', name: 'Honduras', code: 'Código de Comercio de Honduras (Decreto 73-1950)' },
-            se: { flag: '🇸🇪', name: 'Suecia', code: 'Avtalslagen (Lag 1915:218 § 36) & EU GDPR Art. 28' },
-            no: { flag: '🇳🇴', name: 'Noruega', code: 'Avtaleloven § 36 & Personopplysningsloven' },
-            dk: { flag: '🇩🇰', name: 'Dinamarca', code: 'Aftaleloven LBK nr 193 § 36 & GDPR DPA' },
-            fi: { flag: '🇫🇮', name: 'Finlandia', code: 'Oikeustoimilaki 36 § & Tietosuojalaki' },
-            de: { flag: '🇩🇪', name: 'Alemania / DACH', code: 'BGB §§ 305–310 (AGB-Recht) & EU-DSGVO Art. 28' },
-            mx: { flag: '🇲🇽', name: 'México', code: 'Código de Comercio & Ley Federal de Prot. al Consumidor' },
-            co: { flag: '🇨🇴', name: 'Colombia', code: 'Código de Comercio (Decreto 410) & Estatuto del Consumidor' },
-            es: { flag: '🇪🇸', name: 'España', code: 'Código de Comercio de 1885 & TRLGDCU (Arts. 80-91)' },
-            global: { flag: '🌐', name: 'Internacional', code: 'Uniform Commercial Code (UCC § 2-302) & CISG' }
+            sv: { flag: '🇸🇻', name: 'El Salvador', currency: 'USD ($)', code: 'Código de Comercio de El Salvador (Arts. 945+)', standard: 'Suministro y Servicios Mercantiles' },
+            gt: { flag: '🇬🇹', name: 'Guatemala', currency: 'GTQ (Q)', code: 'Código de Comercio de Guatemala (Decreto 2-70 Art. 688)', standard: 'CRECIG / CENAC' },
+            cr: { flag: '🇨🇷', name: 'Costa Rica', currency: 'CRC (₡)', code: 'Código de Comercio (Ley 3284) y Ley 7472 Art. 42', standard: 'MEIC / CCA' },
+            pa: { flag: '🇵🇦', name: 'Panamá', currency: 'USD ($)', code: 'Código de Comercio y Ley 45 de 2007 (ACODECO)', standard: 'CeCAP Arbitraje' },
+            hn: { flag: '🇭🇳', name: 'Honduras', currency: 'HNL (L)', code: 'Código de Comercio de Honduras (Decreto 73-1950)', standard: 'CCIT' },
+            ni: { flag: '🇳🇮', name: 'Nicaragua', currency: 'NIO (C$)', code: 'Código de Comercio & Ley 842', standard: 'CACONIC' },
+            se: { flag: '🇸🇪', name: 'Suecia', currency: 'SEK (kr)', code: 'Avtalslagen (Lag 1915:218 § 36) & Köplagen', standard: 'NL 17 / NLM 19 & AB 04' },
+            no: { flag: '🇳🇴', name: 'Noruega', currency: 'NOK (kr)', code: 'Avtaleloven § 36 & Kjøpsloven', standard: 'NL 17 & Statens standardavtaler (SSA)' },
+            dk: { flag: '🇩🇰', name: 'Dinamarca', currency: 'DKK (kr)', code: 'Aftaleloven LBK nr 193 § 36 & Købeloven', standard: 'NL 17 & AB 18 / K01' },
+            fi: { flag: '🇫🇮', name: 'Finlandia', currency: 'EUR (€)', code: 'Oikeustoimilaki 36 § & Kauppalaki', standard: 'NL 17 & IT2022 Sopimusehdot' },
+            de: { flag: '🇩🇪', name: 'Alemania / DACH', currency: 'EUR (€)', code: 'BGB §§ 305–310 (AGB-Recht) & HGB § 377', standard: 'EVB-IT & VOB/B' },
+            at: { flag: '🇦🇹', name: 'Austria', currency: 'EUR (€)', code: 'ABGB § 879 Abs. 3 & UGB § 377', standard: 'ÖNORM B 2110' },
+            ch: { flag: '🇨🇭', name: 'Suiza', currency: 'CHF', code: 'OR Art. 1 ff., Art. 100 & UWG Art. 8', standard: 'SWICO & SIA 118' },
+            mx: { flag: '🇲🇽', name: 'México', currency: 'MXN ($)', code: 'Código de Comercio & PROFECO (Arts. 85-90 bis)', standard: 'Contratos Adhesión RCPA / CAM' },
+            co: { flag: '🇨🇴', name: 'Colombia', currency: 'COP ($)', code: 'Código de Comercio (Art. 868) & Ley 1480', standard: 'CAC Bogotá' },
+            es: { flag: '🇪🇸', name: 'España', currency: 'EUR (€)', code: 'Ley 3/2004 Morosidad (máx. 60d) & LCGC', standard: 'Condiciones Generales LCGC' },
+            global: { flag: '🌐', name: 'Internacional', currency: 'USD ($)', code: 'Uniform Commercial Code (UCC § 2-302) & CISG', standard: 'MSA, SLA & AIA' }
         };
 
         const active = jurMap[this.selectedJurisdiction] || jurMap.sv;
 
         if (tagEl) {
-            tagEl.innerHTML = `${active.flag} ${active.name}`;
+            tagEl.innerHTML = `${active.flag} ${active.name} • ${active.currency}`;
         }
         if (subEl) {
-            subEl.innerHTML = `Su documento se procesa bajo el <strong>${active.code}</strong> y en <strong>memoria RAM volátil efímera</strong> (cero retención, SOC-2 / GDPR Art. 28).`;
+            subEl.innerHTML = `Su documento se procesa bajo el <strong>${active.code}</strong> (Estándar: <em>${active.standard}</em>) y en <strong>memoria RAM volátil efímera</strong> (cero retención, SOC-2 / GDPR Art. 28).`;
         }
         if (selectEl && selectEl.value !== this.selectedJurisdiction) {
             selectEl.value = this.selectedJurisdiction;
