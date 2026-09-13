@@ -11,14 +11,87 @@ window.AppHandler = {
     currentPartyStance: 'buyer',
     currentLeadData: { name: '', email: '' },
     isNordicMode: false,
+    selectedJurisdiction: 'sv',
 
     init() {
         this.detectAndApplyNordicMode();
+        this.initJurisdiction();
         this.setupDragAndDrop();
         this.setupFormListeners();
         this.checkUrlForPaymentSuccess();
         this.trackInboundLead();
         this.setPartyStance('buyer');
+    },
+
+    initJurisdiction() {
+        try {
+            const params = new URLSearchParams(window.location.search);
+            const countryParam = (params.get('country') || params.get('jurisdiction') || '').toLowerCase();
+            if (countryParam) {
+                const validMap = {
+                    'se': 'se', 'sweden': 'se', 'sverige': 'se',
+                    'no': 'no', 'norway': 'no', 'norge': 'no',
+                    'dk': 'dk', 'denmark': 'dk', 'danmark': 'dk',
+                    'fi': 'fi', 'finland': 'fi', 'suomi': 'fi',
+                    'gt': 'gt', 'guatemala': 'gt',
+                    'cr': 'cr', 'costa rica': 'cr', 'costarica': 'cr',
+                    'pa': 'pa', 'panama': 'pa', 'panamá': 'pa',
+                    'hn': 'hn', 'honduras': 'hn',
+                    'de': 'de', 'germany': 'de', 'deutschland': 'de',
+                    'mx': 'mx', 'mexico': 'mx', 'méxico': 'mx',
+                    'co': 'co', 'colombia': 'co',
+                    'es': 'es', 'spain': 'es', 'españa': 'es',
+                    'us': 'global', 'global': 'global',
+                    'sv': 'sv', 'salvador': 'sv', 'el salvador': 'sv'
+                };
+                if (validMap[countryParam]) {
+                    this.selectedJurisdiction = validMap[countryParam];
+                }
+            }
+            this.updateJurisdictionUI();
+        } catch (e) {
+            console.warn('Jurisdiction init warning:', e);
+        }
+    },
+
+    onJurisdictionChanged(jurisdictionId) {
+        this.selectedJurisdiction = jurisdictionId || 'sv';
+        this.updateJurisdictionUI();
+    },
+
+    updateJurisdictionUI() {
+        const tagEl = document.getElementById('active-jurisdiction-tag');
+        const subEl = document.getElementById('active-jurisdiction-sub');
+        const selectEl = document.getElementById('jurisdiction-select');
+
+        const jurMap = {
+            sv: { flag: '🇸🇻', name: 'El Salvador', code: 'Código de Comercio de El Salvador (Arts. 945+)' },
+            gt: { flag: '🇬🇹', name: 'Guatemala', code: 'Código de Comercio de Guatemala (Decreto 2-70 Arts. 669+)' },
+            cr: { flag: '🇨🇷', name: 'Costa Rica', code: 'Código de Comercio (Ley 3284) y Ley 7472 Art. 42' },
+            pa: { flag: '🇵🇦', name: 'Panamá', code: 'Código de Comercio y Ley 45 de 2007 (ACODECO)' },
+            hn: { flag: '🇭🇳', name: 'Honduras', code: 'Código de Comercio de Honduras (Decreto 73-1950)' },
+            se: { flag: '🇸🇪', name: 'Suecia', code: 'Avtalslagen (Lag 1915:218 § 36) & EU GDPR Art. 28' },
+            no: { flag: '🇳🇴', name: 'Noruega', code: 'Avtaleloven § 36 & Personopplysningsloven' },
+            dk: { flag: '🇩🇰', name: 'Dinamarca', code: 'Aftaleloven LBK nr 193 § 36 & GDPR DPA' },
+            fi: { flag: '🇫🇮', name: 'Finlandia', code: 'Oikeustoimilaki 36 § & Tietosuojalaki' },
+            de: { flag: '🇩🇪', name: 'Alemania / DACH', code: 'BGB §§ 305–310 (AGB-Recht) & EU-DSGVO Art. 28' },
+            mx: { flag: '🇲🇽', name: 'México', code: 'Código de Comercio & Ley Federal de Prot. al Consumidor' },
+            co: { flag: '🇨🇴', name: 'Colombia', code: 'Código de Comercio (Decreto 410) & Estatuto del Consumidor' },
+            es: { flag: '🇪🇸', name: 'España', code: 'Código de Comercio de 1885 & TRLGDCU (Arts. 80-91)' },
+            global: { flag: '🌐', name: 'Internacional', code: 'Uniform Commercial Code (UCC § 2-302) & CISG' }
+        };
+
+        const active = jurMap[this.selectedJurisdiction] || jurMap.sv;
+
+        if (tagEl) {
+            tagEl.innerHTML = `${active.flag} ${active.name}`;
+        }
+        if (subEl) {
+            subEl.innerHTML = `Su documento se procesa bajo el <strong>${active.code}</strong> y en <strong>memoria RAM volátil efímera</strong> (cero retención, SOC-2 / GDPR Art. 28).`;
+        }
+        if (selectEl && selectEl.value !== this.selectedJurisdiction) {
+            selectEl.value = this.selectedJurisdiction;
+        }
     },
 
     setPartyStance(stance) {
@@ -340,7 +413,9 @@ window.AppHandler = {
                         document_base64: base64,
                         document_name: this.selectedFile.name,
                         party_stance: this.currentPartyStance || 'buyer',
-                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP'
+                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP',
+                        country: this.selectedJurisdiction || 'sv',
+                        jurisdiction: this.selectedJurisdiction || 'sv'
                     })
                 });
             } else {
@@ -350,7 +425,9 @@ window.AppHandler = {
                     body: JSON.stringify({ 
                         sample_text: 'sample_contract_text',
                         party_stance: this.currentPartyStance || 'buyer',
-                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP'
+                        audit_standard: this.currentAuditStandard || 'PCAOB_GAAP',
+                        country: this.selectedJurisdiction || 'sv',
+                        jurisdiction: this.selectedJurisdiction || 'sv'
                     })
                 });
             }
@@ -711,6 +788,12 @@ window.AppHandler = {
         if (docNameEl) docNameEl.innerText = (this.selectedFile ? this.selectedFile.name : (isDe ? 'Gewerbevertrag.pdf' : (isEn ? 'Commercial_Agreement.pdf' : 'Contrato_Servicios.pdf')));
         if (docTypeEl) docTypeEl.innerText = data.document_type || (isDe ? 'Gewerblicher Vertrag' : (isEn ? 'Commercial Agreement' : 'Contrato Comercial'));
         if (reportIdEl) reportIdEl.innerText = this.currentReportId || 'rep_123456';
+
+        const jurisdictionBadgeEl = document.getElementById('rep-jurisdiction-badge');
+        if (jurisdictionBadgeEl) {
+            const jurCountry = data.jurisdiction || data.jurisdiction_applied?.country || (this.selectedJurisdiction === 'se' ? 'Suecia' : (this.selectedJurisdiction === 'gt' ? 'Guatemala' : (this.selectedJurisdiction === 'cr' ? 'Costa Rica' : 'El Salvador')));
+            jurisdictionBadgeEl.innerText = `⚖️ MARCO LEGAL: ${jurCountry.toUpperCase()}`;
+        }
 
         const leakageVal = (typeof data.total_financial_leakage === 'number' && !isNaN(data.total_financial_leakage)) 
             ? data.total_financial_leakage 

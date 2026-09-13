@@ -3,6 +3,7 @@ import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { verifyAdminAuth } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
+import { resolveJurisdiction, getLegalNoticeForOutbound } from '../lib/legal-jurisdictions.js';
 
 dotenv.config();
 
@@ -428,18 +429,22 @@ export default async function handler(req, res) {
       let bodyHtml = '';
 
       const cleanName = name ? name.split(' ')[0] : 'colega';
+      const leadJur = resolveJurisdiction(country || email);
+      const legalNoticeHtml = getLegalNoticeForOutbound(p, targetLang);
 
       // PLANTILLAS CON HOOK GRATIS EN 10S, OFERTA $19 USD Y PLANES $69 / $599
       if (isNordic) {
         // PLANTILLA NÓRDICA CALIBRADA AL PODER ADQUISITIVO REGIONAL CON 20% DESCUENTO EN PRIMERA COMPRA CORPORATIVA
-        subject = `vendor contract risk triage & word redlines / gdpr art. 28 / ${company}`;
+        subject = `vendor contract risk triage & word redlines / ${leadJur.commercialCode.split(' ')[0]} / ${company}`;
         bodyHtml = `
           <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; font-size: 15px; color: #111827; line-height: 1.6; max-width: 580px;">
             <p>Hi ${cleanName},</p>
             <p>I am reaching out regarding your legal and procurement governance at <strong>${company}</strong>.</p>
-            <p>We developed <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=nordic&country=se" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), an ephemeral contract audit copilot operating under strict <strong>Zero Data Retention (100% Volatile RAM)</strong> and EU GDPR Article 28 compliance.</p>
+            <p>We developed <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=nordic&country=${leadJur.id}" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), an ephemeral contract audit copilot operating under strict <strong>Zero Data Retention (100% Volatile RAM)</strong> and EU GDPR Article 28 compliance.</p>
             
-            <p>The platform audits commercial agreements in <strong>&lt;10 seconds</strong>, evaluates terms against Scandinavian benchmark standards (liability caps & indexation parity), and generates instant <strong>Word (.docx Track Changes) Redlines</strong> with zero persistent cloud storage or model training.</p>
+            <p>The platform audits commercial agreements in <strong>&lt;10 seconds</strong>, evaluates terms against Scandinavian benchmark standards (liability caps, indexation parity and ${leadJur.commercialCode} § 36 on unfair contract terms), and generates instant <strong>Word (.docx Track Changes) Redlines</strong> with zero persistent cloud storage or model training.</p>
+
+            ${legalNoticeHtml}
 
             <div style="background-color: #f0f9ff; padding: 14px; border-left: 3px solid #0284c7; margin: 16px 0; border-radius: 4px; font-size: 13px; color: #0f172a;">
               <p style="margin: 0 0 6px 0;"><strong>🇪🇺 Nordic Privacy Shield:</strong> Pure RAM buffer execution (0 disk storage, automatic memory purge).</p>
@@ -459,6 +464,8 @@ export default async function handler(req, res) {
             <p>ich kontaktiere Sie bezüglich Ihrer juristischen Leitung bei <strong>${company}</strong>.</p>
             <p>Wir haben <strong>AuditFlow AI</strong> entwickelt – einen KI-Copiloten, der Lieferanten- und Gewerbeverträge in <strong>unter 10 Sekunden</strong> prüft und Redlines in Word (.docx mit Änderungsnachverfolgung) erstellt.</p>
             
+            ${legalNoticeHtml}
+
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 Erste Prüfung: 100% Gratis</strong> in 10s (im flüchtigen RAM, 0 Speicherung): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
               <p style="margin: 0 0 8px 0;"><strong>⚡ Einzelprüfung &amp; Word-Redline:</strong> Einmalig nur <strong>$19 USD</strong>.</p>
@@ -477,6 +484,8 @@ export default async function handler(req, res) {
             <p>Je vous contacte concernant votre direction juridique chez <strong>${company}</strong>.</p>
             <p>Nous avons développé <strong>AuditFlow AI</strong>, un copilote qui audite les contrats fournisseurs en <strong>moins de 10 secondes</strong> et génère le Redline en Word (.docx avec suivi des modifications).</p>
             
+            ${legalNoticeHtml}
+
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 Premier audit : 100% Gratuit</strong> en 10s (en mémoire RAM volatile, zéro stockage) : <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
               <p style="margin: 0 0 8px 0;"><strong>⚡ Audit complet + Redline Word :</strong> Seulement <strong>$19 USD</strong> (sans engagement).</p>
@@ -495,6 +504,8 @@ export default async function handler(req, res) {
             <p>I noticed you lead the legal counsel / corporate practice at <strong>${company}</strong>.</p>
             <p>We built <strong>AuditFlow AI</strong>, a copilot for legal teams that audits vendor agreements in <strong>under 10 seconds</strong> and generates Word Redlines (.docx with track changes) to protect against unquoted penalties and liability traps.</p>
             
+            ${legalNoticeHtml}
+
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 4px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 1st Audit: 100% Free</strong> in 10s (runs in volatile RAM with zero file storage): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold;">audiflowai.com →</a></p>
               <p style="margin: 0 0 8px 0;"><strong>⚡ Single Agreement Redline (.docx):</strong> Just <strong>$19 USD</strong> trial offer.</p>
@@ -514,6 +525,8 @@ export default async function handler(req, res) {
             <p>Veo que lideras la práctica legal / corporativa en <strong>${company}</strong>.</p>
             <p>Desarrollamos <strong>AuditFlow AI</strong> (<a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; text-decoration: none;">audiflowai.com</a>), un copiloto para departamentos legales y despachos que audita contratos de proveedores en <strong>menos de 10 segundos</strong> y genera el <strong>Redline en Word (.docx con control de cambios)</strong> detectando penalizaciones ocultas y sobrecostos.</p>
             
+            ${legalNoticeHtml}
+
             <div style="background-color: #f8fafc; padding: 14px; border-left: 3px solid #2563eb; margin: 16px 0; border-radius: 6px; font-size: 14px;">
               <p style="margin: 0 0 8px 0;"><strong>🎁 Tu 1er Análisis: 100% Gratis</strong> en 10s (en memoria RAM volátil, sin guardar archivos): <a href="https://audiflowai.com/?ref=waalaxy" style="color: #2563eb; font-weight: bold; text-decoration: underline;">Probar gratis aquí →</a></p>
               <p style="margin: 0 0 8px 0;"><strong>⚡ Oferta Redline Individual:</strong> Solo <strong>$19 USD</strong> por contrato completo con exportación en Word.</p>

@@ -4,6 +4,7 @@ import nodemailer from 'nodemailer';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { CONFIG } from '../lib/config.js';
+import { getLegalNoticeForOutbound } from '../lib/legal-jurisdictions.js';
 
 dotenv.config();
 
@@ -246,6 +247,8 @@ export async function runNordicDailySower() {
             At AuditFlow AI, our forensic engine scans 45+ pages in <strong>8.2 seconds</strong> in volatile RAM under strict <strong>EU GDPR Art. 28</strong> compliance—pinpointing asymmetric liability risks with zero client data persistence on disk.
           </p>
         </div>
+
+        ${getLegalNoticeForOutbound(partner, 'nordic')}
 
         <p style="margin-top: 24px; font-size: 13px; color: #64748b; border-top: 1px solid #f1f5f9; padding-top: 16px;">
           Best regards,<br>

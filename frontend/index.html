@@ -426,6 +426,43 @@
                     </button>
                 </div>
 
+                <!-- SELECTOR Y AVISO DE JURISDICCIÓN LEGAL (TRANSPARENCIA FIDUCIARIA MULTI-PAÍS) -->
+                <div class="mb-4 p-4 rounded-xl bg-gradient-to-r from-dark-card via-[#0c1527] to-dark-card border border-accent-blue/30 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs font-mono shadow-md">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-accent-blue/15 text-accent-blue flex items-center justify-center font-bold text-lg shrink-0 border border-accent-blue/30">
+                            ⚖️
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-2">
+                                <span class="font-bold text-white text-xs sm:text-sm">Marco Jurídico &amp; Civil de Auditoría:</span>
+                                <span id="active-jurisdiction-tag" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold border border-emerald-500/30 text-[11px]">🇸🇻 El Salvador</span>
+                            </div>
+                            <p id="active-jurisdiction-sub" class="text-[11px] text-gray-400 font-sans mt-0.5">
+                                Su documento se procesa bajo el <strong>Código de Comercio de El Salvador</strong> y en <strong>memoria RAM volátil efímera</strong> (cero retención, SOC-2 / GDPR Art. 28).
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 shrink-0">
+                        <label for="jurisdiction-select" class="text-[11px] text-gray-400 hidden sm:inline">Cambiar país:</label>
+                        <select id="jurisdiction-select" onchange="window.AppHandler.onJurisdictionChanged(this.value)" class="bg-dark-surface border border-gray-700 text-white rounded-lg px-3 py-1.5 text-xs font-mono focus:border-accent-blue focus:outline-none cursor-pointer">
+                            <option value="sv" selected>🇸🇻 El Salvador (Cód. Comercio Arts. 945+)</option>
+                            <option value="gt">🇬🇹 Guatemala (Decreto 2-70 Arts. 669+)</option>
+                            <option value="cr">🇨🇷 Costa Rica (Ley 3284 / Ley 7472)</option>
+                            <option value="pa">🇵🇦 Panamá (Ley 45 de 2007 ACODECO)</option>
+                            <option value="hn">🇭🇳 Honduras (Decreto 73-1950)</option>
+                            <option value="se">🇸🇪 Suecia (Avtalslagen § 36 &amp; GDPR Art. 28)</option>
+                            <option value="no">🇳🇴 Noruega (Avtaleloven § 36 &amp; Personoppl.)</option>
+                            <option value="dk">🇩🇰 Dinamarca (Aftaleloven § 36 &amp; DPA)</option>
+                            <option value="fi">🇫🇮 Finlandia (Oikeustoimilaki 36 § &amp; GDPR)</option>
+                            <option value="de">🇩🇪 Alemania / DACH (BGB §§ 305–310 AGB)</option>
+                            <option value="mx">🇲🇽 México (Cód. Comercio &amp; PROFECO)</option>
+                            <option value="co">🇨🇴 Colombia (Cód. Comercio &amp; Ley 1480)</option>
+                            <option value="es">🇪🇸 España (Cód. Comercio &amp; TRLGDCU)</option>
+                            <option value="global">🌐 Internacional (UCC § 2-302 / CISG)</option>
+                        </select>
+                    </div>
+                </div>
+
                 <!-- ÁREA DRAG & DROP -->
                 <div id="drop-zone" tabindex="0" role="button" aria-label="Zona para arrastrar o subir archivo" class="drop-card p-6 sm:p-10 md:p-12 rounded-2xl border-2 border-dashed border-gray-700 bg-dark-card hover:border-accent-blue transition-all cursor-pointer relative group mb-4 focus:outline-none focus:ring-2 focus:ring-accent-blue">
                     <input type="file" id="file-input" class="hidden" accept=".pdf,.png,.jpg,.jpeg,.webp">
@@ -874,6 +911,7 @@
                     <div class="flex items-center gap-3 mb-2 flex-wrap">
                         <span id="rep-doc-type" data-i18n="rep_doc_default" class="px-3 py-1 rounded-full bg-border-dark text-accent-blue text-xs font-mono font-medium">Contrato Comercial</span>
                         <span id="rep-stance-badge" class="px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-mono font-bold">🏢 POSTURA: COMPRADOR</span>
+                        <span id="rep-jurisdiction-badge" class="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-xs font-mono font-bold">⚖️ MARCO LEGAL: EL SALVADOR</span>
                         <span id="rep-standard-badge" class="px-3 py-1 rounded-full bg-accent-blue/15 text-accent-blue border border-accent-blue/30 text-xs font-mono font-bold">🇺🇸 PCAOB &amp; US GAAP</span>
                         <span id="rep-risk-badge" data-i18n="rep_risk_high" class="px-3 py-1 rounded-full bg-red-500/20 text-red-400 border border-red-500/30 text-xs font-mono font-bold">RIESGO ALTO</span>
                     </div>

@@ -4,6 +4,7 @@ import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { CONFIG } from '../lib/config.js';
 import { filterActiveLeads, isBounced, addBouncedEmail } from '../lib/bounce-suppression.js';
+import { getLegalNoticeForOutbound } from '../lib/legal-jurisdictions.js';
 
 dotenv.config();
 
@@ -91,6 +92,7 @@ function appendLog(msg) {
 
 // Plantilla para Socios de Bufetes de Abogados
 function buildBufeteHtml(lead) {
+  const legalNoticeHtml = getLegalNoticeForOutbound(lead, 'es');
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 24px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
       <div style="border-bottom: 1px solid #1e293b; padding-bottom: 14px; margin-bottom: 22px;">
@@ -116,6 +118,8 @@ function buildBufeteHtml(lead) {
         <p style="margin: 0; font-size: 13px; color: #34d399;">📄 <strong>Entrega Inmediata en Word (.docx):</strong> Genera el Redline editable con Control de Cambios listo para enviar a la contraparte negociadora.</p>
       </div>
 
+      ${legalNoticeHtml}
+
       <p style="font-size: 14px; color: #e2e8f0; margin-bottom: 22px;">
         Le hemos habilitado un <strong>acceso de cortesía sin costo ni tarjeta de crédito</strong> para que su equipo audite un borrador de prueba en vivo:
       </p>
@@ -137,6 +141,7 @@ function buildBufeteHtml(lead) {
 
 // Plantilla para Directores Financieros (CFOs)
 function buildCfoHtml(lead) {
+  const legalNoticeHtml = getLegalNoticeForOutbound(lead, 'es');
   return `
     <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; background-color: #0b0f19; color: #f8fafc; padding: 32px 24px; max-width: 600px; margin: 0 auto; border-radius: 12px; border: 1px solid #1e293b; line-height: 1.65;">
       <div style="border-bottom: 1px solid #1e293b; padding-bottom: 14px; margin-bottom: 22px;">
@@ -161,6 +166,8 @@ function buildCfoHtml(lead) {
         <p style="margin: 0 0 8px 0; font-size: 13px; color: #ffffff;">📄 <strong>Redline Editable en Word (.docx):</strong> Entrega el documento con Control de Cambios y cláusulas de contra-propuesta listas para negociar.</p>
         <p style="margin: 0; font-size: 13px; color: #38bdf8;">💼 <strong>Ahorro Real de Honorarios:</strong> Evite minutas legales externas de $500–$1,500 USD por borrador. Formato accesible desde $19 USD por contrato o Pro $69 USD/mes.</p>
       </div>
+
+      ${legalNoticeHtml}
 
       <p style="font-size: 14px; color: #e2e8f0; margin-bottom: 22px;">
         Le hemos habilitado un acceso de cortesía para auditar 1 contrato de prueba en vivo, 100% confidencial y sin tarjeta de crédito:

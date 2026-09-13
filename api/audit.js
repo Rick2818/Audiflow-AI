@@ -1,5 +1,6 @@
 import pdfParse from 'pdf-parse';
 import downloadPdfHandler from '../lib/download-pdf.js';
+import { resolveJurisdiction, buildAiJurisdictionPrompt } from '../lib/legal-jurisdictions.js';
 
 export const config = {
   api: {
@@ -9,83 +10,7 @@ export const config = {
   },
 };
 
-const GEMINI_SYSTEM_PROMPT = `
-Eres el motor de auditoría jurídica y financiera de AuditFlow AI, especializado en contratos comerciales, acuerdos de proveedores (IT/Cloud, telecomunicaciones, transporte y arrendamiento corporativo) bajo el marco legal de El Salvador y Centroamérica (Código de Comercio de El Salvador, Ley de Protección al Consumidor, régimen de retenciones fiscales de IVA y Renta, y normas contables NIIF / PCAOB).
-
-Tu misión es realizar una auditoría fiduciaria profunda y rigurosa del documento analizado (digital o escaneado vía visión multimodal).
-
-Debes identificar EXACTAMENTE los hallazgos reales del documento, citar las cláusulas exactas o secciones donde se encuentran, cuantificar el impacto económico estimado en dólares americanos ($ USD), y proponer cláusulas de contra-propuesta para negociación en Word (Redline).
-
-Responde EXCLUSIVAMENTE con un objeto JSON estricto sin delimitadores markdown adicionales fuera del JSON, con esta estructura exacta:
-{
-  "document_type": "Categoría exacta del documento (ej. Contrato de Arrendamiento Comercial, Acuerdo de Nivel de Servicio SLA, Prestación de Servicios Profesionales, Factura Mercantil)",
-  "company_estimate": "Nombre de la empresa, cliente o proveedor detectado en el documento",
-  "party_stance": "buyer",
-  "total_financial_leakage": 14500.00,
-  "leakage_detected_usd": "$14,500 USD",
-  "risk_level": "CRÍTICO",
-  "lead_score": 88,
-  "findings": [
-    {
-      "id": 1,
-      "title": "Nombre conciso de la contingencia o cláusula desequilibrada",
-      "clause_reference": "Cita exacta o referencia de cláusula del documento",
-      "severity": "CRITICAL",
-      "financial_impact": 8500.00,
-      "teaser_preview": "Explicación fiduciaria de por qué esta estipulación perjudica el EBITDA o la seguridad jurídica del cliente conforme al Código de Comercio.",
-      "actionable_solution": "Acción correctiva concreta recomendada.",
-      "fallbacks": {
-        "standard": "Redacción de redline equilibrada estándar.",
-        "maximum": "Redacción altamente protectora a favor del cliente.",
-        "fast_close": "Redacción pragmática de cierre rápido."
-      },
-      "negotiation_pitch": "Argumento persuasivo para presentar a la contraparte negociadora."
-    }
-  ],
-  "missing_provisions": [
-    {
-      "id": "mp_1",
-      "title": "Tope de Responsabilidad Mutua (Mutual Liability Cap)",
-      "status": "MISSING",
-      "severity": "CRITICAL",
-      "risk_explanation": "Evaluación del tope máximo de daños acumulados.",
-      "suggested_clause": "Texto sugerido para incorporar al contrato."
-    },
-    {
-      "id": "mp_2",
-      "title": "Cláusula de Confidencialidad y Custodia de Datos",
-      "status": "MISSING",
-      "severity": "HIGH",
-      "risk_explanation": "Evaluación de salvaguarda de secretos comerciales.",
-      "suggested_clause": "Texto sugerido para incorporar al contrato."
-    },
-    {
-      "id": "mp_3",
-      "title": "Fuerza Mayor y Continuidad Operativa",
-      "status": "MISSING",
-      "severity": "MEDIUM",
-      "risk_explanation": "Evaluación de eventos fortuitos e imprevistos.",
-      "suggested_clause": "Texto sugerido para incorporar al contrato."
-    },
-    {
-      "id": "mp_4",
-      "title": "Resolución de Disputas y Arbitraje Comercial",
-      "status": "PRESENT",
-      "severity": "LOW",
-      "risk_explanation": "Evaluación de jurisdicción y tribunales competentes en San Salvador o arbitraje.",
-      "suggested_clause": "Texto sugerido para pactar jurisdicción clara."
-    }
-  ],
-  "cfo_approval_memo": {
-    "financial_risk_usd": 14500.00,
-    "auditflow_cost_usd": 19,
-    "traditional_lawfirm_cost_usd": 850,
-    "net_roi_multiple": "763x",
-    "roi_percentage": "76,315%",
-    "recommendation": "Dictamen ejecutivo para el Director Financiero (CFO)."
-  }
-}
-`;
+export const GEMINI_SYSTEM_PROMPT = buildAiJurisdictionPrompt('sv');
 
 function validatePreflightQuality(text) {
   if (!text || typeof text !== 'string') return { valid: true, wordCount: 0 };
@@ -125,6 +50,10 @@ export default async function handler(req, res) {
     const partyStance = body.party_stance || 'buyer';
     const reportId = 'rep_' + Math.random().toString(36).substring(2, 11);
 
+    const targetJurisdictionCandidate = body.country || body.jurisdiction || body.audit_standard || '';
+    const appliedJur = resolveJurisdiction(targetJurisdictionCandidate);
+    const dynamicSystemPrompt = buildAiJurisdictionPrompt(targetJurisdictionCandidate, documentName, partyStance);
+
     // Preparar contenido para Gemini Multimodal (PDF base64 o texto)
     let parts = [];
     let isMultimodalPdf = false;
@@ -141,7 +70,7 @@ export default async function handler(req, res) {
           }
         });
         parts.push({
-          text: `${GEMINI_SYSTEM_PROMPT}\n\nAnaliza este documento PDF (nombre: ${documentName}, postura: ${partyStance}). Audita con lupa fiduciaria bajo las leyes comerciales de El Salvador y Centroamérica.`
+          text: `${dynamicSystemPrompt}\n\nAnaliza este documento PDF (nombre: ${documentName}, postura: ${partyStance}). Audita con lupa fiduciaria bajo las leyes comerciales de ${appliedJur.countryName} (${appliedJur.commercialCode}).`
         });
         isMultimodalPdf = true;
 
@@ -183,7 +112,7 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
       }
 
       parts.push({
-        text: `${GEMINI_SYSTEM_PROMPT}\n\nDOCUMENTO A AUDITAR (Nombre: ${documentName}, Postura: ${partyStance}):\n${extractedText}`
+        text: `${dynamicSystemPrompt}\n\nDOCUMENTO A AUDITAR (Nombre: ${documentName}, Postura: ${partyStance}, Jurisdicción: ${appliedJur.countryName}):\n${extractedText}`
       });
     }
 
@@ -262,10 +191,22 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
       auditData.summary = auditData.findings;
     }
 
+    if (!auditData.jurisdiction_applied) {
+      auditData.jurisdiction_applied = {
+        country: appliedJur.countryName,
+        iso_code: appliedJur.code,
+        commercial_code: appliedJur.commercialCode,
+        protective_statute: appliedJur.consumerLaw,
+        privacy_guarantee: appliedJur.privacyStandard
+      };
+    }
+
     return res.status(200).json({
       success: true,
       report_id: reportId,
       audit_data: auditData,
+      jurisdiction: appliedJur.countryName,
+      jurisdiction_applied: auditData.jurisdiction_applied,
       model: 'gemini-2.5-flash-multimodal',
       multimodal_ocr: isMultimodalPdf,
       memory_status: 'PURGED_FROM_RAM'
