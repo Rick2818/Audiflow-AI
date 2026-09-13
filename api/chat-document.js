@@ -42,20 +42,30 @@ ${question.substring(0, 500)}
 </USER_QUERY>
 `;
 
-        const gRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${geminiApiKey}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          signal: AbortSignal.timeout(8000),
-          body: JSON.stringify({
-            systemInstruction: {
-              parts: [{ text: systemInstruction }]
-            },
-            contents: [{ parts: [{ text: userContent }] }],
-            generationConfig: {
-              temperature: 0.1
+        const candidateModels = ['gemini-flash-latest', 'gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
+        let gRes = null;
+        for (const m of candidateModels) {
+          try {
+            const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${geminiApiKey}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              signal: AbortSignal.timeout(8000),
+              body: JSON.stringify({
+                systemInstruction: {
+                  parts: [{ text: systemInstruction }]
+                },
+                contents: [{ parts: [{ text: userContent }] }],
+                generationConfig: {
+                  temperature: 0.1
+                }
+              })
+            });
+            if (r.ok) {
+              gRes = r;
+              break;
             }
-          })
-        });
+          } catch (e) {}
+        }
 
         if (gRes.ok) {
           const gData = await gRes.json();

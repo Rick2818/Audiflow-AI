@@ -127,35 +127,34 @@ CLÁUSULA 4: INDEXACIÓN DOBLE. Los honorarios se reajustarán semestralmente co
       });
     }
 
-    // Llamada al motor Gemini 2.5 Flash con fallback automático a gemini-1.5-flash
-    let geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
-    let geminiRes = await fetch(geminiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts }],
-        generationConfig: {
-          responseMimeType: 'application/json',
-          temperature: 0.1
-        }
-      })
-    });
+    // Llamada al motor Gemini Multimodal con fallback adaptativo entre modelos de alta velocidad
+    const candidateModels = ['gemini-flash-latest', 'gemini-3.6-flash', 'gemini-2.5-flash', 'gemini-1.5-flash'];
+    let geminiRes = null;
+    let selectedModel = 'gemini-flash-latest';
 
-    if (!geminiRes.ok && (geminiRes.status === 404 || geminiRes.status === 400)) {
-      const fallbackUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
-      const fallbackRes = await fetch(fallbackUrl, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts }],
-          generationConfig: {
-            responseMimeType: 'application/json',
-            temperature: 0.1
-          }
-        })
-      });
-      if (fallbackRes.ok) {
-        geminiRes = fallbackRes;
+    for (const m of candidateModels) {
+      try {
+        const geminiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${apiKey}`;
+        const res = await fetch(geminiUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts }],
+            generationConfig: {
+              responseMimeType: 'application/json',
+              temperature: 0.1
+            }
+          })
+        });
+        if (res.ok) {
+          geminiRes = res;
+          selectedModel = m;
+          break;
+        } else {
+          geminiRes = res; // conservar para inspeccionar error si todos fallan
+        }
+      } catch (e) {
+        // continuar con siguiente modelo
       }
     }
 
