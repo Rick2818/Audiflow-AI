@@ -6,8 +6,8 @@ import { generateAndSendDailySalesReport } from '../lib/daily-sales-report.js';
 import { N8nAgentBridge } from '../lib/n8n-agent-bridge.js';
 import adminHandler from '../api/admin.js';
 import outreachHandler from '../api/outreach.js';
-import socialPublishHandler from '../api/social-publish.js';
-import leadRecoveryHandler from '../api/lead-recovery.js';
+import socialPublishHandler from '../lib/social-publish.js';
+import leadRecoveryHandler from '../lib/lead-recovery.js';
 
 /**
  * ==============================================================================

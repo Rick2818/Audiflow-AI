@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { verifyAdminAuth, safeCompare, setStrictCors } from '../lib/security.js';
 import { CONFIG } from '../lib/config.js';
 import { resolveJurisdiction, getLegalNoticeForOutbound, getTripwirePrice } from '../lib/legal-jurisdictions.js';
+import leadRecoveryHandler from '../lib/lead-recovery.js';
 
 dotenv.config();
 
@@ -309,6 +310,11 @@ export default async function handler(req, res) {
 
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
+  }
+
+  // Delegación de recuperación de leads
+  if ((req.url && req.url.includes('lead-recovery')) || req.query?.task === 'lead-recovery') {
+    return await leadRecoveryHandler(req, res);
   }
 
   try {

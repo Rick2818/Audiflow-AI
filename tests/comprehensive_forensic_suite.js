@@ -9,7 +9,7 @@ import chatDocumentHandler from '../api/chat-document.js';
 import crossAuditHandler from '../api/cross-audit.js';
 import exportDocxHandler from '../api/export-docx.js';
 import indexnowHandler from '../lib/indexnow.js';
-import leadRecoveryHandler from '../api/lead-recovery.js';
+import leadRecoveryHandler from '../lib/lead-recovery.js';
 import leadHandler from '../lib/lead.js';
 import outreachHandler, { generateExecutiveLeads, generateOutreachProspects, resolveLeadLanguage } from '../api/outreach.js';
 import paymentHandler from '../api/payment.js';

@@ -3,6 +3,7 @@ import bufferEveningHandler from '../lib/cron-handlers/buffer-evening.js';
 import storytellingHandler from '../lib/cron-handlers/storytelling.js';
 import nordicSowerHandler from '../lib/cron-handlers/nordic-sower.js';
 import centroamericaSowerHandler from '../lib/cron-handlers/centroamerica-sower.js';
+import socialPublishHandler from '../lib/social-publish.js';
 import { getCloudState, setCloudState } from '../lib/cloud-state.js';
 import { verifyAdminAuth, safeCompare, setStrictCors } from '../lib/security.js';
 import dotenv from 'dotenv';
@@ -68,7 +69,9 @@ export default async function handler(req, res) {
 
   // Ejecución según la tarea detectada
   try {
-    if (taskToExecute === 'buffer-morning') {
+    if (taskToExecute === 'social-publish' || (req.url && req.url.includes('social-publish'))) {
+      return await socialPublishHandler(req, res);
+    } else if (taskToExecute === 'buffer-morning') {
       return await bufferMorningHandler(req, res);
     } else if (taskToExecute === 'buffer-evening') {
       return await bufferEveningHandler(req, res);
