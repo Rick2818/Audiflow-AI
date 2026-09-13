@@ -1065,22 +1065,30 @@ window.AppHandler = {
         const companyInput = document.getElementById('prof-company-input');
         const taxIdInput = document.getElementById('prof-taxid-input');
         const quoteNum = document.getElementById('prof-quote-num') ? document.getElementById('prof-quote-num').innerText : 'AF-2026-8891';
+        const totalEl = document.getElementById('prof-total-display');
+        const totalDisplay = totalEl ? totalEl.innerText : '$590.00 USD';
 
         const planText = planSelect ? planSelect.options[planSelect.selectedIndex].text : 'Licencia Corporativa Anual ($590 USD)';
         const company = (companyInput && companyInput.value.trim()) ? companyInput.value.trim() : 'Su Empresa';
         const taxId = (taxIdInput && taxIdInput.value.trim()) ? taxIdInput.value.trim() : 'N/A';
 
         const text = `📑 COTIZACIÓN PROFORMA B2B N° ${quoteNum}\n` +
-            `Cliente: ${company} (ID Fiscal: ${taxId})\n` +
-            `Emisor: AuditFlow AI Corp. (audiflowai.com)\n` +
+            `Cliente / Razón Social: ${company} (NIT/NRC: ${taxId})\n` +
+            `Emisor: AuditFlow AI • Ricardo Bolaños • San Salvador, El Salvador\n` +
             `Concepto: ${planText}\n` +
-            `Garantía: Blindaje Fiduciario 10x ROI (Ahorro 10x o Reembolso 100%)\n` +
-            `Métodos de Pago: Stripe Corporativo, Transferencia Bancaria Directa o Strike Lightning (rick28@strike.me)\n` +
-            `Enlace de Activación: https://audiflowai.com`;
+            `Monto Total: ${totalDisplay}\n` +
+            `Facturación Fiscal DTE: Comprobante de Crédito Fiscal Electrónico (El Salvador) deducible de IVA (13%) y Renta.\n` +
+            `Instrucciones de Pago:\n` +
+            `  • Transferencia Local Transfer365 / ACH: Banco Agrícola / BAC Credomatic (El Salvador).\n` +
+            `  • Tarjetas Corporativas / Wompi SV / Stripe: Pago seguro en línea en https://audiflowai.com\n` +
+            `  • Bitcoin Lightning Network: rick28@strike.me\n` +
+            `Garantía Fiduciaria: Blindaje 10x ROI (Ahorro potencial 10 veces la inversión o reembolso 100%)\n` +
+            `Envío de Comprobantes & Atención Ejecutiva: ricardo@audiflowai.com | WhatsApp: +503 7989 3922\n` +
+            `Enlace de Activación Inmediata: https://audiflowai.com`;
 
         if (navigator.clipboard) {
             navigator.clipboard.writeText(text);
-            this.showToast('¡Datos de cotización proforma copiados para Cuentas por Pagar!');
+            this.showToast('¡Datos de cotización y Transfer365 copiados para Cuentas por Pagar!');
         }
     },
 
