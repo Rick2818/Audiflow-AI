@@ -1,9 +1,9 @@
 {
   "warmupCycleStart": "2026-09-09T17:54:07.649Z",
-  "currentIndex": 195,
-  "currentChapter": 1,
-  "batchSize": 65,
-  "totalSent": 552,
+  "currentIndex": 200,
+  "currentChapter": 2,
+  "batchSize": 50,
+  "totalSent": 839,
   "history": [
     {
       "date": "2026-09-07T15:56:12.810Z",
@@ -67,8 +67,36 @@
       "sentCount": 65,
       "failedCount": 0,
       "leadsCount": 65
+    },
+    {
+      "date": "2026-09-14T14:55:24.548Z",
+      "chapter": 3,
+      "sentCount": 22,
+      "failedCount": 0,
+      "leadsCount": 22
+    },
+    {
+      "date": "2026-09-15T13:21:33.732Z",
+      "chapter": 2,
+      "sentCount": 50,
+      "failedCount": 0,
+      "leadsCount": 50
+    },
+    {
+      "date": "2026-09-16T15:11:32.973Z",
+      "chapter": 2,
+      "sentCount": 50,
+      "failedCount": 0,
+      "leadsCount": 50
+    },
+    {
+      "date": "2026-09-17T14:50:21.738Z",
+      "chapter": 2,
+      "sentCount": 50,
+      "failedCount": 0,
+      "leadsCount": 50
     }
   ],
-  "warmupDay": 3,
-  "lastRunAt": "2026-09-13T16:14:58.475Z"
+  "warmupDay": 8,
+  "lastRunAt": "2026-09-18T00:53:23.807Z"
 }

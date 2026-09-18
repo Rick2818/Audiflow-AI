@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns='http://www.w3.org/2005/Atom' xmlns:apps='http://schemas.google.com/ns/2007'>
+	<title>Mail Filters</title>
+	<id>tag:mail.google.com,2008:filters:instantly_warmup</id>
+	<updated>2026-09-13T11:56:00Z</updated>
+	<entry>
+		<category term='filter'></category>
+		<title>Filtro de Calentamiento Instantly.ai</title>
+		<id>tag:mail.google.com,2008:filter:instantly_warmup_1</id>
+		<updated>2026-09-13T11:56:00Z</updated>
+		<content></content>
+		<apps:property name='hasTheWord' value='9XDFP9J'/>
+		<apps:property name='shouldArchive' value='true'/>
+		<apps:property name='shouldMarkAsRead' value='true'/>
+		<apps:property name='neverSpam' value='true'/>
+	</entry>
+</feed>

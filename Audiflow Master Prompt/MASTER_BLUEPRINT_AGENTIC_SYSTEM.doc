@@ -1,0 +1,290 @@
+{\rtf1\ansi\ansicpg1252\deff0\nobrand
+{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil\fcharset0 Consolas;}{\f2\fnil\fcharset0 Arial;}}
+{\colortbl ;\red15\green23\blue42;\red2\green132\blue199;\red51\green65\blue85;\red241\green245\blue249;\red203\green213\blue225;}
+\viewkind4\uc1\margl1440\margr1440\margt1440\margb1440
+\pard\sa240\sl276\slmult1\f0\fs36\b\cf1 \u127963?\u65039? MASTER BLUEPRINT & SYSTEM ARCHITECTURE PLAYBOOK\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 \b Framework Universal para Sistemas Multi-Agente y Orquestaci\u243?n con N8N\b0 \par
+\pard\sa120\sl250\slmult1\f0\fs21 \b Versi\u243?n:\b0  1.0 Enterprise Core \u8226? \b Tipo:\b0  Gu\u237?a Operativa y Directiva Arquitect\u243?nica (SSOT) \u8226? \b Car\u225?cter:\b0  Fiduciario & Replicable\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 \u127919? 1. MANIFIESTO Y PRINCIPIOS INMUTABLES DE DISE\u209?O\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Este documento es la \b Constituci\u243?n T\u233?cnica y Gu\u237?a Paso a Paso\b0  para dise\u241?ar, desplegar y gobernar sistemas de Inteligencia Artificial multi-agente integrados con flujos de automatizaci\u243?n en \b N8N\b0 . No es una bit\u225?cora hist\u243?rica ni una transcripci\u243?n acumulativa de conversaciones; es un \b framework determin\u237?stico ejecutable\b0  para proyectos presentes y futuros.\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Las 5 Leyes Inmutables de la Arquitectura:\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Determinismo sobre Creatividad Abierta:\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  La IA generativa debe estar confinada por esquemas de datos estrictos (\f1\fs19\cf2 JSON Schema\f0\fs21 ). Toda salida debe validar contra un contrato previo antes de ser consumida por el siguiente proceso o subagente.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Principio Fail-Closed (Fallo Seguro):\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Si un agente o nodo de N8N falla, devuelve un esquema inv\u225?lido o supera el l\u237?mite de tiempo (\i timeout\i0 ), el sistema se detiene de inmediato de forma controlada. Queda terminantemente prohibido asumir datos por defecto o alucinar respuestas no validadas.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Privacidad y Memoria Vol\u225?til RAM (Cero Persistencia Sensible):\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  El procesamiento de documentos de clientes, estados financieros o secretos comerciales se ejecuta en b\u250?feres de memoria RAM vol\u225?til que se purgan en bloques \f1\fs19\cf2 finally\f0\fs21 . Cero persistencia en disco duro de servidores o bases de datos no cifradas.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Desacoplamiento Estricto (Separaci\u243?n de Preocupaciones):\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Un agente \b piensa y decide\b0  dentro de un \u225?mbito de dominio ultra-espec\u237?fico.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  N8N \b transporta, conecta, valida y registra\b0  el estado entre agentes y tareas externas.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  La base de datos / storage \b persiste\b0  exclusivamente estados autorizados e inmutables.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Aislamiento de Contexto (*Anti-Context Bloat*):\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Ning\u250?n agente debe recibir el historial completo del proyecto. Cada llamada recibe exclusivamente:\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Su System Prompt especializado.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  El \f1\fs19\cf2 TaskPayload\f0\fs21  estricto con los datos m\u237?nimos requeridos para su ejecuci\u243?n.\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 \u129302? 2. PILAR 1: CONFIGURACI\u211?N Y GOBERNANZA DE AGENTES\b0\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 A. Taxonom\u237?a Jer\u225?rquica de 3 Niveles\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Para evitar colisiones de autoridad, dispersi\u243?n de tokens y alucinaciones, todo ecosistema de agentes se organiza en \b tres capas conc\u233?ntricas\b0 :\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 `mermaid\par
+\pard\sa120\sl250\slmult1\f0\fs21 graph TD\par
+\pard\sa120\sl250\slmult1\f0\fs21 subgraph "Nivel 1: Direcci\u243?n Estrat\u233?gica"\par
+\pard\sa120\sl250\slmult1\f0\fs21 CEO["Director General (Ricardo / Humano)"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 COO["Agente Orquestador Maestro / GM-COO"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 end\par
+\pard\sa120\sl250\slmult1\f0\fs21 subgraph "Nivel 2: Especialistas de Dominio"\par
+\pard\sa120\sl250\slmult1\f0\fs21 LEGAL["Especialista Legal / Regulatorio"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 FINANCE["Especialista Financiero / CFO"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 MARKETING["Director de Marketing & Crecimiento"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 SECURITY["Auditor de Ciberseguridad & AppSec"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 end\par
+\pard\sa120\sl250\slmult1\f0\fs21 subgraph "Nivel 3: Ejecutores T\u233?cnicos / Subagentes"\par
+\pard\sa120\sl250\slmult1\f0\fs21 EXTRACT["Extractor de Datos / Cl\u225?usulas"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 ANALYZER["Analizador de Riesgos"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 WRITER["Redactor de Mitigaciones / C\u243?digo"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 DEVOPS["Ejecutor de Despliegue & QA"]\par
+\pard\sa120\sl250\slmult1\f0\fs21 end\par
+\pard\sa120\sl250\slmult1\f0\fs21 CEO --> COO\par
+\pard\sa120\sl250\slmult1\f0\fs21 COO --> LEGAL\par
+\pard\sa120\sl250\slmult1\f0\fs21 COO --> FINANCE\par
+\pard\sa120\sl250\slmult1\f0\fs21 COO --> MARKETING\par
+\pard\sa120\sl250\slmult1\f0\fs21 COO --> SECURITY\par
+\pard\sa120\sl250\slmult1\f0\fs21 LEGAL --> EXTRACT\par
+\pard\sa120\sl250\slmult1\f0\fs21 LEGAL --> ANALYZER\par
+\pard\sa120\sl250\slmult1\f0\fs21 FINANCE --> ANALYZER\par
+\pard\sa120\sl250\slmult1\f0\fs21 LEGAL --> WRITER\par
+\pard\sa120\sl250\slmult1\f0\fs21 SECURITY --> DEVOPS\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa140\sl240\slmult1\f0\fs22\b\cf3 Nivel 1: Direcci\u243?n y Coordinaci\u243?n Estrat\u233?gica\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  \b Rol:\b0  Recibe directivas de negocio de alto nivel del usuario humano. Descompone objetivos complejos en planes de acci\u243?n modulares y supervisa la rentabilidad y el cumplimiento normativo general.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  \b Modo de Operaci\u243?n:\b0  Orquesta la invocaci\u243?n de agentes de Nivel 2. No ejecuta extracci\u243?n de bajo nivel ni manipulaci\u243?n mec\u225?nica de datos.\par
+\pard\sa140\sl240\slmult1\f0\fs22\b\cf3 Nivel 2: Especialistas de Dominio\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  \b Rol:\b0  Expertos funcionales en una disciplina concreta (ej. Marco Legal Multi-Jurisdiccional, An\u225?lisis Financiero de Fugas EBITDA, Psicolog\u237?a del Consumidor, Arquitectura de Software).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  \b Modo de Operaci\u243?n:\b0  Aplican heur\u237?sticas avanzadas, reglas de negocio y ponderaciones de severidad. Validan que las propuestas de los ejecutores cumplan con los est\u225?ndares de la industria.\par
+\pard\sa140\sl240\slmult1\f0\fs22\b\cf3 Nivel 3: Ejecutores T\u233?cnicos de Tarea \u218?nica (\i Single-Responsibility Subagents\i0 )\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  \b Rol:\b0  Unidades de c\u243?mputo at\u243?micas y sin estado. Realizan una funci\u243?n puntual y espec\u237?fica (extraer cl\u225?usulas a JSON, generar un diff de c\u243?digo, redactar un p\u225?rrafo alternativo, auditar vulnerabilidades OWASP).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  \b Modo de Operaci\u243?n:\b0  Entrada determin\u237?stica -> Procesamiento acotado -> Salida JSON validada. No toman decisiones de gobernanza ni definen rumbos estrat\u233?gicos.\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 B. Plantilla Universal de Definici\u243?n de Agentes (\f1\fs19\cf2 .agents/agents/\f0\fs21 )\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Todo agente en el proyecto debe definirse bajo este est\u225?ndar formal en formato Markdown con \b YAML Frontmatter\b0 :\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 `markdown\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa120\sl250\slmult1\f0\fs21 name: "nombre-del-agente"\par
+\pard\sa120\sl250\slmult1\f0\fs21 version: "1.0.0"\par
+\pard\sa120\sl250\slmult1\f0\fs21 role: "Especialista en [Dominio Exacto]"\par
+\pard\sa120\sl250\slmult1\f0\fs21 model: "gemini-2.5-flash" # o modelo seg\u250?n balance costo/razonamiento\par
+\pard\sa120\sl250\slmult1\f0\fs21 temperature: 0.1 # 0.0 a 0.2 para tareas determin\u237?sticas; 0.4+ para creatividad/marketing\par
+\pard\sa120\sl250\slmult1\f0\fs21 context_budget_tokens: 8192\par
+\pard\sa120\sl250\slmult1\f0\fs21 enable_write_tools: false # true \u250?nicamente si requiere modificar archivos o correr tests\par
+\pard\sa120\sl250\slmult1\f0\fs21 tools:\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  "read_file"\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  "grep_search"\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa240\sl276\slmult1\f0\fs36\b\cf1 SYSTEM DIRECTIVE: [NOMBRE DEL AGENTE]\b0\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 1. MISI\u211?N Y PROP\u211?SITO\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Eres el especialista exclusivo de [Dominio]. Tu funci\u243?n principal es [Misi\u243?n en 1 frase].\par
+\pard\sa120\sl250\slmult1\f0\fs21 Operas con apego estricto al principio fiduciario de cero improvisaci\u243?n y cero alucinaci\u243?n.\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 2. L\u205?MITES OPERATIVOS (QU\u201? HACES Y QU\u201? TIENES PROHIBIDO)\b0\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Permitido:\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [Acci\u243?n t\u233?cnica permitida 1]\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [Acci\u243?n t\u233?cnica permitida 2]\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Estrictamente Prohibido:\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Modificar componentes fuera de tu \u225?mbito de dominio.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Emitir respuestas en formatos diferentes al JSON especificado.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Asumir valores faltantes sin reportar error o advertencia expl\u237?cita.\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 3. CONTRATO DE ENTRADA (INPUT CONTRACT)\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 El agente espera un payload en el siguiente formato:\par
+\pard\sa120\sl250\slmult1\f0\fs21 \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "taskId": "string (UUID)",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "context": \{ ... \},\par
+\pard\sa120\sl250\slmult1\f0\fs21 "parameters": \{ ... \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 4. CONTRATO DE SALIDA (OUTPUT CONTRACT - STRICT JSON)\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Tu respuesta debe ser EXCLUSIVAMENTE un bloque de c\u243?digo JSON con este esquema:\par
+\pard\sa120\sl250\slmult1\f0\fs21 \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "status": "SUCCESS" | "WARNING" | "ERROR",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "resultData": \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 // Campos obligatorios del dominio\par
+\pard\sa120\sl250\slmult1\f0\fs21 \},\par
+\pard\sa120\sl250\slmult1\f0\fs21 "diagnostics": \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "confidenceScore": 0.98,\par
+\pard\sa120\sl250\slmult1\f0\fs21 "notes": "string"\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 \u9889? 3. PILAR 2: ESTRUCTURA DE ORQUESTACI\u211?N CON N8N\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N act\u250?a como el \b Sistema Nervioso Central y Bus de Comunicaci\u243?n Desacoplado\b0  entre la aplicaci\u243?n frontend/backend, los agentes de IA y los servicios externos (APIs, bases de datos, sistemas de correo).\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 A. Topolog\u237?a del Orquestador Central (Dispatcher Pattern)\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 El flujo de trabajo en N8N se divide en un \b Dispatcher Principal\b0  y m\u250?ltiples \b Sub-Workflows Especializados\b0 :\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 `mermaid\par
+\pard\sa120\sl250\slmult1\f0\fs21 sequenceDiagram\par
+\pard\sa120\sl250\slmult1\f0\fs21 autonumber\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant App as App / Backend / Webhook\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant N8N_Disp as N8N Dispatcher\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Gate_1 as Gatekeeper 1\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Sub_Ext as Sub-WF Extractor (IA)\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Gate_2 as Gatekeeper 2\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Sub_Risk as Sub-WF Risk Analyzer (IA)\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Gate_3 as Gatekeeper 3\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Sub_Write as Sub-WF Mitigation Writer (IA)\par
+\pard\sa120\sl250\slmult1\f0\fs21 participant Output as Respuesta / DB / Notificaciones\par
+\pard\sa120\sl250\slmult1\f0\fs21 App->>N8N_Disp: POST /webhook/audit-contract-pipeline (JSON)\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>N8N_Disp: Generar auditId, executionId y TaskPayload 1\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Sub_Ext: Execute Sub-WF: Extractor\par
+\pard\sa120\sl250\slmult1\f0\fs21 Sub_Ext-->>N8N_Disp: Retorna Cl\u225?usulas Raw\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Gate_1: Validar Esquema de Extracci\u243?n\par
+\pard\sa120\sl250\slmult1\f0\fs21 alt Esquema Inv\u225?lido\par
+\pard\sa120\sl250\slmult1\f0\fs21 Gate_1-->>App: Abortar con Error 422 (Fail-Closed)\par
+\pard\sa120\sl250\slmult1\f0\fs21 else Esquema V\u225?lido\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Sub_Risk: Execute Sub-WF: Risk Analyzer\par
+\pard\sa120\sl250\slmult1\f0\fs21 Sub_Risk-->>N8N_Disp: Retorna Puntuaci\u243?n y Riesgos\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Gate_2: Validar Severidad y C\u225?lculos\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Sub_Write: Execute Sub-WF: Mitigation Writer\par
+\pard\sa120\sl250\slmult1\f0\fs21 Sub_Write-->>N8N_Disp: Retorna Redlines y Textos Blindados\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Gate_3: Validar Completitud del Informe\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N_Disp->>Output: Consolidar Informe Final\par
+\pard\sa120\sl250\slmult1\f0\fs21 Output-->>App: 200 OK con Reporte Fiduciario Completo\par
+\pard\sa120\sl250\slmult1\f0\fs21 end\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 B. Contratos de Datos JSON Est\u225?ndar\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Para que cualquier agente y sub-workflow hable el mismo idioma, se establecen dos estructuras de datos inviolables:\par
+\pard\sa140\sl240\slmult1\f0\fs22\b\cf3 1. Estructura de Tarea Entrante (\f1\fs19\cf2 TaskPayload\f0\fs21 ):\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 `json\par
+\pard\sa120\sl250\slmult1\f0\fs21 \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "taskId": "task_ext_8f92a1c",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "auditId": "audit_k82m9x01p",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "executionId": "exec_1725494400000",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "targetAgent": "CLAUSE_EXTRACTOR",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "timestamp": "2026-09-04T20:00:00.000Z",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "constraints": \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "timeoutMs": 30000,\par
+\pard\sa120\sl250\slmult1\f0\fs21 "maxRetries": 3,\par
+\pard\sa120\sl250\slmult1\f0\fs21 "strictJsonOnly": true,\par
+\pard\sa120\sl250\slmult1\f0\fs21 "jurisdictionFallback": "International / UNIDROIT"\par
+\pard\sa120\sl250\slmult1\f0\fs21 \},\par
+\pard\sa120\sl250\slmult1\f0\fs21 "inputData": \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "documentType": "COMMERCIAL_LEASE",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "rawText": "...",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "targetClauses": [\par
+\pard\sa120\sl250\slmult1\f0\fs21 "PENALTY_CLAUSE",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "INDEMNIFICATION",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "TERMINATION"\par
+\pard\sa120\sl250\slmult1\f0\fs21 ]\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa140\sl240\slmult1\f0\fs22\b\cf3 2. Estructura de Salida del Agente (\f1\fs19\cf2 AgentResult\f0\fs21 ):\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 `json\par
+\pard\sa120\sl250\slmult1\f0\fs21 \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "taskId": "task_ext_8f92a1c",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "auditId": "audit_k82m9x01p",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "status": "SUCCESS",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "agentName": "CLAUSE_EXTRACTOR",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "executionTimeMs": 1420,\par
+\pard\sa120\sl250\slmult1\f0\fs21 "outputData": \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "clausesDetectedCount": 3,\par
+\pard\sa120\sl250\slmult1\f0\fs21 "clauses": [\par
+\pard\sa120\sl250\slmult1\f0\fs21 \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 "clauseId": "cl_01",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "clauseType": "PENALTY_CLAUSE",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "verbatimText": "El arrendatario pagar\u225? el 100% de los c\u225?nones restantes en caso de salida anticipada.",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "riskLevel": "CRITICAL",\par
+\pard\sa120\sl250\slmult1\f0\fs21 "financialExposureUSD": 18500\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 ]\par
+\pard\sa120\sl250\slmult1\f0\fs21 \},\par
+\pard\sa120\sl250\slmult1\f0\fs21 "errors": []\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 C. Nodos Gatekeeper: El Escudo de Validaci\u243?n\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 En N8N, \b ning\u250?n sub-workflow entrega sus datos al siguiente sin pasar por un nodo Gatekeeper (Nodo de C\u243?digo JavaScript)\b0 :\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 `javascript\par
+\pard\sa120\sl250\slmult1\f0\fs21 // GATEKEEPER TEMPLATE EN N8N (Code Node)\par
+\pard\sa120\sl250\slmult1\f0\fs21 const item = $input.first().json;\par
+\pard\sa120\sl250\slmult1\f0\fs21 const out = item.outputData || item;\par
+\pard\sa120\sl250\slmult1\f0\fs21 const errors = [];\par
+\pard\sa120\sl250\slmult1\f0\fs21 // 1. Validaci\u243?n de Estado\par
+\pard\sa120\sl250\slmult1\f0\fs21 if (!out || out.status !== 'SUCCESS') \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 errors.push(\f1\fs19\cf2 Agent Execution failed or returned non-success status: $\{out.status || 'UNKNOWN'\}\f0\fs21 );\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 // 2. Validaci\u243?n de Campos Cr\u237?ticos\par
+\pard\sa120\sl250\slmult1\f0\fs21 if (!Array.isArray(out.clauses) || out.clauses.length === 0) \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 errors.push('The output must contain an array "clauses" with at least 1 element.');\par
+\pard\sa120\sl250\slmult1\f0\fs21 \} else \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 out.clauses.forEach((c, idx) => \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 if (!c.clauseId) errors.push(\f1\fs19\cf2 Clause[$\{idx\}] is missing "clauseId".\f0\fs21 );\par
+\pard\sa120\sl250\slmult1\f0\fs21 if (!c.verbatimText) errors.push(\f1\fs19\cf2 Clause[$\{idx\}] is missing "verbatimText".\f0\fs21 );\par
+\pard\sa120\sl250\slmult1\f0\fs21 if (!c.riskLevel) errors.push(\f1\fs19\cf2 Clause[$\{idx\}] is missing "riskLevel".\f0\fs21 );\par
+\pard\sa120\sl250\slmult1\f0\fs21 \});\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 // 3. Decisi\u243?n Fail-Closed\par
+\pard\sa120\sl250\slmult1\f0\fs21 if (errors.length > 0) \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 return [\{\par
+\pard\sa120\sl250\slmult1\f0\fs21 json: \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 isValid: false,\par
+\pard\sa120\sl250\slmult1\f0\fs21 gatekeeperError: \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 stage: 'GATEKEEPER_EXTRACTOR',\par
+\pard\sa120\sl250\slmult1\f0\fs21 errorCode: 'SCHEMA_VALIDATION_FAILED',\par
+\pard\sa120\sl250\slmult1\f0\fs21 message: errors.join(' | '),\par
+\pard\sa120\sl250\slmult1\f0\fs21 timestamp: new Date().toISOString()\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}];\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 return [\{\par
+\pard\sa120\sl250\slmult1\f0\fs21 json: \{\par
+\pard\sa120\sl250\slmult1\f0\fs21 isValid: true,\par
+\pard\sa120\sl250\slmult1\f0\fs21 validatedData: out\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}\par
+\pard\sa120\sl250\slmult1\f0\fs21 \}];\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 D. Enrutamiento Fiduciario Dual de Notificaciones\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 N8N gobierna el despacho de correos y alertas aplicando la \b Regla de Oro de Cero Spam Operativo\b0 :\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Bandeja Administrativa y Operativa (`tendenciaiatufuturo@gmail.com`):\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Recibe: Capturas de leads, auditor\u237?as shadow, logs de aperturas de correos, reportes de Crons semanales y advertencias de Gatekeeper.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21  \b Bandeja Personal del Fundador / CEO (`rick28191@gmail.com`):\b0 \par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Recibe: \b \u218?nica y exclusivamente NOTIFICACIONES DE COMPRAS CONFIRMADAS ($19, $69, $590 USD)\b0  y alertas cr\u237?ticas de intervenci\u243?n inmediata. Cero ruido operativo.\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 \u128736?\u65039? 4. PLAYBOOK PASO A PASO: DEL D\u205?A 0 A PRODUCCI\u211?N\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Para implementar esta arquitectura en cualquier nuevo proyecto con total confianza, sigue esta secuencia cronol\u243?gica de 5 etapas:\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa120\sl250\slmult1\f0\fs21 [D\u205?A 1: CONTRATOS] \u9472?\u9472?\u9654? [D\u205?A 2: AGENTES] \u9472?\u9472?\u9654? [D\u205?A 3: N8N WORKFLOWS] \u9472?\u9472?\u9654? [D\u205?A 4: GATEKEEPERS] \u9472?\u9472?\u9654? [D\u205?A 5: PRUEBAS E2E]\par
+\pard\sa120\sl250\slmult1\f0\fs21 \f1\fs19\cf2 \f0\fs21 \f1\fs19\cf2 \f0\fs21 \par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Paso 1: Definici\u243?n de Ontolog\u237?a y Esquemas de Datos\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Identificar los 3 a 5 eventos clave del sistema.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Redactar los esquemas JSON estandarizados (\f1\fs19\cf2 TaskPayload\f0\fs21  y \f1\fs19\cf2 AgentResult\f0\fs21 ).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Definir las pol\u237?ticas de tiempo de respuesta (\i timeouts\i0 ) y l\u237?mites presupuestarios de tokens.\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Paso 2: Aprovisionamiento de Agentes en \f1\fs19\cf2 .agents/agents/\f0\fs21 \b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Crear el archivo Markdown con YAML Frontmatter para cada agente.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Redactar el System Prompt enfocado en su rol \u250?nico (\i Single Responsibility Principle\i0 ).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Fijar la temperatura seg\u250?n la tarea:\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Extracci\u243?n y auditor\u237?a de riesgos: \f1\fs19\cf2 temperature: 0.1\f0\fs21 .\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Redacci\u243?n persuasiva y marketing: \f1\fs19\cf2 temperature: 0.4\f0\fs21 .\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Paso 3: Construcci\u243?n del Orquestador y Sub-Workflows en N8N\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Crear el \b Dispatcher Principal\b0  con Webhook Ingestion (\f1\fs19\cf2 POST /api/pipeline\f0\fs21 ).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Implementar los sub-workflows especializados independientes (sin estado global).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Conectar nodos de llamada \f1\fs19\cf2 Execute Workflow\f0\fs21  para modularizar la l\u243?gica.\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Paso 4: Inserci\u243?n de Gatekeepers y Manejo de Errores\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Colocar un nodo Gatekeeper despu\u233?s de cada llamada a modelo de IA.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Configurar rutas condicionales (\f1\fs19\cf2 If / Switch\f0\fs21 ):\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Rama V\u225?lida (\f1\fs19\cf2 isValid == true\f0\fs21 ): Avanza a la siguiente etapa.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Rama Inv\u225?lida (\f1\fs19\cf2 isValid == false\f0\fs21 ): Registra el error, env\u237?a alerta operativa y devuelve HTTP 422 o 500 estructurado.\par
+\pard\sa160\sl240\slmult1\f0\fs24\b\cf3 Paso 5: Pruebas de Cero Regresi\u243?n y Validaci\u243?n E2E\b0\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Ejecutar pruebas sint\u225?cticas de scripts de backend y frontend.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Probar la tuber\u237?a con documentos de prueba con fallos conocidos (para comprobar que los Gatekeepers abortan correctamente).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  Probar la tuber\u237?a con documentos v\u225?lidos (para confirmar la generaci\u243?n del informe completo en <10 segundos).\par
+\pard\sa140\sl240\slmult1\f0\fs16\cf5 -------------------------------------------------------------------------------------------\par
+\pard\sa200\sl259\slmult1\f0\fs28\b\cf2 \u128203? 5. CHECKLIST DE CALIDAD Y APROBACI\u211?N PREVIA A PRODUCCI\u211?N\b0\par
+\pard\sa120\sl250\slmult1\f0\fs21 Antes de declarar un sistema o nueva caracter\u237?stica en estado activo, se debe verificar el 100% de los siguientes puntos:\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [ ] \b Validaci\u243?n Sint\u225?ctica:\b0  Todos los archivos de c\u243?digo ejecutan sin errores (\f1\fs19\cf2 node --check\f0\fs21 ).\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [ ] \b Esquemas JSON Validados:\b0  Los prompts exigen expl\u237?citamente formato JSON sin texto introductorio ni bloques markdown extras si no son requeridos.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [ ] \b Gatekeepers Activos en N8N:\b0  Cada invocaci\u243?n de IA cuenta con un nodo validador intermedio.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [ ] \b Aislamiento de Secretos:\b0  Variables de entorno y llaves privadas residen en \f1\fs19\cf2 .env\f0\fs21  / Vercel Environment Variables, nunca en el repositorio p\u250?blico ni en prompts de agentes.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [ ] \b Enrutamiento Dual Verificado:\b0  Las ventas llegan a la bandeja personal y las operaciones a la bandeja de control.\par
+\pard\li360\sa100\sl240\slmult1\f0\fs21\bullet  [ ] \b Memoria Vol\u225?til RAM Respetada:\b0  Ning\u250?n archivo de usuario se escribe en el disco persistente del servidor.\par
+}

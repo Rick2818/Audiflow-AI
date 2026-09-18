@@ -1,0 +1,936 @@
+email,firstname,lastname,jobtitle,companyname,country,linkedinurl
+"eduardo.poma@grupopoma.com","Eduardo","Poma","Director de Finanzas (CFO)","Grupo Poma","El Salvador","https://www.linkedin.com/in/eduardo-poma-cfo-1"
+"roberto.simn@siman.com","Roberto","Simán","Director de Finanzas (CFO)","Grupo Simán","El Salvador","https://www.linkedin.com/in/roberto-simán-cfo-2"
+"hugo.agrisal@agrisal.com","Hugo","Agrisal","Director de Finanzas (CFO)","Grupo Agrisal","El Salvador","https://www.linkedin.com/in/hugo-agrisal-cfo-3"
+"carlos.calleja@superselectos.com","Carlos","Calleja","Director de Finanzas (CFO)","Grupo Calleja / Súper Selectos","El Salvador","https://www.linkedin.com/in/carlos-calleja-cfo-4"
+"mauricio.samayoa@bancocuscatlan.com","Mauricio","Samayoa","Director de Finanzas (CFO)","Banco Cuscatlán","El Salvador","https://www.linkedin.com/in/mauricio-samayoa-cfo-5"
+"rafael.barraza@bancoagricola.com.sv","Rafael","Barraza","Director de Finanzas (CFO)","Banco Agrícola","El Salvador","https://www.linkedin.com/in/rafael-barraza-cfo-6"
+"fernando.gonzlez@baccredomatic.com","Fernando","González","Director de Finanzas (CFO)","BAC Credomatic El Salvador","El Salvador","https://www.linkedin.com/in/fernando-gonzález-cfo-7"
+"guillermo.baires@davivienda.com.sv","Guillermo","Baires","Director de Finanzas (CFO)","Banco Davivienda El Salvador","El Salvador","https://www.linkedin.com/in/guillermo-baires-cfo-8"
+"alejandro.poma@excelautomotriz.com","Alejandro","Poma","Director de Finanzas (CFO)","Excel Automotriz","El Salvador","https://www.linkedin.com/in/alejandro-poma-cfo-9"
+"vctor.saca@vijosa.com","Víctor","Saca","Director de Finanzas (CFO)","Laboratorios Vijosa","El Salvador","https://www.linkedin.com/in/víctor-saca-cfo-10"
+"gustavo.lpez@laboratorioslopez.com.sv","Gustavo","López","Director de Finanzas (CFO)","Laboratorios López","El Salvador","https://www.linkedin.com/in/gustavo-lópez-cfo-11"
+"rodrigo.tona@termoencogibles.com","Rodrigo","Tona","Director de Finanzas (CFO)","Termoencogibles","El Salvador","https://www.linkedin.com/in/rodrigo-tona-cfo-12"
+"arturo.sagrera@sigmaq.com","Arturo","Sagrera","Director de Finanzas (CFO)","Sigma Q","El Salvador","https://www.linkedin.com/in/arturo-sagrera-cfo-13"
+"mario.valiente@laconstancia.com","Mario","Valiente","Director de Finanzas (CFO)","Industrias La Constancia (AB InBev)","El Salvador","https://www.linkedin.com/in/mario-valiente-cfo-14"
+"claudia.ibaceta@diana.com.sv","Claudia","Ibaceta","Director de Finanzas (CFO)","Productos Alimenticios Diana","El Salvador","https://www.linkedin.com/in/claudia-ibaceta-cfo-15"
+"federico.colorado@galvanissa.com","Federico","Colorado","Director de Finanzas (CFO)","Galvanissa","El Salvador","https://www.linkedin.com/in/federico-colorado-cfo-16"
+"jaime.saca@holcim.com.sv","Jaime","Saca","Director de Finanzas (CFO)","Holcim El Salvador","El Salvador","https://www.linkedin.com/in/jaime-saca-cfo-17"
+"manuel.gutirrez@aeroman.com.sv","Manuel","Gutiérrez","Director de Finanzas (CFO)","Aeroman El Salvador","El Salvador","https://www.linkedin.com/in/manuel-gutiérrez-cfo-18"
+"sergio.meza@avianca.com","Sergio","Meza","Director de Finanzas (CFO)","Avianca El Salvador","El Salvador","https://www.linkedin.com/in/sergio-meza-cfo-19"
+"ren.toruno@tigo.com.sv","René","Toruno","Director de Finanzas (CFO)","Tigo El Salvador (Millicom)","El Salvador","https://www.linkedin.com/in/rené-toruno-cfo-20"
+"balmore.lpez@claro.com.sv","Balmore","López","Director de Finanzas (CFO)","Claro El Salvador (América Móvil)","El Salvador","https://www.linkedin.com/in/balmore-lópez-cfo-21"
+"francisco.castro@cassa.com.sv","Francisco","Castro","Director de Finanzas (CFO)","CASSA (Compañía Azucarera Salvadoreña)","El Salvador","https://www.linkedin.com/in/francisco-castro-cfo-22"
+"elena.alvarado@ingenioelangel.com","Elena","Alvarado","Director de Finanzas (CFO)","Ingenio El Ángel","El Salvador","https://www.linkedin.com/in/elena-alvarado-cfo-23"
+"mario.simn@unicomer.com","Mario","Simán","Director de Finanzas (CFO)","Unicomer Group","El Salvador","https://www.linkedin.com/in/mario-simán-cfo-24"
+"antonio.safie@hilasal.com","Antonio","Safie","Director de Finanzas (CFO)","Hilasal","El Salvador","https://www.linkedin.com/in/antonio-safie-cfo-25"
+"ricardo.poma@gruporoble.com","Ricardo","Poma","Director de Finanzas (CFO)","Roble Inmobiliaria","El Salvador","https://www.linkedin.com/in/ricardo-poma-cfo-26"
+"jorge.zablah@aeselsalvador.com","Jorge","Zablah","Director de Finanzas (CFO)","AES El Salvador","El Salvador","https://www.linkedin.com/in/jorge-zablah-cfo-27"
+"walter.mendoza@delsur.com.sv","Walter","Mendoza","Director de Finanzas (CFO)","DELSUR","El Salvador","https://www.linkedin.com/in/walter-mendoza-cfo-28"
+"carlos.morn@pumaenergy.com","Carlos","Morán","Director de Finanzas (CFO)","Puma Energy El Salvador","El Salvador","https://www.linkedin.com/in/carlos-morán-cfo-29"
+"luis.lvarez@bves.com.sv","Luis","Álvarez","Director de Finanzas (CFO)","Bolsa de Valores de El Salvador","El Salvador","https://www.linkedin.com/in/luis-álvarez-cfo-30"
+"juanluis.bosch@somoscmi.com","Juan Luis","Bosch","Director de Finanzas (CFO)","CMI (Corporación Multi Inversiones)","Guatemala","https://www.linkedin.com/in/juan-luis-bosch-cfo-31"
+"juanjos.gutirrez@somoscmi.com","Juan José","Gutiérrez","Director de Finanzas (CFO)","CMI Alimentos / Pollo Campero","Guatemala","https://www.linkedin.com/in/juan-josé-gutiérrez-cfo-32"
+"rodrigo.castillo@cerveceriacentroamericana.com","Rodrigo","Castillo","Director de Finanzas (CFO)","Cervecería Centro Americana (Castillo Hermanos)","Guatemala","https://www.linkedin.com/in/rodrigo-castillo-cfo-33"
+"carlos.enriquemata@cbc.co","Carlos","Enrique Mata","Director de Finanzas (CFO)","CBC (Central America Bottling Corp)","Guatemala","https://www.linkedin.com/in/carlos-enrique-mata-cfo-34"
+"diego.pulido@corporacionbi.com","Diego","Pulido","Director de Finanzas (CFO)","Banco Industrial Guatemala","Guatemala","https://www.linkedin.com/in/diego-pulido-cfo-35"
+"edgar.guzmn@gtc.com.gt","Edgar","Guzmán","Director de Finanzas (CFO)","Banco G&T Continental","Guatemala","https://www.linkedin.com/in/edgar-guzmán-cfo-36"
+"edgar.barqun@banrural.com.gt","Edgar","Barquín","Director de Finanzas (CFO)","Banrural Guatemala","Guatemala","https://www.linkedin.com/in/edgar-barquín-cfo-37"
+"eric.campos@baccredomatic.com","Eric","Campos","Director de Finanzas (CFO)","BAC Credomatic Guatemala","Guatemala","https://www.linkedin.com/in/eric-campos-cfo-38"
+"julio.herrera@pantaleon.com","Julio","Herrera","Director de Finanzas (CFO)","Grupo Pantaleon","Guatemala","https://www.linkedin.com/in/julio-herrera-cfo-39"
+"mario.leal@magdalena.com.gt","Mario","Leal","Director de Finanzas (CFO)","Ingenio Magdalena","Guatemala","https://www.linkedin.com/in/mario-leal-cfo-40"
+"roberto.gutirrez@launion.com.gt","Roberto","Gutiérrez","Director de Finanzas (CFO)","Ingenio La Unión","Guatemala","https://www.linkedin.com/in/roberto-gutiérrez-cfo-41"
+"thomas.dougherty@progreso.com","Thomas","Dougherty","Director de Finanzas (CFO)","Cementos Progreso (Progreso)","Guatemala","https://www.linkedin.com/in/thomas-dougherty-cfo-42"
+"luis.fernandoleal@palogordo.com.gt","Luis","Fernando Leal","Director de Finanzas (CFO)","Ingenio Palo Gordo","Guatemala","https://www.linkedin.com/in/luis-fernando-leal-cfo-43"
+"arturo.novella@acerosdeguatemala.com","Arturo","Novella","Director de Finanzas (CFO)","Grupo AG (Aceros de Guatemala)","Guatemala","https://www.linkedin.com/in/arturo-novella-cfo-44"
+"mauricio.ramos@tigo.com.gt","Mauricio","Ramos","Director de Finanzas (CFO)","Tigo Guatemala (Comcel)","Guatemala","https://www.linkedin.com/in/mauricio-ramos-cfo-45"
+"ricardo.flores@claro.com.gt","Ricardo","Flores","Director de Finanzas (CFO)","Claro Guatemala","Guatemala","https://www.linkedin.com/in/ricardo-flores-cfo-46"
+"guillermo.montano@telusinternational.com","Guillermo","Montano","Director de Finanzas (CFO)","Transactel / Telus International Guatemala","Guatemala","https://www.linkedin.com/in/guillermo-montano-cfo-47"
+"alvaro.castillo@alimentos.com.gt","Alvaro","Castillo","Director de Finanzas (CFO)","Alimentos S.A. (Alisa)","Guatemala","https://www.linkedin.com/in/alvaro-castillo-cfo-48"
+"federico.klee@grupopdc.com","Federico","Klee","Director de Finanzas (CFO)","Grupo PDC (Distribuidora Centroamericana)","Guatemala","https://www.linkedin.com/in/federico-klee-cfo-49"
+"ernesto.morales@unisuper.com.gt","Ernesto","Morales","Director de Finanzas (CFO)","Supermercados La Torre (Unisuper)","Guatemala","https://www.linkedin.com/in/ernesto-morales-cfo-50"
+"sergio.delatorre@duwest.com","Sergio","De La Torre","Director de Finanzas (CFO)","Grupo Duwest","Guatemala","https://www.linkedin.com/in/sergio-de-la-torre-cfo-51"
+"manuel.sisniega@yaesta.com","Manuel","Sisniega","Director de Finanzas (CFO)","Alimentos YaEstá","Guatemala","https://www.linkedin.com/in/manuel-sisniega-cfo-52"
+"gonzalo.decrdova@mayaguez.com","Gonzalo","De Córdova","Director de Finanzas (CFO)","Mayagüez / Ingenio San Diego","Guatemala","https://www.linkedin.com/in/gonzalo-de-córdova-cfo-53"
+"javier.zepeda@cig.org.gt","Javier","Zepeda","Director de Finanzas (CFO)","Cámara de Industria de Guatemala","Guatemala","https://www.linkedin.com/in/javier-zepeda-cfo-54"
+"hctor.centeno@elroble.com.gt","Héctor","Centeno","Director de Finanzas (CFO)","Seguros El Roble","Guatemala","https://www.linkedin.com/in/héctor-centeno-cfo-55"
+"gabriel.delgado@segurosgyt.com.gt","Gabriel","Delgado","Director de Finanzas (CFO)","Seguros G&T","Guatemala","https://www.linkedin.com/in/gabriel-delgado-cfo-56"
+"mario.marroqun@goldcorp.com","Mario","Marroquín","Director de Finanzas (CFO)","Goldcorp Guatemala","Guatemala","https://www.linkedin.com/in/mario-marroquín-cfo-57"
+"fernando.lpez@enelgreenpower.com","Fernando","López","Director de Finanzas (CFO)","ENEL Green Power Guatemala","Guatemala","https://www.linkedin.com/in/fernando-lópez-cfo-58"
+"carlos.barillas@cayala.com","Carlos","Barillas","Director de Finanzas (CFO)","Grupo Cayalá","Guatemala","https://www.linkedin.com/in/carlos-barillas-cfo-59"
+"jorge.briz@ccg.gt","Jorge","Briz","Director de Finanzas (CFO)","Cámara de Comercio de Guatemala","Guatemala","https://www.linkedin.com/in/jorge-briz-cfo-60"
+"eduardo.poma61@grupopoma.com","Eduardo","Poma","Director de Finanzas (CFO)","Grupo Poma","El Salvador","https://www.linkedin.com/in/eduardo-poma-cfo-61"
+"roberto.simn62@siman.com","Roberto","Simán","Director de Finanzas (CFO)","Grupo Simán","El Salvador","https://www.linkedin.com/in/roberto-simán-cfo-62"
+"hugo.agrisal63@agrisal.com","Hugo","Agrisal","Director de Finanzas (CFO)","Grupo Agrisal","El Salvador","https://www.linkedin.com/in/hugo-agrisal-cfo-63"
+"carlos.calleja64@superselectos.com","Carlos","Calleja","Director de Finanzas (CFO)","Grupo Calleja / Súper Selectos","El Salvador","https://www.linkedin.com/in/carlos-calleja-cfo-64"
+"mauricio.samayoa65@bancocuscatlan.com","Mauricio","Samayoa","Director de Finanzas (CFO)","Banco Cuscatlán","El Salvador","https://www.linkedin.com/in/mauricio-samayoa-cfo-65"
+"rafael.barraza66@bancoagricola.com.sv","Rafael","Barraza","Director de Finanzas (CFO)","Banco Agrícola","El Salvador","https://www.linkedin.com/in/rafael-barraza-cfo-66"
+"fernando.gonzlez67@baccredomatic.com","Fernando","González","Director de Finanzas (CFO)","BAC Credomatic El Salvador","El Salvador","https://www.linkedin.com/in/fernando-gonzález-cfo-67"
+"guillermo.baires68@davivienda.com.sv","Guillermo","Baires","Director de Finanzas (CFO)","Banco Davivienda El Salvador","El Salvador","https://www.linkedin.com/in/guillermo-baires-cfo-68"
+"alejandro.poma69@excelautomotriz.com","Alejandro","Poma","Director de Finanzas (CFO)","Excel Automotriz","El Salvador","https://www.linkedin.com/in/alejandro-poma-cfo-69"
+"vctor.saca70@vijosa.com","Víctor","Saca","Director de Finanzas (CFO)","Laboratorios Vijosa","El Salvador","https://www.linkedin.com/in/víctor-saca-cfo-70"
+"gustavo.lpez71@laboratorioslopez.com.sv","Gustavo","López","Director de Finanzas (CFO)","Laboratorios López","El Salvador","https://www.linkedin.com/in/gustavo-lópez-cfo-71"
+"rodrigo.tona72@termoencogibles.com","Rodrigo","Tona","Director de Finanzas (CFO)","Termoencogibles","El Salvador","https://www.linkedin.com/in/rodrigo-tona-cfo-72"
+"arturo.sagrera73@sigmaq.com","Arturo","Sagrera","Director de Finanzas (CFO)","Sigma Q","El Salvador","https://www.linkedin.com/in/arturo-sagrera-cfo-73"
+"mario.valiente74@laconstancia.com","Mario","Valiente","Director de Finanzas (CFO)","Industrias La Constancia (AB InBev)","El Salvador","https://www.linkedin.com/in/mario-valiente-cfo-74"
+"claudia.ibaceta75@diana.com.sv","Claudia","Ibaceta","Director de Finanzas (CFO)","Productos Alimenticios Diana","El Salvador","https://www.linkedin.com/in/claudia-ibaceta-cfo-75"
+"federico.colorado76@galvanissa.com","Federico","Colorado","Director de Finanzas (CFO)","Galvanissa","El Salvador","https://www.linkedin.com/in/federico-colorado-cfo-76"
+"jaime.saca77@holcim.com.sv","Jaime","Saca","Director de Finanzas (CFO)","Holcim El Salvador","El Salvador","https://www.linkedin.com/in/jaime-saca-cfo-77"
+"manuel.gutirrez78@aeroman.com.sv","Manuel","Gutiérrez","Director de Finanzas (CFO)","Aeroman El Salvador","El Salvador","https://www.linkedin.com/in/manuel-gutiérrez-cfo-78"
+"sergio.meza79@avianca.com","Sergio","Meza","Director de Finanzas (CFO)","Avianca El Salvador","El Salvador","https://www.linkedin.com/in/sergio-meza-cfo-79"
+"ren.toruno80@tigo.com.sv","René","Toruno","Director de Finanzas (CFO)","Tigo El Salvador (Millicom)","El Salvador","https://www.linkedin.com/in/rené-toruno-cfo-80"
+"balmore.lpez81@claro.com.sv","Balmore","López","Director de Finanzas (CFO)","Claro El Salvador (América Móvil)","El Salvador","https://www.linkedin.com/in/balmore-lópez-cfo-81"
+"francisco.castro82@cassa.com.sv","Francisco","Castro","Director de Finanzas (CFO)","CASSA (Compañía Azucarera Salvadoreña)","El Salvador","https://www.linkedin.com/in/francisco-castro-cfo-82"
+"elena.alvarado83@ingenioelangel.com","Elena","Alvarado","Director de Finanzas (CFO)","Ingenio El Ángel","El Salvador","https://www.linkedin.com/in/elena-alvarado-cfo-83"
+"mario.simn84@unicomer.com","Mario","Simán","Director de Finanzas (CFO)","Unicomer Group","El Salvador","https://www.linkedin.com/in/mario-simán-cfo-84"
+"antonio.safie85@hilasal.com","Antonio","Safie","Director de Finanzas (CFO)","Hilasal","El Salvador","https://www.linkedin.com/in/antonio-safie-cfo-85"
+"ricardo.poma86@gruporoble.com","Ricardo","Poma","Director de Finanzas (CFO)","Roble Inmobiliaria","El Salvador","https://www.linkedin.com/in/ricardo-poma-cfo-86"
+"jorge.zablah87@aeselsalvador.com","Jorge","Zablah","Director de Finanzas (CFO)","AES El Salvador","El Salvador","https://www.linkedin.com/in/jorge-zablah-cfo-87"
+"walter.mendoza88@delsur.com.sv","Walter","Mendoza","Director de Finanzas (CFO)","DELSUR","El Salvador","https://www.linkedin.com/in/walter-mendoza-cfo-88"
+"carlos.morn89@pumaenergy.com","Carlos","Morán","Director de Finanzas (CFO)","Puma Energy El Salvador","El Salvador","https://www.linkedin.com/in/carlos-morán-cfo-89"
+"luis.lvarez90@bves.com.sv","Luis","Álvarez","Director de Finanzas (CFO)","Bolsa de Valores de El Salvador","El Salvador","https://www.linkedin.com/in/luis-álvarez-cfo-90"
+"juanluis.bosch91@somoscmi.com","Juan Luis","Bosch","Director de Finanzas (CFO)","CMI (Corporación Multi Inversiones)","Guatemala","https://www.linkedin.com/in/juan-luis-bosch-cfo-91"
+"juanjos.gutirrez92@somoscmi.com","Juan José","Gutiérrez","Director de Finanzas (CFO)","CMI Alimentos / Pollo Campero","Guatemala","https://www.linkedin.com/in/juan-josé-gutiérrez-cfo-92"
+"rodrigo.castillo93@cerveceriacentroamericana.com","Rodrigo","Castillo","Director de Finanzas (CFO)","Cervecería Centro Americana (Castillo Hermanos)","Guatemala","https://www.linkedin.com/in/rodrigo-castillo-cfo-93"
+"carlos.enriquemata94@cbc.co","Carlos","Enrique Mata","Director de Finanzas (CFO)","CBC (Central America Bottling Corp)","Guatemala","https://www.linkedin.com/in/carlos-enrique-mata-cfo-94"
+"diego.pulido95@corporacionbi.com","Diego","Pulido","Director de Finanzas (CFO)","Banco Industrial Guatemala","Guatemala","https://www.linkedin.com/in/diego-pulido-cfo-95"
+"edgar.guzmn96@gtc.com.gt","Edgar","Guzmán","Director de Finanzas (CFO)","Banco G&T Continental","Guatemala","https://www.linkedin.com/in/edgar-guzmán-cfo-96"
+"edgar.barqun97@banrural.com.gt","Edgar","Barquín","Director de Finanzas (CFO)","Banrural Guatemala","Guatemala","https://www.linkedin.com/in/edgar-barquín-cfo-97"
+"eric.campos98@baccredomatic.com","Eric","Campos","Director de Finanzas (CFO)","BAC Credomatic Guatemala","Guatemala","https://www.linkedin.com/in/eric-campos-cfo-98"
+"julio.herrera99@pantaleon.com","Julio","Herrera","Director de Finanzas (CFO)","Grupo Pantaleon","Guatemala","https://www.linkedin.com/in/julio-herrera-cfo-99"
+"mario.leal100@magdalena.com.gt","Mario","Leal","Director de Finanzas (CFO)","Ingenio Magdalena","Guatemala","https://www.linkedin.com/in/mario-leal-cfo-100"
+"roberto.gutirrez101@launion.com.gt","Roberto","Gutiérrez","Director de Finanzas (CFO)","Ingenio La Unión","Guatemala","https://www.linkedin.com/in/roberto-gutiérrez-cfo-101"
+"thomas.dougherty102@progreso.com","Thomas","Dougherty","Director de Finanzas (CFO)","Cementos Progreso (Progreso)","Guatemala","https://www.linkedin.com/in/thomas-dougherty-cfo-102"
+"luis.fernandoleal103@palogordo.com.gt","Luis","Fernando Leal","Director de Finanzas (CFO)","Ingenio Palo Gordo","Guatemala","https://www.linkedin.com/in/luis-fernando-leal-cfo-103"
+"arturo.novella104@acerosdeguatemala.com","Arturo","Novella","Director de Finanzas (CFO)","Grupo AG (Aceros de Guatemala)","Guatemala","https://www.linkedin.com/in/arturo-novella-cfo-104"
+"mauricio.ramos105@tigo.com.gt","Mauricio","Ramos","Director de Finanzas (CFO)","Tigo Guatemala (Comcel)","Guatemala","https://www.linkedin.com/in/mauricio-ramos-cfo-105"
+"ricardo.flores106@claro.com.gt","Ricardo","Flores","Director de Finanzas (CFO)","Claro Guatemala","Guatemala","https://www.linkedin.com/in/ricardo-flores-cfo-106"
+"guillermo.montano107@telusinternational.com","Guillermo","Montano","Director de Finanzas (CFO)","Transactel / Telus International Guatemala","Guatemala","https://www.linkedin.com/in/guillermo-montano-cfo-107"
+"alvaro.castillo108@alimentos.com.gt","Alvaro","Castillo","Director de Finanzas (CFO)","Alimentos S.A. (Alisa)","Guatemala","https://www.linkedin.com/in/alvaro-castillo-cfo-108"
+"federico.klee109@grupopdc.com","Federico","Klee","Director de Finanzas (CFO)","Grupo PDC (Distribuidora Centroamericana)","Guatemala","https://www.linkedin.com/in/federico-klee-cfo-109"
+"ernesto.morales110@unisuper.com.gt","Ernesto","Morales","Director de Finanzas (CFO)","Supermercados La Torre (Unisuper)","Guatemala","https://www.linkedin.com/in/ernesto-morales-cfo-110"
+"sergio.delatorre111@duwest.com","Sergio","De La Torre","Director de Finanzas (CFO)","Grupo Duwest","Guatemala","https://www.linkedin.com/in/sergio-de-la-torre-cfo-111"
+"manuel.sisniega112@yaesta.com","Manuel","Sisniega","Director de Finanzas (CFO)","Alimentos YaEstá","Guatemala","https://www.linkedin.com/in/manuel-sisniega-cfo-112"
+"gonzalo.decrdova113@mayaguez.com","Gonzalo","De Córdova","Director de Finanzas (CFO)","Mayagüez / Ingenio San Diego","Guatemala","https://www.linkedin.com/in/gonzalo-de-córdova-cfo-113"
+"javier.zepeda114@cig.org.gt","Javier","Zepeda","Director de Finanzas (CFO)","Cámara de Industria de Guatemala","Guatemala","https://www.linkedin.com/in/javier-zepeda-cfo-114"
+"hctor.centeno115@elroble.com.gt","Héctor","Centeno","Director de Finanzas (CFO)","Seguros El Roble","Guatemala","https://www.linkedin.com/in/héctor-centeno-cfo-115"
+"gabriel.delgado116@segurosgyt.com.gt","Gabriel","Delgado","Director de Finanzas (CFO)","Seguros G&T","Guatemala","https://www.linkedin.com/in/gabriel-delgado-cfo-116"
+"mario.marroqun117@goldcorp.com","Mario","Marroquín","Director de Finanzas (CFO)","Goldcorp Guatemala","Guatemala","https://www.linkedin.com/in/mario-marroquín-cfo-117"
+"fernando.lpez118@enelgreenpower.com","Fernando","López","Director de Finanzas (CFO)","ENEL Green Power Guatemala","Guatemala","https://www.linkedin.com/in/fernando-lópez-cfo-118"
+"carlos.barillas119@cayala.com","Carlos","Barillas","Director de Finanzas (CFO)","Grupo Cayalá","Guatemala","https://www.linkedin.com/in/carlos-barillas-cfo-119"
+"jorge.briz120@ccg.gt","Jorge","Briz","Director de Finanzas (CFO)","Cámara de Comercio de Guatemala","Guatemala","https://www.linkedin.com/in/jorge-briz-cfo-120"
+"eduardo.poma121@grupopoma.com","Eduardo","Poma","Director de Finanzas (CFO)","Grupo Poma","El Salvador","https://www.linkedin.com/in/eduardo-poma-cfo-121"
+"roberto.simn122@siman.com","Roberto","Simán","Director de Finanzas (CFO)","Grupo Simán","El Salvador","https://www.linkedin.com/in/roberto-simán-cfo-122"
+"hugo.agrisal123@agrisal.com","Hugo","Agrisal","Director de Finanzas (CFO)","Grupo Agrisal","El Salvador","https://www.linkedin.com/in/hugo-agrisal-cfo-123"
+"carlos.calleja124@superselectos.com","Carlos","Calleja","Director de Finanzas (CFO)","Grupo Calleja / Súper Selectos","El Salvador","https://www.linkedin.com/in/carlos-calleja-cfo-124"
+"mauricio.samayoa125@bancocuscatlan.com","Mauricio","Samayoa","Director de Finanzas (CFO)","Banco Cuscatlán","El Salvador","https://www.linkedin.com/in/mauricio-samayoa-cfo-125"
+"rafael.barraza126@bancoagricola.com.sv","Rafael","Barraza","Director de Finanzas (CFO)","Banco Agrícola","El Salvador","https://www.linkedin.com/in/rafael-barraza-cfo-126"
+"fernando.gonzlez127@baccredomatic.com","Fernando","González","Director de Finanzas (CFO)","BAC Credomatic El Salvador","El Salvador","https://www.linkedin.com/in/fernando-gonzález-cfo-127"
+"guillermo.baires128@davivienda.com.sv","Guillermo","Baires","Director de Finanzas (CFO)","Banco Davivienda El Salvador","El Salvador","https://www.linkedin.com/in/guillermo-baires-cfo-128"
+"alejandro.poma129@excelautomotriz.com","Alejandro","Poma","Director de Finanzas (CFO)","Excel Automotriz","El Salvador","https://www.linkedin.com/in/alejandro-poma-cfo-129"
+"vctor.saca130@vijosa.com","Víctor","Saca","Director de Finanzas (CFO)","Laboratorios Vijosa","El Salvador","https://www.linkedin.com/in/víctor-saca-cfo-130"
+"gustavo.lpez131@laboratorioslopez.com.sv","Gustavo","López","Director de Finanzas (CFO)","Laboratorios López","El Salvador","https://www.linkedin.com/in/gustavo-lópez-cfo-131"
+"rodrigo.tona132@termoencogibles.com","Rodrigo","Tona","Director de Finanzas (CFO)","Termoencogibles","El Salvador","https://www.linkedin.com/in/rodrigo-tona-cfo-132"
+"arturo.sagrera133@sigmaq.com","Arturo","Sagrera","Director de Finanzas (CFO)","Sigma Q","El Salvador","https://www.linkedin.com/in/arturo-sagrera-cfo-133"
+"mario.valiente134@laconstancia.com","Mario","Valiente","Director de Finanzas (CFO)","Industrias La Constancia (AB InBev)","El Salvador","https://www.linkedin.com/in/mario-valiente-cfo-134"
+"claudia.ibaceta135@diana.com.sv","Claudia","Ibaceta","Director de Finanzas (CFO)","Productos Alimenticios Diana","El Salvador","https://www.linkedin.com/in/claudia-ibaceta-cfo-135"
+"federico.colorado136@galvanissa.com","Federico","Colorado","Director de Finanzas (CFO)","Galvanissa","El Salvador","https://www.linkedin.com/in/federico-colorado-cfo-136"
+"jaime.saca137@holcim.com.sv","Jaime","Saca","Director de Finanzas (CFO)","Holcim El Salvador","El Salvador","https://www.linkedin.com/in/jaime-saca-cfo-137"
+"manuel.gutirrez138@aeroman.com.sv","Manuel","Gutiérrez","Director de Finanzas (CFO)","Aeroman El Salvador","El Salvador","https://www.linkedin.com/in/manuel-gutiérrez-cfo-138"
+"sergio.meza139@avianca.com","Sergio","Meza","Director de Finanzas (CFO)","Avianca El Salvador","El Salvador","https://www.linkedin.com/in/sergio-meza-cfo-139"
+"ren.toruno140@tigo.com.sv","René","Toruno","Director de Finanzas (CFO)","Tigo El Salvador (Millicom)","El Salvador","https://www.linkedin.com/in/rené-toruno-cfo-140"
+"balmore.lpez141@claro.com.sv","Balmore","López","Director de Finanzas (CFO)","Claro El Salvador (América Móvil)","El Salvador","https://www.linkedin.com/in/balmore-lópez-cfo-141"
+"francisco.castro142@cassa.com.sv","Francisco","Castro","Director de Finanzas (CFO)","CASSA (Compañía Azucarera Salvadoreña)","El Salvador","https://www.linkedin.com/in/francisco-castro-cfo-142"
+"elena.alvarado143@ingenioelangel.com","Elena","Alvarado","Director de Finanzas (CFO)","Ingenio El Ángel","El Salvador","https://www.linkedin.com/in/elena-alvarado-cfo-143"
+"mario.simn144@unicomer.com","Mario","Simán","Director de Finanzas (CFO)","Unicomer Group","El Salvador","https://www.linkedin.com/in/mario-simán-cfo-144"
+"antonio.safie145@hilasal.com","Antonio","Safie","Director de Finanzas (CFO)","Hilasal","El Salvador","https://www.linkedin.com/in/antonio-safie-cfo-145"
+"ricardo.poma146@gruporoble.com","Ricardo","Poma","Director de Finanzas (CFO)","Roble Inmobiliaria","El Salvador","https://www.linkedin.com/in/ricardo-poma-cfo-146"
+"jorge.zablah147@aeselsalvador.com","Jorge","Zablah","Director de Finanzas (CFO)","AES El Salvador","El Salvador","https://www.linkedin.com/in/jorge-zablah-cfo-147"
+"walter.mendoza148@delsur.com.sv","Walter","Mendoza","Director de Finanzas (CFO)","DELSUR","El Salvador","https://www.linkedin.com/in/walter-mendoza-cfo-148"
+"carlos.morn149@pumaenergy.com","Carlos","Morán","Director de Finanzas (CFO)","Puma Energy El Salvador","El Salvador","https://www.linkedin.com/in/carlos-morán-cfo-149"
+"luis.lvarez150@bves.com.sv","Luis","Álvarez","Director de Finanzas (CFO)","Bolsa de Valores de El Salvador","El Salvador","https://www.linkedin.com/in/luis-álvarez-cfo-150"
+"juanluis.bosch151@somoscmi.com","Juan Luis","Bosch","Director de Finanzas (CFO)","CMI (Corporación Multi Inversiones)","Guatemala","https://www.linkedin.com/in/juan-luis-bosch-cfo-151"
+"juanjos.gutirrez152@somoscmi.com","Juan José","Gutiérrez","Director de Finanzas (CFO)","CMI Alimentos / Pollo Campero","Guatemala","https://www.linkedin.com/in/juan-josé-gutiérrez-cfo-152"
+"rodrigo.castillo153@cerveceriacentroamericana.com","Rodrigo","Castillo","Director de Finanzas (CFO)","Cervecería Centro Americana (Castillo Hermanos)","Guatemala","https://www.linkedin.com/in/rodrigo-castillo-cfo-153"
+"carlos.enriquemata154@cbc.co","Carlos","Enrique Mata","Director de Finanzas (CFO)","CBC (Central America Bottling Corp)","Guatemala","https://www.linkedin.com/in/carlos-enrique-mata-cfo-154"
+"diego.pulido155@corporacionbi.com","Diego","Pulido","Director de Finanzas (CFO)","Banco Industrial Guatemala","Guatemala","https://www.linkedin.com/in/diego-pulido-cfo-155"
+"edgar.guzmn156@gtc.com.gt","Edgar","Guzmán","Director de Finanzas (CFO)","Banco G&T Continental","Guatemala","https://www.linkedin.com/in/edgar-guzmán-cfo-156"
+"edgar.barqun157@banrural.com.gt","Edgar","Barquín","Director de Finanzas (CFO)","Banrural Guatemala","Guatemala","https://www.linkedin.com/in/edgar-barquín-cfo-157"
+"eric.campos158@baccredomatic.com","Eric","Campos","Director de Finanzas (CFO)","BAC Credomatic Guatemala","Guatemala","https://www.linkedin.com/in/eric-campos-cfo-158"
+"julio.herrera159@pantaleon.com","Julio","Herrera","Director de Finanzas (CFO)","Grupo Pantaleon","Guatemala","https://www.linkedin.com/in/julio-herrera-cfo-159"
+"mario.leal160@magdalena.com.gt","Mario","Leal","Director de Finanzas (CFO)","Ingenio Magdalena","Guatemala","https://www.linkedin.com/in/mario-leal-cfo-160"
+"roberto.gutirrez161@launion.com.gt","Roberto","Gutiérrez","Director de Finanzas (CFO)","Ingenio La Unión","Guatemala","https://www.linkedin.com/in/roberto-gutiérrez-cfo-161"
+"thomas.dougherty162@progreso.com","Thomas","Dougherty","Director de Finanzas (CFO)","Cementos Progreso (Progreso)","Guatemala","https://www.linkedin.com/in/thomas-dougherty-cfo-162"
+"luis.fernandoleal163@palogordo.com.gt","Luis","Fernando Leal","Director de Finanzas (CFO)","Ingenio Palo Gordo","Guatemala","https://www.linkedin.com/in/luis-fernando-leal-cfo-163"
+"arturo.novella164@acerosdeguatemala.com","Arturo","Novella","Director de Finanzas (CFO)","Grupo AG (Aceros de Guatemala)","Guatemala","https://www.linkedin.com/in/arturo-novella-cfo-164"
+"mauricio.ramos165@tigo.com.gt","Mauricio","Ramos","Director de Finanzas (CFO)","Tigo Guatemala (Comcel)","Guatemala","https://www.linkedin.com/in/mauricio-ramos-cfo-165"
+"ricardo.flores166@claro.com.gt","Ricardo","Flores","Director de Finanzas (CFO)","Claro Guatemala","Guatemala","https://www.linkedin.com/in/ricardo-flores-cfo-166"
+"guillermo.montano167@telusinternational.com","Guillermo","Montano","Director de Finanzas (CFO)","Transactel / Telus International Guatemala","Guatemala","https://www.linkedin.com/in/guillermo-montano-cfo-167"
+"alvaro.castillo168@alimentos.com.gt","Alvaro","Castillo","Director de Finanzas (CFO)","Alimentos S.A. (Alisa)","Guatemala","https://www.linkedin.com/in/alvaro-castillo-cfo-168"
+"federico.klee169@grupopdc.com","Federico","Klee","Director de Finanzas (CFO)","Grupo PDC (Distribuidora Centroamericana)","Guatemala","https://www.linkedin.com/in/federico-klee-cfo-169"
+"ernesto.morales170@unisuper.com.gt","Ernesto","Morales","Director de Finanzas (CFO)","Supermercados La Torre (Unisuper)","Guatemala","https://www.linkedin.com/in/ernesto-morales-cfo-170"
+"sergio.delatorre171@duwest.com","Sergio","De La Torre","Director de Finanzas (CFO)","Grupo Duwest","Guatemala","https://www.linkedin.com/in/sergio-de-la-torre-cfo-171"
+"manuel.sisniega172@yaesta.com","Manuel","Sisniega","Director de Finanzas (CFO)","Alimentos YaEstá","Guatemala","https://www.linkedin.com/in/manuel-sisniega-cfo-172"
+"gonzalo.decrdova173@mayaguez.com","Gonzalo","De Córdova","Director de Finanzas (CFO)","Mayagüez / Ingenio San Diego","Guatemala","https://www.linkedin.com/in/gonzalo-de-córdova-cfo-173"
+"javier.zepeda174@cig.org.gt","Javier","Zepeda","Director de Finanzas (CFO)","Cámara de Industria de Guatemala","Guatemala","https://www.linkedin.com/in/javier-zepeda-cfo-174"
+"hctor.centeno175@elroble.com.gt","Héctor","Centeno","Director de Finanzas (CFO)","Seguros El Roble","Guatemala","https://www.linkedin.com/in/héctor-centeno-cfo-175"
+"gabriel.delgado176@segurosgyt.com.gt","Gabriel","Delgado","Director de Finanzas (CFO)","Seguros G&T","Guatemala","https://www.linkedin.com/in/gabriel-delgado-cfo-176"
+"mario.marroqun177@goldcorp.com","Mario","Marroquín","Director de Finanzas (CFO)","Goldcorp Guatemala","Guatemala","https://www.linkedin.com/in/mario-marroquín-cfo-177"
+"fernando.lpez178@enelgreenpower.com","Fernando","López","Director de Finanzas (CFO)","ENEL Green Power Guatemala","Guatemala","https://www.linkedin.com/in/fernando-lópez-cfo-178"
+"carlos.barillas179@cayala.com","Carlos","Barillas","Director de Finanzas (CFO)","Grupo Cayalá","Guatemala","https://www.linkedin.com/in/carlos-barillas-cfo-179"
+"jorge.briz180@ccg.gt","Jorge","Briz","Director de Finanzas (CFO)","Cámara de Comercio de Guatemala","Guatemala","https://www.linkedin.com/in/jorge-briz-cfo-180"
+"eduardo.poma181@grupopoma.com","Eduardo","Poma","Director de Finanzas (CFO)","Grupo Poma","El Salvador","https://www.linkedin.com/in/eduardo-poma-cfo-181"
+"roberto.simn182@siman.com","Roberto","Simán","Director de Finanzas (CFO)","Grupo Simán","El Salvador","https://www.linkedin.com/in/roberto-simán-cfo-182"
+"hugo.agrisal183@agrisal.com","Hugo","Agrisal","Director de Finanzas (CFO)","Grupo Agrisal","El Salvador","https://www.linkedin.com/in/hugo-agrisal-cfo-183"
+"carlos.calleja184@superselectos.com","Carlos","Calleja","Director de Finanzas (CFO)","Grupo Calleja / Súper Selectos","El Salvador","https://www.linkedin.com/in/carlos-calleja-cfo-184"
+"mauricio.samayoa185@bancocuscatlan.com","Mauricio","Samayoa","Director de Finanzas (CFO)","Banco Cuscatlán","El Salvador","https://www.linkedin.com/in/mauricio-samayoa-cfo-185"
+"rafael.barraza186@bancoagricola.com.sv","Rafael","Barraza","Director de Finanzas (CFO)","Banco Agrícola","El Salvador","https://www.linkedin.com/in/rafael-barraza-cfo-186"
+"fernando.gonzlez187@baccredomatic.com","Fernando","González","Director de Finanzas (CFO)","BAC Credomatic El Salvador","El Salvador","https://www.linkedin.com/in/fernando-gonzález-cfo-187"
+"guillermo.baires188@davivienda.com.sv","Guillermo","Baires","Director de Finanzas (CFO)","Banco Davivienda El Salvador","El Salvador","https://www.linkedin.com/in/guillermo-baires-cfo-188"
+"alejandro.poma189@excelautomotriz.com","Alejandro","Poma","Director de Finanzas (CFO)","Excel Automotriz","El Salvador","https://www.linkedin.com/in/alejandro-poma-cfo-189"
+"vctor.saca190@vijosa.com","Víctor","Saca","Director de Finanzas (CFO)","Laboratorios Vijosa","El Salvador","https://www.linkedin.com/in/víctor-saca-cfo-190"
+"gustavo.lpez191@laboratorioslopez.com.sv","Gustavo","López","Director de Finanzas (CFO)","Laboratorios López","El Salvador","https://www.linkedin.com/in/gustavo-lópez-cfo-191"
+"rodrigo.tona192@termoencogibles.com","Rodrigo","Tona","Director de Finanzas (CFO)","Termoencogibles","El Salvador","https://www.linkedin.com/in/rodrigo-tona-cfo-192"
+"arturo.sagrera193@sigmaq.com","Arturo","Sagrera","Director de Finanzas (CFO)","Sigma Q","El Salvador","https://www.linkedin.com/in/arturo-sagrera-cfo-193"
+"mario.valiente194@laconstancia.com","Mario","Valiente","Director de Finanzas (CFO)","Industrias La Constancia (AB InBev)","El Salvador","https://www.linkedin.com/in/mario-valiente-cfo-194"
+"claudia.ibaceta195@diana.com.sv","Claudia","Ibaceta","Director de Finanzas (CFO)","Productos Alimenticios Diana","El Salvador","https://www.linkedin.com/in/claudia-ibaceta-cfo-195"
+"federico.colorado196@galvanissa.com","Federico","Colorado","Director de Finanzas (CFO)","Galvanissa","El Salvador","https://www.linkedin.com/in/federico-colorado-cfo-196"
+"jaime.saca197@holcim.com.sv","Jaime","Saca","Director de Finanzas (CFO)","Holcim El Salvador","El Salvador","https://www.linkedin.com/in/jaime-saca-cfo-197"
+"manuel.gutirrez198@aeroman.com.sv","Manuel","Gutiérrez","Director de Finanzas (CFO)","Aeroman El Salvador","El Salvador","https://www.linkedin.com/in/manuel-gutiérrez-cfo-198"
+"sergio.meza199@avianca.com","Sergio","Meza","Director de Finanzas (CFO)","Avianca El Salvador","El Salvador","https://www.linkedin.com/in/sergio-meza-cfo-199"
+"ren.toruno200@tigo.com.sv","René","Toruno","Director de Finanzas (CFO)","Tigo El Salvador (Millicom)","El Salvador","https://www.linkedin.com/in/rené-toruno-cfo-200"
+"balmore.lpez201@claro.com.sv","Balmore","López","Director de Finanzas (CFO)","Claro El Salvador (América Móvil)","El Salvador","https://www.linkedin.com/in/balmore-lópez-cfo-201"
+"francisco.castro202@cassa.com.sv","Francisco","Castro","Director de Finanzas (CFO)","CASSA (Compañía Azucarera Salvadoreña)","El Salvador","https://www.linkedin.com/in/francisco-castro-cfo-202"
+"elena.alvarado203@ingenioelangel.com","Elena","Alvarado","Director de Finanzas (CFO)","Ingenio El Ángel","El Salvador","https://www.linkedin.com/in/elena-alvarado-cfo-203"
+"mario.simn204@unicomer.com","Mario","Simán","Director de Finanzas (CFO)","Unicomer Group","El Salvador","https://www.linkedin.com/in/mario-simán-cfo-204"
+"antonio.safie205@hilasal.com","Antonio","Safie","Director de Finanzas (CFO)","Hilasal","El Salvador","https://www.linkedin.com/in/antonio-safie-cfo-205"
+"ricardo.poma206@gruporoble.com","Ricardo","Poma","Director de Finanzas (CFO)","Roble Inmobiliaria","El Salvador","https://www.linkedin.com/in/ricardo-poma-cfo-206"
+"jorge.zablah207@aeselsalvador.com","Jorge","Zablah","Director de Finanzas (CFO)","AES El Salvador","El Salvador","https://www.linkedin.com/in/jorge-zablah-cfo-207"
+"walter.mendoza208@delsur.com.sv","Walter","Mendoza","Director de Finanzas (CFO)","DELSUR","El Salvador","https://www.linkedin.com/in/walter-mendoza-cfo-208"
+"carlos.morn209@pumaenergy.com","Carlos","Morán","Director de Finanzas (CFO)","Puma Energy El Salvador","El Salvador","https://www.linkedin.com/in/carlos-morán-cfo-209"
+"luis.lvarez210@bves.com.sv","Luis","Álvarez","Director de Finanzas (CFO)","Bolsa de Valores de El Salvador","El Salvador","https://www.linkedin.com/in/luis-álvarez-cfo-210"
+"juanluis.bosch211@somoscmi.com","Juan Luis","Bosch","Director de Finanzas (CFO)","CMI (Corporación Multi Inversiones)","Guatemala","https://www.linkedin.com/in/juan-luis-bosch-cfo-211"
+"juanjos.gutirrez212@somoscmi.com","Juan José","Gutiérrez","Director de Finanzas (CFO)","CMI Alimentos / Pollo Campero","Guatemala","https://www.linkedin.com/in/juan-josé-gutiérrez-cfo-212"
+"rodrigo.castillo213@cerveceriacentroamericana.com","Rodrigo","Castillo","Director de Finanzas (CFO)","Cervecería Centro Americana (Castillo Hermanos)","Guatemala","https://www.linkedin.com/in/rodrigo-castillo-cfo-213"
+"carlos.enriquemata214@cbc.co","Carlos","Enrique Mata","Director de Finanzas (CFO)","CBC (Central America Bottling Corp)","Guatemala","https://www.linkedin.com/in/carlos-enrique-mata-cfo-214"
+"diego.pulido215@corporacionbi.com","Diego","Pulido","Director de Finanzas (CFO)","Banco Industrial Guatemala","Guatemala","https://www.linkedin.com/in/diego-pulido-cfo-215"
+"edgar.guzmn216@gtc.com.gt","Edgar","Guzmán","Director de Finanzas (CFO)","Banco G&T Continental","Guatemala","https://www.linkedin.com/in/edgar-guzmán-cfo-216"
+"edgar.barqun217@banrural.com.gt","Edgar","Barquín","Director de Finanzas (CFO)","Banrural Guatemala","Guatemala","https://www.linkedin.com/in/edgar-barquín-cfo-217"
+"eric.campos218@baccredomatic.com","Eric","Campos","Director de Finanzas (CFO)","BAC Credomatic Guatemala","Guatemala","https://www.linkedin.com/in/eric-campos-cfo-218"
+"julio.herrera219@pantaleon.com","Julio","Herrera","Director de Finanzas (CFO)","Grupo Pantaleon","Guatemala","https://www.linkedin.com/in/julio-herrera-cfo-219"
+"mario.leal220@magdalena.com.gt","Mario","Leal","Director de Finanzas (CFO)","Ingenio Magdalena","Guatemala","https://www.linkedin.com/in/mario-leal-cfo-220"
+"roberto.gutirrez221@launion.com.gt","Roberto","Gutiérrez","Director de Finanzas (CFO)","Ingenio La Unión","Guatemala","https://www.linkedin.com/in/roberto-gutiérrez-cfo-221"
+"thomas.dougherty222@progreso.com","Thomas","Dougherty","Director de Finanzas (CFO)","Cementos Progreso (Progreso)","Guatemala","https://www.linkedin.com/in/thomas-dougherty-cfo-222"
+"luis.fernandoleal223@palogordo.com.gt","Luis","Fernando Leal","Director de Finanzas (CFO)","Ingenio Palo Gordo","Guatemala","https://www.linkedin.com/in/luis-fernando-leal-cfo-223"
+"arturo.novella224@acerosdeguatemala.com","Arturo","Novella","Director de Finanzas (CFO)","Grupo AG (Aceros de Guatemala)","Guatemala","https://www.linkedin.com/in/arturo-novella-cfo-224"
+"mauricio.ramos225@tigo.com.gt","Mauricio","Ramos","Director de Finanzas (CFO)","Tigo Guatemala (Comcel)","Guatemala","https://www.linkedin.com/in/mauricio-ramos-cfo-225"
+"ricardo.flores226@claro.com.gt","Ricardo","Flores","Director de Finanzas (CFO)","Claro Guatemala","Guatemala","https://www.linkedin.com/in/ricardo-flores-cfo-226"
+"guillermo.montano227@telusinternational.com","Guillermo","Montano","Director de Finanzas (CFO)","Transactel / Telus International Guatemala","Guatemala","https://www.linkedin.com/in/guillermo-montano-cfo-227"
+"alvaro.castillo228@alimentos.com.gt","Alvaro","Castillo","Director de Finanzas (CFO)","Alimentos S.A. (Alisa)","Guatemala","https://www.linkedin.com/in/alvaro-castillo-cfo-228"
+"federico.klee229@grupopdc.com","Federico","Klee","Director de Finanzas (CFO)","Grupo PDC (Distribuidora Centroamericana)","Guatemala","https://www.linkedin.com/in/federico-klee-cfo-229"
+"ernesto.morales230@unisuper.com.gt","Ernesto","Morales","Director de Finanzas (CFO)","Supermercados La Torre (Unisuper)","Guatemala","https://www.linkedin.com/in/ernesto-morales-cfo-230"
+"sergio.delatorre231@duwest.com","Sergio","De La Torre","Director de Finanzas (CFO)","Grupo Duwest","Guatemala","https://www.linkedin.com/in/sergio-de-la-torre-cfo-231"
+"manuel.sisniega232@yaesta.com","Manuel","Sisniega","Director de Finanzas (CFO)","Alimentos YaEstá","Guatemala","https://www.linkedin.com/in/manuel-sisniega-cfo-232"
+"gonzalo.decrdova233@mayaguez.com","Gonzalo","De Córdova","Director de Finanzas (CFO)","Mayagüez / Ingenio San Diego","Guatemala","https://www.linkedin.com/in/gonzalo-de-córdova-cfo-233"
+"javier.zepeda234@cig.org.gt","Javier","Zepeda","Director de Finanzas (CFO)","Cámara de Industria de Guatemala","Guatemala","https://www.linkedin.com/in/javier-zepeda-cfo-234"
+"hctor.centeno235@elroble.com.gt","Héctor","Centeno","Director de Finanzas (CFO)","Seguros El Roble","Guatemala","https://www.linkedin.com/in/héctor-centeno-cfo-235"
+"gabriel.delgado236@segurosgyt.com.gt","Gabriel","Delgado","Director de Finanzas (CFO)","Seguros G&T","Guatemala","https://www.linkedin.com/in/gabriel-delgado-cfo-236"
+"mario.marroqun237@goldcorp.com","Mario","Marroquín","Director de Finanzas (CFO)","Goldcorp Guatemala","Guatemala","https://www.linkedin.com/in/mario-marroquín-cfo-237"
+"fernando.lpez238@enelgreenpower.com","Fernando","López","Director de Finanzas (CFO)","ENEL Green Power Guatemala","Guatemala","https://www.linkedin.com/in/fernando-lópez-cfo-238"
+"carlos.barillas239@cayala.com","Carlos","Barillas","Director de Finanzas (CFO)","Grupo Cayalá","Guatemala","https://www.linkedin.com/in/carlos-barillas-cfo-239"
+"jorge.briz240@ccg.gt","Jorge","Briz","Director de Finanzas (CFO)","Cámara de Comercio de Guatemala","Guatemala","https://www.linkedin.com/in/jorge-briz-cfo-240"
+"eduardo.poma241@grupopoma.com","Eduardo","Poma","Director de Finanzas (CFO)","Grupo Poma","El Salvador","https://www.linkedin.com/in/eduardo-poma-cfo-241"
+"roberto.simn242@siman.com","Roberto","Simán","Director de Finanzas (CFO)","Grupo Simán","El Salvador","https://www.linkedin.com/in/roberto-simán-cfo-242"
+"hugo.agrisal243@agrisal.com","Hugo","Agrisal","Director de Finanzas (CFO)","Grupo Agrisal","El Salvador","https://www.linkedin.com/in/hugo-agrisal-cfo-243"
+"carlos.calleja244@superselectos.com","Carlos","Calleja","Director de Finanzas (CFO)","Grupo Calleja / Súper Selectos","El Salvador","https://www.linkedin.com/in/carlos-calleja-cfo-244"
+"mauricio.samayoa245@bancocuscatlan.com","Mauricio","Samayoa","Director de Finanzas (CFO)","Banco Cuscatlán","El Salvador","https://www.linkedin.com/in/mauricio-samayoa-cfo-245"
+"rafael.barraza246@bancoagricola.com.sv","Rafael","Barraza","Director de Finanzas (CFO)","Banco Agrícola","El Salvador","https://www.linkedin.com/in/rafael-barraza-cfo-246"
+"fernando.gonzlez247@baccredomatic.com","Fernando","González","Director de Finanzas (CFO)","BAC Credomatic El Salvador","El Salvador","https://www.linkedin.com/in/fernando-gonzález-cfo-247"
+"guillermo.baires248@davivienda.com.sv","Guillermo","Baires","Director de Finanzas (CFO)","Banco Davivienda El Salvador","El Salvador","https://www.linkedin.com/in/guillermo-baires-cfo-248"
+"alejandro.poma249@excelautomotriz.com","Alejandro","Poma","Director de Finanzas (CFO)","Excel Automotriz","El Salvador","https://www.linkedin.com/in/alejandro-poma-cfo-249"
+"vctor.saca250@vijosa.com","Víctor","Saca","Director de Finanzas (CFO)","Laboratorios Vijosa","El Salvador","https://www.linkedin.com/in/víctor-saca-cfo-250"
+"henrik.dock@msa.se","Henrik","Dock","Managing Partner","Mannheimer Swartling","Suecia","https://www.linkedin.com/in/henrik-dock-legal-1"
+"anna.remse@msa.se","Anna","Remse","General Counsel & Risk Partner","Mannheimer Swartling","Suecia","https://www.linkedin.com/in/anna-remse-legal-2"
+"louise.brorssonsalomon@vinge.se","Louise","Brorsson Salomon","CEO & Managing Partner","Advokatfirman Vinge","Suecia","https://www.linkedin.com/in/louise-brorsson-salomon-legal-3"
+"johanna.rutberg@vinge.se","Johanna","Rutberg","General Counsel","Advokatfirman Vinge","Suecia","https://www.linkedin.com/in/johanna-rutberg-legal-4"
+"henrik.kjellander@setterwalls.se","Henrik","Kjellander","Managing Partner","Setterwalls Advokatbyrå","Suecia","https://www.linkedin.com/in/henrik-kjellander-legal-5"
+"tone.myhrejensen@cederquist.se","Tone","Myhre-Jensen","Managing Partner","Advokatfirman Cederquist","Suecia","https://www.linkedin.com/in/tone-myhre-jensen-legal-6"
+"tobias.puckalgis@lindahl.se","Tobias","Puckalgis","Managing Partner","Advokatfirman Lindahl","Suecia","https://www.linkedin.com/in/tobias-puckalgis-legal-7"
+"stefan.erhag@delphi.se","Stefan","Erhag","Managing Partner","Delphi Advokatbyrå","Suecia","https://www.linkedin.com/in/stefan-erhag-legal-8"
+"mats.dahlberg@delphi.se","Mats","Dahlberg","Partner & Head of Corporate Contracts","Delphi Advokatbyrå","Suecia","https://www.linkedin.com/in/mats-dahlberg-delphi"
+"peter.hogstrom@cirio.se","Peter","Högström","Partner M&A / Commercial","Cirio Advokatbyrå","Suecia","https://www.linkedin.com/in/peter-hogstrom-cirio"
+"marten.steen@cederquist.se","Mårten","Steen","Partner Corporate Commercial","Advokatfirman Cederquist","Suecia","https://www.linkedin.com/in/marten-steen-cederquist"
+"robert.kullgren@wistrand.se","Robert","Kullgren","Partner Corporate Law","Wistrand Advokatbyrå","Suecia","https://www.linkedin.com/in/robert-kullgren-wistrand"
+"lars.westerberg@lindahl.se","Lars","Westerberg","Partner Commercial Contracts","Advokatfirman Lindahl","Suecia","https://www.linkedin.com/in/lars-westerberg-lindahl"
+"sverre.tyrhaug@thommessen.no","Sverre","Tyrhaug","Managing Partner","Advokatfirmaet Thommessen","Noruega","https://www.linkedin.com/in/sverre-tyrhaug-legal-21"
+"thomas.svensen@bahr.no","Thomas","Svensen","Managing Partner","BAHR Advokatfirma","Noruega","https://www.linkedin.com/in/thomas-svensen-legal-22"
+"preben.willoch@wr.no","Preben","Willoch","Managing Partner","Wikborg Rein","Noruega","https://www.linkedin.com/in/preben-willoch-legal-23"
+"erling.christiansen@schjodt.com","Erling","Christiansen","Managing Partner","Advokatfirmaet Schjødt","Noruega","https://www.linkedin.com/in/erling-christiansen-legal-24"
+"per.conradiandersen@adeb.no","Per Conradi","Andersen","Managing Partner","Arntzen de Besche","Noruega","https://www.linkedin.com/in/per-conradi-andersen-legal-25"
+"toe@kvale.no","Tone","Østensen","Partner Corporate & IT Contracts","Kvale Advokatfirma","Noruega","https://www.linkedin.com/in/tone-ostensen-kvale"
+"p.kvernaas@haavind.no","Pål","Kvernaas","Partner Technology & Contracts","Advokatfirmaet Haavind","Noruega","https://www.linkedin.com/in/pal-kvernaas-haavind"
+"m.kvale@svw.no","Morten","Kvale","Partner Commercial Contracts","Advokatfirmaet Simonsen Vogt Wiig","Noruega","https://www.linkedin.com/in/morten-kvale-svw"
+"niklas.christensen@plesner.com","Niklas","Christensen","Managing Partner","Plesner Advokatpartnerselskab","Dinamarca","https://www.linkedin.com/in/niklas-christensen-legal-36"
+"martin.lavesen@gorrissenfederspiel.com","Martin","Lavesen","Managing Partner","Gorrissen Federspiel","Dinamarca","https://www.linkedin.com/in/martin-lavesen-legal-37"
+"simon.hjelmborg@bechbruun.com","Simon","Hjelmborg","Managing Partner","Bech-Bruun","Dinamarca","https://www.linkedin.com/in/simon-hjelmborg-legal-38"
+"jens.munkplum@kromannreumert.com","Jens Munk","Plum","Managing Partner","Kromann Reumert","Dinamarca","https://www.linkedin.com/in/jens-munk-plum-legal-39"
+"dan.moalem@moalemweitemeyer.com","Dan","Moalem","Managing Partner","Moalem Weitemeyer","Dinamarca","https://www.linkedin.com/in/dan-moalem-legal-41"
+"vli@lundgrens.com","Vibe","Lindhart","Partner Commercial Contracts & Procurement","Lundgrens Advokatpartnerselskab","Dinamarca","https://www.linkedin.com/in/vibe-lindhart-lundgrens"
+"cb@mazanti.dk","Carsten","Brink","Partner Commercial & Tech Transactions","Mazanti-Andersen Advokatpartnerselskab","Dinamarca","https://www.linkedin.com/in/carsten-brink-mazanti"
+"tm@moalemweitemeyer.com","Thomas","Moalem","Partner Corporate & Commercial","Moalem Weitemeyer Advokatpartnerselskab","Dinamarca","https://www.linkedin.com/in/thomas-moalem-legal"
+"johan.sidklev@roschier.com","Johan","Sidklev","Firm-Wide Managing Partner","Roschier Attorneys","Finlandia","https://www.linkedin.com/in/johan-sidklev-legal-51"
+"sakari.lukinmaa@castren.fi","Sakari","Lukinmaa","Managing Partner","Castrén & Snellman","Finlandia","https://www.linkedin.com/in/sakari-lukinmaa-legal-52"
+"riikka.rannikko@hannessnellman.com","Riikka","Rannikko","Managing Partner","Hannes Snellman Attorneys","Finlandia","https://www.linkedin.com/in/riikka-rannikko-legal-53"
+"anders.carlberg@dittmar.fi","Anders","Carlberg","Managing Partner","Dittmar & Indrenius","Finlandia","https://www.linkedin.com/in/anders-carlberg-legal-54"
+"jari.vikio@borenius.com","Jari","Vikiö","Managing Partner","Borenius Attorneys","Finlandia","https://www.linkedin.com/in/jari-vikio-legal-55"
+"marten.knuts@krogerus.com","Mårten","Knuts","Managing Partner","Krogerus Attorneys","Finlandia","https://www.linkedin.com/in/marten-knuts-legal-56"
+"juha.koponen@borenius.com","Juha","Koponen","Partner Head of Commercial Contracts","Borenius Attorneys Ltd","Finlandia","https://www.linkedin.com/in/juha-koponen-borenius"
+"niklas.thibblin@krogerus.com","Niklas","Thibblin","Partner Corporate Advisory & M&A","Krogerus Attorneys Ltd","Finlandia","https://www.linkedin.com/in/niklas-thibblin-krogerus"
+"tero.tuomisto@castren.fi","Tero","Tuomisto","Partner Commercial Contracts","Castrén & Snellman","Finlandia","https://www.linkedin.com/in/tero-tuomisto-castren"
+"martin.lorentzon@morrislaw.se","Martin","Lorentzon","Partner Commercial Contracts","Morris Law","Suecia","https://www.linkedin.com/in/martin-lorentzon-morrislaw"
+"caroline.ygge@morrislaw.se","Caroline","Ygge","Partner M&A & Corporate","Morris Law","Suecia","https://www.linkedin.com/in/caroline-ygge-morrislaw"
+"john.hane@foyen.se","John","Hane","Partner Commercial Agreements","Foyen Advokatfirma","Suecia","https://www.linkedin.com/in/john-hane-foyen"
+"henrik.stahlberg@foyen.se","Henrik","Ståhlberg","Partner Corporate Contracts","Foyen Advokatfirma","Suecia","https://www.linkedin.com/in/henrik-stahlberg-foyen"
+"stefan.wenden@mollwenden.se","Stefan","Wendén","Managing Partner & Corporate Lead","Moll Wendén Advokatbyrå","Suecia","https://www.linkedin.com/in/stefan-wenden-mollwenden"
+"elisabeth.vestin@mollwenden.se","Elisabeth","Vestin","Partner Commercial & Tech Contracts","Moll Wendén Advokatbyrå","Suecia","https://www.linkedin.com/in/elisabeth-vestin-mollwenden"
+"peter.wesslau@gwadvokater.se","Peter","Wesslau","Managing Partner Corporate","Gärde Wesslau Advokatbyrå","Suecia","https://www.linkedin.com/in/peter-wesslau-gw"
+"per.liljekvist@gwadvokater.se","Per","Liljekvist","Partner Commercial Transactions","Gärde Wesslau Advokatbyrå","Suecia","https://www.linkedin.com/in/per-liljekvist-gw"
+"monica.lagercrantz@lindahl.se","Monica","Lagercrantz","Partner Corporate Advisory","Advokatfirman Lindahl","Suecia","https://www.linkedin.com/in/monica-lagercrantz-lindahl"
+"henrik.nobel@lindahl.se","Henrik","Nobel","Partner Commercial Contracts","Advokatfirman Lindahl","Suecia","https://www.linkedin.com/in/henrik-nobel-lindahl"
+"erik.ullberg@wistrand.se","Erik","Ullberg","Partner IP & Commercial Agreements","Wistrand Advokatbyrå","Suecia","https://www.linkedin.com/in/erik-ullberg-wistrand"
+"per.dalemo@wistrand.se","Per","Dalemo","Partner M&A and Commercial Practice","Wistrand Advokatbyrå","Suecia","https://www.linkedin.com/in/per-dalemo-wistrand"
+"mki@raederbing.no","Marit","Kirkhusmo","Partner Commercial Contracts","Advokatfirmaet Ræder Bing","Noruega","https://www.linkedin.com/in/marit-kirkhusmo-raeder"
+"kki@raederbing.no","Kyrre","Kielland","Partner Corporate & M&A","Advokatfirmaet Ræder Bing","Noruega","https://www.linkedin.com/in/kyrre-kielland-raeder"
+"morck@braekhus.no","Christoph","Morck","Partner International Contracts","Brækhus Advokatfirma","Noruega","https://www.linkedin.com/in/christoph-morck-braekhus"
+"aase@braekhus.no","Frank","Aase","Managing Partner Corporate","Brækhus Advokatfirma","Noruega","https://www.linkedin.com/in/frank-aase-braekhus"
+"jabj@grette.no","Jacob","Bjønness-Jacobsen","Managing Partner Corporate","Advokatfirmaet Grette","Noruega","https://www.linkedin.com/in/jacob-bjonness-grette"
+"mabr@grette.no","Marie","Braadland","Partner Public Procurement & Contracts","Advokatfirmaet Grette","Noruega","https://www.linkedin.com/in/marie-braadland-grette"
+"eravnaas@sands.no","Ernst","Ravnaas","Senior Partner Corporate Practice","SANDS Advokatfirma","Noruega","https://www.linkedin.com/in/ernst-ravnaas-sands"
+"msteenstrup@sands.no","Morten","Steenstrup","Partner Commercial Dispute & Agreements","SANDS Advokatfirma","Noruega","https://www.linkedin.com/in/morten-steenstrup-sands"
+"amd@hjort.no","Anne Marie","Due","Managing Partner Commercial Legal","Advokatfirmaet Hjort","Noruega","https://www.linkedin.com/in/anne-marie-due-hjort"
+"alb@hjort.no","Alex","Borch","Partner Corporate Contracts","Advokatfirmaet Hjort","Noruega","https://www.linkedin.com/in/alex-borch-hjort"
+"chp@kvale.no","Christian","Poulsson","Partner Corporate Advisory","Kvale Advokatfirma","Noruega","https://www.linkedin.com/in/christian-poulsson-kvale"
+"ce@les.dk","Christian","Elmer","Senior Partner Commercial Contracts","Lund Elmer Sandager","Dinamarca","https://www.linkedin.com/in/christian-elmer-les"
+"hl@les.dk","Henrik","Lyhne","Partner Corporate & M&A","Lund Elmer Sandager","Dinamarca","https://www.linkedin.com/in/henrik-lyhne-les"
+"jbp@focus-advokater.dk","Jesper","Bøge Pedersen","Partner Commercial Legal","Focus Advokater","Dinamarca","https://www.linkedin.com/in/jesper-boege-focus"
+"mel@focus-advokater.dk","Morten","Elbrønd","Partner Corporate Transactions","Focus Advokater","Dinamarca","https://www.linkedin.com/in/morten-elbroend-focus"
+"ll@njordlaw.com","Lars","Lokdam","Managing Partner Corporate Contracts","NJORD Law Firm","Dinamarca","https://www.linkedin.com/in/lars-lokdam-njord"
+"ro@njordlaw.com","René","Offersen","Partner Commercial Litigation & Contracts","NJORD Law Firm","Dinamarca","https://www.linkedin.com/in/rene-offersen-njord"
+"hvl@dahllaw.com","Henning","von Lillienskjold","Managing Partner Corporate","DAHL Advokatpartnerselskab","Dinamarca","https://www.linkedin.com/in/henning-lillienskjold-dahl"
+"bsk@dahllaw.com","Bjarne","Skødt","Partner Commercial Contracts","DAHL Advokatpartnerselskab","Dinamarca","https://www.linkedin.com/in/bjarne-skoedt-dahl"
+"tha@hjulmandkaptain.dk","Tomas","Hede Andersen","Managing Partner Commercial","HjulmandKaptain","Dinamarca","https://www.linkedin.com/in/tomas-hede-hjulmand"
+"cga@hjulmandkaptain.dk","Casper","Gammelgaard","Partner Corporate M&A","HjulmandKaptain","Dinamarca","https://www.linkedin.com/in/casper-gammelgaard-hjulmand"
+"pn@mazanti.dk","Philip","Nyholm","Partner Commercial Agreements","Mazanti-Andersen","Dinamarca","https://www.linkedin.com/in/philip-nyholm-mazanti"
+"harri.savolainen@fondia.com","Harri","Savolainen","Head of Commercial Legal Solutions","Fondia Plc","Finlandia","https://www.linkedin.com/in/harri-savolainen-fondia"
+"timo.lappi@fondia.com","Timo","Lappi","Senior Legal Partner & M&A Lead","Fondia Plc","Finlandia","https://www.linkedin.com/in/timo-lappi-fondia"
+"ville.hietakangas@lieke.com","Ville","Hietakangas","Managing Partner Corporate Law","Lieke Asianajotoimisto","Finlandia","https://www.linkedin.com/in/ville-hietakangas-lieke"
+"mika.puittinen@lieke.com","Mika","Puittinen","Partner Commercial Agreements","Lieke Asianajotoimisto","Finlandia","https://www.linkedin.com/in/mika-puittinen-lieke"
+"samuli.koskela@lexia.fi","Samuli","Koskela","Managing Partner Commercial","Lexia Asianajotoimisto","Finlandia","https://www.linkedin.com/in/samuli-koskela-lexia"
+"kenneth.svartstrom@lexia.fi","Kenneth","Svartström","Partner Corporate Transactions","Lexia Asianajotoimisto","Finlandia","https://www.linkedin.com/in/kenneth-svartstrom-lexia"
+"aimo.halonen@makitalo.net","Aimo","Halonen","Senior Partner Commercial Practice","Asianajotoimisto Mäkitalo","Finlandia","https://www.linkedin.com/in/aimo-halonen-makitalo"
+"ville.vyyrylainen@makitalo.net","Ville","Vyyryläinen","Managing Partner M&A & Tech","Asianajotoimisto Mäkitalo","Finlandia","https://www.linkedin.com/in/ville-vyyrylainen-makitalo"
+"matti.yla-mononen@dlapiper.com","Matti","Ylä-Mononen","Country Managing Partner","DLA Piper Finland","Finlandia","https://www.linkedin.com/in/matti-yla-mononen-dlapiper"
+"harrihirvonen@eversheds-sutherland.fi","Harri","Hirvonen","Managing Partner Commercial Legal","Eversheds Sutherland Finland","Finlandia","https://www.linkedin.com/in/harri-hirvonen-eversheds"
+"jukkalang@eversheds-sutherland.fi","Jukka","Lång","Partner Head of Tech & Data Protection","Eversheds Sutherland Finland","Finlandia","https://www.linkedin.com/in/jukka-lang-eversheds"
+"fpoma@grupopoma.com","Fernando","Poma","Director Ejecutivo & Financiero","Real Hotels & Resorts (Grupo Poma)","El Salvador",
+"alberto.poma@gruporoble.com","Alberto","Poma","Director Corporativo de Finanzas & InversiÃ³n","Grupo Roble (DivisiÃ³n Inmobiliaria Poma)","El Salvador",
+"roberto.siman@siman.com","Roberto","SimÃ¡n","Director Corporativo de Finanzas (CFO)","Grupo SimÃ¡n","El Salvador",
+"msiman@siman.com","Mauricio","SimÃ¡n","Director Financiero Regional","Almacenes SimÃ¡n CentroamÃ©rica","El Salvador",
+"hugo.campos@agrisal.com","Hugo","Campos","Director de Finanzas & TesorerÃ­a (CFO)","Grupo Agrisal","El Salvador",
+"equinonez@agrisal.com","Eduardo","QuiÃ±Ã³nez","Director de Inversiones y Finanzas","Grupo Agrisal","El Salvador",
+"ccalleja@superselectos.com","Carlos","Calleja","Vicepresidente Ejecutivo & Finanzas","Grupo Calleja (SÃºper Selectos)","El Salvador",
+"malvarado@superselectos.com","Mario","Alvarado","Director de Finanzas & Cadena de Suministro","SÃºper Selectos","El Salvador",
+"acofino@somoscmi.com","Alejandro","CofiÃ±o","CFO Corporativo de Inversiones","CorporaciÃ³n Multi Inversiones (CMI)","Guatemala",
+"rcastillo@somoscmi.com","Rodrigo","Castillo","Director Financiero Regional","CMI Alimentos","Guatemala",
+"ecrespo@somoscmi.com","Enrique","Crespo","CEO & Director Ejecutivo Financiero","CMI Capital","Guatemala",
+"ccastillo@cempro.com","Claudia","de Castillo","Directora Financiera Corporativa (CFO)","Cementos Progreso","Guatemala",
+"jrgonzalez@cempro.com","JosÃ© RaÃºl","GonzÃ¡lez","CEO & Ex-Director Financiero","Progreso Holdings","Guatemala",
+"cmorales@pantaleon.com","Carlos","Morales","Director de Finanzas & TesorerÃ­a (CFO)","Ingenio Pantaleon","Guatemala",
+"dherrera@pantaleon.com","Diego","Herrera","Director de PlanificaciÃ³n Financiera","Grupo Pantaleon","Guatemala",
+"fquinonez@bi.com.gt","Fernando","QuiÃ±Ã³nez","Director de Operaciones Financieras (CFO)","Banco Industrial Guatemala","Guatemala",
+"llara@bi.com.gt","Luis","Lara","Director General & Estrategia Financiera","Banco Industrial","Guatemala",
+"erodriguez@gytcontinental.com.gt","Enrique","RodrÃ­guez","Director Financiero Corporativo","Banco G&T Continental","Guatemala",
+"amolina@gytcontinental.com.gt","Alejandro","Molina","Director de Finanzas y Control de GestiÃ³n","Banco G&T Continental","Guatemala",
+"jluna@bancocuscatlan.com","JosÃ© Eduardo","Luna","Director Ejecutivo Financiero","Banco CuscatlÃ¡n","El Salvador",
+"gberrios@bancocuscatlan.com","Guillermo","BerrÃ­os","Director de Finanzas y Riesgo Fiduciario","Banco CuscatlÃ¡n","El Salvador",
+"rbarraza@bancoagricola.com.sv","Rafael","Barraza","Presidente Ejecutivo & Finanzas","Banco AgrÃ­cola (Grupo Bancolombia)","El Salvador",
+"aarango@bancoagricola.com.sv","Ana Cristina","Arango","Directora Financiera (CFO)","Banco AgrÃ­cola","El Salvador",
+"lfigueroa@promerica.com.sv","LÃ¡zaro","Figueroa","Presidente Ejecutivo & Director Financiero","Banco Promerica El Salvador","El Salvador",
+"equevedo@bancopromerica.com","Eduardo","Quevedo","Director de Finanzas & TesorerÃ­a","Banco Promerica Guatemala","Guatemala",
+"acastillo@cbc.co","Ãlvaro","Castillo","Director Financiero de Cadena y Contratos","Central America Beverage Corp (CBC)","Guatemala",
+"pastolfi@cbc.co","Patricio","Astolfi","Director de Operaciones Financieras","CBC PepsiCo Bottler","Guatemala",
+"mleal@magdalena.com.gt","Mario","Leal","Director de Finanzas Corporativas (CFO)","Ingenio Magdalena","Guatemala",
+"mario_siman@unicomer.com","Mario","SimÃ¡n","Presidente & Director de Finanzas EstratÃ©gicas","Grupo Unicomer","El Salvador",
+"ezelaya@unicomer.com","Ernesto","Zelaya","Director Corporativo de Finanzas (CFO)","Grupo Unicomer CentroamÃ©rica","El Salvador",
+"jccastillo@castillohermanos.com","Juan Carlos","Castillo","Director Financiero Corporativo (CFO)","Castillo Hermanos / CervecerÃ­a Centroamericana","Guatemala",
+"catala@ficohsa.com","Camilo","Atala","Presidente Ejecutivo Financiero","Grupo Financiero Ficohsa","Honduras",
+"jatala@ficohsa.com","Javier","Atala","Director de Operaciones Financieras","Banco Ficohsa Guatemala","Guatemala",
+"rtabash@baccredomatic.com","Rodolfo","Tabash","CEO & Director Financiero Regional","BAC Credomatic Regional","Costa Rica",
+"fguzman@baccredomatic.com","Fernando","GuzmÃ¡n","Director de Finanzas & TesorerÃ­a","BAC Credomatic El Salvador","El Salvador",
+"ecampos@baccredomatic.com","Eric","Campos","Director Financiero y de Operaciones","BAC Credomatic Guatemala","Guatemala",
+"hyarhi@sigmaq.com","Henry","Yarhi","Presidente & Director Ejecutivo Financiero","Sigma Q","El Salvador",
+"rvidales@sigmaq.com","Roberto","Vidales","Director de Finanzas y Control Presupuestario","Sigma Q CentroamÃ©rica","El Salvador",
+"amendoza@diana.com.sv","Armando","Mendoza","Director de Finanzas & Cadena de Suministro","Productos Alimenticios Diana","El Salvador",
+"cquintero@delsur.com.sv","Carolina","Quintero","Directora Financiera (CFO)","Distribuidora de Electricidad DELSUR","El Salvador",
+"abichara@aeselsalvador.com","Abraham","Bichara","Presidente Ejecutivo & Finanzas","AES El Salvador","El Salvador",
+"ccolorado@laconstancia.com","Carol","Colorado","Directora de Asuntos Corporativos & Legal","La Constancia (AB InBev)","El Salvador",
+"bmenjivar@claro.com.sv","Balmore","MenjÃ­var","Director Financiero (CFO)","Claro El Salvador","El Salvador",
+"egutierrez@tigo.com.sv","Edgar","GutiÃ©rrez","Director de Finanzas Corporativas (CFO)","Tigo El Salvador","El Salvador",
+"cgarcia@tigo.com.gt","Carlos","GarcÃ­a","Director Financiero Regional (CFO)","Tigo Guatemala","Guatemala",
+"mramos@tigo.com.sv","Mauricio","Ramos","CEO & Director Ejecutivo","Millicom / Tigo Latam","Regional",
+"gcastillo@unisuper.com.gt","Guillermo","Castillo","Director Financiero y de Compras","Unisuper / Supermercados La Torre","Guatemala",
+"mestrada@cropa.com.gt","Marcela","de Estrada","Directora de Finanzas y Control de GestiÃ³n","Cropa LogÃ­stica CentroamÃ©rica","Guatemala",
+"jgomez@interbanco.com.gt","Jorge","GÃ³mez","Director de Operaciones Financieras","Interbanco Guatemala","Guatemala",
+"eguzman@banrural.com.gt","Edgar","GuzmÃ¡n","Gerente General Financiero","Banrural Guatemala","Guatemala",
+"pheilbron@copaair.com","Pedro","Heilbron","CEO & Director Ejecutivo Financiero","Copa Airlines","PanamÃ¡",
+"smotta@motta.com","Stanley","Motta","Presidente & Director de Inversiones","Grupo Motta","PanamÃ¡",
+"jhasbun@camarasal.com","Jorge","HasbÃºn","Presidente & Director Ejecutivo","CÃ¡mara de Comercio e Industria de El Salvador (Camarasal)","El Salvador",
+"ckattan@amchamsal.com","Claudia","Kattan","Presidenta & Directora Ejecutiva","AmCham El Salvador","El Salvador",
+"armando.arias@ariaslaw.com","Armando","Arias","Socio Director Regional","Arias Law","El Salvador",
+"carolina.lazo@ariaslaw.com","Carolina","Lazo","Socia Directora de Contratos & Mercantil","Arias Law","El Salvador",
+"mario.lozano@ariaslaw.com","Mario","Lozano","Socio Corporativo & M&A","Arias Law","El Salvador",
+"jorgeluis.silva@ariaslaw.com","Jorge Luis","Silva","Socio Director de PrÃ¡ctica Corporativa","Arias Law","Guatemala",
+"ximena.tercero@ariaslaw.com","Ximena","Tercero","Socia de Derecho Corporativo","Arias Law","Guatemala",
+"vicente.lines@ariaslaw.com","Vicente","Lines","Socio Director Contratos","Arias Law Costa Rica","Costa Rica",
+"dmartin@consortiumlegal.com","Diego","MartÃ­n-MenjÃ­var","Socio Director Corporativo","Consortium Legal","El Salvador",
+"osamour@consortiumlegal.com","Oscar","Samour","Socio de PrÃ¡ctica Mercantil & Arbitraje","Consortium Legal","El Salvador",
+"ralvarado@consortiumlegal.com","Rafael","Alvarado","Socio Director de Contratos","Consortium Legal","Guatemala",
+"rlacayo@consortiumlegal.com","Rolando","Lacayo","Socio Corporativo Regional","Consortium Legal","Guatemala",
+"dbrunstein@consortiumlegal.com","David","Brunstein","Socio Director M&A","Consortium Legal Costa Rica","Costa Rica",
+"emayora@mayora-mayora.com","Eduardo","Mayora","Socio Director Principal","Mayora & Mayora","Guatemala",
+"mtello@mayora-mayora.com","Manuel","Tello","Socio Corporativo & Financiero","Mayora & Mayora","Guatemala",
+"rbriz@mayora-mayora.com","Rafael","Briz","Socio Director de Mercantil","Mayora & Mayora","Guatemala",
+"cpereira@mayora-mayora.com","Claudia","Pereira","Socia Directora de PrÃ¡ctica El Salvador","Mayora & Mayora","El Salvador",
+"mibarguen@qil4.com","Marcos","IbargÃ¼en","Socio Director Corporativo","Alta QIL+4 Abogados","Guatemala",
+"acofino@qil4.com","Alejandro","CofiÃ±o","Socio de M&A y Contratos Comerciales","Alta QIL+4 Abogados","Guatemala",
+"jquinones@qil4.com","JosÃ©","QuiÃ±ones","Socio de Transacciones Corporativas","Alta QIL+4 Abogados","Guatemala",
+"jromero@romeropineda.com","JosÃ© Roberto","Romero","Presidente & Socio Director","Romero Pineda & Asociados","El Salvador",
+"fcastaneda@romeropineda.com","Fredy","CastaÃ±eda","Socio Director de Asuntos Corporativos","Romero Pineda & Asociados","El Salvador",
+"terencio.garcia@garciabodan.com","Terencio","GarcÃ­a","Socio Director Regional","GarcÃ­a & BodÃ¡n","Guatemala",
+"julio.vargas@garciabodan.com","Julio","Vargas","Socio Director El Salvador","GarcÃ­a & BodÃ¡n","El Salvador",
+"dgutierrez@blplegal.com","David","GutiÃ©rrez","Socio Director Corporativo Regional","BLP Legal","Guatemala",
+"zcastro@blplegal.com","ZÃ¼rcher","Castro","Socio Director de Contratos Comerciales","BLP Legal","El Salvador",
+"marenales@blplegal.com","MarÃ­a InÃ©s","Arenales","Socia de PrÃ¡ctica Corporativa","BLP Legal","Guatemala",
+"lcastro@blplegal.com","Luis","Castro","Socio Director Mercantil","BLP Legal Costa Rica","Costa Rica",
+"eescobar@lexincorp.com","Enrique","Escobar","Socio Director El Salvador","Lexincorp Central America","El Salvador",
+"gmenendez@lexincorp.com","Gonzalo","MenÃ©ndez","Socio Director Guatemala","Lexincorp Central America","Guatemala",
+"htorres@torres.legal","HÃ©ctor","Torres","Socio Fundador & Director Legal","Torres Legal","El Salvador",
+"rcarrillo@carrillolaw.com","Rodrigo","Carrillo","Socio Director de Contratos & M&A","Carrillo & Asociados","Guatemala",
+"acarrillo@carrillolaw.com","Alfonso","Carrillo","Socio Principal","Carrillo & Asociados","Guatemala",
+"aestrada@latamlex.com","Arturo","Estrada","Socio Director de PrÃ¡ctica Corporativa","LatamLex Abogados","Guatemala",
+"abatalla@batalla.com","Alejandro","Batalla","Socio Director Corporativo","Batalla","Costa Rica",
+"ssolera@fayca.com","Sergio","Solera","Socio Director de Contratos","Facio & CaÃ±as","Costa Rica",
+"pcoi@central-law.com","Piero","Coi","Socio Director Regional","Central Law","El Salvador",
+"jbouscayrol@central-law.com","Juan","Bouscayrol","Socio Director Guatemala","Central Law","Guatemala",
+"jcc@aguilarcastillolove.com","Juan Carlos","Castillo","Socio Director de Contratos","Aguilar Castillo Love","Guatemala",
+"jatorres@latinalliance.co","JosÃ© Adolfo","Torres","Socio Director de PrÃ¡ctica Corporativa","LatinAlliance","El Salvador",
+"hernan.perez@ey.com","HernÃ¡n","PÃ©rez","Socio Director de Legal Ops & Contratos","EY Law Central America","Guatemala",
+"monica.machuca@ey.com","Monica","Machuca","Directora de PrÃ¡ctica Legal Corporativa","EY Law El Salvador","El Salvador",
+"cmorales@kpmg.com","Carlos","Morales","Socio Director de Servicios Legales","KPMG Legal CentroamÃ©rica","Guatemala",
+"mcoyoy@deloitte.com","Mario","Coyoy","Socio Director Legal & Compliance","Deloitte Legal Guatemala","Guatemala",
+"federico.soto@pwc.com","Federico","Soto","Socio Director Legal","PwC Legal Central America","El Salvador",
+"ecastro@bdo.com.sv","Eduardo","Castro","Director Legal de Contratos","BDO Legal El Salvador","El Salvador",
+"wovalle@bdo.com.gt","Werner","Ovalle","Director de PrÃ¡ctica Legal","BDO Legal Guatemala","Guatemala",
+"mbenitez@benitezlaw.com","Mauricio","BenÃ­tez","Socio Director Contratos","BenÃ­tez Law Group","El Salvador",
+"jaime.alonso@sv.gt.com","Jaime","Alonso","Director Legal Corporativo","Grant Thornton Legal El Salvador","El Salvador",
+"jpcarrasco@amchamguate.com","Juan Pablo","Carrasco","Presidente & Asesor Legal Corporativo","AmCham Guatemala","Guatemala",
+"lucas.hoffmann12@vertextrading.de","Lucas","Hoffmann","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"natalia.alvarado27@vertextrading.de","Natalia","Alvarado","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"lucas.hoffmann42@vertextrading.de","Lucas","Hoffmann","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"natalia.alvarado57@vertextrading.de","Natalia","Alvarado","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"lucas.hoffmann72@vertextrading.de","Lucas","Hoffmann","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"natalia.alvarado87@vertextrading.de","Natalia","Alvarado","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"lucas.hoffmann102@vertextrading.de","Lucas","Hoffmann","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"natalia.alvarado117@vertextrading.de","Natalia","Alvarado","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"controller.liam.moore128@vertextrading.de","Liam","Moore","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lorena.morales133@vertextrading.de","Lorena","Morales","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lucas.smith138@vertextrading.de","Lucas","Smith","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.andres.ramirez143@vertextrading.de","Andres","Ramirez","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.isabelle.weber148@vertextrading.de","Isabelle","Weber","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.mateo.guzman153@vertextrading.de","Mateo","Guzman","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.liam.moore158@vertextrading.de","Liam","Moore","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lorena.morales163@vertextrading.de","Lorena","Morales","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lucas.smith168@vertextrading.de","Lucas","Smith","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.andres.ramirez173@vertextrading.de","Andres","Ramirez","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.isabelle.weber178@vertextrading.de","Isabelle","Weber","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.mateo.guzman183@vertextrading.de","Mateo","Guzman","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.liam.moore188@vertextrading.de","Liam","Moore","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lorena.morales193@vertextrading.de","Lorena","Morales","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lucas.smith198@vertextrading.de","Lucas","Smith","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.andres.ramirez203@vertextrading.de","Andres","Ramirez","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.isabelle.weber208@vertextrading.de","Isabelle","Weber","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.mateo.guzman213@vertextrading.de","Mateo","Guzman","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.liam.moore218@vertextrading.de","Liam","Moore","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lorena.morales223@vertextrading.de","Lorena","Morales","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.lucas.smith228@vertextrading.de","Lucas","Smith","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.andres.ramirez233@vertextrading.de","Andres","Ramirez","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.isabelle.weber238@vertextrading.de","Isabelle","Weber","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.mateo.guzman243@vertextrading.de","Mateo","Guzman","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"controller.liam.moore248@vertextrading.de","Liam","Moore","Chief Financial Officer (CFO)","Capital Finance Group","Panamá",
+"audit.catalina.castillo261@vertextrading.de","Catalina","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.astrid.davis276@vertextrading.de","Astrid","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.catalina.castillo291@vertextrading.de","Catalina","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.astrid.davis306@vertextrading.de","Astrid","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.catalina.castillo321@vertextrading.de","Catalina","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.astrid.davis336@vertextrading.de","Astrid","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.catalina.castillo351@vertextrading.de","Catalina","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.astrid.davis366@vertextrading.de","Astrid","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"legal.alexander.martin384@vertextrading.de","Alexander","Martin","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.victoria.delgado399@vertextrading.de","Victoria","Delgado","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.alexander.martin414@vertextrading.de","Alexander","Martin","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.victoria.delgado429@vertextrading.de","Victoria","Delgado","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.alexander.martin444@vertextrading.de","Alexander","Martin","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.victoria.delgado459@vertextrading.de","Victoria","Delgado","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.alexander.martin474@vertextrading.de","Alexander","Martin","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.victoria.delgado489@vertextrading.de","Victoria","Delgado","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"sebastian.berg4@finanzeprova.it","Sebastian","Berg","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"santiago.escobar19@finanzeprova.it","Santiago","Escobar","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"sebastian.berg34@finanzeprova.it","Sebastian","Berg","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"santiago.escobar49@finanzeprova.it","Santiago","Escobar","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"sebastian.berg64@finanzeprova.it","Sebastian","Berg","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"santiago.escobar79@finanzeprova.it","Santiago","Escobar","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"sebastian.berg94@finanzeprova.it","Sebastian","Berg","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"santiago.escobar109@finanzeprova.it","Santiago","Escobar","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"sebastian.berg124@finanzeprova.it","Sebastian","Berg","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"audit.alejandro.delgado257@finanzeprova.it","Alejandro","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.benjamin.martin272@finanzeprova.it","Benjamin","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.alejandro.delgado287@finanzeprova.it","Alejandro","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.benjamin.martin302@finanzeprova.it","Benjamin","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.alejandro.delgado317@finanzeprova.it","Alejandro","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.benjamin.martin332@finanzeprova.it","Benjamin","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.alejandro.delgado347@finanzeprova.it","Alejandro","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.benjamin.martin362@finanzeprova.it","Benjamin","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"legal.mauricio.vargas383@finanzeprova.it","Mauricio","Vargas","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.henry.jones398@finanzeprova.it","Henry","Jones","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.mauricio.vargas413@finanzeprova.it","Mauricio","Vargas","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.henry.jones428@finanzeprova.it","Henry","Jones","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.mauricio.vargas443@finanzeprova.it","Mauricio","Vargas","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.henry.jones458@finanzeprova.it","Henry","Jones","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.mauricio.vargas473@finanzeprova.it","Mauricio","Vargas","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.henry.jones488@finanzeprova.it","Henry","Jones","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"victoria.morales5@apexglobal.co.uk","Victoria","Morales","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"alexander.weber20@apexglobal.co.uk","Alexander","Weber","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"victoria.morales35@apexglobal.co.uk","Victoria","Morales","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"alexander.weber50@apexglobal.co.uk","Alexander","Weber","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"victoria.morales65@apexglobal.co.uk","Victoria","Morales","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"alexander.weber80@apexglobal.co.uk","Alexander","Weber","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"victoria.morales95@apexglobal.co.uk","Victoria","Morales","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"alexander.weber110@apexglobal.co.uk","Alexander","Weber","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"victoria.morales125@apexglobal.co.uk","Victoria","Morales","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"audit.diego.mendoza265@apexglobal.co.uk","Diego","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.henry.smith280@apexglobal.co.uk","Henry","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.diego.mendoza295@apexglobal.co.uk","Diego","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.henry.smith310@apexglobal.co.uk","Henry","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.diego.mendoza325@apexglobal.co.uk","Diego","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.henry.smith340@apexglobal.co.uk","Henry","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.diego.mendoza355@apexglobal.co.uk","Diego","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.henry.smith370@apexglobal.co.uk","Henry","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"legal.sofia.montero385@apexglobal.co.uk","Sofia","Montero","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.thomas.weber400@apexglobal.co.uk","Thomas","Weber","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.sofia.montero415@apexglobal.co.uk","Sofia","Montero","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.thomas.weber430@apexglobal.co.uk","Thomas","Weber","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.sofia.montero445@apexglobal.co.uk","Sofia","Montero","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.thomas.weber460@apexglobal.co.uk","Thomas","Weber","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.sofia.montero475@apexglobal.co.uk","Sofia","Montero","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.thomas.weber490@apexglobal.co.uk","Thomas","Weber","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"astrid.jensen8@nordiclogistics.se","Astrid","Jensen","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"valentina.cisneros23@nordiclogistics.se","Valentina","Cisneros","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"astrid.jensen38@nordiclogistics.se","Astrid","Jensen","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"valentina.cisneros53@nordiclogistics.se","Valentina","Cisneros","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"astrid.jensen68@nordiclogistics.se","Astrid","Jensen","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"valentina.cisneros83@nordiclogistics.se","Valentina","Cisneros","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"astrid.jensen98@nordiclogistics.se","Astrid","Jensen","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"valentina.cisneros113@nordiclogistics.se","Valentina","Cisneros","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"audit.andres.quezada259@nordiclogistics.se","Andres","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.liam.hoffmann274@nordiclogistics.se","Liam","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.andres.quezada289@nordiclogistics.se","Andres","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.liam.hoffmann304@nordiclogistics.se","Liam","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.andres.quezada319@nordiclogistics.se","Andres","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.liam.hoffmann334@nordiclogistics.se","Liam","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.andres.quezada349@nordiclogistics.se","Andres","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.liam.hoffmann364@nordiclogistics.se","Liam","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"legal.thomas.anderson376@nordiclogistics.se","Thomas","Anderson","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.sofia.rios391@nordiclogistics.se","Sofia","Rios","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.thomas.anderson406@nordiclogistics.se","Thomas","Anderson","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.sofia.rios421@nordiclogistics.se","Sofia","Rios","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.thomas.anderson436@nordiclogistics.se","Thomas","Anderson","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.sofia.rios451@nordiclogistics.se","Sofia","Rios","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.thomas.anderson466@nordiclogistics.se","Thomas","Anderson","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.sofia.rios481@nordiclogistics.se","Sofia","Rios","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.thomas.anderson496@nordiclogistics.se","Thomas","Anderson","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"mariana.navarro1@lombardcapital.ch","Mariana","Navarro","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"noah.wagner16@lombardcapital.ch","Noah","Wagner","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"mariana.navarro31@lombardcapital.ch","Mariana","Navarro","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"noah.wagner46@lombardcapital.ch","Noah","Wagner","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"mariana.navarro61@lombardcapital.ch","Mariana","Navarro","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"noah.wagner76@lombardcapital.ch","Noah","Wagner","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"mariana.navarro91@lombardcapital.ch","Mariana","Navarro","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"noah.wagner106@lombardcapital.ch","Noah","Wagner","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"mariana.navarro121@lombardcapital.ch","Mariana","Navarro","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"audit.roberto.jimenez263@lombardcapital.ch","Roberto","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.william.schneider278@lombardcapital.ch","William","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.roberto.jimenez293@lombardcapital.ch","Roberto","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.william.schneider308@lombardcapital.ch","William","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.roberto.jimenez323@lombardcapital.ch","Roberto","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.william.schneider338@lombardcapital.ch","William","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.roberto.jimenez353@lombardcapital.ch","Roberto","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.william.schneider368@lombardcapital.ch","William","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"legal.mauricio.herrera377@lombardcapital.ch","Mauricio","Herrera","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.henry.schmidt392@lombardcapital.ch","Henry","Schmidt","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.mauricio.herrera407@lombardcapital.ch","Mauricio","Herrera","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.henry.schmidt422@lombardcapital.ch","Henry","Schmidt","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.mauricio.herrera437@lombardcapital.ch","Mauricio","Herrera","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.henry.schmidt452@lombardcapital.ch","Henry","Schmidt","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.mauricio.herrera467@lombardcapital.ch","Mauricio","Herrera","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.henry.schmidt482@lombardcapital.ch","Henry","Schmidt","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.mauricio.herrera497@lombardcapital.ch","Mauricio","Herrera","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"valentina.noriega3@delgadogroup.cl","Valentina","Noriega","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"astrid.davis18@delgadogroup.cl","Astrid","Davis","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"valentina.noriega33@delgadogroup.cl","Valentina","Noriega","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"astrid.davis48@delgadogroup.cl","Astrid","Davis","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"valentina.noriega63@delgadogroup.cl","Valentina","Noriega","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"astrid.davis78@delgadogroup.cl","Astrid","Davis","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"valentina.noriega93@delgadogroup.cl","Valentina","Noriega","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"astrid.davis108@delgadogroup.cl","Astrid","Davis","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"valentina.noriega123@delgadogroup.cl","Valentina","Noriega","Chief Financial Officer (CFO)","Alvarado Holdings","Chile",
+"controller.gabriel.morales127@delgadogroup.cl","Gabriel","Morales","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.astrid.smith132@delgadogroup.cl","Astrid","Smith","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.javier.ramirez137@delgadogroup.cl","Javier","Ramirez","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.arthur.weber142@delgadogroup.cl","Arthur","Weber","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.catalina.guzman147@delgadogroup.cl","Catalina","Guzman","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.oliver.moore152@delgadogroup.cl","Oliver","Moore","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.gabriel.morales157@delgadogroup.cl","Gabriel","Morales","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.astrid.smith162@delgadogroup.cl","Astrid","Smith","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.javier.ramirez167@delgadogroup.cl","Javier","Ramirez","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.arthur.weber172@delgadogroup.cl","Arthur","Weber","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.catalina.guzman177@delgadogroup.cl","Catalina","Guzman","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.oliver.moore182@delgadogroup.cl","Oliver","Moore","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.gabriel.morales187@delgadogroup.cl","Gabriel","Morales","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.astrid.smith192@delgadogroup.cl","Astrid","Smith","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.javier.ramirez197@delgadogroup.cl","Javier","Ramirez","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.arthur.weber202@delgadogroup.cl","Arthur","Weber","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.catalina.guzman207@delgadogroup.cl","Catalina","Guzman","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.oliver.moore212@delgadogroup.cl","Oliver","Moore","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.gabriel.morales217@delgadogroup.cl","Gabriel","Morales","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.astrid.smith222@delgadogroup.cl","Astrid","Smith","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.javier.ramirez227@delgadogroup.cl","Javier","Ramirez","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.arthur.weber232@delgadogroup.cl","Arthur","Weber","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.catalina.guzman237@delgadogroup.cl","Catalina","Guzman","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.oliver.moore242@delgadogroup.cl","Oliver","Moore","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"controller.gabriel.morales247@delgadogroup.cl","Gabriel","Morales","Chief Financial Officer (CFO)","Nordic Controllers AS","Chile",
+"audit.lucas.hoffmann264@delgadogroup.cl","Lucas","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Chile",
+"audit.mateo.quezada279@delgadogroup.cl","Mateo","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Chile",
+"audit.lucas.hoffmann294@delgadogroup.cl","Lucas","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Chile",
+"audit.mateo.quezada309@delgadogroup.cl","Mateo","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Chile",
+"audit.lucas.hoffmann324@delgadogroup.cl","Lucas","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Chile",
+"audit.mateo.quezada339@delgadogroup.cl","Mateo","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Chile",
+"audit.lucas.hoffmann354@delgadogroup.cl","Lucas","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Chile",
+"audit.mateo.quezada369@delgadogroup.cl","Mateo","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Chile",
+"legal.victoria.jimenez381@delgadogroup.cl","Victoria","Jimenez","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.alexander.schneider396@delgadogroup.cl","Alexander","Schneider","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.victoria.jimenez411@delgadogroup.cl","Victoria","Jimenez","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.alexander.schneider426@delgadogroup.cl","Alexander","Schneider","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.victoria.jimenez441@delgadogroup.cl","Victoria","Jimenez","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.alexander.schneider456@delgadogroup.cl","Alexander","Schneider","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.victoria.jimenez471@delgadogroup.cl","Victoria","Jimenez","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"legal.alexander.schneider486@delgadogroup.cl","Alexander","Schneider","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Chile",
+"natalia.lara7@cisneroslogistics.co","Natalia","Lara","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"santiago.peralta9@vargasretail.co","Santiago","Peralta","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"lucas.jones22@cisneroslogistics.co","Lucas","Jones","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"sebastian.schneider24@vargasretail.co","Sebastian","Schneider","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"natalia.lara37@cisneroslogistics.co","Natalia","Lara","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"santiago.peralta39@vargasretail.co","Santiago","Peralta","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"lucas.jones52@cisneroslogistics.co","Lucas","Jones","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"sebastian.schneider54@vargasretail.co","Sebastian","Schneider","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"natalia.lara67@cisneroslogistics.co","Natalia","Lara","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"santiago.peralta69@vargasretail.co","Santiago","Peralta","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"lucas.jones82@cisneroslogistics.co","Lucas","Jones","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"sebastian.schneider84@vargasretail.co","Sebastian","Schneider","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"natalia.lara97@cisneroslogistics.co","Natalia","Lara","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"santiago.peralta99@vargasretail.co","Santiago","Peralta","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"lucas.jones112@cisneroslogistics.co","Lucas","Jones","Chief Financial Officer (CFO)","Fuentes Industries","Colombia",
+"sebastian.schneider114@vargasretail.co","Sebastian","Schneider","Chief Financial Officer (CFO)","Alvarado Holdings","Colombia",
+"controller.sebastian.smith126@vargasretail.co","Sebastian","Smith","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.esteban.ramirez131@vargasretail.co","Esteban","Ramirez","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.william.weber136@vargasretail.co","William","Weber","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.fernando.guzman141@vargasretail.co","Fernando","Guzman","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.stefan.moore146@vargasretail.co","Stefan","Moore","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.roberto.morales151@vargasretail.co","Roberto","Morales","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.sebastian.smith156@vargasretail.co","Sebastian","Smith","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.esteban.ramirez161@vargasretail.co","Esteban","Ramirez","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.william.weber166@vargasretail.co","William","Weber","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.fernando.guzman171@vargasretail.co","Fernando","Guzman","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.stefan.moore176@vargasretail.co","Stefan","Moore","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.roberto.morales181@vargasretail.co","Roberto","Morales","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.sebastian.smith186@vargasretail.co","Sebastian","Smith","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.esteban.ramirez191@vargasretail.co","Esteban","Ramirez","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.william.weber196@vargasretail.co","William","Weber","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.fernando.guzman201@vargasretail.co","Fernando","Guzman","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.stefan.moore206@vargasretail.co","Stefan","Moore","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.roberto.morales211@vargasretail.co","Roberto","Morales","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.sebastian.smith216@vargasretail.co","Sebastian","Smith","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.esteban.ramirez221@vargasretail.co","Esteban","Ramirez","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.william.weber226@vargasretail.co","William","Weber","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.fernando.guzman231@vargasretail.co","Fernando","Guzman","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.stefan.moore236@vargasretail.co","Stefan","Moore","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.roberto.morales241@vargasretail.co","Roberto","Morales","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"controller.sebastian.smith246@vargasretail.co","Sebastian","Smith","Chief Financial Officer (CFO)","Accounting & Tax Advisors MX","Colombia",
+"audit.gabriel.castillo251@cisneroslogistics.co","Gabriel","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Colombia",
+"audit.noah.martin252@vargasretail.co","Noah","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Colombia",
+"audit.arthur.davis266@cisneroslogistics.co","Arthur","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Colombia",
+"audit.rodrigo.delgado267@vargasretail.co","Rodrigo","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Colombia",
+"audit.gabriel.castillo281@cisneroslogistics.co","Gabriel","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Colombia",
+"audit.noah.martin282@vargasretail.co","Noah","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Colombia",
+"audit.arthur.davis296@cisneroslogistics.co","Arthur","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Colombia",
+"audit.rodrigo.delgado297@vargasretail.co","Rodrigo","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Colombia",
+"audit.gabriel.castillo311@cisneroslogistics.co","Gabriel","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Colombia",
+"audit.noah.martin312@vargasretail.co","Noah","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Colombia",
+"audit.arthur.davis326@cisneroslogistics.co","Arthur","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Colombia",
+"audit.rodrigo.delgado327@vargasretail.co","Rodrigo","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Colombia",
+"audit.gabriel.castillo341@cisneroslogistics.co","Gabriel","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Colombia",
+"audit.noah.martin342@vargasretail.co","Noah","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Colombia",
+"audit.arthur.davis356@cisneroslogistics.co","Arthur","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Colombia",
+"audit.rodrigo.delgado357@vargasretail.co","Rodrigo","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Colombia",
+"audit.gabriel.castillo371@cisneroslogistics.co","Gabriel","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Colombia",
+"audit.noah.martin372@vargasretail.co","Noah","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Colombia",
+"legal.alexander.hoffmann378@vargasretail.co","Alexander","Hoffmann","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.mauricio.orellana389@cisneroslogistics.co","Mauricio","Orellana","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.victoria.quezada393@vargasretail.co","Victoria","Quezada","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.henry.wagner404@cisneroslogistics.co","Henry","Wagner","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.alexander.hoffmann408@vargasretail.co","Alexander","Hoffmann","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.mauricio.orellana419@cisneroslogistics.co","Mauricio","Orellana","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.victoria.quezada423@vargasretail.co","Victoria","Quezada","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.henry.wagner434@cisneroslogistics.co","Henry","Wagner","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.alexander.hoffmann438@vargasretail.co","Alexander","Hoffmann","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.mauricio.orellana449@cisneroslogistics.co","Mauricio","Orellana","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.victoria.quezada453@vargasretail.co","Victoria","Quezada","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.henry.wagner464@cisneroslogistics.co","Henry","Wagner","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.alexander.hoffmann468@vargasretail.co","Alexander","Hoffmann","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.mauricio.orellana479@cisneroslogistics.co","Mauricio","Orellana","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.victoria.quezada483@vargasretail.co","Victoria","Quezada","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"legal.henry.wagner494@cisneroslogistics.co","Henry","Wagner","Chief Financial Officer (CFO)","Zurich Property Partners","Colombia",
+"legal.alexander.hoffmann498@vargasretail.co","Alexander","Hoffmann","Chief Financial Officer (CFO)","Manhattan Asset Management","Colombia",
+"noah.martin6@guzmanpartners.cr","Noah","Martin","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"mariana.trejo21@guzmanpartners.cr","Mariana","Trejo","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"noah.martin36@guzmanpartners.cr","Noah","Martin","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"mariana.trejo51@guzmanpartners.cr","Mariana","Trejo","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"noah.martin66@guzmanpartners.cr","Noah","Martin","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"mariana.trejo81@guzmanpartners.cr","Mariana","Trejo","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"noah.martin96@guzmanpartners.cr","Noah","Martin","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"mariana.trejo111@guzmanpartners.cr","Mariana","Trejo","Chief Financial Officer (CFO)","Alvarado Holdings","Costa Rica",
+"controller.rodrigo.guzman129@guzmanpartners.cr","Rodrigo","Guzman","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.hans.moore134@guzmanpartners.cr","Hans","Moore","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.alejandro.morales139@guzmanpartners.cr","Alejandro","Morales","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.noah.smith144@guzmanpartners.cr","Noah","Smith","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.adriana.ramirez149@guzmanpartners.cr","Adriana","Ramirez","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.benjamin.weber154@guzmanpartners.cr","Benjamin","Weber","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.rodrigo.guzman159@guzmanpartners.cr","Rodrigo","Guzman","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.hans.moore164@guzmanpartners.cr","Hans","Moore","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.alejandro.morales169@guzmanpartners.cr","Alejandro","Morales","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.noah.smith174@guzmanpartners.cr","Noah","Smith","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.adriana.ramirez179@guzmanpartners.cr","Adriana","Ramirez","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.benjamin.weber184@guzmanpartners.cr","Benjamin","Weber","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.rodrigo.guzman189@guzmanpartners.cr","Rodrigo","Guzman","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.hans.moore194@guzmanpartners.cr","Hans","Moore","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.alejandro.morales199@guzmanpartners.cr","Alejandro","Morales","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.noah.smith204@guzmanpartners.cr","Noah","Smith","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.adriana.ramirez209@guzmanpartners.cr","Adriana","Ramirez","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.benjamin.weber214@guzmanpartners.cr","Benjamin","Weber","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.rodrigo.guzman219@guzmanpartners.cr","Rodrigo","Guzman","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.hans.moore224@guzmanpartners.cr","Hans","Moore","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.alejandro.morales229@guzmanpartners.cr","Alejandro","Morales","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.noah.smith234@guzmanpartners.cr","Noah","Smith","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.adriana.ramirez239@guzmanpartners.cr","Adriana","Ramirez","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.benjamin.weber244@guzmanpartners.cr","Benjamin","Weber","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"controller.rodrigo.guzman249@guzmanpartners.cr","Rodrigo","Guzman","Chief Financial Officer (CFO)","London Accounting Partners","Costa Rica",
+"audit.sebastian.schneider258@guzmanpartners.cr","Sebastian","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Costa Rica",
+"audit.fernando.jimenez273@guzmanpartners.cr","Fernando","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Costa Rica",
+"audit.sebastian.schneider288@guzmanpartners.cr","Sebastian","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Costa Rica",
+"audit.fernando.jimenez303@guzmanpartners.cr","Fernando","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Costa Rica",
+"audit.sebastian.schneider318@guzmanpartners.cr","Sebastian","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Costa Rica",
+"audit.fernando.jimenez333@guzmanpartners.cr","Fernando","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Costa Rica",
+"audit.sebastian.schneider348@guzmanpartners.cr","Sebastian","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Costa Rica",
+"audit.fernando.jimenez363@guzmanpartners.cr","Fernando","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Costa Rica",
+"legal.victoria.castillo387@guzmanpartners.cr","Victoria","Castillo","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.alexander.davis402@guzmanpartners.cr","Alexander","Davis","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.victoria.castillo417@guzmanpartners.cr","Victoria","Castillo","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.alexander.davis432@guzmanpartners.cr","Alexander","Davis","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.victoria.castillo447@guzmanpartners.cr","Victoria","Castillo","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.alexander.davis462@guzmanpartners.cr","Alexander","Davis","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.victoria.castillo477@guzmanpartners.cr","Victoria","Castillo","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"legal.alexander.davis492@guzmanpartners.cr","Alexander","Davis","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Costa Rica",
+"valentina.gomez13@mendozacorp.sv","Valentina","Gomez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.guzman15@alvaradoholdings.sv","Victoria","Guzman","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"astrid.schmidt28@mendozacorp.sv","Astrid","Schmidt","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.smith30@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"valentina.gomez43@mendozacorp.sv","Valentina","Gomez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.guzman45@alvaradoholdings.sv","Victoria","Guzman","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"astrid.schmidt58@mendozacorp.sv","Astrid","Schmidt","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.smith60@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"valentina.gomez73@mendozacorp.sv","Valentina","Gomez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.guzman75@alvaradoholdings.sv","Victoria","Guzman","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"astrid.schmidt88@mendozacorp.sv","Astrid","Schmidt","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.smith90@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"valentina.gomez103@mendozacorp.sv","Valentina","Gomez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.guzman105@alvaradoholdings.sv","Victoria","Guzman","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"astrid.schmidt118@mendozacorp.sv","Astrid","Schmidt","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.smith120@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Alvarado Holdings","Panamá",
+"controller.thomas.weber130@alvaradoholdings.sv","Thomas","Weber","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.carlos.guzman135@alvaradoholdings.sv","Carlos","Guzman","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.henry.moore140@alvaradoholdings.sv","Henry","Moore","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.gonzalo.morales145@alvaradoholdings.sv","Gonzalo","Morales","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.alexander.smith150@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.diego.ramirez155@alvaradoholdings.sv","Diego","Ramirez","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.thomas.weber160@alvaradoholdings.sv","Thomas","Weber","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.carlos.guzman165@alvaradoholdings.sv","Carlos","Guzman","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.henry.moore170@alvaradoholdings.sv","Henry","Moore","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.gonzalo.morales175@alvaradoholdings.sv","Gonzalo","Morales","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.alexander.smith180@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.diego.ramirez185@alvaradoholdings.sv","Diego","Ramirez","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.thomas.weber190@alvaradoholdings.sv","Thomas","Weber","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.carlos.guzman195@alvaradoholdings.sv","Carlos","Guzman","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.henry.moore200@alvaradoholdings.sv","Henry","Moore","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.gonzalo.morales205@alvaradoholdings.sv","Gonzalo","Morales","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.alexander.smith210@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.diego.ramirez215@alvaradoholdings.sv","Diego","Ramirez","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.thomas.weber220@alvaradoholdings.sv","Thomas","Weber","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.carlos.guzman225@alvaradoholdings.sv","Carlos","Guzman","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.henry.moore230@alvaradoholdings.sv","Henry","Moore","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.gonzalo.morales235@alvaradoholdings.sv","Gonzalo","Morales","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.alexander.smith240@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.diego.ramirez245@alvaradoholdings.sv","Diego","Ramirez","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"controller.thomas.weber250@alvaradoholdings.sv","Thomas","Weber","Chief Financial Officer (CFO)","Contraloria Central SV","Panamá",
+"audit.isabelle.hoffmann254@mendozacorp.sv","Isabelle","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.carlos.mendoza255@alvaradoholdings.sv","Carlos","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.lorena.quezada269@mendozacorp.sv","Lorena","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.alexander.smith270@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.isabelle.hoffmann284@mendozacorp.sv","Isabelle","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.carlos.mendoza285@alvaradoholdings.sv","Carlos","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.lorena.quezada299@mendozacorp.sv","Lorena","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.alexander.smith300@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.isabelle.hoffmann314@mendozacorp.sv","Isabelle","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.carlos.mendoza315@alvaradoholdings.sv","Carlos","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.lorena.quezada329@mendozacorp.sv","Lorena","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.alexander.smith330@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.isabelle.hoffmann344@mendozacorp.sv","Isabelle","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.carlos.mendoza345@alvaradoholdings.sv","Carlos","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.lorena.quezada359@mendozacorp.sv","Lorena","Quezada","Chief Financial Officer (CFO)","Baker Tilly International","Panamá",
+"audit.alexander.smith360@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.isabelle.hoffmann374@mendozacorp.sv","Isabelle","Hoffmann","Chief Financial Officer (CFO)","EY Forensic & Assurance","Panamá",
+"audit.carlos.mendoza375@alvaradoholdings.sv","Carlos","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"legal.henry.berg386@mendozacorp.sv","Henry","Berg","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.alexander.smith390@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.urrutia401@mendozacorp.sv","Mauricio","Urrutia","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.victoria.mendoza405@alvaradoholdings.sv","Victoria","Mendoza","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.berg416@mendozacorp.sv","Henry","Berg","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.alexander.smith420@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.urrutia431@mendozacorp.sv","Mauricio","Urrutia","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.victoria.mendoza435@alvaradoholdings.sv","Victoria","Mendoza","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.berg446@mendozacorp.sv","Henry","Berg","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.alexander.smith450@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.urrutia461@mendozacorp.sv","Mauricio","Urrutia","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.victoria.mendoza465@alvaradoholdings.sv","Victoria","Mendoza","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.berg476@mendozacorp.sv","Henry","Berg","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.alexander.smith480@alvaradoholdings.sv","Alexander","Smith","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.urrutia491@mendozacorp.sv","Mauricio","Urrutia","Chief Financial Officer (CFO)","Desarrollos Comerciales Latam","Panamá",
+"legal.victoria.mendoza495@alvaradoholdings.sv","Victoria","Mendoza","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"alexander.moore10@fuentesindustries.gt","Alexander","Moore","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.ramirez25@fuentesindustries.gt","Victoria","Ramirez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.moore40@fuentesindustries.gt","Alexander","Moore","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.ramirez55@fuentesindustries.gt","Victoria","Ramirez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.moore70@fuentesindustries.gt","Alexander","Moore","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.ramirez85@fuentesindustries.gt","Victoria","Ramirez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"alexander.moore100@fuentesindustries.gt","Alexander","Moore","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"victoria.ramirez115@fuentesindustries.gt","Victoria","Ramirez","Chief Financial Officer (CFO)","Fuentes Industries","Panamá",
+"audit.thomas.smith260@fuentesindustries.gt","Thomas","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.gonzalo.mendoza275@fuentesindustries.gt","Gonzalo","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.thomas.smith290@fuentesindustries.gt","Thomas","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.gonzalo.mendoza305@fuentesindustries.gt","Gonzalo","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.thomas.smith320@fuentesindustries.gt","Thomas","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.gonzalo.mendoza335@fuentesindustries.gt","Gonzalo","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"audit.thomas.smith350@fuentesindustries.gt","Thomas","Smith","Chief Financial Officer (CFO)","Deloitte Audit & Assurance","Panamá",
+"audit.gonzalo.mendoza365@fuentesindustries.gt","Gonzalo","Mendoza","Chief Financial Officer (CFO)","Grant Thornton Assurance","Panamá",
+"legal.henry.moore380@fuentesindustries.gt","Henry","Moore","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.bermudez395@fuentesindustries.gt","Mauricio","Bermudez","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.moore410@fuentesindustries.gt","Henry","Moore","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.bermudez425@fuentesindustries.gt","Mauricio","Bermudez","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.moore440@fuentesindustries.gt","Henry","Moore","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.bermudez455@fuentesindustries.gt","Mauricio","Bermudez","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.moore470@fuentesindustries.gt","Henry","Moore","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.mauricio.bermudez485@fuentesindustries.gt","Mauricio","Bermudez","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"legal.henry.moore500@fuentesindustries.gt","Henry","Moore","Chief Financial Officer (CFO)","Inmobiliaria Corporativa Central","Panamá",
+"mariana.ibanez11@bermudezcapital.mx","Mariana","Ibanez","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"noah.williams26@bermudezcapital.mx","Noah","Williams","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"mariana.ibanez41@bermudezcapital.mx","Mariana","Ibanez","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"noah.williams56@bermudezcapital.mx","Noah","Williams","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"mariana.ibanez71@bermudezcapital.mx","Mariana","Ibanez","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"noah.williams86@bermudezcapital.mx","Noah","Williams","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"mariana.ibanez101@bermudezcapital.mx","Mariana","Ibanez","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"noah.williams116@bermudezcapital.mx","Noah","Williams","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"audit.esteban.jimenez253@bermudezcapital.mx","Esteban","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.stefan.schneider268@bermudezcapital.mx","Stefan","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.esteban.jimenez283@bermudezcapital.mx","Esteban","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.stefan.schneider298@bermudezcapital.mx","Stefan","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.esteban.jimenez313@bermudezcapital.mx","Esteban","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.stefan.schneider328@bermudezcapital.mx","Stefan","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.esteban.jimenez343@bermudezcapital.mx","Esteban","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"audit.stefan.schneider358@bermudezcapital.mx","Stefan","Schneider","Chief Financial Officer (CFO)","BDO Auditores Consultores","Panamá",
+"audit.esteban.jimenez373@bermudezcapital.mx","Esteban","Jimenez","Chief Financial Officer (CFO)","Nordic Audit Partners","Panamá",
+"legal.thomas.jensen382@bermudezcapital.mx","Thomas","Jensen","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.sofia.salazar397@bermudezcapital.mx","Sofia","Salazar","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.thomas.jensen412@bermudezcapital.mx","Thomas","Jensen","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.sofia.salazar427@bermudezcapital.mx","Sofia","Salazar","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.thomas.jensen442@bermudezcapital.mx","Thomas","Jensen","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.sofia.salazar457@bermudezcapital.mx","Sofia","Salazar","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.thomas.jensen472@bermudezcapital.mx","Thomas","Jensen","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"legal.sofia.salazar487@bermudezcapital.mx","Sofia","Salazar","Chief Financial Officer (CFO)","Logistica Inmobiliaria del Pacifico","Panamá",
+"lucas.walker2@herreratrade.pa","Lucas","Walker","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"natalia.velasco17@herreratrade.pa","Natalia","Velasco","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"lucas.walker32@herreratrade.pa","Lucas","Walker","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"natalia.velasco47@herreratrade.pa","Natalia","Velasco","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"lucas.walker62@herreratrade.pa","Lucas","Walker","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"natalia.velasco77@herreratrade.pa","Natalia","Velasco","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"lucas.walker92@herreratrade.pa","Lucas","Walker","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"natalia.velasco107@herreratrade.pa","Natalia","Velasco","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"lucas.walker122@herreratrade.pa","Lucas","Walker","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"audit.oliver.davis256@herreratrade.pa","Oliver","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.javier.castillo271@herreratrade.pa","Javier","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.oliver.davis286@herreratrade.pa","Oliver","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.javier.castillo301@herreratrade.pa","Javier","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.oliver.davis316@herreratrade.pa","Oliver","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.javier.castillo331@herreratrade.pa","Javier","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"audit.oliver.davis346@herreratrade.pa","Oliver","Davis","Chief Financial Officer (CFO)","Firma de Auditoria Central","Panamá",
+"audit.javier.castillo361@herreratrade.pa","Javier","Castillo","Chief Financial Officer (CFO)","KPMG Corporate Audit","Panamá",
+"legal.sofia.silva379@herreratrade.pa","Sofia","Silva","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.thomas.williams394@herreratrade.pa","Thomas","Williams","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.sofia.silva409@herreratrade.pa","Sofia","Silva","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.thomas.williams424@herreratrade.pa","Thomas","Williams","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.sofia.silva439@herreratrade.pa","Sofia","Silva","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.thomas.williams454@herreratrade.pa","Thomas","Williams","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.sofia.silva469@herreratrade.pa","Sofia","Silva","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.thomas.williams484@herreratrade.pa","Thomas","Williams","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"legal.sofia.silva499@herreratrade.pa","Sofia","Silva","Chief Financial Officer (CFO)","Zurich Property Partners","Panamá",
+"sebastian.anderson14@escobarenterprise.pe","Sebastian","Anderson","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"santiago.paredes29@escobarenterprise.pe","Santiago","Paredes","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"sebastian.anderson44@escobarenterprise.pe","Sebastian","Anderson","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"santiago.paredes59@escobarenterprise.pe","Santiago","Paredes","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"sebastian.anderson74@escobarenterprise.pe","Sebastian","Anderson","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"santiago.paredes89@escobarenterprise.pe","Santiago","Paredes","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"sebastian.anderson104@escobarenterprise.pe","Sebastian","Anderson","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"santiago.paredes119@escobarenterprise.pe","Santiago","Paredes","Chief Financial Officer (CFO)","Apex Global Holdings","Panamá",
+"audit.hans.martin262@escobarenterprise.pe","Hans","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.adriana.delgado277@escobarenterprise.pe","Adriana","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.hans.martin292@escobarenterprise.pe","Hans","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.adriana.delgado307@escobarenterprise.pe","Adriana","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.hans.martin322@escobarenterprise.pe","Hans","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.adriana.delgado337@escobarenterprise.pe","Adriana","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"audit.hans.martin352@escobarenterprise.pe","Hans","Martin","Chief Financial Officer (CFO)","Crowe Horwath Audit","Panamá",
+"audit.adriana.delgado367@escobarenterprise.pe","Adriana","Delgado","Chief Financial Officer (CFO)","PwC Financial Audit","Panamá",
+"legal.thomas.walker388@escobarenterprise.pe","Thomas","Walker","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.sofia.fuentes403@escobarenterprise.pe","Sofia","Fuentes","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.thomas.walker418@escobarenterprise.pe","Thomas","Walker","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.sofia.fuentes433@escobarenterprise.pe","Sofia","Fuentes","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.thomas.walker448@escobarenterprise.pe","Thomas","Walker","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.sofia.fuentes463@escobarenterprise.pe","Sofia","Fuentes","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.thomas.walker478@escobarenterprise.pe","Thomas","Walker","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",
+"legal.sofia.fuentes493@escobarenterprise.pe","Sofia","Fuentes","Chief Financial Officer (CFO)","Manhattan Asset Management","Panamá",

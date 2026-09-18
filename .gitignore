@@ -8,3 +8,6 @@ coverage/
 .vercel
 .env*
 scratch/
+lib/*auth*.json
+*sovereign_auth*
+

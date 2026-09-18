@@ -61,22 +61,23 @@ export async function syncLeadsToInstantly(limit = 25) {
     throw new Error('Falta INSTANTLY_API_KEY en .env');
   }
 
-  const csvPath = path.resolve('Waalaxy/waalaxy_el_salvador_250_medianos.csv');
+  const csvPath = path.resolve('Audiflow Marketing/LINKEDIN_MATCHED_AUDIENCE_LEGAL_FINANCE_500.csv');
   const rawCsv = fs.readFileSync(csvPath, 'utf8').replace(/^\uFEFF/, '');
   const lines = rawCsv.split('\n').filter(l => l.trim().length > 0);
   const leads = [];
 
   for (let i = 1; i < lines.length; i++) {
     const cols = parseCsvLine(lines[i]);
-    if (cols.length >= 7) {
-      const email = cols[6]?.trim().toLowerCase();
-      const firstName = cols[0]?.trim();
-      const lastName = cols[1]?.trim();
-      const companyName = cols[3]?.trim();
-      const city = cols[4]?.trim();
+    if (cols.length >= 5) {
+      const email = cols[0]?.trim().toLowerCase();
+      const firstName = cols[1]?.trim();
+      const lastName = cols[2]?.trim();
+      const jobTitle = cols[3]?.trim();
+      const companyName = cols[4]?.trim();
+      const city = cols[5]?.trim() || 'San Salvador';
 
       if (email && email.includes('@')) {
-        leads.push({ email, firstName, lastName, company: companyName, city });
+        leads.push({ email, firstName, lastName, company: companyName, city, jobTitle });
       }
     }
   }

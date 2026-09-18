@@ -257,6 +257,7 @@ export default async function handler(req, res) {
 
     // Sección 2: Contra-Propuesta Formal y Argumentario de Negociación
     docChildren.push(
+      // counter-box: Sección de contra-propuesta formal en formato Word .docx
       new Paragraph({
         children: [
           new TextRun({ text: "2. Contra-Propuesta Formal & Argumentario de Negociación B2B", bold: true, color: "0F172A", size: 24 }),

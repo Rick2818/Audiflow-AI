@@ -159,7 +159,7 @@ if (fs.existsSync(adminPagePath)) {
 if (fs.existsSync(vercelPath)) {
   const vc = fs.readFileSync(vercelPath, 'utf8');
   assert(vc.includes('"crons"'), 'vercel.json contiene configuración de crons automatizados');
-  assert(vc.includes('0 13 * * 1-5') || vc.includes('0 9 * * 1,2'), 'vercel.json programa la ejecución automática matutina (7:00 AM CST / 13:00 UTC L-V)');
+  assert(vc.includes('0 13 * * 1-5') || vc.includes('0 9 * * 1,2') || vc.includes('0 14 * * *'), 'vercel.json programa la ejecución automática matutina (8:00 AM CST / 14:00 UTC)');
 }
 
 // 9. Verificación de las 5 Mejoras Enterprise 2.0 en Producción

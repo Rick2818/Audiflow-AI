@@ -1,12 +1,307 @@
 {
-  "cfoIndex": 0,
-  "bufeteIndex": 0,
+  "cfoIndex": 48,
+  "bufeteIndex": 12,
   "batchSize": 15,
   "cfoQuota": 12,
   "bufeteQuota": 3,
-  "currentIndex": 0,
-  "totalDispatched": 0,
+  "currentIndex": 60,
+  "totalDispatched": 60,
   "cycleCount": 1,
-  "lastRun": null,
-  "history": []
+  "lastRun": "2026-09-17T14:50:09.031Z",
+  "history": [
+    {
+      "date": "2026-09-14T14:55:46.314Z",
+      "totalTarget": 15,
+      "cfoCount": 12,
+      "bufeteCount": 3,
+      "touchBreakdown": {
+        "touch1": 12,
+        "touch2": 0,
+        "touch3": 0
+      },
+      "sentOk": 15,
+      "sentFail": 0
+    },
+    {
+      "date": "2026-09-15T13:21:49.279Z",
+      "totalTarget": 15,
+      "cfoCount": 12,
+      "bufeteCount": 3,
+      "touchBreakdown": {
+        "touch1": 12,
+        "touch2": 0,
+        "touch3": 0
+      },
+      "sentOk": 15,
+      "sentFail": 0
+    },
+    {
+      "date": "2026-09-16T15:11:49.386Z",
+      "totalTarget": 15,
+      "cfoCount": 12,
+      "bufeteCount": 3,
+      "touchBreakdown": {
+        "touch1": 12,
+        "touch2": 0,
+        "touch3": 0
+      },
+      "sentOk": 15,
+      "sentFail": 0
+    },
+    {
+      "date": "2026-09-17T14:50:09.031Z",
+      "totalTarget": 15,
+      "cfoCount": 12,
+      "bufeteCount": 3,
+      "touchBreakdown": {
+        "touch1": 12,
+        "touch2": 0,
+        "touch3": 0
+      },
+      "sentOk": 15,
+      "sentFail": 0
+    }
+  ],
+  "cadence": {
+    "eduardo.poma@grupopoma.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:21.351Z",
+      "completed": false
+    },
+    "fpoma@grupopoma.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:23.022Z",
+      "completed": false
+    },
+    "alberto.poma@gruporoble.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:24.666Z",
+      "completed": false
+    },
+    "roberto.siman@siman.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:26.323Z",
+      "completed": false
+    },
+    "msiman@siman.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:27.989Z",
+      "completed": false
+    },
+    "hugo.campos@agrisal.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:29.653Z",
+      "completed": false
+    },
+    "equinonez@agrisal.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:31.299Z",
+      "completed": false
+    },
+    "ccalleja@superselectos.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:32.963Z",
+      "completed": false
+    },
+    "malvarado@superselectos.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:34.618Z",
+      "completed": false
+    },
+    "acofino@somoscmi.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:36.276Z",
+      "completed": false
+    },
+    "rcastillo@somoscmi.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:37.923Z",
+      "completed": false
+    },
+    "ecrespo@somoscmi.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-14T14:55:39.678Z",
+      "completed": false
+    },
+    "ccastillo@cempro.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:24.614Z",
+      "completed": false
+    },
+    "jrgonzalez@cempro.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:26.260Z",
+      "completed": false
+    },
+    "cmorales@pantaleon.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:27.907Z",
+      "completed": false
+    },
+    "dherrera@pantaleon.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:29.563Z",
+      "completed": false
+    },
+    "fquinonez@bi.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:31.199Z",
+      "completed": false
+    },
+    "llara@bi.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:32.873Z",
+      "completed": false
+    },
+    "erodriguez@gytcontinental.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:34.524Z",
+      "completed": false
+    },
+    "amolina@gytcontinental.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:36.168Z",
+      "completed": false
+    },
+    "jluna@bancocuscatlan.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:37.826Z",
+      "completed": false
+    },
+    "gberrios@bancocuscatlan.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:39.477Z",
+      "completed": false
+    },
+    "rbarraza@bancoagricola.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:41.119Z",
+      "completed": false
+    },
+    "aarango@bancoagricola.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-15T13:21:42.778Z",
+      "completed": false
+    },
+    "lfigueroa@promerica.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:23.935Z",
+      "completed": false
+    },
+    "equevedo@bancopromerica.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:25.591Z",
+      "completed": false
+    },
+    "acastillo@cbc.co": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:27.312Z",
+      "completed": false
+    },
+    "pastolfi@cbc.co": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:28.958Z",
+      "completed": false
+    },
+    "mleal@magdalena.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:30.617Z",
+      "completed": false
+    },
+    "mario_siman@unicomer.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:32.276Z",
+      "completed": false
+    },
+    "ezelaya@unicomer.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:33.928Z",
+      "completed": false
+    },
+    "jccastillo@castillohermanos.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:35.576Z",
+      "completed": false
+    },
+    "catala@ficohsa.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:37.394Z",
+      "completed": false
+    },
+    "jatala@ficohsa.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:39.528Z",
+      "completed": false
+    },
+    "rtabash@baccredomatic.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:41.186Z",
+      "completed": false
+    },
+    "fguzman@baccredomatic.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-16T15:11:42.841Z",
+      "completed": false
+    },
+    "ecampos@baccredomatic.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:38.702Z",
+      "completed": false
+    },
+    "hyarhi@sigmaq.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:40.403Z",
+      "completed": false
+    },
+    "rvidales@sigmaq.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:42.782Z",
+      "completed": false
+    },
+    "amendoza@diana.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:44.813Z",
+      "completed": false
+    },
+    "cquintero@delsur.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:47.273Z",
+      "completed": false
+    },
+    "abichara@aeselsalvador.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:50.005Z",
+      "completed": false
+    },
+    "ccolorado@laconstancia.com": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:52.171Z",
+      "completed": false
+    },
+    "bmenjivar@claro.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:54.829Z",
+      "completed": false
+    },
+    "egutierrez@tigo.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:56.963Z",
+      "completed": false
+    },
+    "cgarcia@tigo.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:49:58.695Z",
+      "completed": false
+    },
+    "mramos@tigo.com.sv": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:50:00.379Z",
+      "completed": false
+    },
+    "gcastillo@unisuper.com.gt": {
+      "touch": 1,
+      "lastTouchDate": "2026-09-17T14:50:02.091Z",
+      "completed": false
+    }
+  }
 }

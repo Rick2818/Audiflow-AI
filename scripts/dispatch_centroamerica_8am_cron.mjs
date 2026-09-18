@@ -392,8 +392,19 @@ export async function runCentroamerica8AMDispatch(options = {}) {
     throw new Error(`❌ No se encontró la base oficial en ${LEADS_FILE}`);
   }
 
+  // CORREGIDO (2026-09-17): JSON.parse sin try/catch — un archivo de leads
+  // corrupto o mal codificado tumbaba todo el script con una excepción sin
+  // manejar (crash del cron diario de Centroamérica) en vez de un error claro.
   const rawContent = fs.readFileSync(LEADS_FILE, 'utf8').replace(/^\uFEFF/, '');
-  const allLeads = JSON.parse(rawContent);
+  let allLeads;
+  try {
+    allLeads = JSON.parse(rawContent);
+  } catch (parseErr) {
+    throw new Error(`❌ El archivo de leads ${LEADS_FILE} contiene JSON inválido: ${parseErr.message}`);
+  }
+  if (!Array.isArray(allLeads)) {
+    throw new Error(`❌ El archivo de leads ${LEADS_FILE} no contiene un arreglo JSON válido.`);
+  }
   const cleanLeads = filterActiveLeads(allLeads);
 
   const cfoLeads = cleanLeads.filter(l => l.type === 'CFO');

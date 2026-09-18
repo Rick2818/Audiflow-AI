@@ -1,5 +1,5 @@
 {
-  "lastPublishedIndex": 9,
+  "lastPublishedIndex": 19,
   "publishedHistory": [
     {
       "timestamp": "2026-09-10T23:56:42.621Z",
@@ -211,6 +211,221 @@
           "success": true,
           "skipped": true,
           "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-14T14:55:21.724Z",
+      "id": "post_03_ram_security",
+      "title": "Arquitectura Zero-Disk: Por Qué Nunca Debes Subir NDAs a IAs Públicas",
+      "image": "https://audiflowai.com/images/ram_volatile_security.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-14T14:55:21.785Z",
+      "id": "reel_01_hook_penalty",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-14T14:58:50.832Z",
+      "id": "post_01_cfo_ebitda",
+      "title": "Fuga de EBITDA y Responsabilidad Solidaria en Contratos de Proveedores",
+      "image": "https://audiflowai.com/images/cfo_ebitda_protection.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa80b944cd74da3d032e49c"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa80b9fea187f1ecae6d410"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-14T23:00:27.102Z",
+      "id": "reel_02_ram_scan_8s",
+      "title": "Reel: 8.2 Segundos de Escaneo en Memoria RAM Volátil vs 5 Horas de Lectura",
+      "image": "https://audiflowai.com/images/reel_scene2_ram_scan_8s.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa87c75ac4a884f4369d876"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa87c819a26ed5c2accee61"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-15T14:00:34.072Z",
+      "id": "post_07_word_redline_desk",
+      "title": "Del Escaneo al Archivo Word (.docx) con Control de Cambios en Segundos",
+      "image": "https://audiflowai.com/images/contract_word_redline.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aa94f6a8f4303f126dcb81f"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aa94f7837b10925a7f87477"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-15T23:00:05.959Z",
+      "id": "reel_01_hook_penalty",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-16T15:11:41.814Z",
+      "id": "post_04_hidden_liability",
+      "title": "Blindaje y Precisión: Detectando Cláusulas de Responsabilidad Ilimitada",
+      "image": "https://audiflowai.com/images/hidden_liability_alert.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aaab19e8e184bbb60ef95fd"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aaab1a959d1cd1f87380791"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-16T23:00:22.014Z",
+      "id": "reel_02_ram_scan_8s",
+      "title": "Reel: 8.2 Segundos de Escaneo en Memoria RAM Volátil vs 5 Horas de Lectura",
+      "image": "https://audiflowai.com/images/reel_scene2_ram_scan_8s.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aab1f7480b24cdcb5f81c60"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aab1f8002c7491fe7feac65"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-17T14:49:58.322Z",
+      "id": "post_05_general_counsel_win",
+      "title": "Certeza Jurídica en Minutos: 0 Pasivos Ocultos Antes de la Firma",
+      "image": "https://audiflowai.com/images/general_counsel_audit_win.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aabfe0778465ef48ce7e238"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aabfe12036b7ea6da67b746"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-18T00:24:02.071Z",
+      "id": "reel_01_hook_penalty",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
         }
       }
     }

@@ -21,6 +21,18 @@ import { fileURLToPath } from 'url';
 
 dotenv.config();
 
+// ==============================================================================
+// RED DE SEGURIDAD GLOBAL DEL PROCESO (ANTI-CRASH DEFENSIVO)
+// ==============================================================================
+process.on('uncaughtException', (err) => {
+  console.error('🚨 [CRITICAL ANTI-CRASH] Uncaught Exception:', err);
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('🚨 [CRITICAL ANTI-CRASH] Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+
 import crossAuditHandler from './api/cross-audit.js';
 import exportDocxHandler from './api/export-docx.js';
 import chatDocumentHandler from './api/chat-document.js';
@@ -80,55 +92,121 @@ app.use(cors());
 app.use(express.json());
 
 // Servir robots.txt y sitemap.xml con cabeceras de tipo de contenido estricto para buscadores
-app.get('/robots.txt', (req, res) => {
-  res.header('Content-Type', 'text/plain');
-  res.sendFile(path.join(__dirname, 'frontend', 'robots.txt'));
+app.get('/robots.txt', (req, res, next) => {
+  try {
+    res.header('Content-Type', 'text/plain');
+    res.sendFile(path.join(__dirname, 'frontend', 'robots.txt'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/sitemap.xml', (req, res) => {
-  res.header('Content-Type', 'application/xml');
-  res.sendFile(path.join(__dirname, 'frontend', 'sitemap.xml'));
+app.get('/sitemap.xml', (req, res, next) => {
+  try {
+    res.header('Content-Type', 'application/xml');
+    res.sendFile(path.join(__dirname, 'frontend', 'sitemap.xml'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/google3767930768036b5b.html', (req, res) => {
-  res.header('Content-Type', 'text/html');
-  res.sendFile(path.join(__dirname, 'frontend', 'google3767930768036b5b.html'));
+app.get('/google3767930768036b5b.html', (req, res, next) => {
+  try {
+    res.header('Content-Type', 'text/html');
+    res.sendFile(path.join(__dirname, 'frontend', 'google3767930768036b5b.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/auditflow2026indexnow.txt', (req, res) => {
-  res.header('Content-Type', 'text/plain');
-  res.sendFile(path.join(__dirname, 'frontend', 'auditflow2026indexnow.txt'));
+app.get('/auditflow2026indexnow.txt', (req, res, next) => {
+  try {
+    res.header('Content-Type', 'text/plain');
+    res.sendFile(path.join(__dirname, 'frontend', 'auditflow2026indexnow.txt'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Rutas de SEO Programático de Alta Intención B2B
-app.get('/auditar-contrato-arrendamiento', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-arrendamiento.html'));
+app.get('/auditar-contrato-arrendamiento', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-arrendamiento.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/auditar-factura-proveedor', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'auditar-factura-proveedor.html'));
+app.get('/auditar-factura-proveedor', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'auditar-factura-proveedor.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/auditar-contrato-servicios-it', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-servicios-it.html'));
+app.get('/auditar-contrato-servicios-it', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'auditar-contrato-servicios-it.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Ruta explícita del Panel de Administración
-app.get('/admin', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'admin.html'));
+app.get('/admin', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'admin.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/admin.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'admin.html'));
+app.get('/admin.html', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'admin.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Rutas de Páginas Legales & Compliance B2B
-app.get('/privacy', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'privacy.html'));
+app.get('/privacy', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'privacy.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
-app.get('/terms', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend', 'terms.html'));
+app.get('/terms', (req, res, next) => {
+  try {
+    res.sendFile(path.join(__dirname, 'frontend', 'terms.html'), (err) => {
+      if (err && !res.headersSent) next(err);
+    });
+  } catch (err) {
+    next(err);
+  }
 });
 
 // Endpoint de notificación instantánea a Bing & IndexNow API
@@ -1578,18 +1656,23 @@ function checkAdminAuth(req) {
 
 // POST /api/admin/login - Autenticación de Administrador
 app.post('/api/admin/login', (req, res) => {
-  const input = (req.body?.password || req.headers['x-admin-password'] || '').trim().toLowerCase().replace(/!+$/, '');
-  const expected = (process.env.ADMIN_PASSWORD || 'AuditFlow2026!').trim().toLowerCase().replace(/!+$/, '');
+  try {
+    const input = (req.body?.password || req.headers['x-admin-password'] || '').trim().toLowerCase().replace(/!+$/, '');
+    const expected = (process.env.ADMIN_PASSWORD || 'AuditFlow2026!').trim().toLowerCase().replace(/!+$/, '');
 
-  if (input === expected || input === 'auditflow2026' || input === 'admin' || input === 'auditflow') {
-    return res.json({
-      success: true,
-      token: 'admin_token_auditflow_2026',
-      message: 'Autenticación exitosa como Administrador de AuditFlow AI'
-    });
+    if (input === expected || input === 'auditflow2026' || input === 'admin' || input === 'auditflow') {
+      return res.json({
+        success: true,
+        token: 'admin_token_auditflow_2026',
+        message: 'Autenticación exitosa como Administrador de AuditFlow AI'
+      });
+    }
+
+    return res.status(401).json({ success: false, error: 'Contraseña incorrecta o credenciales administrativas no autorizadas.' });
+  } catch (err) {
+    console.error('Error en autenticación de administrador:', err);
+    return res.status(500).json({ success: false, error: 'Error procesando autenticación administrativa' });
   }
-
-  return res.status(401).json({ success: false, error: 'Contraseña incorrecta o credenciales administrativas no autorizadas.' });
 });
 
 // GET /api/admin/stats - Obtener Estadísticas y Métricas en Tiempo Real
@@ -1746,6 +1829,20 @@ app.get('/api/admin/stats', async (req, res) => {
     console.error('Error generando estadisticas de admin:', err);
     return res.status(500).json({ error: 'Error procesando reporte de administración' });
   }
+});
+
+// ==============================================================================
+// RED DE SEGURIDAD Y CONTROL CENTRALIZADO DE ERRORES (EXPRESS GLOBAL MIDDLEWARE)
+// ==============================================================================
+app.use((err, req, res, next) => {
+  console.error('🚨 [EXPRESS ERROR HANDLER]', err);
+  if (res.headersSent) {
+    return next(err);
+  }
+  return res.status(err.status || 500).json({
+    success: false,
+    error: err.message || 'Error interno del servidor procesando la solicitud'
+  });
 });
 
 // ==============================================================================
