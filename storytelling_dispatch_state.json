@@ -1,9 +1,9 @@
 {
   "warmupCycleStart": "2026-09-09T17:54:07.649Z",
-  "currentIndex": 200,
-  "currentChapter": 2,
+  "currentIndex": 0,
+  "currentChapter": 1,
   "batchSize": 50,
-  "totalSent": 839,
+  "totalSent": 921,
   "history": [
     {
       "date": "2026-09-07T15:56:12.810Z",
@@ -95,8 +95,22 @@
       "sentCount": 50,
       "failedCount": 0,
       "leadsCount": 50
+    },
+    {
+      "date": "2026-09-18T14:54:49.055Z",
+      "chapter": 2,
+      "sentCount": 50,
+      "failedCount": 0,
+      "leadsCount": 50
+    },
+    {
+      "date": "2026-09-19T15:29:05.192Z",
+      "chapter": 1,
+      "sentCount": 32,
+      "failedCount": 0,
+      "leadsCount": 32
     }
   ],
-  "warmupDay": 8,
+  "warmupDay": 10,
   "lastRunAt": "2026-09-18T00:53:23.807Z"
 }

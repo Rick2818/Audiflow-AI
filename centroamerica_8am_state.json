@@ -1,13 +1,13 @@
 {
   "cfoIndex": 48,
-  "bufeteIndex": 12,
+  "bufeteIndex": 18,
   "batchSize": 15,
   "cfoQuota": 12,
   "bufeteQuota": 3,
-  "currentIndex": 60,
-  "totalDispatched": 60,
+  "currentIndex": 66,
+  "totalDispatched": 90,
   "cycleCount": 1,
-  "lastRun": "2026-09-17T14:50:09.031Z",
+  "lastRun": "2026-09-19T15:29:26.150Z",
   "history": [
     {
       "date": "2026-09-14T14:55:46.314Z",
@@ -60,127 +60,153 @@
       },
       "sentOk": 15,
       "sentFail": 0
+    },
+    {
+      "date": "2026-09-18T14:55:04.185Z",
+      "totalTarget": 15,
+      "cfoCount": 12,
+      "bufeteCount": 3,
+      "touchBreakdown": {
+        "touch1": 0,
+        "touch2": 12,
+        "touch3": 0
+      },
+      "sentOk": 15,
+      "sentFail": 0
+    },
+    {
+      "date": "2026-09-19T15:29:26.150Z",
+      "totalTarget": 15,
+      "cfoCount": 12,
+      "bufeteCount": 3,
+      "touchBreakdown": {
+        "touch1": 0,
+        "touch2": 12,
+        "touch3": 0
+      },
+      "sentOk": 15,
+      "sentFail": 0
     }
   ],
   "cadence": {
     "eduardo.poma@grupopoma.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:21.351Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:39.352Z",
       "completed": false
     },
     "fpoma@grupopoma.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:23.022Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:41.006Z",
       "completed": false
     },
     "alberto.poma@gruporoble.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:24.666Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:42.651Z",
       "completed": false
     },
     "roberto.siman@siman.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:26.323Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:44.338Z",
       "completed": false
     },
     "msiman@siman.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:27.989Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:46.049Z",
       "completed": false
     },
     "hugo.campos@agrisal.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:29.653Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:47.688Z",
       "completed": false
     },
     "equinonez@agrisal.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:31.299Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:49.341Z",
       "completed": false
     },
     "ccalleja@superselectos.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:32.963Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:50.989Z",
       "completed": false
     },
     "malvarado@superselectos.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:34.618Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:52.631Z",
       "completed": false
     },
     "acofino@somoscmi.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:36.276Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:54.285Z",
       "completed": false
     },
     "rcastillo@somoscmi.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:37.923Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:55.944Z",
       "completed": false
     },
     "ecrespo@somoscmi.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-14T14:55:39.678Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-18T14:54:57.580Z",
       "completed": false
     },
     "ccastillo@cempro.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:24.614Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:00.765Z",
       "completed": false
     },
     "jrgonzalez@cempro.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:26.260Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:02.427Z",
       "completed": false
     },
     "cmorales@pantaleon.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:27.907Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:04.248Z",
       "completed": false
     },
     "dherrera@pantaleon.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:29.563Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:05.920Z",
       "completed": false
     },
     "fquinonez@bi.com.gt": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:31.199Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:07.945Z",
       "completed": false
     },
     "llara@bi.com.gt": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:32.873Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:09.721Z",
       "completed": false
     },
     "erodriguez@gytcontinental.com.gt": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:34.524Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:11.382Z",
       "completed": false
     },
     "amolina@gytcontinental.com.gt": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:36.168Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:13.030Z",
       "completed": false
     },
     "jluna@bancocuscatlan.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:37.826Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:14.715Z",
       "completed": false
     },
     "gberrios@bancocuscatlan.com": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:39.477Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:16.358Z",
       "completed": false
     },
     "rbarraza@bancoagricola.com.sv": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:41.119Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:18.008Z",
       "completed": false
     },
     "aarango@bancoagricola.com.sv": {
-      "touch": 1,
-      "lastTouchDate": "2026-09-15T13:21:42.778Z",
+      "touch": 2,
+      "lastTouchDate": "2026-09-19T15:29:19.656Z",
       "completed": false
     },
     "lfigueroa@promerica.com.sv": {

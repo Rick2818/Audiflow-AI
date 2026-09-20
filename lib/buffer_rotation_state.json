@@ -1,5 +1,5 @@
 {
-  "lastPublishedIndex": 19,
+  "lastPublishedIndex": 23,
   "publishedHistory": [
     {
       "timestamp": "2026-09-10T23:56:42.621Z",
@@ -426,6 +426,94 @@
         "facebook": {
           "success": false,
           "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-18T14:54:39.740Z",
+      "id": "post_02_forensic_redline",
+      "title": "Auditoría y Blindaje Contractual en 8 Segundos: Del Borrador al Redline Negociable",
+      "image": "https://audiflowai.com/images/auditflow_forensic_redline.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "facebook": {
+          "success": false,
+          "error": "Fallo al publicar en Buffer (InvalidInputError): Invalid post: Whoops, it looks like you've already got this one scheduled or posted around the same time. We're not able to post the same thing twice so close together."
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-18T23:00:23.049Z",
+      "id": "reel_02_ram_scan_8s",
+      "title": "Reel: 8.2 Segundos de Escaneo en Memoria RAM Volátil vs 5 Horas de Lectura",
+      "image": "https://audiflowai.com/images/reel_scene2_ram_scan_8s.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aadc2745fe629aa26637464"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aadc27f04838aa1c454545b"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-19T15:29:19.736Z",
+      "id": "post_01_cfo_ebitda",
+      "title": "Fuga de EBITDA y Responsabilidad Solidaria en Contratos de Proveedores",
+      "image": "https://audiflowai.com/images/cfo_ebitda_protection.jpg",
+      "format": "FEED",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aaeaa3f9a30e1221c0d0fca"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aaeaa4a076fd8348fcd2b7b"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        }
+      }
+    },
+    {
+      "timestamp": "2026-09-19T23:39:41.121Z",
+      "id": "reel_01_hook_penalty",
+      "title": "Reel: La Cláusula de $142,000 USD que el Abogado No Detectó a las 6 PM",
+      "image": "https://audiflowai.com/images/reel_scene1_hook_penalty.jpg",
+      "format": "REEL",
+      "results": {
+        "linkedin": {
+          "success": true,
+          "id": "6aaf1cfdbb86436624aabf0b"
+        },
+        "instagram": {
+          "success": true,
+          "skipped": true,
+          "reason": "DEACTIVATED_BY_EXECUTIVE_ORDER_FOCUS_LINKEDIN"
+        },
+        "facebook": {
+          "success": true,
+          "id": "6aaf1d086e039ccbc82854ca"
         }
       }
     }
