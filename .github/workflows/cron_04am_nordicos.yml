@@ -1,9 +1,7 @@
 name: ❄️ Campaña Nórdicos 4:00 AM CST (Sector Medio)
 
 on:
-  schedule:
-    # 4:00 AM CST = 10:00 UTC (Lunes a Domingo)
-    - cron: '0 10 * * *'
+  # Scheduled cron disabled on 2026-09-28. Manual execution only.
   workflow_dispatch:
 
 jobs:
