@@ -1,9 +1,7 @@
 name: 📖 Campaña Storytelling 6:00 AM CST (Trilogía 14 Días — 250 Bufetes Medianos)
 
 on:
-  schedule:
-    # 6:00 AM CST = 12:00 UTC (Lunes a Domingo — Sprint 14 Días)
-    - cron: '0 12 * * *'
+  # Scheduled cron disabled on 2026-09-28. Manual execution only.
   workflow_dispatch:
 
 jobs:
