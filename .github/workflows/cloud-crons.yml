@@ -1,15 +1,7 @@
 name: AuditFlow AI - Cloud Crons 24/7
 
 on:
-  schedule:
-    # 04:00 AM CST (10:00 UTC) - Siembra Diaria Nórdicos Midmarket
-    - cron: '0 10 * * *'
-    # 07:00 AM CST (13:00 UTC) - Prospección Matutina Centroamérica (Lunes a Viernes)
-    - cron: '0 13 * * 1-5'
-    # 08:00 AM CST (14:00 UTC) - Publicador Matutino Buffer (LinkedIn, FB, IG)
-    - cron: '0 14 * * *'
-    # 05:00 PM CST(23:00 UTC) - Publicador Vespertino Buffer (Reels / Visual)
-    - cron: '0 23 * * *'
+  # Scheduled cron disabled on 2026-09-28. Manual execution only.
   workflow_dispatch:
     inputs:
       action:
