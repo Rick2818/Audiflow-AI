@@ -1,9 +1,7 @@
 name: 🌇 Publicación Vespertina Buffer 5:00 PM CST (Reels / Audiovisual)
 
 on:
-  schedule:
-    # 5:00 PM CST = 23:00 UTC (Lunes a Domingo)
-    - cron: '0 23 * * *'
+  # Scheduled cron disabled on 2026-09-28. Manual execution only.
   workflow_dispatch:
 
 jobs:
