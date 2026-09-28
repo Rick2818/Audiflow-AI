@@ -1,9 +1,7 @@
 name: 📊 Reporte Ejecutivo de Ventas 2:00 PM CST
 
 on:
-  schedule:
-    # 2:00 PM CST = 20:00 UTC (Lunes a Domingo)
-    - cron: '0 20 * * *'
+  # Scheduled cron disabled on 2026-09-28. Manual execution only.
   workflow_dispatch:
 
 jobs:
